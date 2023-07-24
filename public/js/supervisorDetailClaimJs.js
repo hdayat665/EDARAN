@@ -1,8 +1,188 @@
+function getTravelDataByGeneralId(id, date) {
+    return $.ajax({
+      url: "/getTravelDataByGeneralId/" + id + "/" + date
+    });
+  }
+  function getSubsDataByGeneralId(id) {
+    return $.ajax({
+      url: "/getSubsDataByGeneralId/" + id
+    });
+  }
+  function getProjectNameById(id) {
+    return $.ajax({
+      url: "/getProjectNameById/" + id
+    });
+  }
+  function getOthersDataByGeneralId(id) {
+    return $.ajax({
+      url: "/getOthersDataByGeneralId/" + id 
+    });
+  }
+  function getClaimCategoryNameById(id) {
+    return $.ajax({
+      url: "/getClaimCategoryNameById/" + id
+    });
+  }
+
 //TRAVEL MODAL
-$(document).on("click", "#SVAtravel", function () {
-    console.log("hana");
+$(document).on("click", "#SVRtravel", function() {
+    
+    var date = $(this).data("date");
+    var id = $(this).data("id");
+    var travellingData = getTravelDataByGeneralId(id, date);
+    console.log(id);
+    console.log(date);
+    $("#date").val(date);
+    travellingData.then(function(response) {
+        var data = response.original;
+
+        // Check if the DataTable is already initialized
+        var table = $("#tableTravelling").DataTable();
+        if (table) {
+            // The DataTable is already initialized, so we can just update the data
+            table.clear();
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[i];
+                var row = [
+                    "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>",
+                    rowData.start_time,
+                    rowData.end_time,
+                    rowData.location_start,
+                    rowData.location_end,
+                    rowData.desc,
+                    rowData.type_transport,
+                    rowData.total_km,
+                    rowData.petrol,
+                    rowData.toll,
+                    rowData.parking,
+                    "<div class='dropdown'>" +
+                    "<a href='#' data-bs-toggle='dropdown' class='btn btn-primary btn-sm dropdown-toggle'></i> Actions <i class='fa fa-caret-down'></i></a>" +
+                    "<div class='dropdown-menu'>" +
+                    "<a href='javascript:;' id='updateButtonTravel' data-id='" + rowData.id + "' data-column='id' class='dropdown-item'>Update</a>" +
+                    "<a href='javascript:;' id='saveButtonTravel' data-id='" + rowData.id + "' class='dropdown-item' style='display: none;'>Save</a>" +
+                    "<div class='dropdown-divider'></div>" +
+                    "<a data-bs-toggle='modal' id='deleteButtonTravel' data-id='" + rowData.id + "' class='dropdown-item'>Delete</a>" +
+                    "</div>" +
+                    "</div>"
+                ];
+                
+
+                var tableRow = table.row.add(row).draw().node();
+
+                // Add event listener for "Update" button click
+                $(tableRow).find("#updateButtonTravel").on("click", function() {
+                    var row = $(this).closest("tr");
+                    var cells = row.find("td");
+
+                    cells.each(function(index) {
+                        var cell = $(this);
+                        if (index >= 7 && index <= 10) { // Columns 8, 9, 10 are "Petrol," "Tolls," "Parking"
+                            var value = cell.text().trim();
+                            var input = $("<input>").val(value).addClass("form-control").attr("type", "number");
+
+                            // Add attributes based on column index
+                            if (index === 8) {
+                                input.attr("id", "petrol").attr("name", "petrol");
+                            } else if (index === 9) {
+                                input.attr("id", "tolls").attr("name", "tolls");
+                            } else if (index === 10) {
+                                input.attr("id", "parking").attr("name", "parking");
+                            }
+
+                            cell.html(input);
+                        }
+                    });
+
+                    // Hide the updateButtonTravel button
+                    $(this).hide();
+
+                    // Show the saveButtonTravel button
+                    $(this).siblings("#saveButtonTravel").show();
+                });
+            }
+        } else {
+            // The DataTable is not yet initialized, so we need to initialize it
+            $("#tableTravelling").DataTable({
+                paging: true,
+                scrollX: true,
+                columns: [
+                    { title: "Action", data: "id", "data-column": "id" },
+                    { title: "Start Time" },
+                    { title: "End Time" },
+                    { title: "Start Location" },
+                    { title: "Destination" },
+                    { title: "Description" },
+                    { title: "Type Of Transport" },
+                    { title: "Mileage (KM)" },
+                    { title: "Petrol/fares", data: "petrol" },
+                    { title: "Tolls", data: "toll" },
+                    { title: "Parking", data: "parking" }
+                ]
+            });
+
+            table = $("#tableTravelling").DataTable();
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[i];
+                var row = [
+                    "<div class='dropdown'>" +
+                    "<a href='#' data-bs-toggle='dropdown' class='btn btn-primary btn-sm dropdown-toggle'></i> Actions <i class='fa fa-caret-down'></i></a>" +
+                    "<div class='dropdown-menu'>" +
+                    "<a href='javascript:;' id='updateButtonTravel' data-id='" + rowData.id + "' class='dropdown-item'>Update</a>" +
+                    "<a href='javascript:;' id='saveButtonTravel' data-id='" + rowData.id + "' class='dropdown-item' style='display: none;'>Save</a>" +
+                    "<div class='dropdown-divider'></div>" +
+                    "<a data-bs-toggle='modal' id='deleteButtonTravel' data-id='" + rowData.id + "' class='dropdown-item'>Delete</a>" +
+                    "</div>" +
+                    "</div>", // Action
+                    rowData.start_time,
+                    rowData.end_time,
+                    rowData.location_start,
+                    rowData.location_end,
+                    rowData.desc,
+                    rowData.type_transport,
+                    rowData.total_km,
+                    rowData.petrol,
+                    rowData.toll,
+                    rowData.parking
+                ];
+
+                var tableRow = table.row.add(row).draw().node();
+
+                // Add event listener for "Update" button click
+                $(tableRow).find("#updateButtonTravel").on("click", function() {
+                    var row = $(this).closest("tr");
+                    var cells = row.find("td");
+
+                    cells.each(function(index) {
+                        var cell = $(this);
+                        if (index >= 8 && index <= 10) { // Columns 8, 9, 10 are "Petrol," "Tolls," "Parking"
+                            var value = cell.text().trim();
+                            var input = $("<input>").val(value).addClass("form-control").attr("type", "number");
+
+                            // Add attributes based on column index
+                            if (index === 8) {
+                                input.attr("id", "petrol").attr("name", "petrol");
+                            } else if (index === 9) {
+                                input.attr("id", "tolls").attr("name", "tolls");
+                            } else if (index === 10) {
+                                input.attr("id", "parking").attr("name", "parking");
+                            }
+
+                            cell.html(input);
+                        }
+                    });
+
+                    // Hide the updateButtonTravel button
+                    $(this).hide();
+
+                    // Show the saveButtonTravel button
+                    $(this).siblings("#saveButtonTravel").show();
+                });
+            }
+        }
+
         $("#travelModal").modal("show");
     });
+});
     
     //SUBSISTENCE MODAL
     $(document).on("click", "#SVAsubs", function () {
@@ -48,6 +228,23 @@ $(document).on("click", "#SVAtravel", function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        dom: "<'row'<'col-sm-6'l><'col-sm-6 d-flex justify-content-end'fB>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12'p>>",
+        buttons: [
+            {
+                text: 'Supporting Documents',
+                attr: {
+                    id: 'btnTAttachment',
+                    class: 'btn btn-primary',
+                    type: 'button'
+                },
+                action: function () {
+                    // Custom button action
+                    // Add your logic here
+                }
+            }
+        ]
     });
     
     $("#subsistence").DataTable({
@@ -58,6 +255,23 @@ $(document).on("click", "#SVAtravel", function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        dom: "<'row'<'col-sm-6'l><'col-sm-6 d-flex justify-content-end'fB>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12'p>>",
+        buttons: [
+            {
+                text: 'Supporting Documents',
+                attr: {
+                    id: 'btnSAttachment',
+                    class: 'btn btn-primary',
+                    type: 'button'
+                },
+                action: function () {
+                    // Custom button action
+                    // Add your logic here
+                }
+            }
+        ]
     });
     
     $("#others").DataTable({

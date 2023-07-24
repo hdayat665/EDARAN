@@ -12,8 +12,9 @@
                     <select class="form-select" name="customer_id">
                         <option label="PLEASE CHOOSE"></option>
                         <?php $customers = getCustomer(); ?>
-                        @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}" {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}">
+                        <?php $sortedCustomers = $customers->sortBy('customer_name'); ?>
+                        @foreach ($sortedCustomers as $customer)
+                            <option value="{{ $customer->id }}" {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}>
                                 {{ $customer->customer_name }}</option>
                         @endforeach
                     </select>
@@ -103,18 +104,17 @@
             <div class="row mb-15px">
                 <div class="col-md-4">
                     <select class="form-select" name="acc_manager" id="acc_manager2">
-                        <option value="" label="PLEASE CHOOSE"></option>
                         <?php $Employees = getEmployee(); ?>
-                        @foreach ($Employees as $Employee)
+                        <?php $sortedEmployees = $Employees->sortBy('employeeName'); ?>
+                        @foreach ($sortedEmployees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->acc_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                                <div class="col-md-4">
-                    <select class="form-select" name="project_manager" id="project_manager2" disabled>
-                        <option value="" label="PLEASE CHOOSE"></option>
+                <div class="col-md-4">
+                    <select class="form-select" name="project_manager" id="project_manager2" style="pointer-events: none; background: #e9ecef">
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>

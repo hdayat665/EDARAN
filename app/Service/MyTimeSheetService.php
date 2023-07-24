@@ -1379,7 +1379,7 @@ public function getWorkingHourWeekendbyState($stateid)
         $data = DB::table('timesheet_event as a')
         ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
         ->select('a.*', 'b.employeeName')
-        ->orderBy('a.start_date', 'asc')
+        ->orderBy('a.start_date', 'desc')
         ->get();
         return $data;
     }   

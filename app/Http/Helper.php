@@ -1485,6 +1485,7 @@ if (!function_exists('prjManager')) {
             ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
             ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
+            ->sortBy('name')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
@@ -1761,12 +1762,13 @@ if (!function_exists('getSupervisor')) {
 if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
-        $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+        $employee = Employee::where('user_id', $id)->select('employeeName')->first();
 
-        if (!$data) {
-            $data = '';
+        if ($employee) {
+            return $employee->employeeName;
+        } else {
+            return '';
         }
-        return $data;
     }
 }
 
@@ -2565,7 +2567,9 @@ if (!function_exists('getUserWithSelectedUser')) {
     {
 
         // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])
+        ->orderBy('employeeName', 'asc')
+        ->get();
 
         if (!$data) {
             $data = [];

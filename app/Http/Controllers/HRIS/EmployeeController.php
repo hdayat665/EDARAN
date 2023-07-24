@@ -55,6 +55,9 @@ class EmployeeController extends Controller
 
     public function terminateEmployment(Request $r)
     {
+        // $test = $r -> input();
+        // dd($test);
+
         $ps = new EmployeeService;
 
         $result = $ps->terminateEmployment($r);

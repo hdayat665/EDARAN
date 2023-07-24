@@ -8,7 +8,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">HRIS | Policy's & SOP's</h1>
+    <h1 class="page-header">HRIS | Policy & SOP</h1>
 
 
 
@@ -22,13 +22,13 @@
                 <li class="nav-item">
                     <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
-                        <span class="d-sm-block d-none">Policy's</span>
+                        <span class="d-sm-block d-none">Policy</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
-                        <span class="d-sm-block d-none">SOP's</span>
+                        <span class="d-sm-block d-none">SOP</span>
                     </a>
                 </li>
 
@@ -38,9 +38,9 @@
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <!-- BEGIN tab-pane -->
                 <div class="tab-pane fade active show" id="default-tab-1">
-                    <h3 class="mt-10px"></i> Policy's List </h3>
+                    <h3 class="mt-10px"></i> Policy List </h3>
                     <div class="panel-heading-btn">
-                        <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy's</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy</a>
                     </div>
                     <div class="panel-body">
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
@@ -96,9 +96,9 @@
             <!-- END tab-pane -->
             <!-- BEGIN tab-pane -->
             <div class="tab-pane fade" id="default-tab-2">
-                <h3 class="mt-10px"></i> SOP's List </h3>
+                <h3 class="mt-10px"></i> SOP List </h3>
                 <div class="panel-heading-btn">
-                    <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP's</a>
+                    <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP</a>
                 </div>
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">

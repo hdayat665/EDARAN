@@ -99,7 +99,9 @@
                                             <td>{{ $event->venue ?? '-' }}</td>
                                             {{-- <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }} --}}
                                             </td>
-                                            <td>{{ $event->desc ? $event->desc : '-' }}</td>
+                                            <td style="max-width: 200px; word-wrap: break-word;">
+                                                {{ $event->desc ? $event->desc : '-' }}
+                                            </td>
                                             @php
                                                 $names = explode(',', $event->participant);
                                             @endphp

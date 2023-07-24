@@ -1,5 +1,5 @@
 <div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 1200px">
+    <div class="modal-dialog" style="max-width: 1400px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">View Daily Travelling Log</h5>
@@ -44,51 +44,8 @@
                     <!-- <tbody id="tableRowTravelling">
 
                     </tbody> -->
-                    <tbody>
-                        <tr style="text-align:center">
-                            <td>
-                                <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
-                            </td>
-                            <td>00:00:00</td>
-                            <td>00:00:00</td>
-                            <td style="cursor:pointer;" title="Start Address data">Edaran Office</td>
-                            <td style="cursor:pointer;" title="Destination Address data">KLIA 2</td>
-                            <td>meeting with client</td>
-                            <td>Personal Car</td>
-                            <td>167.5KM</td>
-                            <td>RM50.00</td>
-                            <td>RM50.00</td>
-                            <td>RM50.00</td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a id="" class="dropdown-item"> Edit</a>
-                                <a id="" class="dropdown-item"> Delete</a>
-                                <a id="" class="dropdown-item"> Challenge Route</a>
-                            </td>
-                        </tr>
-                        <tr style="text-align:center">
-                            <td>
-                                <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
-                            </td>
-                            <td>00:00:00</td>
-                            <td>00:00:00</td>
-                            <td style="cursor:pointer;" title="Start Address data">Edaran Office</td>
-                            <td style="cursor:pointer;" title="Destination Address data">KLIA 2</td>
-                            <td>meeting with client</td>
-                            <td>Personal Car</td>
-                            <td>167.5KM</td>
-                            <td>RM50.00</td>
-                            <td>RM50.00</td>
-                            <td>RM50.00</td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a id="" class="dropdown-item"> Edit</a>
-                                <a id="" class="dropdown-item"> Delete</a>
-                                <a id="" class="dropdown-item"> Challenge Route</a>
-                            </td>
-                        </tr>
+                    <tbody id="tableRowTravelling">
+
                     </tbody>
 
                 </table>
@@ -118,18 +75,36 @@
                             <table id="" class="table table-striped table-bordered align-middle">
                                 <thead>
                                     <tr>
-                                        <th class="text-nowrap">No</th>
+                                        <th>Action</th>
                                         <th class="text-nowrap">File Name</th>
                                         <th class="text-nowrap">Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @if ($travelAttachments)
+                                        @foreach ($travelAttachments as $attachment)
+                                        <tr>    
+                                            <td>
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                                <div class="dropdown-menu">
+                                                <a  id="deleteButtonTravelAttachment" data-id="{{ $attachment->id }}" class="dropdown-item">Delete</a>
+                                            </td>
+                                            <td>
+                                                @if(!empty($attachment->file_upload))
+                                                @php
+                                                $filenames = explode(',', $attachment->file_upload);
+                                                @endphp
+                                                @foreach($filenames as $filename)
+                                                <a href="/storage/MtcAttachment/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                @endforeach
+                                                    @endif
+                                            </td>
+                                            <td>{{ $attachment->desc ?? 'N/A' }}</td>
+                                        </tr> 
+                                        @endforeach
+                                    @endif
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
@@ -540,11 +515,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                    <?php $id = 0 ?>
+                                        @if ($travelAttachments)
+                                            @foreach ($travelAttachments as $attachment)
+                                            <?php $id++ ?>
+                                            <tr>    
+                                                <td>{{$id}}</td>
+                                                <td>
+                                                    @if(!empty($attachment->file_upload))
+                                                    @php
+                                                    $filenames = explode(',', $attachment->file_upload);
+                                                    @endphp
+                                                    @foreach($filenames as $filename)
+                                                    <a href="/storage/MtcAttachment/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    @endforeach
+                                                        @endif
+                                                </td>
+                                                <td>{{ $attachment->desc ?? 'N/A' }}</td>
+                                            </tr> 
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -561,56 +551,57 @@
 
 {{-- OTHERS --}}
 <div class="modal fade" id="othersModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 600px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">View Others</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <form id="updateOtherMtc">
-                <div class="">
-                    <div class="row p-2">
-                        <div class="col-md-4">
-                            <label class="form-label">Claim Category</label>
+        <div class="modal-dialog" style="max-width: 600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Others</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="updateOtherMtc">
+                    <div class="">
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Claim Category</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="hidden" name="id" class="form-control" value="" id="claim_id_other">
+                                <input type="hidden" name="general_id" class="form-control" value="" id="general_id_other">
+                                <input readonly type="text"  class="form-control" value="" id="claim_category_update">
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input readonly type="text" class="form-control" value="" id="claim_category_update">
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Amount</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" name="amount" class="form-control" value="" id="amount_other_update">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-md-4">
-                            <label class="form-label">Amount</label>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Description</label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <input type="text" name="amount" class="form-control" value="RM0.00" id="amount_other_update">
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-md-4">
-                            <label class="form-label">Description</label>
-                        </div>
-                        <div class="col-md-8">
-                            <textarea class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-md-4">
-                            <label class="form-label">Supporting Document</label>
-                        </div>
-                        <div class="col-md-8">
-                            <a href="#" class="btn btn-link">File</a>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" style="color: black" data-bs-dismiss="modal">Back</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                        <!-- <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">File Upload</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="file" class="form-control-file" name="file_upload[]" id="" multiple>
+                            </div>
+                        </div> -->
+
+                        <div class="modal-footer"> 
+                            <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
+                            <button type="submit" id="updateOtherMtcBtn" class="btn btn-primary">Update</button>
                         </form>
-                    </div>
-                    </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

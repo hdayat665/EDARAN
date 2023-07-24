@@ -1461,9 +1461,13 @@ getwork.then(function(data) {
 
 
                             var viewappealb = $('<button/>', {
+                                id: 'viewappealid', 
                                 text: 'View Appeal',
                                 class: 'btn btn-primary btn-xs appeal-view-button',
-                                click: function () {
+                                mousedown: function(event) {
+                                    event.stopPropagation();
+                                },
+                                click: function() {
 
 
                                     // Get the logid for the corresponding appliedDate
@@ -1762,8 +1766,7 @@ getwork.then(function(data) {
                                 top: '-35px',
                                 'z-index': '999',   
                                 });
-                        
-                        
+
                          } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
                          } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined >= workingDayHour) {
@@ -1869,19 +1872,13 @@ getwork.then(function(data) {
                         }
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
                         if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approved') {
-                            // show the view appeal modal
-
-                            // if ($(info.origEvent.target).hasClass('appeal-view-button')) {
-                            //     return; // Exit the function if the "View Appeal" button was clicked
-                            //   }
-
-                            $('#addLogModal').modal('show');
-                            const formattedDate = clickedDate.format('DD-MM-YYYY');
-                            $("#dateaddlog").val(formattedDate);
-
+                        
                            
-
+                            $('#addLogModal').modal('show');
+                            const formattedDate = clickedDate.format('YYYY-MM-DD');
+                            $("#dateaddlog").val(formattedDate);
                             return;
+                            
                         }
 
 

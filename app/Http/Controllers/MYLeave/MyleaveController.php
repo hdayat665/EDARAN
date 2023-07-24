@@ -145,6 +145,13 @@ class MyleaveController extends Controller
         return $result;
     }
 
+    public function totalNoPaidLeave()
+    {
+        $ms = new MyleaveService;
+        $result = $ms->totalNoPaidLeave();
+        return $result;
+    }
+
     public function getuserleaveAppr($id = '')
     {
         $ms = new MyleaveService;

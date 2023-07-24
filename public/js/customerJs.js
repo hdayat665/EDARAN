@@ -96,6 +96,8 @@ $(document).ready(function () {
             $("#address2").val(data.address2);
             $("#postcode").val(data.postcode);
             $("#city").val(data.city);
+            $("#state").val(data.state);
+            $("#country").val(data.country);
             $("#phoneNo").val(data.phoneNo);
             $("#idC").val(data.id);
             $("#email").val(data.email);
