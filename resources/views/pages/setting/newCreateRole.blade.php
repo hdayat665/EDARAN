@@ -58,7 +58,7 @@
         <div class="col-md-12 panel panel">
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
-                    <input class="form-check-input" type="checkbox" checked value="" id="">
+                    <input class="form-check-input" type="checkbox" value="" id="">
                 </div>
                 <div class="col-auto">
                     <p class="col-form-label" style="font-size: 15px;">ALL ACCESS</p>
@@ -76,7 +76,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">Dashboard</p>
@@ -86,7 +86,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Top Menu</p>
@@ -96,7 +96,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Announcements</p>
@@ -106,7 +106,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Events</p>
@@ -116,7 +116,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Live Clock In Activities</p>
@@ -126,7 +126,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Leave Employee Report</p>
@@ -136,7 +136,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Attendance Summary Report</p>
@@ -154,7 +154,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">HRMIS</p>
@@ -164,7 +164,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">My Profile</p>
@@ -175,7 +175,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Employee<br>Information
@@ -191,7 +191,7 @@
                     <div class="mb-6 child-element2">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Register New Employee</p>
@@ -201,7 +201,7 @@
                     <div class="mb-6 child-element2">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Edit Employee
@@ -216,7 +216,7 @@
                     <div class="mb-6 child-element2">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Activate /<br>Deactivate Employee</p>
@@ -234,7 +234,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">eAttendance</p>
@@ -244,7 +244,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">My Attendance</p>
@@ -254,7 +254,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Attendance<br>Information
@@ -275,7 +275,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">General Information</p>
@@ -285,7 +285,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Phone Directory</p>
@@ -295,7 +295,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Organization Chart</p>
@@ -305,7 +305,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Policy & SOP's</p>
@@ -323,7 +323,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">eLeave</p>
@@ -333,7 +333,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">My Leave</p>
@@ -343,7 +343,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Leave Approval</p>
@@ -353,34 +353,34 @@
                     <div class="mb-6 child-element2">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
-                                <p class="col-form-label">View Leave</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-6 child-element2">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
-                            </div>
-                            <div class="col-auto">
-                                <p class="col-form-label">Approve Leave</p>
+                                <p class="col-form-label">Department Recommender</p>
                             </div>
                         </div>
                     </div>
                     <div class="mb-6 child-element2">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                            </div>
+                            <div class="col-auto">
+                                <p class="col-form-label">Department Approver</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="mb-6 child-element2">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">Reject Leave</p>
                             </div>
                         </div>
-                    </div>
-                </div><br><br><br><br><br><br>
+                    </div> -->
+                </div><br><br><br><br><br><br><br><br>
             </div>
 		</div>
     </div>
@@ -394,7 +394,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">Timesheet</p>
@@ -404,7 +404,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">My Timesheet</p>
@@ -416,7 +416,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Summary</p>
@@ -426,7 +426,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Month</p>
@@ -436,7 +436,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Week</p>
@@ -446,7 +446,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Day</p>
@@ -456,7 +456,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">New Log</p>
@@ -466,7 +466,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">New Event</p>
@@ -476,7 +476,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Submit (Timesheet Approval)</p>
@@ -486,7 +486,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cancel (Timesheet Approval)</p>
@@ -498,7 +498,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Submission Status</p>
@@ -508,7 +508,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Timesheet Approval</p>
@@ -519,7 +519,7 @@
                             <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">View Timesheet</p>
@@ -529,7 +529,7 @@
                             <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Approve Timesheet</p>
@@ -539,7 +539,7 @@
                             <div class="mb-3 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Amend Timesheet</p>
@@ -550,7 +550,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Realtime Activities</p>
@@ -560,7 +560,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Apeal Approval</p>
@@ -578,7 +578,7 @@
                     <div class="mb-3">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">Project Management</p>
@@ -590,7 +590,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Customer
@@ -605,7 +605,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Information
@@ -620,10 +620,10 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Project Information
+                                        <p class="col-form-label">Account Manager
                                             &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
@@ -634,17 +634,41 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Project Manager</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element3">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Project Information
+                                            &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element3">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Previous Project Manager</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element2">
+                            <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Location
@@ -657,10 +681,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element2">
+                            <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Member</p>
@@ -668,13 +692,13 @@
                                 </div>
                             </div>
 
-                            <div class="mb-6 child-element3">
+                            <div class="mb-6 child-element4">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Current Member
+                                        <p class="col-form-label">Current<br>Member
                                             &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-plus" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
@@ -685,34 +709,30 @@
                                 </div>
                             </div>
 
-                            <div class="mb-6 child-element4">
+                            <div class="mb-6 child-element5">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Assign Location</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="mb-3 child-element3">
+                            <div class="mb-6 child-element4">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Previous Member</p>
+                                        <p class="col-form-label">Project Member</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="mb-6 child-element">
+                            <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Approval
@@ -725,10 +745,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-sm-6">
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">My Project</p>
@@ -738,7 +761,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Request</p>
@@ -749,7 +772,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Request</p>
@@ -759,7 +782,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cancel</p>
@@ -768,7 +791,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br><br><br><br><br>
             </div>
         </div>
 
@@ -779,7 +802,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">eClaim</p>
@@ -789,7 +812,7 @@
                     <div class="mb-6 child-element">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label">My Claim
@@ -807,7 +830,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">General Claim</p>
@@ -817,7 +840,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cash Advance</p>
@@ -827,7 +850,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Monthly Claim</p>
@@ -837,7 +860,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Claim Table</p>
@@ -847,37 +870,41 @@
                             <div class="mb-3 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cash Advance Table</p>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="mb-6 child-element">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Claim Approval</p>
-                                    </div>
-                                </div>
+                    <div class="mb-6 child-element">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
-
+                            <div class="col-auto">
+                                <p class="col-form-label">Claim Approval
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-12">
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Department Recommender
+                                        <p class="col-form-label">Level 1 - Department Recommender
                                             &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -885,15 +912,15 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Department Approver
-                                            &nbsp;
+                                        <p class="col-form-label">Level 1 - Department Approver
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -901,15 +928,15 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Admin Checker
-                                            &nbsp;
+                                        <p class="col-form-label">Level 2 - Checker
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -917,32 +944,15 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Admin Recommender
-                                            &nbsp;
+                                        <p class="col-form-label">Level 2 - Recommender
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="mb-6 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Admin Approver
-                                            &nbsp;
-                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -950,15 +960,15 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Finance Checker
-                                            &nbsp;
+                                        <p class="col-form-label">Level 2 - Approver
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -966,15 +976,127 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Finance Recommender
-                                            &nbsp;
+                                        <p class="col-form-label">Level 3 - Checker
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 3 - Recommender
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 3 - Approver
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 4 - Checker
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 4 - Recommender
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 4 - Approver
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 5 - Finance Checker
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Level 5 - Finance Recommender
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
@@ -982,101 +1104,104 @@
                             <div class="mb-3 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Finance Approver
-                                            &nbsp;
+                                        <p class="col-form-label">Level 5 - Finance Approver
+                                        &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
                                             <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-6 child-element">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Cash Advance Approval</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-6 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Department Approver
-                                            &nbsp;
-                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-6 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Finance Checker
-                                            &nbsp;
-                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-6 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Finance Recommender
-                                            &nbsp;
-                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
-                                    </div>
-                                    <div class="col-auto">
-                                        <p class="col-form-label">Finance Approver
-                                            &nbsp;
-                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked checked>
-                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-check"  type="checkbox" checked>
-                                            <input class="form-check-input rounded-circle fa fa-close"  type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><br>
+
+                    <div class="mb-6 child-element">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                            </div>
+                            <div class="col-auto">
+                                <p class="col-form-label">Cash Advance Approver
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-12">
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Department Approver
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Finance Checker
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Finance Recommender
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6 child-element2">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="col-form-label">Finance Approver
+                                        &nbsp;
+                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                            <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     
     <!-- ================== Row 3 ================== -->
     <div class="row">
@@ -1087,7 +1212,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">Report</p>
@@ -1100,7 +1225,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Timesheet</p>
@@ -1110,7 +1235,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Status Report</p>
@@ -1120,7 +1245,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Employee Report</p>
@@ -1130,7 +1255,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Overtime Report</p>
@@ -1143,7 +1268,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eAttendance</p>
@@ -1153,7 +1278,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Daily Report</p>
@@ -1163,7 +1288,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Status Report</p>
@@ -1176,7 +1301,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eleave</p>
@@ -1189,7 +1314,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Project Management</p>
@@ -1199,7 +1324,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Daily Report</p>
@@ -1209,7 +1334,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Status Report</p>
@@ -1222,7 +1347,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eClaim</p>
@@ -1232,7 +1357,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Claim</p>
@@ -1242,7 +1367,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cash Advance</p>
@@ -1265,7 +1390,7 @@
                     <div class="mb-6">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" checked value="" id="">
+                                <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
                                 <p class="col-form-label" style="font-size: 15px;">Settings</p>
@@ -1279,7 +1404,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">General
@@ -1295,7 +1420,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">System Role
@@ -1311,7 +1436,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">System User
@@ -1327,7 +1452,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Company
@@ -1343,7 +1468,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Department
@@ -1359,7 +1484,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Unit
@@ -1375,7 +1500,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Branch
@@ -1391,7 +1516,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Location
@@ -1407,7 +1532,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Job Grade
@@ -1423,7 +1548,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Designation
@@ -1439,7 +1564,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Employment Type
@@ -1455,7 +1580,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Policy's & SOP's
@@ -1471,7 +1596,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">News
@@ -1491,7 +1616,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eAttendance</p>
@@ -1501,7 +1626,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Clock In Types
@@ -1517,7 +1642,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Working Patterns
@@ -1533,7 +1658,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Location
@@ -1551,7 +1676,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Timesheet</p>
@@ -1561,7 +1686,7 @@
                             <div class="mb-2 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Timesheet Administrator <br> & Timesheet Period
@@ -1577,7 +1702,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Timesheet Group
@@ -1593,7 +1718,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Type Of Logs
@@ -1613,7 +1738,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eLeave</p>
@@ -1623,7 +1748,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Leave Entitlement
@@ -1639,7 +1764,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Staff Leave<br>Entitlement
@@ -1655,7 +1780,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Weekend Entitlement
@@ -1671,7 +1796,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Leave Types
@@ -1687,7 +1812,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Holiday
@@ -1707,7 +1832,7 @@
                             <div class="mb-6 child-element">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">eClaim</p>
@@ -1717,7 +1842,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">General
@@ -1733,7 +1858,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Claim Date
@@ -1749,7 +1874,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Entitlement Group
@@ -1765,7 +1890,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Cash Advance <br> Controller
@@ -1781,7 +1906,7 @@
                             <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" checked value="" id="">
+                                        <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
                                         <p class="col-form-label">Approval Role
@@ -1818,6 +1943,9 @@
         }
         .child-element4 {
             margin-left: 65px; /* Adjust the indentation or spacing as desired */
+        }
+        .child-element5 {
+            margin-left: 80px; /* Adjust the indentation or spacing as desired */
         }
         .rounded-circle {
             width: 16px;
@@ -1857,6 +1985,7 @@
             color: #A9A9A9; /* Change the color to your desired color */
             font-size: 13px; /* Change the font size to your desired size */
         }
+
     </style>
 </div>
 
