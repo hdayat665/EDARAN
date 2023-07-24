@@ -750,7 +750,7 @@
             <div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fa fa-user-group text-gray"></i>
+                        <i class="fa fa-circle-info text-gray"></i>
                     </div>
                     <div class="menu-text text-gray">General Information</div>
                     <div class="menu-caret text-gray"></div>

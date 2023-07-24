@@ -1,5 +1,13 @@
 $(document).ready(function () {
-    $("#tenantNameSubmit").click(function (e) {
+    $("#recipient-name").keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault(); // Prevent default form submission behavior
+            submitForm(); // Call the function to handle form submission
+        }
+    });
+
+    // Function to handle form submission
+    function submitForm() {
         requirejs(["sweetAlert2"], function (swal) {
             var data = new FormData(document.getElementById("submitForm"));
 
@@ -8,7 +16,6 @@ $(document).ready(function () {
                 url: "/checkTenant",
                 data: data,
                 dataType: "json",
-
                 processData: false,
                 contentType: false,
             }).then(function (data) {
@@ -22,43 +29,29 @@ $(document).ready(function () {
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                 }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-
-                        // window.location.href = "/loginTenant";
-                        // $("#exampleModal").modal("hide");
-                        // document.getElementById("tenant").textContent = data.data;
-                        // $("#tenantInput").val(data.data);
-
-
-                        // var tenantElement = document.getElementById("tenant");
-                        // if (tenantElement) {
-                        //     tenantElement.innerHTML = "<strong>" + data.data + "</strong>";
-                        // }
-                        // $("#tenantInput").val(data.data);
-                        // window.location.href = "/loginTenant";
-
-
-
+                    if (data.type != "error") {
                         var tenantElement = document.getElementById("tenant");
                         if (tenantElement) {
                             tenantElement.innerHTML = data.data;
                         }
                         $("#tenantInput").val(data.data);
 
-
                         // Store the value in session storage
                         localStorage.setItem("dataValue", data.data);
 
                         window.location.href = "/loginTenant";
-
-
                     }
-
                 });
             });
         });
+    }
+
+    // Listen for button click
+    $("#tenantNameSubmit").click(function (event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        submitForm(); // Call the function to handle form submission
     });
+
 
 // Retrieve the value from session storage
 var dataValue = localStorage.getItem("dataValue");

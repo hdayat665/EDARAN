@@ -40,7 +40,7 @@
                     </div>
                     <br>
                     <div class="mb-15px">
-                        <button type="button" id="tenantNameSubmit" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Proceed</button>
+                        <a type="submit" id="tenantNameSubmit" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Proceed</a>
                     </div>
                 </form>
                 <br><br><br>

@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/sop"><i class="fa fa-clipboard-list fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">SOP's</h5>
+                    <h5 class="mb-5px">SOP</h5>
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/news"><i class="fa fa-newspaper fa-4x text-blue"></i></a><br><br>
