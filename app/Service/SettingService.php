@@ -2707,7 +2707,9 @@ public function updateTypeOfLogs($r, $id)
         $input = [
             [$tenant, 'AL', 'ANNUAL LEAVE'],
             [$tenant, 'SL', 'SICK LEAVE'],
-            [$tenant, 'HL', 'HOSPITALIZATION']
+            [$tenant, 'HL', 'HOSPITALIZATION'],
+            [$tenant, 'EL', 'EMERGENCY LEAVE'],
+            [$tenant, 'NP', 'NO PAY LEAVE'],
         ];
 
         foreach ($input as $data) {
@@ -2814,7 +2816,9 @@ public function updateTypeOfLogs($r, $id)
             $check = [
                 ['AL', 'ANNUAL LEAVE'],
                 ['SL', 'SICK LEAVE'],
-                ['HL', 'HOSPITALIZATION']
+                ['HL', 'HOSPITALIZATION'],
+                ['EL', 'EMERGENCY LEAVE'],
+                ['NP', 'NO PAY LEAVE'],
             ];
 
             foreach ($check as $row) {
@@ -2849,7 +2853,9 @@ public function updateTypeOfLogs($r, $id)
         $check = [
             ['AL', 'ANNUAL LEAVE'],
             ['SL', 'SICK LEAVE'],
-            ['HL', 'HOSPITALIZATION']
+            ['HL', 'HOSPITALIZATION'],
+            ['EL', 'EMERGENCY LEAVE'],
+            ['NP', 'NO PAY LEAVE'],
         ];
 
         $matchFound = false;

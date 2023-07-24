@@ -402,7 +402,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
-            
+
 
             // eleave Anual leave
             Route::get('/leaveAnnual', 'leaveAnnualView');
@@ -678,6 +678,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getpieleave2', 'getpieleave2');
             Route::get('/getEarnedLeave', 'getEarnedLeave');
             Route::get('/getLapseLeave', 'getLapseLeave');
+            Route::get('/totalNoPaidLeave', 'totalNoPaidLeave');
 
             //checking holiday
 

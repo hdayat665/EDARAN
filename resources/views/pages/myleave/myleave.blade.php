@@ -7,6 +7,14 @@
             background-color: gray !important;
             border-color: gray !important;
         }
+
+        .custom-dropdown-menu {
+            position: static ;
+            height: auto ;
+            max-height: none ;
+            overflow: visible ;
+        }
+
     </style>
 
     <!-- BEGIN #content -->
@@ -140,6 +148,7 @@
                                             </div>
                                         </form>
                                     </div>
+
                                     <div class="row p-2">
                                         <table id="table-leave" class="table table-striped table-bordered align-middle">
                                             <thead>
@@ -168,16 +177,21 @@
                                                 <tr class="odd gradeX">
                                                     <td>{{ $id }}</td>
                                                     <td>
-                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                                                            <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <div class="viewleave">
-                                                                <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
+                                                        <div class="btn-group">
+                                                            <div>
+                                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                                                    <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
+                                                                </a>
                                                             </div>
-                                                            <div class="dropdown-divider "></div>
-                                                            <div class="cancelleave">
-                                                                <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+
+                                                            <div class="dropdown-menu custom-dropdown-menu test">
+                                                                <div class="viewleave">
+                                                                    <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
+                                                                </div>
+                                                                <div class="dropdown-divider "></div>
+                                                                <div class="cancelleave">
+                                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -298,12 +312,12 @@
                                         </form>
                                     </div>
 
-                                    <div class="row p-2">
-                                        <table id="table-leave2" class="table table-striped table-bordered align-middle">
+                                    <div class="row">
+                                        <table id="tableleavedua" class="table table-striped table-bordered align-middle">
                                             <thead>
                                                 <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th width="1%" data-orderable="false">Action</th>
+                                                    <th>No.</th>
+                                                    <th data-orderable="false">Action</th>
                                                     <th width="1%">Applied Date</th>
                                                     <th>Type of Leave</th>
                                                     <th>Start Date</th>
@@ -323,23 +337,20 @@
                                                     $end_date = new DateTime($mh->end_date);
                                                 ?>
                                                 <tr class="odd gradeX">
-                                                    <td>{{ $id }}</td>
-                                                    <td>
-                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                                                            <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <div class="viewleave">
-                                                                <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
+                                                    <td style="width: 1%;">{{ $id }}</td>
+                                                    <td style="width: 1%;">
+                                                        <div class="btn-group">
+                                                            <div>
+                                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                                                    <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
+                                                                </a>
                                                             </div>
-                                                            {{-- <div class="dropdown-divider "></div> --}}
-                                                            {{-- <div class="cancelleave">
-                                                                <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item">Cancel Leave</a>
-                                                            </div> --}}
-                                                            {{-- <div class="dropdown-divider "></div>
-                                                            <div class="rejectedleave">
-                                                                <a class="dropdown-item">Rejected Leave</a>
-                                                            </div> --}}
+
+                                                            <div class="dropdown-menu custom-dropdown-menu test">
+                                                                <div class="viewleave">
+                                                                    <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>{{$applied_date->format('Y-m-d') }}</td>
