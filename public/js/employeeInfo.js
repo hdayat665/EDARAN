@@ -2,19 +2,20 @@ $(document).ready(function () {
 
     $(document).ready(function() {
         $(".wan").hide();
-
-        $(".dropdown-toggle").on("click", function() {
+    
+        $(document).on("click", ".dropdown-toggle", function() {
             var dropdownMenu = $(this).closest(".btn-group").find(".wan");
             $(".wan").not(dropdownMenu).hide();
             dropdownMenu.toggle();
         });
-
+    
         $(document).on("click", function(e) {
             if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
                 $(".wan").hide();
             }
         });
     });
+    
 
     $("#tableemployeeinfo").DataTable({
         responsive: false,
