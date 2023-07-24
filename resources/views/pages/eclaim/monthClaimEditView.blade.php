@@ -149,10 +149,10 @@
                                         </div>
                                         <div class="row p-2">
                                             <div class="col-md-6">
-                                                <label class="form-label">Cash Advance (Less)</label>
+                                                <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn">View</a></label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ number_format($GNC->lessCash ?? 0, 2) }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -160,7 +160,7 @@
                                                 <label class="form-label">Balance Due to/(From) Employee</label>
                                             </div>
                                             <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM {{ number_format($GNC->total_amount ?? 0, 2) }}'>
+                                            <input type="text" class="form-control" readonly value='RM {{ number_format($balance ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                     </div>

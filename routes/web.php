@@ -636,6 +636,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStartTimeDrop/{id}', 'getStartTimeDrop');
             Route::get('/getEndTimeDrop/{id}', 'getEndTimeDrop');
             Route::get('/monthlyClaimView/{id}', 'monthlyClaimView');
+            Route::post('/updateCashMtc', 'updateCashMtc');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

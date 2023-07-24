@@ -1,5 +1,5 @@
 $("document").ready(function () {
-
+ 
       function getTravelDataByGeneralId(id, date) {
         return $.ajax({
           url: "/getTravelDataByGeneralId/" + id + "/" + date
@@ -25,78 +25,53 @@ $("document").ready(function () {
           url: "/getClaimCategoryNameById/" + id
         });
       }
-      $("#hotelcvUpdate,#hnUpdate,#lnUpdate").change(
-        function () {
-            var a = parseInt($("#hotelcvUpdate").val())|| 0;
-            var b = parseInt($("#hnUpdate").val())|| 0;
-            var c = parseInt($("#lnUpdate").val())|| 0;
-            var d = parseInt($("#lodgingcvUpdate").val())|| 0;
-            var e = parseInt($("#TSUpdate").val())|| 0;
-            var f = parseFloat((a*b)+(c*d)).toFixed(2);
-            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
-
-            $("#hnTotalUpdate").val(a*b);
-            $("#lnTotalUpdate").val(c*d);
-            $("#TAVUpdate").val(f);
-            $("#total2Update").val(g);
-        }
-    );
-    
-    $("#hotelcv,#hn,#ln").change(
-        function () {
-            var a = parseInt($("#hotelcv").val())|| 0;
-            var b = parseInt($("#hn").val())|| 0;
-            var c = parseInt($("#ln").val())|| 0;
-            var d = parseInt($("#lodgingcv").val())|| 0;
-            var e = parseInt($("#TS").val())|| 0;
-            var f = parseFloat((a*b)+(c*d)).toFixed(2);
-            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
-            $("#hnTotal").val(a*b);
-            $("#lnTotal").val(c*d);
-            
-            $("#TAV").val(f);
-            $("#total2").val(g);
-        }
-    );
-
-    $("#hotelcvca,#hnca,#lnca").change(
-        function () {
-            var a = parseInt($("#hotelcvca").val())|| 0;
-            var b = parseInt($("#hnca").val())|| 0;
-            var c = parseInt($("#lnca").val())|| 0;
-            var d = parseInt($("#lodgingcvca").val())|| 0;
-            var e = parseInt($("#TSca").val())|| 0;
-            var f = parseFloat((a*b)+(c*d)).toFixed(2);
-            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
-            $("#hnTotalca").val(a*b);
-            $("#lnTotalca").val(c*d);
-            
-            $("#TAVca").val(f);
-            $("#total2ca").val(g);
-        }
-    );
-      document.getElementById('hotelcvUpdate').addEventListener('input', function() {
-        const hiddenInput = document.getElementById('hotelcvUpdateHide');
-        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
-        if (this.value > maxValue) {
-          this.value = maxValue;
-        }
-      });
       
-      document.getElementById('hotelcv').addEventListener('input', function() {
-        const hiddenInput = document.getElementById('htv');
-        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
-        if (this.value > maxValue) {
-          this.value = maxValue;
+      
+    
+    $("#hnTotal").on("input", function () {
+        var a = parseInt($("#hotelcv").val()) || 0;
+        var b = parseInt($("#hn").val()) || 0;
+    
+        var hotel_max = a * b;
+    
+        if ($(this).val() > hotel_max) {
+            $(this).val(hotel_max); // Set hnTotal value to hotel_max if it's greater
         }
-      });
-      document.getElementById('hotelcvca').addEventListener('input', function() {
-        const hiddenInput = document.getElementById('htvca');
-        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
-        if (this.value > maxValue) {
-          this.value = maxValue;
+    });
+    $("#hnTotalca").on("input", function () {
+        var a = parseInt($("#hotelcvca").val()) || 0;
+        var b = parseInt($("#hnca").val()) || 0;
+    
+        var hotel_max = a * b;
+    
+        if ($(this).val() > hotel_max) {
+            $(this).val(hotel_max); // Set hnTotal value to hotel_max if it's greater
         }
-      });
+    });
+    $("#lnTotal").on("input", function () {
+        var a = parseInt($("#lodgingcv").val()) || 0;
+        var b = parseInt($("#ln").val()) || 0;
+    
+        var lodging_max = a * b;
+    
+        if ($(this).val() > lodging_max) {
+            $(this).val(lodging_max); // Set hnTotal value to hotel_max if it's greater
+        }
+    });
+    $("#lnTotalca").on("input", function () {
+        var a = parseInt($("#lodgingcvca").val()) || 0;
+        var b = parseInt($("#lnca").val()) || 0;
+    
+        var lodging_max = a * b;
+    
+        if ($(this).val() > lodging_max) {
+            $(this).val(lodging_max); // Set hnTotal value to hotel_max if it's greater
+        }
+    });
+    
+    
+    
+      
 
     $(document).on("click", "#travelBtn", function() {
     var date = $(this).data("date");
@@ -412,7 +387,12 @@ $("#subsTableUpdate").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
-});
+}); 
+    $(document).on("click", "#viewCaBtn", function () {
+
+
+        $("#viewCa").modal("show");
+    });
     $(document).on("click", "#btnAttachment", function () {
 
 
@@ -471,6 +451,7 @@ $("#subsTableUpdate").DataTable({
                 var endDate = firstResponse.end_date;
                 var endTime = firstResponse.end_time;
                 var laundry_amount = firstResponse.laundry_amount;
+                
                 var laundry_desc = firstResponse.laundry_desc;
                 var file_laundry = firstResponse.file_laundry;
                 var formattedStartDate = startDate.substr(0, 10);
@@ -479,7 +460,9 @@ $("#subsTableUpdate").DataTable({
                 var desc = firstResponse.desc;
                 var file_upload = firstResponse.file_upload;
                 var project = firstResponse.project_id;
-                var hotel = parseFloat(firstResponse.hotel_value);
+                var hotel = !isNaN(parseFloat(firstResponse.hotel_value)) ? parseFloat(firstResponse.hotel_value) : parseFloat(0);
+                var lodging = !isNaN(parseFloat(firstResponse.lodging_value)) ? parseFloat(firstResponse.lodging_value) : parseFloat(0);
+
                 var startDateFood = formattedStartDate;
                 var endDateFood = formattedEndDate;
                 var startTimeFood = startTime;
@@ -492,6 +475,7 @@ $("#subsTableUpdate").DataTable({
                 var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+                
 
                 if (!laundry_amount) {
                     laundry_amount = null;
@@ -604,6 +588,7 @@ $("#subsTableUpdate").DataTable({
                 var d = lunchDaysUpdate;
                 var e = parseFloat($("#DNUpdate").val()); //float
                 var f = dinnerDaysUpdate;
+                var amount = firstResponse.amount ?? (hotel+lodging+(a * b + c * d + e * f));
                 $("#TSUpdate").val((a * b + c * d + e * f).toFixed(2));
                 
             
@@ -613,15 +598,77 @@ $("#subsTableUpdate").DataTable({
                 
                 $("#hnUpdate").val(dayHotel);
                 $("#lnUpdate").val(dayLodging);
-                var lodgingValue = parseFloat($("#lodgingcvUpdate").val());
-                var totalHotel = dayHotel*hotel;
-                var totalLodging = dayLodging*lodgingValue;
-                $("#hnTotalUpdate").val(totalHotel);
                 
-                $("#lnTotalUpdate").val(totalLodging);
-                $("#TAVUpdate").val(totalHotel+totalLodging);
+                $("#hnTotalUpdate").val(hotel);
+                $("#lnTotalUpdate").val(lodging);
+                $("#TAVUpdate").val(hotel+lodging);
                 
-                $("#total2Update").val(totalHotel+totalLodging+(a * b + c * d + e * f));
+                $("#total2Update").val(amount);
+
+                var hotelUpdate = parseInt($("#hotelCvModal").val()) || 0;
+                var lodgingUpdate = parseInt($("#lodgingcvUpdate").val()) || 0;
+                $("#hotelcvUpdate").on("input", function () {
+                    var a = dayHotel || 0;
+                    var b = hotelUpdate || 0;
+                    var laundry = parseFloat($("#laundry_amount_update").val());
+                    var laundry = parseFloat($("#laundry_amount_update").val());
+                    if (isNaN(laundry)) {
+                        laundry = 0;
+                    }
+                    var hotel_max = a * b;
+                    
+                    if (parseFloat($(this).val()) > hotel_max) {
+                        $(this).val(hotel_max);
+                    }
+
+                    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+                    var lodging = parseFloat($("#lnTotalUpdate").val());
+                    var total = parseFloat(hotel + lodging).toFixed(2);
+                    $("#TAVUpdate").val(total);
+
+                    var ts = parseFloat($("#TSUpdate").val());
+                    var tav = parseFloat($("#TAVUpdate").val());
+                    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+                    $("#total2Update").val(total2);
+                });
+                $("#lnTotalUpdate").on("input", function () {
+                    var a = dayLodging || 0;
+                    var b = lodgingUpdate || 0;
+                    var laundry = parseFloat($("#laundry_amount_update").val());
+                    if (isNaN(laundry)) {
+                        laundry = 0;
+                    }
+                    var lodging_max = a * b;
+                    
+                    if (parseFloat($(this).val()) > lodging_max) {
+                        $(this).val(lodging_max);
+                    }
+                    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+                    var lodging = parseFloat($("#lnTotalUpdate").val());
+                    var total = parseFloat(hotel + lodging).toFixed(2);
+                    $("#TAVUpdate").val(total);
+
+                    var ts = parseFloat($("#TSUpdate").val());
+                    var tav = parseFloat($("#TAVUpdate").val());
+                    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+                    $("#total2Update").val(total2);
+                });
+
+                $("#laundry_amount_update").on("input", function () {
+                    var laundry = parseFloat($("#laundry_amount_update").val());
+                    if (isNaN(laundry)) {
+                        laundry = 0;
+                    }
+                    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+                    var lodging = parseFloat($("#lnTotalUpdate").val());
+                    var total = parseFloat(hotel + lodging).toFixed(2);
+                    $("#TAVUpdate").val(total);
+
+                    var ts = parseFloat($("#TSUpdate").val());
+                    var tav = parseFloat($("#TAVUpdate").val());
+                    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+                    $("#total2Update").val(total2);
+                });
                 // Fetch the project name asynchronously
                 getProjectNameById(project).done(function(projectData) {
                     var projectName = projectData && projectData.project_name ? projectData.project_name : 'N/A';
@@ -650,6 +697,10 @@ $("#subsTableUpdate").DataTable({
         });
         
         $("#subsModal").modal("show");
+
+        
+
+       
     });
     
     
@@ -770,8 +821,10 @@ $("#subsTableUpdate").DataTable({
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete").val(officeValue);
+            $("#project").hide();
         } else if ($(this).val() == "Home") {
             var permanentValue = $("#permanentAddress").val() || "-";
+            $("#project").hide();
             $("#autocomplete").val(permanentValue);
         } else {
             $("#project").hide();
@@ -789,9 +842,11 @@ $("#subsTableUpdate").DataTable({
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(officeValue);
+            $("#projectdest").hide();
         } else if ($(this).val() == "Home") {
             var permanentValue = $("#permanentAddress").val() || "-";
             $("#autocomplete2").val(permanentValue);
+            $("#projectdest").hide();
         } else {
             $("#projectdest").hide();
             $("#logname").hide();
@@ -996,18 +1051,21 @@ $("#subsTableUpdate").DataTable({
             $("#totalbf").val((a * b).toFixed(2));
             $("#totallh").val((c * d).toFixed(2));
             $("#totaldn").val((e * f).toFixed(2));
-
+            var laundry = parseFloat($("#laundry_amount").val());
+            if (isNaN(laundry)) {
+                laundry = 0;
+            }
             var a = parseInt($("#hotelcv").val())|| 0;
             var b = parseInt($("#hn").val())|| 0;
             var c = parseInt($("#ln").val())|| 0;
             var d = parseInt($("#lodgingcv").val())|| 0;
             var e = parseInt($("#TS").val())|| 0;
             var f = parseFloat((a*b)+(c*d)).toFixed(2);
-            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e +laundry).toFixed(2);
             $("#hnTotal").val(a*b);
             $("#lnTotal").val(c*d);
             
-            $("#TAV").val(f);
+            
             $("#total2").val(g);
 
             if (days > laundryDays ) {
@@ -1114,18 +1172,7 @@ $("#subsTableUpdate").DataTable({
             $("#totallhca").val((c * d).toFixed(2));
             $("#totaldnca").val((e * f).toFixed(2));
 
-            var a = parseInt($("#hotelcvca").val())|| 0;
-            var b = parseInt($("#hnca").val())|| 0;
-            var c = parseInt($("#lnca").val())|| 0;
-            var d = parseInt($("#lodgingcvca").val())|| 0;
-            var e = parseInt($("#TSca").val())|| 0;
-            var f = parseFloat((a*b)+(c*d)).toFixed(2);
-            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
-            $("#hnTotalca").val(a*b);
-            $("#lnTotalca").val(c*d);
-            
-            $("#TAVca").val(f);
-            $("#total2ca").val(g);
+           
 
             if (days > laundryDays ) {
 
@@ -1226,21 +1273,26 @@ $("#subsTableUpdate").DataTable({
             var ss = "100"; // this is the value to check against
 
             if ($("#htv").val() == ss) {
-                $("#hotelcv").prop("readonly", false);
+                $("#hotelcv").prop("readonly", true);
             } else {
-                $("#hotelcv").prop("readonly", false);
+                $("#hotelcv").prop("readonly", true);
             }
 
             $("#hotelcv").val(s);
             $("#hotelcv1").val(s);
-            $("#hn").prop("readonly", false);
+            $("#hn").prop("readonly", true);
+            $("#hnTotal").prop("readonly", false);
         } else {
             $("#hotelcv").val("");
             $("#hotelcv").prop("readonly", true);
             $("#hotelcv1").val("0");
             $("#hn").prop("readonly", true);
+            $("#hnTotal").prop("readonly", true);
+            $("#hnTotal").val(0);
+            $("#hotelcv").val(0);
         }
     });
+    
     $("#hotelcca").change(function () {
         var s = $("#hotelcca input:checked")
             .map(function () {
@@ -1252,14 +1304,14 @@ $("#subsTableUpdate").DataTable({
             var ss = "100"; // this is the value to check against
 
             if ($("#htvca").val() == ss) {
-                $("#hotelcvca").prop("readonly", false);
+                $("#hotelcvca").prop("readonly", true);
             } else {
-                $("#hotelcvca").prop("readonly", false);
+                $("#hotelcvca").prop("readonly", true);
             }
 
             $("#hotelcvca").val(s);
             $("#hotelcv1ca").val(s);
-            $("#hnca").prop("readonly", false);
+            $("#hnca").prop("readonly", true);
         } else {
             $("#hotelcvca").val("");
             $("#hotelcvca").prop("readonly", true);
@@ -1282,15 +1334,17 @@ $("#subsTableUpdate").DataTable({
             } else {
                 $("#lodgingcv").prop("readonly", true);
             }
-
+            $("#lnTotal").prop("readonly", false);
             $("#lodgingcv").val(s);
             $("#lodgingcv1").val(s);
-            $("#ln").prop("readonly", false);
+            $("#ln").prop("readonly", true);
         } else {
             $("#lodgingcv").val("");
             $("#lodgingcv").prop("readonly", true);
             $("#lodgingcv1").val("0");
             $("#ln").prop("readonly", true);
+            $("#lnTotal").prop("readonly", true);
+            $("#lodgingcv").val(0);
         }
     });
     $("#lodgingcca").change(function () {
@@ -1311,7 +1365,8 @@ $("#subsTableUpdate").DataTable({
 
             $("#lodgingcvca").val(s);
             $("#lodgingcv1ca").val(s);
-            $("#lnca").prop("readonly", false);
+            $("#lnca").prop("readonly", true);
+            
         } else {
             $("#lodgingcvca").val("");
             $("#lodgingcvca").prop("readonly", true);
@@ -1349,24 +1404,40 @@ $("#subsTableUpdate").DataTable({
         
     });
 
-    $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").focus(function () {
-        var a = parseFloat($("#hotelcv1").val()); //float
-        var b = parseInt($("#hn").val());
-
-        var c = parseFloat($("#lodgingcv1").val()); //float
-        var d = parseInt($("#ln").val());
-        var e = parseFloat(a * b + c * d).toFixed(2);
+    $("#hnTotal,#lnTotal,#laundry_amount").on("input", function () {
+        var a = parseFloat($("#hnTotal").val()); //float
+        var b = parseFloat($("#lnTotal").val());
+    
+        var e = parseFloat(a + b).toFixed(2);
         $("#TAV").val(e);
+        var laundry = parseFloat($("#laundry_amount").val());
+        if (isNaN(laundry)) {
+            laundry = 0;
+        }
+        var ts = parseFloat($("#TS").val());
+        var tav = parseFloat($("#TAV").val());
+        var total = parseFloat(ts + tav+laundry).toFixed(2);
+        $("#total2").val(total);
     });
-    $("#htvca,#hotelcv1ca,#hnca,#lodgingcv1ca,#lnca,#ldgvca").focus(function () {
-        var a = parseFloat($("#hotelcv1ca").val()); //float
-        var b = parseInt($("#hnca").val());
-
-        var c = parseFloat($("#lodgingcv1ca").val()); //float
-        var d = parseInt($("#lnca").val());
-        var e = parseFloat(a * b + c * d).toFixed(2);
+    
+    $("#hnTotalca,#lnTotalca,#laundry_amountca").on("input", function () {
+        var a = parseFloat($("#hnTotalca").val()); //float
+        var b = parseFloat($("#lnTotalca").val());
+    
+        var e = parseFloat(a + b).toFixed(2);
         $("#TAVca").val(e);
+        var laundry = parseFloat($("#laundry_amountca").val());
+        if (isNaN(laundry)) {
+            laundry = 0;
+        }
+
+        var ts = parseFloat($("#TSca").val());
+        var tav = parseFloat($("#TAVca").val());
+        var total = parseFloat(ts + tav+laundry).toFixed(2);
+        $("#total2ca").val(total);
     });
+    
+    
     $(
         "#hotelcv,#hotelcv1,#hn,#lodgingcv,#hotelcv1,#ln,#htv,#ldgv,#TS,#TAV,#DBF,#DLH,#DDN"
     ).focus(function () {
@@ -1375,36 +1446,28 @@ $("#subsTableUpdate").DataTable({
         var c = parseFloat(a + b).toFixed(2);
         $("#total2").val(c);
     });
-    $(
-        "#hotelcvca,#hotelcv1ca,#hnca,#lodgingcvca,#hotelcv1ca,#lnca,#htvca,#ldgvca,#TSca,#TAVca,#DBFca,#DLHca,#DDNca"
-    ).focus(function () {
-        var a = parseFloat($("#TSca").val());
-        var b = parseFloat($("#TAVca").val());
-        var c = parseFloat(a + b).toFixed(2);
-        $("#total2ca").val(c);
-    });
+    
     $("#htv").click(function () {
         if (this.checked) {
-            $("#hn").prop("disabled", false); // If checked enable item
+            $("#hn").prop("readonly", false); // If checked enable item
         } else {
-            $("#hn").prop("disabled", true); // If checked disable item
-            $("#hn").val(0);
+            $("#hn").prop("readonly", true); // If checked disable item
         }
     });
     $("#htvca").click(function () {
         if (this.checked) {
-            $("#hnca").prop("disabled", false); // If checked enable item
+            $("#hnca").prop("readonly", false); // If checked enable item
         } else {
-            $("#hnca").prop("disabled", true); // If checked disable item
-            $("#hnca").val(0);
+            $("#hnca").prop("readonly", true); // If checked disable item
+            
         }
     });
     $("#ldgv").click(function () {
         if (this.checked) {
-            $("#ln").prop("disabled", false); // If checked enable item
+            $("#ln").prop("readonly", false); // If checked enable item
         } else {
-            $("#ln").prop("disabled", true); // If checked disable item
-            $("#ln").val(0);
+            $("#ln").prop("readonly", true); // If checked disable item
+            
         }
     });
     $("#ldgvca").click(function () {
@@ -1827,6 +1890,55 @@ $("#subsTableUpdate").DataTable({
                     $.ajax({
                         type: "POST",
                         url: "/submitCaClaim",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/edit/month/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#caSave").click(function (e) {
+        $("#viewCaForm").validate({
+            // Specify validation rules
+            rules: {
+                 "file_upload[]": "required",
+                 desc: "required",
+            },
+
+            messages: {
+                 "file_upload[]": "Please Upload Attachment",
+                 desc: "Please Insert Description",
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("viewCaForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateCashMtc",
                         data: data,
                         dataType: "json",
 

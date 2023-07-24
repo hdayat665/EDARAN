@@ -12,20 +12,40 @@
     <table id="claimtable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th class="text-nowrap">Action</th>
+                
                 <th class="text-nowrap">Year</th>
                 <th class="text-nowrap">Month</th>
-                <th class="text-nowrap">Claim ID</th>
+                
                 <th class="text-nowrap">Type</th>
                 <th class="text-nowrap">Total Amount</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Status Date</th>
+                <th class="text-nowrap">Action</th>
             </tr>
         </thead>
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
                     <tr class="even gradeC">
+                       
+                        <td>{{ $claim->year }}</td>
+                        <td>{{ $claim->month }}</td>
+                        <td>{{ $claim->claim_type }}</td>
+                        <td> RM {{ number_format($claim->total_amount ?? 0, 2) }}</td>
+                        @if ($claim->status == 'amend')
+                            <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
+                        @elseif ($claim->status == 'recommend')
+                            <td><span class="badge bg-warning" data-toggle="paidc" title="Paid">Pending</span></td>
+                        @elseif ($claim->status == 'paid' )
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
+                        @elseif ($claim->status == 'draft')
+                            <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
+                        @elseif ($claim->status == 'reject')
+                            <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
+                        @elseif ($claim->status == 'active')
+                            <td><span class="badge bg-lime" data-toggle="activec" title="Active">Active</span></td>
+                        @endif
+                        <td>{{ date('Y-m-d', strtotime($claim->updated_at)) }}</td>
                         <td>
                             <div class="btn-group me-1 mb-1">
                                 @if ($claim->claim_type == 'GNC')
@@ -94,25 +114,6 @@
                                 @endif
                             </div>
                         </td>
-                        <td>{{ $claim->year }}</td>
-                        <td>{{ $claim->month }}</td>
-                        <td>{{ $claim->claim_id }}</td>
-                        <td>{{ $claim->claim_type }}</td>
-                        <td>MYR {{ $claim->total_amount }}</td>
-                        @if ($claim->status == 'amend')
-                            <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
-                        @elseif ($claim->status == 'recommend')
-                            <td><span class="badge bg-warning" data-toggle="paidc" title="Paid">Pending</span></td>
-                        @elseif ($claim->status == 'paid' )
-                            <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
-                        @elseif ($claim->status == 'draft')
-                            <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
-                        @elseif ($claim->status == 'reject')
-                            <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
-                        @elseif ($claim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activec" title="Active">Active</span></td>
-                        @endif
-                        <td>{{ date('Y-m-d', strtotime($claim->updated_at)) }}</td>
                     </tr>
                 @endforeach
             @endif

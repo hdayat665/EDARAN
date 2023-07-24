@@ -16,10 +16,235 @@ use App\Models\TravelClaim;
 use App\Models\ModeOfTransport;
 use App\Models\ClaimDateSetting;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\EntitleGroup;
+use App\Models\TransportMillage;
+use App\Models\MtcAttachment;
 
 class ClaimApprovalService
 {
+    public function getUserData($id='')
+    {   
+        
+        $data = Employee::where('user_id', $id)->first();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+    public function getGeneralClaimDataById($id = '')
+    {
+        $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        return $data;
+    }
+    public function getDomainRoleAdmin()
+    {
+        $data = DomainList::where('tenant_id', Auth::user()->tenant_id)
+            ->where('type', 'monthlyClaim')
+            ->where('category_role', 'admin')
+            ->first();
+
+        if (!$data) {
+            $data = '';
+        }
+
+        return $data;
+
+    }
+    public function getDomainRoleFinance()
+    {
+        $data = DomainList::where('tenant_id', Auth::user()->tenant_id)
+            ->where('type', 'monthlyClaim')
+            ->where('category_role', 'finance')
+            ->first();
+
+        if (!$data) {
+            $data = '';
+        }
+
+        return $data;
+
+    }
+    public function getSummaryTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking'),
+            DB::raw('SUM(petrol) + SUM(toll) + SUM(parking) AS total_travelling')
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummarySubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('COALESCE(SUM(total_subs), 0) AS total_subs'),
+            DB::raw('COALESCE(SUM(total_acc), 0) AS total_acc'),
+            DB::raw('COALESCE(SUM(laundry_amount), 0) AS total_laundry'),
+            DB::raw('COALESCE(SUM(total_subs), 0) + COALESCE(SUM(total_acc), 0) + COALESCE(SUM(laundry_amount), 0) AS total_all')
+        )
+        ->where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummaryOthersByGeneralId($id = '')
+    {
+        $data = PersonalClaim::select(
+            DB::raw('SUM(amount) AS total_amount'),
+            
+        )
+
+        ->where('general_id', $id)
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getlessCashClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            
+            DB::raw('SUM(lesscash) AS totalCash'),
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->where('claim_for', 1)
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getTotalCarClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(total_km) AS total_km'),
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->where('type_transport', 'Personal Car')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getTotalMotorClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(total_km) AS total_km'),
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->where('type_transport', 'Personal Motocycle')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            'travel_date','general_id',
+            
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking')
+        )
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('travel_date')
+        ->orderBy('travel_date', 'asc')
+        ->get();
+
+        return $data;
+    }
+    public function getSubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->get();
+
+        return $data;
+    }
+    public function getTravelAttachmentsByGeneralId($id = '')
+    {
+        $data = MtcAttachment::where('general_id', $id)
+        ->where('type', 'travelling')
+        ->get();
+
+        return $data;
+    }
+    public function getSubsAttachmentsByGeneralId($id = '')
+    {
+        $data = MtcAttachment::where('general_id', $id)
+        ->where('type', 'subs')
+        ->get();
+
+        return $data;
+    }
+    public function getPersonalClaimByGeneralId($id = '')
+    {
+        $data = PersonalClaim::where('general_id', $id)->get();
+
+        return $data;
+    }
+    public function getEntitlementByJobGradeCar($id = '')
+    {
+
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+        $car = TransportMillage::where('entitle_id', $entitle)
+            ->where('type', 'car')
+            ->get();
+
+        //pr($car);
+
+
+        return $car;
+    }
+    public function getFoodByJobGrade($id = '')
+    {
+        
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)
+                                ->get();
+
+        //pr($entitle);
+
+        
+        return $entitle;
+    }
+    public function getEntitlementByJobGradeMotor($id = '')
+    {
+
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+        $motor = TransportMillage::where('entitle_id', $entitle)
+            ->where('type', 'motor')
+            ->get();
+
+        //pr($car);
+
+
+        return $motor;
+    }
     public function getGeneralClaim($type = '')
     {
         // type 1 approval 2 recommender
@@ -270,14 +495,17 @@ class ClaimApprovalService
 
         return $data;
     }
+    public function getGeneralDetailData()
+    {
+        $data = GeneralClaimDetail::where('tenant_id', Auth::user()->tenant_id)->get();
 
+        return $data;
+    }
     public function supervisorDetailClaimView($id = '')
     {
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
         $claim[1] = ['id', $id];
-
-        // $travel[0] = ['tenant_id', Auth::user()->tenant_id];
-        // $travel[1] = ['general_id', $id];
+        
         $travel = [
             ['travel_claim.tenant_id', '=', Auth::user()->tenant_id],
             ['travel_claim.general_id', '=', $id],
@@ -287,17 +515,11 @@ class ClaimApprovalService
             ['personal_claim.tenant_id', '=', Auth::user()->tenant_id],
             ['personal_claim.general_id', '=', $id],
         ];
-        // $personal[0] = ['tenant_id', Auth::user()->tenant_id];
-        // $personal[1] = ['general_id', $id];
-
 
         $general = [
             ['general_claim_details.tenant_id', '=', Auth::user()->tenant_id],
             ['general_claim_details.general_id', '=', $id],
         ];
-
-        // $general[0] = ['tenant_id', Auth::user()->tenant_id];
-        // $general[1] = ['general_id', $id];
 
         $data['claim'] = GeneralClaim::where($claim)->first();
 
@@ -309,20 +531,7 @@ class ClaimApprovalService
             ->where($travel)
             ->get();
 
-        //pr($data['travel']);
-
-        // $data['travel'] = TravelClaim::select(
-        //         'travel_claim.*',
-        //         'project.project_name',
-        //         'general_claim.id as general_claim_id',
-        //     )
-        //     ->leftJoin('project', 'project.id', '=', 'travel_claim.project_id')
-        //     ->leftJoin('general_claim', 'general_claim.id', '=', 'travel_claim.general_id')
-        //     // ->where($travel)
-        //     ->get();
-
-
-        // pr($data['travel']);
+       
 
         $data['personal'] = PersonalClaim::select(
             'personal_claim.*',
@@ -349,10 +558,6 @@ class ClaimApprovalService
             ->where('general_claim_details.tenant_id', '=', Auth::user()->tenant_id)
             ->where('general_claim_details.general_id', '=', $id)
             ->get();
-
-
-
-        //pr( $data['general']);
 
         return $data;
     }

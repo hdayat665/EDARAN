@@ -432,7 +432,7 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body bg-gray-100 text-black">
-                        <div class="row p-2">
+                        <!-- <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Claim For</label>
                             </div>
@@ -446,13 +446,14 @@
                                         Advance</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <!-- <label class="form-label">Supporting Document</label> -->
                             </div>
                             <div class="col-md-6">
                                 <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
+                                <input type="hidden" name="claim_for" value="2">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">                                
                             </div>
@@ -473,7 +474,8 @@
                                             <th class="text-nowrap">Type of Cash Advance
                                             </th>
                                             <th class="text-nowrap">Travel Date</th>
-                                            <th class="text-nowrap">Amount</th>
+                                            <th class="text-nowrap">Applied Amount</th>
+                                            <th class="text-nowrap">Final Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -485,6 +487,7 @@
                                                 <td>Form ID {{ $cashAdvance->id }}</td>
                                                 <td> {{ getCashAdvanceType($cashAdvance->type) }}</td>
                                                 <td> {{ $cashAdvance->travel_date }}</td>
+                                                <td> {{ $cashAdvance->amount }}</td>
                                                 <td> {{ $cashAdvance->final_amount ?? $cashAdvance->amount }}</td>
                                             </tr>
                                         @endforeach
@@ -718,13 +721,13 @@
                                                             <label class="form-label">X</label>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                            <input type="text" name="hotel" class="form-control" id="hnca" readonly value="0">
                                                         </div>
                                                         <div class="col-md-1">
                                                             <label class="form-label">=</label>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                            <input type="text" name="hotel_value" class="form-control" id="hnTotalca"  value="0">
                                                         </div>
                                                     </div>
                                                     <div class="row p-2">
@@ -742,13 +745,13 @@
                                                             <label class="form-label">X</label>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <input type="text" name="lodging" class="form-control" value="0" id="lnca" disabled>
+                                                            <input type="number" name="lodging" class="form-control" value="0" id="lnca" readonly>
                                                         </div>
                                                         <div class="col-md-1">
                                                             <label class="form-label">=</label>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                            <input type="number" name="lodging_value" class="form-control" id="lnTotalca"  value="0">
                                                         </div>
                                                     </div>
                                                     
@@ -769,7 +772,7 @@
                                                             <label class="form-label">=</label>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAVca">
+                                                            <input readonly type="number" name="total_acc" class="form-control" value="0" id="TAVca">
                                                         </div>
                                                     </div>
                                                     <div class="row p-2">
@@ -781,7 +784,7 @@
                                                             <label class="form-label">=</label>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input readonly type="text" name="total" class="form-control" value="" id="total2ca">
+                                                            <input readonly type="number" name="total" class="form-control" value="" id="total2ca">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -800,7 +803,7 @@
                                                         <label class="form-label">Amount</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="number" name="laundry_amount" id=""class="form-control" placeholder="0.00">
+                                                        <input type="number" value=0 name="laundry_amount" id="laundry_amountca"class="form-control" placeholder="0.00">
                                                     </div>
                                                     </div>
                                                     <div class="row p-2">
@@ -829,7 +832,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <div class="WOC" style="display:none">
+                        <div class="WOC">
                         <form id="subsForm">
                             <div class="row p-2">
                                 <div class="row p-2">
@@ -1052,7 +1055,7 @@
                                                         <label class="form-label">Hotel</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input  type="number" readonly name="hotel_value"class="form-control" id="hotelcv">
+                                                        <input  type="number" readonly class="form-control" id="hotelcv">
                                                     </div>
                                                     <div class="col-md-2" style="display: none">
                                                         <input  type="number" class="form-control"  id="hotelcv1" value="0">
@@ -1061,13 +1064,13 @@
                                                         <label class="form-label">X</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="text" name="hotel" class="form-control" id="hn" readonly value="0">
+                                                        <input type="number" name="hotel" class="form-control" id="hn" readonly value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hnTotal" readonly value="0">
+                                                        <input type="number" name="hotel_value" readonly class="form-control" id="hnTotal" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -1091,7 +1094,7 @@
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="lnTotal" readonly value="0">
+                                                        <input type="text" name="lodging_value"  readonly class="form-control" id="lnTotal"  value="0">
                                                     </div>
                                                 </div>
                                                 
@@ -1143,7 +1146,7 @@
                                                         <label class="form-label">Amount</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="number" name="laundry_amount" id=""class="form-control" placeholder="0.00">
+                                                        <input type="number" name="laundry_amount" id="laundry_amount" class="form-control" placeholder="0.00">
                                                     </div>
                                                     </div>
                                                     <div class="row p-2">
@@ -1186,7 +1189,7 @@
             <form id="personalForm">
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body bg-gray-100 text-black">
-                        <div class="row p-2">
+                        <div class="row p-2" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Applied Date</label>
                             </div>
