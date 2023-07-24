@@ -19,7 +19,7 @@ class myClaimController extends Controller
         return view('pages.eclaim.myClaim', $data);
     }
     public function monthlyClaimView($id = '')
-    {
+    { 
         $mcs = new myClaimService;
         $data['GNC'] = $mcs->getGeneralClaimDataById($id);
         $data['user'] = $mcs->getUserData();
@@ -29,7 +29,12 @@ class myClaimController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+        $data['cashAdvance'] = $mcs->getCashAdvanceClaimByGeneralId($id) ?? 0;
+        $data['balance'] = ($data['GNC']->total_amount) - $data['cashAdvance'];
+
+        if ($data['balance'] < 0) {
+            $data['balance'] = 0;
+        }
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
@@ -414,7 +419,14 @@ class myClaimController extends Controller
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
-        
+        $data['cashAdvance'] = $mcs->getCashAdvanceClaimByGeneralId($id) ?? 0;
+        $data['balance'] = ($data['GNC']->total_amount) - $data['cashAdvance'];
+
+        if ($data['balance'] < 0) {
+            $data['balance'] = 0;
+        }
+
+        //pr($data['balance']);
         //pr($data['summaryTravelling']);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
@@ -622,6 +634,15 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+    public function updateCashMtc(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->updateCashMtc($r);
+
+        return response()->json($data);
+    }
+    
     public function saveSubsAttachment(request $r)
     {
         $mcs = new myClaimService;

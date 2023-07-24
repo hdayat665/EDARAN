@@ -111,7 +111,7 @@
                     <div class="col-md-1">
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit">Cancel</button>
+                                <a data-id="{{ $claimData->id }}" class="btn btn-primary" id="cancelButton" type="submit">Cancel</a>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -305,7 +305,7 @@
                                             <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" readonly value='RM {{ number_format($lessCash[0]->totalCash ?? 0, 2) }}'>
+                                            <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -313,7 +313,7 @@
                                             <label class="form-label">Balance Due to/(From) Employee</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" readonly value='RM {{ number_format($GNC->total_amount ?? 0, 2) }}'>
+                                            <input type="text" class="form-control" readonly value='RM {{ number_format($balance ?? 0, 2) }}'>
                                         </div>
                                     </div>
                                 </div>
