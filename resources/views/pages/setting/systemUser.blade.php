@@ -25,7 +25,7 @@
                         <td>Ariza Binti Othman</td>
                         <td>ariza@edaran.com</td>
                         <td>Human Resource</td>
-                        <td>Active</td>
+                        <td><span class="badge <?= 'bg-green'  ?>">Active</span></td>
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
@@ -41,7 +41,7 @@
                         <td>Roziyusmira Binti Mohd Yusuf</td>
                         <td>rozi@edaran.com</td>
                         <td>Employee</td>
-                        <td>Inactive</td>
+                        <td><span class="badge <?= 'bg-red'  ?>">Inactive</span></td>
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
@@ -57,7 +57,7 @@
                         <td>Ariza Binti Othman</td>
                         <td>ariza@edaran.com</td>
                         <td>Human Resource</td>
-                        <td>Active</td>
+                        <td><span class="badge <?= 'bg-green'  ?>">Active</span></td>
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
@@ -73,7 +73,7 @@
                         <td>Roziyusmira Binti Mohd Yusuf</td>
                         <td>rozi@edaran.com</td>
                         <td>Employee</td>
-                        <td>Inactive</td>
+                        <td><span class="badge <?= 'bg-red'  ?>">Inactive</span></td>
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">

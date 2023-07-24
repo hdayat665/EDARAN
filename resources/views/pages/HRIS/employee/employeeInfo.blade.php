@@ -1,8 +1,7 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
-<style>
-        
+    <style>
         .custom-dropdown-menu {
         position: static ;
         /* display:block; */
