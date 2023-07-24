@@ -1,4 +1,25 @@
 $(document).ready(function () {
+
+
+
+    $(document).ready(function() {
+        $(".test").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".test");
+            $(".test").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".test").hide();
+            }
+        });
+    });
+
+
+
     $(document).ready(function () {
         if (
             $("#datepicker-date").val() ||

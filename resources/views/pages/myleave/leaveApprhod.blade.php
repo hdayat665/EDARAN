@@ -1,6 +1,18 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+
+    <style>
+
+        .custom-dropdown-menu {
+            position: static ;
+            height: auto ;
+            max-height: none ;
+            overflow: visible ;
+        }
+
+    </style>
+
     <div id="content" class="app-content">
     <br>
     <h1 class="page-header" id="leaveHodJs">eLeave <small>| Leave Approval | Head Of Department</small></h1>
@@ -85,69 +97,68 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $id = 0 ?>
+                                @if ($leaveApprhodView)
+                                @foreach ($leaveApprhodView as $l)
+                        <?php $id++ ?>
 
-                            <?php $id = 0 ?>
-                                    @if ($leaveApprhodView)
-                                    @foreach ($leaveApprhodView as $l)
-                            <?php $id++ ?>
-
-                            <tr class="odd gradeX">
-                                <td>{{ $id }}</td>
-                                <td >
-                                    <div class="btn-group">
+                        <tr class="odd gradeX">
+                            <td>{{ $id }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <div>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item" href="/viewTimesheetLeave/{{$l->up_user_id}}" >View Calendar</a>
-
-                                            <div class="dropdown-divider" style=""></div>
-                                                <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a>
-                                            @if ($l->up_app_status == '4')
-                                            @else
-                                                <div class="dropdown-divider" style=""></div>
-                                                <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
-                                            @endif
-                                            @if ($l->up_app_status == '3')
-                                            @else
-                                                <div class="dropdown-divider"></div>
-                                                <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
-                                            @endif
-                                        </ul>
                                     </div>
-                                </td>
-                                <td>{{$l->applied_date}}</td>
-                                <td>{{$l->fullName}}</td>
-                                <td>{{$l->type}}</td>
-                                <td>{{$l->start_date}}</td>
-                                <td>{{$l->end_date}}</td>
-                                <td>{{$l->total_day_applied}}</td>
-                                <td>@for ($i = 1; $i <= 4; $i++)
-                                            <?php
-                                                switch ($i) {
-                                                    case 1:
-                                                        $status = 'Pending Approval';
-                                                        break;
-                                                    case 2:
-                                                        $status = 'Pending Approval';
-                                                        break;
-                                                    case 3:
-                                                        $status = 'Rejected';
-                                                        break;
-                                                    case 4:
-                                                        $status = 'Approved';
-                                                        break;
-                                                    default:
-                                                        $status = 'Unknown';
-                                                }
-                                            ?>
-                                            @if ($l->up_app_status == $i)
-                                                @php
-                                                    echo $status;
-                                                    break;
-                                                @endphp
-                                            @endif
-                                        @endfor
-                                    </td>
-                            </tr>
+                                    <ul class="dropdown-menu custom-dropdown-menu test" >
+                                        <li><a class="dropdown-item" href="/viewTimesheetLeave/{{$l->up_user_id}}">View Calendar</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a></li>
+                                        @if ($l->up_app_status != '4')
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a></li>
+                                        @endif
+                                        @if ($l->up_app_status != '3')
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="editButton3" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{$l->applied_date}}</td>
+                            <td>{{$l->fullName}}</td>
+                            <td>{{$l->type}}</td>
+                            <td>{{$l->start_date}}</td>
+                            <td>{{$l->end_date}}</td>
+                            <td>{{$l->total_day_applied}}</td>
+                            <td>
+                                @for ($i = 1; $i <= 4; $i++)
+                                    <?php
+                                        switch ($i) {
+                                            case 1:
+                                                $status = 'Pending Approval';
+                                                break;
+                                            case 2:
+                                                $status = 'Pending Approval';
+                                                break;
+                                            case 3:
+                                                $status = 'Rejected';
+                                                break;
+                                            case 4:
+                                                $status = 'Approved';
+                                                break;
+                                            default:
+                                                $status = 'Unknown';
+                                        }
+                                    ?>
+                                    @if ($l->up_app_status == $i)
+                                        @php
+                                            echo $status;
+                                            break;
+                                        @endphp
+                                    @endif
+                                @endfor
+                            </td>
+                        </tr>
                         @endforeach
                         @endif
                     </tbody>
