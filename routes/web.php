@@ -425,6 +425,7 @@ Route::group(['middleware' => ['web']], function () {
 
             // eleave Leave Holiday
             Route::get('/holidaylist', 'holidaylistView');
+            Route::post('/holidaylist', 'holidaylistView');
             Route::post('/createholidaylist', 'createholidaylist');
             Route::get('/getcreateLeaveholiday/{id}', 'getcreateLeaveholiday');
             Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');

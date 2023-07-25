@@ -9,8 +9,8 @@ use Illuminate\Routing\Controller;
 
 class MyleaveController extends Controller
 {
-    public function myleaveView(Request $r)
-    {
+    public function myleaveView(Request $r){
+        
         $ms = new MyleaveService;
 
         $data['myleave'] = $ms->myleaveView();

@@ -51,15 +51,23 @@
                     </div>
                     <br>
                     <div class="row p-2">
-                        <div class="col-4">
-                            <label class="form-label">Country*</label>
-                            <select class="form-select select2" id="addCountry1" name="country_id" style="text-transform:uppercase" required>
-                                <option value="" label="PLEASE CHOOSE"></option>
-                                @foreach($country as $ct)
-                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <form action="/holidaylist" method="POST">
+                            <div class="row">
+                                <label class="form-label">Country*</label>
+                                <div class="col-4">
+
+                                    <select class="form-select select2" id="countrySearch" name="countrySearch" style="text-transform:uppercase" required>
+                                        <option value="" label="PLEASE CHOOSE"></option>
+                                        @foreach($country as $ct)
+                                            <option value="{{ $ct->country_id }}" {{ old('countrySearch') == $ct->country_id ? 'selected' : ($countrySearch == $ct->country_id ? 'selected' : '') }}>{{ $ct->country_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <br>
                     <div class="row p-2">
