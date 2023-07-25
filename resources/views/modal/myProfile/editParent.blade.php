@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck9" value="on" type="checkbox" name="non_citizen" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} id="non_citizen">
+                                        <input class="form-check-input partCheck9" value="on" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} type="checkbox" name="non_citizen" id="non_citizen">
                                         <label class="form-label" for="citizen">
                                             Non-Citizen
                                         </label>

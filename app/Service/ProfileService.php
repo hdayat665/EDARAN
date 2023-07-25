@@ -722,7 +722,7 @@ class ProfileService
         return $data;
     }
 
-    public function getParentByUserId($user_id = '')
+    public function getParent($user_id = '')
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
@@ -750,20 +750,6 @@ class ProfileService
     public function addParent($r)
     {
         $input = $r->input();
-        // $sameAddress = $input['sameAddress'] ?? null;
-        // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] .' '. $input['state'] . ' ' . $input['country'];
-        // if ($sameAddress) {
-        //     $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
-
-        //     $input['address1'] = $userProfile->address1 . ' ' . $userProfile->address2 . '' . $userProfile->city . ' ' . $userProfile->state . ' ' . $userProfile->country;
-        //     $input['address2'] = $userProfile->address2;
-        //     $input['city'] = $userProfile->city;
-        //     $input['state'] = $userProfile->state;
-        //     $input['postcode'] = $userProfile->postcode;
-        //     $input['country'] = $userProfile->country;
-        //     unset($input['sameAddress']);
-        // }
-
         if ($_FILES['idFile']['name'])
         {
             $idAttachment = upload($r->file('idFile'));
@@ -775,6 +761,27 @@ class ProfileService
         }
 
 
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
+        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
+            $input['idNo'] = null;
+        }
+
+
+        if(!isset($input['oku_status']))
+        {
+            $input['oku_status'] = null;
+        }
+
+
+        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
+            $input['okuFile'] = null;
+            $input['okuCardNum'] = null;
+        }
+
 
         if (isset($_FILES['okuFile']['name'])) {
             $payslip = upload(request()->file('okuFile'));
@@ -783,6 +790,12 @@ class ProfileService
             $input['okuFile'] = null;
         }
 
+        if(!isset($input['passport']))
+        {
+            $input['passport'] = null;
+            $input['expiryDate'] = null;
+            $input['issuingCountry'] = null;
+        }
 
         $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
@@ -857,7 +870,6 @@ class ProfileService
         } else {
             unset($input['sameAddress']);
 
-            // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] . ' ' . $input['state'] . ' ' . $input['country'];
             UserParent::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -1158,7 +1170,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Children is Created..';
+        $data['msg'] = 'New Children is Created.';
 
         return $data;
     }

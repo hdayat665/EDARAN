@@ -39,8 +39,8 @@
                                     <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$l->id}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
-                    @endforeach
-                    @endif
+                        @endforeach
+                        @endif
                 </tbody>
             </table>
             <div class="row p-2">
