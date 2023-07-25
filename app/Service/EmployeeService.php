@@ -938,7 +938,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Parent details is Updated';
+            $data['msg'] = 'Family is Updated';
         }
 
         return $data;
@@ -1396,7 +1396,6 @@ class EmployeeService
     public function updateProfile_Picture($r, $id)
     {
         $input = $r->input();
-
         if ($_FILES['uploadFile']['name']) {
             $payslip = uploadPic($r->file('uploadFile'));
             $input['uploadFile'] = $payslip['filename'];
@@ -1405,7 +1404,7 @@ class EmployeeService
                 unset($input['uploadFile']);
             }
         }
-        //dd($input);
+
 
         UserProfile::where('user_id', $id)->update($input);
 

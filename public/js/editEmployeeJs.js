@@ -72,6 +72,14 @@ $('#event').select2();
                 $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
+
+
+            $('#crop').click(function() {
+                // Show the submit button
+                $('#uploadpicture').show();
+                $('#uploadcancel').show();
+
+            });
         }
     });
 
@@ -5109,6 +5117,13 @@ $(document).on("click", "#uploadpicture", function () {
 
         messages: {
             // Add custom error messages for each form field
+            profile_picture: {
+                
+                // Add any additional validation rules for the profile picture field
+            },
+
+
+
         },
 
         submitHandler: function (form) {
@@ -5139,7 +5154,6 @@ $(document).on("click", "#uploadpicture", function () {
                         allowEscapeKey: false,
                     }).then(function () {
                         if (data.type == "error") {
-                            // Handle error condition
                         } else {
                             location.reload();
                         }
