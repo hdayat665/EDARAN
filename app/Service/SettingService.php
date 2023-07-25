@@ -1911,6 +1911,15 @@ public function updateTypeOfLogs($r, $id)
         $claimCategory['claim_catagory_code'] = $input['claim_catagory_code'];
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
+        $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
+        $claimCategory['addproject'] = $input['addproject'];
+
+        $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
+        $claimCategory['addattach'] = $input['addattach'];
+
+        $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+        $claimCategory['attachstatus'] = $input['attachstatus'];
+
         ClaimCategory::create($claimCategory);
 
         $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
