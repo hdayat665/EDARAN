@@ -19,7 +19,7 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-6">
-                        <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: uppercase;">
+                        <select class="selectpicker form-control" id="employee_id" name="employee_id[]" style="text-transform: uppercase;" multiple>
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
 
                                 <?php
