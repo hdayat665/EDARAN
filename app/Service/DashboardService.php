@@ -115,65 +115,231 @@ class DashboardService
         return $data;
     }
 
-    //function listing date for all date before current date,exclude weekday,holiday
-    //     public function holidays()
-    // {
-    //     $currentMonth = date('m');
-    //     $currentYear = date('Y');
-    //     $currentDay = date('d');
 
-    //     $startDate = \Carbon\Carbon::create($currentYear, $currentMonth, 1);
-    //     $endDate = \Carbon\Carbon::create($currentYear, $currentMonth, $currentDay);
+    public function getunlogdate() 
+{
+    $user = Auth::user();
+    $getstate = DB::table('employment as a')
+        ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
+        ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
+        ->where('a.user_id', $user->id)
+        ->select('c.state_id')
+        ->first();
 
-    //     $holidays = holidayModel::where('tenant_id', Auth::user()->tenant_id)
-    //         ->whereBetween('start_date', [$startDate, $endDate])
-    //         ->get(['start_date'])
-    //         ->pluck('start_date')
-    //         ->map(function ($date) {
-    //             return \Carbon\Carbon::parse($date)->toDateString();
-    //         });
+    $cityId = $getstate->state_id;
 
-    //     $dates = [];
+    $getweekend = DB::table('leave_weekend as a')
+        ->where('a.state_id', '=', $cityId)
+        ->whereNull('a.total_time')
+        ->select('a.day_of_week')
+        ->get();
 
-    //     while ($startDate->lte($endDate)) {
-    //         if (!$startDate->isWeekend() && !$holidays->contains($startDate->toDateString())) {
-    //             $dates[] = $startDate->toDateString();
-    //         }
-    //         $startDate->addDay();
-    //     }
+    $sortedWeekendDays = $getweekend->pluck('day_of_week')->sort();
 
-    //     return $dates;
-    // }
+    $higherNumber = $sortedWeekendDays->last();
+    $lowerNumber = $sortedWeekendDays->first();
 
-    public function countHolidays()
-    {
-        $currentMonth = date('m');
-        $currentYear = date('Y');
-        $currentDay = date('d');
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+    $currentDay = date('j');
 
-        $startDate = \Carbon\Carbon::create($currentYear, $currentMonth, 1);
-        $endDate = \Carbon\Carbon::create($currentYear, $currentMonth, $currentDay);
-
-        $holidays = holidayModel::where('tenant_id', Auth::user()->tenant_id)
-            ->whereBetween('start_date', [$startDate, $endDate])
-            ->get(['start_date'])
-            ->pluck('start_date')
-            ->map(function ($date) {
-                return \Carbon\Carbon::parse($date)->toDateString();
-            });
-
-        $count = 0;
-
-        while ($startDate->lte($endDate)) {
-            if (!$startDate->isWeekend() && (!$holidays->isEmpty() && !$holidays->contains($startDate->toDateString()))) {
-                $count++;
-            } elseif ($startDate->isWeekend()) {
-                $startDate->addDay(); // Skip weekend days
-                continue;
-            }
-            $startDate->addDay();
+    $datesInMonth = array();
+    for ($day = 1; $day <= $currentDay; $day++) {
+        $date = date('Y-m-d', strtotime("$currentYear-$currentMonth-$day"));
+        $dayOfWeek = date('w', strtotime($date));
+        if ($dayOfWeek != $higherNumber && $dayOfWeek != $lowerNumber) {
+            $datesInMonth[] = $date;
         }
-
-        return ['holidays' => $count];
     }
+
+
+    $userId = $user->id;
+    $logDatesInMonth = array();
+
+    $logs = DB::table('timesheet_log')
+    ->where('user_id', $userId)
+    ->whereRaw("MONTH(date) = ?", [$currentMonth])
+    ->select('date', 'total_hour')
+    ->get();
+
+$logsWithTotalHours = array();
+
+foreach ($logs as $log) {
+    $date = $log->date;
+    
+    // Split the total_hour time string into hours and minutes.
+    list($hours, $minutes) = explode(':', $log->total_hour);
+    
+    // If the date already exists in the array, add the hours and minutes to the existing totals.
+    if (isset($logsWithTotalHours[$date])) {
+        $logsWithTotalHours[$date]['hours'] += $hours;
+        $logsWithTotalHours[$date]['minutes'] += $minutes;
+
+        // If minutes are more than 60, convert it to hours.
+        if ($logsWithTotalHours[$date]['minutes'] >= 60) {
+            $extraHours = floor($logsWithTotalHours[$date]['minutes'] / 60);
+            $logsWithTotalHours[$date]['hours'] += $extraHours;
+            $logsWithTotalHours[$date]['minutes'] -= $extraHours * 60;
+        }
+    } else {
+        // If the date doesn't exist in the array, add it with the hours and minutes.
+        $logsWithTotalHours[$date] = [
+            'date' => $date,
+            'hours' => $hours,
+            'minutes' => $minutes,
+        ];
+    }
+}
+
+// Format the total hours and minutes back into 'HH:MM' format.
+foreach ($logsWithTotalHours as &$log) {
+    $log['total_hour'] = sprintf('%02d:%02d', $log['hours'], $log['minutes']);
+    unset($log['hours']);
+    unset($log['minutes']);
+}
+
+// dd($logsWithTotalHours);
+
+
+$events = DB::table('timesheet_event')
+    ->whereRaw("MONTH(start_date) = ?", [$currentMonth])
+    ->get();
+
+$attendances = DB::table('attendance_event')
+    ->where('user_id', $userId)
+    ->where('status', 'attend')
+    ->pluck('event_id')
+    ->toArray();
+
+$eventsWithTotalHours = array();
+
+foreach ($events as $event) {
+    $participants = explode(',', $event->participant);
+    if (in_array($userId, $participants)) {
+        $date = date('Y-m-d', strtotime($event->start_date));
+        $dayOfWeek = date('w', strtotime($date));
+        if ($dayOfWeek != 6 && $dayOfWeek != 0) {
+            if ($date <= date('Y-m-d') && in_array($event->id, $attendances)) {
+                list($hours, $minutes) = explode(':', $event->duration);
+                $hours = (int)$hours;
+                $minutes = (int)$minutes;
+                
+                // If the date already exists in the array, add the hours and minutes to the existing totals.
+                if (isset($eventsWithTotalHours[$date])) {
+                    $eventsWithTotalHours[$date]['hours'] += $hours;
+                    $eventsWithTotalHours[$date]['minutes'] += $minutes;
+                } else {
+                    // If the date doesn't exist in the array, add it with the hours and minutes.
+                    $eventsWithTotalHours[$date] = [
+                        'date' => $date,
+                        'hours' => $hours,
+                        'minutes' => $minutes,
+                    ];
+                }
+                
+                // If minutes are more than 60, convert it to hours.
+                if ($eventsWithTotalHours[$date]['minutes'] >= 60) {
+                    $extraHours = floor($eventsWithTotalHours[$date]['minutes'] / 60);
+                    $eventsWithTotalHours[$date]['hours'] += $extraHours;
+                    $eventsWithTotalHours[$date]['minutes'] -= $extraHours * 60;
+                }
+                
+                // Format hours and minutes as 'total_hour'.
+                $eventsWithTotalHours[$date]['total_hour'] = sprintf('%02d:%02d', $eventsWithTotalHours[$date]['hours'], $eventsWithTotalHours[$date]['minutes']);
+            }
+        }
+    }
+}
+
+// Remove 'hours' and 'minutes' from the result.
+foreach ($eventsWithTotalHours as $date => $value) {
+    unset($eventsWithTotalHours[$date]['hours']);
+    unset($eventsWithTotalHours[$date]['minutes']);
+}
+
+
+
+
+foreach($logsWithTotalHours as $date => $value) {
+    if(isset($eventsWithTotalHours[$date])) {
+        // Convert total_hour to minutes for logs
+        list($logHours, $logMinutes) = explode(':', $value['total_hour']);
+        $logTotalMinutes = $logHours * 60 + $logMinutes;
+        
+        // Convert total_hour to minutes for events
+        list($eventHours, $eventMinutes) = explode(':', $eventsWithTotalHours[$date]['total_hour']);
+        $eventTotalMinutes = $eventHours * 60 + $eventMinutes;
+
+        // Sum total minutes
+        $totalMinutes = $logTotalMinutes + $eventTotalMinutes;
+
+        // Convert back to hours and minutes
+        $hours = floor($totalMinutes / 60);
+        $minutes = $totalMinutes % 60;
+
+        // Update total_hour in logs array
+        $logsWithTotalHours[$date]['total_hour'] = sprintf('%02d:%02d', $hours, $minutes);
+
+        // Remove the date from events array to avoid duplication
+        unset($eventsWithTotalHours[$date]);
+    }
+}
+
+// Merge the two arrays
+$finalArray = array_merge($logsWithTotalHours, $eventsWithTotalHours);
+
+
+
+$finalArrayFiltered = [];
+
+$getweekday = DB::table('leave_weekend as a')
+    ->where('a.state_id', '=', $cityId)
+    ->whereNotNull('a.total_time')
+    ->select('a.day_of_week', 'a.total_time')
+    ->get();
+
+$weekdayTimes = [];
+foreach ($getweekday as $day) {
+    $weekdayTimes[$day->day_of_week] = $day->total_time;
+}
+
+$finalArrayFiltered = [];
+
+foreach($finalArray as $date => $value) {
+    // Get the day of the week for the current date.
+    $dayOfWeek = date('N', strtotime($date));
+
+    // Set the comparison time based on the day of the week.
+    if(isset($weekdayTimes[$dayOfWeek])) {
+        $comparisonTime = $weekdayTimes[$dayOfWeek];
+    } else {
+        // You can set default comparisonTime for other days or add more conditions for other days.
+        $comparisonTime = "08:00";
+    }
+
+    list($comparisonHours, $comparisonMinutes) = explode(':', $comparisonTime);
+
+    list($hours, $minutes) = explode(':', $value['total_hour']);
+    if($hours > $comparisonHours || ($hours == $comparisonHours && $minutes >= $comparisonMinutes)) {
+        $finalArrayFiltered[$date] = $value;
+    }
+}
+
+
+$datesNotInFinalArray = array_diff($datesInMonth, array_keys($finalArrayFiltered));
+
+$datesNotInFinalArray['unlogdate'] = count($datesNotInFinalArray);
+
+if (!$datesNotInFinalArray) {
+    $datesNotInFinalArray = [];
+}
+
+
+return $datesNotInFinalArray;
+
+
+
+
+}
+
 }

@@ -31,19 +31,14 @@ $(document).ready(function () {
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
         // $('#vehicleType').val('');
-
         vehicleData.then(function (data) {
             $("input").val("");
 
             vdata = data.data;
+            console.log(vdata);
+
             $("#vehicleType").val(vdata.vehicle_type);
             $("#idV").val(vdata.id);
-            // var select = document.getElementById('vehicleType');
-
-            // const options = Array.from(select.options);
-            // options.forEach((option, i) => {
-            //     if (option.value === vdata.vehicle_type) select.selectedIndex = i;
-            // });
             $("#plateNo").val(vdata.plate_no);
         });
         $("#edit-vehicle").modal("show");

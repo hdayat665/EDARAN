@@ -3,11 +3,11 @@
 @section('content')
 <div id="content" class="app-content"> {{--  --}}
     <h1 class="page-header">HRIS | Edit Employee</h1>
-    <div class="row"> 
-        <div class="col-xl-3"> 
-            <div class="card"> 
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="card">
                 <div class="card-body">
-                    <div class="profile-pic m-3"> 
+                    <div class="profile-pic m-3">
                     @php
                         $profilePicUrl = asset('storage/profilePic/' . $user_id . '.jpg');
                     @endphp
@@ -17,10 +17,10 @@
                     @else
                         <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
                     @endif
-    
+
                     <!-- <img src="{{ asset('storage/profilePic/' . $user_id . '.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog"> -->
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
-                        <p>{{$username ?? ''}}</p> 
+                        <p>{{$username ?? ''}}</p>
                         <span class="badge bg-success d-block p-2">Active</span>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-briefcase fa-fw me-2"></i></span>
@@ -51,24 +51,24 @@
                             </div>
                         </div>
                         <!-- Tabs navs -->
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-        <div class="col-xl-9"> 
-            <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab"> 
-                <div class="card"> 
-                    <div class="tab-content" id="v-pills-tabContent"> 
-                        <div class="tab-pane fade show active" id="v-pills-myprofile1" role="tabpanel" aria-labelledby="v-pills-myprofile-tab"> 
-                            <div class="card-header bg-white bg-gray-100"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9">
+            <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
+                <div class="card">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-myprofile1" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
+                            <div class="card-header bg-white bg-gray-100">
                                 <h4 class="fw-bold">
                                     Personal Information
                                 </h4>
                                 <p class="fw-light">
                                     Update Employee personal information
                                 </p>
-                            </div> 
-                            <ul class="nav nav-tabs" id="myTab"> 
+                            </div>
+                            <ul class="nav nav-tabs" id="myTab">
                                 <li class="nav-item" >
                                     <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                                         <span class="d-sm-none">My Profile</span>
@@ -111,10 +111,10 @@
                                         <span class="d-sm-block d-none">Family</span>
                                     </a>
                                 </li>
-                            </ul> 
-                            <div class="card"> 
-                                <div class="card-body" id="editEmployeeJs"> 
-                                    <div class="tab-content panel m-0 rounded-0 p-3"> 
+                            </ul>
+                            <div class="card">
+                                <div class="card-body" id="editEmployeeJs">
+                                    <div class="tab-content panel m-0 rounded-0 p-3">
                                         <div class="tab-pane fade active show" id="default-tab-1">
                                             <h4 class="mt-10px">Employee Details</h4>
                                             <br>
@@ -132,7 +132,7 @@
                                                         <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="email@gmail.com">
                                                         <input type="hidden" value="{{$user_id}}" name="user_id">
                                                     </div>
-                            
+
                                                 </div>
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
@@ -179,7 +179,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                            
+
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <div class="row">
@@ -279,7 +279,7 @@
                                                             </div>
                                                              <div class="col-sm-6">
                                                             <div class="row">
-                        
+
                                                             <div class="col-sm-12">
                                                                 <label for="" class="form-label" >OKU Card Number*</label>
                                                                 <input type="text" disabled value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" readonly class="form-control" placeholder="OKU CARD NUMBER">
@@ -294,7 +294,7 @@
                                                         @if ($profile->okuFile)
                                                         Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
                                                         @endif
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                                 <hr class="mt-5">
                                                 <h4 class="row p-2">Contact Details</h4>
@@ -323,13 +323,13 @@
                                                 <div class="row p-2">
                                                     <div class="modal-footer">
                                                         <button href="javascript:;" id="saveProfile" class="btn btn-primary">Update</button>
-                                                            
+
                                                             <a class="btn btn-white btnNext" >Next</a>
                                                     </div>
                                                 </div>
-                                        
+
                                             </form>
-                                        </div> 
+                                        </div>
 
                                         @include('pages.HRIS.employee.qualification')
 
@@ -346,9 +346,9 @@
                                     </div>
                                 </div>
                             </div>
-                           
-                        </div> 
-                        
+
+                        </div>
+
                         @include('pages.HRIS.employee.myEmployment')
 
                         @include('pages.HRIS.employee.myVehicle')
@@ -361,12 +361,12 @@
 
                         @include('pages.HRIS.employee.entitlement')
 
-                    </div> 
-                </div> 
-            </div> 
-        </div> 
-    </div> 
-</div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="modal-dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -379,18 +379,18 @@
             <form id="profilepicform" enctype="multipart/form-data">
                 <input type="hidden" value="{{$user_id}}" name="user_id" id="user_id">
                 <input class="form-check-input" type="checkbox" id="Gravatar" />
-                
+
                 <label class="form-check-label" for="Gravatar">Use Gravatar profile picture</label><br><br>
                 <label for="edit-profile-picture" class="form-label">Profile Picture</label>
                 <input type="file" id="edit-profile-picture" class="form-control" aria-describedby="edit-profile-picture">
-                
+
                 <div class="d-flex" >
                     <div class="mr-auto p-2" style="display: none;" id="showImage">
                     <div class="col-12 border m-2">
                     <div id="croppie" class="mt-2">
-                        
+
                             <img src="" alt="">
-                                                         
+
                     </div>
                     <a href="javascript:;" class="btn btn-primary" id="crop">Crop</a>
                     </div>
@@ -401,11 +401,11 @@
                             <p class="text-left bold" ><strong>Cropped Picture</strong></p>
                         <div id="result_image"  class="p-2 m-2 border">
                             <img src="" alt="">
-                    </div> 
+                    </div>
                     </div>
                     </div>
                 </div>
-                
+
         </div>
         </div>
             <div class="modal-footer">

@@ -156,38 +156,44 @@ class EmployeeService
     public function terminateEmployment($r)
     {
         $input = $r->input();
-
+        // dd($input);
         $status['status'] = 'Deactivate';
 
-        // check attachment
-        if ($r->hasfile('file')) {
-            foreach ($r->file('file') as $file) {
-                $nameFile = upload($file);
-                $attch['user_id'] = $input['user_id'];
-                $attch['type'] = 'termination';
-                $attch['file'] = $nameFile['filename'];
-                Attachments::create($attch);
+        if ($r->hasFile('file')) {
+            $uploadedFile = $r->file('file');
+            $statusfile = upload($uploadedFile);
+
+            if ($statusfile['filename']) {
+                $attch['file'] = $statusfile['filename'];
             }
+
+            $attch['user_id'] = $input['user_id'];
+            $attch['type'] = 'termination';
+
+            Attachments::create($attch);
         }
 
         // update status users and employment $table
         Users::where('id', $input['user_id'])->update($status);
 
-        Employee::where('user_id', $input['user_id'])->update($status);
+        $effectiveFrom['effectiveFrom'] = $input['effectiveFrom'];
 
-        // // add data in jobHistory
-        // $input['updatedBy'] = Auth::user()->username;
-        // unset($input['status']);
+        Employee::where('user_id', $input['user_id'])
+        ->update([
+            'status'=> $status['status'],
+            'effectiveFrom' => $input['effectiveFrom']
+        ]);
 
-        // $jobHistory = [];
-        // $jobHistory['user_id'] = $input['user_id'];
-        // $jobHistory['employmentDetail'] = $input['employmentDetail'];
-        // // $jobHistory['role'] = $input['role'];
 
-        // $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']), "Y/m/d H:i:s");
-        // $jobHistory['updatedBy'] = $input['updatedBy'];
+        $jobHistory['user_id'] = $input['user_id'];
+        $jobHistory['remarks'] = $input['remarks'];
+        $jobHistory['employmentDetail'] = $input['employmentDetail'];
 
-        // JobHistory::create($jobHistory);
+        $jobHistory['statusHistory'] = $input['status'] = 'Deactivate';
+        $updateBy = Auth::user()->username;
+        $jobHistory['updatedBy'] = $updateBy;
+
+        JobHistory::create($jobHistory);
 
         $data = [];
         $data['status'] = true;
@@ -354,39 +360,6 @@ class EmployeeService
                 $input['expiryDate'] = null;
                 $input['issuingCountry'] = null;
             }
-
-            // if(!$input['religion'])
-            // {
-            //     unset($input['religion']);
-            // }
-
-            // if(!$input['race'])
-            // {
-            //     unset($input['race']);
-            // }
-
-            // if(!$input['phoneNo'])
-            // {
-            //     unset($input['phoneNo']);
-            // }
-
-            // if(!$input['homeNo'])
-            // {
-            //     unset($input['homeNo']);
-            // }
-
-            // if(!$input['extensionNo'])
-            // {
-            //     unset($input['extensionNo']);
-            // }
-
-            // if(!$input['passport'])
-            // {
-            //     unset($input['passport']);
-            //     unset($input['expiryDate']);
-            //     unset($input['issuingCountry']);
-
-            // }
 
             if ($input['username']) {
 
@@ -567,42 +540,6 @@ class EmployeeService
                 unset($input['address2E']);
             }
 
-
-
-            // if ($input['mainCompanion']['name']) {
-            //     $mainCom = ($r()->input('mainCompanion'));
-            //     $mainCom->mainCompanion = 6;
-            //     $mainCom->save();
-            // } else {
-            //     $input['mainCompanion'] = null;
-            // }
-
-            // usik sini
-            // if($input['mainCompanion']) {
-            //     $companion -> mainCompanion = 6;
-            //     $companion -> save();
-            //     }else {
-            //         $companion -> mainCompanion = 4;
-            //     $companion -> save();
-            //     }
-
-
-
-            // if ($r->input('mainCompanion')) {
-                // Set the mainCompanion attribute of the new companion to 1
-                // $companion->mainCompanion = 6;
-                // $companion->save();
-
-                // Set the mainCompanion attribute of all other companions to 0
-                // UserCompanion::where('user_id', $id)
-                //     ->where('id', '<>', $companion->id)
-                //     ->update(['mainCompanion' => 0]);
-            // }
-
-            // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
-            // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
-            // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
-            // $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
             $id = $input['id'];
             UserCompanion::where('id', $id)->update($input);
 
@@ -717,6 +654,18 @@ class EmployeeService
                 }
             }
 
+
+            if(!isset($input['expiryDate']))
+            {
+                $input['expiryDate'] = null;
+            }
+
+
+            if(!isset($input['issuingCountry']))
+            {
+                $input['issuingCountry'] = null;
+            }
+
             UserChildren::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -762,7 +711,15 @@ class EmployeeService
         return $data;
     }
 
-    public function getParentByUserId($user_id = '')
+    public function getEmployeeParentById($id = '')
+    {
+        $data['data'] = UserParent::where('id', $id)->first();
+        $data['msg'] = 'Success Get Parent Data';
+
+        return $data;
+    }
+
+    public function getEmployeeParent($user_id = '')
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
@@ -770,6 +727,7 @@ class EmployeeService
 
         return $data;
     }
+
 
     public function addEmployeeSibling($r)
     {
@@ -837,6 +795,25 @@ class EmployeeService
             }
         }
 
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
+        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
+            $input['idNo'] = null;
+        }
+
+
+        if(!isset($input['oku_status']))
+        {
+            $input['oku_status'] = null;
+        }
+
+        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
+            $input['okuFile'] = null;
+            $input['okuCardNum'] = null;
+        }
 
         if (isset($_FILES['okuFile']['name'])) {
             $okuAttach = upload(request()->file('okuFile'));
@@ -859,8 +836,7 @@ class EmployeeService
             $input['country'] = $userProfile->country;
             unset($input['sameAddress']);
         }
-        // $input['user_id'] = Auth::user()->id;
-        // pr($input);
+
         UserParent::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -1017,16 +993,6 @@ class EmployeeService
             $jobHistory = [];
             $changes = [];
 
-            // if ($input['role'] !== $user->role) {
-            //     $jobHistory['roleHistory'] = $input['role'];
-            //     $changes[] = 'Company has changed to ' . $input['role'];
-            //     //$changes[] = 'Role has changed to ' . $input['role'];
-
-            // } else if ($input['role'] === $user->role_id) {
-            //     $jobHistory['roleHistory'] = null;
-            //     //$changes[] = 'Company has been set to null';
-            // }
-
             if ($input['company'] !== $user->company) {
                 $jobHistory['companyHistory'] = $input['company'];
 
@@ -1098,12 +1064,6 @@ class EmployeeService
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
             JobHistory::create($jobHistory);
-
-            // $jobz['user_id'] = $input['user_id'];
-            // $jobz['effectiveDate'] = $input['EffectiveFrom'];
-            // $jobz['tenant_id'] = $user->tenant_id;
-            // $jobz['updatedBy'] = $user->username;
-            // JobHistory::create($jobz);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1180,6 +1140,11 @@ class EmployeeService
 
         $user = Employee::where('user_id',$id)->get();
 
+        // $jobHistory['user_id'] = $user;
+        // $updateBy = Auth::user()->username;
+        // $jobHistory['updatedBy'] = $updateBy;
+
+        // JobHistory::create($jobHistory);
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
@@ -1189,6 +1154,20 @@ class EmployeeService
         } else {
             Employee::where('user_id', $id)->update($update);
             Users::where('id', $id)->update($update);
+
+            // $jobHistory['effectiveDate'] = $input['EffectiveFrom'];
+            $jobHistory['user_id'] = $id;
+            $updateBy = Auth::user()->username;
+            $jobHistory['updatedBy'] = $updateBy;
+            $jobHistory['statusHistory'] = 'Active';
+            JobHistory::create($jobHistory);
+
+            // JobHistory::create([
+            //     $updateBy = Auth::user()->username,
+            //     $jobHistory['updatedBy'] = $updateBy,
+            //     'statusHistory' => $update['status'] = 'Active',
+            //     'user_id' => $id,
+            // ]);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1735,6 +1714,48 @@ class EmployeeService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Get Address Data';
         }
+
+        return $data;
+    }
+
+
+    public function getEmployeeByJobHistory($id)
+    {
+        $jobstatus = JobHistory::select('jobhistory.id', 'employment.employeeId', 'employment.user_id',
+        'employment.employeeName', 'employment.employeeEmail', 'employment.effectiveFrom', 'employment.report_to',
+        'jobhistory.employmentDetail', 'jobhistory.remarks', 'jobhistory.statusHistory', 'attachments.file')
+            ->join('employment', 'jobhistory.user_id', '=', 'employment.user_id')
+            ->join('attachments', 'attachments.user_id', '=', 'employment.user_id')
+            ->where('jobhistory.id', $id)
+            ->get();
+
+        if(!$jobstatus)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'JobHistory Status not found';
+        }else{
+            $data['data'] = $jobstatus;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get JobHistory Status Data';
+        }
+
+        return $data;
+    }
+
+    public function getEmployeeByJobHistoryById($id = '')
+    {
+        $data['data'] = JobHistory::select('jobhistory.id', 'employment.employeeId', 'employment.user_id',
+        'employment.employeeName', 'employment.employeeEmail', 'employment.effectiveFrom', 'employment.report_to',
+        'jobhistory.employmentDetail', 'jobhistory.remarks', 'jobhistory.statusHistory', 'attachments.file')
+            ->join('employment', 'jobhistory.user_id', '=', 'employment.user_id')
+            ->join('attachments', 'attachments.user_id', '=', 'employment.user_id')
+            ->where('jobhistory.id', $id)
+            ->first();
+        $data['msg'] = 'Success Get Job History Data';
 
         return $data;
     }
