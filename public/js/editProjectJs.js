@@ -26,9 +26,24 @@ $(document).ready(function () {
     $("#projectmember").picker({
         search: true,
     });
-    // $('#employee_id').picker({
-    //     search:true,
+
+    // $(document).ready(function() {
+    //     $('.select2').select2({
+    //         placeholder: "PLEASE CHOOSE",
+    //         allowClear: true,
+    //     });
     // });
+
+    $(document).ready(function() {
+
+        $('.select1').select2({
+            placeholder: "PLEASE CHOOSE",
+            allowClear: true,
+            dropdownParent: $('#addProjectMemberModal'),
+        });
+    });
+    
+
     // $('#acc_manager2').picker({
     //     search:true,
     // });
