@@ -97,8 +97,8 @@ $(document).ready(function () {
         });
     });
 
-    $("#submit").click(function (e) {
-        $("#submitForm").validate({
+    $("#submitTerminate").click(function (e) {
+        $("#submitTerminateForm").validate({
             // Specify validation rules
             rules: {
                 effectiveFrom: "required",
@@ -114,7 +114,7 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
-                        document.getElementById("submitForm")
+                        document.getElementById("submitTerminateForm")
                     );
 
                     $.ajax({
@@ -151,12 +151,14 @@ $(document).ready(function () {
         $("#exampleModal").modal("show");
         var userId = $(this).data("id");
         var employeeId = $(this).data("employee");
+
         $("#userId").val(userId);
 
         var ParentData = getEmployee(employeeId);
 
         ParentData.then(function (data) {
             parent = data;
+            console.log(parent);
             $("#employeeId").val(parent.employeeId);
             $("#employeeName").val(parent.employeeName);
             $("#employeeEmail").val(parent.employeeEmail);

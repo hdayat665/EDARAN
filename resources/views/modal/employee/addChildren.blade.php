@@ -122,7 +122,7 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck3" type="checkbox" id="" name="okuStatus2" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
-                                       
+
                                         <label class="form-check-label" for="nonCitizen1">
                                             OKU?
                                         </label>
@@ -172,7 +172,7 @@
                         <div class="col-sm-6">
                             <label for="" class="form-label">Supporting Document</label>
                             <input type="file" class="form-control" name="supportDoc">
-                            
+
                         </div>
                     </div>
                     <div class="row p-2">
@@ -194,7 +194,7 @@
                             <label for="firstname" class="form-label">City</label>
                             <input type="text" id="" name="city" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
-                        
+
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -224,12 +224,12 @@
                             </select>
                         </div>
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addChildren" class="btn btn-primary">Save</button>
-               
+
             </div>
             </form>
         </div>
@@ -304,11 +304,11 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="expirydate" class="form-label">Expiry Date*</label>
-                            <input type="date" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate"  disabled style="pointer-events: none;" readonly placeholder="YYYY/MM/DD">
+                            <input type="date" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate"  placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="issuingCountry1" disabled readonly>
+                            <select class="form-select" name="issuingCountry" id="issuingCountry1" >
                                 <option value="" label="PLEASE CHOOSE" selected="selected" ></option>
 
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -333,7 +333,7 @@
                         <div class="col-sm-3">
                             <label for="age" class="form-label">Age</label>
                             <input type="text" id="age1" name="age" readonly class="form-control" aria-describedby="age" placeholder="AGE">
-                        </div> 
+                        </div>
                         <div class="col-sm-3">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" name="gender" id="gender1">
@@ -359,7 +359,7 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck4" type="checkbox" id="nonCitizen1" name="okuStatus" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
-                                       
+
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
@@ -430,7 +430,7 @@
                             <label for="firstname" class="form-label">City</label>
                             <input type="text" id="" name="city" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
-                        
+
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -460,7 +460,7 @@
                             </select>
                         </div>
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -592,7 +592,7 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
-                                       
+
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
@@ -663,7 +663,7 @@
                             <label for="firstname" class="form-label" >City</label>
                             <input type="text" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
-                        
+
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
