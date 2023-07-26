@@ -1,3 +1,9 @@
+//CASH ADVANCE LESS MODAL
+$(document).on("click", "#CAless", function () {
+
+    $("#CAlessModal").modal("show");
+});
+
 //TRAVEL MODAL
 $(document).on("click", "#FinApprtravel", function () {
     console.log("hana");

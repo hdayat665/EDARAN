@@ -144,7 +144,7 @@
                      <!-- button CANCEL changed to PRINT -->
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -312,22 +312,6 @@
                             <div class="col-md-4">
                                 <div class="row p-2">
                                     <div class="col-md-6">
-                                        <label class="form-label">Phone Bill</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" readonly value='RM '>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Entertainment</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" readonly value='RM '>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
                                         <label class="form-label">Others</label>
                                     </div>
                                     <div class="col-md-6">
@@ -346,7 +330,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-md-8">
-                                        <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                        <label class="form-label">Cash Advance (Less)<a id="CAless" class="btn btn-link">View</a></label>
                                     </div>
                                     <div class="col-md-4">
                                         <input readonly type="text" value="RM0.00" name="" class="form-control">

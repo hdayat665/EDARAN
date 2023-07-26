@@ -115,23 +115,6 @@
                             @php
                                 $personal = isset($result['personal']) ? $result['personal'] : null;
                             @endphp
-                            @if ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
-                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check'))))
-                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
-                            @else
-                                <div class="row p-2">
-                                    <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
-                                        <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> --}} -->
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
-                                        <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
-                                    </div>
-                                </div>
-                            @endif
 
                             @if ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
                                     && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check'))))
@@ -160,11 +143,29 @@
                                     </div>
                                 @endif
                             @endif
+
+                            @if ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
+                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check'))))
+                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                            @else
+                                <div class="row p-2">
+                                    <div class="col d-flex justify-content-end">
+                                        <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                                        <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> --}} -->
+                                    </div>
+                                </div>
+                                <div class="row p-2">
+                                    <div class="col d-flex justify-content-end">
+                                        <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                                        <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                     @endif
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
                             <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                         </div>
                     </div>
@@ -332,7 +333,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="row p-2">
+                                <!-- <div class="row p-2">
                                     <div class="col-md-6">
                                         <label class="form-label">Phone Bill</label>
                                     </div>
@@ -347,7 +348,7 @@
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" readonly value='RM '>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row p-2">
                                     <div class="col-md-6">
                                         <label class="form-label">Others</label>
@@ -368,7 +369,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-md-8">
-                                        <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                        <label class="form-label">Cash Advance (Less)<a id="CAless" class="btn btn-link">View</a></label>
                                     </div>
                                     <div class="col-md-4">
                                         <input readonly type="text" value="RM0.00" name="" class="form-control">

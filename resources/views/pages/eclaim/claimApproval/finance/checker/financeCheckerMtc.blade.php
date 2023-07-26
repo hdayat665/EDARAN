@@ -109,6 +109,17 @@
                 </div>
                 <div class="col-md-2">
                     @if ( $general->f1 != 'recommend')
+                        @if ((($personal->f1 == 'check' && $personal->f2 == 'check') || ($personal->f1 == 'check' && $personal->f3 == 'check') || ($personal->f2 == 'check' && $personal->f3 == 'check'))
+                            && (($travel->f1 == 'check' && $travel->f2 == 'check') || ($travel->f1 == 'check' && $travel->f3 == 'check') || ($travel->f2 == 'check' && $travel->f3 == 'check')))
+                                @if ($checkers == 'f1')
+                                    <div class="row p-2">
+                                        <div class="col d-flex justify-content-end">
+                                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Check</a>
+                                        </div>
+                                    </div>
+                                @endif
+                        @endif
+                        
                         @if ($general->pv_number != '')
                             <!-- The pv_number is not null, so hide all buttons -->
                         @else
@@ -128,22 +139,11 @@
                                     </div>
                                 </div>
                             @endif
-
-                            @if ((($personal->f1 == 'check' && $personal->f2 == 'check') || ($personal->f1 == 'check' && $personal->f3 == 'check') || ($personal->f2 == 'check' && $personal->f3 == 'check'))
-                            && (($travel->f1 == 'check' && $travel->f2 == 'check') || ($travel->f1 == 'check' && $travel->f3 == 'check') || ($travel->f2 == 'check' && $travel->f3 == 'check')))
-                                @if ($checkers == 'f1')
-                                    <div class="row p-2">
-                                        <div class="col d-flex justify-content-end">
-                                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Check</a>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endif
                         @endif
                     @endif
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
                             <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                         </div>
                     </div>
@@ -312,22 +312,6 @@
                             <div class="col-md-4">
                                 <div class="row p-2">
                                     <div class="col-md-6">
-                                        <label class="form-label">Phone Bill</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" readonly value='RM '>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Entertainment</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" readonly value='RM '>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
                                         <label class="form-label">Others</label>
                                     </div>
                                     <div class="col-md-6">
@@ -346,7 +330,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-md-8">
-                                        <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                        <label class="form-label">Cash Advance (Less)<a id="CAless" class="btn btn-link">View</a></label>
                                     </div>
                                     <div class="col-md-4">
                                         <input readonly type="text" value="RM0.00" name="" class="form-control">
