@@ -7,6 +7,7 @@ use App\Mail\Mail as MailMail;
 use App\Models\Employee;
 use App\Models\Subscription;
 use App\Models\Users;
+use App\Models\Tenant;
 use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

@@ -1196,6 +1196,7 @@ class MyleaveService
 
         return $datapie;
     }
+
     public function getpieleave2()
     {
         $currentYear = Carbon::now()->format('Y');
@@ -1262,6 +1263,7 @@ class MyleaveService
 
         return $datapie2;
     }
+
     public function getEarnedLeave()
     {
         $today = Carbon::now();
