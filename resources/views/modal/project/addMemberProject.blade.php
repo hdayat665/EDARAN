@@ -18,9 +18,8 @@
                     </div>
 
                     <div class="row mb-15px">
-                        <div class="col-md-6">
-                            
-                            <select class="form-select select1" id="employee_id" name="employee_id[]" style="text-transform: uppercase;" multiple>
+                        <div class="col-md-6">    
+                            <select class="form-select select1" id="employee_id" name="employee_id" style="text-transform: uppercase;">
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
 
                                 <?php
