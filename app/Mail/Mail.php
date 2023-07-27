@@ -111,6 +111,9 @@ class Mail extends Mailable
         else if ($data['typeEmail'] == 'emailmissedtimesheet') {
             $view = 'emails.timesheet.emailmissedtimesheet';
         }
+        else if ($data['typeEmail'] == 'emaileventreminder') {
+            $view = 'emails.timesheet.emaileventreminder';
+        }
         // if ($data['typeEmail'] == 'emailmissedtimesheet' || (isset($response['typeEmail']) && $response['typeEmail'] == 'emailmissedtimesheet')) {
         //     $view = 'emails.timesheet.emailmissedtimesheet';
         // }
@@ -120,6 +123,7 @@ class Mail extends Mailable
         // $subject = 'This is a demo!';
         // $name = 'Jane Doe';
 
+        
         if (isset($data['file'])) {
             return $this->view($view)
                 ->from($data['from'], $data['nameFrom'])

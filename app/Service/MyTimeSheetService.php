@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 // use App\Service\Carbon;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+
 
 class MyTimeSheetService
 {
@@ -548,8 +550,19 @@ if ($existingLogs->isNotEmpty()) {
             unset($input['file_upload']);
         }
     }
+    
 
-    TimesheetEvent::where('id', $id)->update($input);
+   //this code is to make datatble in editeventmodal not return err when updating
+    // Define the disallowed keys
+    $disallowed = ['tableviewparticipant_length'];
+
+    // Filter the inputs
+    $filtered = Arr::except($input, $disallowed);
+
+    // Update the event
+    TimesheetEvent::where('id', $id)->update($filtered);
+
+    // TimesheetEvent::where('id', $id)->update($input);
 
         $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
@@ -1769,6 +1782,44 @@ public function getWorkingHourWeekendbyState($stateid)
             ['status', 'active'],
         ])->get();
     
+        return $data;
+    }
+
+    public function updatereasonreaject($r, $id)
+    {
+        $input = $r->input();
+        $user = Auth::user();
+        // dd($id,$input);
+
+        // $input['user_id'] = $user->id;
+        // $input['tenant_id'] = $user->tenant_id;
+        // $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
+
+        // $start_time = strtotime($input['start_time']);
+        // $end_time = strtotime($input['end_time']);
+        // $totaltime = $end_time - $start_time;
+
+        // $input['reasonreject'] = $input['reasonreject'];
+        $input['status'] = "Rejected";
+        
+        TimesheetAppeals::where('id', $id)->update($input);
+
+        $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
+        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+        ->where('timesheet_appeal.id', $id)
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToEmployeeAppeal($settingEmail);
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Timesheet Log';
+
         return $data;
     }
     

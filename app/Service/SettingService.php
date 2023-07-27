@@ -471,7 +471,7 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
-        date_default_timezone_set("Asia/Kuala_Lumpur");
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
 
         if ($etData) {
@@ -508,7 +508,7 @@ class SettingService
             'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
-            'addedBy' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
 
         ];
 
@@ -1031,9 +1031,12 @@ class SettingService
                 unset($input['file']);
             }
         }
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = $user->tenant_id;
+        $input['created_at'] = date('Y-m-d H:i:s');
 
         Policy::create($input);
 
@@ -1059,7 +1062,10 @@ class SettingService
         }
 
         $user = Auth::user();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $input['modifiedBy'] = $user->username;
+        $input['modified_at'] = date('Y-m-d H:i:s');
 
         Policy::where('id', $id)->update($input);
 
@@ -1985,6 +1991,10 @@ public function updateTypeOfLogs($r, $id)
             $input['claim_type'] = implode(',', $input['claim_type']);
         }
 
+        $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
+        $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
+        $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+
         ClaimCategory::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
@@ -2542,6 +2552,55 @@ public function updateTypeOfLogs($r, $id)
         }
 
         return $data;
+
+    }
+
+    public function searchHolidaylist($r) {
+
+        $input = $r->input();
+
+        $dataallstate = holidayModel::select('*')
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc');
+
+        if ($input['countrySearch']) {
+            $country_id = $input['countrySearch'];
+            $dataallstate->where('leave_holiday.country_id', '=', $country_id);
+        }
+
+        $dataallstate = $dataallstate->get();
+
+        $data = [];
+
+        foreach ($dataallstate as $state) {
+            $stateIds = explode(',', $state->state_id); // Separate the string into an array based on commas
+            $totalStateIds = count(array_filter($stateIds)); // Filter out empty values before counting
+
+            $state->total = $totalStateIds; // Add new 'total' property to the object
+
+            $data[] = $state;
+        }
+
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+            $totalAll = count($dataallstate);
+
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
+            }
+        }
+
+
+
+        return $data;
+
+
 
     }
 

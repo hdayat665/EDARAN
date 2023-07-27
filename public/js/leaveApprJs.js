@@ -251,91 +251,15 @@ $(document).ready(function () {
 
     function myleaveview(id) {
         return $.ajax({
-            url: "/getuserleaveApprview/" + id,
+            url: "/getuserRecommenderView/" + id,
         });
     }
 
     function myleave(id) {
         return $.ajax({
-            url: "/getuserleaveAppr/" + id,
+            url: "/getuserRecommender/" + id,
         });
     }
-
-    $(document).on("click", "#approvebuttontype", function () {
-        id = $(this).data("id");
-        // console.log(id);
-        // return false;
-        requirejs(["sweetAlert2"], function (swal) {
-            swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                $.ajax({
-                    type: "get",
-                    url: "/approvemyleave/" + id,
-
-                    processData: false,
-                    contentType: false,
-                }).then(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
-                    });
-                });
-            });
-        });
-    });
-    $(document).on("click", "#approvebutton2", function () {
-        // id = $(this).data("id");
-        id = $("#iddata").val();
-        // console.log(id);
-        // return false;
-        requirejs(["sweetAlert2"], function (swal) {
-            swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                $.ajax({
-                    type: "get",
-                    url: "/approvemyleaveby/" + id,
-
-                    processData: false,
-                    contentType: false,
-                }).then(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
-                    });
-                });
-            });
-        });
-    });
 
     $("#updateButton").click(function (e) {
         $("#updateForm").validate({
@@ -354,7 +278,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updatesupervisor/" + id,
+                        url: "/updateRecommender/" + id,
                         data: data,
                         dataType: "json",
 
@@ -456,7 +380,7 @@ $(document).ready(function () {
 
     function myleave2(id) {
         return $.ajax({
-            url: "/getuserleaveAppr/" + id,
+            url: "/getuserRecommender/" + id,
         });
     }
 
@@ -481,7 +405,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updatesupervisorreject/" + id,
+                        url: "/updateRecommenderReject/" + id,
                         data: data,
                         dataType: "json",
 

@@ -73,7 +73,7 @@
                                         <td>{{$policy->addedBy}}</td>
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
-                                        <td>{{$policy->updated_at}}</td>
+                                        <td>{{$policy->modified_at}}</td>
                                         <td>
                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                             <div class="dropdown-menu">

@@ -17,6 +17,9 @@
     <p><strong>Appeal ID </strong> : {{ $data['data']->logid ?? '-' }} </p>
     <p><strong>Employee Name </strong> : {{ $employeeNamex ?? '-' }} </p>
     <p><strong>Appeal Date</strong> : {{ $data['data']->applied_date ?? '-' }} </p>
+    @if (!empty($data['data']->reasonreject))
+    <p><strong>Reason of Rejected</strong> : {{ $data['data']->reasonreject }}</p>
+    @endif
     <br>
     <p>Please click the link button for further action </p>
     <a href="{{ env('APP_URL') . '/myTimesheet' }}"><button>Click Here</button></a>
