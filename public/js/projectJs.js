@@ -18,8 +18,11 @@ $(document).ready(function () {
         },
     });
 
-    $("#acc_manager2").picker({
-        search: true,
+    $('.selectacc2').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#addModal'),
+        // multiple: true,
     });
 
     $("#data-table-default2").DataTable({

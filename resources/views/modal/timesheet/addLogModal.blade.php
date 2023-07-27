@@ -139,7 +139,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                           <label for="gender" class="form-label">Description</label>
-                          <textarea class="form-control" name="desc" rows="5"></textarea>
+                          <textarea class="form-control" name="desc" rows="5" maxlength="225"></textarea>
                         </div>
                     </div>
                     {{-- only for total duration purpose --}}
