@@ -424,11 +424,19 @@
                             <div class="col-md-4">
                                 <label class="form-label">File Upload</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="" multiple>
                             </div>
+                            
                         </div>
-
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">File Name</label>
+                            </div>
+                            <div class="col-md-2">
+                                <a id="file_other_update" href="#"></a>
+                            </div>
+                        </div>
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateOtherMtcBtn" class="btn btn-primary">Update</button>

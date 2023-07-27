@@ -70,7 +70,7 @@
                                         <label class="form-label">Description</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <textarea class="form-control" id="" name="desc" rows="6"></textarea>
+                                        <textarea class="form-control" id="desc" name="desc" rows="6"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                         <label class="form-label">Project</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select" id="" name="project_id">
+                                        <select class="form-select" id="projectid" name="project_id">
                                             
                                             <?php $projects = myProjectOnly(); ?>
                                             <option class="form-label" value="">
@@ -232,7 +232,7 @@
                                         <label class="form-label">Project</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select" id="" name="project_id2">
+                                        <select class="form-select" id="projectId2" name="project_id2">
                                             <?php $projects = myProjectOnly(); ?>
                                             <option class="form-label" value="">Select Project</option>
                                             @foreach ($projects as $project)
@@ -414,7 +414,8 @@
                         </div>
                         
                         <div class="row p-2">
-                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                            <div class="modal-footer"> 
+                                <button type="button" id="reset_travel" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="travelSaveButton" class="btn btn-primary">Save</button>
                             </div>
                         </div>
@@ -922,7 +923,7 @@
                                                 <label class="form-label">Project</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <select class="form-select" name="project_id">
+                                                <select class="form-select" name="project_id" id="project_subs">
                                                     <option class="form-label" value="" selected>
                                                         PLEASE CHOOSE</option>
                                                     <?php $projects = myProjectOnly(); ?>
@@ -946,7 +947,7 @@
                                                 <label class="form-label">Description</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <textarea class="form-control" name="desc" id="" rows="4"></textarea>
+                                                <textarea class="form-control" name="desc" id="desc_subs" rows="4"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1154,7 +1155,7 @@
                                                             <label class="form-label">Description</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <textarea class="form-control" name="laundry_desc" id="" rows="3"></textarea>
+                                                            <textarea class="form-control" name="laundry_desc" id="laundry_desc" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="row p-2">
@@ -1169,7 +1170,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                                    <div class="modal-footer"> 
+                                        <button type="button" id="reset_sub" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
                             </div>
                                 </div>
@@ -1240,7 +1242,7 @@
                                 <label class="form-label">Description</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="claim_desc" id="claim_desc" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -1303,7 +1305,7 @@
             } else {
                 var distance = response.rows[0].elements[0].distance.value;
                 var distanceInKm = distance / 1000;
-                var distanceFormatted = distanceInKm.toFixed(2);
+                var distanceFormatted = distanceInKm.toFixed(1);
                 document.getElementById('result').value = distanceFormatted;
 
 

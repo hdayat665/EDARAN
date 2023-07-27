@@ -2973,10 +2973,12 @@ class myClaimService
         return $data;
     }
 
-    public function updateStatusMonthlyClaim($id = '', $status = '')
+    public function updateStatusMonthlyClaim($id = '', $status = '', $r )
     {
-
+        $input = $r->input();
+        
         $claim['status'] = $status; 
+        $claim['total_amount'] = $input['amount']; 
 
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
@@ -3686,7 +3688,7 @@ class myClaimService
     public function updateOtherMtc($r)
     {
         $input = $r->input();
-        //pr($input);
+       
         $id = $input['id'];
         $general_id = $input['general_id'];
         $user = PersonalClaim::where('id', $id)->first();
@@ -3704,7 +3706,7 @@ class myClaimService
             }
         }
         $fileString = implode(',', $filenames);
-
+        //pr($fileString);
         $input['file_upload'] = $fileString ?? '';
 
         if (!$user) {

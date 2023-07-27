@@ -57,7 +57,7 @@
                                         <div class="col d-flex justify-content-end">
                                             <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
                                             <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit">
-                                                Submit</button>
+                                                Submit</button> 
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -160,7 +160,10 @@
                                                 <label class="form-label">Balance Due to/(From) Employee</label>
                                             </div>
                                             <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM {{ number_format($balance ?? 0, 2) }}'>
+                                                <form id="balance">
+                                                    <input type="text" class="form-control" readonly value='RM {{ number_format($balance ?? 0, 2) }}'>
+                                                    <input type="hidden" name="amount" id="balanceValue" value="{{ number_format($balance ?? 0, 2) }}">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
