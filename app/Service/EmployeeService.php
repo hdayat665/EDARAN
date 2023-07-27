@@ -1427,10 +1427,28 @@ class EmployeeService
 
     public function addEmployeeAddressDetails($r)
     {
+        // Assuming $r is the user data or request object containing the necessary information.
         $input = $r->input();
-        $input['addressType'] = '0';
 
+        // Check if the user already has an address or not
+        if (!UserAddress::where('user_id', $input['user_id'])->exists()) {
+            // If the user doesn't have an address, set the addressType to '3'
+            $input['addressType'] = '3';
+        } else {
+            // If the user already has an address, check if the addressType is '3'
+            $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
+            if ($existingAddress->addressType === '3') {
+                // If the user has addressType '3', set the addressType to '0'
+                $input['addressType'] = '0';
+            } else {
+                // If the user has a different addressType, keep it as it is.
+                $input['addressType'] = $existingAddress->addressType;
+            }
+        }
+
+        // Create a new user address record
         UserAddress::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

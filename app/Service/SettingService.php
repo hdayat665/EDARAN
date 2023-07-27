@@ -471,7 +471,7 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
-        date_default_timezone_set("Asia/Kuala_Lumpur");
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
 
         if ($etData) {
@@ -508,7 +508,7 @@ class SettingService
             'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
-            'addedBy' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
 
         ];
 
@@ -1031,9 +1031,12 @@ class SettingService
                 unset($input['file']);
             }
         }
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = $user->tenant_id;
+        $input['created_at'] = date('Y-m-d H:i:s');
 
         Policy::create($input);
 
@@ -1059,7 +1062,10 @@ class SettingService
         }
 
         $user = Auth::user();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $input['modifiedBy'] = $user->username;
+        $input['modified_at'] = date('Y-m-d H:i:s');
 
         Policy::where('id', $id)->update($input);
 
