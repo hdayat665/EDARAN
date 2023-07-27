@@ -209,7 +209,7 @@
                                     <?php $target = ['leave_recommender']; ?>
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
-                                            <a href="/leaveAppr" class="menu-link">
+                                            <a href="/leaveRecommender" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user-pen text-gray"></i>
                                                 </div>
@@ -353,20 +353,20 @@
                                     @php
                                         $ruleDepartments1 = ['DepartRecommender', 'DepartApprover'];
                                         $totalCount1 = 0;
-                                        
+
                                         foreach ($ruleDepartments1 as $department) {
                                             $count = getGeneralClaimMenuNotifyForDepartment($department)->count();
                                             $totalCount1 += $count;
                                         }
-                                        
+
                                         $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceChecker'];
                                         $totalCount2 = 0;
-                                        
+
                                         foreach ($ruleDepartments2 as $department) {
                                             $count = getClaimData($department)->count();
                                             $totalCount2 += $count;
                                         }
-                                        
+
                                         $totalCounts = $totalCount1 + $totalCount2;
                                     @endphp
                                     <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>

@@ -2549,6 +2549,55 @@ public function updateTypeOfLogs($r, $id)
 
     }
 
+    public function searchHolidaylist($r) {
+
+        $input = $r->input();
+
+        $dataallstate = holidayModel::select('*')
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc');
+
+        if ($input['countrySearch']) {
+            $country_id = $input['countrySearch'];
+            $dataallstate->where('leave_holiday.country_id', '=', $country_id);
+        }
+
+        $dataallstate = $dataallstate->get();
+
+        $data = [];
+
+        foreach ($dataallstate as $state) {
+            $stateIds = explode(',', $state->state_id); // Separate the string into an array based on commas
+            $totalStateIds = count(array_filter($stateIds)); // Filter out empty values before counting
+
+            $state->total = $totalStateIds; // Add new 'total' property to the object
+
+            $data[] = $state;
+        }
+
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+            $totalAll = count($dataallstate);
+
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
+            }
+        }
+
+
+
+        return $data;
+
+
+
+    }
+
 
 
 
