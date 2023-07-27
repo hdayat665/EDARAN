@@ -31,7 +31,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'Active']])->first();
+        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
         if ($user) {
             $data['status'] = false;
@@ -157,7 +157,7 @@ class EmployeeService
     {
         $input = $r->input();
         // dd($input);
-        $status['status'] = 'Deactivate';
+        $status['status'] = 'terminate';
 
         if ($r->hasFile('file')) {
             $uploadedFile = $r->file('file');
@@ -1107,14 +1107,14 @@ class EmployeeService
             }
 
             $input['tenant_id'] = Auth::user()->tenant_id;
-            $input['status'] = 'Active';
+            $input['status'] = 'active';
             $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
             Employee::create($input);
 
             $ec['user_id'] = $input['user_id'];
             UserEmergency::create($ec);
 
-            $user['status'] = 'Active';
+            $user['status'] = 'active';
             User::where('id', $input['user_id'])->update($user);
 
             $ls = new LoginService;
@@ -1135,16 +1135,10 @@ class EmployeeService
     public function cancelTerminateEmployment($id)
     {
         $update = [
-            'status' => 'Active'
+            'status' => 'active'
         ];
 
         $user = Employee::where('user_id',$id)->get();
-
-        // $jobHistory['user_id'] = $user;
-        // $updateBy = Auth::user()->username;
-        // $jobHistory['updatedBy'] = $updateBy;
-
-        // JobHistory::create($jobHistory);
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
@@ -1161,13 +1155,6 @@ class EmployeeService
             $jobHistory['updatedBy'] = $updateBy;
             $jobHistory['statusHistory'] = 'Active';
             JobHistory::create($jobHistory);
-
-            // JobHistory::create([
-            //     $updateBy = Auth::user()->username,
-            //     $jobHistory['updatedBy'] = $updateBy,
-            //     'statusHistory' => $update['status'] = 'Active',
-            //     'user_id' => $id,
-            // ]);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
