@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 class MyleaveController extends Controller
 {
     public function myleaveView(Request $r){
-        
+
         $ms = new MyleaveService;
 
         $data['myleave'] = $ms->myleaveView();
@@ -49,7 +49,7 @@ class MyleaveController extends Controller
 
 
 
-        return view('pages.myleave.myleave', $data);
+        return view('pages.leave.myleave', $data);
     }
 
     public function searchmyleavehistory(Request $r)
@@ -152,24 +152,7 @@ class MyleaveController extends Controller
         return $result;
     }
 
-    public function getuserleaveAppr($id = '')
-    {
-        $ms = new MyleaveService;
 
-        $result = $ms->getuserleaveAppr($id);
-        // dd($result);
-
-        return $result;
-    }
-    public function getuserleaveApprview($id = '')
-    {
-        $ms = new MyleaveService;
-
-        $result = $ms->getuserleaveApprview($id);
-        // dd($result);
-
-        return $result;
-    }
 
     public function getuserleaveApprhod($id = '')
     {
@@ -194,10 +177,11 @@ class MyleaveController extends Controller
     //supervisor
 
 
-    public function leaveApprView(Request $r)
+    public function leaveRecommenderIndex(Request $r)
     {
         $ms = new MyleaveService;
-        $data['leaveApprView'] = $ms->leaveApprview();
+        $data['leaveRecommenderListActive'] = $ms->leaveRecommenderActive();
+        $data['leaveRecommenderListHistory'] = $ms->leaveRecommenderHistory();
         $data['employer'] = $ms->idemployer();
         $data['types'] = $ms->datatype();
         $data['applydate'] = '';
@@ -207,33 +191,52 @@ class MyleaveController extends Controller
         $input = $r->input();
 
         if ($input) {
-            $data['leaveApprView'] = $ms->searleavaappr($r);
+            $data['leaveRecommenderList'] = $ms->searchleaveRecommenderIndex($r);
             $data['applydate'] = $input['applydate'];
             $data['idemployer'] = $input['idemployer'];
             $data['type'] = $input['type'];
         }
 
-        return view('pages.myleave.leaveAppr', $data);
+        return view('pages.leave.leaveRecommender', $data);
     }
 
-    public function updatesupervisor(Request $r, $id)
-    {
-        $ms = new MyleaveService;
+    public function updateRecommender(Request $r, $id) {
 
-        $result = $ms->updatesupervisor($r, $id);
+        $ms = new MyleaveService;
+        $result = $ms->updateRecommender($r, $id);
 
         return response()->json($result);
     }
 
 
-    public function updatesupervisorreject(Request $r, $id)
+    public function updateRecommenderReject(Request $r, $id)
     {
         $ms = new MyleaveService;
 
-        $result = $ms->updatesupervisorreject($r, $id);
+        $result = $ms->updateRecommenderReject($r, $id);
 
         return response()->json($result);
     }
+
+    public function getuserRecommender($id = '') {
+
+        $ms = new MyleaveService;
+        $result = $ms->getuserRecommender($id);
+
+        return $result;
+    }
+
+    public function getuserRecommenderView($id = '') {
+
+        $ms = new MyleaveService;
+        $result = $ms->getuserRecommenderView($id);
+
+        return $result;
+    }
+
+
+
+
 
 
 
@@ -257,7 +260,7 @@ class MyleaveController extends Controller
             $data['type'] = $input['type'];
         }
 
-        return view('pages.myleave.leaveApprhod', $data);
+        return view('pages.leave.leaveHod', $data);
     }
 
     public function updatehod(Request $r, $id)

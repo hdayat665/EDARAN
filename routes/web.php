@@ -695,12 +695,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchmyleavehistory', 'searchmyleavehistory');
 
             //supervisor
-            Route::get('/leaveAppr', 'leaveApprView');
-            Route::post('/leaveAppr', 'leaveApprView');
-            Route::get('/getuserleaveAppr/{id}', 'getuserleaveAppr');
-            Route::get('/getuserleaveApprview/{id}', 'getuserleaveApprview');
-            Route::post('/updatesupervisor/{id}', 'updatesupervisor');
-            Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
+            Route::get('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::post('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::get('/getuserRecommender/{id}', 'getuserRecommender');
+            Route::get('/getuserRecommenderView/{id}', 'getuserRecommenderView');
+            Route::post('/updateRecommender/{id}', 'updateRecommender');
+            Route::post('/updateRecommenderReject/{id}', 'updateRecommenderReject');
 
             //hod
             Route::get('/leaveApprhod', 'leaveApprhodView');

@@ -56,7 +56,7 @@
                                 <label class="form-label">Country*</label>
                                 <div class="col-4">
 
-                                    <select class="form-select select2" id="countrySearch" name="countrySearch" style="text-transform:uppercase" required>
+                                    <select class="form-select select2" id="countrySearch" name="countrySearch" style="text-transform:uppercase">
                                         <option value="" label="PLEASE CHOOSE"></option>
                                         @foreach($country as $ct)
                                             <option value="{{ $ct->country_id }}" {{ old('countrySearch') == $ct->country_id ? 'selected' : ($countrySearch == $ct->country_id ? 'selected' : '') }}>{{ $ct->country_name }}</option>
