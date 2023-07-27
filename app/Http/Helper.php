@@ -1,50 +1,51 @@
 <?php
 
-use App\Models\ActivityLogs;
-use App\Models\ApprovelRoleGeneral;
-use App\Models\Branch;
-use App\Models\ClaimCategory;
-use App\Models\ClaimCategoryContent;
-use App\Models\ClaimDateSetting;
-use App\Models\AppealMtc;
-use App\Models\ApprovalConfig;
-use App\Models\CashAdvanceDetail;
-use App\Models\Company;
-use App\Models\Customer;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\DomainList;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\GeneralClaim;
-use App\Models\GeneralClaimDetail;
-use App\Models\JobGrade;
-use App\Models\Project;
-use App\Models\ProjectLocation;
-use App\Models\ProjectMember;
 use App\Models\Role;
-use App\Models\TimesheetEvent;
-use App\Models\Location;
-use App\Models\TypeOfLogs;
 use App\Models\Unit;
-use App\Models\UserProfile;
-use App\Models\Users;
-use App\Models\UserRole;
-use App\Models\TransportMillage;
-use App\Models\EclaimGeneral;
-use App\Models\PermissionRole;
-use App\Models\EntitleSubsBenefit;
-use App\Models\Notification;
-use App\Models\Country;
 use App\Models\State;
-use App\Notifications\GeneralNotification;
-use App\Service\ClaimApprovalService;
+use App\Models\Users;
+use App\Models\Branch;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Project;
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\JobGrade;
+use App\Models\Location;
+use App\Models\UserRole;
+use App\Models\AppealMtc;
+use App\Models\Department;
+use App\Models\DomainList;
+use App\Models\JobHistory;
+use App\Models\TypeOfLogs;
+use App\Models\Designation;
+use App\Models\UserProfile;
+use App\Models\ActivityLogs;
+use App\Models\GeneralClaim;
+use App\Models\Notification;
+use App\Models\ClaimCategory;
+use App\Models\EclaimGeneral;
+use App\Models\ProjectMember;
+use App\Models\ApprovalConfig;
+use App\Models\EmploymentType;
+use App\Models\PermissionRole;
+use App\Models\TimesheetEvent;
+use App\Models\ProjectLocation;
 use App\Service\MyleaveService;
-use App\Service\MyTimeSheetService;
 use App\Service\ProjectService;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ClaimDateSetting;
+use App\Models\TransportMillage;
+use App\Models\CashAdvanceDetail;
+use App\Models\EntitleSubsBenefit;
+use App\Models\GeneralClaimDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\ApprovelRoleGeneral;
+use App\Service\MyTimeSheetService;
+use App\Models\ClaimCategoryContent;
+use Illuminate\Support\Facades\Auth;
+use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\GeneralNotification;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -834,7 +835,7 @@ if (!function_exists('getUnitProject')) {
 if (!function_exists('getBranchProject')) {
     function getBranchProject($id = '')
     {
-        
+
         if ($id) {
             $data = Branch::find($id);
         } else {
@@ -974,6 +975,20 @@ if (!function_exists('getEmploymentTypeforJobHistory')) {
         }
 
         return $employementTypes->pluck('type', 'id')->toArray();
+    }
+}
+
+if (!function_exists('getEmploymentTerminateStatusforJobHistory')) {
+    function getEmploymentTerminateStatusforJobHistory()
+    {
+        $user = Auth::user();
+        $employementTerminateStatus = [];
+
+        if ($user) {
+            $employementTerminateStatus = JobHistory::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $employementTerminateStatus->pluck('statusHistory', 'id')->toArray();
     }
 }
 
@@ -1485,6 +1500,7 @@ if (!function_exists('prjManager')) {
             ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
             ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
+            ->sortBy('name')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
@@ -1761,12 +1777,13 @@ if (!function_exists('getSupervisor')) {
 if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
-        $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+        $employee = Employee::where('user_id', $id)->select('employeeName')->first();
 
-        if (!$data) {
-            $data = '';
+        if ($employee) {
+            return $employee->employeeName;
+        } else {
+            return '';
         }
-        return $data;
     }
 }
 
@@ -2565,7 +2582,9 @@ if (!function_exists('getUserWithSelectedUser')) {
     {
 
         // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])
+        ->orderBy('employeeName', 'asc')
+        ->get();
 
         if (!$data) {
             $data = [];

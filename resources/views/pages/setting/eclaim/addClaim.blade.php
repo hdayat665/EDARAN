@@ -47,6 +47,30 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row p-2">
+                                <label for="claimtype" class="col-sm-3 col-form-label">Add Project</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <input type="checkbox" class="form-check-input" name="addproject" id="addprojectid"  /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-2">
+                                <label for="claimtype" class="col-sm-3 col-form-label">Add Attachment</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <input type="checkbox" class="form-check-input" name="addattach" id="addattachid" /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-3" style="display:none" id="mandotoryview">
+                                <label for="claimtype" class="col-sm-5 col-form-label">Mandotory Attachment</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <input type="checkbox" class="form-check-input" name="attachstatus" id="" /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="label" style="display: none">
                                 <div class="form-group row p-2">
                                     <label for="labellingname" class="col-sm-3 col-form-label">Labelling Name</label>

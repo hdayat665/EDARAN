@@ -22,7 +22,7 @@
 				<div class="stats-icon"><i class="fa fa-calendar-days"></i></div>
 				<div class="stats-info">
 					<h4>MY TIMESHEET</h4>
-					<p>{{ $holidays }}</p>
+					<p>{{ $unlogdate['unlogdate'] }}</p>
 				</div>
 				<div class="stats-link">
 					<a href="/myTimesheet"><i class="fa fa-calendar-days"></i></a>

@@ -1,6 +1,6 @@
 <!-- NEW DESIGN -->
 <div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 1200px">
+    <div class="modal-dialog" style="max-width: 1400px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">View Daily Travelling Log</h5>
@@ -45,51 +45,8 @@
                     <!-- <tbody id="tableRowTravelling">
 
                     </tbody> -->
-                    <tbody>
-                        <tr style="text-align:center">
-                            <td>
-                                <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
-                            </td>
-                            <td id="start_time">00:00:00</td>
-                            <td id="end_time">00:00:00</td>
-                            <td id="location_start">Edaran Office</td>
-                            <td id="location_address">KLIA 2</td>
-                            <td id="desc">meeting with client</td>
-                            <td id="type_transport">Personal Car</td>
-                            <td id="millage">167.5KM</td>
-                            <td id="petrol">RM50.00</td>
-                            <td id="toll">RM50.00</td>
-                            <td id="parking">RM50.00</td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a id="" class="dropdown-item"> Edit</a>
-                                <a id="" class="dropdown-item"> Delete</a>
-                                <a id="" class="dropdown-item"> Challenge Route</a>
-                            </td>
-                        </tr>
-                        <tr style="text-align:center">
-                            <td>
-                                <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
-                            </td>
-                            <td id="start_time">00:00:00</td>
-                            <td id="end_time">00:00:00</td>
-                            <td id="location_start">Edaran Office</td>
-                            <td id="location_address">KLIA 2</td>
-                            <td id="desc">meeting with client</td>
-                            <td id="type_transport">Personal Car</td>
-                            <td id="millage">167.5KM</td>
-                            <td id="petrol">RM50.00</td>
-                            <td id="toll">RM50.00</td>
-                            <td id="parking">RM50.00</td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a id="" class="dropdown-item"> Edit</a>
-                                <a id="" class="dropdown-item"> Delete</a>
-                                <a id="" class="dropdown-item"> Challenge Route</a>
-                            </td>
-                        </tr>
+                    <tbody id="tableRowTravelling">
+
                     </tbody>
 
                 </table>

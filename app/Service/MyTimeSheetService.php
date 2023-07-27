@@ -766,10 +766,30 @@ public function getWorkingHourWeekendbyState($stateid)
 
         public function getHolidays()
     {
-        $data = holidayModel::where([['tenant_id', Auth::user()->tenant_id]])->get();
+        // $data = holidayModel::where([['tenant_id', Auth::user()->tenant_id]])->get();
+        // dd($data);
 
-        return $data;
-    }
+        // return $data;
+        $user = Auth::user();
+        $stateId = DB::table('employment as a')
+            ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
+            ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
+            ->where('a.user_id', $user->id)
+            ->select('c.state_id')
+            ->value('c.state_id'); // Use the value() method to get the single value directly
+        // dd($stateId);
+        // return $stateId; // Optionally return the state_id if needed
+
+        
+        $getpublicbystate = DB::table('leave_holiday as a')
+        ->whereRaw("FIND_IN_SET($stateId, a.state_id)")
+        ->select('a.*')
+        ->get();
+    
+        return  $getpublicbystate;
+    // dd($getpublicbystate);
+        
+        }
 
 
     public function getLeaves()
@@ -1379,7 +1399,7 @@ public function getWorkingHourWeekendbyState($stateid)
         $data = DB::table('timesheet_event as a')
         ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
         ->select('a.*', 'b.employeeName')
-        ->orderBy('a.start_date', 'asc')
+        ->orderBy('a.start_date', 'desc')
         ->get();
         return $data;
     }   

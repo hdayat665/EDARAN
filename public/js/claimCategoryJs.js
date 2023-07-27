@@ -244,7 +244,50 @@ $(document).ready(function () {
             });
         });
     });
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const checkbox = document.getElementById('addprojectid');
+
+    //     // Add event listener to detect changes
+    //     checkbox.addEventListener('change', function () {
+    //         if (this.checked) {
+    //             this.value = '1'; // Checkbox is checked, set the value to 1
+    //         } else {
+    //             this.value = '0'; // Checkbox is not checked, set the value to 0
+    //         }
+    //     });
+    // });
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const checkbox = document.getElementById('addattachid');
+
+    //     // Add event listener to detect changes
+    //     checkbox.addEventListener('change', function () {
+    //         if (this.checked) {
+    //             this.value = '1'; // Checkbox is checked, set the value to 1
+    //         } else {
+    //             this.value = '0'; // Checkbox is not checked, set the value to 0
+    //         }
+    //     });
+    // });
+
+    $("#addattachid").click(function () {
+        if ($(this).is(":checked")) {
+            $("#mandotoryview").show();
+        } else {
+            $("#mandotoryview").hide();
+        }
+    });
+
+    $("#addattachidu").click(function () {
+        if ($(this).is(":checked")) {
+            $("#mandotoryview").show();
+        } else {
+            $("#mandotoryview").hide();
+        }
+    });
 });
+
 
 function delRow(btn) {
     var row = btn.parentNode.parentNode;

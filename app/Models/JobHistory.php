@@ -40,6 +40,7 @@ class JobHistory extends Authenticatable
         'employmentTypeHistory',
         'supervisorHistory',
         'CORHistory',
+        'statusHistory',
     ];
 }
 

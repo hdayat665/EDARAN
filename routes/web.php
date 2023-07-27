@@ -178,7 +178,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
 
-            Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
@@ -190,6 +189,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getChildren/{id}', 'getChildren');
             Route::get('/getChildrenById/{id}', 'getChildrenById');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
+            Route::get('/getParent/{id}', 'getParent');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');
             Route::get('/myProfile', 'myProfileView');
@@ -219,6 +219,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployeeCompanion', 'updateEmployeeCompanion');
             Route::post('/updateEmployeeChildren', 'updateEmployeeChildren');
             Route::post('/addEmployeeChildren', 'addEmployeeChildren');
+            Route::get('/getEmployeeParent/{id}', 'getEmployeeParent');
+            Route::get('/getEmployeeParentById/{id}', 'getEmployeeParentById');
             Route::post('/addEmployeeSibling', 'addEmployeeSibling');
             Route::post('/updateEmployeeSibling', 'updateEmployeeSibling');
             Route::post('/addEmployeeParent', 'addEmployeeParent');
@@ -230,6 +232,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            Route::get('/getEmployeeByJobHistory', 'getEmployeeByJobHistory');
+            Route::get('/getEmployeeByJobHistoryById/{id}', 'getEmployeeByJobHistoryById');
+
             //
             Route::post('/updateProfile_Picture/{id}', 'updateProfile_Picture');
             // hierarchy
@@ -637,6 +642,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStartTimeDrop/{id}', 'getStartTimeDrop');
             Route::get('/getEndTimeDrop/{id}', 'getEndTimeDrop');
             Route::get('/monthlyClaimView/{id}', 'monthlyClaimView');
+            Route::post('/updateCashMtc', 'updateCashMtc');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
