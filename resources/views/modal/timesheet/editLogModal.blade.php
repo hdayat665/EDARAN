@@ -163,7 +163,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Description</label>
-                            <textarea class="form-control" name="desc" id="desc" rows="5" maxlength="255"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" rows="5" maxlength="225"></textarea>
                         </div>
                         
                     </div>

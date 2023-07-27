@@ -70,19 +70,27 @@ tenantInput.value = dataValue || "";
 
 
 
+$(document).ready(function () {
+    // Check if there are remembered values in localStorage
+    var rememberedEmailAddress = localStorage.getItem("rememberedEmailAddress");
+    var rememberedPassword = localStorage.getItem("rememberedPassword");
+
+    // Pre-fill the input fields with the remembered values (if any)
+    if (rememberedEmailAddress) {
+        $("#emailAddress").val(rememberedEmailAddress);
+    }
+
+    if (rememberedPassword) {
+        $("#password").val(rememberedPassword);
+    }
+
     $("#login").click(function (e) {
         $("#loginForm").validate({
             // Specify validation rules
             rules: {
-                // The key name on the left side is the name attribute
-                // of an input field. Validation rules are defined
-                // on the right side
                 password: "required",
                 username: {
                     required: true,
-                    // Specify that email should be validated
-                    // by the built-in "email" rule
-                    // email: true
                 },
             },
 
@@ -91,24 +99,36 @@ tenantInput.value = dataValue || "";
                 password: "Please Insert Password",
                 username: "Please Insert Username",
             },
+
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
+                // Check if the "Remember Me" checkbox is checked
+                var rememberMeChecked = $("#rememberMe").is(":checked");
+
+                // If "Remember Me" is checked, save the values to localStorage
+                if (rememberMeChecked) {
+                    var emailAddress = $("#emailAddress").val();
+                    var password = $("#password").val();
+
+                    // Save the values to localStorage
+                    localStorage.setItem("rememberedEmailAddress", emailAddress);
+                    localStorage.setItem("rememberedPassword", password);
+                }
+
+                // Make the AJAX POST request
                 requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("loginForm")
-                    );
+                    var data = new FormData(document.getElementById("loginForm"));
 
                     $.ajax({
                         type: "POST",
                         url: "/login/tenant",
                         data: data,
                         dataType: "json",
-
                         processData: false,
                         contentType: false,
                     }).then(function (data) {
-                        // console.log(data);
+                        // Handling the response data from the server
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -119,7 +139,9 @@ tenantInput.value = dataValue || "";
                             allowEscapeKey: false,
                         }).then(function () {
                             if (data.type == "error") {
+                                // Handle error case if needed
                             } else {
+                                // Redirect to the dashboardTenant page upon successful login
                                 window.location.href = "/dashboardTenant";
                             }
                         });
@@ -128,6 +150,8 @@ tenantInput.value = dataValue || "";
             },
         });
     });
+});
+
 
     // $('#login').click(function(e) {
     //     this.form.checkValidity(); // for demonstration purposes only, will always b "true" here, in this case, since HTML5 validation will block this "click" event if form invalid (i.e. if "required" field "foo" is empty)

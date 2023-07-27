@@ -38,6 +38,9 @@ function getWorkingHourWeekendbyState(stateid) {
 
 var idwork = $("#state_id").val();
 
+var joineddate = $("#joinneddate").val();
+// console.log(joineddate);
+
 getwork = getWorkingHourWeekendbyState(idwork);
 
 getwork.then(function(data) {
@@ -1337,6 +1340,10 @@ getwork.then(function(data) {
                
 
                 dayCellDidMount: function(info) {                       
+
+                    
+                    // console.log(joineddate+"daycell");
+                    
                     
                     var current = new Date(info.date);
                     var currentDate = new Date();
@@ -1742,12 +1749,17 @@ getwork.then(function(data) {
                        else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && 
                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)) {
                         $(info.el).css('background-color', '#FF8080');
-                        $(info.el).append('&nbsp;').append(appealaddb);
-                        $(appealaddb).css({
+
+                        var joinneddate = new Date(joineddate);
+                        if (current.getTime() >= joinneddate.getTime()) {
+                          $(info.el).append('&nbsp;').append(appealaddb);
+                          $(appealaddb).css({
                             position: 'relative',
                             top: '-35px',
-                            'z-index': '999',   
-                            });
+                            'z-index': '999',
+                          });
+                        }
+                      
 
                         }else if (
                             (current < twoDaysBefore) &&
@@ -2187,45 +2199,44 @@ getwork.then(function(data) {
 
                                 // Flag to track if datepicker was closed due to outside click
                                 var outsideClick = false;
-                              
-                                // Attach a change event listener to the date input
-                                $("#dateaddlogedit").on("change", function() {
-                                  var selectedDate = new Date($(this).val());
-                              
-                                  if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
-                                    $(this).prop("readonly", true);
-                                    $(this).css("pointer-events", "none");
-                                  } else {
-                                    $(this).prop("readonly", false);
-                                    $(this).css("pointer-events", "auto");
-                                  }
-                                });
-                              
-                                // When the datepicker is closed without selecting a new date,
-                                // restore the initial value of the date input
+
                                 $("#dateaddlogedit").on("focusout", function() {
-                                  if (outsideClick && $(this).val() === "") {
+                                if (outsideClick && $(this).val() === "") {
                                     $(this).val(initialDate);
-                                  }
-                                  // Reset the flag
-                                  outsideClick = false;
-                                });
-                              
-                                // Set the flag when clicking outside the datepicker
-                                $(document).on("mousedown", function(event) {
-                                  var target = $(event.target);
-                                  if (!target.closest(".datepicker").length && !target.is("#dateaddlogedit")) {
-                                    outsideClick = true;
-                                  }
+                                }
+                                // Reset the flag
+                                outsideClick = false;
                                 });
 
-                                // if ( selectedDate < twoDaysBefore) {
-                                //     $("#dateaddlogedit").prop("readonly", true);
-                                //     $("#dateaddlogedit").css("pointer-events", "none");
-                                // } else {
-                                //     $("#dateaddlogedit").prop("readonly", false);
-                                //     $("#dateaddlogedit").css("pointer-events", "auto");
-                                // }
+                                // Set the flag when clicking outside the datepicker
+                                $(document).on("mousedown", function(event) {
+                                var target = $(event.target);
+                                if (!target.closest(".datepicker").length && !target.is("#dateaddlogedit")) {
+                                    outsideClick = true;
+                                }
+                                });
+
+                                // Your other function
+                                $("#statusappeal").on("change", function() {
+                                var selectedDate = new Date($("#dateaddlogedit").val());
+                                var twoDaysBefore = new Date();
+                                twoDaysBefore.setDate(twoDaysBefore.getDate() - 2);
+
+                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $("#dateaddlogedit").prop("readonly", true).css("pointer-events", "none");
+                                    // Disable the focusout functionality when read-only
+                                    outsideClick = false;
+                                } else {
+                                    $("#dateaddlogedit").prop("readonly", false).css("pointer-events", "auto");
+                                    // Enable the focusout functionality when editable
+                                    outsideClick = true;
+                                }
+                                });
+
+                                // Initial setup based on the initial statusappeal value
+                                $("#statusappeal").trigger("change");
+
+                               
 
                                 
                         });
@@ -2295,47 +2306,54 @@ getwork.then(function(data) {
                                 }
                             });
 
-                            var eventData = getEvents(eventId);
-                            eventData.then(function(data) {
-                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
-                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
+                            async function loadEventData(eventId) {
+                                var eventData = await getEvents(eventId);
+                                var participants = eventData.participants;
+                                var attendanceStatus = eventData.attendanceStatus;
+                            
+                                // Destroy the old DataTable instance and clear the body
+                                var table = $('#tableviewparticipant').DataTable();
+                                table.clear().destroy();
                             
                                 var tableBody = $("#tableRowParticipant");
-                                tableBody.empty(); // Clear any existing rows in the table
+                                tableBody.empty();
                             
                                 for (var i = 0; i < participants.length; i++) {
                                     var participant = participants[i];
-                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
+                                    var status = attendanceStatus[i].status;
                             
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
                                     row.append($("<td></td>").text(participant.name));
-
-                                    if (status === "no response") {
-                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
-                                        var badgeSpan = $("<span></span>").addClass("badge bg-warning rounded-pill").text("no response");
-                                        statusBadge.append(badgeSpan);
-                                        row.append($("<td></td>").append(statusBadge));
-                                      } else if (status === "not attend") {
-                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
-                                        var badgeSpan = $("<span></span>").addClass("badge bg-danger rounded-pill").text("not attend");
-                                        statusBadge.append(badgeSpan);
-                                        row.append($("<td></td>").append(statusBadge));
-                                      } else {
-                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
-                                        var badgeSpan = $("<span></span>").addClass("badge bg-success rounded-pill").text("Attend");
-                                        statusBadge.append(badgeSpan);
-                                        row.append($("<td></td>").append(statusBadge));
-                                      }
                             
-                                    
+                                    var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
+                                    var badgeSpan = $("<span></span>");
+                            
+                                    if (status === "no response") {
+                                        badgeSpan.addClass("badge bg-warning rounded-pill").text("no response");
+                                    } else if (status === "not attend") {
+                                        badgeSpan.addClass("badge bg-danger rounded-pill").text("not attend");
+                                    } else if (status === "attend"){
+                                        badgeSpan.addClass("badge bg-lime rounded-pill").text("Attend");
+                                    }
+                            
+                                    statusBadge.append(badgeSpan);
+                                    row.append($("<td></td>").append(statusBadge));
+                            
                                     tableBody.append(row);
-                                } //badge bg-lime rounded-pill
-
+                                }
+                            
+                                // Re-initialize the DataTable
                                 $('#tableviewparticipant').DataTable({
-                                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                                    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
                                 });
-                            });
+                            }
+                            
+                            // usage:
+                            loadEventData(eventId);
+                            
+                            
+                            
                                                             
                             
                             
