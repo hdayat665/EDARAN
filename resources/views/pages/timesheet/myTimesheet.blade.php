@@ -54,6 +54,7 @@
         <div class="">
             <input type="hidden" id="userIdForApproval" value="{{ $data['user_id'] }}">
             <input type="hidden" id="state_id" value="{{ $stateData->state_id }}">
+            <input type="hidden" id="joinneddate" value="{{ $data['joined_date'] }}">
 
              {{-- <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button> --}}
              {{-- <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button> --}}
