@@ -166,59 +166,6 @@ $(document).ready(function () {
         $("#okuattach2").css("pointer-events", "none");
     }
 
-    // var checkboxes = $('input[name="address_type[]"]');
-    // var permanentChecked = false;
-    // var correspondentChecked = false;
-    // var addressId = null;
-    // var addressType = "0";
-
-    // checkboxes.each(function () {
-    //     if ($(this).is(":checked")) {
-    //         if ($(this).val() === "permanent") {
-    //             permanentChecked = true;
-    //         } else if ($(this).val() === "correspondent") {
-    //             correspondentChecked = true;
-    //         }
-    //         if (addressId == null) {
-    //             addressId = $(this).data("address-id");
-    //             addressType = $(this).data("address-type");
-    //         }
-    //     }
-    // });
-
-    // if (permanentChecked && correspondentChecked) {
-    //     checkboxes.not(":checked").prop("disabled", true);
-    //     // if both checkboxes are checked and have the same address ID, set addressType to 3
-    //     if (
-    //         checkboxes.filter(
-    //             '[data-address-id="' + addressId + '"]:checked'
-    //         ).length === 2
-    //     ) {
-    //         addressType = "3";
-    //     }
-    // } else if (permanentChecked) {
-    //     // if only permanent checkbox is checked, set addressType to 1
-    //     addressType = "1";
-    //     // disable all other permanent checkboxes
-    //     checkboxes
-    //         .filter('[value="permanent"]:not(:checked)')
-    //         .prop("disabled", true);
-    //     // enable all correspondent checkboxes
-    //     checkboxes
-    //         .filter('[value="correspondent"]')
-    //         .prop("disabled", false);
-    // } else if (correspondentChecked) {
-    //     // if only correspondent checkbox is checked, set addressType to 2
-    //     addressType = "2";
-    //     // disable all other correspondent checkboxes
-    //     checkboxes
-    //         .filter('[value="correspondent"]:not(:checked)')
-    //         .prop("disabled", true);
-    //     // enable all permanent checkboxes
-    //     checkboxes.filter('[value="permanent"]').prop("disabled", false);
-    // } else {
-    //     checkboxes.prop("disabled", false);
-    // }
 
     $("#passportmyprofile").change(function () {
         if ($("#passportmyprofile").val() !== "") {
@@ -240,22 +187,21 @@ $(document).ready(function () {
 
     $("#passportparentedit").change(function () {
         if ($("#passportparentedit").val() !== "") {
+             // Disable expiration date and passport country fields
+             $("#expiryDateParentEdit").prop("disabled", true);
+             $("#expiryDateParentEdit").css("pointer-events", "none");
+             $("#expiryDateParentEdit").val("");
+
+             $("#issuingCountryParentEdit").prop("disabled", true);
+             $("#issuingCountryParentEdit").css("pointer-events", "none");
+             $("#issuingCountryParentEdit").val("");
+        } else {
             // Enable expiration date and passport country fields
             $("#expiryDateParentEdit").prop("disabled", false);
             $("#expiryDateParentEdit").css("pointer-events", "auto");
 
             $("#issuingCountryParentEdit").prop("disabled", false);
             $("#issuingCountryParentEdit").css("pointer-events", "auto");
-        } else {
-            // Disable expiration date and passport country fields
-            $("#expiryDateParentEdit").prop("disabled", true);
-            $("#expiryDateParentEdit").css("pointer-events", "none");
-            $("#expiryDateParentEdit").val("");
-
-            $("#issuingCountryParentEdit").prop("disabled", true);
-            $("#issuingCountryParentEdit").css("pointer-events", "none");
-            $("#issuingCountryParentEdit").val("");
-
         }
     });
 
@@ -3081,6 +3027,9 @@ $(document).ready(function () {
     for (let i = 0; i < childIds.length; i++) {
         const type = childIds[i];
         $(document).on("click","#childModalEdit" + type, function (e) {
+            $("#issuingCountry1").val("").prop("disabled", true);
+            $("#expiryDate1").val("").prop("disabled", true);
+
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
@@ -3932,6 +3881,8 @@ $(document).ready(function () {
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
         $(document).on("click","#parentModalEdit" + type, function (e) {
+            $("#expiryDateParentEdit").val("").prop("disabled", true);
+            $("#issuingCountryParentEdit").val("").prop("disabled", true);
 
             id = $(this).data("id");
             var ParentData = getParent(id);
@@ -3955,7 +3906,7 @@ $(document).ready(function () {
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
                 $("#fullNameP1").val(parent.fullName);
-                $("#idNoP1").val(parent.idNo);
+                $("#idnumber7").val(parent.idNo);
                 $("#oldIDNoP1").val(parent.oldIDNo);
                 $("#relationshipP1").val(parent.relationship);
                 if (parent.non_citizen == "on") {
@@ -4152,6 +4103,45 @@ $(document).ready(function () {
         });
     });
 
+    var checkboxes = $('input[name="address_type[]"]');
+
+var permanentChecked = false;
+var correspondentChecked = false;
+var addressId = null;
+var addressType = "0";
+
+checkboxes.each(function () {
+    if ($(this).is(":checked")) {
+        if ($(this).val() === "permanent") {
+            permanentChecked = true;
+        } else if ($(this).val() === "correspondent") {
+            correspondentChecked = true;
+        }
+        if (addressId == null) {
+            addressId = $(this).data("address-id");
+            addressType = $(this).data("address-type");
+        }
+    }
+});
+
+if (permanentChecked && correspondentChecked) {
+    if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+        addressType = "3";
+    }
+    checkboxes.not(":checked").prop("disabled", true);
+} else if (permanentChecked) {
+    addressType = "1";
+    checkboxes.filter('[value="permanent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="correspondent"]').prop("disabled", false);
+} else if (correspondentChecked) {
+    addressType = "2";
+    checkboxes.filter('[value="correspondent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="permanent"]').prop("disabled", false);
+} else {
+    addressType = "0";
+    checkboxes.prop("disabled", false);
+}
+
     $('input[name="address_type[]"]').on("change", function () {
 
         var permanentChecked = false;
@@ -4167,51 +4157,26 @@ $(document).ready(function () {
                 if ($(this).is(":checked")) {
                     if ($(this).val() === "permanent") {
                         permanentChecked = true;
+                        checkboxes.prop("disabled", true);
                     } else if ($(this).val() === "correspondent") {
                         correspondentChecked = true;
+                        checkboxes.prop("disabled", true);
+
                     }
                 }
             });
 
         if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
-            checkboxes
-                .filter('[value="permanent"]:checked')
-                // .prop("disabled", true);
-
-            checkboxes
-                .filter('[value="correspondent"]:not(:checked)')
-                // .prop("disabled", false);
-
         } else if (permanentChecked == false && correspondentChecked == true) {
             addressType = "2";
-            checkboxes
-                .filter('[value="correspondent"]:checked')
-                // .prop("disabled", true);
-
-            checkboxes
-                .filter('[value="permanent"]:not(:checked)')
-
-
         } else if (permanentChecked == true && correspondentChecked == true) {
             addressType = "3";
-            checkboxes
-                .filter('[value="permanent"]:checked')
-                // .prop("disabled", false);
-            checkboxes
-                .filter('[value="correspondent"]:checked')
-                // .prop("disabled", false);
-
         } else if (permanentChecked == false && correspondentChecked == false){
             addressType = "0";
-            checkboxes
-            .filter('[value="correspondent"]:not(:checked)')
-            // .prop("disabled", true);
-
-        checkboxes
-            .filter('[value="permanent"]:not(:checked)')
-
         }
+
+
 
         $.ajax({
             url: "/updateAddressDetails",
@@ -4783,12 +4748,21 @@ $(".okuCheck4").click(function () {
 $(".okuCheck5").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard5").prop("readonly", false);
+        $("#okucard5").prop("disabled", false);
+
+        $("#okuattach5").prop("disabled", false);
+        $("#okuattach5").prop("readonly", false);
+
         $("#okuattach5").css("pointer-events", "auto");
-        okuStatus = 1;
+        // okuStatus = 1;
     } else {
         $("#okucard5").prop("readonly", true);
+        $("#okucard5").prop("disabled", true);
+
+        $("#okuattach5").prop("disabled", true);
+        $("#okuattach5").prop("readonly", true);
         $("#okuattach5").css("pointer-events", "none");
-        okuStatus = 0;
+        // okuStatus = 0;
     }
 });
 

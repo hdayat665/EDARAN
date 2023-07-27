@@ -103,7 +103,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <select class="form-select" name="acc_manager" id="acc_manager2">
+                    <select class="form-select selectacc" name="acc_manager" id="acc_manager2">
                         <?php $Employees = getEmployee(); ?>
                         <?php $sortedEmployees = $Employees->sortBy('employeeName'); ?>
                         @foreach ($sortedEmployees as $Employee)
@@ -114,15 +114,16 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select" name="project_manager" id="project_manager2" style="pointer-events: none; background: #e9ecef">
-                        <?php $Employees = getEmployee(); ?>
+                    <select class="form-select" name="project_manager" id="project_manager2" style="display:none" ></select>
+                    <select class="form-select selectmng" name="project_manager" id="project_manager2_show">
+                        <option value="" selected>PLEASE CHOOSE</option>    
+                    <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
                     </select>
-                    <select class="form-select" name="project_manager" id="project_manager2_show" style="display:none" disabled></select>
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date" value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />
@@ -171,3 +172,11 @@
         </form>
     </div>
 </div>
+<style>
+  /* Target the parent element of .select2-selection */
+  .form-select.selectmng + .select2-container .select2-selection {
+    pointer-events: none;
+    background-color: #e9ecef;
+  }
+  
+</style>

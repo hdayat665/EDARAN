@@ -24,6 +24,12 @@ function getTravelDataByGeneralId(id, date) {
     });
   }
 
+//CASH ADVANCE LESS MODAL
+$(document).on("click", "#CAless", function () {
+
+    $("#CAlessModal").modal("show");
+});
+
 //TRAVEL MODAL
 $(document).on("click", "#SVRtravel", function() {
     
@@ -190,6 +196,19 @@ $(document).on("click", "#SVRtravel", function() {
         $("#subsModal").modal("show");
     });
     
+    $(document).ready(function() {
+        $(document).on("change", "#listofCA", function() {
+            $("input").val("");
+    
+            if ($(this).val() == "1") {
+                $(".lists").show();
+    
+            } else if ($(this).val() == "2") {
+                $(".lists").hide();
+            }
+        });
+    });
+
     //OTHERS MODAL
     $(document).on("click", "#SVAothers", function () {
     

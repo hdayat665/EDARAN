@@ -416,8 +416,23 @@ $("#subsTableUpdate").DataTable({
                 var amount = firstResponse.amount;
                 var desc = firstResponse.claim_desc;
                 var general_id = firstResponse.general_id;
-                var file = firstResponse.file_upload;
-    
+                var file_upload = firstResponse.file_upload;
+                
+                if (!file_upload) {
+                    file_upload = "No Attachment";
+                } else {
+                    var fileLinks = file_upload.split(",");
+                    file_upload = "";
+                    for (var i = 0; i < fileLinks.length; i++) {
+                        var fileLink = fileLinks[i].trim();
+                        file_upload += `<a href="/storage/PersonalFile/${fileLink}" target="_blank">${fileLink}</a>`;
+                        if (i < fileLinks.length - 1) {
+                            file_upload += "<br>";
+                        }
+                    }
+                }
+                
+
                 getClaimCategoryNameById(claim_category).done(function(claimData) {
                     $("#claim_id_other").val(id);
                     $("#general_id_other").val(general_id);
@@ -425,6 +440,7 @@ $("#subsTableUpdate").DataTable({
                     $("#amount_other_update").val(amount);
                     $("#desc_other_update").val(desc);
                     $("#end_time_update").val(desc);
+                    $("#file_other_update").html(file_upload);
                 }).fail(function() {
                     console.log('Failed to fetch project name.');
                 });
@@ -2125,14 +2141,15 @@ $("#subsTableUpdate").DataTable({
     $("#editSubmitButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
             id = $("#generalId").val();
-            // var data = new FormData(document.getElementById("subsForm"));
-
+            
+            var data = new FormData(document.getElementById("balance"));
+            console.log(data); // Add this line to log the data to the console
+    
             $.ajax({
                 type: "POST",
                 url: "/submitMonthlyClaim/" + id,
-                // data: data,
+                data: data,
                 dataType: "json",
-
                 processData: false,
                 contentType: false,
             }).then(function (data) {
@@ -2146,6 +2163,7 @@ $("#subsTableUpdate").DataTable({
                     allowEscapeKey: false,
                 }).then(function () {
                     if (data.type == "error") {
+                        // Handle error if needed
                     } else {
                         window.location.href = "/myClaimView";
                         // location.reload();
@@ -2154,6 +2172,7 @@ $("#subsTableUpdate").DataTable({
             });
         });
     });
+    
 });
 
 $(document).on("click", "#deleteButtonPersonal", function () {
@@ -2334,13 +2353,7 @@ document.getElementById("resetButtonOthers").addEventListener("click", function(
     document.getElementById("claim_desc").value = "";
 
     // Clear the file input by creating a new one and replacing the old input element
-    const fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.className = "form-control-file";
-    fileInput.name = "file_upload[]";
-    fileInput.id = "supportdocument";
-    fileInput.multiple = true;
-    document.getElementById("supportdocument").parentNode.replaceChild(fileInput, document.getElementById("supportdocument"));
+    document.getElementById("supportdocument").value = "";
 });
 
 $("#updateSubsMtcBtn").click(function (e) {
@@ -2429,3 +2442,53 @@ $(document).on("click", "#deleteButtonTravel", function () {
         });
     });
 });
+document.getElementById("reset_travel").addEventListener("click", function() {
+    // Clear the input fields
+    document.getElementById("datepickertc").value = "";
+    document.getElementById("timestart").value = "";
+    document.getElementById("timeend").value = "";
+    document.getElementById("totalduration").value = "";
+    document.getElementById("desc").value = "";
+    document.getElementById("type_transport").selectedIndex = 0;
+    document.getElementById("ls").selectedIndex = 0;
+    document.getElementById("dest").selectedIndex = 0;
+    document.getElementById("projectid").selectedIndex = 0;
+    document.getElementById("projectId2").selectedIndex = 0;
+    document.getElementById("autocomplete").value = "";
+    document.getElementById("autocomplete2").value = "";
+    document.getElementById("result").value = "";
+    document.getElementById("petrol").value = "";
+    document.getElementById("toll").value = "";
+    document.getElementById("parking").value = "";
+  });
+
+  document.getElementById("reset_sub").addEventListener("click", function() {
+    // Clear the input fields
+    document.getElementById("date1").selectedIndex = 0;
+    document.getElementById("time1").selectedIndex = 0;
+    document.getElementById("date2").selectedIndex = 0;
+    document.getElementById("time2").selectedIndex = 0;
+    document.getElementById("result1").value = "";
+    document.getElementById("project_subs").selectedIndex = 0;
+    document.getElementById("desc_subs").value = "";
+    document.getElementById("DBF").value = "";
+    document.getElementById("totalbf").value = "";
+    document.getElementById("DLH").value = "";
+    document.getElementById("totallh").value = "";
+    document.getElementById("DDN").value = "";
+    document.getElementById("totaldn").value = "";
+    document.getElementById("TS").value = "";
+    document.getElementById("hotelcv").value = "";
+    document.getElementById("hn").value = "";
+    document.getElementById("hnTotal").value = "";
+    document.getElementById("lodgingcv").value = "";
+    document.getElementById("ln").value = "";
+    document.getElementById("lnTotal").value = "";
+    document.getElementById("TAV").value = "";
+    document.getElementById("total2").value = "";
+    document.getElementById("laundry_amount").value = "";
+    document.getElementById("laundry_desc").value = "";
+    document.getElementById("ldgv").checked = false;
+    document.getElementById("htv").checked = false;
+
+  });

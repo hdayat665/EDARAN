@@ -722,7 +722,7 @@ class ProfileService
         return $data;
     }
 
-    public function getParentByUserId($user_id = '')
+    public function getParent($user_id = '')
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
@@ -750,20 +750,6 @@ class ProfileService
     public function addParent($r)
     {
         $input = $r->input();
-        // $sameAddress = $input['sameAddress'] ?? null;
-        // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] .' '. $input['state'] . ' ' . $input['country'];
-        // if ($sameAddress) {
-        //     $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
-
-        //     $input['address1'] = $userProfile->address1 . ' ' . $userProfile->address2 . '' . $userProfile->city . ' ' . $userProfile->state . ' ' . $userProfile->country;
-        //     $input['address2'] = $userProfile->address2;
-        //     $input['city'] = $userProfile->city;
-        //     $input['state'] = $userProfile->state;
-        //     $input['postcode'] = $userProfile->postcode;
-        //     $input['country'] = $userProfile->country;
-        //     unset($input['sameAddress']);
-        // }
-
         if ($_FILES['idFile']['name'])
         {
             $idAttachment = upload($r->file('idFile'));
@@ -775,6 +761,27 @@ class ProfileService
         }
 
 
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
+        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
+            $input['idNo'] = null;
+        }
+
+
+        if(!isset($input['oku_status']))
+        {
+            $input['oku_status'] = null;
+        }
+
+
+        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
+            $input['okuFile'] = null;
+            $input['okuCardNum'] = null;
+        }
+
 
         if (isset($_FILES['okuFile']['name'])) {
             $payslip = upload(request()->file('okuFile'));
@@ -783,6 +790,12 @@ class ProfileService
             $input['okuFile'] = null;
         }
 
+        if(!isset($input['passport']))
+        {
+            $input['passport'] = null;
+            $input['expiryDate'] = null;
+            $input['issuingCountry'] = null;
+        }
 
         $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
@@ -857,7 +870,6 @@ class ProfileService
         } else {
             unset($input['sameAddress']);
 
-            // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] . ' ' . $input['state'] . ' ' . $input['country'];
             UserParent::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -1158,7 +1170,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Children is Created..';
+        $data['msg'] = 'New Children is Created.';
 
         return $data;
     }
@@ -1329,166 +1341,7 @@ class ProfileService
 
 
         return $data;
-
-        // $input = $r->input();
-
-        // $user_id = Auth::user()->id;
-        // $id = $input['id'] ?? 1;
-
-        // $user = UserAddress::where('id', $id)->first();
-
-        // if(!$user)
-        // {
-        //     $data['status'] = config('app.response.error.status');
-        //     $data['type'] = config('app.response.error.type');
-        //     $data['title'] = config('app.response.error.title');
-        //     $data['msg'] = 'Address not found';
-
-        // } else {
-
-        //     $user->update($input);
-
-        //     $data['status'] = config('app.response.success.status');
-        //     $data['type'] = config('app.response.success.type');
-        //     $data['title'] = config('app.response.success.title');
-        //     $data['msg'] = 'Address is updated.';
-        // }
-
-
     }
-
-    // public function updateAddressType($r)
-    // {
-    //     $id = $r->input('id');
-    //     $user_id = Auth::user()->id;
-    //     $addressType = $r->input('addressType');
-    //     $checked = $r->input('checked');
-
-    //     $address = UserAddress::where('id', $id)->first();
-    //     if (!$address) {
-    //         $data['status'] = config('app.response.error.status');
-    //         $data['type'] = config('app.response.error.type');
-    //         $data['title'] = config('app.response.error.title');
-    //         $data['msg'] = 'Address not found';
-    //     } else {
-    //         // Update the address type value based on the checkbox state
-    //         if ($addressType == 'permanent' && $checked) {
-    //             $address->addressType |= 1;
-    //         } else if ($addressType == 'correspondent' && $checked) {
-    //             $address->addressType |= 2;
-    //         } else if ($addressType == 'permanent' && !$checked) {
-    //             $address->addressType &= ~1;
-    //         } else if ($addressType == 'correspondent' && !$checked) {
-    //             $address->addressType &= ~2;
-    //         }
-
-    //         // If both permanent and correspondent are checked, set the address type to 3
-    //         if ($address->addressType == 3) {
-    //             $address->addressType = 3;
-    //         }
-
-    //         $address->save();
-
-    //         $data['status'] = config('app.response.success.status');
-    //         $data['type'] = config('app.response.success.type');
-    //         $data['title'] = config('app.response.success.title');
-    //         $data['msg'] = 'Success Update Address Type';
-    //     }
-
-    //     return $data;
-    // }
-
-
-    // public function updateAddressType($r)
-    // {
-    //     $id = $r->input('id');
-    //     $addressType = $r->input('addressType');
-    //     $checked = $r->input('checked');
-
-    //     $address = UserAddress::where('id', $id)->first();
-    //     if (!$address) {
-    //         return response()->json(['status' => 'error', 'msg' => 'Address not found']);
-    //     }
-
-    //     $addressTypeValue = $addressType == 'permanent' ? 1 : ($addressType == 'correspondent' ? 2 : 3);
-    //     $address->addressType = $checked ? $addressTypeValue : ($address->addressType & ~$addressTypeValue);
-    //     $address->save();
-
-    //     return response()->json(['status' => 'success', 'msg' => 'Address type updated']);
-    // }
-
-//     public function updateAddressType($r)
-// {
-//     $id = $r->input('id');
-//     $user_id = Auth::user()->id;
-//     $addressType = $r->input('addressType');
-//     $checked = $r->input('checked');
-
-//     $address = UserAddress::where('id', $id)->first();
-//     if (!$address) {
-//         $data['status'] = config('app.response.error.status');
-//         $data['type'] = config('app.response.error.type');
-//         $data['title'] = config('app.response.error.title');
-//         $data['msg'] = 'Address not found';
-//     }
-
-//     // Update the address type value based on the checkbox state
-//     if ($addressType == 'permanent' && $checked) {
-//         $address->addressType |= 1;
-//     } else if ($addressType == 'correspondent' && $checked) {
-//         $address->addressType |= 2;
-//     } else if ($addressType == 'permanent' && !$checked) {
-//         $address->addressType &= ~1;
-//     } else if ($addressType == 'correspondent' && !$checked) {
-//         $address->addressType &= ~2;
-//     }
-
-//     // Set the address type value based on the state of the two checkboxes
-//     if ($address->addressType == 3 || ($address->permanent && $address->correspondent)) {
-//         $address->addressType = 3; // both are checked
-//     } else if ($address->addressType == 0) {
-//         $address->addressType = 4; // both are unchecked
-//     }
-
-//     $address->save();
-
-//     $data['status'] = config('app.response.success.status');
-//     $data['type'] = config('app.response.success.type');
-//     $data['title'] = config('app.response.success.title');
-//     $data['msg'] = 'Success Update Address Type';
-
-//     return $data;
-// }
-
-
-
-
-    // public function updateAddressDetails($input)
-    // {
-
-    //     $user_id = Auth::user()->id;
-
-    //     $user = UserAddress::where('user_id', $user_id)->first();
-
-    //     if(!$user)
-    //     {
-    //         $data['status'] = config('app.response.error.status');
-    //         $data['type'] = config('app.response.error.type');
-    //         $data['title'] = config('app.response.error.title');
-    //         $data['msg'] = 'Address not found';
-
-    //     } else {
-
-    //         UserAddress::where('user_id', $user_id)->update($input);
-
-    //         $data['status'] = config('app.response.success.status');
-    //         $data['type'] = config('app.response.success.type');
-    //         $data['title'] = config('app.response.success.title');
-    //         $data['msg'] = 'Success Update Address';
-    //     }
-
-    //     return $data;
-    // }
 
     public function deleteAddressDetails($id = '')
     {

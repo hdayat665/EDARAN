@@ -1,4 +1,73 @@
 <!-- NEW DESIGN -->
+{{-- CASH ADVANCE LESS MODAL --}}
+<div class="modal fade" id="CAlessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Cash Advance (Less)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="">
+                <div class="">
+                    <div class="row p-2">
+                        <div class="">
+                            <table id="" class="table table-striped table-bordered align-middle">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th class="text-nowrap">Checked</th>
+                                        <th class="text-nowrap">No</th>
+                                        <th class="text-nowrap">Form ID</th>
+                                        <th class="text-nowrap">Type of Cash</th>
+                                        <th class="text-nowrap">Travel Date</th>
+                                        <th class="text-nowrap">Applied Amount</th>
+                                        <th class="text-nowrap">Used Amount</th>
+                                        <th class="text-nowrap">Final Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align:center">
+                                        <!-- <td>
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
+                                        </td> -->
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>   
+                                        </td>
+                                        <td>1</td>
+                                        <td>OTHER (NON OUTSTATION)</td>
+                                        <td>30/05/20223 - 01/06/2023</td>
+                                        <td>RM 1000</td>
+                                        <td>RM 0</td>
+                                        <td>RM 0</td>
+                                        <td>RM 0</td>
+                                    </tr>
+                                    <tr style="text-align:center">
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>   
+                                        </td>
+                                        <td>1</td>
+                                        <td>OTHER (NON OUTSTATION)</td>
+                                        <td>30/05/20223 - 01/06/2023</td>
+                                        <td>RM 1000</td>
+                                        <td>RM 0</td>
+                                        <td>RM 0</td>
+                                        <td>RM 0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- TRAVEL MODAL --}}
 <div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 1400px">
         <div class="modal-content">
@@ -82,7 +151,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -106,22 +179,55 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row p-2">
+                <!-- <div class="row p-2" >
                     <div class="col-md-3">
                         <label class="form-label">Claim for</label>
                     </div>
                     <div class="col-md-3">
-                        <!-- <input readonly type="text" value="" class="form-control"> -->
-                        <td>
-                            <input href="#" data-bs-toggle="dropdown" class="btn btn-light btn-sm dropdown-toggle" value="With Cash Advance" style="color:black" readonly>
-                            <div class="dropdown-menu">
-                            <a id="" class="dropdown-item"> With Cash Advance</a>
-                            <a id="" class="dropdown-item"> Without Cash Advance</a>
-                        </td>
+                        <select class="form-select" id="listofCA" name="">
+                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
+                            <option value="1">With Cash Advance</option>
+                            <option value="2">Without Cash Advance</option>
+                        </select>
                     </div>
                 </div>
+                <br>
+                <div class="lists" style="display:none">
+                    <div class="form-control">
+                        <div class="row p-2">
+                            <div class="col">
+                                <label class="form-label">List of Cash Advance</label>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <table class="table table-striped table-bordered align-middle">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th>Checked</th>
+                                        <th>Form ID</th>
+                                        <th>Type of Cash Advance</th>
+                                        <th>Travel Date</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align:center">
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
+                                        </td>
+                                        <td>CA 13</td>
+                                        <td>Project (Outstation)</td>
+                                        <td>2023-01-07 - 2023-01-09</td>
+                                        <td>RM 400.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+                <br>
                 <form id="updateSubsMtc">
-                    <div class="">
+                    <div class="form-control">
                         <div class="row p-2">
                             <div class="row p-2">
                                 <label class="form-label">Travel Date and Time</label>
@@ -384,15 +490,14 @@
                                                     <input readonly type="text" name="total" class="form-control" value="" id="total2Update">
                                                 </div>
                                             </div>
-                                            
-                                            <div class="row p-2">
+                                            <!-- <div class="row p-2">
                                                 <div class="col md-3">
                                                     <label for="file">Supporting Document</label>
                                                 </div><div class="col md-3">
                                                     <label for="file"></label>
                                                     <br>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -454,13 +559,17 @@
                                 <table id="" class="table table-striped table-bordered align-middle">
                                     <thead>
                                         <tr>
-
+                                            <th class="text-nowrap">No</th>
                                             <th class="text-nowrap">File Name</th>
                                             <th class="text-nowrap">Description</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -512,7 +621,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-4">
-                            <label class="form-label">File Upload</label>
+                            <label class="form-label">Supporting Document</label>
                         </div>
                         <div class="col-md-8">
                             <a href="#" class="btn btn-link">File</a>

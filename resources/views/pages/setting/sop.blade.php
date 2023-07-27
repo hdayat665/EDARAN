@@ -73,7 +73,7 @@
                                         <td>{{$policy->addedBy}}</td>
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
-                                        <td>{{$policy->updated_at}}</td>
+                                        <td>{{$policy->modified_at}}</td>
                                         <td>
                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                             <div class="dropdown-menu">
@@ -164,7 +164,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Policy's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Policy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -202,7 +202,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Policy's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Policy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -240,18 +240,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New SOP's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New SOP</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code* </label>
+                        <label class="form-label">SOP Code* </label>
                         <input type="text" class="form-control" name="SOPCode" placeholder="SOP'S CODE" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name* </label>
+                        <label class="form-label">SOP Name* </label>
                         <input type="text" class="form-control" name="SOPName" placeholder="SOP'S NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
@@ -276,19 +276,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update SOP's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update SOP</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code </label>
+                        <label class="form-label">SOP Code </label>
                         <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP'S CODE" >
                         <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP'S CODE" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name </label>
+                        <label class="form-label">SOP Name </label>
                         <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP'S NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">

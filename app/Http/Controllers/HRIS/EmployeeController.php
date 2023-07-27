@@ -55,8 +55,6 @@ class EmployeeController extends Controller
 
     public function terminateEmployment(Request $r)
     {
-        // $test = $r -> input();
-        // dd($test);
 
         $ps = new EmployeeService;
 
@@ -177,14 +175,25 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
-    public function getParent($user_id = '')
+    public function getEmployeeParent($user_id = '')
     {
         $ps = new EmployeeService;
 
-        $result = $ps->getParentByUserId($user_id);
+        $result = $ps->getEmployeeParent($user_id);
 
         return response()->json($result);
     }
+
+
+    public function getEmployeeParentById($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeParentById($id);
+
+        return response()->json($result);
+    }
+
 
     public function addEmployeeSibling(Request $r)
     {
@@ -296,7 +305,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-    ////
+
     public function updateclaimhierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
@@ -480,6 +489,25 @@ class EmployeeController extends Controller
             $result = $ps->updateAddressType($r);
 
             return response()->json($result);
+    }
+
+
+    public function getEmployeeByJobHistory()
+     {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeByJobHistory();
+
+        return response()->json($result);
+    }
+
+    public function getEmployeeByJobHistoryById($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeByJobHistoryById($id);
+
+        return response()->json($result);
     }
 
 }

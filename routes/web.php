@@ -178,7 +178,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
 
-            Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
@@ -190,6 +189,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getChildren/{id}', 'getChildren');
             Route::get('/getChildrenById/{id}', 'getChildrenById');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
+            Route::get('/getParent/{id}', 'getParent');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');
             Route::get('/myProfile', 'myProfileView');
@@ -219,6 +219,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployeeCompanion', 'updateEmployeeCompanion');
             Route::post('/updateEmployeeChildren', 'updateEmployeeChildren');
             Route::post('/addEmployeeChildren', 'addEmployeeChildren');
+            Route::get('/getEmployeeParent/{id}', 'getEmployeeParent');
+            Route::get('/getEmployeeParentById/{id}', 'getEmployeeParentById');
             Route::post('/addEmployeeSibling', 'addEmployeeSibling');
             Route::post('/updateEmployeeSibling', 'updateEmployeeSibling');
             Route::post('/addEmployeeParent', 'addEmployeeParent');
@@ -230,6 +232,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            Route::get('/getEmployeeByJobHistory', 'getEmployeeByJobHistory');
+            Route::get('/getEmployeeByJobHistoryById/{id}', 'getEmployeeByJobHistoryById');
+
             //
             Route::post('/updateProfile_Picture/{id}', 'updateProfile_Picture');
             // hierarchy
@@ -425,6 +430,7 @@ Route::group(['middleware' => ['web']], function () {
 
             // eleave Leave Holiday
             Route::get('/holidaylist', 'holidaylistView');
+            Route::post('/holidaylist', 'holidaylistView');
             Route::post('/createholidaylist', 'createholidaylist');
             Route::get('/getcreateLeaveholiday/{id}', 'getcreateLeaveholiday');
             Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');
@@ -601,6 +607,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getApproverAppeal', 'getApproverAppeal');
             Route::get('/getStateById/{id}', 'getStateById');
             Route::get('/getWorkingHourWeekendbyState/{stateid}', 'getWorkingHourWeekendbyState');
+            Route::post('/updatereasonreaject/{id}', 'updatereasonreaject');
 
         });
 
@@ -689,12 +696,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchmyleavehistory', 'searchmyleavehistory');
 
             //supervisor
-            Route::get('/leaveAppr', 'leaveApprView');
-            Route::post('/leaveAppr', 'leaveApprView');
-            Route::get('/getuserleaveAppr/{id}', 'getuserleaveAppr');
-            Route::get('/getuserleaveApprview/{id}', 'getuserleaveApprview');
-            Route::post('/updatesupervisor/{id}', 'updatesupervisor');
-            Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
+            Route::get('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::post('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::get('/getuserRecommender/{id}', 'getuserRecommender');
+            Route::get('/getuserRecommenderView/{id}', 'getuserRecommenderView');
+            Route::post('/updateRecommender/{id}', 'updateRecommender');
+            Route::post('/updateRecommenderReject/{id}', 'updateRecommenderReject');
 
             //hod
             Route::get('/leaveApprhod', 'leaveApprhodView');

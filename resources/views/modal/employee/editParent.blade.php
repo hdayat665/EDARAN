@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Parent Details</h5>
+                <h5 class="modal-title" id="add-parent">Update Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck7 " value="on" type="checkbox" name="non_citizen" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} id="non_citizen">
+                                        <input class="form-check-input partCheck7" value="on" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} type="checkbox" name="non_citizen" id="non_citizen">
                                         <label class="form-check-label " for="citizen">
                                             Non-Citizen
                                         </label>

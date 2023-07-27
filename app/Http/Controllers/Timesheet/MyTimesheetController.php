@@ -42,11 +42,14 @@ class MyTimesheetController extends Controller
             $data['eleaveapprover'] = $data['employee']->eleaveapprover;
             $data['status_appeal'] = $data['employee']->status_appeal;
             $data['appeal_Date'] = $data['employee']->appeal_date;
+            $data['joined_date'] = $data['employee']->joinedDate;
+            // dd($data['joined_date']);
         } else {
             $data['employee_id'] = null;
             $data['department_id'] = null;
             $data['eleaveapprover'] = null;
             $data['appeal_Date'] = null;
+            $data['joined_date'] = null;
         }
     
     
@@ -547,6 +550,15 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->getWorkingHourWeekendbyState($stateid);
+
+        return response()->json($result);
+    }
+
+    public function updatereasonreaject(Request $r, $id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->updatereasonreaject($r, $id);
 
         return response()->json($result);
     }

@@ -47,7 +47,32 @@
                                 <label for="claimtype" class="col-sm-3 col-form-label">Add Dropdown</label>
                                 <div class="col-sm-6">
                                     <div class="row-sm-6 p-1">
-                                        <input type="checkbox" class="form-check-input" name="" id="adddropdownu" /> <label></label>
+                                        <input type="checkbox" class="form-check-input" name="adddropdownu" id="adddropdowidnu" /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-2">
+                                <label for="claimtype" class="col-sm-3 col-form-label">Add Project</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <input type="checkbox" class="form-check-input" name="addproject" id="addprojectidu" value="1" {{ $claimCategory->addproject == '1' ? 'checked' : '' }} /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-2">
+                                <label for="claimtype" class="col-sm-3 col-form-label">Add Attachment</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <input type="checkbox" class="form-check-input" name="addattach" id="addattachidu" value="1" {{ $claimCategory->addattach == '1' ? 'checked' : '' }} /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-3" id="mandotoryview" style="{{ $claimCategory->addattach == '1' ? '' : 'display: none' }}">
+                                <label for="claimtype" class="col-sm-5 col-form-label">Mandatory Attachment</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                        <!-- Checkbox 2 -->
+                                        <input type="checkbox" class="form-check-input" name="attachstatus" id="attachstatus" value="1" {{ $claimCategory->attachstatus == '1' ? 'checked' : '' }} />
                                     </div>
                                 </div>
                             </div>
