@@ -9,15 +9,15 @@
    
     <br>
     <br>
-    <p>Title: FIRST REMINDER | TIMESHEET LOG REMINDER | {{ $date }} (DATE)</p>
-    <p>Please complete your timesheet log for the date {{ $date }} </p><br>
+    {{-- <p>Title: FIRST REMINDER | TIMESHEET LOG REMINDER | {{ $date }} (DATE)</p>
+    <p>Please complete your timesheet log for the date {{ $date }} </p><br> --}}
     {{-- <p>{{ $user_id }} </p><br>
     <p>{{ $branch }} </p><br>
     <p>{{ $state }} </p><br> --}}
     {{-- @foreach ($dow as $day)
         <p>{{ $day }}</p><br>
     @endforeach --}}
-    <p>{{ $wknd1 }} naim</p><br>
+    <p>naim</p><br>
     
    
 

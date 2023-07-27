@@ -1985,6 +1985,10 @@ public function updateTypeOfLogs($r, $id)
             $input['claim_type'] = implode(',', $input['claim_type']);
         }
 
+        $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
+        $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
+        $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+
         ClaimCategory::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');

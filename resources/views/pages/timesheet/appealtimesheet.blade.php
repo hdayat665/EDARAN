@@ -60,7 +60,9 @@
                                                                     <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Approved" id="statusButton"> Approve Log Appeal</a>
                                                                 </div>
                                                                 <div class="approvetimesheet">
-                                                                    <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Rejected" id="statusButton">Reject Log Appeal</a>
+                                                                    {{-- <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Rejected" id="statusButton">Reject Log Appeal</a> --}}
+                                                                    <a href="javascript:;"  class="dropdown-item" data-id="{{$app->id}}" id="rejectb">Reject Log Appeal</a>
+                                                                    {{-- <a href="javascript:;" id="editButton" data-id="{{$jobGrade->id}}" class="dropdown-item"> Edit</a> --}}
                                                                 </div>
                                                                 @else
                                                                 <div class="viewtimesheet">
@@ -134,6 +136,7 @@
                                                             </div>
                                                             <div class="approvetimesheet">
                                                                 <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Rejected" id="statusButton">Reject Log Appeal</a>
+                                                                
                                                             </div>
                                                             @else
                                                             <div class="viewtimesheet">
@@ -178,5 +181,6 @@
         </div>
     </div>    
             @include('modal.timesheet.appealmodalviewapprover')
+            @include('modal.timesheet.appealmodalviewreject')
             
         @endsection
