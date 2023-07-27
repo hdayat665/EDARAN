@@ -119,38 +119,4 @@ $(document).on("change", "#departmentShow", function () {
     });
 });
 
-// $(document).on('change', "#unitShow", function() {
-//     unitId = $(this).val();
-//     $('#branchShow')
-//         .find('option')
-//         .remove()
-//         .end()
-//         .append('<option label="Please Choose" selected="selected"> </option>')
-//         .val('')
 
-//     function branchByUnitId(unitId) {
-//         return $.ajax({
-//             url: "/branchByUnitId/" + unitId
-//         });
-//     }
-
-//     // $('#branchHide').hide();
-//     // $('#branchShow').show();
-
-//     $('#branchShow')
-//         .find('option')
-//         // .remove()
-//         .end();
-
-//     var branch = branchByUnitId(unitId);
-
-//     branch.then(function(data) {
-//         // alert('ss');
-//         for (let i = 0; i < data.length; i++) {
-//             const branch = data[i];
-//             var opt = document.createElement("option");
-//             document.getElementById("branchShow").innerHTML +=
-//                 '<option value="' + branch['id'] + '">' + branch['branchName'] + "</option>";
-//         }
-//     })
-// });
