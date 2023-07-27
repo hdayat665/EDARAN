@@ -31,7 +31,12 @@
                         <td>{{ $claim->year }}</td>
                         <td>{{ $claim->month }}</td>
                         <td>{{ $claim->claim_type }}</td>
-                        <td> RM {{ number_format($claim->total_amount ?? 0, 2) }}</td>
+                        @if ($claim->status === 'draft')
+                            <td> N/A</td>
+                        @else
+                            <td> RM {{ number_format($claim->total_amount ?? 0, 2) }}</td>
+                        @endif
+
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
