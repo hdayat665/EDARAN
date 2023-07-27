@@ -27,8 +27,8 @@ $(document).ready(function () {
             if (statusData.file) {
                 $("#attachment").html(
 
-                    '<a href="/storage/' + statusData.file + '" download="'+ statusData.file +'">here</a>'
-
+                    // '<a href="/storage/' + statusData.file + '" download="'+ statusData.file +'">here</a>'
+                    '<a href="/storage/' + statusData.file + '" target="_blank">here</a>'
                 );
             }
 

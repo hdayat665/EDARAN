@@ -100,7 +100,7 @@
                         <div class="row p-2">
                                 <div class="col-sm-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
+                                    <input type="text" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="dom" class="form-label">Date Marriage</label>

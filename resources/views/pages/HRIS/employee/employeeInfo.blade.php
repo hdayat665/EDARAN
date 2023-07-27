@@ -10,7 +10,7 @@
         overflow: visible ;
     }
     </style>
-    
+
 <div id="content" class="app-content">
     <h1 class="page-header">HRMIS | Employee Information</h1>
     <div class="panel panel">
@@ -20,7 +20,7 @@
             <div class="panel-heading-btn">
             </div>
         </div>
-        
+
         <div class="panel-body" id="employeeInfo">
             <table id="tableemployeeinfo" class="table table-striped table-bordered align-middle" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
                 <thead>
@@ -75,8 +75,11 @@
                         <td>{{$employeeInfo->phoneNo}}</td>
                         <td>{{$employeeInfo->department}}</td>
                         <td>{{ ($employeeInfo->report_to) ? getSupervisor($employeeInfo->report_to)->employeeName : '-' }}</td>
-                        {{-- <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td> --}}
-                        <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : ($employeeInfo->status == 'Active' ? 'bg-green' : 'bg-red')  ?>">{{$employeeInfo->status}}</span></td>
+                        @if($employeeInfo->status == 'active')
+                        <td> <span class="badge bg-green">Active </span></td>
+                        @else
+                        <td> <span class="badge bg-red">Deactivate </span></td>
+                        @endif
                     </tr>
                     @endforeach
                     @endif
