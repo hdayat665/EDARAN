@@ -356,7 +356,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
-                                <p class="col-form-label">Department Recommender</p>
+                                <p class="col-form-label">Department <br>Recommender
+                                &nbsp;
+                                    <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -366,7 +372,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
-                                <p class="col-form-label">Department Approver</p>
+                                <p class="col-form-label">Department<br>Approver
+                                &nbsp;
+                                    <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                </p>
                             </div>
                         </div>
                     </div>
