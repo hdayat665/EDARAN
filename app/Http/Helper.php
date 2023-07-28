@@ -2583,8 +2583,8 @@ if (!function_exists('getUserWithSelectedUser')) {
 
         // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])
-        ->orderBy('employeeName', 'asc')
-        ->get();
+            ->orderBy('employeeName', 'asc')
+            ->get();
 
         if (!$data) {
             $data = [];

@@ -488,11 +488,11 @@ class SettingService
         $user = Auth::user();
 
         $getid = Location::select('id')
-        ->where('country_id','=', $input['ref_country'])
-        ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['location_cityid'])
-        ->where('postcode','=', $input['ref_postcode'])
-        ->first();
+            ->where('country_id', '=', $input['ref_country'])
+            ->where('state_id', '=', $input['ref_state'])
+            ->where('name', '=', $input['location_cityid'])
+            ->where('postcode', '=', $input['ref_postcode'])
+            ->first();
 
 
 
@@ -520,7 +520,6 @@ class SettingService
         $data['msg'] = 'Branch is Created';
 
         return $data;
-
     }
     public function updateBranch($r, $id)
     {
@@ -547,11 +546,11 @@ class SettingService
         $user = Auth::user();
 
         $getid = Location::select('id')
-        ->where('country_id','=', $input['ref_country'])
-        ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['location_cityid'])
-        ->where('postcode','=', $input['ref_postcode'])
-        ->first();
+            ->where('country_id', '=', $input['ref_country'])
+            ->where('state_id', '=', $input['ref_state'])
+            ->where('name', '=', $input['location_cityid'])
+            ->where('postcode', '=', $input['ref_postcode'])
+            ->first();
 
         $input = [
             'companyId' => $input['companyId'],
@@ -652,8 +651,6 @@ class SettingService
         }
 
         return $data;
-
-
     }
 
     public function getStateCountry($id)
@@ -1311,7 +1308,7 @@ class SettingService
     // public function listuserrole()
     // {
     //     $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
-    //         ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
+    //         ->leftJoin('userProfile', 'role_user.up_user_id', '=', 'userprofile.user_id')
     //         ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
     //         ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
     //         ->leftJoin('role as rolee', 'rolee.id', '=', 'role_user.role_id')
@@ -1371,8 +1368,8 @@ class SettingService
     public function getStatebyCountry($id = '')
     {
         $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
-        ->where('location_states.country_id', $id)
-        ->get();
+            ->where('location_states.country_id', $id)
+            ->get();
 
 
         return $data;
@@ -1382,9 +1379,9 @@ class SettingService
     {
 
         $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
-        ->where('location_cities.state_id', $id)
-        ->groupBy('location_cities.name')
-        ->get();
+            ->where('location_cities.state_id', $id)
+            ->groupBy('location_cities.name')
+            ->get();
 
 
         return $data;
@@ -1394,8 +1391,8 @@ class SettingService
     {
 
         $data = Location::select('*')
-                ->where('name', $id)
-                ->get();
+            ->where('name', $id)
+            ->get();
 
 
         return $data;
@@ -1404,13 +1401,13 @@ class SettingService
 
     public function locationView()
     {
-        $data = Location::select('location_cities.id','location_country.country_name','location_states.state_name','location_cities.postcode')
+        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name', 'location_cities.postcode')
             ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
             ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
             ->orderBy('location_cities.id', 'desc')
             ->get();
 
-            return $data;
+        return $data;
     }
 
     public function unitView()
@@ -1477,7 +1474,7 @@ class SettingService
     public function getRoleById($id)
     {
         $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
-            ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
+            ->leftJoin('userProfile', 'role_user.up_user_id', '=', 'userprofile.user_id')
             ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
             ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
             ->leftJoin('role as rolee', 'role_user.role_id', '=', 'rolee.id')
@@ -1520,14 +1517,12 @@ class SettingService
     {
 
         $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
-        ->where('branch.id', $id)
-        ->first();
+            ->where('branch.id', $id)
+            ->first();
 
 
 
         return $data;
-
-
     }
 
     public function getJobGradeById($id)
@@ -1589,107 +1584,107 @@ class SettingService
     }
 
     public function createTypeOfLogs($r)
-{
-    $input = $r->input();
-    $user = Auth::user();
+    {
+        $input = $r->input();
+        $user = Auth::user();
 
-    if (isset($input['project_id'])) {
-        $logsData['project_id'] = $input['project_id'];
-    }
-    $logsData['department'] = $input['department'];
-    $logsData['type_of_log'] = $input['type_of_log'];
-    $logsData['tenant_id'] = $user->tenant_id;
-    $logsData['activity_name'] = implode(', ', $input['activity_name']); // Convert the array into a string
-
-    TypeOfLogs::create($logsData);
-
-    $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
-
-    if (isset($input['activity_name'])) {
-
-        foreach ($input['activity_name'] as $activity) {
-            $activityData['department'] = $input['department'];
-            $activityData['activity_name'] = $activity;
-            $activityData['project_id'] = $input['project_id'];
-            $activityData['logs_id'] = $typeOfLog->id;
-            $activityData['tenant_id'] = $user->tenant_id;
-
-            ActivityLogs::create($activityData);
+        if (isset($input['project_id'])) {
+            $logsData['project_id'] = $input['project_id'];
         }
-    }
+        $logsData['department'] = $input['department'];
+        $logsData['type_of_log'] = $input['type_of_log'];
+        $logsData['tenant_id'] = $user->tenant_id;
+        $logsData['activity_name'] = implode(', ', $input['activity_name']); // Convert the array into a string
 
-    $data['status'] = config('app.response.success.status');
-    $data['type'] = config('app.response.success.type');
-    $data['title'] = config('app.response.success.title');
-    $data['msg'] = 'Success Create Type of Logs';
+        TypeOfLogs::create($logsData);
 
-    return $data;
-}
+        $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
 
+        if (isset($input['activity_name'])) {
 
+            foreach ($input['activity_name'] as $activity) {
+                $activityData['department'] = $input['department'];
+                $activityData['activity_name'] = $activity;
+                $activityData['project_id'] = $input['project_id'];
+                $activityData['logs_id'] = $typeOfLog->id;
+                $activityData['tenant_id'] = $user->tenant_id;
 
-
-public function updateTypeOfLogs($r, $id)
-{
-    $input = $r->input();
-    $user = Auth::user();
-
-    if (isset($input['project_id'])) {
-        $logsData['project_id'] = $input['project_id'];
-    }
-
-    if ($input['type_of_log'] == 'Non-Project') {
-        $logsData['project_id'] = null;
-    }
-
-    $logsData['department'] = $input['department'];
-    $logsData['type_of_log'] = $input['type_of_log'];
-    $logsData['tenant_id'] = $user->tenant_id;
-    $logsData['activity_name'] = implode(', ', $input['activity_name']);
-
-    TypeOfLogs::where('id', $id)->update($logsData);
-
-    if (isset($input['activity_name'])) {
-        foreach ($input['activity_name'] as $activity) {
-            $activityData['department'] = $input['department'];
-            $activityData['activity_name'] = $activity;
-            $activityData['project_id'] = $input['project_id'];
-            $activityData['logs_id'] = $id; // Use the $id variable instead of $typeOfLog->id
-            $activityData['tenant_id'] = $user->tenant_id;
-
-            // Check if a record with the same activity_name and logs_id exists
-            $existingActivity = ActivityLogs::where('activity_name', $activity)
-                ->where('logs_id', $id) // Use the $id variable instead of $typeOfLog->id
-                ->first();
-
-            if ($existingActivity) {
-                // If the record already exists, update its other fields
-                $existingActivity->update($activityData);
-            } else {
-                // Otherwise, create a new record
                 ActivityLogs::create($activityData);
             }
         }
 
-        // Remove activity names that are not present in the updated type_of_logs record
-        $existingActivities = ActivityLogs::where('logs_id', $id)->get();
-        $existingActivityNames = $existingActivities->pluck('activity_name')->toArray();
-        $deletedActivities = array_diff($existingActivityNames, $input['activity_name']);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Type of Logs';
 
-        if (!empty($deletedActivities)) {
-            ActivityLogs::where('logs_id', $id)
-                        ->whereIn('activity_name', $deletedActivities)
-                        ->delete();
-        }
+        return $data;
     }
 
-    $data['status'] = config('app.response.success.status');
-    $data['type'] = config('app.response.success.type');
-    $data['title'] = config('app.response.success.title');
-    $data['msg'] = 'Success Update Type of Log';
 
-    return $data;
-}
+
+
+    public function updateTypeOfLogs($r, $id)
+    {
+        $input = $r->input();
+        $user = Auth::user();
+
+        if (isset($input['project_id'])) {
+            $logsData['project_id'] = $input['project_id'];
+        }
+
+        if ($input['type_of_log'] == 'Non-Project') {
+            $logsData['project_id'] = null;
+        }
+
+        $logsData['department'] = $input['department'];
+        $logsData['type_of_log'] = $input['type_of_log'];
+        $logsData['tenant_id'] = $user->tenant_id;
+        $logsData['activity_name'] = implode(', ', $input['activity_name']);
+
+        TypeOfLogs::where('id', $id)->update($logsData);
+
+        if (isset($input['activity_name'])) {
+            foreach ($input['activity_name'] as $activity) {
+                $activityData['department'] = $input['department'];
+                $activityData['activity_name'] = $activity;
+                $activityData['project_id'] = $input['project_id'];
+                $activityData['logs_id'] = $id; // Use the $id variable instead of $typeOfLog->id
+                $activityData['tenant_id'] = $user->tenant_id;
+
+                // Check if a record with the same activity_name and logs_id exists
+                $existingActivity = ActivityLogs::where('activity_name', $activity)
+                    ->where('logs_id', $id) // Use the $id variable instead of $typeOfLog->id
+                    ->first();
+
+                if ($existingActivity) {
+                    // If the record already exists, update its other fields
+                    $existingActivity->update($activityData);
+                } else {
+                    // Otherwise, create a new record
+                    ActivityLogs::create($activityData);
+                }
+            }
+
+            // Remove activity names that are not present in the updated type_of_logs record
+            $existingActivities = ActivityLogs::where('logs_id', $id)->get();
+            $existingActivityNames = $existingActivities->pluck('activity_name')->toArray();
+            $deletedActivities = array_diff($existingActivityNames, $input['activity_name']);
+
+            if (!empty($deletedActivities)) {
+                ActivityLogs::where('logs_id', $id)
+                    ->whereIn('activity_name', $deletedActivities)
+                    ->delete();
+            }
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Type of Log';
+
+        return $data;
+    }
 
 
 
@@ -2282,7 +2277,7 @@ public function updateTypeOfLogs($r, $id)
 
         $data =
             leaveEntitlementModel::select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName', 'jobgrade.jobGradeName')
-            ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
+            ->leftJoin('userProfile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
             ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
             ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
             ->leftJoin('jobgrade', 'leave_entitlement.id_jobgrade', '=', 'jobgrade.id')
@@ -2297,7 +2292,7 @@ public function updateTypeOfLogs($r, $id)
         $data =
             Employee::where('employment.tenant_id', Auth::user()->tenant_id)
             ->whereNull('leave_entitlement.id_employment')
-            ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
+            ->leftJoin('userProfile', 'employment.user_id', '=', 'userprofile.user_id')
             ->leftJoin('department', 'employment.department', '=', 'department.id')
             ->leftJoin('leave_entitlement', 'employment.user_id', '=', 'leave_entitlement.id_employment')
             ->select('userprofile.user_id', 'userprofile.fullname', 'department.id')
@@ -2325,7 +2320,7 @@ public function updateTypeOfLogs($r, $id)
         }
 
         if ($checkdate > $currentYear + 1) {
-            $data['msg'] = 'The Year '.$checkdate.' is more than two years in the future';
+            $data['msg'] = 'The Year ' . $checkdate . ' is more than two years in the future';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2333,24 +2328,24 @@ public function updateTypeOfLogs($r, $id)
         }
 
         $check = leaveEntitlementModel::select('leave_entitlement.*')
-            ->where('leave_entitlement.tenant_id','=', Auth::user()->tenant_id)
-            ->whereYear('leave_entitlement.le_year','=', $checkdate)
+            ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
+            ->whereYear('leave_entitlement.le_year', '=', $checkdate)
             ->get();
 
-        if($check->isEmpty()){
+        if ($check->isEmpty()) {
 
             $getEmployer = Employee::select('employment.*')
-            ->where('employment.tenant_id', Auth::user()->tenant_id)
-            ->where(function ($query) {
-                $query->where('employment.status', '=', 'Active')
-                    ->orWhere('employment.status', '=', 'active');
-            })
-            ->where(function ($query) {
-                $query->where('employment.employmentType', '=', '1')
-                    ->orWhere('employment.employmentType', '=', '2');
-            })
-            ->orderBy('employment.user_id', 'asc')
-            ->get();
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->where(function ($query) {
+                    $query->where('employment.status', '=', 'Active')
+                        ->orWhere('employment.status', '=', 'active');
+                })
+                ->where(function ($query) {
+                    $query->where('employment.employmentType', '=', '1')
+                        ->orWhere('employment.employmentType', '=', '2');
+                })
+                ->orderBy('employment.user_id', 'asc')
+                ->get();
 
 
             foreach ($getEmployer as $employer) {
@@ -2362,13 +2357,13 @@ public function updateTypeOfLogs($r, $id)
                 $totalYears = $diff->y;
                 $totalMonths = $diff->m;
 
-                $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
+                $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*', 'jobgrade.jobGradeName')
                     ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
                     ->where('leave_anualleave.jobgrade_id', '=', $employer->jobGrade) // Use $employer->jobGrade
                     ->leftJoin('jobgrade', 'leave_anualleave.jobgrade_id', '=', 'jobgrade.id')
                     ->orderBy('id', 'asc')->first();
 
-                $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
+                $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*', 'leave_types.leave_types')
                     ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
                     ->where('leave_sickleave.tenant_id', Auth::user()->tenant_id)
                     ->orderBy('id', 'asc')->get();
@@ -2437,8 +2432,6 @@ public function updateTypeOfLogs($r, $id)
                 ];
 
                 leaveEntitlementModel::create($input);
-
-
             }
 
             $data['status'] = config('app.response.success.status');
@@ -2447,21 +2440,15 @@ public function updateTypeOfLogs($r, $id)
             $data['msg'] = 'Successfully save entitlement';
 
             return $data;
+        } else {
 
-
-
-        }else{
-
-            $data['msg'] = 'The Year '.$checkdate.' Has Already Generated';
+            $data['msg'] = 'The Year ' . $checkdate . ' Has Already Generated';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
 
             return $data;
-
-
         }
-
     }
 
     public function getcreateLeaveEntitlement($id)
@@ -2473,7 +2460,7 @@ public function updateTypeOfLogs($r, $id)
         $data =
             leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->where('leave_entitlement.id', '=', $id)
-            ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
+            ->leftJoin('userProfile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
             ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
             ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
             ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
@@ -2508,7 +2495,8 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function holidaylistView() {
+    public function holidaylistView()
+    {
 
         $dataallstate = holidayModel::select('*')
             ->where('tenant_id', '=', Auth::user()->tenant_id)
@@ -2542,17 +2530,16 @@ public function updateTypeOfLogs($r, $id)
         }
 
         return $data;
-
     }
 
 
 
 
-    public function country() {
+    public function country()
+    {
 
         $data = Country::all();
         return $data;
-
     }
 
     public function createholidaylist($r)
@@ -2729,8 +2716,7 @@ public function updateTypeOfLogs($r, $id)
                     'leave_types' => $data[2],
 
                 ],
-                [
-                ]
+                []
             );
         }
 
@@ -2804,8 +2790,8 @@ public function updateTypeOfLogs($r, $id)
     {
         $input = $r->input();
         $existingLeaveType = leavetypesModel::where('id', $id)
-        ->where('tenant_id', '=', Auth::user()->tenant_id)
-        ->first();
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->first();
 
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
@@ -2856,8 +2842,8 @@ public function updateTypeOfLogs($r, $id)
     public function deleteLeavetypes($id)
     {
         $existingLeaveType = leavetypesModel::where('id', $id)
-        ->where('tenant_id', '=', Auth::user()->tenant_id)
-        ->first();
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->first();
 
         $check = [
             ['AL', 'ANNUAL LEAVE'],
@@ -2891,8 +2877,6 @@ public function updateTypeOfLogs($r, $id)
         }
 
         return $data;
-
-
     }
 
     public function updateStatusleavetypes($id, $status)
@@ -3176,8 +3160,8 @@ public function updateTypeOfLogs($r, $id)
         $tenant = Auth::user()->tenant_id;
 
         $getJobgrade = JobGrade::select('jobgrade.*')
-        ->where('jobgrade.tenant_id', Auth::user()->tenant_id)
-        ->orderBy('id', 'asc')->get();
+            ->where('jobgrade.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'asc')->get();
 
         foreach ($getJobgrade as $data) {
 
@@ -3186,14 +3170,12 @@ public function updateTypeOfLogs($r, $id)
                     'tenant_id' => $tenant,
                     'jobgrade_id' => $data->id,
                 ],
-                [
-
-                ]
+                []
             );
         }
 
         $data =
-        leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
+            leaveAnualLeaveModel::select('leave_anualleave.*', 'jobgrade.jobGradeName')
             ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('jobgrade', 'leave_anualleave.jobgrade_id', '=', 'jobgrade.id')
             ->orderBy('id', 'asc')->get();
@@ -3204,10 +3186,10 @@ public function updateTypeOfLogs($r, $id)
         $tenant = Auth::user()->tenant_id;
 
         $getTypeSick = leavetypesModel::select('leave_types.*')
-            ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
+            ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
             ->where(function ($query) {
-                $query->where('leave_types.leave_types_code', '=','SL')
-                    ->orWhere('leave_types.leave_types_code', '=','HL');
+                $query->where('leave_types.leave_types_code', '=', 'SL')
+                    ->orWhere('leave_types.leave_types_code', '=', 'HL');
             })
             ->orderBy('id', 'asc')->get();
 
@@ -3218,14 +3200,12 @@ public function updateTypeOfLogs($r, $id)
                     'tenant_id' => $tenant,
                     'type_sickleave' => $data->id,
                 ],
-                [
-
-                ]
+                []
             );
         }
 
         $data =
-        leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
+            leaveSicKleaveModel::select('leave_sickleave.*', 'leave_types.leave_types')
             ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
             ->where('leave_sickleave.tenant_id', Auth::user()->tenant_id)
             ->orderBy('id', 'asc')->get();
@@ -3244,13 +3224,12 @@ public function updateTypeOfLogs($r, $id)
                     'tenant_id' => $data[0],
                     'type_carryforward' => $data[1],
                 ],
-                [
-                ]
+                []
             );
         }
 
         $data =
-        leaveCarryForwordModel::select('leave_carryforward.*')
+            leaveCarryForwordModel::select('leave_carryforward.*')
             ->where('leave_carryforward.tenant_id', Auth::user()->tenant_id)
             ->orderBy('id', 'asc')->get();
         return $data;
@@ -3282,7 +3261,8 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function updateweekend($r){
+    public function updateweekend($r)
+    {
         $input = $r->input();
 
         foreach ($input as $key => $value) {
@@ -3313,7 +3293,8 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function createleaveweekend($r){
+    public function createleaveweekend($r)
+    {
 
         $input = $r->input();
         $tenant = Auth::user()->tenant_id;
@@ -3323,7 +3304,7 @@ public function updateTypeOfLogs($r, $id)
             [$tenant, $input['state_id'], 2, '07:00', '19:00'],
             [$tenant, $input['state_id'], 3, '07:00', '19:00'],
             [$tenant, $input['state_id'], 4, '07:00', '19:00'],
-            [$tenant, $input['state_id'], 5, '07:00', '19:00' ],
+            [$tenant, $input['state_id'], 5, '07:00', '19:00'],
             [$tenant, $input['state_id'], 6, null, null],
             [$tenant, $input['state_id'], 0, null, null]
         ];
@@ -3352,17 +3333,18 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function getweekend($id){
+    public function getweekend($id)
+    {
 
         $data = leaveWeekendModel::select(
             'leave_weekend.*',
             'location_states.state_name',
         )
-        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-        ->where('leave_weekend.state_id',  '=', $id)
-        ->join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
-        ->orderBy('leave_weekend.id', 'asc')
-        ->get();
+            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_weekend.state_id',  '=', $id)
+            ->join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
+            ->orderBy('leave_weekend.id', 'asc')
+            ->get();
 
         return $data;
     }
@@ -3467,30 +3449,29 @@ public function updateTypeOfLogs($r, $id)
                 MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.end_time END)
             ) AS sunday_end"),
         )
-        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-        ->Join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
-        ->groupBy('leave_weekend.state_id')
-        ->get();
+            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->Join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
+            ->groupBy('leave_weekend.state_id')
+            ->get();
 
         return $data;
-
     }
 
-    public function getstate(){
+    public function getstate()
+    {
 
         $data = State::select('location_states.id', 'location_states.state_name')
-        // ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-        ->whereNull('leave_weekend.state_id')
-        ->leftJoin('leave_weekend', 'location_states.id', '=', 'leave_weekend.state_id')
-        ->orderBy('location_states.id', 'asc')
-        ->get();
+            // ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->whereNull('leave_weekend.state_id')
+            ->leftJoin('leave_weekend', 'location_states.id', '=', 'leave_weekend.state_id')
+            ->orderBy('location_states.id', 'asc')
+            ->get();
 
         // dd($data);
         // die;
 
 
         return $data;
-
     }
 
     // public function newRole()
@@ -3503,9 +3484,9 @@ public function updateTypeOfLogs($r, $id)
     public function getstateholiday($id)
     {
         $data = State::select('*')
-        ->where('country_id', '=', $id)
-        ->orderBy('id', 'asc')
-        ->get();
+            ->where('country_id', '=', $id)
+            ->orderBy('id', 'asc')
+            ->get();
 
         return $data;
     }
@@ -3547,7 +3528,4 @@ public function updateTypeOfLogs($r, $id)
 
         return $data;
     }
-
 }
-
-

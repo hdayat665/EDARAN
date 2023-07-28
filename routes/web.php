@@ -291,7 +291,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/newRole', 'newRole');
             Route::get('/newCreateRole', 'newCreateRole');
-            Route::get('/newUpdateRole', 'newUpdateRole');
+            Route::get('/newUpdateRole/{id}', 'newUpdateRole');
             Route::get('/systemUser', 'systemUser');
             // Route::get('/systemUserCreate', 'systemUserCreate');
             Route::get('/systemUserUpdate', 'systemUserUpdate');
@@ -606,7 +606,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getApproverAppeal', 'getApproverAppeal');
             Route::get('/getStateById/{id}', 'getStateById');
             Route::get('/getWorkingHourWeekendbyState/{stateid}', 'getWorkingHourWeekendbyState');
-
         });
 
 

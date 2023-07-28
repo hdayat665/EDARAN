@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('userprofile', function (Blueprint $table) {
+        Schema::create('userProfile', function (Blueprint $table) {
             $table->id();
             $table->string('user_id', 255)->nullable();
             $table->string('tenant_id', 255)->nullable();
@@ -56,6 +56,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userprofile');
+        Schema::dropIfExists('userProfile');
     }
 };
