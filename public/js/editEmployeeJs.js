@@ -557,6 +557,17 @@ $('#event').select2();
         }
     });
 
+    /////edit employee
+    $("#idnumber").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = "19".concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            $("#dob").val(year + "-" + month + "-" + day);
+        }
+    });
+
     ////update companion
     $("#idnumber2s").change(function () {
         if ($(this).val().length == 12) {
