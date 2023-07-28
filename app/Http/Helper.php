@@ -2963,7 +2963,7 @@ if (!function_exists('getEleaveData')) {
         $ss = new MyleaveService;
 
         if ($role == 'recommender') {
-            $data = $ss->leaveApprview();
+            $data = $ss->leaveRecommenderActive();
         } else {
             $data = $ss->leaveApprhodView();
         }

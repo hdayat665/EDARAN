@@ -28,6 +28,9 @@ class Policy extends Authenticatable
         'file',
         'addedBy',
         'modifiedBy',
+        'created_at',
+        'updated_at',
+
     ];
 
 }

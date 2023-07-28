@@ -56,7 +56,7 @@
                                     <label class="form-label">Claim ID</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->claim_id ?? '-' }}">
+                                    <input readonly type="text"  class="form-control" value="{{ $claimData->claim_id ?? '-' }}" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -64,13 +64,13 @@
                                     <label class="form-label">Month</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->month ?? '-' }}">
+                                    <input readonly type="text"  class="form-control" value="{{ $claimData->month ?? '-' }}" style="text-align:center">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim Type</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->claim_type ?? '-' }}">
+                                    <input readonly type="text"  class="form-control" value="{{ $claimData->claim_type ?? '-' }}" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -78,13 +78,13 @@
                                     <label class="form-label">Status</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->status ?? '-' }}">
+                                    <input readonly type="text"  class="form-control" value="{{ $claimData->status ?? '-' }}" style="text-align:center">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Applied Date</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ isset($claimData->created_at) ? $claimData->created_at->format('Y-m-d') : '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ isset($claimData->created_at) ? $claimData->created_at->format('Y-m-d') : '-' }}" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -108,13 +108,14 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <!-- <div class="row p-2">
-                            <div class="col d-flex justify-content-end">
-                                <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Cancel</a>
-                            </div>
-                        </div> -->
                         @if ($general->supervisor == 'recommend')
                         @else
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Recommend</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
+                            </div>
+                        </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                                 <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
@@ -127,17 +128,16 @@
                                 <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col d-flex justify-content-end">
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Recommend</a>
-                                <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
-                            </div>
-                        </div>
                         @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                                <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
                                 <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($user->eclaimrecommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $user->eclaimrecommender ? getEmployeeNameById($user->eclaimrecommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -163,7 +163,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($user->eclaimapprover ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $user->eclaimapprover ? getEmployeeNameById($user->eclaimapprover)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getadmin->recommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getadmin->recommender ? getEmployeeNameById($getadmin->recommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -182,7 +182,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getadmin->approver ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getadmin->approver ? getEmployeeNameById($getadmin->approver)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@
                                             <label class="form-label">Checker 1</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker1 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker1 ? getEmployeeNameById($getfinance->checker1)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -201,7 +201,7 @@
                                             <label class="form-label">Checker 2</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker2 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker2 ? getEmployeeNameById($getfinance->checker2)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -209,7 +209,7 @@
                                             <label class="form-label">Checker 3</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker3 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker3 ? getEmployeeNameById($getfinance->checker3)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -217,7 +217,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->recommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->recommender ? getEmployeeNameById($getfinance->recommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -225,7 +225,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->approver ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->approver ? getEmployeeNameById($getfinance->approver)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-8">
-                                            <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                            <label class="form-label">Cash Advance (Less)<a id="CAless" class="btn btn-link">View</a></label>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" readonly value='RM {{ number_format($lessCash[0]->totalCash ?? 0, 2) }}'>

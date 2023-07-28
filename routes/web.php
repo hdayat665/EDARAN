@@ -430,6 +430,7 @@ Route::group(['middleware' => ['web']], function () {
 
             // eleave Leave Holiday
             Route::get('/holidaylist', 'holidaylistView');
+            Route::post('/holidaylist', 'holidaylistView');
             Route::post('/createholidaylist', 'createholidaylist');
             Route::get('/getcreateLeaveholiday/{id}', 'getcreateLeaveholiday');
             Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');
@@ -606,6 +607,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getApproverAppeal', 'getApproverAppeal');
             Route::get('/getStateById/{id}', 'getStateById');
             Route::get('/getWorkingHourWeekendbyState/{stateid}', 'getWorkingHourWeekendbyState');
+            Route::post('/updatereasonreaject/{id}', 'updatereasonreaject');
         });
 
 
@@ -693,12 +695,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchmyleavehistory', 'searchmyleavehistory');
 
             //supervisor
-            Route::get('/leaveAppr', 'leaveApprView');
-            Route::post('/leaveAppr', 'leaveApprView');
-            Route::get('/getuserleaveAppr/{id}', 'getuserleaveAppr');
-            Route::get('/getuserleaveApprview/{id}', 'getuserleaveApprview');
-            Route::post('/updatesupervisor/{id}', 'updatesupervisor');
-            Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
+            Route::get('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::post('/leaveRecommender', 'leaveRecommenderIndex');
+            Route::get('/getuserRecommender/{id}', 'getuserRecommender');
+            Route::get('/getuserRecommenderView/{id}', 'getuserRecommenderView');
+            Route::post('/updateRecommender/{id}', 'updateRecommender');
+            Route::post('/updateRecommenderReject/{id}', 'updateRecommenderReject');
 
             //hod
             Route::get('/leaveApprhod', 'leaveApprhodView');

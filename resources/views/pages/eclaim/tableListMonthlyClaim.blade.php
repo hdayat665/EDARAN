@@ -40,7 +40,7 @@
                         <tr>    
                             <td>{{$id}}</td>
                             <td>{{ $travel->travel_date ?? '' }}</td>
-                            <td>{{ $travel->total_km ?? '0' }} KM</td>
+                            <td>{{ number_format($travel->total_km ?? 0, 1) }} KM</td>
                             <td>RM {{ $travel->total_petrol ?? '0' }}</td>
                             <td>RM {{ $travel->total_toll ?? '0' }}</td>
                             <td>RM {{ $travel->total_parking ?? '0' }}</td>

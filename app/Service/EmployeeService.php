@@ -31,7 +31,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'Active']])->first();
+        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
         if ($user) {
             $data['status'] = false;
@@ -157,7 +157,7 @@ class EmployeeService
     {
         $input = $r->input();
         // dd($input);
-        $status['status'] = 'Deactivate';
+        $status['status'] = 'terminate';
 
         if ($r->hasFile('file')) {
             $uploadedFile = $r->file('file');
@@ -938,7 +938,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Parent details is Updated';
+            $data['msg'] = 'Family is Updated';
         }
 
         return $data;
@@ -1107,14 +1107,14 @@ class EmployeeService
             }
 
             $input['tenant_id'] = Auth::user()->tenant_id;
-            $input['status'] = 'Active';
+            $input['status'] = 'active';
             $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
             Employee::create($input);
 
             $ec['user_id'] = $input['user_id'];
             UserEmergency::create($ec);
 
-            $user['status'] = 'Active';
+            $user['status'] = 'active';
             User::where('id', $input['user_id'])->update($user);
 
             $ls = new LoginService;
@@ -1135,16 +1135,10 @@ class EmployeeService
     public function cancelTerminateEmployment($id)
     {
         $update = [
-            'status' => 'Active'
+            'status' => 'active'
         ];
 
         $user = Employee::where('user_id',$id)->get();
-
-        // $jobHistory['user_id'] = $user;
-        // $updateBy = Auth::user()->username;
-        // $jobHistory['updatedBy'] = $updateBy;
-
-        // JobHistory::create($jobHistory);
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
@@ -1161,13 +1155,6 @@ class EmployeeService
             $jobHistory['updatedBy'] = $updateBy;
             $jobHistory['statusHistory'] = 'Active';
             JobHistory::create($jobHistory);
-
-            // JobHistory::create([
-            //     $updateBy = Auth::user()->username,
-            //     $jobHistory['updatedBy'] = $updateBy,
-            //     'statusHistory' => $update['status'] = 'Active',
-            //     'user_id' => $id,
-            // ]);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1396,7 +1383,6 @@ class EmployeeService
     public function updateProfile_Picture($r, $id)
     {
         $input = $r->input();
-
         if ($_FILES['uploadFile']['name']) {
             $payslip = uploadPic($r->file('uploadFile'));
             $input['uploadFile'] = $payslip['filename'];
@@ -1405,7 +1391,7 @@ class EmployeeService
                 unset($input['uploadFile']);
             }
         }
-        //dd($input);
+
 
         UserProfile::where('user_id', $id)->update($input);
 
@@ -1428,10 +1414,28 @@ class EmployeeService
 
     public function addEmployeeAddressDetails($r)
     {
+        // Assuming $r is the user data or request object containing the necessary information.
         $input = $r->input();
-        $input['addressType'] = '0';
 
+        // Check if the user already has an address or not
+        if (!UserAddress::where('user_id', $input['user_id'])->exists()) {
+            // If the user doesn't have an address, set the addressType to '3'
+            $input['addressType'] = '3';
+        } else {
+            // If the user already has an address, check if the addressType is '3'
+            $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
+            if ($existingAddress->addressType === '3') {
+                // If the user has addressType '3', set the addressType to '0'
+                $input['addressType'] = '0';
+            } else {
+                // If the user has a different addressType, keep it as it is.
+                $input['addressType'] = $existingAddress->addressType;
+            }
+        }
+
+        // Create a new user address record
         UserAddress::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

@@ -25,13 +25,13 @@
                             <label for="recipient-name" class="col-form-label">Exit Type*</label>
                             <select class="form-select" name="employmentDetail">
                                 <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
-                                <option value="DECEASED" label="1.DECEASED"></option>
-                                <option value="DISMISSED" label="2.DISMISSED"></option>
-                                <option value="RETRENCHED" label="3.RETRENCHED"></option>
-                                <option value="END OF CONTRACT" label="4.END OF CONTRACT"></option>
-                                <option value="RESIGNED" label="5.RESIGNED"></option>
-                                <option value="RETIREMENT" label="6.RETIREMENT"></option>
-                                <option value="OTHERS" label="7.OTHERS"></option>
+                                <option value="DECEASED" label="DECEASED"></option>
+                                <option value="DISMISSED" label="DISMISSED"></option>
+                                <option value="RETRENCHED" label="RETRENCHED"></option>
+                                <option value="END OF CONTRACT" label="END OF CONTRACT"></option>
+                                <option value="RESIGNED" label="RESIGNED"></option>
+                                <option value="RETIREMENT" label="RETIREMENT"></option>
+                                <option value="OTHERS" label="OTHERS"></option>
                             </select>
                             <label for="recipient-name" class="col-form-label">Remarks</label>
                             <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>

@@ -1300,14 +1300,20 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    public function holidaylistView()
-    {
+    public function holidaylistView(Request $r) {
+
         $hlv = new SettingService;
 
         $data['holiday'] = $hlv->holidaylistView();
-        // dd($data['holiday'] );
-        // die;
         $data['country'] = $hlv->country();
+        $data['countrySearch'] = '';
+
+        $input = $r->input();
+
+        if (isset($input['countrySearch'])) {
+            $data['holiday'] = $hlv->searchHolidaylist($r);
+            $data['countrySearch'] = isset($input['countrySearch']) ? $input['countrySearch'] : '';
+        }
 
         return view('pages.setting.eLeave.holidaylist', $data);
     }

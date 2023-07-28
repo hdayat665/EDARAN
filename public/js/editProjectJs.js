@@ -26,12 +26,31 @@ $(document).ready(function () {
     $("#projectmember").picker({
         search: true,
     });
-    // $('#employee_id').picker({
-    //     search:true,
-    // });
-    // $('#acc_manager2').picker({
-    //     search:true,
-    // });
+
+    $(document).ready(function() {
+
+        $('.select1').select2({
+            placeholder: "PLEASE CHOOSE",
+            allowClear: true,
+            dropdownParent: $('#addProjectMemberModal'),
+            // multiple: true,
+        });
+    });
+    
+    $('.selectacc').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#tab1'),
+        // multiple: true,
+    });
+    
+
+    $('.selectmng').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#tab1'),
+        // multiple: true,
+    });
 
     // $("#project_manager2").picker({
     //     search: true,
@@ -1039,51 +1058,55 @@ $(document).ready(function () {
     });
 
 
-        $("#project_manager2_show").hide();
-        $("#project_manager2").prop("readonly", true);
+    $(document).on("change", "#acc_manager2", function () {
+        var selectedValue = $(this).val();
+        if (selectedValue !== "") {
+            $("#project_manager2_show")
+                .find("option")
+                .remove()
+                .end()
+                .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
+                .val("");
 
-        $(document).on("change", "#acc_manager2", function () {
-            var selectedValue = $(this).val();
-            if (selectedValue !== "") {
-                $("#project_manager2_show")
-                    .find("option")
-                    .remove()
-                    .end()
-                    .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
-                    .val("");
-
-                $.ajax({
-                    url: "/getUserWithSelectedUser/" + selectedValue,
-                    success: function (data) {
-                        for (let i = 0; i < data.length; i++) {
-                            const user = data[i];
-                            console.log(user["id"]);
-                            var opt = document.createElement("option");
-                            document.getElementById("project_manager2_show").innerHTML +=
-                                '<option value="' +
-                                user["id"] +
-                                '">' +
-                                user["employeeName"] +
-                                "</option>";
-                        }
-                    },
-                });
-
-                $("#project_manager2_show").prop("disabled", false);
-                $("#project_manager2_show").show();
-                $("#project_manager2").css({
-                    "pointer-events": "auto",
-                    background: "#e9ecef",
-                });
-                $("#project_manager2").hide();
-            } else {
-                $("#project_manager2_show").hide();
-                $("#project_manager2_show").prop("disabled", false);
-                $("#project_manager2").css({
+            $("#project_manager2_show").next().find(".select2-selection").css({
+                "pointer-events": "auto",
+                "background-color": "white" 
+            });
+            
+            $.ajax({
+                url: "/getUserWithSelectedUser/" + selectedValue,
+                success: function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        const user = data[i];
+                        console.log(user["id"]);
+                        var opt = document.createElement("option");
+                        opt.value = user["id"];
+                        opt.text = user["employeeName"];
+                        $("#project_manager2_show").append(opt);
+                    }
+    
+                    // Enable the select2 plugin after adding options
+                    
+    
+                    // Set the background color here
+                    
+                },
+            });
+    
+            $("#project_manager2_show").show();
+            $("#project_manager2").hide();
+        } else {
+            $("#project_manager2_show").hide();
+            $("#project_manager2").show();
+    
+            // Revert the styles when the change event occurs
+            $("#project_manager2_show")
+                .next()
+                .find(".select2-selection")
+                .css({
                     "pointer-events": "none",
-                    background: "#e9ecef",
+                    "background-color": "#e9ecef" 
                 });
-                $("#project_manager2").show();
-            }
-        });
+        }
+      });
 });

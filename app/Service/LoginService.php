@@ -7,6 +7,7 @@ use App\Mail\Mail as MailMail;
 use App\Models\Employee;
 use App\Models\Subscription;
 use App\Models\Users;
+use App\Models\Tenant;
 use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -315,11 +316,17 @@ class LoginService
 
         if (!Auth::user()) {
             $data['msg'] = 'Credential not match with tenant name!';
-
             throw new CustomException($data['msg']);
         }
 
         $user_id = Auth::user()->id;
+
+        // Check if the user's status is active
+        $userStatus = Auth::user()->status;
+        if ($userStatus !== 'active') {
+            $data['msg'] = 'Your account is not active.';
+            throw new CustomException($data['msg']);
+        }
 
         Users::where('id', $user_id)->update(['is_login' => 'yes']);
 
@@ -328,19 +335,24 @@ class LoginService
 
             if (!$userDetail) {
                 $data['msg'] = 'Credential not match with tenant name!';
-
                 throw new CustomException($data['msg']);
             }
 
             if ($userDetail->status == 'not verified') {
                 $data['msg'] = 'Your account is not verified.';
+                throw new CustomException($data['msg']);
+            }
 
+            // Check if the tenant's status is active
+            if ($userDetail->status !== 'active') {
+                $data['msg'] = 'The tenant account is not active.';
                 throw new CustomException($data['msg']);
             }
         }
 
         return $data;
     }
+
 
     public function checkTenantName($input)
     {

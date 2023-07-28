@@ -72,6 +72,14 @@ $('#event').select2();
                 $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
+
+
+            $('#crop').click(function() {
+                // Show the submit button
+                $('#uploadpicture').show();
+                $('#uploadcancel').show();
+
+            });
         }
     });
 
@@ -103,11 +111,18 @@ $('#event').select2();
         }
     });
 
-    // var employmentInfoHeight = $("#editHRISJs").height();
+    $("#idno7").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
 
-    // // Set the same height for the Job History card
-    // $("#jobHistoryJs").css("max-height", employmentInfoHeight + "px");
-    // console.log(employmentInfoHeight);
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age7").val(currentAge);
+        }
+    });
 
     $("#firstname,#lastname").change(function () {
         var a = $("#firstname").val();
@@ -142,7 +157,24 @@ $('#event').select2();
         var b = $("#lastNameChild").val();
         $("#fullNameChild").val(a + " " + b);
     });
+
     $("#idNoaddChild").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBChild").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
+        }
+    });
+
+
+    $("#idNo1").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
             var year = idn.substring(0, 2);
@@ -186,6 +218,7 @@ $('#event').select2();
         }
     });
     //EDIT CHILD
+
     $("#idNo1").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
@@ -198,6 +231,21 @@ $('#event').select2();
             $("#DOB1").val(
                 (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
             );
+        }
+    });
+
+    $("#idNo1").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age1").val(currentAge);
         }
     });
 
@@ -505,9 +553,40 @@ $('#event').select2();
 
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
-            $("#age").val(currentAge);
+            $("#age2").val(currentAge);
         }
     });
+
+    ////update companion
+    $("#idnumber2s").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+
+            var cutoff = new Date().getFullYear() - 2000;
+
+            $("#dobs").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
+        }
+    });
+
+    $("#idnumber2s").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000;
+
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age2s").val(currentAge);
+        }
+    });
+
+
     $("#stateEmc").css({ "pointer-events": "none", background: "#e9ecef" });
     $("#countryEmc").css({ "pointer-events": "none", background: "#e9ecef" });
 
@@ -2260,6 +2339,48 @@ $('#event').select2();
         }
     }
 
+
+////////////////////////////////////////////////////
+
+var checkboxes = $('input[name="address_type[]"]');
+
+var permanentChecked = false;
+var correspondentChecked = false;
+var addressId = null;
+var addressType = "0";
+
+checkboxes.each(function () {
+    if ($(this).is(":checked")) {
+        if ($(this).val() === "permanent") {
+            permanentChecked = true;
+        } else if ($(this).val() === "correspondent") {
+            correspondentChecked = true;
+        }
+        if (addressId == null) {
+            addressId = $(this).data("address-id");
+            addressType = $(this).data("address-type");
+        }
+    }
+});
+
+if (permanentChecked && correspondentChecked) {
+    if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+        addressType = "3";
+    }
+    checkboxes.not(":checked").prop("disabled", true);
+} else if (permanentChecked) {
+    addressType = "1";
+    checkboxes.filter('[value="permanent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="correspondent"]').prop("disabled", false);
+} else if (correspondentChecked) {
+    addressType = "2";
+    checkboxes.filter('[value="correspondent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="permanent"]').prop("disabled", false);
+} else {
+    addressType = "0";
+    checkboxes.prop("disabled", false);
+}
+
     $('input[name="address_type[]"]').on("change", function () {
 
         var permanentChecked = false;
@@ -2275,51 +2396,26 @@ $('#event').select2();
                 if ($(this).is(":checked")) {
                     if ($(this).val() === "permanent") {
                         permanentChecked = true;
+                        checkboxes.prop("disabled", true);
                     } else if ($(this).val() === "correspondent") {
                         correspondentChecked = true;
+                        checkboxes.prop("disabled", true);
+
                     }
                 }
             });
 
         if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
-            checkboxes
-                .filter('[value="permanent"]:checked')
-                // .prop("disabled", true);
-
-            checkboxes
-                .filter('[value="correspondent"]:not(:checked)')
-                // .prop("disabled", false);
-
         } else if (permanentChecked == false && correspondentChecked == true) {
             addressType = "2";
-            checkboxes
-                .filter('[value="correspondent"]:checked')
-                // .prop("disabled", true);
-
-            checkboxes
-                .filter('[value="permanent"]:not(:checked)')
-
-
         } else if (permanentChecked == true && correspondentChecked == true) {
             addressType = "3";
-            checkboxes
-                .filter('[value="permanent"]:checked')
-                // .prop("disabled", false);
-            checkboxes
-                .filter('[value="correspondent"]:checked')
-                // .prop("disabled", false);
-
         } else if (permanentChecked == false && correspondentChecked == false){
             addressType = "0";
-            checkboxes
-            .filter('[value="correspondent"]:not(:checked)')
-            // .prop("disabled", true);
-
-        checkboxes
-            .filter('[value="permanent"]:not(:checked)')
-
         }
+
+
 
         $.ajax({
             url: "/updateAddressDetails",
@@ -4949,12 +5045,18 @@ $('#event').select2();
     $("#idno6").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
-            var year = "19".concat(idn.substring(0, 2));
+            var year = idn.substring(0, 2);
             var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $("#DOBaddparent").val(year + "-" + month + "-" + day);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBaddparent").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
         }
     });
+
 
     $("#idno6").change(function () {
         if ($(this).val().length == 12) {
@@ -5030,10 +5132,15 @@ $('#event').select2();
     $("#idno7").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
-            var year = "19".concat(idn.substring(0, 2));
+            var year = idn.substring(0, 2);
             var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $("#DOBP1").val(year + "-" + month + "-" + day);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBP1").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
         }
     });
 
@@ -5109,6 +5216,13 @@ $(document).on("click", "#uploadpicture", function () {
 
         messages: {
             // Add custom error messages for each form field
+            profile_picture: {
+
+                // Add any additional validation rules for the profile picture field
+            },
+
+
+
         },
 
         submitHandler: function (form) {
@@ -5139,7 +5253,6 @@ $(document).on("click", "#uploadpicture", function () {
                         allowEscapeKey: false,
                     }).then(function () {
                         if (data.type == "error") {
-                            // Handle error condition
                         } else {
                             location.reload();
                         }

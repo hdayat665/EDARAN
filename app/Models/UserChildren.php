@@ -18,7 +18,7 @@ class UserChildren extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userChildren';
+    protected $table ='userchildren';
 
     protected $fillable = [
         'user_id',

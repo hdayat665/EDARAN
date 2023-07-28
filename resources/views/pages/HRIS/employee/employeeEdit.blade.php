@@ -409,8 +409,8 @@
         </div>
         </div>
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
-                <button href="javascript:;" id="uploadpicture" class="btn btn-primary">Save</button>
+                <a href="javascript:;" id="uploadcancel"  class="btn btn-white" data-bs-dismiss="modal" style="display: none;">Close</a>
+                <button href="javascript:;" id="uploadpicture" class="btn btn-primary" style="display: none;">Save</button>
             </div>
             </form>
         </div>
