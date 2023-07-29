@@ -24,7 +24,7 @@ $(document).ready(function () {
             );
         },
     });
-    
+
     $("#tablepolicy").DataTable({
         responsive: false,
         lengthMenu: [
@@ -171,7 +171,7 @@ $(document).on("click", "#updateButton1", function () {
         },
 
         messages: {
-            code: "Please Insert Policy's",
+            code: "Please Insert Policy",
             policy: "Please Insert Document Title",
             desc: "Please Insert Description",
             file: "Please Upload Document",
@@ -290,8 +290,8 @@ $("#saveButton2").click(function (e) {
         },
 
         messages: {
-            SOPCode: "Please Insert SOP's Code",
-            SOPName: "Please Insert SOP's Name",
+            SOPCode: "Please Insert SOP Code",
+            SOPName: "Please Insert SOP Name",
             desc: "Please Insert Description",
             file: "Please Upload Attachment",
         },
@@ -340,8 +340,8 @@ $(document).on("click", "#updateButton2", function () {
         },
 
         messages: {
-            SOPCode: "Please Insert SOP's Code",
-            SOPName: "Please Insert SOP's Name",
+            SOPCode: "Please Insert SOP Code",
+            SOPName: "Please Insert SOP Name",
             desc: "Please Insert Description",
             file: "Please Upload Attachment",
         },

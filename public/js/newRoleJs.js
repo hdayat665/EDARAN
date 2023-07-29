@@ -1,4 +1,16 @@
 $(document).ready(function () {
+
+    // Check all checkboxes when "ALL ACCESS" is checked
+    $("#allAccessCheckbox").on("change", function () {
+        if ($(this).prop("checked")) {
+            // Find all checkboxes inside the "panel-body" and check them, excluding the ones with class "excludeFromAllAccess"
+            $(".panel-body input[type='checkbox']:not(.excludeFromAllAccess)").prop("checked", true);
+        } else {
+            // Uncheck all checkboxes inside the "panel-body"
+            $(".panel-body input[type='checkbox']").prop("checked", false);
+        }
+    });
+
     $("#systemRoleTable").DataTable({
         responsive: true,
         lengthMenu: [
