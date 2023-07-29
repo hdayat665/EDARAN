@@ -36,8 +36,12 @@
                         <div class="panel-body">
                             <div class="row p-2">
                                 <div class="form-control">
-                                    <div class="row p-2 ">
+                                    {{-- <div class="col-md-12" style="display: flex; justify-content: flex-end" >
                                         <button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#updatelapse"> <i aria-hidden="true"></i> Generate Staff</button>
+                                    </div> --}}
+                                    <br>
+                                    <div class="col-md-12" style="display: flex; justify-content: flex-end" >
+                                        <a href="javascript:;" id="approveAllButton" class="btn btn-primary col-2"><i class="fa fa-check" aria-hidden="true"></i> Generate by Select</a>
                                     </div>
                                     <div class="row p-2">
                                         {{-- <div class="row">
@@ -93,41 +97,42 @@
                                         </form>
                                     </div> --}}
                                     <div class="row p-2">
-                                        <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th class="text-nowrap">Action</th>
-                                                    <th class="text-nowrap">Employee Name</th>
-                                                    <th class="text-nowrap">Department</th>
-                                                    <th class="text-nowrap">Job Grade</th>
-                                                    <th class="text-nowrap">Current Entitlement Balance</th>
-                                                    <th class="text-nowrap">Sick Leave Entitlement Balance</th>
-                                                    <th class="text-nowrap">Carry Forward Balance</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $id = 0 ?>
-                                                    @if ($leave)
-                                                    @foreach ($leave as $l)
-                                                <?php $id++ ?>
-                                                <tr class="odd gradeX">
-                                                    <td>{{ $id }}</td>
-                                                    <td>
-                                                        <a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$l->id}}" data-bs-target="#editleave" class="btn btn-outline-blue">edit
-                                                        </a>
-                                                    </td>
-                                                    <td>{{$l->fullname}}</td>
-                                                    <td>{{$l->departmentName}}</td>
-                                                    <td>{{$l->jobGradeName}}</td>
-                                                    <td>{{$l->current_entitlement_balance}}</td>
-                                                    <td>{{$l->sick_leave_entitlement_balance}}</td>
-                                                    <td>{{$l->carry_forward_balance}}</td>
-                                                </tr>
-                                                @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                        <form id="approveAllForm">
+                                            <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="1%">No.</th>
+                                                        <th class="text-nowrap">Employee Name</th>
+                                                        <th class="text-nowrap">Department</th>
+                                                        <th class="text-nowrap">Job Grade</th>
+                                                        <th class="text-nowrap">Current Entitlement Balance</th>
+                                                        <th class="text-nowrap">Sick Leave Entitlement Balance</th>
+                                                        <th class="text-nowrap">Carry Forward Balance</th>
+                                                        <th class="text-nowrap" data-orderable="false"><input class="form-check-input" type="checkbox" id="checkall" /></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php $id = 0 ?>
+                                                        @if ($entitlementActive)
+                                                        @foreach ($entitlementActive as $ea)
+                                                    <?php $id++ ?>
+                                                    <tr class="odd gradeX">
+                                                        <td>{{ $id }}</td>
+                                                        <td>{{$ea->fullname}}</td>
+                                                        <td>{{$ea->departmentName}}</td>
+                                                        <td>{{$ea->jobGradeName}}</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>0</td>
+                                                        <td>
+                                                            <input class="form-check-input" value="{{$ea->user_id}}" name="employer[{{$ea->user_id}}][user_id]" type="checkbox" id="checkbox1" />
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +196,7 @@
                                     </form>
                                 </div> --}}
                                 <div class="row p-2">
-                                    <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
+                                    <table  id="tableentitlementcurrent"  class="table table-striped table-bordered align-middle">
                                         <thead>
                                             <tr>
                                                 <th width="1%">No.</th>
@@ -206,8 +211,8 @@
                                         </thead>
                                         <tbody>
                                             <?php $id = 0 ?>
-                                                @if ($leave)
-                                                @foreach ($leave as $l)
+                                                @if ($entitlementCurrent)
+                                                @foreach ($entitlementCurrent as $l)
                                             <?php $id++ ?>
                                             <tr class="odd gradeX">
                                                 <td>{{ $id }}</td>

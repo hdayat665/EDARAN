@@ -14,7 +14,7 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="leaveApprJs"> | Leave Approval | Supervisor</h1>
+        <h1 class="page-header" id="leaveApprJs"> | Leave Approval | Recommender</h1>
         <div class="row p-2">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">
@@ -110,8 +110,8 @@
                                                     @foreach ($leaveRecommenderListActive as $l)
                                                         <?php $id++; ?>
                                                         <tr class="odd gradeX">
-                                                            <td>{{ $id }}</td>
-                                                            <td>
+                                                            <td style="width: 1%;">{{ $id }}</td>
+                                                            <td style="width: 1%;">
                                                                 <div class="btn-group">
                                                                     <div>
                                                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -237,7 +237,7 @@
                                     </form>
                                 </div>
                                 <div class="row p-2">
-                                    <table id="leaveApprovalSv" class="table table-striped table-bordered align-middle">
+                                    <table id="leaveApprovalSvHistory" class="table table-striped table-bordered align-middle">
                                         <thead>
                                             <tr>
                                                 <th width="1%">No.</th>
@@ -257,8 +257,8 @@
                                                 @foreach ($leaveRecommenderListHistory as $l)
                                                     <?php $id++; ?>
                                                     <tr class="odd gradeX">
-                                                        <td>{{ $id }}</td>
-                                                        <td>
+                                                        <td style="width: 1%;">{{ $id }}</td>
+                                                        <td style="width: 1%;">
                                                             <div class="btn-group">
                                                                 <div>
                                                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -335,9 +335,9 @@
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
-        @include('modal.eleave.supervisor.supervisorModelView')
-        @include('modal.eleave.supervisor.supervisorModelApproved')
-        @include('modal.eleave.supervisor.supervisorModelRejected')
+        @include('modal.eleave.recommender.recommenderModelView')
+        @include('modal.eleave.recommender.recommenderModelApproved')
+        @include('modal.eleave.recommender.recommenderModelRejected')
     </div>
 
 

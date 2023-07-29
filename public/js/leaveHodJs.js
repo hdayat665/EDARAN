@@ -1,6 +1,13 @@
 $(document).ready(function () {
 
 
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+        window.location.hash = e.target.hash;
+    });
 
     $(document).ready(function() {
         $(".test").hide();
@@ -49,7 +56,20 @@ $(document).ready(function () {
         format: "yyyy-mm-dd",
     });
 
-    $("#leaveApprovalhod").DataTable({
+    $("#leaveApproval").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#leaveApprovalhod").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#leaveApprovalHistory").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
