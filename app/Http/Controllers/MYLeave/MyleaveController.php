@@ -193,11 +193,18 @@ class MyleaveController extends Controller
 
         $input = $r->input();
 
-        if ($input) {
-            $data['leaveRecommenderList'] = $ms->searchleaveRecommenderIndex($r);
-            $data['applydate'] = $input['applydate'];
-            $data['idemployer'] = $input['idemployer'];
-            $data['type'] = $input['type'];
+        if (isset($input['applydate']) || isset($input['idemployer']) || isset($input['type'])) {
+            $data['leaveRecommenderListActive'] = $ms->searchleaveRecommenderActive($r);
+            $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
+            $data['idemployer'] = isset($input['idemployer']) ? $input['idemployer'] : '';
+            $data['type'] = isset($input['type']) ? $input['type'] : '';
+        }
+
+        if (isset($input['applydateH']) || isset($input['idemployerH']) || isset($input['typeH'])) {
+            $data['leaveRecommenderListHistory'] = $ms->activeleaveRecomenderHistory($r);
+            $data['applydateH'] = isset($input['applydateH']) ? $input['applydateH'] : '';
+            $data['idemployerH'] = isset($input['idemployerH']) ? $input['idemployerH'] : '';
+            $data['typeH'] = isset($input['typeH']) ? $input['typeH'] : '';
         }
 
         return view('pages.leave.leaveRecommender', $data);
@@ -260,7 +267,7 @@ class MyleaveController extends Controller
 
         $input = $r->input();
 
-        if (isset($input['applydate']) || isset($input['idemployer']) || isset($input['statusmy'])) {
+        if (isset($input['applydate']) || isset($input['idemployer']) || isset($input['type'])) {
             $data['leaveApproverListActive'] = $ms->searchleaveApproverActive($r);
             $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
             $data['idemployer'] = isset($input['idemployer']) ? $input['idemployer'] : '';

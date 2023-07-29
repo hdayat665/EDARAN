@@ -25,6 +25,18 @@ $(document).ready(function () {
         });
     });
 
+    $("#datepicker-date").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#datepicker-dateH").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
 
 
     $(document).ready(function () {
@@ -43,10 +55,32 @@ $(document).ready(function () {
         });
     });
 
+    $(document).ready(function () {
+        if (
+            $("#datepicker-dateH").val() ||
+            $("#idemployerH").val() ||
+            $("#typeH").val()
+        ) {
+            $("#filterleaveH").show();
+        } else {
+            $("#filterleaveH").hide();
+        }
+
+        $("#filterH").click(function () {
+            $("#filterleaveH").toggle();
+        });
+    });
+
     $("#reset").on("click", function () {
         $("#datepicker-date").val($("#datepicker-date").data("default-value"));
         $("#idemployer").val($("#idemployer").data("default-value"));
         $("#type").val($("#type").data("default-value"));
+    });
+
+    $("#resetH").on("click", function () {
+        $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
+        $("#idemployerH").val($("#idemployerH").data("default-value"));
+        $("#typeH").val($("#typeH").data("default-value"));
     });
 
     $("#calendar").datepicker({
@@ -63,7 +97,7 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         initComplete: function (settings, json) {
-            $("#leaveApprovalhod").wrap(
+            $("#leaveApproval").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -76,7 +110,7 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         initComplete: function (settings, json) {
-            $("#leaveApprovalhod").wrap(
+            $("#leaveApprovalHistory").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },

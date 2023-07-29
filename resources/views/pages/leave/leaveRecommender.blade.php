@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <form action="/leaveSupervisor" method="POST">
+                                        <form action="/leaveRecommender#default-tab-1" method="POST">
                                             <div id="filterleave" style="display: none">
                                                 <h5>Filter</h5><br>
                                                 <div class="row">
@@ -186,30 +186,30 @@
                                 <div class="row p-2">
                                     <div class="row">
                                         <div class="col d-flex justify-content-end">
-                                            <a id="filter" class="btn btn-default btn-icon btn-lg">
+                                            <a id="filterH" class="btn btn-default btn-icon btn-lg">
                                                 <i class="fa fa-filter"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <form action="/leaveSupervisor" method="POST">
-                                        <div id="filterleave" style="display: none">
+                                    <form action="/leaveRecommender#default-tab-2" method="POST">
+                                        <div id="filterleaveH" style="display: none">
                                             <h5>Filter</h5><br>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="date">Apply Date</label>
-                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-date">
+                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydateH" value="<?php echo $applydateH; ?>" id="datepicker-dateH">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="text">Employee Name</label>
-                                                        <select class="form-select" name="idemployer" id="idemployer">
+                                                        <select class="form-select" name="idemployerH" id="idemployerH">
                                                             <option value="">ALL</option>
                                                             @foreach ($employer as $idem)
-                                                                <option value="{{ $idem->user_id }}" {{ old('idemployer') == $idem->user_id ? 'selected' : ($idemployer == $idem->user_id ? 'selected' : '') }}>
+                                                                <option value="{{ $idem->user_id }}" {{ old('idemployer') == $idem->user_id ? 'selected' : ($idemployerH == $idem->user_id ? 'selected' : '') }}>
                                                                     {{ $idem->fullName }}</option>
                                                             @endforeach
                                                         </select>
@@ -218,10 +218,10 @@
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="text">Type of Leave</label>
-                                                        <select class="form-select" name="type" id="type">
+                                                        <select class="form-select" name="typeH" id="typeH">
                                                             <option value="">ALL</option>
                                                             @foreach ($types as $dt)
-                                                                <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($type == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                                <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typeH == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -230,7 +230,7 @@
                                                     <br>
                                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                     &ensp;
-                                                    <button id="reset" class="btn btn-primary">Reset</button>
+                                                    <button id="resetH" class="btn btn-primary">Reset</button>
                                                 </div>
                                             </div>
                                         </div>

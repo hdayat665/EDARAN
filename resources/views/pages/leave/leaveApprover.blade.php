@@ -112,8 +112,8 @@
                                                 <?php $id++ ?>
 
                                                 <tr class="odd gradeX">
-                                                    <td>{{ $id }}</td>
-                                                    <td>
+                                                    <td style="width: 1%;">{{ $id }}</td>
+                                                    <td style="width: 1%;">
                                                         <div class="btn-group">
                                                             <div>
                                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -184,7 +184,7 @@
                                 <div class="row p-2">
                                     <div class="row">
                                         <div class="col d-flex justify-content-end">
-                                            <a id="filter" class="btn btn-default btn-icon btn-lg">
+                                            <a id="filterH" class="btn btn-default btn-icon btn-lg">
                                                 <i class="fa fa-filter"></i>
                                             </a>
                                         </div>
@@ -192,13 +192,13 @@
                                 </div>
                                 <div class="row">
                                     <form action="/leaveApprover#default-tab-2" method="POST">
-                                        <div id="filterleave" style="display: none">
+                                        <div id="filterleaveH" style="display: none">
                                             <h5>Filter</h5><br>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="date">Apply Date</label>
-                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydateH" value="<?php echo $applydate; ?>" id="datepicker-date">
+                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydateH" value="<?php echo $applydateH; ?>" id="datepicker-dateH">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -228,7 +228,7 @@
                                                     <!-- <div class="row"> -->
                                                         <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                         &ensp;
-                                                        <button  id="reset" class="btn btn-primary">Reset</button>
+                                                        <button  id="resetH" class="btn btn-primary">Reset</button>
                                                     <!-- </div> -->
                                                 </div>
                                             </div>
@@ -257,8 +257,8 @@
                                             <?php $id++ ?>
 
                                             <tr class="odd gradeX">
-                                                <td>{{ $id }}</td>
-                                                <td>
+                                                <td style="width: 1%;">{{ $id }}</td>
+                                                <td style="width: 1%;">
                                                     <div class="btn-group">
                                                         <div>
                                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
