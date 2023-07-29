@@ -248,11 +248,11 @@
 
                     <div class="mb-3">
                         <label class="form-label">SOP Code* </label>
-                        <input type="text" class="form-control" name="SOPCode" placeholder="SOP'S CODE" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPCode" placeholder="SOP CODE" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">SOP Name* </label>
-                        <input type="text" class="form-control" name="SOPName" placeholder="SOP'S NAME" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPName" placeholder="SOP NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description* </label>
@@ -284,12 +284,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">SOP Code </label>
-                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP'S CODE" >
-                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP'S CODE" >
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP CODE" >
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">SOP Name </label>
-                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP'S NAME" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description </label>
