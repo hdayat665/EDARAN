@@ -1297,8 +1297,20 @@ class ProfileService
     {
         $input = $r->input();
         $input['user_id'] = Auth::user()->id;
-        $input['addressType'] = '0';
+     
+        if (!UserAddress::where('user_id', $input['user_id'])->exists()) {
+            $input['addressType'] = '3';
+        } else {
+            $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
+            if ($existingAddress->addressType === '3') {
+                $input['addressType'] = '0';
+            } else {
+                $input['addressType'] = $existingAddress->addressType;
+            }
+        }
+
         UserAddress::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
