@@ -226,7 +226,7 @@
                                     <?php $target = ['leave_approver']; ?>
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
-                                            <a href="/leaveApprhod" class="menu-link">
+                                            <a href="/leaveApprover" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-users-gear text-gray"></i>
                                                 </div>

@@ -13,27 +13,20 @@
     {{-- content-start --}}
 
     <div id="content" class="app-content">
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
-        <h1 class="page-header">Setting | Weekend Entitlements</h1>
+        <h1 class="page-header">Setting | Working Hours</h1>
         <div class="row">
             <div class="col-xl-15" id="weekendEntitlementJs">
-                <!-- BEGIN nav-tabs -->
-
                 <div class="tab-content panel m-0 rounded-0 p-3">
                     <div class="tab-pane fade active show" id="default-tab-1">
-                        <h3 class="mt-10px"></i> Weekend Entitlement List </h3>
-                        <!-- BEGIN panel-heading -->
-                        <hr>
-                        <br>
-                        <div class="panel-heading-btn">
-                            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addcountry" class="btn btn-primary">+ Add State</a>
-                        </div>
-
-                        <br>
-
                         <form id="updateWeekend">
                             <div class="panel-body">
+                                <h3 class="mt-10px"></i> Working Hour </h3>
+                                <br>
+                                <div class="panel-heading-btn">
+                                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addcountry" class="btn btn-primary">+ New State</a>
+                                </div>
+                                <br>
+                                <br>
                                 <table  id="tableweekend"  class="table table-striped table-bordered align-middle">
                                     <thead>
                                         <tr>

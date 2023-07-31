@@ -2965,7 +2965,7 @@ if (!function_exists('getEleaveData')) {
         if ($role == 'recommender') {
             $data = $ss->leaveRecommenderActive();
         } else {
-            $data = $ss->leaveApprhodView();
+            $data = $ss->leaveApproverActive();
         }
 
 

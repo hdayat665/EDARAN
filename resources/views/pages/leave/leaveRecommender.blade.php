@@ -14,7 +14,7 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="leaveApprJs"> | Leave Approval | Supervisor</h1>
+        <h1 class="page-header" id="leaveApprJs"> | Leave Approval | Recommender</h1>
         <div class="row p-2">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <form action="/leaveSupervisor" method="POST">
+                                        <form action="/leaveRecommender#default-tab-1" method="POST">
                                             <div id="filterleave" style="display: none">
                                                 <h5>Filter</h5><br>
                                                 <div class="row">
@@ -110,8 +110,8 @@
                                                     @foreach ($leaveRecommenderListActive as $l)
                                                         <?php $id++; ?>
                                                         <tr class="odd gradeX">
-                                                            <td>{{ $id }}</td>
-                                                            <td>
+                                                            <td style="width: 1%;">{{ $id }}</td>
+                                                            <td style="width: 1%;">
                                                                 <div class="btn-group">
                                                                     <div>
                                                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -186,30 +186,30 @@
                                 <div class="row p-2">
                                     <div class="row">
                                         <div class="col d-flex justify-content-end">
-                                            <a id="filter" class="btn btn-default btn-icon btn-lg">
+                                            <a id="filterH" class="btn btn-default btn-icon btn-lg">
                                                 <i class="fa fa-filter"></i>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <form action="/leaveSupervisor" method="POST">
-                                        <div id="filterleave" style="display: none">
+                                    <form action="/leaveRecommender#default-tab-2" method="POST">
+                                        <div id="filterleaveH" style="display: none">
                                             <h5>Filter</h5><br>
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="date">Apply Date</label>
-                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-date">
+                                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydateH" value="<?php echo $applydateH; ?>" id="datepicker-dateH">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="text">Employee Name</label>
-                                                        <select class="form-select" name="idemployer" id="idemployer">
+                                                        <select class="form-select" name="idemployerH" id="idemployerH">
                                                             <option value="">ALL</option>
                                                             @foreach ($employer as $idem)
-                                                                <option value="{{ $idem->user_id }}" {{ old('idemployer') == $idem->user_id ? 'selected' : ($idemployer == $idem->user_id ? 'selected' : '') }}>
+                                                                <option value="{{ $idem->user_id }}" {{ old('idemployer') == $idem->user_id ? 'selected' : ($idemployerH == $idem->user_id ? 'selected' : '') }}>
                                                                     {{ $idem->fullName }}</option>
                                                             @endforeach
                                                         </select>
@@ -218,10 +218,10 @@
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="text">Type of Leave</label>
-                                                        <select class="form-select" name="type" id="type">
+                                                        <select class="form-select" name="typeH" id="typeH">
                                                             <option value="">ALL</option>
                                                             @foreach ($types as $dt)
-                                                                <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($type == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                                <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typeH == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -230,14 +230,14 @@
                                                     <br>
                                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                     &ensp;
-                                                    <button id="reset" class="btn btn-primary">Reset</button>
+                                                    <button id="resetH" class="btn btn-primary">Reset</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="row p-2">
-                                    <table id="leaveApprovalSv" class="table table-striped table-bordered align-middle">
+                                    <table id="leaveApprovalSvHistory" class="table table-striped table-bordered align-middle">
                                         <thead>
                                             <tr>
                                                 <th width="1%">No.</th>
@@ -257,8 +257,8 @@
                                                 @foreach ($leaveRecommenderListHistory as $l)
                                                     <?php $id++; ?>
                                                     <tr class="odd gradeX">
-                                                        <td>{{ $id }}</td>
-                                                        <td>
+                                                        <td style="width: 1%;">{{ $id }}</td>
+                                                        <td style="width: 1%;">
                                                             <div class="btn-group">
                                                                 <div>
                                                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -335,9 +335,9 @@
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
-        @include('modal.eleave.supervisor.supervisorModelView')
-        @include('modal.eleave.supervisor.supervisorModelApproved')
-        @include('modal.eleave.supervisor.supervisorModelRejected')
+        @include('modal.eleave.recommender.recommenderModelView')
+        @include('modal.eleave.recommender.recommenderModelApproved')
+        @include('modal.eleave.recommender.recommenderModelRejected')
     </div>
 
 
