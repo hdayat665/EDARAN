@@ -733,34 +733,84 @@ class MailService
         'employment.user_id',
         'employment.employeeName',
         'employment.workingEmail',
-        'employment.branch'
+        'employment.branch',
+        'timesheet_event.duration',
+        'timesheet_event.start_time',
+        'timesheet_event.end_time',
+        'timesheet_event.reminder',
+        'timesheet_event.event_name',
+        'timesheet_event.start_date',
+        'timesheet_event.venue',
+        
     )
-    ->where('timesheet_event.reminder', '=', 1)
+    ->whereNotNull('timesheet_event.reminder')
     ->whereDate('timesheet_event.start_date', '=', $today) // Filtering rows for current date
     ->where('attendance_event.status', '=', 'attend') // Filtering rows for attendees only
     ->get();
 
 
     foreach ($users as $user) {
+        $startTime = strtotime($user->start_time);
+        $currentTime = strtotime(date('H:i'));
+      
+        $reminder = $user->reminder;
 
-        $receiver = $user->workingEmail;
-
-        $data = [
-            'nameFrom' => $user->employeeName,
-            'user_id' => $user->user_id,
-            // Include any other data required for the email content
-        ];
-
-        $response = [
-            'subject' => 'Event Reminder',
-            'typeEmail' => 'emaileventreminder',
-            'from' => env('MAIL_FROM_ADDRESS'),
-            'nameFrom' => $user->employeeName,
-            // Include any other data required for the email content
-        ];
-
-        // Now, send the email
-        Mail::to($receiver)->send(new MailMail($response, $data));
+        if($reminder == 1) {
+            $oneHourBefore = strtotime('-5 minutes', $startTime);
+        } 
+        else if($reminder == 2) {
+            $oneHourBefore = strtotime('-10 minutes', $startTime);
+        }
+        else if($reminder == 3) {
+            $oneHourBefore = strtotime('-15 minutes', $startTime);
+        }
+        else if($reminder == 4) {
+            $oneHourBefore = strtotime('-20 minutes', $startTime);
+        }
+        else if($reminder == 5) {
+            $oneHourBefore = strtotime('-30 minutes', $startTime);
+        }
+        else {
+            $oneHourBefore = strtotime('-1 hour', $startTime);
+        }
+    
+        // If current time is exactly 1 hour before the start time, then send the email
+        if ($currentTime == $oneHourBefore) {
+            $receiver = $user->workingEmail;
+    
+            $data = [
+                'nameFrom' => $user->employeeName,
+                'user_id' => $user->user_id,
+                'duration' => $user->duration,
+                'start_time' => $user->start_time,
+                'reminder' => $user->reminder,
+                'event_name' => $user->event_name,
+                'date' => $user->start_date,
+                'start_time' => $user->start_time,
+                'end_time' => $user->end_time,
+                'venue' => $user->venue,
+                // Include any other data required for the email content
+            ];
+    
+            $response = [
+                'subject' => 'Event Reminder',
+                'typeEmail' => 'emaileventreminder',
+                'from' => env('MAIL_FROM_ADDRESS'),
+                'nameFrom' => $user->employeeName,
+                'duration' => $user->duration,
+                'start_time' => $user->start_time,
+                'reminder' => $user->reminder,
+                'event_name' => $user->event_name,
+                'date' => $user->start_date,
+                'end_time' => $user->end_time,
+                'venue' => $user->venue,
+                // Include any other data required for the email content
+            ];
+    
+            // Now, send the email
+            Mail::to($receiver)->send(new MailMail($response, $data));
+        }
     }
+    
 }
 }
