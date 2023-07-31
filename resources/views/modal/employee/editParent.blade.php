@@ -65,19 +65,18 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-
                                     <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label" >Expiry Date</label>
-                                    <input type="text" id="expirydate7" value="{{ date_format(date_create($user->expiryDate), 'Y-m-d') }}" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" >
+                                    <label for="expirydate" class="form-label" >Expiry Date*</label>
+                                    <input type="text" id="expirydate7" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled required >
 
                             </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label" >Issuing Country</label>
-                            <select class="form-select" name="issuingCountry" id="issuingCountry7" style="text-transform:uppercase">
+                            <label for="issuing-country" class="form-label" >Issuing Country*</label>
+                            <select class="form-select" name="issuingCountry" id="issuingCountry7" style="text-transform:uppercase" disabled required>
                             <option value="" label="PLEASE CHOOSE" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
