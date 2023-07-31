@@ -1,27 +1,28 @@
 $("document").ready(function () {
 
-      $("#datepickercor").daterangepicker({
-        opens: "right",
-        format: "MM/DD/YYYY",
-        separator: " to ",
-        startDate: moment().subtract("days", 29),
-        endDate: moment(),
-    
-    }, function(start, end) {
-        $("#default-daterange input").val(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
-    });
+    $(document).ready(function () {
+        $("#datepickercor").daterangepicker({
+          opens: "right",
+          format: "YYYY/MM/DD",
+          separator: " to ",
+          startDate: moment().subtract(29, "days"),
+          endDate: moment(),
+          locale: {
+            format: "YYYY/MM/DD",
+          },
+        });
+      });
+    // , function(start, end) {
+    //     $("#default-daterange input").val(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
+    // });
 
       $(document).on('change', "#staffn", function() {
         if ($(this).val() == "2")  {
             $("#staffname").show();
-			
-		
-			
-
-        } 
+        }
 		else {
             $("#staffname").hide();
-			
+
         }
     });
 
@@ -35,7 +36,7 @@ $("document").ready(function () {
         ],
         responsive: false,
         // scrollX: true,
-    
+
         dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
         buttons: [
             { extend: 'excel', className: 'btn-blue',},
@@ -48,5 +49,5 @@ $("document").ready(function () {
             );
         },
     });
-    
+
 });

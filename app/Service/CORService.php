@@ -72,11 +72,10 @@ class CORService
         ->where($cond)
         // ->groupBy('c.project_name')
         // ->whereBetween('a.created_at', [$startDate, $endDate])
-        ->whereBetween('a.created_at', [$startDate, date('Y-m-d', strtotime($endDate. ' + 1 day'))])
-
+        ->whereBetween('a.effectiveFrom', [$startDate, date('Y-m-d', strtotime($endDate. ' + 1 day'))])
         ->get();
 
         return $data;
     }
-    
+
 }

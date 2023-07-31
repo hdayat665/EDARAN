@@ -26,12 +26,13 @@ class CORReportController extends Controller
         $data = [];
         $trs = new CORService;
         $input = $r->input();
-        
+        // dd($input);
         $requiredKeys = ['selectAS', 'date_range'];
+
         if(array_diff($requiredKeys, array_keys($input))) {
             return redirect()->back()->withErrors(['message' => 'Please select all dropdown values']);
         }
-    
+
 
         if ($input['selectAS'] == '1') {
             $data['employees'] = $trs->getdatabyemployee($input);
