@@ -4,12 +4,12 @@
         <div class="modal-content">
             <form id="formstate">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add State</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">New State</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="">
-                        <label class="form-label">Add State*</label>
+                        <label class="form-label">State*</label>
                         <div class="input-group">
                             <select class="form-select" name="state_id">
                                 <option value="" label="PLEASE CHOOSE"></option>
@@ -38,7 +38,7 @@
         <div class="modal-content">
             <form id="updateweekendmodal">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Weekend and Hour Working</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Working Hours</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

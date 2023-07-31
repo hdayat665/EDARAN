@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+        window.location.hash = e.target.hash;
+    });
+
+
     $(document).ready(function () {
         $("#tableeleave").dataTable({
             responsive: false,
@@ -175,6 +185,21 @@ $(document).ready(function () {
         },
     });
 
+    $("#tableentitlementcurrent").DataTable({
+        searching: true,
+        lengthChange: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        responsive: false,
+        initComplete: function (settings, json) {
+            $("#tableentitlementcurrent").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
     $("#tableannual").DataTable({
         searching: true,
         lengthChange: true,
@@ -216,6 +241,43 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+
+    $("#approveAllButton").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(document.getElementById("approveAllForm"));
+
+            $.ajax({
+                type: "POST",
+                url: "/leaveEntitlementSelect",
+                data: data,
+                dataType: "json",
+
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+
+    $(document).ready(function() {
+        // When the checkall checkbox is clicked
+        $('#checkall').click(function() {
+            // Check or uncheck all the individual checkboxes based on the state of checkall
+            $('input[name^="employer["][type="checkbox"]').prop('checked', this.checked);
+        });
     });
 
 });

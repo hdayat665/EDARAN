@@ -56,7 +56,7 @@
                         <div class="col-sm-6">
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                    <input class="form-check-input excludeFromAllAccess" type="checkbox" value="" id="">
                                 </div>
                                 <div class="col-auto">
                                     <p class="col-form-label">Role Customize</p>
@@ -79,7 +79,7 @@
         <div class="col-md-12 panel panel">
             <div class="row g-3 align-items-center">
                 <div class="col-auto">
-                    <input class="form-check-input" type="checkbox" value="" id="">
+                    <input class="form-check-input" type="checkbox" value="" id="allAccessCheckbox">
                 </div>
                 <div class="col-auto">
                     <p class="col-form-label" style="font-size: 15px;">ALL ACCESS</p>
@@ -377,7 +377,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
-                                <p class="col-form-label">Department Recommender</p>
+                                <p class="col-form-label">Department <br>Recommender
+                                &nbsp;
+                                    <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -387,7 +393,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="">
                             </div>
                             <div class="col-auto">
-                                <p class="col-form-label">Department Approver</p>
+                                <p class="col-form-label">Department<br>Approver
+                                &nbsp;
+                                    <input class="form-check-input rounded-circle fa fa-eye" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-check" type="checkbox" checked>
+                                    <input class="form-check-input rounded-circle fa fa-close" type="checkbox" checked>
+                                </p>
                             </div>
                         </div>
                     </div>

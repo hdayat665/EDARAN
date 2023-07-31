@@ -1121,11 +1121,12 @@ class SettingController extends Controller
         return response()->json($data);
     }
 
-    public function eleaveEntitlementView()
+    public function leaveEntitlementIndex()
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
+        $data['entitlementActive'] = $ss->leaveEntitlementActive();
+        $data['entitlementCurrent'] = $ss->leaveEntitlementCurrent();
         $data['nameStaff'] = $ss->leaveNameStaff();
         // dd($data['nameStaff']);
         // die;
@@ -1214,6 +1215,18 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateleaveEntitlement($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function leaveEntitlementSelect(Request $r)
+    {
+        // $input = $r->input();
+        // dd($input);
+        // die;
+        $ss = new SettingService;
+
+        $result = $ss->leaveEntitlementSelect($r);
 
         return response()->json($result);
     }

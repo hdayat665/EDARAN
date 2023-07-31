@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+        window.location.hash = e.target.hash;
+    });
+
+
     $(document).ready(function() {
         $(".test").hide();
 
@@ -32,10 +41,44 @@ $(document).ready(function () {
         });
     });
 
+    $("#datepicker-date").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#datepicker-dateH").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $(document).ready(function () {
+        if (
+            $("#datepicker-dateH").val() ||
+            $("#idemployerH").val() ||
+            $("#typeH").val()
+        ) {
+            $("#filterleaveH").show();
+        } else {
+            $("#filterleaveH").hide();
+        }
+
+        $("#filterH").click(function () {
+            $("#filterleaveH").toggle();
+        });
+    });
+
     $("#reset").on("click", function () {
         $("#datepicker-date").val($("#datepicker-date").data("default-value"));
         $("#idemployer").val($("#idemployer").data("default-value"));
         $("#type").val($("#type").data("default-value"));
+    });
+
+    $("#resetH").on("click", function () {
+        $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
+        $("#idemployerH").val($("#idemployerH").data("default-value"));
+        $("#typeH").val($("#typeH").data("default-value"));
     });
 
     $("#leaveApprovalSv").DataTable({
@@ -46,6 +89,19 @@ $(document).ready(function () {
         ],
         initComplete: function (settings, json) {
             $("#leaveApprovalSv").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#leaveApprovalSvHistory").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#leaveApprovalSvHistory").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
