@@ -8,6 +8,10 @@ use App\Models\UserCompanion;
 use App\Models\ClaimDateSetting;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Service\MailService;
+use App\Models\TimesheetLog;
+use App\Models\TimesheetAppeals;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -44,6 +48,12 @@ class Kernel extends ConsoleKernel
         $ageCompanion = UserCompanion::first();
         $submitAgeCompanion = $ageCompanion->age;
         $schedule->command('increment:agecompanion')->yearly($submitAgeCompanion);
+
+        $schedule->call(function () {
+        $mailService = new MailService();
+        $mailService->emailEventReminder(); // Pass any required data as an argument
+        // Log::info('Email sent successfully');
+        })->everyMinute();
     }
 
     /**
