@@ -1362,15 +1362,14 @@ class EmployeeService
     public function updateProfile_Picture($r, $id)
     {
         $input = $r->input();
-        if ($_FILES['uploadFile']['name']) {
-            $payslip = uploadPic($r->file('uploadFile'));
-            $input['uploadFile'] = $payslip['filename'];
-
-            if (!$input['uploadFile']) {
+        if ($r->hasFile('uploadFile')) {
+            $uploadfile = uploadPic($r->file('uploadFile'));
+            if ($uploadfile && array_key_exists('filename', $uploadfile)) {
+                $input['uploadFile'] = $uploadfile['filename'];
+            } else {
                 unset($input['uploadFile']);
             }
         }
-
 
         UserProfile::where('user_id', $id)->update($input);
 
