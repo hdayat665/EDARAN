@@ -1073,6 +1073,31 @@ if (!function_exists('myProjectOnly')) {
         return $data;
     }
 }
+if (!function_exists('myProjectActive')) {
+    function myProjectActive()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // pr(Auth::user()->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
+
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        }
+
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+            ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'],['b.status', '!=', 'CLOSED']])
+            ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 
 if (!function_exists('getContractType')) {
     function getContractType()

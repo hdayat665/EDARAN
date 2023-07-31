@@ -2677,6 +2677,18 @@ class myClaimService
         
         
     }
+    public function getUsedCashAdvance($id = '')
+    {   
+        $data = GeneralClaim::where('id', $id)->first();
+
+        // Assuming $data->lessCash contains comma-separated IDs
+        $lessCashIds = explode(',', $data->lessCash);
+
+        $data2 = CashAdvanceDetail::whereIn('id', $lessCashIds)->get();
+
+        return $data2;
+    }
+
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
@@ -2976,10 +2988,12 @@ class myClaimService
     public function updateStatusMonthlyClaim($id = '', $status = '', $r )
     {
         $input = $r->input();
-        
+       
         $claim['status'] = $status; 
-        $claim['total_amount'] = $input['amount']; 
-
+        $amount = (float) str_replace(',', '', $input['amount']);
+        //pr($amount);
+        $claim['total_amount'] = $amount; 
+        //pr($claim['total_amount']);
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
 
