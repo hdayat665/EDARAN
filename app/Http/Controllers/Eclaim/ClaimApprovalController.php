@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ClaimApprovalController extends Controller
 {
     public function claimApprovalView($type = '')
-    {
+    { 
         $mcs = new ClaimApprovalService;
 
         $data['claims'] = $mcs->getGeneralClaim($type);
@@ -65,7 +65,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
-        
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -235,12 +235,12 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
-        
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['user'] = $mcs->getUserData($data['general']->user_id);
         $data['claimData'] = $mcs->getGeneralClaimDataById($id);
         $data['getadmin'] = $mcs->getDomainRoleAdmin();
         $data['getfinance'] = $mcs->getDomainRoleFinance();
-
+ 
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
@@ -413,9 +413,162 @@ class ClaimApprovalController extends Controller
 
         $data['checkers'] = getFinanceChecker();
         $data['general'] = $result['claim'];
-        $data['travels'] = $result['travel'];
-        $data['personals'] = $result['personal'];
-        $data['gncs'] = $result['general'];
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['user'] = $mcs->getUserData($data['general']->user_id);
+        $data['claimData'] = $mcs->getGeneralClaimDataById($id);
+        $data['getadmin'] = $mcs->getDomainRoleAdmin();
+        $data['getfinance'] = $mcs->getDomainRoleFinance();
+ 
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $data['user_id'] = $data['general']->user_id ?? '';
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $carValue = $data['totalCar'][0]->total_km ??0;
+
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+
+        $data['ansCar']= $ansCar ;
+
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
+
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalLaundry = $data['summarySubs'][0]->total_laundry ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        $data['totalTravellings'] = $totalTravellings;
+        //pr($data['totalcarmotor']);
+        $data['details'] = getGNCDetailByGeneralId($id);
 
         if ($data['general']->claim_type == 'MTC') {
             $view = 'financeCheckerMtc';
@@ -456,9 +609,165 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
-        $data['gncs'] = $result['general'];
+        $data['user'] = $mcs->getUserData($data['general']->user_id);
+        $data['generalDetail'] = $mcs->getGeneralDetailData();
+        $data['claimData'] = $mcs->getGeneralClaimDataById($id);
+        $data['getadmin'] = $mcs->getDomainRoleAdmin();
+        $data['getfinance'] = $mcs->getDomainRoleFinance();
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $data['user_id'] = $data['general']->user_id ?? '';
+        
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $carValue = $data['totalCar'][0]->total_km ??0;
+
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+
+        $data['ansCar']= $ansCar ;
+
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
+
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalLaundry = $data['summarySubs'][0]->total_laundry ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        
+        $data['totalTravellings'] = $totalTravellings;
+        //pr($data['totalcarmotor']);
+        $data['details'] = getGNCDetailByGeneralId($id);
 
         if ($data['general']->claim_type == 'MTC') {
             $view = 'fapprovalMtc';
@@ -476,9 +785,165 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
-        $data['gncs'] = $result['general'];
+        $data['user'] = $mcs->getUserData($data['general']->user_id);
+        $data['generalDetail'] = $mcs->getGeneralDetailData();
+        $data['claimData'] = $mcs->getGeneralClaimDataById($id);
+        $data['getadmin'] = $mcs->getDomainRoleAdmin();
+        $data['getfinance'] = $mcs->getDomainRoleFinance();
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $data['user_id'] = $data['general']->user_id ?? '';
+        
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $carValue = $data['totalCar'][0]->total_km ??0;
+
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+
+        $data['ansCar']= $ansCar ;
+
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
+
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalLaundry = $data['summarySubs'][0]->total_laundry ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        
+        $data['totalTravellings'] = $totalTravellings;
+        //pr($data['totalcarmotor']);
+        $data['details'] = getGNCDetailByGeneralId($id);
 
         // if ($data['general']->claim_type == 'MTC') {
         $view = 'adminApprovalDetailMtc';
@@ -570,9 +1035,165 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
-        $data['gncs'] = $result['general'];
+        $data['user'] = $mcs->getUserData($data['general']->user_id);
+        $data['generalDetail'] = $mcs->getGeneralDetailData();
+        $data['claimData'] = $mcs->getGeneralClaimDataById($id);
+        $data['getadmin'] = $mcs->getDomainRoleAdmin();
+        $data['getfinance'] = $mcs->getDomainRoleFinance();
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $data['user_id'] = $data['general']->user_id ?? '';
+        
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $carValue = $data['totalCar'][0]->total_km ??0;
+
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+
+        $data['ansCar']= $ansCar ;
+
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
+
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalLaundry = $data['summarySubs'][0]->total_laundry ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        
+        $data['totalTravellings'] = $totalTravellings;
+        //pr($data['totalcarmotor']);
+        $data['details'] = getGNCDetailByGeneralId($id);
 
         // pr($data['gncs']);
         if ($data['general'] != null && $data['general']->claim_type == 'MTC') {
@@ -589,12 +1210,167 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        
         $data['general'] = $result['claim'];
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
-        $data['gncs'] = $result['general'];
+        $data['user'] = $mcs->getUserData($data['general']->user_id);
+        $data['generalDetail'] = $mcs->getGeneralDetailData();
+        $data['claimData'] = $mcs->getGeneralClaimDataById($id);
+        $data['getadmin'] = $mcs->getDomainRoleAdmin();
+        $data['getfinance'] = $mcs->getDomainRoleFinance();
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $data['user_id'] = $data['general']->user_id ?? '';
+        
+        $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $entitlementArr = json_decode($data['car'], true);
 
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $carValue = $data['totalCar'][0]->total_km ??0;
+
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+
+        $data['ansCar']= $ansCar ;
+
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
+
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalLaundry = $data['summarySubs'][0]->total_laundry ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        
+        $data['totalTravellings'] = $totalTravellings;
+        //pr($data['totalcarmotor']);
+        $data['details'] = getGNCDetailByGeneralId($id);
         // if ($data['general']->claim_type == 'MTC') {
         $view = 'adminRecDetail';
         // } else {
@@ -834,7 +1610,7 @@ class ClaimApprovalController extends Controller
     public function skipAllClaim(Request $r)
     {
         $ss = new ClaimApprovalService;
-
+        
         $result = $ss->skipAllClaim($r);
 
         return response()->json($result);

@@ -1,4 +1,5 @@
-$(document).ready(function () {
+$(document).ready(function () { 
+    
     $("#activetable").dataTable({
         searching: true,
         lengthChange: true,

@@ -651,15 +651,12 @@ class ProfileService
                 }
             }
 
-
-
             if (isset($_FILES['okuFile']['name'])) {
                 $payslip = upload($r()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
             } else {
                 $input['okuFile'] = null;
             }
-
 
             if ($_FILES['supportDoc']['name']) {
                 $payslip = upload($r->file('supportDoc'));
@@ -690,11 +687,6 @@ class ProfileService
 
             }
 
-
-
-
-
-
             if(!isset($input['nonCitizen']))
             {
                 $input['nonCitizen'] = null;
@@ -705,7 +697,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'New Children is Updated..';
+            $data['msg'] = 'Children is Updated.';
         }
 
         return $data;
@@ -1297,8 +1289,20 @@ class ProfileService
     {
         $input = $r->input();
         $input['user_id'] = Auth::user()->id;
-        $input['addressType'] = '0';
+
+        if (!UserAddress::where('user_id', $input['user_id'])->exists()) {
+            $input['addressType'] = '3';
+        } else {
+            $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
+            if ($existingAddress->addressType === '3') {
+                $input['addressType'] = '0';
+            } else {
+                $input['addressType'] = $existingAddress->addressType;
+            }
+        }
+
         UserAddress::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

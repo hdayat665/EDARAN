@@ -216,7 +216,7 @@
                                     <div class="col-md-9">
                                         <select class="form-select" id="projectid" name="project_id">
                                             
-                                            <?php $projects = myProjectOnly(); ?>
+                                            <?php $projects = myProjectActive(); ?>
                                             <option class="form-label" value="">
                                                 Please Select</option>
                                             @foreach ($projects as $project)
@@ -233,7 +233,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <select class="form-select" id="projectId2" name="project_id2">
-                                            <?php $projects = myProjectOnly(); ?>
+                                            <?php $projects = myProjectActive(); ?>
                                             <option class="form-label" value="">Select Project</option>
                                             @foreach ($projects as $project)
                                                 <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
@@ -583,7 +583,7 @@
                                                     <select class="form-select" name="project_id">
                                                         <option class="form-label" value="" selected>
                                                             PLEASE CHOOSE</option>
-                                                        <?php $projects = myProjectOnly(); ?>
+                                                        <?php $projects = myProjectActive(); ?>
                                                         @foreach ($projects as $project)
                                                             <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                                         @endforeach
@@ -926,7 +926,7 @@
                                                 <select class="form-select" name="project_id" id="project_subs">
                                                     <option class="form-label" value="" selected>
                                                         PLEASE CHOOSE</option>
-                                                    <?php $projects = myProjectOnly(); ?>
+                                                    <?php $projects = myProjectActive(); ?>
                                                     @foreach ($projects as $project)
                                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                                     @endforeach

@@ -144,12 +144,14 @@ $(document).ready(function () {
     $("#addreasonr").click(function (e) {
         $("#rejectform").validate({
             rules: {
-               
+                reasonreject: "required",
+                
                 
             },
 
             messages: {
-                
+                reasonreject: "Please Insert Reason",
+               
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

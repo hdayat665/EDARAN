@@ -157,6 +157,19 @@ class ClaimApprovalService
 
         return $data;
     }
+    public function getCashAdvancePaid()
+    {
+        $data = CashAdvanceDetail::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['user_id', Auth::user()->id],
+            //['status', 'paid'],
+            //['status', 3]
+        ])->get();
+        
+        return $data;
+        
+        
+    }
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
@@ -873,7 +886,7 @@ class ClaimApprovalService
     public function skipAllClaim($r)
     {
         $input = $r->input();
-
+        
         if (!isset($input['id'])) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -894,7 +907,7 @@ class ClaimApprovalService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'Success Skip The Queue';
 
         return $data;
     }

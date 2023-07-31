@@ -54,16 +54,13 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
-
-
                                     <input type="text" id="passport6" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label" >Expiry Date*</label>
-                                    <input type="text" id="expirydate6" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;" readonly>
-
+                                    <input type="text" id="expirydate6" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly disabled >
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label" >Issuing Country*</label>
@@ -130,7 +127,7 @@
                                 </div>
                                 <div class="col-sm-6 ">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" disabled readonly id="okucard5" name="okuCardNum" value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER">
+                                    <input type="number" disabled readonly id="okucard5" name="okuCardNum" value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER">
                                 </div>
                             </div>
                         </div>

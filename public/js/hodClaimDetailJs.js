@@ -192,20 +192,9 @@ $(document).on("click", "#SVRsubs", function () {
 
     $("#subsModal").modal("show");
 });
-
-$(document).ready(function() {
-    $(document).on("change", "#listofCA", function() {
-        $("input").val("");
-
-        if ($(this).val() == "1") {
-            $(".lists").show();
-
-        } else if ($(this).val() == "2") {
-            $(".lists").hide();
-        }
-    });
+$(document).on("click", "#viewCaBtn", function () {
+    $("#viewCa").modal("show");
 });
-
 //OTHERS MODAL
 $(document).on("click", "#SVRothers", function () {
     var id = $(this).data("id");

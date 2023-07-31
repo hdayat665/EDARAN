@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Update Children Details</h5> 
+                <h5 class="modal-title" id="add-children">Update Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -44,7 +44,7 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input partCheck5" value="on" type="checkbox" id="nonCitizen1" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}}>
-                                       
+
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -75,7 +75,7 @@
                                     <label for="passport" class="form-label">Passport Number</label>
                                     <input type="text" id="passports1" name="passport" value="{{ $children->passport ?? '' }}" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport">
                                 </div>
-                               
+
                             </div>
                         </div>
                          <div class="col-sm-3">
@@ -90,7 +90,7 @@
                                             $americass = americas();
                                             $asias = asias();
                                         ?>
-                                
+
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -116,7 +116,7 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="gender" class="form-label">Gender</label>
-                           
+
                             <select class="form-select" name="gender" id="gender1">
                                 <option value="" label=" PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
@@ -218,7 +218,7 @@
                             <label for="firstname" class="form-label" >City</label>
                             <input type="text" id="city1" name="city" value="" class="form-control" placeholder="CITY" style="text-transform:uppercase">
                         </div>
-                        
+
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -248,7 +248,7 @@
                             </select>
                         </div>
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

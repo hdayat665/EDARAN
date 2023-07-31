@@ -40,7 +40,6 @@ class ProfileController extends Controller
     {
         $input = $r->input();
 
-
         $ps = new ProfileService;
 
         $result = $ps->updateData($input);
