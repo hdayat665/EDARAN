@@ -323,7 +323,7 @@ $("#cancelButton").click(function (e) {
         });
     });
 });
-
+ 
 //OTHERS MODAL
 $(document).on("click", "#mcvOthers", function () {
 
@@ -340,7 +340,10 @@ $(document).on("click", "#btnSAttachment", function () {
 
     $("#subsistenceAttachment").modal("show");
 });
+$(document).on("click", "#viewCaBtn", function () {
 
+    $("#viewCa").modal("show");
+});
 $("#travelling").DataTable({
     paging: true,
     filter: false,

@@ -30,11 +30,7 @@ class myClaimController extends Controller
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
         $data['cashAdvance'] = $mcs->getCashAdvanceClaimByGeneralId($id) ?? 0;
-        $data['balance'] = ($data['GNC']->total_amount) - $data['cashAdvance'];
-
-        if ($data['balance'] < 0) {
-            $data['balance'] = 0;
-        }
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
@@ -177,6 +173,11 @@ class myClaimController extends Controller
         $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
+        $data['balance'] = $data['sum'] - $data['cashAdvance'];
+        
+        if ($data['balance'] < 0) {
+            $data['balance'] = 0;
+        }
         $data['totalcarmotor'] = $totalcarmotor;
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
@@ -420,12 +421,8 @@ class myClaimController extends Controller
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['cashAdvance'] = $mcs->getCashAdvanceClaimByGeneralId($id) ?? 0;
-        $data['balance'] = ($data['GNC']->total_amount) - $data['cashAdvance'];
-
-        if ($data['balance'] < 0) {
-            $data['balance'] = 0;
-        }
-
+        
+        
         //pr($data['balance']);
         //pr($data['summaryTravelling']);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
@@ -602,6 +599,12 @@ class myClaimController extends Controller
         $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
+        $data['balance'] = $data['sum'] - $data['cashAdvance'];
+        
+        if ($data['balance'] < 0) {
+            $data['balance'] = 0;
+        }
+
         $data['totalcarmotor'] = $totalcarmotor;
         //pr($data['totalcarmotor']);
         $data['totalTravellings'] = $totalTravellings;

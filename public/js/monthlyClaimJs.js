@@ -834,6 +834,7 @@ $("#subsTableUpdate").DataTable({
     $(document).on("change", "#ls", function () {
         if ($(this).val() == "My Project") {
             $("#project").show();
+            $("#autocomplete").val('');
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete").val(officeValue);
@@ -844,6 +845,7 @@ $("#subsTableUpdate").DataTable({
             $("#autocomplete").val(permanentValue);
         } else {
             $("#project").hide();
+            $("#autocomplete").val('');
         }
     });
 
@@ -852,9 +854,11 @@ $("#subsTableUpdate").DataTable({
         if ($(this).val() == "My Project") {
             $("#projectdest").show();
             $("#logname").hide();
+            $("#autocomplete2").val('');
         } else if ($(this).val() == "Others") {
             $("#projectdest").hide();
             $("#logname").hide();
+            $("#autocomplete2").val('');
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(officeValue);
@@ -866,6 +870,7 @@ $("#subsTableUpdate").DataTable({
         } else {
             $("#projectdest").hide();
             $("#logname").hide();
+            $("#autocomplete2").val('');
         }
     });
 

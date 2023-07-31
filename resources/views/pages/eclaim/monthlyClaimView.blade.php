@@ -302,7 +302,7 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-8">
-                                            <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                            <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn">View</a></label>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
