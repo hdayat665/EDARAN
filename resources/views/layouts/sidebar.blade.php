@@ -209,7 +209,7 @@
                                     <?php $target = ['leave_recommender']; ?>
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
-                                            <a href="/leaveAppr" class="menu-link">
+                                            <a href="/leaveRecommender" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user-pen text-gray"></i>
                                                 </div>
@@ -226,7 +226,7 @@
                                     <?php $target = ['leave_approver']; ?>
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
-                                            <a href="/leaveApprhod" class="menu-link">
+                                            <a href="/leaveApprover" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-users-gear text-gray"></i>
                                                 </div>
@@ -350,6 +350,26 @@
                                     </div>
                                     <div class="menu-caret text-gray">
                                     </div>
+                                    @php
+                                        $ruleDepartments1 = ['DepartRecommender', 'DepartApprover'];
+                                        $totalCount1 = 0;
+
+                                        foreach ($ruleDepartments1 as $department) {
+                                            $count = getGeneralClaimMenuNotifyForDepartment($department)->count();
+                                            $totalCount1 += $count;
+                                        }
+
+                                        $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceChecker'];
+                                        $totalCount2 = 0;
+
+                                        foreach ($ruleDepartments2 as $department) {
+                                            $count = getClaimData($department)->count();
+                                            $totalCount2 += $count;
+                                        }
+
+                                        $totalCounts = $totalCount1 + $totalCount2;
+                                    @endphp
+                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>
                                 </a>
 
                                 <div class="menu-submenu">
@@ -365,6 +385,15 @@
                                                 </div>
                                                 <div class="menu-caret text-gray">
                                                 </div>
+                                                @php
+                                                    $ruleDepartments = ['DepartRecommender', 'DepartApprover'];
+                                                    $totalCount = 0;
+                                                    foreach ($ruleDepartments as $department) {
+                                                        $count = getGeneralClaimMenuNotifyForDepartment($department)->count();
+                                                        $totalCount += $count;
+                                                    }
+                                                @endphp
+                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                             </a>
                                             <div class="menu-submenu">
                                                 <?php $target = ['eclaim_department_recommender']; ?>
@@ -421,6 +450,15 @@
                                                 </div>
                                                 <div class="menu-caret text-gray">
                                                 </div>
+                                                @php
+                                                    $ruleDepartments = ['FinanceRec', 'FinanceApprover', 'FinanceChecker'];
+                                                    $totalCount = 0;
+                                                    foreach ($ruleDepartments as $department) {
+                                                        $count = getClaimData($department)->count();
+                                                        $totalCount += $count;
+                                                    }
+                                                @endphp
+                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -493,6 +531,15 @@
                                                 <div class="menu-text text-gray">Admin</i></div>
                                                 <div class="menu-caret text-gray">
                                                 </div>
+                                                @php
+                                                    $ruleDepartments = ['AdminRec', 'AdminApprover', 'AdminChecker'];
+                                                    $totalCount = 0;
+                                                    foreach ($ruleDepartments as $department) {
+                                                        $count = getClaimData($department)->count();
+                                                        $totalCount += $count;
+                                                    }
+                                                @endphp
+                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -703,7 +750,7 @@
             <div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
-                        <i class="fa fa-user-group text-gray"></i>
+                        <i class="fa fa-circle-info text-gray"></i>
                     </div>
                     <div class="menu-text text-gray">General Information</div>
                     <div class="menu-caret text-gray"></div>

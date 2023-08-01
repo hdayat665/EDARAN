@@ -2,49 +2,50 @@
 
 namespace App\Service;
 
-use App\Models\ActivityLogs;
-use App\Models\ApprovalConfig;
-use App\Models\ApprovelRoleGeneral;
-use App\Models\Branch;
-use App\Models\ClaimCategory;
-use App\Models\ClaimCategoryContent;
-use App\Models\ClaimDateSetting;
-use App\Models\Company;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\DomainList;
-use App\Models\EclaimGeneral;
-use App\Models\EclaimGeneralSetting;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\EntitleGroup;
-use App\Models\EntitleSubsBenefit;
-use App\Models\JobGrade;
-use App\Models\News;
-use App\Models\Policy;
-use App\Models\Role;
-use App\Models\SOP;
-use App\Models\TransportMillage;
-use App\Models\TypeOfLogs;
-use App\Models\Unit;
-use App\Models\leaveEntitlementModel;
-use App\Models\UserProfile;
-use App\Models\UserRole;
-use App\Models\holidayModel;
-use App\Models\leavetypesModel;
-use App\Models\PermissionRole;
-use App\Models\Users;
-use App\Models\leaveAnualLeaveModel;
-use App\Models\leaveSicKleaveModel;
-use App\Models\leaveCarryForwordModel;
-use App\Models\leaveWeekendModel;
-use App\Models\Location;
-use App\Models\State;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\Input;
-use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use App\Models\SOP;
+use App\Models\News;
+use App\Models\Role;
+use App\Models\Unit;
+use App\Models\State;
+use App\Models\Users;
+use App\Models\Branch;
+use App\Models\Policy;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Employee;
+use App\Models\JobGrade;
+use App\Models\Location;
+use App\Models\UserRole;
+use App\Models\Department;
+use App\Models\DomainList;
+use App\Models\TypeOfLogs;
+use App\Models\Designation;
+use App\Models\UserProfile;
+use App\Models\ActivityLogs;
+use App\Models\EntitleGroup;
+use App\Models\holidayModel;
+use App\Models\ClaimCategory;
+use App\Models\EclaimGeneral;
+use App\Models\ApprovalConfig;
+use App\Models\EmploymentType;
+use App\Models\PermissionRole;
+use App\Models\leavetypesModel;
+use App\Models\ClaimDateSetting;
+use App\Models\TransportMillage;
+use App\Models\leaveWeekendModel;
+use App\Models\EntitleSubsBenefit;
+use Illuminate\Support\Facades\DB;
+use App\Models\ApprovelRoleGeneral;
+use App\Models\leaveSicKleaveModel;
+use App\Models\ClaimCategoryContent;
+use App\Models\EclaimGeneralSetting;
+use App\Models\leaveAnualLeaveModel;
+use Illuminate\Support\Facades\Auth;
+use App\Models\leaveEntitlementModel;
+use App\Models\leaveCarryForwordModel;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class SettingService
 {
@@ -470,9 +471,9 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
-        //pr($input);
-        date_default_timezone_set("Asia/Kuala_Lumpur");
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+
         if ($etData) {
             $data['msg'] = 'Branch name already exists.';
             $data['status'] = config('app.response.error.status');
@@ -482,9 +483,34 @@ class SettingService
             return $data;
         }
 
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['addedBy'] = $user->username;
+
+        $getid = Location::select('id')
+        ->where('country_id','=', $input['ref_country'])
+        ->where('state_id','=', $input['ref_state'])
+        ->where('name','=', $input['location_cityid'])
+        ->where('postcode','=', $input['ref_postcode'])
+        ->first();
+
+
+
+        $user = Auth::user();
+
+        $input = [
+            'companyId' => $input['companyId'],
+            'branchName' => $input['branchName'],
+            'branchType' => $input['branchType'],
+            'address' => $input['address'],
+            'address2' => $input['address2'],
+
+            'ref_cityid' => $getid->id,
+            'tenant_id' => Auth::user()->tenant_id,
+            'addedBy' => $user->username,
+            'created_at' => date('Y-m-d H:i:s'),
+
+        ];
 
         Branch::create($input);
 
@@ -494,10 +520,12 @@ class SettingService
         $data['msg'] = 'Branch is Created';
 
         return $data;
+
     }
     public function updateBranch($r, $id)
     {
         $input = $r->input();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $branchName = $input['branchName'];
 
         $existingBranch = Branch::where('branchName', $branchName)
@@ -516,11 +544,30 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
-        $input['modifiedBy'] = $user->username;
+
+        $getid = Location::select('id')
+        ->where('country_id','=', $input['ref_country'])
+        ->where('state_id','=', $input['ref_state'])
+        ->where('name','=', $input['location_cityid'])
+        ->where('postcode','=', $input['ref_postcode'])
+        ->first();
+
+        $input = [
+            'companyId' => $input['companyId'],
+            'branchName' => $input['branchName'],
+            'branchType' => $input['branchType'],
+            'address' => $input['address'],
+            'address2' => $input['address2'],
+
+            'ref_cityid' => $getid->id,
+            'tenant_id' => Auth::user()->tenant_id,
+            'modifiedBy' => $user->username,
+            'modified_at' => date('Y-m-d H:i:s'),
+        ];
 
         Branch::where('id', $id)->update($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -564,25 +611,23 @@ class SettingService
     {
         $input = $r->input();
 
-        $checkData = Location::where([['postcode', $input['postcode']], ['tenant_id', Auth::user()->tenant_id]])->first();
-        if ($checkData) {
-            $data['msg'] = 'Postcode name already exists.';
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
 
-            return $data;
-        }
+        $input = [
+            'country_id' => $input['country_id'],
+            'state_id' => $input['state_name'],
+            'name' => $input['city_name'],
+            'postcode' => $input['postcode'],
 
-        $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        ];
 
         Location::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Location';
+        $data['msg'] = 'Success Create State Postcode';
 
         return $data;
     }
@@ -597,6 +642,7 @@ class SettingService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Location not found';
         } else {
+
             $Location->delete();
 
             $data['status'] = config('app.response.success.status');
@@ -606,6 +652,8 @@ class SettingService
         }
 
         return $data;
+
+
     }
 
     public function getStateCountry($id)
@@ -620,44 +668,10 @@ class SettingService
 
     public function createStateCountry($r)
     {
-        // $rules = [
-        //     'stateCode' => 'required|unique:states',
-        //     'stateName' => 'required|unique:states',
-        // ];
-
-        // $messages = [
-        //     'stateCode.required' => 'State code is required',
-        //     'stateCode.unique' => 'State code already exists',
-        //     'stateName.required' => 'State name is required',
-        //     'stateName.unique' => 'State name already exists',
-        // ];
-
-        // $validator = Validator::make($r->all(), $rules, $messages);
-
-        // if ($validator->fails()) {
-        //     $data['msg'] = $validator->messages()->first();
-        //     $data['status'] = config('app.response.error.status');
-        //     $data['type'] = config('app.response.error.type');
-        //     $data['title'] = config('app.response.error.title');
-
-        //     return $data;
-        // }
-
-        // $input = $r->input();
-
-        // State::create($input);
-
-        // $data['status'] = config('app.response.success.status');
-        // $data['type'] = config('app.response.success.type');
-        // $data['title'] = config('app.response.success.title');
-        // $data['msg'] = 'Success Create State Country';
-
-        // return $data;
-
         $input = $r->input();
 
-        $checkData = State::where([['stateName', $input['stateName']], ['tenant_id', Auth::user()->tenant_id]])->first();
-        if ($checkData) {
+        $etData = State::where([['state_name', $input['state_name']]])->first();
+        if ($etData) {
             $data['msg'] = 'State name already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -666,15 +680,21 @@ class SettingService
             return $data;
         }
 
-        $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input = [
+            'country_id' => $input['country_id'],
+            'state_name' => $input['state_name'],
+            'state_code' => $input['state_code'],
+
+
+        ];
 
         State::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Country';
+        $data['msg'] = 'Success Create State and Countries';
 
         return $data;
     }
@@ -1011,9 +1031,12 @@ class SettingService
                 unset($input['file']);
             }
         }
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = $user->tenant_id;
+        $input['created_at'] = date('Y-m-d H:i:s');
 
         Policy::create($input);
 
@@ -1039,7 +1062,10 @@ class SettingService
         }
 
         $user = Auth::user();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $input['modifiedBy'] = $user->username;
+        $input['modified_at'] = date('Y-m-d H:i:s');
 
         Policy::where('id', $id)->update($input);
 
@@ -1087,7 +1113,7 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
-        
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1310,7 +1336,7 @@ class SettingService
 
     public function branchView()
     {
-        $data['branchs'] = DB::table('branch as a')
+        $data = DB::table('branch as a')
             ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -1320,23 +1346,77 @@ class SettingService
         return $data;
     }
 
-    // public function locationView()
-    // {
-    //     $data = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+    public function branchCountry()
+    {
+        $data = Country::all();
 
-    //     return $data;
-    // }
+        return $data;
+    }
+
+    public function branchState()
+    {
+        $data = State::all();
+
+        return $data;
+    }
+
+    public function branchCity()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function branchPostcode()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function getStatebyCountry($id = '')
+    {
+        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+        ->where('location_states.country_id', $id)
+        ->get();
+
+
+        return $data;
+    }
+
+    public function getCitybyState($id = '')
+    {
+
+        $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+        ->where('location_cities.state_id', $id)
+        ->groupBy('location_cities.name')
+        ->get();
+
+
+        return $data;
+    }
+
+    public function getPostcodeByCity($id = '')
+    {
+
+        $data = Location::select('*')
+                ->where('name', $id)
+                ->get();
+
+
+        return $data;
+    }
 
 
     public function locationView()
     {
-        $data = Location::select('location.id', 'settingcountry.CountryName', 'states.stateName', 'location.postcode')
-            ->join('settingcountry', 'location.countryID', '=', 'settingcountry.countryID')
-            ->join('states', 'location.stateID', '=', 'states.id')
+        $data = Location::select('location_cities.id','location_country.country_name','location_states.state_name','location_cities.postcode')
+            ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->orderBy('location_cities.id', 'desc')
             ->get();
 
-
-        return $data;
+            return $data;
     }
 
     public function unitView()
@@ -1444,9 +1524,16 @@ class SettingService
 
     public function getBranchById($id)
     {
-        $data = Branch::find($id);
+
+        $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
+        ->where('branch.id', $id)
+        ->first();
+
+
 
         return $data;
+
+
     }
 
     public function getJobGradeById($id)
@@ -1830,6 +1917,15 @@ public function updateTypeOfLogs($r, $id)
         $claimCategory['claim_catagory_code'] = $input['claim_catagory_code'];
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
+        $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
+        $claimCategory['addproject'] = $input['addproject'];
+
+        $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
+        $claimCategory['addattach'] = $input['addattach'];
+
+        $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+        $claimCategory['attachstatus'] = $input['attachstatus'];
+
         ClaimCategory::create($claimCategory);
 
         $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
@@ -1894,6 +1990,10 @@ public function updateTypeOfLogs($r, $id)
         if ($input['claim_type']) {
             $input['claim_type'] = implode(',', $input['claim_type']);
         }
+
+        $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
+        $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
+        $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
 
         ClaimCategory::where('id', $id)->update($input);
 
@@ -2185,8 +2285,44 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function leaveEntitlementView()
-    {
+
+
+    public function leaveEntitlementActive() {
+
+        // $currentDateObj = Carbon::now()->setYear(2024);
+        $currentDateObj = Carbon::now();
+
+        $data =
+            Employee::select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName', 'jobgrade.jobGradeName')
+            ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->leftJoin('jobgrade', 'employment.jobGrade', '=', 'jobgrade.id')
+            ->leftJoin('leave_entitlement', function ($join) use ($currentDateObj) {
+                $join->on('employment.user_id', '=', 'leave_entitlement.id_employment')
+                     ->where(function ($query) use ($currentDateObj) {
+                         $query->whereYear('leave_entitlement.le_year', '=', $currentDateObj->year)
+                               ->orWhereNull('leave_entitlement.le_year');
+                     });
+            })
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('employment.status', '=', 'Active')
+                    ->orWhere('employment.status', '=', 'active');
+            })
+            ->where(function ($query) {
+                $query->where('employment.employmentType', '=', '1')
+                    ->orWhere('employment.employmentType', '=', '2');
+            })
+            ->where(function ($query) use ($currentDateObj) {
+                $query->whereNull('leave_entitlement.id_employment');
+            })
+            ->get();
+
+        return $data;
+    }
+
+    public function leaveEntitlementCurrent() {
+
         $currentDateObj = Carbon::now();
         $checkdate = $currentDateObj->format('Y');
 
@@ -2199,8 +2335,146 @@ public function updateTypeOfLogs($r, $id)
             ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year', '=', $checkdate)
             ->orderBy('id', 'desc')->get();
+
         return $data;
     }
+
+
+    public function leaveEntitlementSelect($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['employer'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the Employee first!';
+
+            return $data;
+        }
+
+        $input = $r->input('employer');
+
+
+        foreach ($input as $user_id => $data) {
+
+            $getEmployer = Employee::select('employment.*')
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('employment.status', '=', 'Active')
+                    ->orWhere('employment.status', '=', 'active');
+            })
+            ->where(function ($query) {
+                $query->where('employment.employmentType', '=', '1')
+                    ->orWhere('employment.employmentType', '=', '2');
+            })
+            ->where('employment.user_id', '=', $user_id)
+            ->orderBy('employment.user_id', 'asc')
+            ->first();
+
+            $joinDate = $getEmployer->joinedDate;
+            $joinDateCarbon = Carbon::parse($joinDate);
+            $currentDateCarbon = Carbon::now();
+            $diff = $joinDateCarbon->diff($currentDateCarbon);
+            $totalYears = $diff->y;
+            $totalMonths = $diff->m;
+            $currentDatex = Carbon::now();
+            $currentDate = $currentDatex->format('Y-m-d');
+
+            $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
+                ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
+                ->where('leave_anualleave.jobgrade_id', '=', $getEmployer->jobGrade) // Use $employer->jobGrade
+                ->leftJoin('jobgrade', 'leave_anualleave.jobgrade_id', '=', 'jobgrade.id')
+                ->orderBy('id', 'asc')->first();
+
+            $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
+                ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
+                ->where('leave_sickleave.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('id', 'asc')->get();
+
+            $getCarryForward = leaveCarryForwordModel::select('leave_carryforward.*')
+                ->where('leave_carryforward.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('id', 'asc')->first();
+
+            if ($totalYears < 2 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears kurang dari 2
+                $data1 = $getAnual->permenant_01;
+            } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears antara 2 hingga 5
+                $data1 = $getAnual->permenant_02;
+            } elseif ($totalYears >= 5 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears lebih dari 5
+                $data1 = $getAnual->permenant_03;
+            } elseif ($getEmployer->employmentType == 1) {
+                // Kode untuk kasus jika employmentType == 1
+                $data1 = $getAnual->contract;
+            }
+
+
+            $data2 = [];
+
+            foreach ($getSickLeave as $sickLeave) {
+                if ($totalYears < 2 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_01;
+                } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_02;
+                } elseif ($totalYears >= 5 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_03;
+                } elseif ($totalYears <= 2 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_01;
+                } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_02;
+                } elseif ($totalYears >= 5 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_03;
+                }
+            }
+
+            $data4 = $getCarryForward->lapsed_date;
+            $data5 = $getCarryForward->max_duration;
+            $data6 = $currentDateCarbon->format('Y-m-d');
+            $data7 = Auth::user()->tenant_id;
+
+            // dd($employer->user_id,$data1,$data2[0],$data2[1],$data4,$data5,$data6);
+            // die;
+
+            $input = [
+                'id_userprofile' => $getEmployer->user_id,
+                'id_employment' => $getEmployer->user_id,
+                'id_department' => $getEmployer->department,
+                'id_jobgrade' => $getEmployer->jobGrade,
+                'current_entitlement' => $data1,
+                'current_entitlement_balance' => $data1,
+                'sick_leave_entitlement' => $data2[0],
+                'sick_leave_entitlement_balance' => $data2[0],
+                'hospitalization_entitlement' => $data2[1],
+                'hospitalization_entitlement_balance' => $data2[1],
+                'carry_forward' => $data5,
+                'carry_forward_balance' => $data5,
+                'lapsed_date' => $data4,
+                'le_year' => $currentDate,
+                'tenant_id' => $data7,
+            ];
+
+            leaveEntitlementModel::create($input);
+
+
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully save entitlement';
+
+        return $data;
+    }
+
+
+
+
+
+
+
+
 
     public function leaveNameStaff()
     {
@@ -2418,11 +2692,100 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function holidaylistView()
-    {
-        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+    public function holidaylistView() {
+
+        $dataallstate = holidayModel::select('*')
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $data = [];
+
+        foreach ($dataallstate as $state) {
+            $stateIds = explode(',', $state->state_id); // Separate the string into an array based on commas
+            $totalStateIds = count(array_filter($stateIds)); // Filter out empty values before counting
+
+            $state->total = $totalStateIds; // Add new 'total' property to the object
+
+            $data[] = $state;
+        }
+
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+            $totalAll = count($dataallstate);
+
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
+            }
+        }
 
         return $data;
+
+    }
+
+    public function searchHolidaylist($r) {
+
+        $input = $r->input();
+
+        $dataallstate = holidayModel::select('*')
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc');
+
+        if ($input['countrySearch']) {
+            $country_id = $input['countrySearch'];
+            $dataallstate->where('leave_holiday.country_id', '=', $country_id);
+        }
+
+        $dataallstate = $dataallstate->get();
+
+        $data = [];
+
+        foreach ($dataallstate as $state) {
+            $stateIds = explode(',', $state->state_id); // Separate the string into an array based on commas
+            $totalStateIds = count(array_filter($stateIds)); // Filter out empty values before counting
+
+            $state->total = $totalStateIds; // Add new 'total' property to the object
+
+            $data[] = $state;
+        }
+
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+            $totalAll = count($dataallstate);
+
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
+            }
+        }
+
+
+
+        return $data;
+
+
+
+    }
+
+
+
+
+    public function country() {
+
+        $data = Country::all();
+        return $data;
+
     }
 
     public function createholidaylist($r)
@@ -2445,6 +2808,11 @@ public function updateTypeOfLogs($r, $id)
         $data4 = $input['annual_date'];
         $data5 = Auth::user()->tenant_id;
         $data6 = 1;
+        $data7 = strtoupper($input['country_id']);
+        $data8 = implode(',', array_filter($input['selected_state_ids'], function ($value) {
+            return $value !== null;
+        }));
+
 
         $input = [
             'holiday_title' => $data1,
@@ -2452,10 +2820,39 @@ public function updateTypeOfLogs($r, $id)
             'end_date' => $data3,
             'annual_date' => $data4,
             'tenant_id' => $data5,
-            'status' => $data6
+            'status' => $data6,
+            'country_id' => $data7,
+            'state_id' => $data8,
+
         ];
 
         holidayModel::create($input);
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Holiday is created';
+
+        return $data;
+    }
+
+    public function updateholidaystate($r)
+    {
+        $input = $r->input();
+
+
+        $id = $input['idstate'];
+        $datastate = implode(',', array_filter($input['selected_state_ids'], function ($value) {
+            return $value !== null;
+        }));
+
+
+        $input = [
+            'state_id' => $datastate,
+        ];
+
+        holidayModel::where('id', $id)->update($input);
 
 
         $data['status'] = config('app.response.success.status');
@@ -2552,7 +2949,9 @@ public function updateTypeOfLogs($r, $id)
         $input = [
             [$tenant, 'AL', 'ANNUAL LEAVE'],
             [$tenant, 'SL', 'SICK LEAVE'],
-            [$tenant, 'HL', 'HOSPITALIZATION']
+            [$tenant, 'HL', 'HOSPITALIZATION'],
+            [$tenant, 'EL', 'EMERGENCY LEAVE'],
+            [$tenant, 'NP', 'NO PAY LEAVE'],
         ];
 
         foreach ($input as $data) {
@@ -2659,7 +3058,9 @@ public function updateTypeOfLogs($r, $id)
             $check = [
                 ['AL', 'ANNUAL LEAVE'],
                 ['SL', 'SICK LEAVE'],
-                ['HL', 'HOSPITALIZATION']
+                ['HL', 'HOSPITALIZATION'],
+                ['EL', 'EMERGENCY LEAVE'],
+                ['NP', 'NO PAY LEAVE'],
             ];
 
             foreach ($check as $row) {
@@ -2694,7 +3095,9 @@ public function updateTypeOfLogs($r, $id)
         $check = [
             ['AL', 'ANNUAL LEAVE'],
             ['SL', 'SICK LEAVE'],
-            ['HL', 'HOSPITALIZATION']
+            ['HL', 'HOSPITALIZATION'],
+            ['EL', 'EMERGENCY LEAVE'],
+            ['NP', 'NO PAY LEAVE'],
         ];
 
         $matchFound = false;
@@ -3112,31 +3515,87 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function updateweekend($r)
-    {
-        $input = $r->input('checkbox');
+    public function updateweekend($r){
+        $input = $r->input();
 
-        foreach ($input as $id => $data) {
-            $record = leaveWeekendModel::find($id);
+        foreach ($input as $key => $value) {
+            if (strpos($key, 'id_') === 0) {
+                $day = substr($key, 3); // Mengambil nama hari berdasarkan kunci
+                $id = $value;
+                $start_time = $input['start_time_' . $day];
+                $end_time = $input['end_time_' . $day];
+                $duration = $input['duration_' . $day];
 
-            if ($record) {
-                $record->monday = isset($data['monday']) ? $data['monday'] : null;
-                $record->tuesday = isset($data['tuesday']) ? $data['tuesday'] : null;
-                $record->wednesday = isset($data['wednesday']) ? $data['wednesday'] : null;
-                $record->thursday = isset($data['thursday']) ? $data['thursday'] : null;
-                $record->friday = isset($data['friday']) ? $data['friday'] : null;
-                $record->saturday = isset($data['saturday']) ? $data['saturday'] : null;
-                $record->sunday = isset($data['sunday']) ? $data['sunday'] : null;
+                $record = leaveWeekendModel::find($id);
 
-                $record->save();
+                if ($record) {
+                    $record->start_time = $start_time;
+                    $record->end_time = $end_time;
+                    $record->total_time = $duration;
+
+                    $record->save();
+                }
             }
         }
-
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Successfully update Weekend';
+
+        return $data;
+    }
+
+    public function createleaveweekend($r){
+
+        $input = $r->input();
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+
+            [$tenant, $input['state_id'], 1, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 2, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 3, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 4, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 5, '07:00', '19:00' ],
+            [$tenant, $input['state_id'], 6, null, null],
+            [$tenant, $input['state_id'], 0, null, null]
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveWeekendModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'state_id' => $data[1],
+                    'day_of_week' => $data[2],
+
+                ],
+                [
+                    'start_time' => $data[3],
+                    'end_time' => $data[4],
+
+                ]
+            );
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully Create State';
+
+        return $data;
+    }
+
+    public function getweekend($id){
+
+        $data = leaveWeekendModel::select(
+            'leave_weekend.*',
+            'location_states.state_name',
+        )
+        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+        ->where('leave_weekend.state_id',  '=', $id)
+        ->join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
+        ->orderBy('leave_weekend.id', 'asc')
+        ->get();
 
         return $data;
     }
@@ -3195,42 +3654,133 @@ public function updateTypeOfLogs($r, $id)
 
     public function weekendview()
     {
-        $tenant = Auth::user()->tenant_id;
-        $input = [
-            [$tenant, 'JHR', 'JOHOR'],
-            [$tenant, 'KDH', 'KEDAH'],
-            [$tenant, 'KEL', 'KELANTAN'],
-            [$tenant, 'MLK', 'MELAKA'],
-            [$tenant, 'PHG', 'PAHANG'],
-            [$tenant, 'PNG', 'PULAU PINANG'],
-            [$tenant, 'PRK', 'PERAK'],
-            [$tenant, 'SBH', 'SABAH'],
-            [$tenant, 'SRW', 'SERAWAK'],
-            [$tenant, 'SGR', 'SELANGOR'],
-            [$tenant, 'TRG', 'TERANGGANU'],
-            [$tenant, 'WP', 'WILAYAH PERSEKUTUAN'],
-            [$tenant, 'NS', 'NEGERI SEMBILAN'],
-            [$tenant, 'PLS', 'PERLIS'],
+        $data = leaveWeekendModel::select(
+            'leave_weekend.state_id',
+            'location_states.state_name',
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.start_time END)
+            ) AS monday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.end_time END)
+            ) AS monday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.start_time END)
+            ) AS tuesday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.end_time END)
+            ) AS tuesday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.start_time END)
+            ) AS webnesday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.end_time END)
+            ) AS webnesday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.start_time END)
+            ) AS thursday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.end_time END)
+            ) AS thursday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.start_time END)
+            ) AS friday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.end_time END)
+            ) AS friday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.start_time END)
+            ) AS saturday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.end_time END)
+            ) AS saturday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.start_time END)
+            ) AS sunday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.end_time END)
+            ) AS sunday_end"),
+        )
+        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+        ->Join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
+        ->groupBy('leave_weekend.state_id')
+        ->get();
 
-        ];
+        return $data;
 
-        foreach ($input as $data) {
-            $record = leaveWeekendModel::updateOrCreate(
-                [
-                    'tenant_id' => $data[0],
-                    'state_code' => $data[1],
-                    'state' => $data[2],
+    }
 
-                ],
-                [
-                ]
-            );
-        }
+    public function getstate(){
 
-        $data =
-        leaveWeekendModel::select('leave_weekend.*')
-            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-            ->orderBy('id', 'asc')->get();
+        $data = State::select('location_states.id', 'location_states.state_name')
+        // ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+        ->whereNull('leave_weekend.state_id')
+        ->leftJoin('leave_weekend', 'location_states.id', '=', 'leave_weekend.state_id')
+        ->orderBy('location_states.id', 'asc')
+        ->get();
+
+        // dd($data);
+        // die;
+
+
+        return $data;
+
+    }
+
+    // public function newRole()
+    // {
+    //     $data = [];
+
+    //     return $data;
+    // }
+
+    public function getstateholiday($id)
+    {
+        $data = State::select('*')
+        ->where('country_id', '=', $id)
+        ->orderBy('id', 'asc')
+        ->get();
+
         return $data;
     }
+
+    public function getstateholidaydetail($id)
+    {
+
+        $getHoliday = holidayModel::select('*')
+            ->where('id', '=', $id)
+            ->first();
+
+        $stateIds = explode(',', $getHoliday->state_id); // Memisahkan string menjadi array berdasarkan koma
+
+        $statesFromIds = []; // Array untuk menyimpan data state dari state_id
+
+        foreach ($stateIds as $id) {
+            $record = State::find($id); // Mengambil data state berdasarkan ID
+
+            if ($record) {
+                $statesFromIds[$record->id] = $record; // Menyimpan data state ke dalam array $statesFromIds dengan kunci ID
+            }
+        }
+
+        $statesFromQuery = State::select('*')
+            ->where('country_id', '=', $getHoliday->country_id)
+            ->get(); // Mengambil data state dari query berdasarkan country_id
+
+        $data = []; // Array untuk menyimpan data state
+
+        foreach ($statesFromQuery as $state) {
+            if (isset($statesFromIds[$state->id])) {
+                $state->checked = true; // Menandai state yang memiliki ID yang sama sebagai tercentang
+            }
+            $data[] = $state; // Menambahkan state ke dalam array $data
+        }
+
+        // dd($data);
+        // die;
+
+        return $data;
+    }
+
 }
+
+

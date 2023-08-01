@@ -14,6 +14,25 @@
             display: block;
             word-wrap: break-word;
         }
+
+        .border {
+            border-radius: 4px !important;
+        }
+
+        .select-all-checkbox {
+            margin-right: 10px !important;
+        }
+
+        .select-all-label {
+            margin-left: 5px !important;
+        }
+
+        .wan {
+            margin-left: 5px !important; /* Mencentangkan tepi ke tengah secara horizontal */
+            margin-right: 5px !important; /* Mencentangkan tepi ke tengah secara horizontal */
+        }
+
+
     </style>
 
     <div id="content" class="app-content">
@@ -30,12 +49,34 @@
                             <button class="btn btn-primary " data-bs-toggle="modal" id="myModal1" data-bs-target="#uploadbulk"> <i class="fa fa-upload" aria-hidden="true"></i></i> Bulk Upload</button>
                         </div>
                     </div>
+                    <br>
+                    <div class="row p-2">
+                        <form action="/holidaylist" method="POST">
+                            <div class="row">
+                                <label class="form-label">Country*</label>
+                                <div class="col-4">
+
+                                    <select class="form-select select2" id="countrySearch" name="countrySearch" style="text-transform:uppercase">
+                                        <option value="" label="PLEASE CHOOSE"></option>
+                                        @foreach($country as $ct)
+                                            <option value="{{ $ct->country_id }}" {{ old('countrySearch') == $ct->country_id ? 'selected' : ($countrySearch == $ct->country_id ? 'selected' : '') }}>{{ $ct->country_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
                     <div class="row p-2">
                         <table id="tableholiday" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th width="1%" class="text-nowrap" data-orderable="false">Action</th>
                                     <th class="text-nowrap" data-orderable="false">Status</th>
+                                    <th class="text-nowrap">State</th>
                                     <th class="text-nowrap">Holiday Title</th>
                                     <th class="text-nowrap">Start Date</th>
                                     <th class="text-nowrap">End Date</th>
@@ -64,6 +105,9 @@
                                                         {{ $h->status == '1' ? 'checked' : '' }}>
                                                 </div>
                                             </td>
+                                            <td style="text-align:center">
+                                                <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-id="{{ $h->id }}" data-all = "{{ $h->total }}" id="holidayState" ></i>{{ $h->total }}</a></td>
+                                            </td>
                                             <td>{{ $h->holiday_title }}</td>
                                             <td>{{ $h->start_date }}</td>
                                             <td>{{ $h->end_date }}</td>
@@ -79,5 +123,6 @@
         </div>
 
         @include('modal.eleave.holiday.holidayListModal')
+        @include('modal.eleave.holiday.holidayState')
     </div>
 @endsection

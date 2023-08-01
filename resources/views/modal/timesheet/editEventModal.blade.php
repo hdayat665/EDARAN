@@ -483,7 +483,7 @@
                                 <h3 class='form-label'>Not Attend</h3>
                             </div>
                         </div>
-                        <input type="hidden" id="user_id_event" value="{{$user_id}}">
+                        <input type="hidden" id="user_id_event" value="{{ $data['user_id'] }}">
 
                     </div>
                     <div class="row p-2">

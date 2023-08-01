@@ -41,8 +41,6 @@
                         <th class="text-nowrap">Company Name</th>
                         <th class="text-nowrap">Branch Type</th>
                         <th class="text-nowrap">Branch Name</th>
-                        <th class="text-nowrap">Postcode</th>
-                        <th class="text-nowrap">State</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
@@ -63,8 +61,6 @@
                         <td style="text-transform: uppercase;">{{$branch->companyName}}</td>
                         <td>{{$branch->branchType}}</td>
                         <td>{{$branch->branchName}}</td>
-                        <td>{{$branch->postcode}}</td>
-                        <td style="text-transform: uppercase;">{{$branch->state}}</td>
                         <td>{{$branch->addedBy}}</td>
                         <td>{{$branch->created_at}}</td>
                         <td>{{$branch->modifiedBy}}</td>
@@ -126,16 +122,7 @@
                                 <option value="STATE ">STATE </option>
                             </select>
                         </div>
-                        {{-- <div class="mb-2">
-                            <label class="form-label">Unit Name*</label>
-                            <select class="form-select" name="unitId" style="text-transform: uppercase;">
-                                <option type="text"value="" label="Select Unit" selected="selected">Select Unit </option>
-                                <?php $units = getUnit() ?>
-                                @foreach ($units as $unit)
-                                <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
+
 
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
@@ -145,63 +132,48 @@
                             <label class="form-label">Address 2</label>
                             <input type="text" class="form-control" name="address2" id="address2" placeholder="ADDRESS 2" >
                         </div>
-                        {{-- <div class="mb-2">
-                            <label class="form-label">Postcode*</label>
-                            <input type="number" class="form-control" name="postcode" id="postcode" placeholder="POSTCODE" aria-describedby="postcode">
-                        </div> --}}
+
                         <div class="mb-2">
-                            <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
-                            <input type="hidden" class="form-control" name="latitude" id="latitude" />
-                            <input type="hidden" class="form-control" name="longitude" id="longitude" />
+                                <label class="form-label">Country*</label>
+                                <select class="form-select" name="ref_country" id="country_id" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+
+
+                                    @foreach($country as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+
+                                </select>
+                        </div>
+                        <div class="mb-2">
+                                <label class="form-label">State*</label>
+                                <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+
+
+
+                                </select>
 
                         </div>
-                        <div class="row mb-2">
-                            <div class="col-sm-4">
-                                <label class="form-label">Country*</label>
-                                <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
-                                    <option type="text" value="MY" label="MALAYSIA" selected="selected">MALAYSIA</option>
+                        <div class="mb-2">
+                            <label class="form-label">City*</label>
+                            <select class="form-select" name="location_cityid" id="city_id" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
 
 
-                                    <?php $countries = getCountryBranch()?>
+                                <input type="hidden" class="form-control" name="latitude" id="latitude" />
+                                <input type="hidden" class="form-control" name="longitude" id="longitude" />
 
-                                    @foreach ($countries as $country)
-                                        <option value="{{ $country->countryID }}"
-                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
-                                    @endforeach
+                            </select>
 
-
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label">State*</label>
-                                <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-
-                                    <?php $states = getStateBranch()?>
-
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->stateName }}"
-                                            label="{{ $state->stateName }}">{{ $state->stateName }}</option>
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-                            <div class="col-sm-4">
+                        </div>
+                        <div class="mb-2">
                                 <label class="form-label">Postcode*</label>
 
-                                <select class="form-select" name="postcode" id="postcode"style="text-transform: uppercase;">
+                                <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
                                     <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
 
-                                    <?php $postcodes = getPostcodeBranch()?>
-
-                                    @foreach ($postcodes as $postcode)
-                                        <option value="{{ $postcode->postcode }}"
-                                            label="{{ $postcode->postcode }}">{{ $postcode->postcode }}</option>
-                                    @endforeach
                                 </select>
-                            </div>
                         </div>
                 </div>
 
@@ -241,24 +213,14 @@
                             <input type="text" class="form-control" name="branchName" id="branchNameE" maxlength="100" placeholder="BRANCH NAME" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Branch Type</label>
+                            <label class="form-label">Branch Type*</label>
                             <select class="form-select" name="branchType" id="branchTypeE">
                                 <option value="">SELECT BRANCH TYPE</option>
                                 <option value="HEADQUARTERS">HEADQUARTERS </option>
                                 <option value="STATE">STATE </option>
                             </select>
                         </div>
-                        {{-- <div class="mb-2">
-                            <label class="form-label">Unit Name*</label>
-                            <select class="form-select" name="unitId" id="unitIdE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="SELECT UNIT">SELECT UNIT </option>
-                                <?php $units = getUnit() ?>
-                                @foreach ($units as $unit)
-                                <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
-                                @endforeach
 
-                            </select>
-                        </div> --}}
 
 
                         <div class="mb-2">
@@ -270,57 +232,53 @@
                             <input type="text" class="form-control" name="address2" id="address2E" maxlength="100" placeholder="ADDRESS 2" >
                         </div>
 
+                        <div class="mb-2">
+                            <label class="form-label">Country*</label>
+                            <select class="form-select" name="ref_country" id="countryE" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
 
+
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">State*</label>
+                            <select class="form-select" name="ref_state" id="stateE" style="text-transform: uppercase;">
+                                <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                @foreach($state as $st)
+                                    <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" id="cityE" placeholder="CITY" >
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-sm-4">
-                                <label class="form-label">Country*</label>
-                                <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
-                                    <option >PLEASE CHOOSE</option>
-                                    <?php $countries = getCountryBranch()?>
-
-                                    @foreach ($countries as $country)
-                                        <option value="{{ $country->countryID }}"
-                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label">State*</label>
-                                <select class="form-select" name="state" id="stateE" style="text-transform: uppercase;">
-                                    <option  label="" selected="selected">Please Choose</option>
-                                <?php $states = getStateBranch()?>
-
-                                @foreach ($states as $state)
-                                <option value="{{ $state->stateName }}"
-                                    label="{{ $state->stateName }}">{{ $state->stateName }}</option>
-                                 @endforeach
-
-
-
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label">Postcode*</label>
-                                <select class="form-select" name="postcode" id="postcodeE" style="text-transform: uppercase;">
-                                    <option type="text"value="" label="" selected="selected">Please Choose</option>
-                                <?php $postcodes = getPostcodeBranch()?>
-
-                                @foreach ($postcodes as $postcode)
-                                    <option value="{{ $postcode->postcode }}"
-                                        label="{{ $postcode->postcode }}">{{ $postcode->postcode }}</option>
+                            <select class="form-select" name="location_cityid" id="cityE" style="text-transform: uppercase;">
+                                <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                @foreach($city as $cty)
+                                    <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
-                                </select>
-                            </div>
+                            </select>
                         </div>
+                        <div class="mb-2">
+                            <label class="form-label">Postcode*</label>
+                            <select class="form-select" name="ref_postcode" id="postcodeE" style="text-transform: uppercase;">
+                                    <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
+
+
+                            </select>
+
+
                         </div>
+
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
                         </div>
                     </form>
             </div>

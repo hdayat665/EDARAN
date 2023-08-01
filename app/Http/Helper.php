@@ -1,50 +1,51 @@
 <?php
 
-use App\Models\ActivityLogs;
-use App\Models\ApprovelRoleGeneral;
-use App\Models\Branch;
-use App\Models\ClaimCategory;
-use App\Models\ClaimCategoryContent;
-use App\Models\ClaimDateSetting;
-use App\Models\AppealMtc;
-use App\Models\ApprovalConfig;
-use App\Models\CashAdvanceDetail;
-use App\Models\Company;
-use App\Models\Customer;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\DomainList;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\GeneralClaim;
-use App\Models\GeneralClaimDetail;
-use App\Models\JobGrade;
-use App\Models\Project;
-use App\Models\ProjectLocation;
-use App\Models\ProjectMember;
 use App\Models\Role;
-use App\Models\TimesheetEvent;
-use App\Models\Location;
-use App\Models\TypeOfLogs;
 use App\Models\Unit;
-use App\Models\UserProfile;
-use App\Models\Users;
-use App\Models\UserRole;
-use App\Models\TransportMillage;
-use App\Models\EclaimGeneral;
-use App\Models\PermissionRole;
-use App\Models\EntitleSubsBenefit;
-use App\Models\Notification;
-use App\Models\Country;
 use App\Models\State;
-use App\Notifications\GeneralNotification;
-use App\Service\ClaimApprovalService;
+use App\Models\Users;
+use App\Models\Branch;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Project;
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\JobGrade;
+use App\Models\Location;
+use App\Models\UserRole;
+use App\Models\AppealMtc;
+use App\Models\Department;
+use App\Models\DomainList;
+use App\Models\JobHistory;
+use App\Models\TypeOfLogs;
+use App\Models\Designation;
+use App\Models\UserProfile;
+use App\Models\ActivityLogs;
+use App\Models\GeneralClaim;
+use App\Models\Notification;
+use App\Models\ClaimCategory;
+use App\Models\EclaimGeneral;
+use App\Models\ProjectMember;
+use App\Models\ApprovalConfig;
+use App\Models\EmploymentType;
+use App\Models\PermissionRole;
+use App\Models\TimesheetEvent;
+use App\Models\ProjectLocation;
 use App\Service\MyleaveService;
-use App\Service\MyTimeSheetService;
 use App\Service\ProjectService;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ClaimDateSetting;
+use App\Models\TransportMillage;
+use App\Models\CashAdvanceDetail;
+use App\Models\EntitleSubsBenefit;
+use App\Models\GeneralClaimDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\ApprovelRoleGeneral;
+use App\Service\MyTimeSheetService;
+use App\Models\ClaimCategoryContent;
+use Illuminate\Support\Facades\Auth;
+use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\GeneralNotification;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -676,7 +677,7 @@ if (!function_exists('asias')) {
             'LA' => "LAOS",
             'LB' => "LEBANON",
             'MO' => "MACAU SAR CHINA",
-            'MALAYSIA' => "MALAYSIA",
+            'MY' => "MALAYSIA",
             'MV' => "MALDIVES",
             'MN' => "MONGOLIA",
             'MM' => "MYANMAR [BURMA]",
@@ -710,115 +711,6 @@ if (!function_exists('asias')) {
     }
 }
 
-if (!function_exists('getCountryName')) {
-    function getCountryName($countryId)
-    {
-        $countries = getCountries();
-
-        if (isset($countries[$countryId])) {
-            return $countries[$countryId];
-        }
-
-        return '';
-    }
-}
-
-if (!function_exists('getCountries')) {
-    function getCountries()
-    {
-        $data = Country::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-        return $data->pluck('CountryName', 'countryID')->toArray();
-    }
-}
-
-if (!function_exists('getStateName')) {
-    function getStateName($stateId)
-    {
-        $states = getStates();
-
-        if (isset($states[$stateId])) {
-            return $states[$stateId];
-        }
-
-        return '';
-    }
-}
-
-if (!function_exists('getStates')) {
-    function getStates()
-    {
-        $data = State::all();
-
-        if (blank($data)) {
-            return null;
-        }
-
-        return $data->pluck('stateName', 'id')->toArray();
-    }
-}
-
-if (!function_exists('getCountryBranch')) {
-    function getCountryBranch()
-    {
-        $data = Country::all();
-
-        if (blank($data)) {
-            $data = [];
-
-        }
-
-        return $data;
-    }
-}
-
-if (!function_exists('getStateBranch')) {
-    function getStateBranch()
-    {
-        $data = State::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-
-        return $data;
-    }
-}
-
-if (!function_exists('getPostcodeBranch')) {
-    function getPostcodeBranch()
-    {
-        $data = Location::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-
-        return $data;
-    }
-}
-
-if (!function_exists('getLocation')) {
-    function getLocation()
-    {
-        $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
-        WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
-
- if (blank($data)) {
-    $data = [];
-}
-        return $data;
-
-
-    }
-}
-
 if (!function_exists('getCompany')) {
     function getCompany()
     {
@@ -831,6 +723,7 @@ if (!function_exists('getCompany')) {
         return $data;
     }
 }
+
 
 if (!function_exists('getCompanyforJobHistory')) {
     function getCompanyforJobHistory()
@@ -923,9 +816,26 @@ if (!function_exists('getUnitforJobHistory')) {
         return $units->pluck('unitName', 'id')->toArray();
     }
 }
+if (!function_exists('getUnitProject')) {
+    function getUnitProject($id = '')
+    {
+        if ($id) {
+            $data = Unit::find($id);
+        } else {
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getBranchProject')) {
     function getBranchProject($id = '')
     {
+
         if ($id) {
             $data = Branch::find($id);
         } else {
@@ -1068,6 +978,20 @@ if (!function_exists('getEmploymentTypeforJobHistory')) {
     }
 }
 
+if (!function_exists('getEmploymentTerminateStatusforJobHistory')) {
+    function getEmploymentTerminateStatusforJobHistory()
+    {
+        $user = Auth::user();
+        $employementTerminateStatus = [];
+
+        if ($user) {
+            $employementTerminateStatus = JobHistory::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $employementTerminateStatus->pluck('statusHistory', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getCustomer')) {
     function getCustomer()
     {
@@ -1140,6 +1064,31 @@ if (!function_exists('myProjectOnly')) {
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
             ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
             ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve']])
+            ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('myProjectActive')) {
+    function myProjectActive()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // pr(Auth::user()->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
+
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        }
+
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+            ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'],['b.status', '!=', 'CLOSED']])
             ->get();
         // pr($data);
         if (!$data) {
@@ -1576,6 +1525,7 @@ if (!function_exists('prjManager')) {
             ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
             ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
+            ->sortBy('name')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
@@ -1852,12 +1802,13 @@ if (!function_exists('getSupervisor')) {
 if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
-        $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+        $employee = Employee::where('user_id', $id)->select('employeeName')->first();
 
-        if (!$data) {
-            $data = '';
+        if ($employee) {
+            return $employee->employeeName;
+        } else {
+            return '';
         }
-        return $data;
     }
 }
 
@@ -2535,7 +2486,7 @@ if (!function_exists('getFinanceChecker')) {
     function getFinanceChecker()
     {
 
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -2558,7 +2509,7 @@ if (!function_exists('getFinanceChecker')) {
 if (!function_exists('getAdminChecker')) {
     function getAdminChecker()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -2656,7 +2607,9 @@ if (!function_exists('getUserWithSelectedUser')) {
     {
 
         // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])
+        ->orderBy('employeeName', 'asc')
+        ->get();
 
         if (!$data) {
             $data = [];
@@ -3035,9 +2988,9 @@ if (!function_exists('getEleaveData')) {
         $ss = new MyleaveService;
 
         if ($role == 'recommender') {
-            $data = $ss->leaveApprview();
+            $data = $ss->leaveRecommenderActive();
         } else {
-            $data = $ss->leaveApprhodView();
+            $data = $ss->leaveApproverActive();
         }
 
 

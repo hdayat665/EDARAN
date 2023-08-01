@@ -1,10 +1,10 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim | Claim Approval | Approver</h1>
+        <h1 class="page-header">eClaim | Claim Approval | Department Approver</h1>
         <div class="panel panel" id="supervisorDepartmentJs">
         
-            <div class="panel-body">
+            <div class="panel-body"> 
             
                 <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
@@ -52,7 +52,7 @@
                                     </ul>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary" id="skipButton" style="display: none;" type="button">Skip the Queue</a>&nbsp;
+                                    <a class="btn btn-primary" id="skipButton" type="button" style="display: none;">Skip the Queue</a>&nbsp;
                                     <a class="btn btn-primary" id="approveAllButton" type="button">Approve All</a>&nbsp;
                                     <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
                                     <!-- <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp; -->

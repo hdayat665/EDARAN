@@ -64,6 +64,7 @@ requirejs.config({
         viewGNSJs: assets + "/js/viewGNSJs",
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
+        monthlyClaimViewJs: assets + "/js/monthlyClaimViewJs",
         eclaimDateJs: assets + "/js/eclaimDateJs",
         supervisorDepartmentJs: assets + "/js/supervisorDepartmentJs",
         supervisorDetailClaimJs: assets + "/js/supervisorDetailClaimJs",
@@ -120,6 +121,12 @@ requirejs.config({
 
         // myleave Report
         eleavereportjs: assets + "/js/eleavereportjs",
+
+        // newRole Js
+        newRoleJs: assets + "/js/newRoleJs",
+
+        // systemUser Js
+        systemUserJs: assets + "/js/systemUserJs",
     },
 });
 
@@ -363,6 +370,11 @@ if ($("#monthlyClaimJs").length > 0) {
     requirejs(["monthlyClaimJs"]);
 }
 
+if ($("#monthlyClaimViewJs").length > 0) {
+    requirejs(["monthlyClaimViewJs"]);
+}
+
+
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
 }
@@ -523,6 +535,14 @@ if ($("#eleavereportjs").length > 0) {
 
 if ($("#appealTimesheetsJs").length > 0) {
     requirejs(["appealTimesheetsJs"]);
+}
+
+if ($("#newRoleJs").length > 0) {
+    requirejs(["newRoleJs"]);
+}
+
+if ($("#systemUserJs").length > 0) {
+    requirejs(["systemUserJs"]);
 }
 
 $(document).ajaxStart(function () {

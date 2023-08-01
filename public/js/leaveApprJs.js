@@ -1,4 +1,30 @@
 $(document).ready(function () {
+
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+        window.location.hash = e.target.hash;
+    });
+
+
+    $(document).ready(function() {
+        $(".test").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".test");
+            $(".test").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".test").hide();
+            }
+        });
+    });
+
     $(document).ready(function () {
         if (
             $("#datepicker-date").val() ||
@@ -15,10 +41,44 @@ $(document).ready(function () {
         });
     });
 
+    $("#datepicker-date").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#datepicker-dateH").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $(document).ready(function () {
+        if (
+            $("#datepicker-dateH").val() ||
+            $("#idemployerH").val() ||
+            $("#typeH").val()
+        ) {
+            $("#filterleaveH").show();
+        } else {
+            $("#filterleaveH").hide();
+        }
+
+        $("#filterH").click(function () {
+            $("#filterleaveH").toggle();
+        });
+    });
+
     $("#reset").on("click", function () {
         $("#datepicker-date").val($("#datepicker-date").data("default-value"));
         $("#idemployer").val($("#idemployer").data("default-value"));
         $("#type").val($("#type").data("default-value"));
+    });
+
+    $("#resetH").on("click", function () {
+        $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
+        $("#idemployerH").val($("#idemployerH").data("default-value"));
+        $("#typeH").val($("#typeH").data("default-value"));
     });
 
     $("#leaveApprovalSv").DataTable({
@@ -29,6 +89,19 @@ $(document).ready(function () {
         ],
         initComplete: function (settings, json) {
             $("#leaveApprovalSv").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#leaveApprovalSvHistory").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#leaveApprovalSvHistory").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -234,91 +307,15 @@ $(document).ready(function () {
 
     function myleaveview(id) {
         return $.ajax({
-            url: "/getuserleaveApprview/" + id,
+            url: "/getuserRecommenderView/" + id,
         });
     }
 
     function myleave(id) {
         return $.ajax({
-            url: "/getuserleaveAppr/" + id,
+            url: "/getuserRecommender/" + id,
         });
     }
-
-    $(document).on("click", "#approvebuttontype", function () {
-        id = $(this).data("id");
-        // console.log(id);
-        // return false;
-        requirejs(["sweetAlert2"], function (swal) {
-            swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                $.ajax({
-                    type: "get",
-                    url: "/approvemyleave/" + id,
-
-                    processData: false,
-                    contentType: false,
-                }).then(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
-                    });
-                });
-            });
-        });
-    });
-    $(document).on("click", "#approvebutton2", function () {
-        // id = $(this).data("id");
-        id = $("#iddata").val();
-        // console.log(id);
-        // return false;
-        requirejs(["sweetAlert2"], function (swal) {
-            swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                $.ajax({
-                    type: "get",
-                    url: "/approvemyleaveby/" + id,
-
-                    processData: false,
-                    contentType: false,
-                }).then(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
-                    });
-                });
-            });
-        });
-    });
 
     $("#updateButton").click(function (e) {
         $("#updateForm").validate({
@@ -337,7 +334,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updatesupervisor/" + id,
+                        url: "/updateRecommender/" + id,
                         data: data,
                         dataType: "json",
 
@@ -439,7 +436,7 @@ $(document).ready(function () {
 
     function myleave2(id) {
         return $.ajax({
-            url: "/getuserleaveAppr/" + id,
+            url: "/getuserRecommender/" + id,
         });
     }
 
@@ -464,7 +461,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updatesupervisorreject/" + id,
+                        url: "/updateRecommenderReject/" + id,
                         data: data,
                         dataType: "json",
 

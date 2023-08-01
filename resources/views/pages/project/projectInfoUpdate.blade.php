@@ -12,8 +12,9 @@
                     <select class="form-select" name="customer_id">
                         <option label="PLEASE CHOOSE"></option>
                         <?php $customers = getCustomer(); ?>
-                        @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}" {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}">
+                        <?php $sortedCustomers = $customers->sortBy('customer_name'); ?>
+                        @foreach ($sortedCustomers as $customer)
+                            <option value="{{ $customer->id }}" {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}>
                                 {{ $customer->customer_name }}</option>
                         @endforeach
                     </select>
@@ -102,27 +103,27 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <select class="form-select" name="acc_manager" id="acc_manager2">
-                        <option value="" label="PLEASE CHOOSE"></option>
+                    <select class="form-select selectacc" name="acc_manager" id="acc_manager2">
                         <?php $Employees = getEmployee(); ?>
-                        @foreach ($Employees as $Employee)
+                        <?php $sortedEmployees = $Employees->sortBy('employeeName'); ?>
+                        @foreach ($sortedEmployees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->acc_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                                <div class="col-md-4">
-                    <select class="form-select" name="project_manager" id="project_manager2" disabled>
-                        <option value="" label="PLEASE CHOOSE"></option>
-                        <?php $Employees = getEmployee(); ?>
+                <div class="col-md-4">
+                    <select class="form-select" name="project_manager" id="project_manager2" style="display:none" ></select>
+                    <select class="form-select selectmng" name="project_manager" id="project_manager2_show">
+                        <option value="" selected>PLEASE CHOOSE</option>
+                    <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
                     </select>
-                    <select class="form-select" name="project_manager" id="project_manager2_show" style="display:none" disabled></select>
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date" value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />
@@ -171,3 +172,11 @@
         </form>
     </div>
 </div>
+<style>
+  /* Target the parent element of .select2-selection */
+  .form-select.selectmng + .select2-container .select2-selection {
+    pointer-events: none;
+    background-color: #e9ecef;
+  }
+
+</style>

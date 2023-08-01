@@ -39,7 +39,7 @@
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
-                                <?php $projects = project_memberaddl($user_id) ?>
+                                <?php $projects = project_memberaddl($data['user_id']); ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach
@@ -61,12 +61,28 @@
                         
                        
                     </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="Office-Log" class="form-label">Lunch Break</label>
+                                <select class="form-select" id="lunchBreakedit" name="lunch_break" aria-label="Default select example">
+                                    <option class="" value="">PLEASE CHOOSE</option>
+                                    <option class="" value="1">YES</option>
+                                    <option class="" value="2">NO</option>
+                                </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="issuing-country" class="form-label">Total Hours</label>
+                            <input type="text" readonly id="total_hour_edit" name="total_hour" class="form-control" aria-describedby="dob">
+                            <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
+                            <input type="hidden" readonly id="statusappeal" class="form-control" aria-describedby="dob">
+                        </div>
+                    </div>
                     <div class="row p-2" id="activity_location_edit">
                         <div class="col-sm-6" id="activityByProjectEditHide" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_name_edit1" name="activity_name">
                                 <option class="form-label" value="">PLEASE CHOOSE </option>
-                                <?php $activitys = activityName($department_id) ?> 
+                                <?php $activitys = activityName($data['department_id']); ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
                                 @endforeach
@@ -77,7 +93,7 @@
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_name_edit2" name="activity_name" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="">PLEASE CHOOSE </option>
-                                <?php $activitys = activityName1($department_id) ?> 
+                                <?php $activitys = activityName1($data['department_id']); ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
                                 @endforeach
@@ -110,29 +126,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <label for="Office-Log" class="form-label">Lunch Break</label>
-                                <select class="form-select" id="lunchBreakedit" name="lunch_break" aria-label="Default select example">
-                                    <option class="" value="">PLEASE CHOOSE</option>
-                                    <option class="" value="1">YES</option>
-                                    <option class="" value="2">NO</option>
-                                </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Total Hours</label>
-                            <input type="text" readonly id="total_hour_edit" name="total_hour" class="form-control" aria-describedby="dob">
-                            <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
-                            <input type="hidden" readonly id="statusappeal" class="form-control" aria-describedby="dob">
-                        </div>
-                    </div>
+                    
                     
                     <div class="row p-2" id="listprojectedit" style="display:none">
                         <div class="col-sm-6" >
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
-                                <?php $projects = project_memberaddl($user_id) ?>
+                                <?php $projects = project_memberaddl($data['user_id']); ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach
@@ -162,7 +163,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Description</label>
-                            <textarea class="form-control" name="desc" id="desc" rows="5"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" rows="5" maxlength="225"></textarea>
                         </div>
                         
                     </div>

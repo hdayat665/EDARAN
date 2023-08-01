@@ -57,7 +57,7 @@
                                         <div class="col d-flex justify-content-end">
                                             <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
                                             <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit">
-                                                Submit</button>
+                                                Submit</button> 
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -76,7 +76,7 @@
                                                 <label class="form-label">Travelling</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $totalcarmotor ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($totalcarmotor ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -84,7 +84,7 @@
                                                 <label class="form-label">Petrol/Fare</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_petrol ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summaryTravelling[0]->total_petrol ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -92,7 +92,7 @@
                                                 <label class="form-label">Toll</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_toll ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summaryTravelling[0]->total_toll ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -100,7 +100,7 @@
                                                 <label class="form-label">Parking</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_parking ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summaryTravelling[0]->total_parking ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -108,7 +108,7 @@
                                                 <label class="form-label">Subsistence Allowance</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_subs ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summarySubs[0]->total_subs ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -116,7 +116,15 @@
                                                 <label class="form-label">Accommodation & Lodging</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_acc ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summarySubs[0]->total_acc ?? 0, 2) }}'>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Laundry</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summarySubs[0]->total_laundry ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +134,7 @@
                                                 <label class="form-label">Others</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($summaryOthers[0]->total_amount ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                     </div>
@@ -136,15 +144,15 @@
                                                 <label class="form-label">Total</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $sum ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($sum ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
                                             <div class="col-md-6">
-                                                <label class="form-label">Cash Advance (Less)</label>
+                                                <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn">View</a></label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input readonly type="text" value="" name="" class="form-control">
+                                                <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -152,7 +160,10 @@
                                                 <label class="form-label">Balance Due to/(From) Employee</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input readonly type="text" value="" name="" class="form-control">
+                                                <form id="balance">
+                                                    <input type="text" class="form-control" readonly value='RM {{ number_format($balance ?? 0, 2) }}'>
+                                                    <input type="hidden" name="amount" id="balanceValue" value="{{ number_format($balance ?? 0, 2) }}">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +198,7 @@
                                     <input readonly type="text" value="{{ $GNC->total_amount }}" name="claim_type" class="form-control">
                                 </div>
                             </div> -->
-                            </div>
+                            </div> 
                             <div class="row p-2">
                                 <br>
                             </div>
@@ -197,7 +208,7 @@
                     <div class="row p-2">
                                 <br>
                             </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         @include('pages.eclaim.tableListMonthlyClaim')
                     </div>
                 </div>

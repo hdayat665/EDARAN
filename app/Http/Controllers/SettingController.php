@@ -169,7 +169,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->createBranch($r);
-
         return response()->json($result);
     }
 
@@ -178,7 +177,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateBranch($r, $id);
-
         return response()->json($result);
     }
 
@@ -488,9 +486,47 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result = $ss->branchView();
+        $data['branchs']  = $ss->branchView();
+        $data['country'] = $ss->branchCountry();
+        $data['state'] = $ss->branchState();
+        $data['city'] = $ss->branchCity();
+        $data['postcode'] = $ss->branchPostcode();
 
-        return view('pages.setting.branch', $result);
+
+        return view('pages.setting.branch', $data);
+    }
+
+
+    public function getStatebyCountry($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getStatebyCountry($id);
+
+
+        return $result;
+    }
+
+    public function getCitybyState($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getCitybyState($id);
+
+
+        return $result;
+    }
+
+
+
+    public function getPostcodeByCity($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getPostcodeByCity($id);
+
+
+        return $result;
     }
 
     public function locationView()
@@ -498,11 +534,8 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $data['locations'] = $ss->locationView();
-
-        //pr($data['locations']);
-
-
-
+        $data['country'] = $ss->branchCountry();
+        $data['state'] = $ss->branchState();
 
         return view('pages.setting.location', $data);
     }
@@ -1088,11 +1121,12 @@ class SettingController extends Controller
         return response()->json($data);
     }
 
-    public function eleaveEntitlementView()
+    public function leaveEntitlementIndex()
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
+        $data['entitlementActive'] = $ss->leaveEntitlementActive();
+        $data['entitlementCurrent'] = $ss->leaveEntitlementCurrent();
         $data['nameStaff'] = $ss->leaveNameStaff();
         // dd($data['nameStaff']);
         // die;
@@ -1134,9 +1168,10 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $data['weekend'] = $ss->weekendview();
+        $data['state'] = $ss->getstate();
 
-        // dd($data['weekend']);
-        // die;
+        // dd($data['state']);
+        // // die;
 
         return view('pages.setting.eleave.weekendEntitlement', $data);
     }
@@ -1180,6 +1215,18 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateleaveEntitlement($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function leaveEntitlementSelect(Request $r)
+    {
+        // $input = $r->input();
+        // dd($input);
+        // die;
+        $ss = new SettingService;
+
+        $result = $ss->leaveEntitlementSelect($r);
 
         return response()->json($result);
     }
@@ -1266,25 +1313,48 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    // public function holidaylistView(){
-    //      return view('pages.setting.eleave.holidaylist');
-    // }
+    public function holidaylistView(Request $r) {
 
-    public function holidaylistView()
-    {
         $hlv = new SettingService;
 
-        $result = $hlv->holidaylistView();
+        $data['holiday'] = $hlv->holidaylistView();
+        $data['country'] = $hlv->country();
+        $data['countrySearch'] = '';
 
-        return view('pages.setting.eLeave.holidaylist', $result);
+        $input = $r->input();
+
+        if (isset($input['countrySearch'])) {
+            $data['holiday'] = $hlv->searchHolidaylist($r);
+            $data['countrySearch'] = isset($input['countrySearch']) ? $input['countrySearch'] : '';
+        }
+
+        return view('pages.setting.eLeave.holidaylist', $data);
     }
 
     public function createholidaylist(Request $r)
     {
+        // $input = $r->input();
+
+        // dd($input);
+        // die;
 
         $chl = new SettingService;
 
         $result = $chl->createholidaylist($r);
+
+        return response()->json($result);
+    }
+
+    public function updateholidaystate(Request $r)
+    {
+        // $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $chl = new SettingService;
+
+        $result = $chl->updateholidaystate($r);
 
         return response()->json($result);
     }
@@ -1431,6 +1501,21 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function createleaveweekend(Request $r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $ss = new SettingService;
+
+        $result = $ss->createleaveweekend($r);
+
+
+
+        return response()->json($result);
+    }
     public function updateweekend(Request $r)
     {
         $input = $r->input();
@@ -1441,6 +1526,19 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateweekend($r);
+
+
+
+        return response()->json($result);
+    }
+
+    public function getweekend($id = '')
+    {
+
+
+        $ss = new SettingService;
+
+        $result = $ss->getweekend($id);
 
         return response()->json($result);
     }
@@ -1471,5 +1569,75 @@ class SettingController extends Controller
         $result = $ss->updateCarryForward($r);
 
         return response()->json($result);
+    }
+
+    public function newRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newRole');
+    }
+    public function newCreateRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newCreateRole');
+    }
+    public function newUpdateRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newUpdateRole');
+    }
+
+    public function systemUser()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUser');
+    }
+    // public function systemUserCreate()
+    // {
+    //     // $ss = new SettingService;
+
+    //     // $result = $ss->systemUser();
+
+    //     return view('pages.setting.systemUserCreate');
+    // }
+    public function systemUserUpdate()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUserUpdate');
+    }
+
+
+    //
+    public function getstateholiday($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getstateholiday($id);
+
+        return $result;
+    }
+
+    public function getstateholidaydetail($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getstateholidaydetail($id);
+
+        return $result;
     }
 }

@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck8" value="on" type="checkbox" name="nonCitizen" id="citizen">
+                                        <input class="form-check-input partCheck8" value="on" type="checkbox" name="non_citizen" id="non_citizen2">
                                         <label class="form-check-label" for="citizen" >
                                             Non-Citizen
                                         </label>
@@ -42,7 +42,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >New Identification Number*</label>
                                     <input type="number" id="idNoaddFamily" name="idNo" value="" class="form-control" placeholder="000000000000" >
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -61,20 +61,19 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                  
                                     <input type="text" id="passportParent" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" id="expiryDateParent" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;"  >
+                                    <input type="text" id="expiryDateParent" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled readonly>
 
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select"  name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase"  >
-                                                                
+                            <select class="form-select"  name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase" disabled readonly >
+
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -130,7 +129,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck5 " value="" type="checkbox" name="okuStatus2"  id="">                                        
+                                        <input class="form-check-input okuCheck5" value="on" type="checkbox" name="oku_status" id="oku_status2">
                                         <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
@@ -138,8 +137,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">OKU Card Number*</label>
-                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly  placeholder="OKU CARD NUMBER">
-                                    
+                                    <input type="number" id="okucard5" name="okuCardNum" value="" class="form-control" readonly  placeholder="OKU CARD NUMBER">
+
                                 </div>
                             </div>
                         </div>
@@ -199,7 +198,7 @@
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country*</label>
                             <select class="form-select" name="country" id="countryparent" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
-                                <?php 
+                                <?php
                                     $americass = americas();
                                     $asias = asias();
                                 ?>
@@ -219,9 +218,9 @@
                         </div>
                     </div>
 
-                
+
             </div>
-            <div class="modal-footer"> 
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
             </div>

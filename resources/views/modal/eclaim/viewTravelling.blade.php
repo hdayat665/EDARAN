@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                         <div class="p-2">
                             <div class="row">
                                 <div class="col-md-6">
@@ -256,20 +256,20 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input  type="hidden" class="form-control" value="{{ $food[0]['local_hotel_value'] }}" id="hotelcvUpdateHide">
-                                                    <input type="number" name="hotel_value" class="form-control" value="" id="hotelcvUpdate" />
+                                                    <input type="number"  readonly id="hotelCvModal" class="form-control" value="{{ $food[0]['local_hotel_value'] }}"  />
                                                 </div>
                                                 
                                                 <div class="col-md-1">
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="hotel" class="form-control" id="hnUpdate" value="0">
+                                                    <input type="text" name="hotel" class="form-control" readonly id="hnUpdate" value="0">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" readonly id="hnTotalUpdate" value="0">
+                                                    <input type="text" name="hotel_value" class="form-control"  id="hotelcvUpdate" value="0">
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -286,19 +286,19 @@
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="lodging" class="form-control" value="0" id="lnUpdate">
+                                                    <input type="text" name="lodging" readonly class="form-control" value="0" id="lnUpdate">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" readonly class="form-control" id="lnTotalUpdate" value="0">
+                                                    <input type="text" name="lodging_value"  class="form-control" id="lnTotalUpdate" value="0">
                                                 </div>
                                             </div>
                                             
                                             <div class="row p-2">
                                                 <div class="col-md-3">
-                                                    <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                                    <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
                                                 </div>
                                                 <div class="col-md-1">
                                                     
@@ -319,7 +319,7 @@
                                             <div class="row p-2">
                                             
                                                 <div class="col-md-6">
-                                                    <a id="file_upload" href="#"></a>
+                                                    <!-- <a id="file_upload" href="#"></a> -->
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">Total (A+B)</label>
@@ -328,13 +328,50 @@
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input readonly type="text" name="total" class="form-control" value="" id="total2Update">
+                                                    <input readonly type="text" name="amount" class="form-control" value="" id="total2Update">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-2"  id="laundrydivUpdate">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Laundry Allowance</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Amount</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" name="laundry_amount" id="laundry_amount_update"class="form-control" placeholder="0.00">
+                                                    </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Description</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Supporting Document</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                            <a id="file_laundry_update" href="#"></a>
+                                                        </div> 
+                                                    </div> -->
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>
@@ -387,11 +424,19 @@
                             <div class="col-md-4">
                                 <label class="form-label">File Upload</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="" multiple>
                             </div>
+                            
                         </div>
-
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">File Name</label>
+                            </div>
+                            <div class="col-md-2">
+                                <a id="file_other_update" href="#"></a>
+                            </div>
+                        </div>
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateOtherMtcBtn" class="btn btn-primary">Update</button>
@@ -558,6 +603,61 @@
                             </div> 
                         </div>
                         <div class="modal-footer"> 
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="viewCa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 1200px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View Cash Advance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="viewCaForm">
+                    <div class="">
+                        <input readonly type="hidden" value="{{ isset($GNC['id']) ? $GNC['id'] : '' }}" name="id" class="form-control">
+                        <div class="row p-2">
+                            <div class="">
+                            <table id="claimtable" class="table table-striped table-bordered align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>-</th>
+                                            <th class="text-nowrap">No</th>
+                                            <th class="text-nowrap">Form ID</th>
+                                            <th class="text-nowrap">Type of Cash Advance
+                                            </th>
+                                            <th class="text-nowrap">Travel Date</th>
+                                            <th class="text-nowrap">Applied Amount</th>
+                                            <th class="text-nowrap">Used Amount</th>
+                                            <th class="text-nowrap">Final Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1; ?>
+                                        @foreach ($cashAdvances as $cashAdvance)
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" value="{{ $cashAdvance->id }}" name="cashAdvanceId[]" /></td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>Form ID {{ $cashAdvance->id }}</td>
+                                                <td> {{ getCashAdvanceType($cashAdvance->type) }}</td>
+                                                <td> {{ $cashAdvance->travel_date }}</td>
+                                                <td>RM {{ $cashAdvance->amount }}</td>
+                                                <td>RM {{ $cashAdvance->used_amount ?? 0}} </td>
+                                                <td>RM {{ $cashAdvance->final_amount ?? 0 }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
+                        <div class="modal-footer"> 
+                            <button type="submit" id="caSave" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         
                         </div>

@@ -10,8 +10,10 @@ use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
+use Illuminate\Support\Facades\Log;
+use DateTime;
 
-class MailService 
+class MailService
 {
     public function emailToSupervisorClaimGNC($data)
     {
@@ -38,7 +40,7 @@ class MailService
         }
     }
 
-    
+
     public function emailToSupervisorClaimMTC($data)
     {
         // get supervisor detail
@@ -112,7 +114,7 @@ class MailService
         Mail::to($receiver)->send(new MailMail($response));
         // }
     }
-    
+
     public function approvalEmailMTCForAdmin($data)
     {
         // get supervisor detail
@@ -289,6 +291,7 @@ class MailService
         if($user && $recommenderLeave){
 
             $receiver = $recommenderLeave->workingEmail;
+            $response['cc'] = $user->workingEmail;
             $response['typeEmail'] = 'emailToRecommenderLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -330,6 +333,7 @@ class MailService
             $response['from'] = env('MAIL_FROM_ADDRESS');
             $response['nameFrom'] = $user->employeeName;
             $response['subject'] = 'Leave Application';
+            $response['cc'] = $user->workingEmail;
             $response['title'] = 'Leave Application';
             $response['approvedby'] = $approvedbyLeave->employeeName;
             $response['employeeName'] = $user->employeeName;
@@ -368,6 +372,7 @@ class MailService
         if($user && $approvedbyLeave){
 
             $receiver = $approvedbyLeave->workingEmail;
+            $response['cc'] = $recommendedby->workingEmail;
             $response['typeEmail'] = 'emailToApproverLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -406,6 +411,7 @@ class MailService
         if($user && $userRecommender){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $userRecommender->workingEmail;
             $response['typeEmail'] = 'emailToRejectedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -443,6 +449,8 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
+
             $response['typeEmail'] = 'emailToRejectedLeaveHod';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -480,6 +488,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
             $response['typeEmail'] = 'emailToApprovedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -516,6 +525,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $approvedby->workingEmail;
+            $response['cc'] = $user->workingEmail;
             $response['typeEmail'] = 'emailToApprovedAppeal';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -532,6 +542,8 @@ class MailService
             Mail::to($receiver)->send(new MailMail($response));
         }
     }
+
+
 
 
     public function emailToEmployeeAppeal($data)
@@ -554,6 +566,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
             $response['typeEmail'] = 'emailToEmployeeAppeal';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -569,4 +582,235 @@ class MailService
             Mail::to($receiver)->send(new MailMail($response));
         }
     }
+
+    public function getEmailData($data)
+    {
+        {
+
+            $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                    ->join('designation', 'employment.designation', '=', 'designation.id')
+                    ->join('department', 'employment.department', '=', 'department.id')
+                    ->where('employment.user_id', $data->user_id)
+                    ->where('employment.tenant_id', Auth::user()->tenant_id)
+                    ->first();
+    
+            $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                    ->join('designation', 'employment.designation', '=', 'designation.id')
+                    ->join('department', 'employment.department', '=', 'department.id')
+                    ->where('employment.user_id', $user->tsapprover)
+                    ->where('employment.tenant_id', Auth::user()->tenant_id)
+                    ->first();
+    
+            if($user && $approvedby){
+    
+                $receiver = $user->workingEmail;
+                $response['typeEmail'] = 'emailToEmployeeAppeal';
+    
+                $response['from'] = env('MAIL_FROM_ADDRESS');
+                $response['nameFrom'] = $approvedby->employeeName;
+                $response['subject'] = 'Timesheet Appeal Application Status';
+                $response['title'] = 'Timesheet Appeal Application Status';
+                $response['employeeNamex'] = $user->employeeName;
+                $response['employeeName'] = $approvedby->employeeName;
+                $response['departmentName'] = $approvedby->departmentName;
+                $response['designationName'] = $approvedby->designationName;
+                $response['data'] = $data;
+    
+                Mail::to($receiver)->send(new MailMail($response));
+            }
+        }
+    }
+
+    public function emailToApproverAppeal123()
+{
+    $now = now();
+    $twoDaysAgo = $now->subDays(1)->format('Y-m-d');
+
+    $users = Employee::leftJoin('timesheet_event', function ($join) use ($twoDaysAgo) {
+        $join->on('employment.user_id', '=', 'timesheet_event.user_id')
+            ->leftJoin('attendance_event', function ($join) {
+                $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
+                    ->where('attendance_event.status', '=', 'attend');
+            })
+            ->whereDate('timesheet_event.start_date', '=', $twoDaysAgo)
+            ->groupBy('timesheet_event.user_id');
+    })
+    ->leftJoin('timesheet_log', function ($join) use ($twoDaysAgo) {
+        $join->on('employment.user_id', '=', 'timesheet_log.user_id')
+            ->whereDate('timesheet_log.date', '=', $twoDaysAgo)
+            ->groupBy('timesheet_log.user_id');
+    })
+    ->groupBy('employment.user_id', 'employment.employeeName', 'employment.workingEmail', 'employment.branch')
+    ->select(
+        'employment.user_id',
+        'employment.employeeName',
+        'employment.workingEmail',
+        'employment.branch',
+        DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_event.duration))) AS total_event_hours"),
+        DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_log.total_hour))) AS total_log_hours")
+    )
+    ->get();
+    
+        foreach ($users as $user) {
+
+            //can i use $twoDaysAgo
+
+            $getstate = DB::table('employment as a')
+            ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
+            ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
+            ->where('a.user_id', $user->user_id)
+            ->select('c.state_id')
+            ->first();
+            $stateId = $getstate->state_id;
+
+            $receiver = $user->workingEmail;
+
+            $getweekend = DB::table('leave_weekend as a')
+            ->where('a.state_id', $stateId)
+            ->whereNull('a.start_time')
+            ->pluck('a.day_of_week')
+            ->toArray();
+        
+        
+            $dow = $getweekend;
+            rsort($dow); 
+            $wknd1 = $dow[0];
+            $wknd2 = $dow[1];
+
+    
+            $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
+            $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
+            $combinedHours = $eventHours->diff($logHours)->format('%H:%I:%S');
+    
+            $working_hour = '08:00:00';
+    
+            $data = [
+                'nameFrom' => $user->employeeName,
+                'user_id' => $user->user_id,
+                'total_event_hours' => $user->total_event_hours,
+                'total_log_hours' => $user->total_log_hours,
+                'test' => $combinedHours,
+                "date" => $twoDaysAgo,
+                "branch" => $user->branch,
+                "state" =>  $stateId,
+                'dow' => $dow,
+                'wknd1'=> $wknd1,
+            ];
+    
+            $response = [
+                'subject' => 'Timesheet Appeal Application Status',
+                'typeEmail' => 'emailmissedtimesheet',
+                'from' => env('MAIL_FROM_ADDRESS'),
+                'nameFrom' => $user->employeeName,
+                'test' => $combinedHours,
+                'date' => $twoDaysAgo,
+                'user_id' => $user->user_id,
+                'branch' => $user->branch,
+                'state' =>  $stateId,
+                'dow' => $dow,
+                'wknd1'=> $wknd1,
+            ];
+    
+    
+            if ($combinedHours < $working_hour || $combinedHours === '00:00:00') {
+                Mail::to($receiver)->send(new MailMail($response, $data));
+            }
+        }
+    }
+
+    public function emailEventReminder()
+    {
+        $today = date('Y-m-d');
+
+    $users = Employee::leftJoin('timesheet_event', function($join) {
+        $join->whereRaw("FIND_IN_SET(employment.user_id, timesheet_event.participant)");
+    })
+    ->leftJoin('attendance_event', function($join) {
+        $join->on('employment.user_id', '=', 'attendance_event.user_id')
+            ->on('timesheet_event.id', '=', 'attendance_event.event_id');
+    })
+    ->select(
+        'employment.user_id',
+        'employment.employeeName',
+        'employment.workingEmail',
+        'employment.branch',
+        'timesheet_event.duration',
+        'timesheet_event.start_time',
+        'timesheet_event.end_time',
+        'timesheet_event.reminder',
+        'timesheet_event.event_name',
+        'timesheet_event.start_date',
+        'timesheet_event.venue',
+        
+    )
+    ->whereNotNull('timesheet_event.reminder')
+    ->whereDate('timesheet_event.start_date', '=', $today) // Filtering rows for current date
+    ->where('attendance_event.status', '=', 'attend') // Filtering rows for attendees only
+    ->get();
+
+
+    foreach ($users as $user) {
+        $startTime = strtotime($user->start_time);
+        $currentTime = strtotime(date('H:i'));
+      
+        $reminder = $user->reminder;
+
+        if($reminder == 1) {
+            $oneHourBefore = strtotime('-5 minutes', $startTime);
+        } 
+        else if($reminder == 2) {
+            $oneHourBefore = strtotime('-10 minutes', $startTime);
+        }
+        else if($reminder == 3) {
+            $oneHourBefore = strtotime('-15 minutes', $startTime);
+        }
+        else if($reminder == 4) {
+            $oneHourBefore = strtotime('-20 minutes', $startTime);
+        }
+        else if($reminder == 5) {
+            $oneHourBefore = strtotime('-30 minutes', $startTime);
+        }
+        else {
+            $oneHourBefore = strtotime('-1 hour', $startTime);
+        }
+    
+        // If current time is exactly 1 hour before the start time, then send the email
+        if ($currentTime == $oneHourBefore) {
+            $receiver = $user->workingEmail;
+    
+            $data = [
+                'nameFrom' => $user->employeeName,
+                'user_id' => $user->user_id,
+                'duration' => $user->duration,
+                'start_time' => $user->start_time,
+                'reminder' => $user->reminder,
+                'event_name' => $user->event_name,
+                'date' => $user->start_date,
+                'start_time' => $user->start_time,
+                'end_time' => $user->end_time,
+                'venue' => $user->venue,
+                // Include any other data required for the email content
+            ];
+    
+            $response = [
+                'subject' => 'Event Reminder',
+                'typeEmail' => 'emaileventreminder',
+                'from' => env('MAIL_FROM_ADDRESS'),
+                'nameFrom' => $user->employeeName,
+                'duration' => $user->duration,
+                'start_time' => $user->start_time,
+                'reminder' => $user->reminder,
+                'event_name' => $user->event_name,
+                'date' => $user->start_date,
+                'end_time' => $user->end_time,
+                'venue' => $user->venue,
+                // Include any other data required for the email content
+            ];
+    
+            // Now, send the email
+            Mail::to($receiver)->send(new MailMail($response, $data));
+        }
+    }
+    
+}
 }

@@ -71,11 +71,11 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;"  readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" disabled readonly>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country* </label>
                                 <select class="form-select" name="issuingCountry" id="issuingCountry2" value="{{ $companion->issuingCountry ?? '' }}" style= "pointer-events: none;" disabled readonly>
@@ -100,7 +100,7 @@
                         <div class="row p-2">
                                 <div class="col-sm-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
+                                    <input type="text" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="dom" class="form-label">Date Marriage</label>
@@ -145,7 +145,7 @@
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" >OKU Card Number*</label>
                                         <input type="text" id="okucard1" disabled name="okuCardNum" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <br>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -190,7 +190,7 @@
                                 <label for="firstname" class="form-label">City*</label>
                                 <input type="text" id="cityc" name="city" value="{{ $companion->city ?? '' }}" placeholder="CITY" class="form-control" aria-describedby="firstname">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -241,7 +241,7 @@
                                 <label for="company-name" class="form-label">Company Name</label>
                                 <input type="text" id="companyNamemc" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" placeholder="COMPANY NAME" class="form-control" aria-describedby="company-name">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -252,7 +252,7 @@
                                 <label for="income-tax-number" class="form-label">Income Tax Number</label>
                                 <input type="text" readonly id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control" placeholder="000000000000" aria-describedby="income-tax-number">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -284,7 +284,7 @@
                                 <label for="firstname" class="form-label">City</label>
                                 <input type="text" readonly id="cityEmc" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -315,9 +315,8 @@
                             </div>
                         </div>
                         <p class="text-end mb-0 mt-3">
-                        
                         <button href="javascript:;" id="addCompanion" class="btn btn-primary">Save</button>
-                    </p>
+                        </p>
                     </form>
                 </div>
             </div>
@@ -392,15 +391,15 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number 2</label>
-                                        <input type="text" id="passportmcs" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" readonly placeholder="PASSPORT NUMBER" aria-describedby="passport" style= "pointer-events: none;" readonly>
+                                        <input type="text" id="passportmcs" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport" >
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydatemcs" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" class="form-control" placeholder="YYYY/MM/DD" aria-describedby="expirydate">
+                                        <input type="text" id="expirydatemcs" name="expiryDate" value="{{ ($companion->expiryDate !== null) ? date_format(date_create($companion->expiryDate), 'Y-m-d') : '' }}" class="form-control" readonly placeholder="YYYY/MM/DD" aria-describedby="expirydate">
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" id="issuingCountry2s" value="{{ $companion->issuingCountry ?? '' }}">
@@ -432,18 +431,17 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="dom" class="form-label">Date of Marriage</label>
-                                       <input type="text" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
+                                       <input type="text" id="dom" name="DOM" value="{{ ($companion->DOM !== null) ? date_format(date_create($companion->DOM), 'Y-m-d') : '' }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row">
-                                   
+
                                     <div class="col-sm-6">
                                         <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                         <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                         @if ($companion->marrigeCert)
-                                        {{-- Click <a href="/storage/app/file/{{$companion->marrigeCert}}" target="_blank">here</a> to see marriage cert. --}}
                                         @endif
                                     </div>
                                     <div class="col-sm-6">
@@ -459,7 +457,7 @@
                                 </div>
                             </div>
                         </div>
-                
+
                         <div class="row p-2">
                              <div class="col-sm-6">
                                 <label for="contact-number" class="form-label">Phone Number</label>
@@ -475,7 +473,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck1s "  id="" value="" type="checkbox" name="okuStatus1s"  >
+                                            <input class="form-check-input okuCheck1s"  id="" value="" type="checkbox" name="okuStatus1s"  >
                                             <label class="form-check-label" for="citizen" >
                                                 OKU?
                                             </label>
@@ -484,7 +482,7 @@
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" >OKU Card Number*</label>
                                         <input type="number" id="okucard1s" disabled name="okuNumber" value="{{ $companion->okuNumber ?? '' }}" class="form-control" readonly placeholder="OKU CARD NUMBER">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -579,7 +577,7 @@
                                 <label for="company-name" class="form-label">Company Name</label>
                                 <input type="text" id="phone-number" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" placeholder="COMPANY NAME" class="form-control mcdetail" aria-describedby="company-name">
                             </div>
-                           
+
                         </div>
                         <div class="row p-2">
                          <div class="col-sm-6">
@@ -590,14 +588,14 @@
                                 <label for="income-tax-number" class="form-label">Income Tax Number</label>
                                 <input type="text" id="income-tax-number" readonly name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control mcdetail" aria-describedby="income-tax-number" placeholder="000000000000">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
                                 <input type="text" readonly id="payslipmc" readonly name="salary"  class="form-control mcdetail" placeholder="MONTHLY SALARY">
                                 <input type="file" id="extension-number" name="payslip" value="{{ $companion->salary ?? '' }}" class="form-control" hidden aria-describedby="0000">
-                               
+
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
@@ -623,7 +621,7 @@
                                 <label for="firstname" class="form-label">City</label>
                                 <input type="text" id="firstname" readonly name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control mcdetail" placeholder="CITY" aria-describedby="firstname">
                             </div>
-                           
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -654,19 +652,19 @@
                         </div>
                     <p class="text-end mb-0 mt-3">
                         <button id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
-                    </p>                    
+                    </p>
                     </form>
 
                 </div>
             </div>
-        </div> 
+        </div>
         @endforeach
         @endif
     </div>
     <div class="row p-2">
             <div class="modal-footer">
                 <a class="btn btn-white me-5px btnPrevious">Previous</a>
-                
+
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>

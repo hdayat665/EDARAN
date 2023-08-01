@@ -8,7 +8,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">HRIS | Policy's & SOP's</h1>
+    <h1 class="page-header">HRIS | Policy & SOP</h1>
 
 
 
@@ -22,13 +22,13 @@
                 <li class="nav-item">
                     <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
-                        <span class="d-sm-block d-none">Policy's</span>
+                        <span class="d-sm-block d-none">Policy</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
-                        <span class="d-sm-block d-none">SOP's</span>
+                        <span class="d-sm-block d-none">SOP</span>
                     </a>
                 </li>
 
@@ -38,15 +38,15 @@
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <!-- BEGIN tab-pane -->
                 <div class="tab-pane fade active show" id="default-tab-1">
-                    <h3 class="mt-10px"></i> Policy's List </h3>
+                    <h3 class="mt-10px"></i> Policy List </h3>
                     <div class="panel-heading-btn">
-                        <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy's</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy</a>
                     </div>
                     <div class="panel-body">
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th>No.</th> 
+                                    <th>No.</th>
                                     <th class="text-nowrap">Policy</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
@@ -73,7 +73,7 @@
                                         <td>{{$policy->addedBy}}</td>
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
-                                        <td>{{$policy->updated_at}}</td>
+                                        <td>{{$policy->modified_at}}</td>
                                         <td>
                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                             <div class="dropdown-menu">
@@ -96,15 +96,15 @@
             <!-- END tab-pane -->
             <!-- BEGIN tab-pane -->
             <div class="tab-pane fade" id="default-tab-2">
-                <h3 class="mt-10px"></i> SOP's List </h3>
+                <h3 class="mt-10px"></i> SOP List </h3>
                 <div class="panel-heading-btn">
-                    <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP's</a>
+                    <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP</a>
                 </div>
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>                
-                                <th>No.</th>                 
+                            <tr>
+                                <th>No.</th>
                                 <th class="text-nowrap">SOP Code</th>
                                 <th class="text-nowrap">SOP Name</th>
                                 <th class="text-nowrap">Description</th>
@@ -129,7 +129,7 @@
                                     <td>{{$SOP->desc}}</td>
                                     <td>
                                         <a href="{{ route('download', ['filename' => $SOP->file]) }}">{{$SOP->file}}</a>
-                                    </td>                                    
+                                    </td>
                                     <td>{{$SOP->addedBy}}</td>
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
@@ -164,7 +164,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Policy's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Policy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -183,7 +183,7 @@
                         <textarea type="text" class="form-control" rows="3" placeholder="DESCRIPTION" name="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Attachment </label>
+                        <label class="form-label">Attachment*</label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
@@ -202,7 +202,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Policy's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Policy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -240,19 +240,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New SOP's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New SOP</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code* </label>
-                        <input type="text" class="form-control" name="SOPCode" placeholder="SOP'S CODE" maxlength="100" >
+                        <label class="form-label">SOP Code* </label>
+                        <input type="text" class="form-control" name="SOPCode" placeholder="SOP CODE" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name* </label>
-                        <input type="text" class="form-control" name="SOPName" placeholder="SOP'S NAME" maxlength="100" >
+                        <label class="form-label">SOP Name* </label>
+                        <input type="text" class="form-control" name="SOPName" placeholder="SOP NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description* </label>
@@ -276,20 +276,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update SOP's</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update SOP</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code </label>
-                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP'S CODE" >
-                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP'S CODE" >
+                        <label class="form-label">SOP Code </label>
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP CODE" >
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP CODE" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name </label>
-                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP'S NAME" maxlength="100" >
+                        <label class="form-label">SOP Name </label>
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description </label>

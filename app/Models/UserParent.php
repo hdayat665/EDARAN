@@ -25,7 +25,6 @@ class UserParent extends Authenticatable
         'firstName',
         'lastName',
         'fullName',
-        'nonCitizen',
         'idNo',
         'passport',
         'expiryDate',
@@ -44,6 +43,8 @@ class UserParent extends Authenticatable
         'idFile',
         'okuFile',
         'oldIDNo',
+        'oku_status',
+        'non_citizen',
         'okuCardNum',
     ];
 }

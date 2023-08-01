@@ -1,5 +1,21 @@
 $(document).ready(function () {
 
+    $(document).ready(function() {
+        $(".test").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".test");
+            $(".test").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".test").hide();
+            }
+        });
+    });
+
 
     const fileInput = document.getElementById("fileupload");
 
@@ -33,24 +49,37 @@ $(document).ready(function () {
         },
     });
 
-    $("#table-leave2").DataTable({
+    $("#tableleavedua").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
         initComplete: function (settings, json) {
-            $("#table-leave2").wrap(
+            $("#tableleavedua").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+
+    var getNoPayLeave = getNoPayLeave();
+
+    function getNoPayLeave() {
+        return $.ajax({
+            url: "/totalNoPaidLeave",
+        });
+    }
+
+    getNoPayLeave.then(function (data) {
+        $("#totalNoPaidLeave").text("Total Days for No Paid Leave: " + (data.totalNoPay || 0) + " Days");
+
     });
 
     var getEarnedLeave = getEarnedLeave();
 
     function getEarnedLeave() {
         return $.ajax({
-            url: "/getEarnedLeave/",
+            url: "/getEarnedLeave",
         });
     }
 
@@ -63,7 +92,7 @@ $(document).ready(function () {
 
     function getLapseLeave() {
         return $.ajax({
-            url: "/getLapseLeave/",
+            url: "/getLapseLeave",
         });
     }
 
@@ -78,7 +107,7 @@ $(document).ready(function () {
 
     function mypie1() {
         return $.ajax({
-            url: "/getpieleave/",
+            url: "/getpieleave",
         });
     }
 
@@ -141,7 +170,7 @@ $(document).ready(function () {
 
     function mypie2() {
         return $.ajax({
-            url: "/getpieleave2/",
+            url: "/getpieleave2",
         });
     }
 
@@ -271,6 +300,9 @@ $(document).ready(function () {
         $("#menu6").hide();
         $("#menu7").hide();
         $("#menu8").hide();
+        $("#hideavaible").hide();
+        $("#menusick").hide();
+
     });
 
     $(document).on("change", "#select3", function () {
@@ -422,6 +454,7 @@ $(document).ready(function () {
                 end_date: "required",
                 reason: "required",
                 flexRadioDefault: "required",
+                fileuploadsick: "required",
             },
 
             messages: {
@@ -433,6 +466,7 @@ $(document).ready(function () {
                 start_date: "Please Insert Start Date",
                 end_date: "Please Insert End Date",
                 flexRadioDefault: "Please select morning or evening",
+                fileuploadsick: "Please insert document or medical certificate (MC)",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -808,4 +842,28 @@ $(document).ready(function () {
             url: "/getusermyleave/" + id,
         });
     }
+
+    $(document).on("change", "#typeofleavehidden", function () {
+        var checktype = $("#typeofleavehidden").val();
+        var checktype1 = $("#type_sick").val();
+
+        // console.log(checktype,checktype1);
+
+        if(checktype == 2  &&  checktype1 == 2){
+
+            $("#hideavaible").show();
+            $("#menusick").show();
+            $("#menu9").hide();
+
+        }else{
+
+            $("#hideavaible").hide();
+            $("#menu9").show();
+            $("#menusick").hide();
+            $("#radio1").val("");
+            $("#radio2").val("");
+
+        }
+
+    });
 });

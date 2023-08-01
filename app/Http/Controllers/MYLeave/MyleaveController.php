@@ -9,8 +9,8 @@ use Illuminate\Routing\Controller;
 
 class MyleaveController extends Controller
 {
-    public function myleaveView(Request $r)
-    {
+    public function myleaveView(Request $r){
+
         $ms = new MyleaveService;
 
         $data['myleave'] = $ms->myleaveView();
@@ -24,6 +24,10 @@ class MyleaveController extends Controller
         $data['typelistmy'] = '';
         $data['status_searchingmy'] = '';
         $data['types'] = $ms->datatype();
+        $data['typessick'] = $ms->datatypesick();
+
+        // dd($data['typessick']);
+        // die;
         // $data['mypie'] = $ms->datapie();
 
         $input = $r->input();
@@ -45,7 +49,7 @@ class MyleaveController extends Controller
 
 
 
-        return view('pages.myleave.myleave', $data);
+        return view('pages.leave.myleave', $data);
     }
 
     public function searchmyleavehistory(Request $r)
@@ -69,6 +73,9 @@ class MyleaveController extends Controller
 
     public function createtmyleave(Request $r)
     {
+        // $input = $r->input();
+        // dd($input);
+        // die;
 
         $ms = new MyleaveService;
 
@@ -138,24 +145,14 @@ class MyleaveController extends Controller
         return $result;
     }
 
-    public function getuserleaveAppr($id = '')
+    public function totalNoPaidLeave()
     {
         $ms = new MyleaveService;
-
-        $result = $ms->getuserleaveAppr($id);
-        // dd($result);
-
+        $result = $ms->totalNoPaidLeave();
         return $result;
     }
-    public function getuserleaveApprview($id = '')
-    {
-        $ms = new MyleaveService;
 
-        $result = $ms->getuserleaveApprview($id);
-        // dd($result);
 
-        return $result;
-    }
 
     public function getuserleaveApprhod($id = '')
     {
@@ -180,70 +177,113 @@ class MyleaveController extends Controller
     //supervisor
 
 
-    public function leaveApprView(Request $r)
+    public function leaveRecommenderIndex(Request $r)
     {
         $ms = new MyleaveService;
-        $data['leaveApprView'] = $ms->leaveApprview();
+        $data['leaveRecommenderListActive'] = $ms->leaveRecommenderActive();
+        $data['leaveRecommenderListHistory'] = $ms->leaveRecommenderHistory();
         $data['employer'] = $ms->idemployer();
         $data['types'] = $ms->datatype();
         $data['applydate'] = '';
         $data['idemployer'] = '';
         $data['type'] = '';
+        $data['applydateH'] = '';
+        $data['idemployerH'] = '';
+        $data['typeH'] = '';
 
         $input = $r->input();
 
-        if ($input) {
-            $data['leaveApprView'] = $ms->searleavaappr($r);
-            $data['applydate'] = $input['applydate'];
-            $data['idemployer'] = $input['idemployer'];
-            $data['type'] = $input['type'];
+        if (isset($input['applydate']) || isset($input['idemployer']) || isset($input['type'])) {
+            $data['leaveRecommenderListActive'] = $ms->searchleaveRecommenderActive($r);
+            $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
+            $data['idemployer'] = isset($input['idemployer']) ? $input['idemployer'] : '';
+            $data['type'] = isset($input['type']) ? $input['type'] : '';
         }
 
-        return view('pages.myleave.leaveAppr', $data);
+        if (isset($input['applydateH']) || isset($input['idemployerH']) || isset($input['typeH'])) {
+            $data['leaveRecommenderListHistory'] = $ms->activeleaveRecomenderHistory($r);
+            $data['applydateH'] = isset($input['applydateH']) ? $input['applydateH'] : '';
+            $data['idemployerH'] = isset($input['idemployerH']) ? $input['idemployerH'] : '';
+            $data['typeH'] = isset($input['typeH']) ? $input['typeH'] : '';
+        }
+
+        return view('pages.leave.leaveRecommender', $data);
     }
 
-    public function updatesupervisor(Request $r, $id)
-    {
-        $ms = new MyleaveService;
+    public function updateRecommender(Request $r, $id) {
 
-        $result = $ms->updatesupervisor($r, $id);
+        $ms = new MyleaveService;
+        $result = $ms->updateRecommender($r, $id);
 
         return response()->json($result);
     }
 
 
-    public function updatesupervisorreject(Request $r, $id)
+    public function updateRecommenderReject(Request $r, $id)
     {
         $ms = new MyleaveService;
 
-        $result = $ms->updatesupervisorreject($r, $id);
+        $result = $ms->updateRecommenderReject($r, $id);
 
         return response()->json($result);
     }
+
+    public function getuserRecommender($id = '') {
+
+        $ms = new MyleaveService;
+        $result = $ms->getuserRecommender($id);
+
+        return $result;
+    }
+
+    public function getuserRecommenderView($id = '') {
+
+        $ms = new MyleaveService;
+        $result = $ms->getuserRecommenderView($id);
+
+        return $result;
+    }
+
+
+
+
 
 
 
     //hod
-    public function leaveApprhodView(Request $r)
+    public function leaveApproverIndex(Request $r)
     {
         $ms = new MyleaveService;
-        $data['leaveApprhodView'] = $ms->leaveApprhodView();
+        $data['leaveApproverListActive'] = $ms->leaveApproverActive();
+        $data['leaveApproverListHistory'] = $ms->leaveApproverHistory();
         $data['employer'] = $ms->idemployerhod();
         $data['types'] = $ms->datatype();
         $data['applydate'] = '';
         $data['idemployer'] = '';
         $data['type'] = '';
+        $data['applydateH'] = '';
+        $data['idemployerH'] = '';
+        $data['typeH'] = '';
 
         $input = $r->input();
 
-        if ($input) {
-            $data['leaveApprhodView'] = $ms->searApprhod($r);
-            $data['applydate'] = $input['applydate'];
-            $data['idemployer'] = $input['idemployer'];
-            $data['type'] = $input['type'];
+        if (isset($input['applydate']) || isset($input['idemployer']) || isset($input['type'])) {
+            $data['leaveApproverListActive'] = $ms->searchleaveApproverActive($r);
+            $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
+            $data['idemployer'] = isset($input['idemployer']) ? $input['idemployer'] : '';
+            $data['type'] = isset($input['type']) ? $input['type'] : '';
         }
 
-        return view('pages.myleave.leaveApprhod', $data);
+        if (isset($input['applydateH']) || isset($input['idemployerH']) || isset($input['typeH'])) {
+            $data['leaveApproverListHistory'] = $ms->activeleaveApproverHistory($r);
+            $data['applydateH'] = isset($input['applydateH']) ? $input['applydateH'] : '';
+            $data['idemployerH'] = isset($input['idemployerH']) ? $input['idemployerH'] : '';
+            $data['typeH'] = isset($input['typeH']) ? $input['typeH'] : '';
+        }
+
+
+
+        return view('pages.leave.leaveApprover', $data);
     }
 
     public function updatehod(Request $r, $id)

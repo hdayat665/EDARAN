@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class EmployeeController extends Controller
-{   
+{
     public function updateProfile_Picture(Request $r, $id)
     {
         $ps = new EmployeeService;
 
         $result = $ps->updateProfile_Picture($r, $id);
-        
+
         return response()->json($result);
     }
     public function addProfile(Request $r)
@@ -55,6 +55,7 @@ class EmployeeController extends Controller
 
     public function terminateEmployment(Request $r)
     {
+
         $ps = new EmployeeService;
 
         $result = $ps->terminateEmployment($r);
@@ -69,7 +70,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-    
+
     public function employeeInfoView()
     {
         $ps = new EmployeeService;
@@ -174,14 +175,25 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
-    public function getParent($user_id = '')
+    public function getEmployeeParent($user_id = '')
     {
         $ps = new EmployeeService;
 
-        $result = $ps->getParentByUserId($user_id);
+        $result = $ps->getEmployeeParent($user_id);
 
         return response()->json($result);
     }
+
+
+    public function getEmployeeParentById($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeParentById($id);
+
+        return response()->json($result);
+    }
+
 
     public function addEmployeeSibling(Request $r)
     {
@@ -213,8 +225,6 @@ class EmployeeController extends Controller
     public function getEmployeeAddressforParent($id = '')
     {
         $ps = new EmployeeService;
-
-    
 
         $result = $ps->getEmployeeAddressforParent($id);
 
@@ -295,7 +305,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-    ////
+
     public function updateclaimhierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
@@ -307,7 +317,7 @@ class EmployeeController extends Controller
     public function updatecashhierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatecashhierarchy($r, $id);
 
         return response()->json($result);
@@ -315,7 +325,7 @@ class EmployeeController extends Controller
     public function updateeleavehierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updateeleavehierarchy($r, $id);
 
         return response()->json($result);
@@ -324,7 +334,7 @@ class EmployeeController extends Controller
     public function updatetimehierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatetimehierarchy($r, $id);
 
         return response()->json($result);
@@ -333,14 +343,14 @@ class EmployeeController extends Controller
     public function updatetimehierarchy2(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatetimehierarchy2($r, $id);
 
         return response()->json($result);
     }
 
-    
-  
+
+
     public function addEmployeeEducation(Request $r)
     {
         $ps = new EmployeeService;
@@ -368,7 +378,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-       
+
 
     public function updateEmployeeEducation(Request $r)
     {
@@ -466,8 +476,6 @@ class EmployeeController extends Controller
     {
         $ps = new EmployeeService;
 
-    
-
         $result = $ps->getEmployeeAddressforCompanion($id);
 
         return response()->json($result);
@@ -481,6 +489,25 @@ class EmployeeController extends Controller
             $result = $ps->updateAddressType($r);
 
             return response()->json($result);
+    }
+
+
+    public function getEmployeeByJobHistory()
+     {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeByJobHistory();
+
+        return response()->json($result);
+    }
+
+    public function getEmployeeByJobHistoryById($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeByJobHistoryById($id);
+
+        return response()->json($result);
     }
 
 }

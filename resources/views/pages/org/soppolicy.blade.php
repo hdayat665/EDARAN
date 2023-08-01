@@ -99,7 +99,7 @@
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>                                
+                            <tr>
                                 <th class="text-nowrap">SOP Code</th>
                                 <th class="text-nowrap">SOP Name</th>
                                 <th class="text-nowrap">Description</th>
@@ -272,20 +272,20 @@
                 <form id="editForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code </label>
+                        <label class="form-label">SOP's Code*</label>
                         <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP'S CODE" >
                         <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP'S CODE" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name </label>
+                        <label class="form-label">SOP's Name*</label>
                         <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP'S NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description </label>
+                        <label class="form-label">Description*</label>
                         <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255" placeholder="DESCRIPTION"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label>
+                        <label class="form-label">File Upload*</label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                         <span id="fileDownloadSOP"></span>
                     </div>

@@ -1,4 +1,172 @@
+//js dah working
 $(document).ready(function () {
+
+
+    var weekend1ifany;
+    var weekend2ifany;
+    var weekend3ifany;
+    var weekend4ifany;
+    var weekend5ifany;
+    var weekend6ifany;
+    var weekend7ifany;
+
+    var dayone;
+    var daytwo;
+    var daythree;
+    var dayfour;
+    var dayfive;
+    var daysix;
+    var dayseven;
+
+
+    var totalhourday1;
+    var totalhourday2;
+    var totalhourday3;
+    var totalhourday4;
+    var totalhourday5;
+    var totalhourday6;
+    var totalhourday7;
+
+
+
+
+function getWorkingHourWeekendbyState(stateid) {
+  return $.ajax({
+    url: "/getWorkingHourWeekendbyState/" + stateid,
+  });
+}
+
+var idwork = $("#state_id").val();
+
+var joineddate = $("#joinneddate").val();
+// console.log(joineddate);
+
+getwork = getWorkingHourWeekendbyState(idwork);
+
+getwork.then(function(data) {
+  var days = {};
+  for (var i = 0; i < data.length; i++) {
+    var workdata = data[i];
+    var dayNumber = i + 1;
+    var dayKey = 'day' + dayNumber;
+    if (workdata.start_time === null) {
+      days[dayKey] = workdata.day_of_week;
+    }
+  }
+
+  // Store defined values in separate variables
+   weekend1ifany = days.hasOwnProperty('day1') ? days.day1 : null;
+   weekend2ifany = days.hasOwnProperty('day2') ? days.day2 : null;
+   weekend3ifany = days.hasOwnProperty('day3') ? days.day3 : null;
+   weekend4ifany = days.hasOwnProperty('day4') ? days.day4 : null;
+   weekend5ifany = days.hasOwnProperty('day5') ? days.day5 : null;
+   weekend6ifany = days.hasOwnProperty('day6') ? days.day6 : null;
+   weekend7ifany = days.hasOwnProperty('day7') ? days.day7 : null;
+  
+   var startDate = getStartDate();
+    $("#dateaddlog").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        startDate: startDate,  // Set the start date dynamically
+        endDate: new Date() // Disable future dates
+    });
+
+    function getStartDate() {
+        var currentDate = new Date();
+        var dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+        var daysToSubtract = 2;
+
+        const today = dayjs();
+
+        var daystominus = -2;
+
+        var currentDayOfWeek = today.day();
+
+        var checkweekendv = [weekend1ifany, weekend2ifany, weekend3ifany, weekend4ifany, weekend5ifany, weekend6ifany, weekend7ifany];
+
+        // Filter out null values
+        var resultchw = checkweekendv.filter(function(value) {
+        return value !== null;
+        });
+
+        // Sort the filtered values in ascending order
+        resultchw.sort(function(a, b) {
+        return a - b;
+        });
+
+            var lowestValue = parseInt(resultchw[0]);
+
+            var secondLowestValue = parseInt(resultchw[1]);
+
+        // Modify lowestValue and secondLowestValue based on conditions
+        if (lowestValue >= 0 && lowestValue <= 7) {
+        lowestValue = lowestValue + 1;
+        }
+        else
+        lowestValue = 0;
+
+        if (secondLowestValue >= 0 && secondLowestValue <= 5) {
+        secondLowestValue = secondLowestValue + 2;
+        }
+        else if(secondLowestValue == 6) {
+            secondLowestValue = 2;
+        }
+        else if(secondLowestValue == 7) {
+            secondLowestValue = 3;
+        }
+
+        // Check if the current day is Saturday (6) or Sunday (0)
+        if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
+            var daysToSubtract = 4;
+        }
+
+        var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
+        return startDate;
+    }
+
+    // Set the minimum and maximum dates to restrict the date range that can be selected
+    $("#dateaddlog").datepicker("setStartDate", startDate);
+    $("#dateaddlog").datepicker("setEndDate", new Date());
+
+});
+
+getwork.then(function(data) {
+    var days = {};
+    for (var i = 0; i < data.length; i++) {
+      var workdata = data[i];
+      var dayNumber = i + 1;
+      var dayKey = 'day' + dayNumber;
+  
+      days[dayKey] = {
+        day_of_week: workdata.day_of_week,
+        total_hour: workdata.total_time
+      };
+    }
+  
+    // Extract day_of_week and total_hour into separate variables
+     dayone = days.hasOwnProperty('day1') ? days.day1.day_of_week : null;
+     daytwo = days.hasOwnProperty('day2') ? days.day2.day_of_week : null;
+     daythree = days.hasOwnProperty('day3') ? days.day3.day_of_week : null;
+     dayfour = days.hasOwnProperty('day4') ? days.day4.day_of_week : null;
+     dayfive = days.hasOwnProperty('day5') ? days.day5.day_of_week : null;
+     daysix = days.hasOwnProperty('day6') ? days.day6.day_of_week : null;
+     dayseven = days.hasOwnProperty('day7') ? days.day7.day_of_week : null;
+  
+     totalhourday1 = days.hasOwnProperty('day1') ? days.day1.total_hour : null;
+     totalhourday2 = days.hasOwnProperty('day2') ? days.day2.total_hour : null;
+     totalhourday3 = days.hasOwnProperty('day3') ? days.day3.total_hour : null;
+     totalhourday4 = days.hasOwnProperty('day4') ? days.day4.total_hour : null;
+     totalhourday5 = days.hasOwnProperty('day5') ? days.day5.total_hour : null;
+     totalhourday6 = days.hasOwnProperty('day6') ? days.day6.total_hour : null;
+     totalhourday7 = days.hasOwnProperty('day7') ? days.day7.total_hour : null;
+
+    //  console.log(daytwo);
+  
+    // ...
+  });
+  
+
     // $("#addeventalldayedit").change(function() {
     //     if ($(this).is(":checked")) {
     //       $(this).val("allday");
@@ -44,7 +212,6 @@ $(document).ready(function () {
         var vehicleData = getData(id);
 
         vehicleData.then(function (data) {
-            // console.log(data);
             $("#department").val(data.department);
             $("#project").val(data.project_id);
             if (data.project_id) {
@@ -128,6 +295,8 @@ $(document).ready(function () {
             url: "/getAppealidList/"
         });
     }
+
+   
 
     var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
@@ -405,7 +574,7 @@ $(document).ready(function () {
                 office_log: "required",
                 project_id: "required",
                 office_log_project: "required",
-                activity_name: "required",
+                // activity_name: "required",
                 activity_office: "required",
                 start_time: "required",
                 project_location: "required",
@@ -421,7 +590,7 @@ $(document).ready(function () {
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose Project",
                 office_log_project: "Please Choose Project",
-                activity_name: "Please Choose Activity Name",
+                // activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose Activity Name",
                 start_time: "Please Choose Start Time",
                 project_location: "Please Choose Project Location",
@@ -473,7 +642,7 @@ $(document).ready(function () {
                 office_log: "required",
                 project_id: "required",
                 office_log_project: "required",
-                activity_name: "required",
+                // activity_name: "required",
                 activity_office: "required",
                 start_time: "required",
                 project_location: "required",
@@ -489,7 +658,7 @@ $(document).ready(function () {
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose",
                 office_log_project: "Please Choose",
-                activity_name: "Please Choose Activity Name",
+                // activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose Activity Name",
                 start_time: "Please  Choose Start Time",
                 project_location: "Please Choose Project Location",
@@ -502,7 +671,6 @@ $(document).ready(function () {
                     var data = new FormData(
                         document.getElementById("editLogForm")
                     );
-                    // console.log(data);
                     var id = $("#id").val();
 
                     $.ajax({
@@ -579,7 +747,7 @@ $(document).ready(function () {
                 reason: "required" },
 
             messages: {
-                reason: "Please Put Reason"
+                reason: "Please Enter Reason"
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -711,7 +879,6 @@ $(document).ready(function () {
                     var data = new FormData(
                         document.getElementById("editEventForm")
                     );
-                    // console.log(data);
                     var id = $("#idEvent").val();
 
                     $.ajax({
@@ -823,7 +990,6 @@ $(document).ready(function () {
         
         getApproverAppeal().done(function (data) {
             approverUserId = data;
-            // console.log("Approver User ID:", approverUserId);
         });
         
 
@@ -831,11 +997,9 @@ $(document).ready(function () {
 
         timesheetData.then(function (data) {
             // $('#userIdForApproval').val(data['events'][0]['user_id']);
-            // console.log(data['events']);
             var event = [];
         for (let i = 0; i < data['events'].length; i++) {
             var events = data['events'][i];
-            // console.log(events);
             // var startDate = new Date(events['start_date']);
             // var startMonth = startDate.getMonth() + 1;
             // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -893,7 +1057,6 @@ $(document).ready(function () {
         attendhour = [];
         for (let i = 0; i < data['eventsattends'].length; i++) {
             var events = data['eventsattends'][i];
-            // console.log(events);
             // var startDate = new Date(events['start_date']);
             // var startMonth = startDate.getMonth() + 1;
             // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -948,8 +1111,6 @@ $(document).ready(function () {
                 eventid: events['id'],
             });
 
-            // console.log(events['duration'])
-
         }
 
             var log = [];
@@ -976,8 +1137,6 @@ $(document).ready(function () {
                 var endTime = logs['end_time'];
                 time = endTime.split(":");
                 endTime = time[0] < 10 ? "0" + endTime : endTime;
-                // console.log(logs['total_hour']);
-                // console.log(startDate,startTime,endTime);  
 
                 function type_of_log(id) {
                     const data = {
@@ -1003,7 +1162,6 @@ $(document).ready(function () {
                         logId: logs["id"],
                     },
                 });
-                // console.log(log);
 
                 loghour.push({
                     start: new Date(startYear, startMonth - 1, startDay),
@@ -1034,7 +1192,7 @@ $(document).ready(function () {
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
 
-                // console.log(leaves['reason'])
+
                 leave.push({
                     title:
                         leaves["leave_types"] + " : " + "\n" + leaves["reason"],
@@ -1062,7 +1220,6 @@ $(document).ready(function () {
             var rangeholiday = [];
             for (let i = 0; i < data['holidays'].length; i++) {
                 var holidays = data['holidays'][i];
-                // console.log(holidays);
                 var startDate = new Date(holidays['start_date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -1105,13 +1262,11 @@ $(document).ready(function () {
                     
                     
                 });
-                // console.log(holidays['start_date'] + holidays['end_date']);
             }
 
             var highestNumber = 0;
             for (let i = 0; i < data['appeals'].length; i++) {
                 var appeals = data['appeals'][i];
-                // console.log(appeals['applied_date']);
                 var match = appeals['logid'].match(/LA-(\d+)/);
                 if (match) {
                     var number = parseInt(match[1]);
@@ -1122,22 +1277,11 @@ $(document).ready(function () {
             }
             var nextNumber = highestNumber + 1;
             var nextLogId = 'LA-' + nextNumber.toString().padStart(4, '0');
-            // console.log(nextLogId);
-
-
-            // dataEvent = event.concat(log);
-            // dataleave = dataEvent.concat(leave);
-            // dataHoliday = dataleave.concat(holiday);
-
-            
               
             dataEvent = event.concat(eventattend);
             datalog = dataEvent.concat(log);
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
-
-           
-
 
             dataHoliday.sort(function(a, b) {
                 var dateA = a.start;
@@ -1165,18 +1309,6 @@ $(document).ready(function () {
               });
               
 
-            // console.log(dataHoliday);
-             
-
-            //   console.log(datalog)
-
-            //   dataHoliday.sort(function(a, b) {
-            //     return new Date(a.start) - new Date(b.start);
-            //   });
-              
-            
-            // console.log(dataEvent);
-            // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: "logButton EventButton SumButton",
@@ -1205,22 +1337,19 @@ $(document).ready(function () {
                 },
 
 
-                dayCellDidMount: function(info) {
+               
+
+                dayCellDidMount: function(info) {                       
+
                     
-                    // console.log(approverUserId+"from deaycell");
+                    // console.log(joineddate+"daycell");
+                    
+                    
                     var current = new Date(info.date);
                     var currentDate = new Date();
                     
                     var currentdate = new Date();
                     currentdate.setDate(currentdate.getDate());
-                    
-                    // var oneDayBefore = new Date();
-                    // oneDayBefore.setDate(currentDate.getDate() - 1);
-                    // var satuhari = new Date(oneDayBefore.setDate(currentDate.getDate() - 1));
-                    
-                    // var twoDayBefore = new Date();
-                    // twoDayBefore.setDate(currentDate.getDate() - 2);
-                    // var duahari = new Date(twoDayBefore.setDate(currentDate.getDate() - 2));
                     
                     var currentMonth = currentDate.getMonth();
                     var currentYear = currentDate.getFullYear();
@@ -1230,38 +1359,92 @@ $(document).ready(function () {
                     
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
                     
-                    var weekend1 = current.getDay() === 6;
-                    var weekend2 = current.getDay() === 0;
-
-                    var onedayafterweekend2 = weekend2 + 1;
-                    var twodayafterweekend2 = weekend2 + 2;
+                    var weekend1 = current.getDay() == weekend1ifany;
+                    var weekend2 = current.getDay() == weekend2ifany;
+                    var weekend3 = current.getDay() == weekend3ifany;
+                    var weekend4 = current.getDay() == weekend4ifany;
+                    var weekend5 = current.getDay() == weekend5ifany;
+                    var weekend6 = current.getDay() == weekend6ifany;
+                    var weekend7 = current.getDay() == weekend7ifany;
                     
                     var dateonedaybefore = current.getDate() === oneDaysBefore.getDate();
                     var datetwodayebefore = current.getDate() === twoDaysBefore.getDate();
 
-                    // console.log(dateonedaybefore+"dateonedaybefore");
-                   
+                    //to compare next day after weekend
+                    const today = dayjs();
 
-                    var comparecurrentonedaybefore = currentDate.getDay() === Number(onedayafterweekend2);
-                    var comparecurrenttwodaybefore = currentDate.getDay() === Number(twodayafterweekend2);
-                    // console.log(comparecurrentonedaybefore+"comparecurrentonedaybefore");
-                    // var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+                    var currentDayOfWeek = today.day();
 
+                    var checkweekendv = [weekend1ifany, weekend2ifany, weekend3ifany, weekend4ifany, weekend5ifany, weekend6ifany, weekend7ifany];
+
+                    // Filter out null values
+                    var resultchw = checkweekendv.filter(function(value) {
+                    return value !== null;
+                    });
+
+                    // Sort the filtered values in ascending order
+                    resultchw.sort(function(a, b) {
+                    return a - b;
+                    });
+
+                     var lowestValue = parseInt(resultchw[0]);
+
+                     var secondLowestValue = parseInt(resultchw[1]);
+
+                    // Modify lowestValue and secondLowestValue based on conditions
+                    if (lowestValue >= 0 && lowestValue <= 7) {
+                    lowestValue = lowestValue + 1;
+                    }
+                    else
+                    lowestValue = 0;
+
+                    if (secondLowestValue >= 0 && secondLowestValue <= 5) {
+                    secondLowestValue = secondLowestValue + 2;
+                    }
+                    else if(secondLowestValue == 6) {
+                        secondLowestValue = 2;
+                    }
+                    else if(secondLowestValue == 7) {
+                        secondLowestValue = 3;
+                    }
+
+                    
+
+                    
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
                     
-                    if (comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+
+                    // Check if the current day is Saturday (6) or Sunday (0)
+                    if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
                         twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 4);
-                        // console.log("return here");
+
                     }
 
                     var workingDayHour = '08:00';
 
-                    if (current.getDay() === 5) { // Check if it's Friday (Friday is represented by 5 in JavaScript, where Sunday is 0)
-                        workingDayHour = '07:30';
+                    if (current.getDay() == dayone) { // Check if it's Friday (Friday is represented by 5 in JavaScript, where Sunday is 0)
+                        workingDayHour = totalhourday1;
+                      }
+                      else if(current.getDay() == daytwo ){
+                        workingDayHour = totalhourday2;
+                      }
+                      else if(current.getDay() == daythree){
+                        workingDayHour = totalhourday3;
+                      }
+                      else if(current.getDay() == dayfour){
+                        workingDayHour = totalhourday4;
+                      }
+                      else if(current.getDay() == dayfive){
+                        workingDayHour = totalhourday5;
+                      }
+                      else if(current.getDay() == daysix){
+                        workingDayHour = totalhourday6;
+                      }
+                      else if(current.getDay() == dayseven){
+                        workingDayHour = totalhourday7;
                       }
 
-                 
-                   
+                      
 
                     var appealaddb = $('<button/>', {
                                 text: 'Appeal',
@@ -1270,7 +1453,6 @@ $(document).ready(function () {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
                                     var day = info.date.getDate();
-                                    // console.log(year);
                                     $('#yearappeal').val(year);
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
@@ -1286,9 +1468,13 @@ $(document).ready(function () {
 
 
                             var viewappealb = $('<button/>', {
+                                id: 'viewappealid', 
                                 text: 'View Appeal',
                                 class: 'btn btn-primary btn-xs appeal-view-button',
-                                click: function () {
+                                mousedown: function(event) {
+                                    event.stopPropagation();
+                                },
+                                click: function() {
 
 
                                     // Get the logid for the corresponding appliedDate
@@ -1302,7 +1488,6 @@ $(document).ready(function () {
                                         var day = days[index];
                                         var approver = approvers[index];
                                         var file = files[index];
-                                        // console.log(year);
                                         $('#log_idv').val(logId);
                                         $('#reasonappealv').val(reason);
                                         if (status === "Locked") {
@@ -1321,8 +1506,9 @@ $(document).ready(function () {
                                             $("#filedownloadappeal").html('<a href="/storage/' + file + '">Download ' + fileName + '</a>');
                                           }
 
-                                        // console.log(file)
+                                    
                                         $('#appealmodalview').modal('show');
+                                        
 
 
                                     }
@@ -1353,16 +1539,6 @@ $(document).ready(function () {
                         }
                     }
 
-                    // var totalHours = 0;
-                    // var hasLog = false;
-                    // for (var i = 0; i < loghour.length; i++) {
-                    //     if (current >= loghour[i].start && current <= loghour[i].end) {
-                    //         hasLog = true;
-                    //         console.log(totalHours);
-                    //         totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
-                    //         var logid = loghour[i].logid;
-                    //     }
-                    // }
 
                     var totalHoursforlog = '00:00';
                     var hasLog = false;
@@ -1384,9 +1560,6 @@ $(document).ready(function () {
                             var minuteslog = Math.floor((totalHourlog % 3600) / 60);
                             totalHoursforlog = hourslog.toString().padStart(2, '0') + ':' + minuteslog.toString().padStart(2, '0');
                             var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
-
-                            // console.log(hours1+"test567")
-                            // Exit the loop once the total hours for the current date are calculated
                             break;
                         }
                     }
@@ -1432,9 +1605,6 @@ $(document).ready(function () {
                     var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
                    
                     var totalHoursCombineds = parseInt(hours, 10).toString();
-
-                    console.log(totalHoursCombined);
-                    // console.log(totalHoursCombineds);
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1484,7 +1654,6 @@ $(document).ready(function () {
                         click: function () {
                         }
                     });
-                    // console.log(hours1 + "test")
 
                     var hasAppeal = appliedDates.includes(datedefaultformat);
                     var noappeal = !appliedDates.includes(datedefaultformat);
@@ -1531,7 +1700,7 @@ $(document).ready(function () {
                         $(info.el).css('background-color', '#80ff80');
                       }
                     //for date after weekend, not exclude in 48hour
-                      if(comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                      if(currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
                         if ((current < currentDate) && current.getDate() !== currentDate.getDate()
                             && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined < workingDayHour )) {
                             $(info.el).css('background-color', '#FF8080');
@@ -1543,10 +1712,10 @@ $(document).ready(function () {
                         }
                        
                       }
-
+                   
                      if (
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2) &&
+                        !(weekend1 || weekend2 || weekend3 || weekend4|| weekend5 || weekend6 || weekend7) &&
                         !hasLog &&
                         !hasEvent &&
                         current.getMonth() === currentMonth &&
@@ -1558,16 +1727,18 @@ $(document).ready(function () {
                      else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
+                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)  &&
+                         ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
-                        $(info.el).css('background-color', '#80ff80');
+                        $(info.el).css('background-color', '#FF8080');
                       }
                       else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
+                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)  
+                        && ( (hasLog || hasEvent) && totalHoursCombined >= workingDayHour)
                       ) {
-                        $(info.el).css('background-color', '#FF8080');
+                        $(info.el).css('background-color', '#80ff80');
                       }
 
                      
@@ -1575,21 +1746,28 @@ $(document).ready(function () {
                     //     $(info.el).css('background-color', 'red');
                     //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && !(weekend1 || weekend2)) {
+                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && 
+                       !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)) {
                         $(info.el).css('background-color', '#FF8080');
-                        $(info.el).append('&nbsp;').append(appealaddb);
-                        $(appealaddb).css({
+
+                        var joinneddate = new Date(joineddate);
+                        if (current.getTime() >= joinneddate.getTime()) {
+                          $(info.el).append('&nbsp;').append(appealaddb);
+                          $(appealaddb).css({
                             position: 'relative',
                             top: '-35px',
-                            'z-index': '999',   
-                            });
+                            'z-index': '999',
+                          });
+                        }
+                      
 
                         }else if (
                             (current < twoDaysBefore) &&
                             hasAppeal &&
                             (
                               ((hasLog || hasEvent) && totalHoursCombined < workingDayHour) ||
-                              (!hasLog && !hasEvent && !(weekend1 || weekend2))
+                              (!hasLog && !hasEvent && 
+                                !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7))
                             )
                           ) {
 
@@ -1600,8 +1778,7 @@ $(document).ready(function () {
                                 top: '-35px',
                                 'z-index': '999',   
                                 });
-                        
-                        
+
                          } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
                          } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined >= workingDayHour) {
@@ -1622,11 +1799,14 @@ $(document).ready(function () {
                                 'z-index': '999',   
                                 });
                          }
-                         else if (info.date.getDay() === 0 &&  !isSameDate) {
-                        $(info.el).css('background-color', '#B3CCFF');
-                    } else if (info.date.getDay() === 6 && !isSameDate) {
-                        $(info.el).css('background-color', '#B3CCFF');
-                    }
+                         else if ((info.date.getDay() == weekend1ifany || info.date.getDay() == weekend2ifany || 
+                                    info.date.getDay() == weekend3ifany || info.date.getDay() == weekend4ifany || 
+                                    info.date.getDay() == weekend5ifany || info.date.getDay() == weekend6ifany ||info.date.getDay() == weekend7ifany  ) 
+                         && !isSameDate) {
+                            $(info.el).css('background-color', '#B3CCFF');
+                          }
+                          
+                    
                  else {
                         // $(info.el).css('background-color', 'white');
                       }
@@ -1634,9 +1814,60 @@ $(document).ready(function () {
 
 
                     dateClick: function(info) {
-
-                        const today = dayjs();
+                        
+                        
                         const clickedDate = dayjs(info.date);
+                        const today = dayjs();
+
+                        var daystominus = -2;
+                
+                        var currentDayOfWeek = today.day();
+                
+                        var checkweekendv = [weekend1ifany, weekend2ifany, weekend3ifany, weekend4ifany, weekend5ifany, weekend6ifany, weekend7ifany];
+                
+                        // Filter out null values
+                        var resultchw = checkweekendv.filter(function(value) {
+                        return value !== null;
+                        });
+                
+                        // Sort the filtered values in ascending order
+                        resultchw.sort(function(a, b) {
+                        return a - b;
+                        });
+                
+                         var lowestValue = parseInt(resultchw[0]);
+                
+                         var secondLowestValue = parseInt(resultchw[1]);
+
+                         var weekn1 = parseInt(resultchw[0]);;
+                         var weekn2 = parseInt(resultchw[1]);
+
+                
+                        // Modify lowestValue and secondLowestValue based on conditions
+                        if (lowestValue >= 0 && lowestValue <= 7) {
+                        lowestValue = lowestValue + 1;
+                        }
+                        else
+                        lowestValue = 0;
+                
+                        if (secondLowestValue >= 0 && secondLowestValue <= 5) {
+                        secondLowestValue = secondLowestValue + 2;
+                        }
+                        else if(secondLowestValue == 6) {
+                            secondLowestValue = 2;
+                        }
+                        else if(secondLowestValue == 7) {
+                            secondLowestValue = 3;
+                        }
+                
+                        console.log(lowestValue + "," + secondLowestValue);
+                        
+                
+                
+                        // Check if the current day is Saturday (6) or Sunday (0)
+                        if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
+                            daystominus = -4;
+                        }
 
                         // check if the clicked date's status is "approve"
                         var appliedDates = [];
@@ -1653,54 +1884,49 @@ $(document).ready(function () {
                         }
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
                         if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approved') {
-                            // show the view appeal modal
+                        
+                           
                             $('#addLogModal').modal('show');
-                            const formattedDate = clickedDate.format('DD-MM-YYYY');
+                            const formattedDate = clickedDate.format('YYYY-MM-DD');
                             $("#dateaddlog").val(formattedDate);
-
                             return;
+                            
                         }
 
 
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
-                        var daystominus = -2;
+                       
 
-                        var currentDayOfWeek = today.day();
-
-                        var monday = 1; 
-                        var tuesday = 2;
-
-                        // Check if the current day is Saturday (6) or Sunday (0)
-                        if (currentDayOfWeek === monday || currentDayOfWeek === tuesday) {
-                            daystominus = -4;
-                        }
-
-                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
-                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
+                        if (
+                            ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
+                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) &&
+                            !(clickedDate.day() == weekn1 && clickedDate.isBefore(today, 'day')) &&
+                             !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day'))
+                          ) {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'You can only add logs for the current and past 2 days!',
+                              icon: 'error',
+                              title: 'Oops...',
+                              text: 'You can only add logs for the current and past 2 days!',
                             });
-                        return;
-                        }
+                            return;
+                          }
+                          
                         if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
 
                           return;
                         }
 
+                        // Check if the clicked date is Saturday or Sunday
+                        // if (clickedDate.day() === 0 || clickedDate.day() === 6) {
+                        //     return;
+                        // }
+
                         // show the add log modal
                         $('#addLogModal').modal('show');
                         $("#dateaddlog").val(formattedDate);
                       },
-
-
-
-
-
-
 
                 // original code
                 // dateClick: function(info) {
@@ -1762,6 +1988,7 @@ $(document).ready(function () {
                     }
 
                     
+                    
 
                     function getAttendance1(eventId) {
                         return $.ajax({
@@ -1797,7 +2024,6 @@ $(document).ready(function () {
                         logId = info.event.extendedProps.logId;
                         var logData = getLogs(logId);
                         logData.then(function (data) {
-                            // console.log(data);
 
                             if (data.type_of_log == "3") {
                                 $("#officelogedit").css("display", "none");
@@ -1969,24 +2195,48 @@ $(document).ready(function () {
                                 twoDaysBefore.setDate(currentDate.getDate() - 3);
                                 
                                 
-                                var selectedDate = new Date($("#dateaddlogedit").val());
-                              
-                                
-                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
-                                    $("#dateaddlogedit").prop("readonly", true);
-                                    $("#dateaddlogedit").css("pointer-events", "none");
-                                } else {
-                                    $("#dateaddlogedit").prop("readonly", false);
-                                    $("#dateaddlogedit").css("pointer-events", "auto");
-                                }
+                                var initialDate = $("#dateaddlogedit").val();
 
-                                // if ( selectedDate < twoDaysBefore) {
-                                //     $("#dateaddlogedit").prop("readonly", true);
-                                //     $("#dateaddlogedit").css("pointer-events", "none");
-                                // } else {
-                                //     $("#dateaddlogedit").prop("readonly", false);
-                                //     $("#dateaddlogedit").css("pointer-events", "auto");
-                                // }
+                                // Flag to track if datepicker was closed due to outside click
+                                var outsideClick = false;
+
+                                $("#dateaddlogedit").on("focusout", function() {
+                                if (outsideClick && $(this).val() === "") {
+                                    $(this).val(initialDate);
+                                }
+                                // Reset the flag
+                                outsideClick = false;
+                                });
+
+                                // Set the flag when clicking outside the datepicker
+                                $(document).on("mousedown", function(event) {
+                                var target = $(event.target);
+                                if (!target.closest(".datepicker").length && !target.is("#dateaddlogedit")) {
+                                    outsideClick = true;
+                                }
+                                });
+
+                                // Your other function
+                                $("#statusappeal").on("change", function() {
+                                var selectedDate = new Date($("#dateaddlogedit").val());
+                                var twoDaysBefore = new Date();
+                                twoDaysBefore.setDate(twoDaysBefore.getDate() - 2);
+
+                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $("#dateaddlogedit").prop("readonly", true).css("pointer-events", "none");
+                                    // Disable the focusout functionality when read-only
+                                    outsideClick = false;
+                                } else {
+                                    $("#dateaddlogedit").prop("readonly", false).css("pointer-events", "auto");
+                                    // Enable the focusout functionality when editable
+                                    outsideClick = true;
+                                }
+                                });
+
+                                // Initial setup based on the initial statusappeal value
+                                $("#statusappeal").trigger("change");
+
+                               
 
                                 
                         });
@@ -2028,7 +2278,6 @@ $(document).ready(function () {
                         });
                         var eventData = getEvents(eventId);
                         eventData.then(function (data) {
-                            // console.log(data);
                             var userId = $("#userIdForApproval").val();
                             $("#attendShow").hide();
                             $("#attendNoResponse").show();
@@ -2040,7 +2289,6 @@ $(document).ready(function () {
                                 userId
                             );
                             attendanceEvent.then(function (dataAttendance) {
-                                // console.log(data);
                                 if (dataAttendance) {
                                     if (dataAttendance.status == "attend") {
                                         $("#attendHide").hide();
@@ -2058,63 +2306,87 @@ $(document).ready(function () {
                                 }
                             });
 
-                            var eventData = getEvents(eventId);
-                            eventData.then(function(data) {
-                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
-                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
+                            async function loadEventData(eventId) {
+                                var eventData = await getEvents(eventId);
+                                var participants = eventData.participants;
+                                var attendanceStatus = eventData.attendanceStatus;
+                            
+                                // Destroy the old DataTable instance and clear the body
+                                var table = $('#tableviewparticipant').DataTable();
+                                table.clear().destroy();
                             
                                 var tableBody = $("#tableRowParticipant");
-                                tableBody.empty(); // Clear any existing rows in the table
+                                tableBody.empty();
                             
                                 for (var i = 0; i < participants.length; i++) {
                                     var participant = participants[i];
-                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
+                                    var status = attendanceStatus[i].status;
                             
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
                                     row.append($("<td></td>").text(participant.name));
-                                    row.append($("<td></td>").text(status));
+                            
+                                    var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
+                                    var badgeSpan = $("<span></span>");
+                            
+                                    if (status === "no response") {
+                                        badgeSpan.addClass("badge bg-warning rounded-pill").text("no response");
+                                    } else if (status === "not attend") {
+                                        badgeSpan.addClass("badge bg-danger rounded-pill").text("not attend");
+                                    } else if (status === "attend"){
+                                        badgeSpan.addClass("badge bg-lime rounded-pill").text("Attend");
+                                    }
+                            
+                                    statusBadge.append(badgeSpan);
+                                    row.append($("<td></td>").append(statusBadge));
                             
                                     tableBody.append(row);
                                 }
-                            });
                             
-                            
-                            
-                            var eventData1 = getEvents(eventId);
-                            eventData1.then(function(data) {
-                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
-                                var selectElement = $("#addneweventparticipantedit");
-                            
-                                // Clear any existing options
-                                selectElement.empty();
-                            
-                                // Add the "Please Choose" option as the first option
-                                var pleaseChooseOption = $("<option></option>")
-                                    .val("")
-                                    .text("PLEASE CHOOSE");
-                            
-                                selectElement.append(pleaseChooseOption);
-                            
-                                // Add the non-participant options
-                                for (var i = 0; i < nonParticipants.length; i++) {
-                                    var option = $("<option></option>")
-                                        .val(nonParticipants[i].user_id)
-                                        .text(nonParticipants[i].name);
-                            
-                                    selectElement.append(option);
-                                }
-                            
-                                // Initialize the Select2 plugin with multiple selection and search
-                                selectElement.select2({
-                                    dropdownParent: $('#editeventmodal'),
-                                    multiple: true,
-                                    dropdownCss: {
-                                        top: '100%',
-                                        bottom: 'auto'
-                                    }
+                                // Re-initialize the DataTable
+                                $('#tableviewparticipant').DataTable({
+                                    "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
                                 });
+                            }
+                            
+                            // usage:
+                            loadEventData(eventId);
+                            
+                            
+                            
+                                                            
+                            
+                            
+                           
+
+                           
+
+
+                            var eventData = getEvents(eventId);
+                            eventData.then(function(data) {
+                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
+
+                                var dropdown = $("#addneweventparticipantedit");
+                                dropdown.empty(); // Clear any existing options in the dropdown
+
+                                for (var i = 0; i < nonParticipants.length; i++) {
+                                    var nonParticipant = nonParticipants[i];
+
+                                    // Create an option element for each non-participant
+                                    var option = $("<option></option>")
+                                        .val(nonParticipant.user_id)
+                                        .text(nonParticipant.name);
+
+                                    dropdown.append(option);
+                                }
+
+                                // Initialize Select2 after populating the dropdown
+                                // dropdown.select2({
+                                //     placeholder: "Please Choose"
+                                // });
                             });
+
+
                             
 
 
@@ -2813,43 +3085,6 @@ $(document).ready(function () {
         Calendar.init();
     });
 
-    //  FOR MODAL LOG AND EVENT
-    // $("#dateaddlog").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     format: 'yyyy-mm-dd'
-    // });
-
-
-
-    $("#dateaddlog").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy-mm-dd",
-        startDate: getStartDate(), // Set the start date dynamically
-        endDate: new Date() // Disable future dates
-    });
-    
-    function getStartDate() {
-        var currentDate = new Date();
-        var dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
-        var daysToSubtract = 2;
-
-        monday = 1;
-        tuesday = 2;
-    
-        if (dayOfWeek === monday|| dayOfWeek === tuesday) {
-            // If today is Monday or Tuesday, subtract 4 days instead of 2
-            daysToSubtract = 4;
-        }
-    
-        var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
-        return startDate;
-    }
-    
-    // Set the minimum and maximum dates to restrict the date range that can be selected
-    $("#dateaddlog").datepicker("setStartDate", getStartDate());
-    $("#dateaddlog").datepicker("setEndDate", new Date());
 
     $("#starteventdate")
         .datepicker({
@@ -3139,8 +3374,7 @@ $("#endeventdate").datepicker({
     
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-    
-        // console.log(days + ":" + hours);
+
         $("#durationeditevent").val(
             hours + ":" + mins + ":0"
         );
@@ -3411,15 +3645,12 @@ $("#endeventdate").datepicker({
     $("#addneweventprojectlocsearchedit").picker({ search: true });
     // $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
-    // $('#addneweventparticipantedit').select2({
-    //     dropdownParent: $('#editeventmodal'),
-    //     multiple: true
-    // });
-    
 
+    $('#addneweventparticipantedit').select2({
+        dropdownParent: $('#editeventmodal'),
+        multiple: true
+    });
     
-
-   
     
 
     $(document).on("change", "#typeoflogedit", function () {
@@ -3711,16 +3942,21 @@ $("#endeventdate").datepicker({
     // $('#addneweventparticipantedit').select2();
     // $('#addneweventparticipantedit').select2({ placeholder:"Please Choose" });
     // $('#addneweventparticipantedit').picker({ search: true });
-    // $('#editeventmodal').on('shown.bs.modal', function () {
-    //     $('#addneweventparticipantedit').select2({ placeholder: "Please Choose" });
-    // });
+        // $('#editeventmodal').on('shown.bs.modal', function () {
+        //     $('#addneweventparticipantedit').select2({ placeholder: "Please Choose" });
+        // });
     // $("#testchosen").chosen();
     $('#my-select').multiselect({
         includeSelectAllOption: true, // Add an "Select All" option
         enableFiltering: true, // Enable search/filtering
         maxHeight: 200 // Set a maximum height for the dropdown
       });
+
+      $('#tableviewparticipant').DataTable({
+        
+    });
 });  //end sini
+
 
 
 
@@ -3760,3 +3996,4 @@ toggleVenueLocation();
 var venue = document.getElementById("venueaddpehal");
 var observer = new MutationObserver(toggleVenueLocation);
 observer.observe(venue, { attributes: true, attributeFilter: ["style"] });
+

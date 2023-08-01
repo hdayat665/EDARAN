@@ -52,11 +52,10 @@
     <br>
    <div class="col d-flex justify-content-end">
         <div class="">
-            <input type="hidden" id="userIdForApproval" value="{{$user_id}}">
-            <input type="hidden" id="idtesting" value="{{$eleaveapprover}}">
-            <input type="hidden" id="idtesting123" value="{{ isset($status_appeal) ? $status_appeal : '' }}">
-            <input type="hidden" id="appeal_Date" value="{{ isset($appeal_Date) ? $appeal_Date : '' }}">
-            
+            <input type="hidden" id="userIdForApproval" value="{{ $data['user_id'] }}">
+            <input type="hidden" id="state_id" value="{{ $stateData->state_id }}">
+            <input type="hidden" id="joinneddate" value="{{ $data['joined_date'] }}">
+
              {{-- <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button> --}}
              {{-- <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button> --}}
 

@@ -25,14 +25,14 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label" >Old Identification Number</label>
-                            <input type="text" id="" name="oldIDNo" class="form-control" aria-describedby="" placeholder="0000000">                        </div>
+                            <input type="text" id="" name="oldIDNo" class="form-control" aria-describedby="" placeholder="0000000"></div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck6  " value="" type="checkbox" name="nonNetizen3" id="">
+                                        <input class="form-check-input partCheck6" value="on" type="checkbox" name="non_citizen" id="non_citizen2">
                                         <label class="form-check-label" for="citizen" >
                                             Non-Citizen
                                         </label>
@@ -54,16 +54,13 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
-                                  
-                                   
                                     <input type="text" id="passport6" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label" >Expiry Date*</label>
-                                    <input type="text" id="expirydate6" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;" readonly>
-
+                                    <input type="text" id="expirydate6" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly disabled >
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label" >Issuing Country*</label>
@@ -122,16 +119,15 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck5" type="checkbox" id="" name="okuStatus3" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
-                                       
+                                        <input class="form-check-input okuCheck5" value="on" type="checkbox" name="oku_status" id="oku_status2">
                                         <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <label for="lastname" class="form-label" >OKU Card Number*</label>                                    
-                                    <input type="text" disabled readonly id="okucard5" name="okuCardNum" value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER">
+                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
+                                    <input type="number" disabled readonly id="okucard5" name="okuCardNum" value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -206,9 +202,9 @@
                         </div>
                     </div>
 
-                
+
             </div>
-            <div class="modal-footer"> 
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
             </div>

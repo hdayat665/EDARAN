@@ -1,4 +1,50 @@
 $(document).ready(function () {
+    const bucketTab = document.getElementById('bucketTab');
+    const skipButton = document.getElementById('skipButton');
+
+    // Event listener for Bucket tab
+    bucketTab.addEventListener('click', function() {
+    // Show the skipButton
+    skipButton.style.display = 'block';
+    });
+
+    // Event listeners for other tabs
+    const activeTab = document.getElementById('activeTab');
+    const amendTab = document.getElementById('ammendTab');
+    const rejectedTab = document.getElementById('rejectedTab');
+
+    // Function to hide the skipButton
+    function hideSkipButton() {
+    skipButton.style.display = 'none';
+    }
+ 
+    // Event listeners for Active, Amend, and Rejected tabs
+    activeTab.addEventListener('click', hideSkipButton);
+    amendTab.addEventListener('click', hideSkipButton);
+    rejectedTab.addEventListener('click', hideSkipButton);
+
+
+    // Get the necessary elements
+    const approveAllButton = document.getElementById('approveAllButton');
+
+    // Event listener for Active tab
+    activeTab.addEventListener('click', function() {
+    // Show the approveAllButton
+    approveAllButton.style.display = 'block';
+    skipButton.style.display = 'none';
+    });
+
+    // Function to hide the approveAllButton
+    function hideApproveAllButton() {
+    approveAllButton.style.display = 'none';
+    }
+
+    // Event listeners for Amend and Rejected tabs
+    bucketTab.addEventListener('click', hideApproveAllButton);
+    amendTab.addEventListener('click', hideApproveAllButton);
+    rejectedTab.addEventListener('click', hideApproveAllButton);
+    
+    
     $("#activetable").dataTable({
         searching: true,
         lengthChange: true,

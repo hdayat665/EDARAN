@@ -31,6 +31,7 @@
                                 <div class="row p-2">
                                     <div class="col-md-3">
                                         <label class="form-label">Travel Date*</label>
+                                        
                                     </div>
                                     <div class="col-md-3">
                                         <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
@@ -69,7 +70,7 @@
                                         <label class="form-label">Description</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <textarea class="form-control" id="" name="desc" rows="6"></textarea>
+                                        <textarea class="form-control" id="desc" name="desc" rows="6"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +214,9 @@
                                         <label class="form-label">Project</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select" id="" name="project_id">
+                                        <select class="form-select" id="projectid" name="project_id">
                                             
-                                            <?php $projects = myProjectOnly(); ?>
+                                            <?php $projects = myProjectActive(); ?>
                                             <option class="form-label" value="">
                                                 Please Select</option>
                                             @foreach ($projects as $project)
@@ -231,8 +232,8 @@
                                         <label class="form-label">Project</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select" id="" name="project_id2">
-                                            <?php $projects = myProjectOnly(); ?>
+                                        <select class="form-select" id="projectId2" name="project_id2">
+                                            <?php $projects = myProjectActive(); ?>
                                             <option class="form-label" value="">Select Project</option>
                                             @foreach ($projects as $project)
                                                 <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
@@ -413,7 +414,8 @@
                         </div>
                         
                         <div class="row p-2">
-                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                            <div class="modal-footer"> 
+                                <button type="button" id="reset_travel" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="travelSaveButton" class="btn btn-primary">Save</button>
                             </div>
                         </div>
@@ -422,7 +424,7 @@
             </form>
         </div>
         <div class="accordion-item">
-            <form id="subsForm">
+            
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                         aria-expanded="false" aria-controls="collapseThree">
@@ -431,7 +433,7 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body bg-gray-100 text-black">
-                        <div class="row p-2">
+                        <!-- <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Claim For</label>
                             </div>
@@ -445,18 +447,24 @@
                                         Advance</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <!-- <label class="form-label">Supporting Document</label> -->
                             </div>
                             <div class="col-md-6">
                                 <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
+                                <input type="hidden" name="claim_for" value="2">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">                                
                             </div>
                         </div>
                         <div class="WC" style="display:none">
+                        <form id="subsFormca">
+                                <input type="hidden" name="claim_for" value='1'>
+                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">     
+                                <input type="hidden" value="{{ $year }}" name="year">                          
                             <div class="row p-2">
                                 <table id="claimtable" class="table table-striped table-bordered align-middle">
                                     <thead>
@@ -467,318 +475,373 @@
                                             <th class="text-nowrap">Type of Cash Advance
                                             </th>
                                             <th class="text-nowrap">Travel Date</th>
-                                            <th class="text-nowrap">Amount</th>
+                                            <th class="text-nowrap">Applied Amount</th>
+                                            <th class="text-nowrap">Final Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1; ?>
                                         @foreach ($cashAdvances as $cashAdvance)
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" value="{{ $cashAdvance->id }}" name="cashAdvanceId[]" /></td>
+                                                <td><input class="form-check-input" type="radio" value="{{ $cashAdvance->id }}" name="cashAdvanceId" /></td>
                                                 <td>{{ $no++ }}</td>
                                                 <td>Form ID {{ $cashAdvance->id }}</td>
                                                 <td> {{ getCashAdvanceType($cashAdvance->type) }}</td>
                                                 <td> {{ $cashAdvance->travel_date }}</td>
                                                 <td> {{ $cashAdvance->amount }}</td>
+                                                <td> {{ $cashAdvance->final_amount ?? $cashAdvance->amount }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="WOCca" >
-                            <div class="row p-2">
                                 <div class="row p-2">
-                                    <label class="form-label">Travel date and time</label>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row p-2">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">Start Date</label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <select class="form-control" name="start_date" id="date1ca">
-                                                            <option value="">Select Date</option>
-                                                            @foreach($travelDate as $date)
-                                                                <option value="{{ $date }}">{{ $date }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row p-2">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">Start Time</label>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" name="start_time" style=" background: #ffffff;" placeholder="Time" id="time1ca">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="row p-2">
+                                        <label class="form-label">Travel date and time</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row p-2">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">End Date</label>
+                                    <div class="row p-2">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">Start Date</label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <select class="form-control" name="start_date" id="date1ca">
+                                                                <option value="">Select Date</option>
+                                                                @foreach($travelDate as $date)
+                                                                    <option value="{{ $date }}">{{ $date }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <select class="form-control" name="end_date" id="date2ca">
-                                                            <option value="">Select Date</option>
-                                                            @foreach($travelDate as $date)
-                                                                <option value="{{ $date }}">{{ $date }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">Start Time</label>
+                                                        </div>
+                                                        <div class="col">
+                                                        <select class="form-select" id="time1ca" name="start_time">
+                                                                <option class="form-label" value="" selected>Please
+                                                                    Select</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row p-2">
-                                                    <div class="col-md-3">
-                                                        <label class="form-label">End Time</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">End Date</label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <select class="form-control" name="end_date" id="date2ca">
+                                                                <option value="">Select Date</option>
+                                                                @foreach($travelDate as $date)
+                                                                    <option value="{{ $date }}">{{ $date }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" name="end_time" style=" background: #ffffff;" placeholder="Time" id="time2ca">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">End Time</label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <select class="form-select" id="time2ca" name="end_time">
+                                                                <option class="form-label" value="" selected>Please
+                                                                    Select</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
+                                                    
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-2">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row p-2">
-                                            <div class="col-md-4">
-                                                <label class="form-label">Travel Duration</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" id="result1ca" name="travel_duration" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="col-md-4">
-                                                <label class="form-label">Project</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <select class="form-select" name="project_id">
-                                                    <option class="form-label" value="" selected>
-                                                        PLEASE CHOOSE</option>
-                                                    <?php $projects = myProjectOnly(); ?>
-                                                    @foreach ($projects as $project)
-                                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="row p-2">
-                                            <div class="col-md-4">
-                                                <label class="form-label">Description</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <textarea class="form-control" name="desc" id="" rows="4"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="p-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Travel Duration</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="result1ca" name="travel_duration" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Project</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select" name="project_id">
+                                                        <option class="form-label" value="" selected>
+                                                            PLEASE CHOOSE</option>
+                                                        <?php $projects = myProjectActive(); ?>
+                                                        @foreach ($projects as $project)
+                                                            <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4" style="display: none">
+                                                    <label class="form-label">laundry</label>
+                                                </div>
+                                                <div class="col-md-8" style="display: none">
+                                                    <input type="text" class="form-control" id="laundryDayca" name="" value=7 readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Description</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control" name="desc" id="" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             
-                            <!-- <div class="p-2">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-control">
-                                            <div class="row p-2">
-                                                <label class="form-label">Subsistence Allowance</label>
+                                <div class="p-2">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Subsistence Allowance</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Breakfast</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BFca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" class="form-control" readonly name="breakfast" value="0" id="DBFca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" readonly id="totalbfca">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Lunch</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LHca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="lunch" readonly class="form-control" value="0" id="DLHca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" readonly id="totallhca">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Dinner</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DNca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="dinner" readonly class="form-control" value="0" id="DDNca">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" readonly id="totaldnca">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-2">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Total (A)</label>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input readonly type="text" name="total_subs" class="form-control" value="0" id="TSca">
+                                                    </div>
+                                                </div>
+                                            
                                             </div>
-                                            <div class="row p-2">
-                                                <div class="col-md-2">
-                                                    <label class="form-label">Breakfast</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BFca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">X</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" class="form-control" readonly name="breakfast" value="0" id="DBFca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">=</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" readonly id="totalbfca">
-                                                </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="col-md-2">
-                                                    <label class="form-label">Lunch</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LHca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">X</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" name="lunch" readonly class="form-control" value="0" id="DLHca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">=</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" readonly id="totallhca">
-                                                </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="col-md-2">
-                                                    <label class="form-label">Dinner</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DNca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">X</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" name="dinner" readonly class="form-control" value="0" id="DDNca">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">=</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" readonly id="totaldnca">
-                                                </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="col-md-2">
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-control">
+                                                    <div class="row p-2">
+                                                        <label class="form-label">Accommodation</label>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3" id="hotelcca">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htvca" />
+                                                            <label class="form-label">Hotel</label>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input  type="text" readonly name="hotel_value"class="form-control" id="hotelcvca">
+                                                        </div>
+                                                        <div class="col-md-2" style="display: none">
+                                                            <input  type="text" class="form-control"  id="hotelcv1ca" value="0">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">X</label>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="text" name="hotel" class="form-control" id="hnca" readonly value="0">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">=</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="text" name="hotel_value" class="form-control" id="hnTotalca"  value="0">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3" id="lodgingcca">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgvca" />
+                                                            <label class="form-label">Lodging</label>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input  type="text" readonly class="form-control" id="lodgingcvca">
+                                                        </div>
+                                                        <div class="col-md-2" style="display: none">
+                                                            <input readonly type="text" class="form-control" id="lodgingcv1ca" value="0">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">X</label>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="number" name="lodging" class="form-control" value="0" id="lnca" readonly>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">=</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input type="number" name="lodging_value" class="form-control" id="lnTotalca"  value="0">
+                                                        </div>
+                                                    </div>
                                                     
-                                                </div>
-                                                <div class="col-md-2">
-                                                    
-                                                </div>
-                                                <div class="col-md-1">
-                                                    
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label">Total (A)</label>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="form-label">=</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input readonly type="text" name="total_subs" class="form-control" value="0" id="TSca">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocumentca" multiple> -->
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label class="form-label">Total (B)</label>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">=</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input readonly type="number" name="total_acc" class="form-control" value="0" id="TAVca">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        
+                                                        <div class="col-md-8">
+                                                            <label class="form-label">Total Subsistence Allowance & Accommodation (A+B)</label>
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <label class="form-label">=</label>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <input readonly type="number" name="total" class="form-control" value="" id="total2ca">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                           
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-6">
-                                        <div class="form-control">
+                                    <div class="p-2" id="laundrydivca" style="display: none">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-control">
                                                 <div class="row p-2">
-                                                    <label class="form-label">Accommodation</label>
+                                                    <label class="form-label">Laundry Allowance</label>
                                                 </div>
                                                 <div class="row p-2">
-                                                    <div class="col-md-3" id="hotelc">
-                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htvca" />
-                                                        <label class="form-label">Hotel</label>
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Amount</label>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <input  type="text" readonly name="hotel_value"class="form-control" id="hotelcvca">
-                                                    </div>
-                                                    <div class="col-md-2" style="display: none">
-                                                        <input  type="text" class="form-control"  id="hotelcv1ca" value="0">
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">X</label>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">=</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
-                                                    </div>
-                                                </div>
-                                                <div class="row p-2">
-                                                    <div class="col-md-3" id="lodgingc">
-                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgvca" />
-                                                        <label class="form-label">Lodging</label>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input  type="text" readonly class="form-control" id="lodgingcvca">
-                                                    </div>
-                                                    <div class="col-md-2" style="display: none">
-                                                        <input readonly type="text" class="form-control" id="lodgingcv1ca" value="0">
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">X</label>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input type="text" name="lodging" class="form-control" value="0" id="lnca" disabled>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">=</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row p-2">
-                                                    <div class="col-md-3">
-                                                        <input type="file" class="form-control-file" name="file_upload[]" id="supportdocumentca" multiple>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Total (B)</label>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">=</label>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAVca">
-                                                    </div>
-                                                </div>
-                                                <div class="row p-2">
-                                                    
                                                     <div class="col-md-8">
-                                                        <label class="form-label">Total Subsistence Allowance & Accommodation (A+B)</label>
+                                                        <input type="number" value=0 name="laundry_amount" id="laundry_amountca"class="form-control" placeholder="0.00">
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <label class="form-label">=</label>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <input readonly type="text" name="total" class="form-control" value="" id="total2ca">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Description</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control" name="laundry_desc" id="" rows="3"></textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <!-- <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Supporting Document</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                        </div> 
+                                                    </div> -->
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
-                            <div class="modal-footer">
-                                <button type="submit" id="caButton" class="btn btn-primary">Save</button>
-                            </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" id="caButton" class="btn btn-primary">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
                         </div>
-                            
-                        </div>
-                        <div class="WOC" style="display:none">
+                        <div class="WOC">
+                        <form id="subsForm">
                             <div class="row p-2">
                                 <div class="row p-2">
                                     <label class="form-label">Travel date and time</label>
+                                    <input type="hidden" name="claim_for" value='2'>
+                                    <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
+                                    <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">  
+                                    <input type="hidden" value="{{ $year }}" name="year"> 
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-md-6">
@@ -802,7 +865,10 @@
                                                         <label class="form-label">Start Time</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="start_time" style=" background: #ffffff;" placeholder="Time" id="time1">
+                                                    <select class="form-select" id="time1" name="start_time">
+                                                            <option class="form-label" value="" selected>Please
+                                                                Select</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -829,9 +895,13 @@
                                                         <label class="form-label">End Time</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="end_time" style=" background: #ffffff;" placeholder="Time" id="time2">
+                                                        <select class="form-select" id="time2" name="end_time">
+                                                            <option class="form-label" value="" selected>Please
+                                                                Select</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -853,14 +923,20 @@
                                                 <label class="form-label">Project</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <select class="form-select" name="project_id">
+                                                <select class="form-select" name="project_id" id="project_subs">
                                                     <option class="form-label" value="" selected>
                                                         PLEASE CHOOSE</option>
-                                                    <?php $projects = myProjectOnly(); ?>
+                                                    <?php $projects = myProjectActive(); ?>
                                                     @foreach ($projects as $project)
                                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                            <div class="col-md-4" style="display: none">
+                                                <label class="form-label">laundry</label>
+                                            </div>
+                                            <div class="col-md-8" style="display: none">
+                                                <input type="text" class="form-control" id="laundryDay" name="" value=7 readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -871,7 +947,7 @@
                                                 <label class="form-label">Description</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <textarea class="form-control" name="desc" id="" rows="4"></textarea>
+                                                <textarea class="form-control" name="desc" id="desc_subs" rows="4"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -980,7 +1056,7 @@
                                                         <label class="form-label">Hotel</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input  type="number" readonly name="hotel_value"class="form-control" id="hotelcv">
+                                                        <input  type="number" readonly class="form-control" id="hotelcv">
                                                     </div>
                                                     <div class="col-md-2" style="display: none">
                                                         <input  type="number" class="form-control"  id="hotelcv1" value="0">
@@ -989,13 +1065,13 @@
                                                         <label class="form-label">X</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="text" name="hotel" class="form-control" id="hn" readonly value="0">
+                                                        <input type="number" name="hotel" class="form-control" id="hn" readonly value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hnTotal" readonly value="0">
+                                                        <input type="number" name="hotel_value" readonly class="form-control" id="hnTotal" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -1019,13 +1095,13 @@
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="lnTotal" readonly value="0">
+                                                        <input type="text" name="lodging_value"  readonly class="form-control" id="lnTotal"  value="0">
                                                     </div>
                                                 </div>
                                                 
                                                 <div class="row p-2">
                                                     <div class="col-md-3">
-                                                        <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                                        <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
                                                     </div>
                                                     <div class="col-md-1">
                                                         
@@ -1059,9 +1135,47 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                                <div class="p-2" style="display: none" id="laundrydiv">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Laundry Allowance</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Amount</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" name="laundry_amount" id="laundry_amount" class="form-control" placeholder="0.00">
+                                                    </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Description</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control" name="laundry_desc" id="laundry_desc" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Supporting Document</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                        </div> 
+                                                    </div> -->
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer"> 
+                                        <button type="button" id="reset_sub" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
                             </div>
+                                </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -1077,7 +1191,7 @@
             <form id="personalForm">
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body bg-gray-100 text-black">
-                        <div class="row p-2">
+                        <div class="row p-2" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Applied Date</label>
                             </div>
@@ -1128,7 +1242,7 @@
                                 <label class="form-label">Description</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="claim_desc" id="claim_desc" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -1191,7 +1305,7 @@
             } else {
                 var distance = response.rows[0].elements[0].distance.value;
                 var distanceInKm = distance / 1000;
-                var distanceFormatted = distanceInKm.toFixed(2);
+                var distanceFormatted = distanceInKm.toFixed(1);
                 document.getElementById('result').value = distanceFormatted;
 
 

@@ -40,7 +40,6 @@ class ProfileController extends Controller
     {
         $input = $r->input();
 
-
         $ps = new ProfileService;
 
         $result = $ps->updateData($input);
@@ -177,7 +176,7 @@ class ProfileController extends Controller
 
         $ls = new LoginService;
 
-        $result = $ls->resetPassword($input);
+        $result = $ls->updatePass($input);
 
         return response()->json($result);
     }

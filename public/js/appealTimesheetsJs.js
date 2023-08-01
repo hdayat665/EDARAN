@@ -106,7 +106,7 @@ $(document).ready(function () {
 
         var id = $(this).data("id");
         var vehicleData = getSOP(id);
-        // console.log(vehicleData);
+        console.log(vehicleData);
     
         vehicleData.then(function (data) {
             
@@ -122,13 +122,103 @@ $(document).ready(function () {
             $("#monthappealv").val(data.month);
             $("#dayappealv").val(data.day);
             $("#reasonappealv").val(data.reason);
-           
+
+            // $("#reason_reject").val(data.reasonreject);
+
+            if (data.reasonreject !== null) {
+                $("#reason_reject").val(data.reasonreject);
+                $("#reasonhide").show(); // Show the reasonhide div
+            } else {
+                $("#reason_reject").val(''); // Set the textarea value to an empty string
+                $("#reasonhide").hide(); // Hide the reasonhide div
+            }
+
             if (data.file) {
                 var fileName = data.file.split('/').pop(); // Extract the file name from the file path
                 $("#filedownloadappeal").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
               }
         });
         $("#viewapprover").modal("show");
+    });
+
+    $("#addreasonr").click(function (e) {
+        $("#rejectform").validate({
+            rules: {
+                reasonreject: "required",
+                
+                
+            },
+
+            messages: {
+                reasonreject: "Please Insert Reason",
+               
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("rejectform")
+                    );
+                    var id = $("#idtr").val();
+                        // console.log(id);
+                        // return false;
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatereasonreaject/" + id,
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $(document).on("click", "#rejectb", function () {
+
+        var id = $(this).data("id");
+        var vehicleData = getSOP(id);
+        // console.log(vehicleData);
+        
+    
+        vehicleData.then(function (data) {
+            
+            $("#log_idr").val(data.logid);
+            $("#idtr").val(data.id);
+            
+            if (data.status === "Locked") {
+                $("#Statusr").val("Pending");
+            } else {
+                $("#Statusr").val(data.status);
+            }
+            $("#yearappealr").val(data.year);
+            $("#monthappealr").val(data.month);
+            $("#dayappealr").val(data.day);
+            $("#reasonappealr").val(data.reason);
+            $("#reason_reject").val(data.reasonreject);
+            $("#applieddater").val(data.applied_date);
+            
+           
+            if (data.file) {
+                var fileName = data.file.split('/').pop(); // Extract the file name from the file path
+                $("#filedownloadappealr").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
+              }
+        });
+        $("#viewreject").modal("show");
     });
 
 

@@ -40,24 +40,24 @@
                                 <div class="col d-flex justify-content-start">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">
-                                            <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Active</a>
+                                            <a href="#default-tab-1" data-bs-toggle="tab" id="activeTab" class="nav-link active">Active</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Bucket</a>
+                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link " id="bucketTab">Bucket</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Amend</a>
+                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link " id="ammendTab">Amend</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Rejected</a>
+                                            <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link " id="rejectedTab">Rejected</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <button class="btn btn-primary" type="button">Skip the Queue</button>&nbsp;
-                                    <button class="btn btn-primary" type="button">Approve All</button>&nbsp;
-                                    <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
-                                    <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp;
+                                    <a class="btn btn-primary" id="skipButton" type="button" style="display: none;">Skip the Queue</a>&nbsp;
+                                    <a class="btn btn-primary" id="approveAllButton" type="button">Approve All</a>&nbsp;
+                                    <!-- <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp; -->
+                                    <!-- <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp; -->
                                 </div>
                             </div>
                         </div>

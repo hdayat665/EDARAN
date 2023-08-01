@@ -1,4 +1,22 @@
 $(document).ready(function () {
+
+    $(document).ready(function() {
+        $(".wan").hide();
+
+        $(document).on("click", ".dropdown-toggle", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".wan");
+            $(".wan").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".wan").hide();
+            }
+        });
+    });
+
+
     $("#tableemployeeinfo").DataTable({
         responsive: false,
         dom:
@@ -79,26 +97,24 @@ $(document).ready(function () {
         });
     });
 
-    $("#submit").click(function (e) {
-        $("#submitForm").validate({
+    $("#submitTerminate").click(function (e) {
+        $("#submitTerminateForm").validate({
             // Specify validation rules
             rules: {
                 effectiveFrom: "required",
                 employmentDetail: "required",
-                remarks: "required",
                 file: "required",
             },
 
             messages: {
-                effectiveFrom: "Please Insert Terminate Date",
-                employmentDetail: "Please Insert Terminate Type",
-                remarks: "Please Insert Remarks",
+                effectiveFrom: "Please Choose Exit Date",
+                employmentDetail: "Please Choose Exit Type",
                 file: "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
-                        document.getElementById("submitForm")
+                        document.getElementById("submitTerminateForm")
                     );
 
                     $.ajax({
@@ -131,16 +147,24 @@ $(document).ready(function () {
         });
     });
 
+    $("#exitdate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    })
+
     $(document).on("click", "#terminate", function () {
         $("#exampleModal").modal("show");
         var userId = $(this).data("id");
         var employeeId = $(this).data("employee");
+
         $("#userId").val(userId);
 
         var ParentData = getEmployee(employeeId);
 
         ParentData.then(function (data) {
             parent = data;
+            console.log(parent);
             $("#employeeId").val(parent.employeeId);
             $("#employeeName").val(parent.employeeName);
             $("#employeeEmail").val(parent.employeeEmail);

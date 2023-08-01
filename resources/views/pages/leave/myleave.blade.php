@@ -7,6 +7,14 @@
             background-color: gray !important;
             border-color: gray !important;
         }
+
+        .custom-dropdown-menu {
+            position: static ;
+            height: auto ;
+            max-height: none ;
+            overflow: visible ;
+        }
+
     </style>
 
     <!-- BEGIN #content -->
@@ -55,6 +63,8 @@
                                         </div>
                                         <br>
                                         <div id="EarnedLeave" class="form-control">Earned Leave to Date:  Days</div>
+                                        <br>
+                                        <div id="totalNoPaidLeave" class="form-control">Total Days for No Paid Leave: 0</div>
                                     </div>
                                 </div>
                                     <div class="col-sm-6">
@@ -138,6 +148,7 @@
                                             </div>
                                         </form>
                                     </div>
+
                                     <div class="row p-2">
                                         <table id="table-leave" class="table table-striped table-bordered align-middle">
                                             <thead>
@@ -166,16 +177,21 @@
                                                 <tr class="odd gradeX">
                                                     <td>{{ $id }}</td>
                                                     <td>
-                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                                                            <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <div class="viewleave">
-                                                                <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
+                                                        <div class="btn-group">
+                                                            <div>
+                                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                                                    <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
+                                                                </a>
                                                             </div>
-                                                            <div class="dropdown-divider "></div>
-                                                            <div class="cancelleave">
-                                                                <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+
+                                                            <div class="dropdown-menu custom-dropdown-menu test">
+                                                                <div class="viewleave">
+                                                                    <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
+                                                                </div>
+                                                                <div class="dropdown-divider "></div>
+                                                                <div class="cancelleave">
+                                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -296,12 +312,12 @@
                                         </form>
                                     </div>
 
-                                    <div class="row p-2">
-                                        <table id="table-leave2" class="table table-striped table-bordered align-middle">
+                                    <div class="row">
+                                        <table id="tableleavedua" class="table table-striped table-bordered align-middle">
                                             <thead>
                                                 <tr>
-                                                    <th width="1%">No.</th>
-                                                    <th width="1%" data-orderable="false">Action</th>
+                                                    <th>No.</th>
+                                                    <th data-orderable="false">Action</th>
                                                     <th width="1%">Applied Date</th>
                                                     <th>Type of Leave</th>
                                                     <th>Start Date</th>
@@ -321,23 +337,20 @@
                                                     $end_date = new DateTime($mh->end_date);
                                                 ?>
                                                 <tr class="odd gradeX">
-                                                    <td>{{ $id }}</td>
-                                                    <td>
-                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                                                            <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu">
-                                                            <div class="viewleave">
-                                                                <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
+                                                    <td style="width: 1%;">{{ $id }}</td>
+                                                    <td style="width: 1%;">
+                                                        <div class="btn-group">
+                                                            <div>
+                                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                                                    <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
+                                                                </a>
                                                             </div>
-                                                            {{-- <div class="dropdown-divider "></div> --}}
-                                                            {{-- <div class="cancelleave">
-                                                                <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item">Cancel Leave</a>
-                                                            </div> --}}
-                                                            {{-- <div class="dropdown-divider "></div>
-                                                            <div class="rejectedleave">
-                                                                <a class="dropdown-item">Rejected Leave</a>
-                                                            </div> --}}
+
+                                                            <div class="dropdown-menu custom-dropdown-menu test">
+                                                                <div class="viewleave">
+                                                                    <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>{{$applied_date->format('Y-m-d') }}</td>
@@ -398,25 +411,47 @@
                         <div class="modal-body">
                             <form id="addForm">
                                 <div class="row p-2">
-
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Applied Date </label>
                                             <input type="text" class="form-control" name= "applied_date" id="datepicker-applied" placeholder="yyyy-mm-dd" readonly>
                                         </div>
 								    </div>
-
                                     <div class="col-sm-6" id="menu2">
                                         <label class="form-label" for="Menu2">Type of Leave*</label>
-                                           <select class="form-select" name="typeofleave">
-                                                <option value="" label="PLEASE CHOOSE "></option>
-                                                    @foreach($types as $dt)
-                                                        <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
-                                                    @endforeach
-                                            </select>
+                                        <select class="form-select" id="typeofleavehidden" name="typeofleave">
+                                            <option value="" label="PLEASE CHOOSE "></option>
+                                            @foreach($types as $dt)
+                                            <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
-
+                                <div class="row p-2" id="hideavaible">
+                                    <div class="col-sm-12">
+                                        <div>
+                                            <label for="exampleInputEmail1" class="form-label">Date Availability</label>
+                                        </div>
+                                        <div class="mb-12">
+                                            <input type="hidden" class="form-control" id="type_sick" value="<?php echo $typessick->id; ?>">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" value="1" type="radio" name="availability" id="radio1" checked>
+                                                <label class="form-check-label" for="radio1">
+                                                    Available
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" value="2" type="radio" name="availability" id="radio2">
+                                                <label class="form-check-label" for="radio2">
+                                                    Existing Application
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <br>
+                                    </div>
+                                </div>
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu3">
                                         <label class="form-label" for="Menu3">No of Day(s) Applied*</label>
@@ -493,6 +528,13 @@
                                         <label class="form-label" for="Menu7">Supporting Document</label>
                                         <div class="input-group">
                                             <input id="fileupload" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
+                                            <span id="fileDownloadPolicy"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" id="menusick">
+                                        <label class="form-label" for="Menu7">Supporting Document</label>
+                                        <div class="input-group">
+                                            <input name="fileuploadsick" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
                                             <span id="fileDownloadPolicy"></span>
                                         </div>
                                     </div>

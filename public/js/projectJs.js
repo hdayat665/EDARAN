@@ -18,8 +18,11 @@ $(document).ready(function () {
         },
     });
 
-    $("#acc_manager2").picker({
-        search: true,
+    $('.selectacc2').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#addModal'),
+        // multiple: true,
     });
 
     $("#data-table-default2").DataTable({
@@ -425,8 +428,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#contract_start_date")
-    .datepicker({
+    $("#contract_start_date").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",

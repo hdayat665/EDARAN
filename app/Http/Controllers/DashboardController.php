@@ -24,9 +24,8 @@ class DashboardController extends Controller
         $result['numberOfObjects'] = $ss->myProject();
         $result['allproject'] = $ss->allproject();
         $result['allEmployee'] = $ss->allEmployee();
-        $result['holidays'] = $ss->countHolidays();
-        $result = array_merge($result, $ss->countHolidays());
-
+        $result['allEmployee'] = $ss->allEmployee();
+        $result['unlogdate'] = $ss->getunlogdate();
         // sendGeneralNotification(Auth::user()->id, 'testing send to self');
 
         // dd($result['allEmployee']);

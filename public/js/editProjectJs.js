@@ -18,7 +18,7 @@ $(document).ready(function () {
     $("#location-search").picker({
         search: true,
     });
- 
+
     $("#location-search-edit").picker({
         search: true,
     });
@@ -26,12 +26,31 @@ $(document).ready(function () {
     $("#projectmember").picker({
         search: true,
     });
-    // $('#employee_id').picker({
-    //     search:true,
-    // });
-    // $('#acc_manager2').picker({
-    //     search:true,
-    // });
+
+    $(document).ready(function() {
+
+        $('.select1').select2({
+            placeholder: "PLEASE CHOOSE",
+            allowClear: true,
+            dropdownParent: $('#addProjectMemberModal'),
+            // multiple: true,
+        });
+    });
+    
+    $('.selectacc').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#tab1'),
+        // multiple: true,
+    });
+    
+
+    $('.selectmng').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#tab1'),
+        // multiple: true,
+    });
 
     // $("#project_manager2").picker({
     //     search: true,
@@ -48,12 +67,6 @@ $(document).ready(function () {
     });
 
     $("#datepicker-joineddate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
-    
-    $("#datepicker-joineddate2").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
@@ -971,13 +984,13 @@ $(document).ready(function () {
         })
         .on("changeDate", function(e) {
             var startDate = e.date;
-    
+
             // Update the end datepicker's date to the selected start date
             $("#datepicker-end").datepicker("update", startDate);
-    
+
             // Set the minimum date for the end datepicker to the selected start date
             $("#datepicker-end").datepicker("setStartDate", startDate);
-    
+
             // Enable or disable the end datepicker based on whether a start date is selected
             if (startDate !== null) {
                 $("#datepicker-end").prop("readonly", false);
@@ -985,17 +998,17 @@ $(document).ready(function () {
                 $("#datepicker-end").prop("readonly", true);
             }
         });
-    
+
         // Initialize the datepicker for contract_end_date
         $("#datepicker-end").datepicker({
             format: "yyyy/mm/dd",
             autoclose: true,
             todayHighlight: true,
         });
-    
+
         // Disable the end datepicker initially
         $("#datepicker-end").prop("readonly", true);
-    
+
         // Initialize the datepicker for warranty_start_date
         $(document).ready(function () {
             // Initialize the start datepicker
@@ -1005,13 +1018,13 @@ $(document).ready(function () {
                 format: "yyyy/mm/dd",
             }).on("changeDate", function (e) {
                 var startDate = e.date;
-        
+
                 // Set the end datepicker's date to the selected start date
                 $("#datepicker-warend").datepicker("update", startDate);
-        
+
                 // Set the minimum date for the end datepicker to the selected start date
                 $("#datepicker-warend").datepicker("setStartDate", startDate);
-        
+
                 // Enable or disable the end datepicker based on whether a start date is selected
                 if (startDate !== null) {
                     $("#datepicker-warend").prop("readonly", false);
@@ -1019,20 +1032,20 @@ $(document).ready(function () {
                     $("#datepicker-warend").prop("readonly", true);
                 }
             });
-        
+
             // Initialize the end datepicker
             $("#datepicker-warend").datepicker({
                 format: "yyyy/mm/dd",
                 autoclose: true,
                 todayHighlight: true,
             });
-        
+
             // Disable the end datepicker initially
             $("#datepicker-warend").prop("readonly", true);
         });
-        
-    
-    
+
+
+
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -1043,48 +1056,57 @@ $(document).ready(function () {
             }
         }
     });
-    
 
-        $("#project_manager2_show").hide();
-        $("#project_manager2").prop("readonly", true);
+
+    $(document).on("change", "#acc_manager2", function () {
+        var selectedValue = $(this).val();
+        if (selectedValue !== "") {
+            $("#project_manager2_show")
+                .find("option")
+                .remove()
+                .end()
+                .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
+                .val("");
+
+            $("#project_manager2_show").next().find(".select2-selection").css({
+                "pointer-events": "auto",
+                "background-color": "white" 
+            });
+            
+            $.ajax({
+                url: "/getUserWithSelectedUser/" + selectedValue,
+                success: function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        const user = data[i];
+                        console.log(user["id"]);
+                        var opt = document.createElement("option");
+                        opt.value = user["id"];
+                        opt.text = user["employeeName"];
+                        $("#project_manager2_show").append(opt);
+                    }
     
-        $(document).on("change", "#acc_manager2", function () {
-            var selectedValue = $(this).val();
-            if (selectedValue !== "") {
-                $("#project_manager2_show")
-                    .find("option")
-                    .remove()
-                    .end()
-                    .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
-                    .val("");
+                    // Enable the select2 plugin after adding options
+                    
     
-                $.ajax({
-                    url: "/getUserWithSelectedUser/" + selectedValue,
-                    success: function (data) {
-                        for (let i = 0; i < data.length; i++) {
-                            const user = data[i];
-                            console.log(user["id"]);
-                            var opt = document.createElement("option");
-                            document.getElementById("project_manager2_show").innerHTML +=
-                                '<option value="' +
-                                user["id"] +
-                                '">' +
-                                user["employeeName"] +
-                                "</option>";
-                        }
-                    },
+                    // Set the background color here
+                    
+                },
+            });
+    
+            $("#project_manager2_show").show();
+            $("#project_manager2").hide();
+        } else {
+            $("#project_manager2_show").hide();
+            $("#project_manager2").show();
+    
+            // Revert the styles when the change event occurs
+            $("#project_manager2_show")
+                .next()
+                .find(".select2-selection")
+                .css({
+                    "pointer-events": "none",
+                    "background-color": "#e9ecef" 
                 });
-    
-                $("#project_manager2_show").prop("disabled", false);
-                $("#project_manager2_show").show();
-                $("#project_manager2").prop("disabled", true);
-                $("#project_manager2").hide();
-            } else {
-                $("#project_manager2_show").hide();
-                $("#project_manager2_show").prop("disabled", true);
-                $("#project_manager2").prop("disabled", false);
-                $("#project_manager2").show();
-            }
-        });
+        }
+      });
 });
-    

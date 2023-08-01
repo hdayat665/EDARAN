@@ -22,7 +22,7 @@
 				<div class="stats-icon"><i class="fa fa-calendar-days"></i></div>
 				<div class="stats-info">
 					<h4>MY TIMESHEET</h4>
-					<p>{{ $holidays }}</p>
+					<p>{{ $unlogdate['unlogdate'] }}</p>
 				</div>
 				<div class="stats-link">
 					<a href="/myTimesheet"><i class="fa fa-calendar-days"></i></a>
@@ -39,7 +39,7 @@
 					<p>{{ $numberOfObjects['numberOfObjects'] }}</p>
 				</div>
 				<div class="stats-link">
-				<a ><i class="fa fa-bag-shopping"></i></a>
+				<a href="/myProject" ><i class="fa fa-bag-shopping"></i></a>
 				</div>
 			</div>
 		</div>

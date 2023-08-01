@@ -20,9 +20,9 @@ $("#tsapprover2").select2();
 // search bar in select box (Employment Information)
 $('#role').select2();
 $('#companyForEmployment').select2();
-$('#departmentShow').select2({placeholder: "please choose"});
-$('#unitShow').select2({placeholder: "please choose"});
-$('#branchShow').select2({placeholder: "please choose"});
+$('#departmentShow').select2({placeholder: "PLEASE CHOOSE"});
+$('#unitShow').select2({placeholder: "PLEASE CHOOSE"});
+$('#branchShow').select2({placeholder: "PLEASE CHOOSE"});
 $('#jobGrade').select2();
 $('#designation').select2();
 $('#employmentType').select2();
@@ -72,6 +72,14 @@ $('#event').select2();
                 $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
+
+
+            $('#crop').click(function() {
+                // Show the submit button
+                $('#uploadpicture').show();
+                $('#uploadcancel').show();
+
+            });
         }
     });
 
@@ -103,65 +111,18 @@ $('#event').select2();
         }
     });
 
-    var checkboxes = $('input[name="address_type[]"]');
-    var permanentChecked = false;
-    var correspondentChecked = false;
-    var addressId = null;
-    var addressType = "0";
+    $("#idno7").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
 
-    checkboxes.each(function () {
-        if ($(this).is(":checked")) {
-            if ($(this).val() === "permanent") {
-                permanentChecked = true;
-            } else if ($(this).val() === "correspondent") {
-                correspondentChecked = true;
-            }
-            if (addressId == null) {
-                addressId = $(this).data("address-id");
-                addressType = $(this).data("address-type");
-            }
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age7").val(currentAge);
         }
     });
-
-    if (permanentChecked && correspondentChecked) {
-        checkboxes.not(":checked").prop("disabled", true);
-        // if both checkboxes are checked and have the same address ID, set addressType to 3
-        if (
-            checkboxes.filter(
-                '[data-address-id="' + addressId + '"]:checked'
-            ).length === 2
-        ) {
-            addressType = "3";
-        }
-    } else if (permanentChecked) {
-        // if only permanent checkbox is checked, set addressType to 1
-        addressType = "1";
-        // disable all other permanent checkboxes
-        checkboxes
-            .filter('[value="permanent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]')
-            .prop("disabled", false);
-    } else if (correspondentChecked) {
-        // if only correspondent checkbox is checked, set addressType to 2
-        addressType = "2";
-        // disable all other correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all permanent checkboxes
-        checkboxes.filter('[value="permanent"]').prop("disabled", false);
-    } else {
-        checkboxes.prop("disabled", false);
-    }
-
-    // var employmentInfoHeight = $("#editHRISJs").height();
-
-    // // Set the same height for the Job History card
-    // $("#jobHistoryJs").css("max-height", employmentInfoHeight + "px");
-    // console.log(employmentInfoHeight);
 
     $("#firstname,#lastname").change(function () {
         var a = $("#firstname").val();
@@ -196,7 +157,24 @@ $('#event').select2();
         var b = $("#lastNameChild").val();
         $("#fullNameChild").val(a + " " + b);
     });
+
     $("#idNoaddChild").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBChild").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
+        }
+    });
+
+
+    $("#idNo1").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
             var year = idn.substring(0, 2);
@@ -240,6 +218,7 @@ $('#event').select2();
         }
     });
     //EDIT CHILD
+
     $("#idNo1").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
@@ -252,6 +231,21 @@ $('#event').select2();
             $("#DOB1").val(
                 (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
             );
+        }
+    });
+
+    $("#idNo1").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age1").val(currentAge);
         }
     });
 
@@ -333,13 +327,42 @@ $('#event').select2();
     // Update Children Details
 
     $("#passports1").change(function () {
-        if ($("#expiryDate1").prop("readonly")) {
+        if (($("#expiryDate1").val() !== "") ) {
             $("#expiryDate1").prop("readonly", false);
+            $("#expiryDate1").prop("disabled", false);
             $("#expiryDate1").css("pointer-events", "auto");
+
+            $("#issuingCountry1").prop("readonly", false);
+            $("#issuingCountry1").prop("disabled", false);
+            $("#issuingCountry1").css("pointer-events", "auto");
         } else {
             $("#expiryDate1").prop("readonly", true);
+            $("#expiryDate1").prop("disabled", true);
             $("#expiryDate1").css("pointer-events", "none");
             $("#expiryDate1").val("");
+
+            $("#issuingCountry1").prop("readonly", true);
+            $("#issuingCountry1").prop("disabled", true);
+            $("#issuingCountry1").css("pointer-events", "none");
+            $("#issuingCountry1").val("");
+        }
+    });
+
+    $("#passportparentedit").change(function () {
+        if ($("#passportparentedit").val() !== "") {
+            $("#expirydate7").prop("disabled", false);
+            $("#expirydate7").css("pointer-events", "auto");
+
+            $("#issuingCountry7").prop("disabled", false);
+            $("#issuingCountry7").css("pointer-events", "auto");
+        } else {
+            $("#expirydate7").prop("disabled", true);
+             $("#expirydate7").css("pointer-events", "none");
+             $("#expirydate7").val("");
+
+             $("#issuingCountry7").prop("disabled", true);
+             $("#issuingCountry7").css("pointer-events", "none");
+             $("#issuingCountry7").val("");
         }
     });
 
@@ -353,40 +376,36 @@ $('#event').select2();
 
             $("#age1").prop("readonly", false);
 
-            $("#passports1").prop("readonly", false);
-            $("#passports1").css("pointer-events", "auto");
+            // $("#passports1").prop("readonly", false);
+            // $("#passports1").css("pointer-events", "auto");
 
             $("#gender1").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 background: "#ffffff",
             });
-
-            $("#issuingCountry1").prop("readonly", false);
-            $("#issuingCountry1").css("pointer-events", "auto");
         } else {
             $("#idNo1").prop("readonly", false);
 
             $("#DOB1").prop("readonly", true);
             $("#DOB1").css("pointer-events", "none");
 
-            $("#passports1").val("");
-            $("#passports1").prop("readonly", false);
-            $("#passports1").css("pointer-events", "auto");
+            // $("#passports1").val("");
+            // $("#passports1").prop("readonly", false);
+            // $("#passports1").css("pointer-events", "auto");
 
-            $("#expiryDate1").val("");
-            $("#expiryDate1").prop("readonly", true);
-            $("#expiryDate1").css("pointer-events", "none");
+            // $("#expiryDate1").val("");
+            // $("#expiryDate1").prop("readonly", true);
+            // $("#expiryDate1").css("pointer-events", "none");
 
             $("#gender1").css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
+
             $("#age1").prop("readonly", true);
 
-            $("#issuingCountry1").prop("readonly", true);
-            $("#issuingCountry1").css("pointer-events", "none");
         }
     });
 
@@ -531,9 +550,51 @@ $('#event').select2();
 
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
-            $("#age").val(currentAge);
+            $("#age2").val(currentAge);
         }
     });
+
+    /////edit employee
+    $("#idnumber").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = "19".concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            $("#dob").val(year + "-" + month + "-" + day);
+        }
+    });
+
+    ////update companion
+    $("#idnumber2s").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+
+            var cutoff = new Date().getFullYear() - 2000;
+
+            $("#dobs").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
+        }
+    });
+
+    $("#idnumber2s").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000;
+
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age2s").val(currentAge);
+        }
+    });
+
+
     $("#stateEmc").css({ "pointer-events": "none", background: "#e9ecef" });
     $("#countryEmc").css({ "pointer-events": "none", background: "#e9ecef" });
 
@@ -653,6 +714,7 @@ $('#event').select2();
             $("#expirydatemc").prop("readonly", false);
             $("#expirydatemc").css("pointer-events", "auto");
             $("#expirydatemc").prop("disabled", false);
+
             $("#issuingCountry2").prop("disabled", false);
             $("#issuingCountry2").css("pointer-events", "auto");
         } else {
@@ -672,13 +734,8 @@ $('#event').select2();
             $("#idnumber2s").prop("readonly", true);
             $("#idnumber2s").val("");
 
-            $("#passportmcs").prop("readonly", false);
-
             $("#dobs").prop("readonly", false);
             $("#dobs").css("pointer-events", "auto");
-
-            $("#passportmcs").prop("readonly", false);
-            $("#passportmcs").css("pointer-events", "auto");
 
             $("#expirydatemcs").prop("readonly", false);
             $("#expirydatemcs").css("pointer-events", "auto");
@@ -696,8 +753,6 @@ $('#event').select2();
             $("#dobs").css("pointer-events", "none");
 
             $("#passportmcs").val("");
-            $("#passportmcs").prop("readonly", true);
-            $("#passportmcs").css("pointer-events", "none");
 
             $("#expirydatemcs").prop("readonly", true);
             $("#expirydatemcs").css("pointer-events", "none");
@@ -709,6 +764,26 @@ $('#event').select2();
             $("#issuingCountry2s").css("pointer-events", "none");
 
             $("#age2s").prop("readonly", false);
+        }
+    });
+
+    $("#passportmcs").change(function () {
+        if ($("#expirydatemcs").prop("readonly")) {
+            $("#expirydatemcs").prop("readonly", false);
+            $("#expirydatemcs").css("pointer-events", "auto");
+            $("#expirydatemcs").prop("disabled", false);
+
+            $("#issuingCountry2").prop("disabled", false);
+            $("#issuingCountry2").css("pointer-events", "auto");
+        } else {
+            $("#expirydatemcs").prop("readonly", true);
+            $("#expirydatemcs").css("pointer-events", "none");
+            $("#expirydatemcs").val("");
+            $("#expirydatemcs").prop("disabled", false);
+
+            $("#issuingCountry2s").prop("disabled", false);
+            $("#issuingCountry2s").css("pointer-events", "auto");
+            $("#issuingCountry2s").val("");
         }
     });
 
@@ -952,6 +1027,147 @@ $('#event').select2();
         }
     });
 
+    $("#same-addressEditParent").change(function () {
+        if (this.checked) {
+            $("#address1P1")
+                .val($("#address-1").val())
+                .prop("readonly", true);
+            $("#address2P1")
+                .val($("#address-2").val())
+                .prop("readonly", true);
+            $("#postcodeP1")
+                .val($("#postcode").val())
+                .prop("readonly", true);
+            $("#cityP1").val($("#city").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#stateP1")
+                .val($("#state").val())
+                .prop("readonly", true)
+                .css({
+                    "pointer-events": "none",
+                    "touch-action": "none",
+                    background: "#e9ecef",
+                });
+            $("#countryP1")
+                .val($("#country").val())
+                .prop("readonly", true)
+                .css({
+                    "pointer-events": "none",
+                    "touch-action": "none",
+                    background: "#e9ecef",
+                });
+
+            // Fetch permanent address from userAddress table if available
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforParentx = getEmployeeAddressforParent(id);
+            //console.log(id);
+
+            getEmployeeAddressforParentx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
+                            permanentCountry
+                        ) {
+                            $("#address1P1").val(permanentAddress1);
+                            $("#address2P1").val(permanentAddress2);
+                            $("#postcodeP1").val(permanentPostcode);
+                            $("#cityP1").val(permanentCity);
+                            $("#stateP1").val(permanentState);
+                            $("#countryP1").val(permanentCountry);
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+            $("#address1P1")
+                .val($("#address-1").val())
+                .prop("readonly", true);
+            $("#address2P1")
+                .val($("#address-2").val())
+                .prop("readonly", true);
+            $("#postcodeP1")
+                .val($("#postcode").val())
+                .prop("readonly", true);
+            $("#cityP1").val($("#city").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#stateP1").val($("#state").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#countryP1").val($("#country").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+        } else {
+            $("#address1P1").prop("readonly", false);
+            $("#address2P1").prop("readonly", false);
+            $("#postcodeP1").prop("readonly", false);
+            $("#cityP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            $("#stateP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            $("#countryP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            // $("#address1parent").val($("").val()).prop("readonly", false);
+            // $("#address2parent").val($("").val()).prop("readonly", false);
+            // $("#postcodeparent").val($("").val()).prop("readonly", false);
+            // $("#cityparent").val($("").val()).prop("readonly", false);
+            // $("#statec").val($("").val()).prop("disabled", false);
+            // $("#countryc").val($("1").val()).prop("disabled", false);
+            $("#address1P1").val($("").val()).prop("readonly", false);
+            $("#address2P1").val($("").val()).prop("readonly", false);
+            $("#postcodeP1").val($("").val()).prop("readonly", false);
+            $("#cityP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#stateP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#countryP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+        }
+    });
+
     function getEmployeeAddressforParent(id) {
         return $.ajax({
             url: "/getEmployeeAddressforParent/" + id,
@@ -999,14 +1215,15 @@ $('#event').select2();
                 "touch-action": "none",
                 background: "#e9ecef",
             });
+            var id = document.getElementById("user_id").value;
 
             // Fetch permanent address from userAddress table if available
-            var id = document.getElementById("user_id").value;
+
             // console.log(id);
             // return false;
             var getEmployeeAddressforCompanionx =
                 getEmployeeAddressforCompanion(id);
-            //console.log(id);
+            console.log(id);
 
             getEmployeeAddressforCompanionx
                 .then(function (data) {
@@ -1047,8 +1264,15 @@ $('#event').select2();
             $("#address-2c").val($("").val()).prop("readonly", false);
             $("#postcodec").val($("").val()).prop("readonly", false);
             $("#cityc").val($("").val()).prop("readonly", false);
-            $("#statec").val($("").val()).prop("disabled", false);
-            $("#countryc").val($("1").val()).prop("disabled", false);
+            $("#statec").val($("").val()).prop("disabled", false).css({ "pointer-events": "auto", background: "none" });
+            $("#countryc").val($("")
+            .val("MY"))
+            .prop("disabled", false)
+            .prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            })
         }
     });
 
@@ -1315,6 +1539,23 @@ $('#event').select2();
         }
     });
 
+
+    //edit Child
+    $('input[name="nonCitizen"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idNo1").val("").prop("disabled", true);
+
+            $("#issuingCountry1").prop("disabled", false);
+            $("#issuingCountry1").prop("disabled", true);
+        } else {
+            $("#idNo1").prop("disabled", false);
+
+            $("#issuingCountry1").prop("disabled", true);
+
+            $("#issuingCountry1").prop("disabled", true);
+        }
+    });
+
     $('input[name="okuStatus2"]').click(function () {
         if ($(this).is(":checked")) {
             $("#okucard3").prop("disabled", false);
@@ -1332,14 +1573,14 @@ $('#event').select2();
         if ($(this).is(":checked")) {
             $("#idNo1").val("").prop("disabled", true);
 
-            $("#issuingCountry1").prop("disabled", false);
-            $("#expiryDate1").prop("disabled", false);
+            // $("#issuingCountry1").prop("disabled", false);
+            // $("#expiryDate1").prop("disabled", false);
         } else {
             $("#idNo1").prop("disabled", false);
 
-            $("#issuingCountry1").prop("disabled", true);
+            // $("#issuingCountry1").prop("disabled", true);
 
-            $("#expiryDate1").prop("disabled", true);
+            // $("#expiryDate1").prop("disabled", true);
         }
     });
 
@@ -1371,26 +1612,36 @@ $('#event').select2();
     $('input[name="nonNetizen3"]').click(function () {
         if ($(this).is(":checked")) {
             $("#idno6").val("").prop("disabled", true);
-            $("#expirydate6").prop("disabled", true);
+            // $("#expirydate6").prop("disabled", true);
             $("#issuingCountry6").prop("disabled", true);
 
         } else {
             $("#idno6").prop("disabled", false);
-            $("#expirydate6").prop("disabled", true);
+            // $("#expirydate6").prop("disabled", true);
             $("#issuingCountry6").prop("disabled", true);
         }
     });
 
 
-    $('input[name="okuStatus3"]').click(function () {
-        if ($(this).is(":checked")) {
+        //oku check add family
+    $(".okuCheck5").click(function () {
+        if ($(this).prop("checked")) {
+            $("#okucard5").prop("readonly", false);
             $("#okucard5").prop("disabled", false);
 
             $("#okuattach5").prop("disabled", false);
-        } else {
-            $("#okucard5").val("").prop("disabled", true);
+            $("#okuattach5").prop("readonly", false);
 
-            $("#okuattach5").val("").prop("disabled", true);
+            $("#okuattach5").css("pointer-events", "auto");
+            // okuStatus = 1;
+        } else {
+            $("#okucard5").prop("readonly", true);
+            $("#okucard5").prop("disabled", true);
+
+            $("#okuattach5").prop("disabled", true);
+            $("#okuattach5").prop("readonly", true);
+            $("#okuattach5").css("pointer-events", "none");
+            // okuStatus = 0;
         }
     });
 
@@ -1490,21 +1741,18 @@ $('#event').select2();
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
-                // phoneNo2: {
-                //     required: "Please Insert Phone Number",
-                //     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
-                //     rangelength: "Please Insert Valid Phone Number",
-                // },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                 },
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset OKU Card Number",
+                    digits: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
+
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
@@ -2096,8 +2344,50 @@ $('#event').select2();
         }
     }
 
+
+////////////////////////////////////////////////////
+
+var checkboxes = $('input[name="address_type[]"]');
+
+var permanentChecked = false;
+var correspondentChecked = false;
+var addressId = null;
+var addressType = "0";
+
+checkboxes.each(function () {
+    if ($(this).is(":checked")) {
+        if ($(this).val() === "permanent") {
+            permanentChecked = true;
+        } else if ($(this).val() === "correspondent") {
+            correspondentChecked = true;
+        }
+        if (addressId == null) {
+            addressId = $(this).data("address-id");
+            addressType = $(this).data("address-type");
+        }
+    }
+});
+
+if (permanentChecked && correspondentChecked) {
+    if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+        addressType = "3";
+    }
+    checkboxes.not(":checked").prop("disabled", true);
+} else if (permanentChecked) {
+    addressType = "1";
+    checkboxes.filter('[value="permanent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="correspondent"]').prop("disabled", false);
+} else if (correspondentChecked) {
+    addressType = "2";
+    checkboxes.filter('[value="correspondent"]:not(:checked)').prop("disabled", true);
+    checkboxes.filter('[value="permanent"]').prop("disabled", false);
+} else {
+    addressType = "0";
+    checkboxes.prop("disabled", false);
+}
+
     $('input[name="address_type[]"]').on("change", function () {
-        var checkboxes = $('input[name="address_type[]"]');
+
         var permanentChecked = false;
         var correspondentChecked = false;
         var addressId = $(this).data("address-id");
@@ -2105,55 +2395,33 @@ $('#event').select2();
             ? $(this).data("address-type")
             : "0";
 
-        checkboxes.each(function () {
-            if ($(this).is(":checked")) {
-                if ($(this).val() === "permanent") {
-                    permanentChecked = true;
-                } else if ($(this).val() === "correspondent") {
-                    correspondentChecked = true;
+        var checkboxes = $('input[name="address_type[]"][data-address-id='+addressId+']');
+
+            checkboxes.each(function () {
+                if ($(this).is(":checked")) {
+                    if ($(this).val() === "permanent") {
+                        permanentChecked = true;
+                        checkboxes.prop("disabled", true);
+                    } else if ($(this).val() === "correspondent") {
+                        correspondentChecked = true;
+                        checkboxes.prop("disabled", true);
+
+                    }
                 }
-            }
-        });
+            });
 
-        if (permanentChecked && correspondentChecked) {
-            checkboxes.not(":checked").prop("disabled", true);
-            // if both checkboxes are checked and have the same address ID, set addressType to 3
-            if (
-                checkboxes.filter(
-                    '[data-address-id="' + addressId + '"]:checked'
-                ).length === 2
-            ) {
-                addressType = "3";
-            }
-        } else if (permanentChecked) {
-            // if only permanent checkbox is checked, set addressType to 1
+        if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
-            // disable all other permanent checkboxes
-            checkboxes
-                .filter('[value="permanent"]:not(:checked)')
-                .prop("disabled", true);
-            // enable all correspondent checkboxes
-            checkboxes
-                .filter('[value="correspondent"]')
-                .prop("disabled", false);
-        } else if (correspondentChecked) {
-            // if only correspondent checkbox is checked, set addressType to 2
+        } else if (permanentChecked == false && correspondentChecked == true) {
             addressType = "2";
-            // disable all other correspondent checkboxes
-            checkboxes
-                .filter('[value="correspondent"]:not(:checked)')
-                .prop("disabled", true);
-            // enable all permanent checkboxes
-            checkboxes.filter('[value="permanent"]').prop("disabled", false);
-        } else {
-            checkboxes.prop("disabled", false);
-        }
-
-        if ($(this).is(":not(:checked)")) {
+        } else if (permanentChecked == true && correspondentChecked == true) {
+            addressType = "3";
+        } else if (permanentChecked == false && correspondentChecked == false){
             addressType = "0";
         }
 
-        // send an AJAX request to update the address type status
+
+
         $.ajax({
             url: "/updateAddressDetails",
             type: "POST",
@@ -2162,7 +2430,6 @@ $('#event').select2();
                 addressType: addressType,
             },
             success: function (data) {
-                // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: "success",
                     text: "Address Type is updated!",
@@ -2171,13 +2438,18 @@ $('#event').select2();
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
+                }).then(function () {
+                    location.reload();
                 });
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error(errorThrown);
             },
         });
     });
+
 
     /////////////////////////////////////////////
 
@@ -2218,7 +2490,7 @@ $('#event').select2();
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
@@ -2310,7 +2582,7 @@ $('#event').select2();
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
@@ -2478,14 +2750,15 @@ $('#event').select2();
                 },
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    digits: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 designation: {
                     required: "Please Insert Designation",
@@ -2518,7 +2791,6 @@ $('#event').select2();
                     processData: false,
                     contentType: false,
                 }).then(function (data) {
-                    console.log(data);
                     Swal.fire({
                         title: data.title,
                         icon: "success",
@@ -2652,14 +2924,14 @@ $('#event').select2();
                     },
                     okuNumber: {
                         required: "Please Insert OKU Card Number",
-                        rangelength: "Please Inset Valid Home Number",
+                        rangelength: "Please Insert Valid OKU Card Number",
                     },
                     okuID: {
                         required: "Please Insert OKU Attachment",
                     },
                     homeNo: {
                         digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                        rangelength: "Please Inset Valid Home Number",
+                        rangelength: "Please Insert Valid Home Number",
                     },
                     designation: {
                         required: "Please Insert Designation",
@@ -2818,7 +3090,8 @@ $('#event').select2();
                 DOBChild: "Please Enter Date Of Birth",
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    digits: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
@@ -2836,7 +3109,7 @@ $('#event').select2();
                     required: "Please Insert Issuing Country",
                 },
                 postcode: {
-                    rangelength: "Please Inset a valid postcode",
+                    rangelength: "Please Insert a valid postcode",
                 },
             },
             submitHandler: function (form) {
@@ -2937,7 +3210,7 @@ $('#event').select2();
 
                 okuNo: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
                 },
 
                 okuFile: {
@@ -2951,7 +3224,7 @@ $('#event').select2();
                     required: "Please Insert Issuing Country",
                 },
                 postcode: {
-                    rangelength: "Please Inset a valid postcode",
+                    rangelength: "Please Insert a valid postcode",
                 },
             },
 
@@ -2996,7 +3269,10 @@ $('#event').select2();
 
     for (let i = 0; i < childIds.length; i++) {
         const type = childIds[i];
-        $("#childModalEdit" + type).click(function (e) {
+        $(document).on("click","#childModalEdit" + type, function (e) {
+            $("#issuingCountry1").val("").prop("disabled", true);
+            $("#expiryDate1").val("").prop("disabled", true);
+
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
@@ -3071,7 +3347,7 @@ $('#event').select2();
             $("#view-children").modal("show");
         });
 
-        $("#deleteChildren" + type).click(function (e) {
+        $(document).on("click","#deleteChildren" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
@@ -3469,14 +3745,162 @@ $('#event').select2();
         $("#fullNameP").val(a + " " + b);
     });
 
+    $("#firstNames1,#lastNameP1").change(function () {
+        var a = $("#firstNames1").val();
+        var b = $("#lastNameP1").val();
+        $("#fullNameP1").val(a + " " + b);
+    });
+
     $("#parentModalAdd").click(function (e) {
-        $("input").prop("disabled", false);
-        $("select").prop("disabled", false);
+        // $("input").prop("disabled", false);
+        // $("select").prop("disabled", false);
+
+        $("#expirydate6").prop("disabled", true);
+        $("#expirydate6").prop("readonly", true);
+
         $("#add-parent").modal("show");
     });
 
     $("#addParent").click(function (e) {
         $("#addParentForm").validate({
+            // Specify validation rules
+            rules: {
+                firstName: {
+                    required: true,
+                },
+                lastName: {
+                    required: true,
+                },
+                DOB: "required",
+                gender: {
+                    required: false,
+                },
+                contactNo: {
+                    required: false,
+                    digits: true,
+                    rangelength: [9, 12],
+
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                city: "required",
+                state: "required",
+                age: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12],
+                },
+                oldIDNo: {
+                    //digits: true,
+                    rangelength: [7, 7],
+                },
+                okuCardNum: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                okuFile: {
+                    required: true,
+                },
+
+                expiryDate: "required",
+                issuingCountry: {
+                    required: true,
+                },
+            },
+
+            messages: {
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
+                contactNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Valid Phone Number Without ' - ' And Space",
+                    rangelength: "Please Insert Valid Phone Number Without ' - ' And Space",
+
+                },
+                relationship: "Please Choose Relationship",
+                address1: "Please Insert Address 1",
+                postcode: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+                age: "Please Insert Age",
+                idNo: {
+                    required: "Please Insert New Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                okuCardNum: {
+                    required: "Please Insert OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
+                    digits: "Please Insert Valid OKU Card Number",
+
+                },
+                okuFile: {
+                    required: "Please Insert OKU Attachment",
+                },
+
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
+                },
+            },
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("addParentForm")
+                );
+
+                $.ajax({
+                    type: "POST",
+                    url: "/addEmployeeParent",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            },
+        });
+    });
+
+    $("#editParent").click(function (e) {
+        $("#editParentForm").validate({
             // Specify validation rules
             rules: {
                 firstName: {
@@ -3563,7 +3987,8 @@ $('#event').select2();
                 },
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
+                    digits: "Please Insert Valid OKU Card Number",
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
@@ -3576,12 +4001,12 @@ $('#event').select2();
             },
             submitHandler: function (form) {
                 var data = new FormData(
-                    document.getElementById("addParentForm")
+                    document.getElementById("editParentForm")
                 );
 
                 $.ajax({
                     type: "POST",
-                    url: "/addEmployeeParent",
+                    url: "/updateEmployeeParent",
                     data: data,
                     dataType: "json",
 
@@ -3609,51 +4034,21 @@ $('#event').select2();
         });
     });
 
-    $("#editParent").click(function (e) {
-        var data = new FormData(document.getElementById("editParentForm"));
-
-        $.ajax({
-            type: "POST",
-            url: "/updateEmployeeParent",
-            data: data,
-            dataType: "json",
-
-            processData: false,
-            contentType: false,
-        }).then(function (data) {
-            console.log(data);
-            Swal.fire({
-                title: data.title,
-                icon: "success",
-                text: data.msg,
-                type: data.type,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "OK",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                if (data.type == "error") {
-                } else {
-                    location.reload();
-                }
-            });
-        });
-    });
-
     parentId = $("#parentId").val();
 
     parentIds = parentId.split(",");
 
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
-        $("#parentModalEdit" + type).click(function (e) {
-            $("input").prop("disabled", false);
-            $("select").prop("disabled", false);
-            id = $(this).data("id");
-            var ParentData = getParent(id);
+        $(document).on("click","#parentModalEdit" + type, function (e) {
+            // $("input").prop("disabled", false);
+            // $("select").prop("disabled", false);
+            // $("#okuattach6").prop("disabled", true);
 
+            id = $(this).data("id");
+            var ParentData = getEmployeeParent(id);
             ParentData.then(function (data) {
-                console.log(data.data);
+            // console.log(data.data);
                 parent = data.data;
                 $("#DOBP1").val(parent.DOB);
                 $("#idP").val(parent.id);
@@ -3664,20 +4059,50 @@ $('#event').select2();
                 $("#countryP1").val(parent.country);
                 $("#contactNoP1").val(parent.contactNo);
                 $("#genderP1").val(parent.gender);
+                $("#fullNameP1").val(parent.fullName);
                 $("#firstNames1").val(parent.firstName);
-                $("#passport7").val(parent.passport);
+                $("#lastNameP1").val(parent.lastName);
+                $("#passportparentedit").val(parent.passport);
                 $("#expirydate7").val(parent.expiryDate);
                 $("#issuingCountry7").val(parent.issuingCountry);
                 $("#oldIDNoP1").val(parent.oldIDNo);
                 $("#postcodeP1").val(parent.postcode);
-                $("#lastNameP1").val(parent.lastName);
                 $("#relationshipP1").val(parent.relationship);
                 $("#idno7").val(parent.idNo);
                 $("#okucard6").val(parent.okuCardNum);
+                // $("#okuattach6").val(parent.okuFile);
                 $("#age7").val(parent.age);
+                if (parent.non_citizen == "on") {
+                    $("#non_citizen").prop("checked", true);
+                    $("#idno7").prop("disabled", true);
+                    $("#idno7").prop("readonly", true);
 
-                if (parent.nonCitizen == "on") {
-                    $("#nonCitizenP1").prop("checked", true);
+                    $("#DOBP1").prop("readonly", false);
+                    $("#DOBP1").css("pointer-events", "auto");
+                } else {
+                    $("#non_citizen").prop("checked", false);
+                    $("#idno7").prop("disabled", false);
+                    $("#idno7").prop("readonly", false);
+
+                    $("#DOBP1").prop("readonly", true);
+                    $("#DOBP1").css("pointer-events", "auto");
+                }
+                if (parent.oku_status == "on") {
+                    $("#oku_status").prop("checked", true);
+                    $("#okucard6").prop("readonly", false);
+                    $("#okucard6").prop("disabled", false);
+                    $("#okucard6").val(parent.okuCardNum);
+
+                    $("#okuattach6").prop("disabled", true);
+                    $("#okuattach6").css("pointer-events", "auto");
+                } else {
+                    $("#oku_status").prop("checked", false);
+                    $("#okucard6").prop("disabled", true);
+                    $("#okucard6").prop("readonly", true);
+                    $("#okucard6").val("");
+
+                    $("#okuattach6").prop("disabled", true);
+                    $("#okuattach6").css("pointer-events", "auto");
                 }
             });
             $("#edit-parent").modal("show");
@@ -3685,7 +4110,7 @@ $('#event').select2();
 
         $("#parentModalView" + type).click(function (e) {
             id = $(this).data("id");
-            var ParentData = getParent(id);
+            var ParentData = getEmployeeParent(id);
 
             $("input").prop("disabled", true);
             $("select").prop("disabled", true);
@@ -3713,7 +4138,7 @@ $('#event').select2();
             $("#view-parent").modal("show");
         });
 
-        $("#deleteParent" + type).click(function (e) {
+        $(document).on("click","#deleteParent" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
@@ -3747,9 +4172,9 @@ $('#event').select2();
             });
         });
 
-        function getParent(id) {
+        function getEmployeeParent(id) {
             return $.ajax({
-                url: "/getParentById/" + id,
+                url: "/getEmployeeParentById/" + id,
             });
         }
     }
@@ -3771,14 +4196,10 @@ $('#event').select2();
             $("input").val("");
 
             vdata = data.data;
+            console.log(vdata);
+
             $("#vehicleType").val(vdata.vehicle_type);
             $("#idV").val(vdata.id);
-            // var select = document.getElementById('vehicleType');
-
-            // const options = Array.from(select.options);
-            // options.forEach((option, i) => {
-            //     if (option.value === vdata.vehicle_type) select.selectedIndex = i;
-            // });
             $("#plateNo").val(vdata.plate_no);
         });
         $("#edit-vehicle").modal("show");
@@ -4380,9 +4801,6 @@ $('#event').select2();
     //add parent
     $("#parentModalAdd").click(function () {
         if ($(this).prop("checked")) {
-            $("#expirydate6").prop("disabled", true);
-            $("#expirydate6").prop("readonly", true);
-
             $("#issuingCountry6").prop("disabled", true);
             $("#issuingCountry6").prop("readonly", true);
 
@@ -4392,9 +4810,6 @@ $('#event').select2();
             $("#okuattach5").prop("disabled", true);
             $("#okuattach5").prop("readonly", true);
         } else {
-            $("#expirydate6").prop("disabled", true);
-            $("#expirydate6").prop("readonly", true);
-
             $("#issuingCountry6").prop("disabled", true);
             $("#issuingCountry6").prop("readonly", true);
 
@@ -4552,14 +4967,20 @@ $('#event').select2();
         }
     });
 
-    //oku check update family
-
+    //oku check edit family
     $(".okuCheck6").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard6").prop("readonly", false);
+            $("#okucard6").prop("disabled", false);
+
+            $("#okuattach6").prop("disabled", false);
             $("#okuattach6").css("pointer-events", "auto");
         } else {
             $("#okucard6").prop("readonly", true);
+            $("#okucard6").prop("disabled", true);
+            $("#okucard6").val("");
+
+            $("#okuattach6").prop("disabled", true);
             $("#okuattach6").css("pointer-events", "none");
         }
     });
@@ -4568,73 +4989,75 @@ $('#event').select2();
     $(".partCheck6").click(function () {
         if ($(this).prop("checked")) {
             $("#idno6").prop("readonly", true);
+            $("#idno6").val("");
+            $("#idno6").prop("disabled", true);
 
             $("#DOBaddparent").prop("readonly", false);
             $("#DOBaddparent").css("pointer-events", "auto");
-            $("#idno6").val("");
+
             $("#age6").prop("readonly", false);
+
             $("#gender6").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 background: "#ffffff",
             });
 
-            $("#passport6").prop("readonly", false);
-            $("#passport6").css("pointer-events", "auto");
         } else {
             $("#idno6").prop("readonly", false);
+            $("#idno6").prop("disabled", false);
+
             $("#DOBaddparent").prop("readonly", true);
             $("#DOBaddparent").css("pointer-events", "none");
-            $("#passport6").val("");
 
-            $("#passport6").val("");
-            $("#passport6").prop("readonly", false);
-            $("#passport6").css("pointer-events", "auto");
-
-            $("#expirydate6").val("");
-            $("#expirydate6").prop("readonly", true);
-            $("#expirydate6").css("pointer-events", "none");
             $("#gender6").css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
+
             $("#age6").prop("readonly", true);
         }
     });
 
+
     $("#passport6").change(function () {
-        if ($("#expirydate6").prop("readonly")) {
-            $("#expirydate6").prop("readonly", false);
-            $("#expirydate6").css("pointer-events", "auto");
+        if ($("#passport6").val() !== "") {
             $("#expirydate6").prop("disabled", false);
+            $("#expirydate6").css("pointer-events", "auto");
+            $("#expirydate6").prop("readonly", false);
+
             $("#issuingCountry6").prop("disabled", false);
-
-
-            $("#issuingCountry6").prop("readonly", false);
             $("#issuingCountry6").css("pointer-events", "auto");
         } else {
-            $("#expirydate6").prop("readonly", true);
-            $("#expirydate6").css("pointer-events", "none");
-            $("#expirydate6").val("");
             $("#expirydate6").prop("disabled", true);
-            $("#issuingCountry6").prop("disabled", true);
+             $("#expirydate6").css("pointer-events", "none");
+             $("#expirydate6").prop("readonly", true);
+             $("#expirydate6").val("");
 
-            $("#issuingCountry6").prop("readonly", true);
-            $("#issuingCountry6").css("pointer-events", "none");
-            $("#issuingCountry6").val("");
+             $("#issuingCountry6").prop("disabled", true);
+             $("#issuingCountry6").css("pointer-events", "none");
+             $("#issuingCountry6").val("");
         }
     });
+
+
 
     $("#idno6").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
-            var year = "19".concat(idn.substring(0, 2));
+            var year = idn.substring(0, 2);
             var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $("#DOBaddparent").val(year + "-" + month + "-" + day);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBaddparent").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
         }
     });
+
 
     $("#idno6").change(function () {
         if ($(this).val().length == 12) {
@@ -4663,66 +5086,42 @@ $('#event').select2();
         }
     });
 
-    //update child
-    $(".partCheck7").click(function () {
+     //UPDATE FAMILY DETAILS
+
+     $(".partCheck7").click(function () {
         if ($(this).prop("checked")) {
+            $("#idno7").prop("disabled", true);
             $("#idno7").prop("readonly", true);
-            $("#DOBP1").prop("readonly", false);
+            $("#idno7").val("");
+
+            $("#DOBP1").val("").prop("readonly", false);
             $("#DOBP1").css("pointer-events", "auto");
 
-            $("#expirydate7").prop("readonly", false);
-            $("#expirydate7").css("pointer-events", "auto");
-            $("#idno7").val("");
-            $("#age7").prop("readonly", false);
-            $("#genderP1").css({
-                "pointer-events": "auto",
-                "touch-action": "auto",
-                background: "#ffffff",
-            });
-            $("#issuingCountry7").css("pointer-events", "none");
         } else {
+            $("#idno7").prop("disabled", false);
             $("#idno7").prop("readonly", false);
-            $("#DOBP1").prop("readonly", true);
+
+            $("#DOBP1").val("").prop("readonly", true);
             $("#DOBP1").css("pointer-events", "none");
-            $("#passport7").val("");
-            $("#expirydate7").val("");
-            $("#expirydate7").prop("readonly", true);
-            $("#expirydate7").css("pointer-events", "none");
-            $("#genderP1").css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
-            $("#age7").prop("readonly", true);
-            $("#issuingCountry7").css("pointer-events", "none");
+
         }
     });
 
-    $("#passport7").change(function () {
-        if ($("#expirydate7").prop("readonly")) {
-            $("#expirydate7").prop("readonly", false);
-            $("#expirydate7").css("pointer-events", "auto");
 
-            $("#issuingCountry7").prop("readonly", false);
-            $("#issuingCountry7").css("pointer-events", "auto");
-        } else {
-            $("#expirydate7").prop("readonly", true);
-            $("#expirydate7").css("pointer-events", "none");
-            $("#expirydate7").val("");
 
-            $("#issuingCountry7").prop("readonly", true);
-            $("#issuingCountry7").css("pointer-events", "none");
-            $("#issuingCountry7").val("");
-        }
-    });
 
     $("#idno7").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
-            var year = "19".concat(idn.substring(0, 2));
+            var year = idn.substring(0, 2);
             var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $("#DOBP1").val(year + "-" + month + "-" + day);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98
+            $("#DOBP1").val(
+                (year > cutoff ? "19" : "20") + year + "-" + month + "-" + day
+            );
         }
     });
 
@@ -4787,17 +5186,14 @@ $(document).on("click", "#uploadpicture", function () {
     );
 
     $("#profilepicform").validate({
-        // Specify validation rules
         rules: {
-            // Add validation rules for each form field
             profile_picture: {
                 required: true,
-                // Add any additional validation rules for the profile picture field
             },
         },
-
         messages: {
-            // Add custom error messages for each form field
+            profile_picture: {
+            },
         },
 
         submitHandler: function (form) {
@@ -4806,9 +5202,9 @@ $(document).on("click", "#uploadpicture", function () {
                     document.getElementById("profilepicform")
                 );
                 data.append("uploadFile", fileUpload);
-                console.log($("#result_image img").attr("src"));
+                // console.log($("#result_image img").attr("src"));
                 var id = $("#user_id").val();
-                console.log(id);
+                // console.log(id);
                 $.ajax({
                     type: "POST",
                     url: "/updateProfile_Picture/" + id,
@@ -4828,7 +5224,6 @@ $(document).on("click", "#uploadpicture", function () {
                         allowEscapeKey: false,
                     }).then(function () {
                         if (data.type == "error") {
-                            // Handle error condition
                         } else {
                             location.reload();
                         }
