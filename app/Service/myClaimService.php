@@ -3152,8 +3152,19 @@ class myClaimService
     {
 
         $claim['status'] = "draft";
-        $claim['supervisor'] = "";
+        $claim['hod'] = "";
+        $claim['f1'] = "";
+        $claim['f2'] = "";
+        $claim['f3'] = "";
+        $claim['f_recommender'] = "";
+        $claim['f_approval'] = "";
+        $claim['a1'] = "";
+        $claim['a2'] = "";
+        $claim['a3'] = "";
+        $claim['a_recommender'] = "";
+        $claim['a_approval'] = "";
         
+
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 
         $data['status'] = config('app.response.success.status');
