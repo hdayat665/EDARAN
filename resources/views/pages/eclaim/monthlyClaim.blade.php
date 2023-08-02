@@ -50,20 +50,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <div class="row p-2">
+                                <div class="col-md-6">
+                                    <!-- <div class="row p-2">
                                         <div class="col d-flex justify-content-end">
                                             <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
                                             <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit">
                                                 Submit</button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row p-2">
                                         <div class="col d-flex justify-content-end">
                                             <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             
                             <div class="p-2">
