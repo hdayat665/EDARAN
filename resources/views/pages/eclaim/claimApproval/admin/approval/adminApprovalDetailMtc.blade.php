@@ -6,7 +6,7 @@
 
             <!-- NEW DESIGN -->
             {{-- ROW 1 --}}
-            <div class="row p-2">
+            <div class="row p-2"> 
                 <div class="col-md-5">
                     <div class="form-control">
                         <div class="row p-2">

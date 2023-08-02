@@ -11,17 +11,7 @@
                 <input type="text" class="form-control" readonly value='RM {{ number_format($totalTravellings ?? 0, 2) }}'>
             </div>
         </div>
-        <div class="row p-2">
-            <div class="col d-flex justify-content-end">
-                <div class="col-md-6">
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a id="btnTAttachment" class="btn btn-primary"></i> Supporting Documents</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
         <div class="row p-2">
             <div class="col md-12">
                         
@@ -90,17 +80,7 @@
                     <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_all ?? 0 }}'>
                 </div>
             </div>
-            <div class="row p-2">
-                <div class="col md-6 d-flex justify-content-end">
-                    <div class="col-md-6">
-                        <div class="row p-2">
-                            <div class="col d-flex justify-content-end">
-                                <a id="btnSAttachment" class="btn btn-primary"></i> Supporting Documents</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class="row p-2">
                 <div class="">
