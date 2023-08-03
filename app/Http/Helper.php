@@ -1029,6 +1029,7 @@ if (!function_exists('getState')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
+            'MELAKA' => 'MELAKA',
             'OTHERS' => 'OTHERS',
         ];
 
@@ -1241,6 +1242,7 @@ if (!function_exists('state')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
+            'MELAKA' => 'MELAKA',
             'OTHERS' => 'OTHERS',
         ];
 
