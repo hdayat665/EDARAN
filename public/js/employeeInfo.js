@@ -15,7 +15,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
 
     $("#tableemployeeinfo").DataTable({
         responsive: false,
@@ -146,6 +146,12 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#exitdate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    })
 
     $(document).on("click", "#terminate", function () {
         $("#exampleModal").modal("show");

@@ -108,6 +108,16 @@
                                             <div class="dropdown-divider"></div>
                                             <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a>
                                         </div>
+                                    @elseif ($claim->status == 'recommend')
+                                        <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
+                                            <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
+                                            <a href="/monthlyClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                                MTC</a>
+                                            
+                                        </div>
                                     @elseif ($claim->status == 'paid')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>

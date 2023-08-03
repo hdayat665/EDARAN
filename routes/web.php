@@ -424,10 +424,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createleaveweekend', 'createleaveweekend');
 
             // eleave Leave Entitlement
-            Route::get('/leaveEntitlement', 'eleaveEntitlementView');
+            Route::get('/leaveEntitlement', 'leaveEntitlementIndex');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
             Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
             Route::post('/updateleaveEntitlement/{id}', 'updateleaveEntitlement');
+
+            Route::post('/leaveEntitlementSelect', 'leaveEntitlementSelect');
+
+
 
             // eleave Leave Holiday
             Route::get('/holidaylist', 'holidaylistView');
@@ -704,8 +708,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateRecommenderReject/{id}', 'updateRecommenderReject');
 
             //hod
-            Route::get('/leaveApprhod', 'leaveApprhodView');
-            Route::post('/leaveApprhod', 'leaveApprhodView');
+            Route::get('/leaveApprover', 'leaveApproverIndex');
+            Route::post('/leaveApprover', 'leaveApproverIndex');
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::get('/getuserleaveApprhodview/{id}', 'getuserleaveApprhodview');
             Route::post('/updatehod/{id}', 'updatehod');

@@ -185,7 +185,7 @@
                     <label class="form-label">Total</label>
                 </div>
                 <div class="col md-3 justify-content-end">
-                    <input type="text" class="form-control" readonly value='RM0.00'>
+                    <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
                 </div>
             </div>
             <div class="row p-2">

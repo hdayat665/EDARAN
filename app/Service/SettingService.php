@@ -2280,8 +2280,44 @@ class SettingService
         return $data;
     }
 
-    public function leaveEntitlementView()
-    {
+
+
+    public function leaveEntitlementActive() {
+
+        // $currentDateObj = Carbon::now()->setYear(2024);
+        $currentDateObj = Carbon::now();
+
+        $data =
+            Employee::select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName', 'jobgrade.jobGradeName')
+            ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->leftJoin('jobgrade', 'employment.jobGrade', '=', 'jobgrade.id')
+            ->leftJoin('leave_entitlement', function ($join) use ($currentDateObj) {
+                $join->on('employment.user_id', '=', 'leave_entitlement.id_employment')
+                     ->where(function ($query) use ($currentDateObj) {
+                         $query->whereYear('leave_entitlement.le_year', '=', $currentDateObj->year)
+                               ->orWhereNull('leave_entitlement.le_year');
+                     });
+            })
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('employment.status', '=', 'Active')
+                    ->orWhere('employment.status', '=', 'active');
+            })
+            ->where(function ($query) {
+                $query->where('employment.employmentType', '=', '1')
+                    ->orWhere('employment.employmentType', '=', '2');
+            })
+            ->where(function ($query) use ($currentDateObj) {
+                $query->whereNull('leave_entitlement.id_employment');
+            })
+            ->get();
+
+        return $data;
+    }
+
+    public function leaveEntitlementCurrent() {
+
         $currentDateObj = Carbon::now();
         $checkdate = $currentDateObj->format('Y');
 
@@ -2294,8 +2330,146 @@ class SettingService
             ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year', '=', $checkdate)
             ->orderBy('id', 'desc')->get();
+
         return $data;
     }
+
+
+    public function leaveEntitlementSelect($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['employer'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the Employee first!';
+
+            return $data;
+        }
+
+        $input = $r->input('employer');
+
+
+        foreach ($input as $user_id => $data) {
+
+            $getEmployer = Employee::select('employment.*')
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('employment.status', '=', 'Active')
+                    ->orWhere('employment.status', '=', 'active');
+            })
+            ->where(function ($query) {
+                $query->where('employment.employmentType', '=', '1')
+                    ->orWhere('employment.employmentType', '=', '2');
+            })
+            ->where('employment.user_id', '=', $user_id)
+            ->orderBy('employment.user_id', 'asc')
+            ->first();
+
+            $joinDate = $getEmployer->joinedDate;
+            $joinDateCarbon = Carbon::parse($joinDate);
+            $currentDateCarbon = Carbon::now();
+            $diff = $joinDateCarbon->diff($currentDateCarbon);
+            $totalYears = $diff->y;
+            $totalMonths = $diff->m;
+            $currentDatex = Carbon::now();
+            $currentDate = $currentDatex->format('Y-m-d');
+
+            $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
+                ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
+                ->where('leave_anualleave.jobgrade_id', '=', $getEmployer->jobGrade) // Use $employer->jobGrade
+                ->leftJoin('jobgrade', 'leave_anualleave.jobgrade_id', '=', 'jobgrade.id')
+                ->orderBy('id', 'asc')->first();
+
+            $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
+                ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
+                ->where('leave_sickleave.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('id', 'asc')->get();
+
+            $getCarryForward = leaveCarryForwordModel::select('leave_carryforward.*')
+                ->where('leave_carryforward.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('id', 'asc')->first();
+
+            if ($totalYears < 2 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears kurang dari 2
+                $data1 = $getAnual->permenant_01;
+            } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears antara 2 hingga 5
+                $data1 = $getAnual->permenant_02;
+            } elseif ($totalYears >= 5 && $getEmployer->employmentType == 2) {
+                // Kode untuk jika $totalYears lebih dari 5
+                $data1 = $getAnual->permenant_03;
+            } elseif ($getEmployer->employmentType == 1) {
+                // Kode untuk kasus jika employmentType == 1
+                $data1 = $getAnual->contract;
+            }
+
+
+            $data2 = [];
+
+            foreach ($getSickLeave as $sickLeave) {
+                if ($totalYears < 2 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_01;
+                } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_02;
+                } elseif ($totalYears >= 5 && $getEmployer->employmentType == 2) {
+                    $data2[] = $sickLeave->permenant_03;
+                } elseif ($totalYears <= 2 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_01;
+                } elseif ($totalYears >= 2 && $totalYears < 5 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_02;
+                } elseif ($totalYears >= 5 && $getEmployer->employmentType == 1) {
+                    $data2[] = $sickLeave->contract_03;
+                }
+            }
+
+            $data4 = $getCarryForward->lapsed_date;
+            $data5 = $getCarryForward->max_duration;
+            $data6 = $currentDateCarbon->format('Y-m-d');
+            $data7 = Auth::user()->tenant_id;
+
+            // dd($employer->user_id,$data1,$data2[0],$data2[1],$data4,$data5,$data6);
+            // die;
+
+            $input = [
+                'id_userprofile' => $getEmployer->user_id,
+                'id_employment' => $getEmployer->user_id,
+                'id_department' => $getEmployer->department,
+                'id_jobgrade' => $getEmployer->jobGrade,
+                'current_entitlement' => $data1,
+                'current_entitlement_balance' => $data1,
+                'sick_leave_entitlement' => $data2[0],
+                'sick_leave_entitlement_balance' => $data2[0],
+                'hospitalization_entitlement' => $data2[1],
+                'hospitalization_entitlement_balance' => $data2[1],
+                'carry_forward' => $data5,
+                'carry_forward_balance' => $data5,
+                'lapsed_date' => $data4,
+                'le_year' => $currentDate,
+                'tenant_id' => $data7,
+            ];
+
+            leaveEntitlementModel::create($input);
+
+
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully save entitlement';
+
+        return $data;
+    }
+
+
+
+
+
+
+
+
 
     public function leaveNameStaff()
     {

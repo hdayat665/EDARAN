@@ -20,7 +20,7 @@ $(document).ready(function () {
     function hideSkipButton() {
     skipButton.style.display = 'none';
     }
-
+ 
     // Event listeners for Active, Amend, and Rejected tabs
     activeTab.addEventListener('click', hideSkipButton);
     amendTab.addEventListener('click', hideSkipButton);
@@ -34,7 +34,7 @@ $(document).ready(function () {
     activeTab.addEventListener('click', function() {
     // Show the approveAllButton
     approveAllButton.style.display = 'block';
-    skipButton.style.display = 'block';
+    skipButton.style.display = 'none';
     });
 
     // Function to hide the approveAllButton
@@ -437,8 +437,8 @@ $(document).ready(function () {
     });
     $("#skipButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(document.getElementById("approveAllForm"));
-
+            var data = new FormData(document.getElementById("skipAllForm"));
+            
             $.ajax({
                 type: "POST",
                 url: "/skipAllClaim",

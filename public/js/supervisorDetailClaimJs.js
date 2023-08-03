@@ -23,13 +23,9 @@ function getTravelDataByGeneralId(id, date) {
       url: "/getClaimCategoryNameById/" + id
     });
   }
-
-//CASH ADVANCE LESS MODAL
-$(document).on("click", "#CAless", function () {
-
-    $("#CAlessModal").modal("show");
+$(document).on("click", "#viewCaBtn", function () {
+    $("#viewCa").modal("show");
 });
-
 //TRAVEL MODAL
 $(document).on("click", "#SVRtravel", function() {
     

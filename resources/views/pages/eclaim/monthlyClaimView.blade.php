@@ -109,19 +109,24 @@
                         </div>
                     </div>
                     <div class="col-md-1">
+                        @if ($GNC->supervisor == 'recommend')
+                        @else
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
+                            
                                 <a data-id="{{ $claimData->id }}" class="btn btn-primary" id="cancelButton" type="submit">Cancel</a>
+                            
+                            </div>
+                        </div>
+                        @endif
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <!-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> -->
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button>
+                                <button class="btn btn-primary" onclick="window.history.back()">Back</button>
                             </div>
                         </div>
                     </div>
@@ -302,7 +307,7 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-8">
-                                            <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
+                                            <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn">View</a></label>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>

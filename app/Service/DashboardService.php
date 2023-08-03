@@ -151,6 +151,75 @@ class DashboardService
             $datesInMonth[] = $date;
         }
     }
+    
+    $userId = $user->id;
+
+    // dd($datesInMonth);
+    $leaves = DB::table('myleave')
+    ->where('up_user_id', $userId)
+    ->whereRaw("MONTH(start_date) = ?", [$currentMonth])
+    ->where('status_final', '=', '4')
+    ->select('start_date', 'end_date')
+    ->get();
+
+$leavesdate = array();
+
+foreach ($leaves as $leave) {
+    $startDate = \Carbon\Carbon::parse($leave->start_date);
+    $endDate = \Carbon\Carbon::parse($leave->end_date);
+
+    // Generate an array of dates between the start and end dates
+    $dateRange = \Carbon\CarbonPeriod::create($startDate, $endDate);
+
+    // Populate the range between start and end dates
+    foreach ($dateRange as $date) {
+        $formattedDate = $date->format('Y-m-d');
+        $leavesdate[$formattedDate] = [
+            'start_date' => $leave->start_date,
+            'end_date' => $leave->end_date,
+        ];
+    }
+}
+
+// dd($leavesdate);
+
+$datewoutwknd = array_diff($datesInMonth, array_keys($leavesdate));
+// dd($datewoutwknd);
+
+
+
+$holidays = DB::table('leave_holiday')
+// ->whereRaw("FIND_IN_SET(state_id, ?)", [$cityId])
+->whereRaw("FIND_IN_SET($cityId, state_id)")
+->whereRaw("MONTH(start_date) = ?", [$currentMonth])
+->select('start_date', 'end_date','state_id')
+->get();
+
+$holidaybystate = array();
+
+foreach ($holidays as $holiday) {
+    $startDate = \Carbon\Carbon::parse($holiday->start_date);
+    $endDate = \Carbon\Carbon::parse($holiday->end_date);
+
+    // Generate an array of dates between the start and end dates
+    $dateRange = \Carbon\CarbonPeriod::create($startDate, $endDate);
+
+    // Populate the range between start and end dates
+    foreach ($dateRange as $date) {
+        $formattedDate = $date->format('Y-m-d');
+        $holidaybystate[$formattedDate] = [
+            'start_date' => $holiday->start_date,
+            'end_date' => $holiday->end_date,
+        ];
+    }
+}
+// dd($holidaybystate);
+
+$datewoutwknd = array_diff($datesInMonth, array_keys($leavesdate));
+$datewoutholiday = array_diff($datewoutwknd, array_keys($holidaybystate));
+
+// dd($datewoutholiday);
+
 
 
     $userId = $user->id;
@@ -326,7 +395,7 @@ foreach($finalArray as $date => $value) {
 }
 
 
-$datesNotInFinalArray = array_diff($datesInMonth, array_keys($finalArrayFiltered));
+$datesNotInFinalArray = array_diff($datewoutholiday, array_keys($finalArrayFiltered));
 
 $datesNotInFinalArray['unlogdate'] = count($datesNotInFinalArray);
 
