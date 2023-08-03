@@ -69,7 +69,26 @@ getwork.then(function(data) {
         autoclose: true,
         format: "yyyy-mm-dd",
         startDate: startDate,  // Set the start date dynamically
-        endDate: new Date() // Disable future dates
+        endDate: new Date(), // Disable future dates
+        beforeShowDay: function(date) {
+            // Enable all weekends (Saturday and Sunday), regardless of the range
+            if (date.getDay() == weekend1ifany || date.getDay() == weekend2ifany ||
+            date.getDay() == weekend3ifany || date.getDay() == weekend4ifany ||
+            date.getDay() == weekend5ifany || date.getDay() == weekend6ifany ||
+            date.getDay() == weekend7ifany
+            ) {
+                return true;
+            }
+    
+            // Enable all dates within the range
+            if (date >= startDate && date <= new Date()) {
+                return true;
+            }
+    
+            // Disable all other dates
+            return false;
+        }
+      
     });
 
     function getStartDate() {
@@ -116,14 +135,20 @@ getwork.then(function(data) {
             secondLowestValue = 3;
         }
 
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            return currentDate; // Return the current date (enable today)
+        }
+
         // Check if the current day is Saturday (6) or Sunday (0)
         if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
             var daysToSubtract = 4;
         }
 
         var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
-        return startDate;
+        // return startDate;
     }
+
+   
 
     // Set the minimum and maximum dates to restrict the date range that can be selected
     $("#dateaddlog").datepicker("setStartDate", startDate);
@@ -1713,17 +1738,20 @@ getwork.then(function(data) {
                        
                       }
                    
-                     if (
+                      if (
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2 || weekend3 || weekend4|| weekend5 || weekend6 || weekend7) &&
+                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7) &&
                         !hasLog &&
                         !hasEvent &&
-                        current.getMonth() === currentMonth &&
-                        current.getFullYear() === currentYear
+                        current.getMonth() === currentDate.getMonth() &&
+                        current.getFullYear() === currentDate.getFullYear() &&
+                        current.getDate() <= currentDate.getDate() // Check that the current date is on or after the processed date
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
-
+                      
+                      
+                      
                      else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
@@ -1860,7 +1888,7 @@ getwork.then(function(data) {
                             secondLowestValue = 3;
                         }
                 
-                        console.log(lowestValue + "," + secondLowestValue);
+                        // console.log(lowestValue + "," + secondLowestValue);
                         
                 
                 
@@ -2147,6 +2175,24 @@ getwork.then(function(data) {
                             );
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
+                            // activity_name_edit2
+
+                            var activityNamehide = $("#activity_name_edit2").val();
+
+                            if (!activityNamehide) {
+                              // Hide the div if the activityName is empty or null
+                              $("#activityByProjectEditHide1").hide();
+                            }
+
+                            var projectLhide = $("#projectlocsearchedit").val();
+
+                            if (!projectLhide) {
+                              // Hide the div if the activityName is empty or null
+                              $("#locationByProjectEditHide").hide();
+                            }
+
+
+
                             $("#activity_name_edit1").val(data.activity_name);
                            
 
@@ -2166,7 +2212,7 @@ getwork.then(function(data) {
                             $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
                             $("#lunchBreakedit").val(data.lunch_break);
-
+                            
                             $("#starttimeedit").val(data.start_time);
 
                             $("#starttimeedit").mdtimepicker({
@@ -2236,7 +2282,7 @@ getwork.then(function(data) {
                                 // Initial setup based on the initial statusappeal value
                                 $("#statusappeal").trigger("change");
 
-                               
+                                
 
                                 
                         });
@@ -3681,6 +3727,7 @@ $("#endeventdate").datepicker({
             // $("#activity_location_edit").hide();
             $("#activityByProjectEditHide1").hide();
             $("#locationByProjectEditHide").hide();
+            
         }
     });
     $(document).on("change", "#officelog2edit", function () {
