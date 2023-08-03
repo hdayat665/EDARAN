@@ -19,7 +19,7 @@
         <div class="col-md-4">
             <label class="form-label">Project</label>
         </div>
-        <div class="col-md-8"> 
+        <div class="col-md-8">
             <select class="form-select" id="project" readonly name="project_id1">
                 <option class="form-label" value="" selected>
                     Please Select</option>
@@ -54,7 +54,7 @@
             <label class="form-label">Purpose</label>
         </div>
         <div class="col-md-8">
-            <textarea type="text" class="form-control" name="purpose4" rows="3" maxlength="255"> </textarea>
+            <textarea type="text" class="form-control" name="purpose4" rows="3" maxlength="255"></textarea>
         </div>
     </div>
     {{-- <div class="row p-2">
