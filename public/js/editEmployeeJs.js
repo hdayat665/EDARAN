@@ -2060,7 +2060,7 @@ $('#event').select2();
                     processData: false,
                     contentType: false,
                 }).then(function (data) {
-                    console.log(data);
+                    // console.log(data);
                     Swal.fire({
                         title: data.title,
                         icon: "success",

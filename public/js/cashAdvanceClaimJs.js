@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#projectTable").DataTable({});
     $(document).on("change", "#toca", function () {
         $("input").val("");
- 
+
         if ($(this).val() == "1") {
             $(".PO").show();
             $(".MOT").show();
@@ -285,28 +285,28 @@ $(document).ready(function () {
                     picker.endDate.format("DD/MM/YYYY")
             );
         });
-        
+
         $(document).on("change", "#areacategory", function () {
             var id = $(this).val();
-            
+
             function getEntitlementContent(id) {
                 return $.ajax({
                     url: "/getEntitlementContent/" + id,
                 });
             }
-        
+
             var user = getEntitlementContent(id);
             console.log(user);
-            
+
             user.done(function (data) {
                 var value = parseInt(data[0].value);
                 $("#subs").val(value);
-        
+
                 var a = parseInt($("#day").val());
                 var b = parseFloat($("#subs").val());
                 var c = parseFloat(a * b).toFixed(2);
                 $("#totalsubs").val(c);
-                
+
                 var a = parseFloat($("#totalsubs").val());
                 var b = parseFloat($("#totalacco").val());
                 var c = parseFloat($("#fuelfare").val());
@@ -318,16 +318,16 @@ $(document).ready(function () {
                 var a1 = parseFloat($("#totalexp").val());
                 var f1 = parseFloat((75 / 100) * a1).toFixed(2);
                 $("#maxpaid").val(f1);
-                
+
             });
         });
-        
-        
+
+
 
         $(document).on("change", "#accom", function () {
             var id = $(this).val();
             //console.log(id);
-        
+
             function getAccomodation() {
                 return $.ajax({
                     url: "/getAccomodation/",
@@ -335,14 +335,14 @@ $(document).ready(function () {
                     dataType: "json" // Set the data type to JSON
                 });
             }
-        
+
             getAccomodation().done(function (data) {
                 var A1 = data.area[0].local_hotel_value;
                 var B1 = data.area[0].lodging_allowance_value;
 
                 var price = "";
 
-                if (id == "hotel") { 
+                if (id == "hotel") {
                     price = A1;
                 } else if (id == "lodging") {
                     price = B1;
@@ -356,7 +356,7 @@ $(document).ready(function () {
                 var b = parseFloat($("#acco").val());
                 var c = parseFloat(a * b).toFixed(2);
                 $("#totalacco").val(c);
-                
+
                 var a = parseFloat($("#totalsubs").val());
                 var b = parseFloat($("#totalacco").val());
                 var c = parseFloat($("#fuelfare").val());
@@ -372,7 +372,7 @@ $(document).ready(function () {
 
 
         });
-        
+
 
         $("#datefilter1").on("cancel.daterangepicker", function (ev, picker) {
             $(this).val("");
@@ -438,23 +438,23 @@ $(document).ready(function () {
         });
     });
     $(document).on("change", "#locationShow", function () {
-  
+
         if ($(this).val() === 'other') {
             $("#otherlocation").show();
-        } else { 
+        } else {
             $("#otherlocation").hide();
         }
-    
+
     });
 
     $(document).on("change", "#locationShow2", function () {
-  
+
         if ($(this).val() === 'other') {
             $("#otherlocation2").show();
         } else {
             $("#otherlocation2").hide();
         }
-    
+
     });
 
     $(document).on("change", "#project", function () {
@@ -558,13 +558,58 @@ $(document).ready(function () {
             },
         });
     });
- 
+
     $("#submitButton").click(function (e) {
         $("#saveForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                type: "required",
 
-            messages: {},
+                travel_date3: "required",
+                project_id1: "required",
+                project_location_id: "required",
+                purpose4: "required",
+
+                travel_date2: "required",
+                project_id2: "required",
+                project_location_id2: "required",
+                purpose2: "required",
+
+                travel_date: "required",
+                destination: "required",
+                purpose3: "required",
+
+                date_require_cash: "required",
+                purpose: "required",
+                amount: "required",
+                file_upload: "required",
+
+                transport_type: "required",
+            },
+            messages: {
+                type: "Please Choose Type of Cash Advance",
+
+                travel_date3:   "Please Choose Travel Date",
+                project_id1: "Please Choose Project",
+                project_location_id: "Please Choose Destination",
+                purpose4: "Please Insert Purpose",
+
+                travel_date2:   "Please Choose Travel Date",
+                project_id2: "Please Choose Project",
+                project_location_id2: "Please Choose Destination",
+                purpose2: "Please Insert Purpose",
+
+                travel_date:   "Please Choose Travel Date",
+                destination: "Please Choose Destination",
+                purpose3: "Please Insert Purpose",
+
+                date_require_cash:   "Please Choose Date of Required Cash",
+                purpose: "Please Insert Purpose",
+                amount: "Please Insert Amount",
+                file_upload: "Please Upload Supporting Document",
+
+                transport_type: "Please Choose Mode of Transport",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
