@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ApprovelRoleGeneral;
 use App\Service\MyTimeSheetService;
 use App\Models\ClaimCategoryContent;
+use App\Models\MenuPermissionCode;
 use Illuminate\Support\Facades\Auth;
 use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Storage;
@@ -3017,6 +3018,20 @@ if (!function_exists('getCaClaimData')) {
 
             // $data = CashAdvanceDetail::where($ca)->get();
         }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getMenuPermissionById')) {
+    function getMenuPermission()
+    {
+        $data = MenuPermissionCode::get();
 
         if (!$data) {
             $data = [];

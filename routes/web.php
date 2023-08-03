@@ -88,6 +88,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/ajaxResetPass', 'ajaxResetPass');
         Route::post('/ajaxForgotDomain', 'ajaxForgotDomain');
         Route::post('/ajaxForgotPass', 'ajaxForgotPass');
+        Route::get('/seeder', 'seeder');
     });
 
     Route::group(['middleware' => 'auth'], function () {
