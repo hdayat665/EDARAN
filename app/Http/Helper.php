@@ -1090,7 +1090,7 @@ if (!function_exists('myProjectActive')) {
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
             ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'],['b.status', '!=', 'CLOSED']])
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'], ['b.status', '!=', 'CLOSED']])
             ->get();
         // pr($data);
         if (!$data) {
@@ -2444,7 +2444,7 @@ if (!function_exists('checkingMonthlyClaim')) {
 if (!function_exists('getRoleById')) {
     function getRoleById($id = '')
     {
-        $data = Role::where('id', $id)->first();
+        $data = Role::where('id', $id)->with('permissions')->first();
 
         if (!$data) {
             $data = [];

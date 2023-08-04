@@ -20,9 +20,13 @@ class MenuPermissionImport implements ToModel, WithHeadingRow
             'level_2' => $row['level_2'],
             'level_3' => $row['level_3'],
             'level_4' => $row['level_4'],
+            'view' => $row['view'],
+            'add' => $row['add'],
+            'edit' => $row['edit'],
+            'delete' => $row['delete'],
         ]);
 
-        MenuPermissionCode::where('name', $row['name'])->delete();
+        MenuPermissionCode::where('menu_id', $row['menu_id'])->delete();
 
         return $import;
     }

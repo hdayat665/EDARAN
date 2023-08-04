@@ -1313,7 +1313,8 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    public function holidaylistView(Request $r) {
+    public function holidaylistView(Request $r)
+    {
 
         $hlv = new SettingService;
 
@@ -1583,12 +1584,13 @@ class SettingController extends Controller
     {
         // $ss = new SettingService;
 
-        // $result = $ss->newCreateRole();
+        $result['role'] = [];
 
         return view('pages.setting.newCreateRole');
     }
     public function newUpdateRole($id = '')
     {
+
         $result['role'] = getRoleById($id);
 
         return view('pages.setting.newUpdateRole', $result);

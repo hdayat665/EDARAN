@@ -72,6 +72,27 @@ class SettingService
         $input['addedTime'] = date('Y-m-d h:m:s');
         Role::create($input);
 
+        $roleData = Role::orderBy('id', 'DESC')->first();
+
+        if (!empty($input['permissions'])) {
+
+            PermissionRole::where('role_id', $roleData->id)->delete();
+
+            $permissions = $input['permissions'];
+
+            foreach ($permissions as $permission) {
+                $permissionRole = [
+                    'tenant_id' => Auth::user()->tenant_id,
+                    'role_id' => $roleData->id,
+                    'permission_code' => $permission,
+                    'modified_by' => $user->username,
+                    'modified_time' => date('Y-m-d h:m:s')
+                ];
+
+                PermissionRole::create($permissionRole);
+            }
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -91,19 +112,21 @@ class SettingService
         $updateData['roleName'] = $r['roleName'];
         $updateData['modifiedBy'] = $modifiedBy;
         $updateData['modifiedTime'] = $modifiedTime;
-        //pr($updateData);
+        $updateData['desc'] = $r['desc'];
+        // pr($updateData);
         // $updateData = [
         //     'modifiedBy' => $modifiedBy,
         //     'modifiedTime' => $modifiedTime
         // ];
 
         Role::where('id', $id)->update($updateData);
+        // dd($input);
 
         if (!empty($input['permissions'])) {
 
             PermissionRole::where('role_id', $id)->delete();
 
-            $permissions = explode(',', $input['permissions']);
+            $permissions = $input['permissions'];
 
             foreach ($permissions as $permission) {
                 $permissionRole = [
@@ -2282,7 +2305,8 @@ class SettingService
 
 
 
-    public function leaveEntitlementActive() {
+    public function leaveEntitlementActive()
+    {
 
         // $currentDateObj = Carbon::now()->setYear(2024);
         $currentDateObj = Carbon::now();
@@ -2294,10 +2318,10 @@ class SettingService
             ->leftJoin('jobgrade', 'employment.jobGrade', '=', 'jobgrade.id')
             ->leftJoin('leave_entitlement', function ($join) use ($currentDateObj) {
                 $join->on('employment.user_id', '=', 'leave_entitlement.id_employment')
-                     ->where(function ($query) use ($currentDateObj) {
-                         $query->whereYear('leave_entitlement.le_year', '=', $currentDateObj->year)
-                               ->orWhereNull('leave_entitlement.le_year');
-                     });
+                    ->where(function ($query) use ($currentDateObj) {
+                        $query->whereYear('leave_entitlement.le_year', '=', $currentDateObj->year)
+                            ->orWhereNull('leave_entitlement.le_year');
+                    });
             })
             ->where('employment.tenant_id', Auth::user()->tenant_id)
             ->where(function ($query) {
@@ -2316,7 +2340,8 @@ class SettingService
         return $data;
     }
 
-    public function leaveEntitlementCurrent() {
+    public function leaveEntitlementCurrent()
+    {
 
         $currentDateObj = Carbon::now();
         $checkdate = $currentDateObj->format('Y');
@@ -2354,18 +2379,18 @@ class SettingService
         foreach ($input as $user_id => $data) {
 
             $getEmployer = Employee::select('employment.*')
-            ->where('employment.tenant_id', Auth::user()->tenant_id)
-            ->where(function ($query) {
-                $query->where('employment.status', '=', 'Active')
-                    ->orWhere('employment.status', '=', 'active');
-            })
-            ->where(function ($query) {
-                $query->where('employment.employmentType', '=', '1')
-                    ->orWhere('employment.employmentType', '=', '2');
-            })
-            ->where('employment.user_id', '=', $user_id)
-            ->orderBy('employment.user_id', 'asc')
-            ->first();
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->where(function ($query) {
+                    $query->where('employment.status', '=', 'Active')
+                        ->orWhere('employment.status', '=', 'active');
+                })
+                ->where(function ($query) {
+                    $query->where('employment.employmentType', '=', '1')
+                        ->orWhere('employment.employmentType', '=', '2');
+                })
+                ->where('employment.user_id', '=', $user_id)
+                ->orderBy('employment.user_id', 'asc')
+                ->first();
 
             $joinDate = $getEmployer->joinedDate;
             $joinDateCarbon = Carbon::parse($joinDate);
@@ -2376,13 +2401,13 @@ class SettingService
             $currentDatex = Carbon::now();
             $currentDate = $currentDatex->format('Y-m-d');
 
-            $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
+            $getAnual = leaveAnualLeaveModel::select('leave_anualleave.*', 'jobgrade.jobGradeName')
                 ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
                 ->where('leave_anualleave.jobgrade_id', '=', $getEmployer->jobGrade) // Use $employer->jobGrade
                 ->leftJoin('jobgrade', 'leave_anualleave.jobgrade_id', '=', 'jobgrade.id')
                 ->orderBy('id', 'asc')->first();
 
-            $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
+            $getSickLeave = leaveSicKleaveModel::select('leave_sickleave.*', 'leave_types.leave_types')
                 ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
                 ->where('leave_sickleave.tenant_id', Auth::user()->tenant_id)
                 ->orderBy('id', 'asc')->get();
@@ -2451,8 +2476,6 @@ class SettingService
             ];
 
             leaveEntitlementModel::create($input);
-
-
         }
 
         $data['status'] = config('app.response.success.status');
@@ -2716,7 +2739,8 @@ class SettingService
         return $data;
     }
 
-    public function searchHolidaylist($r) {
+    public function searchHolidaylist($r)
+    {
 
         $input = $r->input();
 
@@ -2760,9 +2784,6 @@ class SettingService
 
 
         return $data;
-
-
-
     }
 
 
