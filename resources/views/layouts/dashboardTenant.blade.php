@@ -41,13 +41,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <link href="/assets/css/vendor.min.css" rel="stylesheet" />
-    <link href="/assets/css/vendor.min.css" rel="stylesheet" />
     <link href="/assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
     <!-- ================== BEGIN page-css ================== -->
-    <link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    {{-- <link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" /> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.5/jquery-jvectormap.css"
+        integrity="sha512-1ZwE8kCr0CknYsK+JYHqxnFqCZ2c17AJ6uTVf6me8UFCZJPE12ujWxnspvRJUb/zciTQ2D58PkJHQk5PLSYJ4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-    <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    {{-- <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css"
+        integrity="sha512-sE0lXJVucHTljwWwIjHMf0dUV5EQ+S3FjCsTqWRhXieDW5oJ1ng0bGjLGer6xYF3yRISIptJ5ds64xFG9KSLJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/assets/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <link href="/assets/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/common/main.min.css" rel="stylesheet" />
@@ -322,7 +325,7 @@
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {
+        initComplete: function(settings, json) {
             $("#tablenews-dashboard").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
@@ -350,7 +353,7 @@
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {
+        initComplete: function(settings, json) {
             $("#timesheetapproval-dashboard").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
@@ -364,7 +367,7 @@
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {
+        initComplete: function(settings, json) {
             $("#data-table-default-clocks").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
@@ -472,60 +475,65 @@
 </script>
 
 <script>
-$(document).ready(function () {
+    $(document).ready(function() {
 
-    function getAttendance(eventId) {
-    return $.ajax({
-        url: "/getAttendanceByEventId/" + eventId,
-    });
-}
-function getEvents(id) {
-    return $.ajax({
-        url: "/getEventById/" + id,
-    });
-}
+        function getAttendance(eventId) {
+            return $.ajax({
+                url: "/getAttendanceByEventId/" + eventId,
+            });
+        }
 
-$(document).on("click", "#buttonnViewParticipant", function () {
-    var id = $(this).data("id");
-    var eventData = getEvents(id);
-    eventData.then(function (data) {
-        var attendanceEvent = getAttendance(data.id);
-        attendanceEvent.then(function (dataAttendance) {
-            // Check if the DataTable is already initialized
-            var table = $("#tableviewparticipants").DataTable();
-            if (table) {
-                // The DataTable is already initialized, so we can just update the data
-                table.clear();
-                for (let i = 0; i < dataAttendance.length; i++) {
-                    const attendance = dataAttendance[i];
-                    table.row.add([i + 1, attendance.employeeName]);
-                }
-                table.draw();
-            } else {
-                // The DataTable is not yet initialized, so we need to initialize it
-                $("#tableviewparticipants").DataTable({
-                    paging: true,
-                    columns: [{ title: "No" }, { title: "Participants" }],
+        function getEvents(id) {
+            return $.ajax({
+                url: "/getEventById/" + id,
+            });
+        }
+
+        $(document).on("click", "#buttonnViewParticipant", function() {
+            var id = $(this).data("id");
+            var eventData = getEvents(id);
+            eventData.then(function(data) {
+                var attendanceEvent = getAttendance(data.id);
+                attendanceEvent.then(function(dataAttendance) {
+                    // Check if the DataTable is already initialized
+                    var table = $("#tableviewparticipants").DataTable();
+                    if (table) {
+                        // The DataTable is already initialized, so we can just update the data
+                        table.clear();
+                        for (let i = 0; i < dataAttendance.length; i++) {
+                            const attendance = dataAttendance[i];
+                            table.row.add([i + 1, attendance.employeeName]);
+                        }
+                        table.draw();
+                    } else {
+                        // The DataTable is not yet initialized, so we need to initialize it
+                        $("#tableviewparticipants").DataTable({
+                            paging: true,
+                            columns: [{
+                                title: "No"
+                            }, {
+                                title: "Participants"
+                            }],
+                        });
+                        for (let i = 0; i < dataAttendance.length; i++) {
+                            const attendance = dataAttendance[i];
+                            table.row.add([i + 1, attendance.employeeName]);
+                        }
+                    }
                 });
-                for (let i = 0; i < dataAttendance.length; i++) {
-                    const attendance = dataAttendance[i];
-                    table.row.add([i + 1, attendance.employeeName]);
-                }
-            }
+            });
+
+            $("#modalparticipant").modal("show");
         });
-    });
-
-    $("#modalparticipant").modal("show");
-});
 
 
-    $('#tableviewparticipants').DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-    });
+        $('#tableviewparticipants').DataTable({
+            responsive: false,
+            lengthMenu: [
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "All"],
+            ],
+        });
 
     });
 </script>

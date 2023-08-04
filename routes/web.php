@@ -88,6 +88,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/ajaxResetPass', 'ajaxResetPass');
         Route::post('/ajaxForgotDomain', 'ajaxForgotDomain');
         Route::post('/ajaxForgotPass', 'ajaxForgotPass');
+        Route::get('/seeder', 'seeder');
     });
 
     Route::group(['middleware' => 'auth'], function () {
@@ -291,7 +292,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/newRole', 'newRole');
             Route::get('/newCreateRole', 'newCreateRole');
-            Route::get('/newUpdateRole', 'newUpdateRole');
+            Route::get('/newUpdateRole/{id}', 'newUpdateRole');
             Route::get('/systemUser', 'systemUser');
             // Route::get('/systemUserCreate', 'systemUserCreate');
             Route::get('/systemUserUpdate', 'systemUserUpdate');
@@ -612,7 +613,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStateById/{id}', 'getStateById');
             Route::get('/getWorkingHourWeekendbyState/{stateid}', 'getWorkingHourWeekendbyState');
             Route::post('/updatereasonreaject/{id}', 'updatereasonreaject');
-
         });
 
 
