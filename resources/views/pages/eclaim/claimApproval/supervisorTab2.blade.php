@@ -55,19 +55,6 @@
                 @endforeach
             @endif
         </tbody>
-        <tfoot style="display:table-row-group" id="filterrecommend">
-            <tr>
-                <th data-orderable="false"></th>
-                <th data-orderable="false"></th>
-                <th class="text-nowrap">Applied Date</th>
-                <th class="text-nowrap">Employee Name</th>
-                <th class="text-nowrap">Month</th>
-                <th class="text-nowrap">Claim ID</th>
-                <th class="text-nowrap">Claim Type</th>
-                <th class="text-nowrap">Total Amount</th>
-                <th class="text-nowrap">Status</th>
-                <th class="text-nowrap">Status Date</th>
-            </tr>
-        </tfoot>
+        
     </table>
 </div>
