@@ -61,19 +61,18 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-
                                     <input type="text" id="passportParent" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" id="expiryDateParent" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;"  >
+                                    <input type="text" id="expiryDateParent" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled readonly>
 
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select"  name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase"  >
+                            <select class="form-select"  name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase" disabled readonly >
 
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">

@@ -28,7 +28,7 @@
             <label class="form-label">Purpose</label>
         </div>
         <div class="col-md-8">
-            <textarea type="text" class="form-control" name="purpose3" rows="3" maxlength="255"> </textarea>
+            <textarea type="text" class="form-control" name="purpose3" rows="3" maxlength="255"></textarea>
         </div>
     </div>
     {{-- <div class="row p-2">

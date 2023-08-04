@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ApprovelRoleGeneral;
 use App\Service\MyTimeSheetService;
 use App\Models\ClaimCategoryContent;
+use App\Models\MenuPermissionCode;
 use Illuminate\Support\Facades\Auth;
 use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Storage;
@@ -1029,6 +1030,7 @@ if (!function_exists('getState')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
+            'MELAKA' => 'MELAKA',
             'OTHERS' => 'OTHERS',
         ];
 
@@ -1088,7 +1090,7 @@ if (!function_exists('myProjectActive')) {
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
             ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'],['b.status', '!=', 'CLOSED']])
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve'], ['b.status', '!=', 'CLOSED']])
             ->get();
         // pr($data);
         if (!$data) {
@@ -1241,6 +1243,7 @@ if (!function_exists('state')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
+            'MELAKA' => 'MELAKA',
             'OTHERS' => 'OTHERS',
         ];
 
@@ -2441,7 +2444,7 @@ if (!function_exists('checkingMonthlyClaim')) {
 if (!function_exists('getRoleById')) {
     function getRoleById($id = '')
     {
-        $data = Role::where('id', $id)->first();
+        $data = Role::where('id', $id)->with('permissions')->first();
 
         if (!$data) {
             $data = [];
@@ -2608,8 +2611,8 @@ if (!function_exists('getUserWithSelectedUser')) {
 
         // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])
-        ->orderBy('employeeName', 'asc')
-        ->get();
+            ->orderBy('employeeName', 'asc')
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -3042,6 +3045,20 @@ if (!function_exists('getCaClaimData')) {
 
             // $data = CashAdvanceDetail::where($ca)->get();
         }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getMenuPermissionById')) {
+    function getMenuPermission()
+    {
+        $data = MenuPermissionCode::get();
 
         if (!$data) {
             $data = [];

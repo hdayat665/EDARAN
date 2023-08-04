@@ -9,27 +9,14 @@
    
     <br>
     <br>
-    {{-- <p>Title: FIRST REMINDER | TIMESHEET LOG REMINDER | {{ $date }} (DATE)</p>
-    <p>Please complete your timesheet log for the date {{ $date }} </p><br> --}}
-    {{-- <p>{{ $user_id }} </p><br>
-    <p>{{ $branch }} </p><br>
-    <p>{{ $state }} </p><br> --}}
-    {{-- @foreach ($dow as $day)
-        <p>{{ $day }}</p><br>
-    @endforeach --}}
-    <p>naim</p><br>
-    
-   
-
-    <br>
-   
-    <br>
-    
-    
-
-    <p>Please click the link button for further action </p>
-    <a href="{{ env('APP_URL') . '/myTimesheet' }}"><button>Click Here</button></a>
-    <br>
+    <p>Title: Event Reminder :  {{ $event_name }}</p>
+    <p>Dear {{ $nameFrom }}</p>
+    <p>Please be advised that you have an event to attend.</p><br>
+    <p>
+    Date : {{ $date }}<br>
+    Time : {{ $start_time }} - {{ $end_time }}<br>
+    Venue : {{ $venue }}
+    </p>
     <br>
     <p>
          Thank You
