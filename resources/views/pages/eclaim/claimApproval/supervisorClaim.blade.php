@@ -37,11 +37,12 @@
                                         <li class="nav-item">
                                             <a href="#default-tab-1" data-bs-toggle="tab" id="activeTab" class="nav-link active">Active</a>
                                         </li>
-                                        <!-- <li class="nav-item">
-                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Approved</a>
-                                        </li> -->
+                                       
                                         <li class="nav-item">
                                             <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link" id="bucketTab">Bucket</a>
+                                        </li>
+                                         <li class="nav-item">
+                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link " id="approvedTab">Approved</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#default-tab-3" data-bs-toggle="tab" id="ammendTab" class="nav-link ">Amend</a>

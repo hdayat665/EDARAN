@@ -60,24 +60,24 @@
                                     </div>
                                 @elseif ($cashClaim->status == 'active')
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                         <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Claim</a>
+                                        <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Cash Advance</a>
                                     </div>
                                 @elseif ($cashClaim->status == 'amend')
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
                                 @elseif ($cashClaim->status == 'cancelled')
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
                                 @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
                                     </div>
                                 @endif
                             </div>

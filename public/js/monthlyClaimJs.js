@@ -1,5 +1,5 @@
 $("document").ready(function () {
- 
+  
       function getTravelDataByGeneralId(id, date) {
         return $.ajax({
           url: "/getTravelDataByGeneralId/" + id + "/" + date
@@ -968,14 +968,18 @@ $("#subsTableUpdate").DataTable({
     // });
     
     $(document).ready(function () {
-        $("#timestart,#timeend").mdtimepicker({});
+        $("#timestart,#timeend").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy-mm-dd",
             })
             .datepicker("setDate", "now");
         //$("#time2").mdtimepicker({});
-    
+        
         // Calculate and display travel duration
         $("#result1, #date1, #time1, #date2, #time2").change(function () {
             var startDate = document.getElementById('date1').value;
@@ -1233,8 +1237,8 @@ $("#subsTableUpdate").DataTable({
         }
     );
     
-    var TCar = parseInt(document.getElementById("totalCar").value); 
-    var TMotor = parseInt(document.getElementById("totalMotor").value);
+    var TCar = parseFloat(document.getElementById("totalCar").value); 
+    var TMotor = parseFloat(document.getElementById("totalMotor").value);
     TotalTcarTmotor = TCar + TMotor;
     $("#TotalMileageCarMotor").val("RM " + TotalTcarTmotor.toFixed(2));
     document.getElementById("totalMileage").textContent = "RM " + TotalTcarTmotor.toFixed(2);

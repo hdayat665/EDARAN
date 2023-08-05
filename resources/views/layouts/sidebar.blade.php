@@ -992,6 +992,7 @@
             <!-- End Sidenav Content Orbit -->
             <!-- Sidenav Content Orbit -->
             <?php $target = ['setting_tab']; ?>
+            {{-- {{ print_r(Auth::user()->role_id) }} --}}
             @if (array_intersect($role_permission, $target))
                 <div class="menu-item has-sub">
                     <a href="/setting" class="menu-link">

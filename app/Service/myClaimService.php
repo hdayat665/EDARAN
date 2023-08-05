@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-
+ 
 class myClaimService 
 {
     public function getClaimsData($user_id = '')
@@ -1502,16 +1502,31 @@ class myClaimService
         // $input1['file_upload'] = $fileString ?? '';
         $input1['project_id'] = $input['project_id2'] ?? $input['project_id'] ?? '';
         
-        $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
-        ->where(function ($query) use ($input1) {
-            $query->where('travel_date', $input1['travel_date'])
-                ->where('start_time', '<=', $input1['end_time'])
-                ->where('end_time', '>=', $input1['start_time']);
-        })
-        ->exists();
+        $startTime = date('Y-m-d H:i:s', strtotime($input1['start_time']));
+        $endTime = date('Y-m-d H:i:s', strtotime($input1['end_time']));
 
-        if ($overlappingClaims) {
-            // Return overlapping claim data
+        // $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
+        // ->where(function ($query) use ($input1) {
+        //     $query->where('travel_date', $input1['travel_date'])
+        //         ->where('start_time', '<=', $input1['end_time'])
+        //         ->where('end_time', '>=', $input1['start_time']);
+        // })
+        // ->exists();
+        
+        $existingLogs = TravelClaim::where('general_id', $input['general_id'])
+        ->where('travel_date', $input1['travel_date'])
+        ->where(function ($query) use ($startTime, $endTime) {
+            $query->where(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+            });
+        })
+        ->get();
+        
+        if ($existingLogs->isNotEmpty()) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -1519,6 +1534,16 @@ class myClaimService
             $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
             return $data;
         }
+
+        // if ($overlappingClaims) {
+        //     // Return overlapping claim data
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+        //     $data['id'] = $generalClaimData->id;
+        //     $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
+        //     return $data;
+        // }
 
         TravelClaim::create($input1);
 
