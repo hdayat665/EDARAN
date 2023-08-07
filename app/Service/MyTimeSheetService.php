@@ -201,7 +201,7 @@ class MyTimeSheetService
     ->where('date', $input['date'])
     ->where(function ($query) use ($startTime, $endTime) {
         $query->where(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
         })->orWhere(function ($query) use ($startTime, $endTime) {
             $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
         })->orWhere(function ($query) use ($startTime, $endTime) {
@@ -210,8 +210,6 @@ class MyTimeSheetService
     })
     ->get();
 
-
-
 if ($existingLogs->isNotEmpty()) {
     $data['status'] = config('app.response.error.status');
     $data['type'] = config('app.response.error.type');
@@ -219,6 +217,7 @@ if ($existingLogs->isNotEmpty()) {
     $data['msg'] = 'Unable to add log due to overlapped time';
     return $data;
 }
+
 
 
     // $dayOfWeek = date('N', strtotime($input['date']));
@@ -303,7 +302,7 @@ if ($existingLogs->isNotEmpty()) {
         ->where('date', $input['date'])
         ->where(function ($query) use ($startTime, $endTime, $id) {
             $query->where(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
             })->orWhere(function ($query) use ($startTime, $endTime) {
                 $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
             })->orWhere(function ($query) use ($startTime, $endTime) {
