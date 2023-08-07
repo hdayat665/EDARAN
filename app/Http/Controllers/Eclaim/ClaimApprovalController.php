@@ -1623,7 +1623,14 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+    public function updateTravelMtcAdminRec(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
 
+        $result = $ps->updateTravelMtcAdminRec($r,$id = '');
+
+        return response()->json($result);
+    }
     public function updateTravelMtcAdminApp(Request $r,$id = '')
     {
         $ps = new ClaimApprovalService;
@@ -1632,6 +1639,25 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+
+    public function updateSubsMtcAdminRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcAdminRec($r);
+
+        return response()->json($result);
+    }
+    public function updateOtherMtcAdminRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcAdminRec($r);
+
+        return response()->json($result);
+    }
+
+
 
     // 
     public function updateSubsMtcAdminApp(Request $r)

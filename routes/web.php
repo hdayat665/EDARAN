@@ -148,6 +148,10 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+            Route::post('/updateTravelMtcAdminRec/{id}', 'updateTravelMtcAdminRec');
+            Route::post('/updateSubsMtcAdminRec', 'updateSubsMtcAdminRec');
+            Route::post('/updateOtherMtcAdminRec', 'updateOtherMtcAdminRec');
+            
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
