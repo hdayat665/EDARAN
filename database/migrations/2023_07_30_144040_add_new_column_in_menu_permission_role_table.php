@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('userProfile', function (Blueprint $table) {
-            $table->integer('employee_id')->nullable();
+        Schema::table('menu_permission_code', function (Blueprint $table) {
+            $table->integer('menu_id')->nullable()->after('user_id');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('userProfile', function (Blueprint $table) {
-            $table->dropColumn('employee_id');
+        Schema::table('menu_permission_code', function (Blueprint $table) {
+            $table->dropColumn('menu_id');
         });
     }
 };

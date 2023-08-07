@@ -28,4 +28,9 @@ class Role extends Authenticatable
         'modifiedBy',
         'modifiedTime',
     ];
+
+    public function permissions()
+    {
+        return $this->hasMany(PermissionRole::class, 'role_id', 'id');
+    }
 }
