@@ -15,7 +15,7 @@ $(document).ready(function () {
     const activeTab = document.getElementById('activeTab');
     const amendTab = document.getElementById('ammendTab');
     const rejectedTab = document.getElementById('rejectedTab');
-
+    const approvedTab = document.getElementById('approvedTab');
     // Function to hide the skipButton
     function hideSkipButton() {
     skipButton.style.display = 'none';
@@ -25,7 +25,7 @@ $(document).ready(function () {
     activeTab.addEventListener('click', hideSkipButton);
     amendTab.addEventListener('click', hideSkipButton);
     rejectedTab.addEventListener('click', hideSkipButton);
-
+    approvedTab.addEventListener('click', hideSkipButton);
 
     // Get the necessary elements
     const approveAllButton = document.getElementById('approveAllButton');
@@ -46,7 +46,7 @@ $(document).ready(function () {
     bucketTab.addEventListener('click', hideApproveAllButton);
     amendTab.addEventListener('click', hideApproveAllButton);
     rejectedTab.addEventListener('click', hideApproveAllButton);
-
+    approvedTab.addEventListener('click', hideApproveAllButton);
     // $("#filteractive").hide();
     // $("#activeTable").DataTable({
     //     bPaginate: false,
@@ -143,58 +143,46 @@ $(document).ready(function () {
         columnDefs: [{ orderable: false, targets: [0] }],
     });
 
-    // $("#filterrecommend").hide();
-    // $("#recommendedtable").DataTable({
-    //     bPaginate: false,
-    //     // scrollX:true,
-    //     initComplete: function (settings, json) {
-    //         this.api()
-    //             .columns([2, 3, 4, 5, 6, 7, 8, 9])
-    //             .every(function () {
-    //                 var column = this;
-    //                 var select = $(
-    //                     '<select><option value=""></option></select>'
-    //                 )
-    //                     .appendTo($(column.footer()).empty())
-    //                     .on("change", function () {
-    //                         var val = $.fn.dataTable.util.escapeRegex(
-    //                             $(this).val()
-    //                         );
-    //                         column
-    //                             .search(val ? "^" + val + "$" : "", true, false)
-    //                             .draw();
-    //                     });
-
-    //                 column
-    //                     .data()
-    //                     .unique()
-    //                     .sort()
-    //                     .each(function (d, j) {
-    //                         select.append(
-    //                             '<option value="' + d + '">' + d + "</option>"
-    //                         );
-    //                     });
-    //             });
-    //         $("#recommendedtable").wrap(
-    //             "<div style='overflow:auto; width:100%;position:relative;'></div>"
-    //         );
-    //     },
-
-    //     dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
-    //     buttons: [
-    //         {
-    //             extend: "pdf",
-    //             className: "btn-sm",
-    //             orientation: "landscape",
-    //         },
-    //         {
-    //             text: '<i class="fa fa-filter" aria-hidden="true"></i>',
-    //             action: function (e, dt, node, config) {
-    //                 $("#filterrecommend").toggle();
-    //             },
-    //         },
-    //     ],
-    // });
+    $("#filterrecommend").hide();
+    $("#recommendedtable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
 
     $("#buckettable").dataTable({
         searching: true,

@@ -1175,7 +1175,7 @@ class SettingController extends Controller
 
         return view('pages.setting.eleave.weekendEntitlement', $data);
     }
-//module add weekend-Weekend entitlement
+    //module add weekend-Weekend entitlement
     public function createWeekendEntitlement(Request $r)
     {
         $ss = new SettingService;
@@ -1313,7 +1313,8 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    public function holidaylistView(Request $r) {
+    public function holidaylistView(Request $r)
+    {
 
         $hlv = new SettingService;
 
@@ -1573,27 +1574,26 @@ class SettingController extends Controller
 
     public function newRole()
     {
-        // $ss = new SettingService;
+        $ss = new SettingService;
 
-        // $result = $ss->newCreateRole();
+        $result = $ss->getRole();
 
-        return view('pages.setting.newRole');
+        return view('pages.setting.newRole', $result);
     }
     public function newCreateRole()
     {
         // $ss = new SettingService;
 
-        // $result = $ss->newCreateRole();
+        $result['role'] = [];
 
         return view('pages.setting.newCreateRole');
     }
-    public function newUpdateRole()
+    public function newUpdateRole($id = '')
     {
-        // $ss = new SettingService;
 
-        // $result = $ss->newCreateRole();
+        $result['role'] = getRoleById($id);
 
-        return view('pages.setting.newUpdateRole');
+        return view('pages.setting.newUpdateRole', $result);
     }
 
     public function systemUser()

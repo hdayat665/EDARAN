@@ -1,13 +1,16 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Imports\MenuPermissionImport;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Service\LoginService;
 use App\Mail\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vehicle;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AjaxController extends Controller
 {
@@ -39,7 +42,7 @@ class AjaxController extends Controller
 
         $ls = new LoginService();
 
-        $check = $ls->ajaxLogin($input,'tenant');
+        $check = $ls->ajaxLogin($input, 'tenant');
 
         echo json_encode($check);
     }
@@ -60,10 +63,7 @@ class AjaxController extends Controller
 
         $check = $ls->ajaxLogin($input, 'admin');
 
-            echo json_encode($check);
-
-
-
+        echo json_encode($check);
     }
 
     public function ajaxForgotPass(Request $r)
@@ -78,7 +78,8 @@ class AjaxController extends Controller
         $checkEmail = $ls->checkEmail($email);
 
         if ($checkEmail['type'] == 'error') {
-            echo json_encode($checkEmail);die;
+            echo json_encode($checkEmail);
+            die;
         }
 
         // send email
@@ -88,7 +89,7 @@ class AjaxController extends Controller
         $data['domain'] = $checkEmail['domain'];
         $data['username'] = $checkEmail['data']->username;
         $data['content2'] = 'Please click the button below to reset your password:';
-        $data['resetPassLink'] = env('APP_URL').'/resetPassword/'.$checkEmail['data']->user_id;
+        $data['resetPassLink'] = env('APP_URL') . '/resetPassword/' . $checkEmail['data']->user_id;
         $data['from'] = env('MAIL_USERNAME');
         $data['nameFrom'] = 'Claim';
         $data['subject'] = 'Orbit Reset Password';
@@ -117,7 +118,8 @@ class AjaxController extends Controller
         $checkEmail = $ls->checkEmail($email);
 
         if ($checkEmail['type'] == 'error') {
-            echo json_encode($checkEmail);die;
+            echo json_encode($checkEmail);
+            die;
         }
 
         // send email
@@ -127,7 +129,7 @@ class AjaxController extends Controller
         $data['nameFrom'] = 'Claim';
         $data['subject'] = 'Orbit Reset Password';
         $data['typeAttachment'] = "application/pdf";
-       //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+        //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
         // \Mail::to($receiver)->send(new Mail($data));
 
@@ -152,23 +154,23 @@ class AjaxController extends Controller
     public function sendEmailRegister()
     {
         $receiver = 'hidayat@thelorry.com';
-         // send email
-         $data['typeEmail'] = 'register';
-         $data['first_name'] = 'asda';
-         $data['last_name'] = 'asdas';
-         $data['domain'] = 'asdasd';
-         $data['username'] = 'asdasd';
-         $data['password'] = 'asdasd';
-         $data['id'] = '8';
-         $data['from'] = env('MAIL_USERNAME');
-         $data['nameFrom'] = "s";
-         $data['subject'] = "Your have new inquiry from s website";
-         $data['receiver'] = 'hidayat@thelorry.com';
-         $data['cc'] = "";
-         $data['typeAttachment'] = "application/pdf";
+        // send email
+        $data['typeEmail'] = 'register';
+        $data['first_name'] = 'asda';
+        $data['last_name'] = 'asdas';
+        $data['domain'] = 'asdasd';
+        $data['username'] = 'asdasd';
+        $data['password'] = 'asdasd';
+        $data['id'] = '8';
+        $data['from'] = env('MAIL_USERNAME');
+        $data['nameFrom'] = "s";
+        $data['subject'] = "Your have new inquiry from s website";
+        $data['receiver'] = 'hidayat@thelorry.com';
+        $data['cc'] = "";
+        $data['typeAttachment'] = "application/pdf";
         //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
-         \Mail::to($receiver)->send(new Mail($data));
+        \Mail::to($receiver)->send(new Mail($data));
     }
 
     public function ajaxCheckTenantName(Request $r)
@@ -180,10 +182,22 @@ class AjaxController extends Controller
         $tenantName = $ls->checkTenantName($input);
 
         return \response()->json([
-            'title'=>'success',
-            'type'=>'success',
-            'msg'=>'Tenant found!',
+            'title' => 'success',
+            'type' => 'success',
+            'msg' => 'Tenant found!',
             'data' => $tenantName
         ], 200);
+    }
+
+
+
+    public function seeder()
+    {
+        try {
+            Excel::import(new MenuPermissionImport, 'storage/seeder/menu_permission_code.xlsx');
+            return response()->json('success', 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
     }
 }
