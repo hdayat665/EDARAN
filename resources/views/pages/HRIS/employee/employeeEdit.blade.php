@@ -17,7 +17,6 @@
                     @else
                         <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
                     @endif
-
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
                         <p>{{$username ?? ''}}</p>
                         <span class="badge bg-success d-block p-2">Active</span>

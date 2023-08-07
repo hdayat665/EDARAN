@@ -228,24 +228,24 @@
                                                        value="" placeholder="YYYY-MM-DD"
                                                        aria-describedby="effective-from">
                                                </div>
-                                               <div class="col-sm-6">
-                                                   <label for="firstname" class="form-label">Event*</label>
-                                                   <select class="form-select" name="event" id="event">
+                                               <div class="col-sm-6" >
+                                                   <label for="firstname" class="form-label" >Event*</label>
+                                                   <select class="form-select" name="event" id="event-id">
                                                        <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE</option>
                                                        <?php $events = getEvent(); ?>
                                                        @foreach ($events as $key => $event)
                                                            <option value="{{ $key }}"
                                                            <?= $employment->event == $key ? : '' ?>>{{ $event }}</option>
-                                                   @endforeach
-                                               </select>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="modal-footer">
-                                       <button type="submit" class="btn btn-primary float-end" id="updateEmp">
-                                           Update
-                                       </button>
-                                   </div>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary float-end" id="updateEmp">
+                                                Update
+                                            </button>
+                                        </div>
                                    </form>
                                    </div>
                            </div>
