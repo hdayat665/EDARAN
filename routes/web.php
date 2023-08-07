@@ -139,7 +139,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/approveAllClaim', 'approveAllClaim');
             Route::post('/approveAllCa', 'approveAllCa');
             Route::post('/skipAllClaim', 'skipAllClaim');
-
+            Route::post('/skipAllClaim', 'skipAllClaim');
+            Route::post('/updateTravelMtcAdminApp/{id}', 'updateTravelMtcAdminApp');
+            Route::post('/updateSubsMtcAdminApp', 'updateSubsMtcAdminApp');
+            Route::post('/updateOtherMtcAdminApp', 'updateOtherMtcAdminApp');
+            
+            
 
 
 

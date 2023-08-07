@@ -1925,13 +1925,20 @@ getwork.then(function(data) {
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
                        
+                        let isLeaveDay = false;
+                            for (let i = 0; i < leavesdate.length; i++) {
+                                if (clickedDate >= leavesdate[i].start && clickedDate <= leavesdate[i].end) {
+                                isLeaveDay = true;
+                                break;
+                                }
+                            }
 
                         if (
                             ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) &&
                             !(clickedDate.day() == weekn1 && clickedDate.isBefore(today, 'day')) &&
-                             !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day'))
-                          ) {
+                            !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day'))
+                        )  {
                             Swal.fire({
                               icon: 'error',
                               title: 'Oops...',
@@ -1939,6 +1946,16 @@ getwork.then(function(data) {
                             });
                             return;
                           }
+
+                        //   if (isLeaveDay
+                        //    ) {
+                        //     Swal.fire({
+                        //       icon: 'error',
+                        //       title: 'Oops...',
+                        //       text: 'Cannot Log on weekend',
+                        //     });
+                        //     return;
+                        //   }
                           
                         if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
