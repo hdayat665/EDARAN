@@ -63,6 +63,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -185,6 +186,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -242,6 +244,7 @@
                         
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -466,7 +469,7 @@
                                             </div>
                                             <div class="row p-2">
                                                 <div class="col-md-2" id="lodgingc">
-                                                    <label class="form-label">Lodging</label>
+                                                    <label class="form-label">Lodging123</label>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="number" class="form-control" readonly value="{{ $food[0]['lodging_allowance_value'] }}" id="lodgingcvUpdate" />
@@ -556,7 +559,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
-                                                            <a id="file_laundry_update" href="#"></a>
+                                                            <a id="file_laundry_updat  </form>e" href="#"></a>
                                                         </div> 
                                                     </div> -->
                                                 </div> 
@@ -567,6 +570,7 @@
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>
+                            {{-- <button href="javascript:;" id="updateSubsMtcBtn" class="btn btn-primary">Submit</button> --}}
                             
                             </form>
                         </div>
