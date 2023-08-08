@@ -124,6 +124,9 @@ $(document).on("click", "#SVRtravel", function() {
     console.log(id);
     console.log(date);
     $("#date").val(date);
+    $("#id").val(id);
+    $("#checkedBtn").data("id", id);
+    $("#checkedBtn").data("date", date);
     travellingData.then(function(response) {
         var data = response.original;
 
@@ -134,8 +137,20 @@ $(document).on("click", "#SVRtravel", function() {
             table.clear();
             for (var i = 0; i < data.length; i++) {
                 var rowData = data[i];
-                var row = [
-                    "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>",
+                var checkboxHTML =
+                        "<input class='form-check-input' type='checkbox' id='checkbox1' name='f1' disabled " +
+                        (rowData.f1 === 'checked' ? "checked" : "") + " />" +
+                        "<input class='form-check-input' type='checkbox' id='checkbox2' name='f2' disabled " +
+                        (rowData.f2 === 'checked' ? "checked" : "") + " />" +
+                        "<input class='form-check-input' type='checkbox' id='checkbox3' name='f3' disabled " +
+                        (rowData.f3 === 'checked' ? "checked" : "") + " />" +
+                        "<input class='form-check-input' type='checkbox' id='checkbox4' name='f4' disabled " +
+                        (rowData.f4 === 'checked' ? "checked" : "") + " />" +
+                        "<input class='form-check-input' type='checkbox' id='checkbox5' name='f5' disabled " +
+                        (rowData.f5 === 'checked' ? "checked" : "") + " />";
+
+                    var row = [
+                    checkboxHTML,
                     rowData.start_time,
                     rowData.end_time,
                     rowData.location_start,
@@ -972,6 +987,40 @@ $(document).ready(function () {
                 });
             });
         });
+    });
+    $("#checkedBtn").on("click", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        var date = $(this).data("date");
+        var level = $("#financeChecker").val();
+        
+        requirejs(["sweetAlert2"], function (swal) {
+            $.ajax({
+                type: "POST",
+                url: "/updateCheckMtc/" + id +  "/" + date + "/" + level,
+
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+        // updating checked attribute of change event occurred element, this.checked returns current state
+        // $(".wrapper").val($(".container").html());
+        // updating the value of textarea
     });
 
     $("#checkSubs").click(function (e) {
