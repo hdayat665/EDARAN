@@ -36,7 +36,7 @@
                                     <div class="dropdown-menu">
                                         <a href="/newUpdateRole/{{ $role->id }}" id="" data-id="" class="dropdown-item"> Edit</a>
                                         <div class="dropdown-divider"></div>
-                                        <a id="" data-id="" class="dropdown-item"> Delete</a>
+                                        <a id="deleteBtn" data-id="{{ $role->id }}" class="dropdown-item"> Delete</a>
                                 </td>
                             </tr>
                         @endforeach
