@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -185,6 +186,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -243,6 +245,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -548,7 +551,7 @@
                                                             <label class="form-label">Description</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                            <textarea class="form-control" name="laundry_desc" id="laundry_desc_update" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="row p-2">
