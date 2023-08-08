@@ -926,7 +926,6 @@ class EmployeeService
     public function updateEmployee($r)
     {
         $input = $r->input();
-
         $id = $input['id'];
 
         $user = Employee::where('id', $id)->first();
@@ -939,13 +938,13 @@ class EmployeeService
 
         } else {
 
-            //update role user
-            if ($input['role'] !== $user->role_id) {
+            if ($input['roleId']) {
+                $input['role'] = $input['roleId'];
                 $userRole['role_id'] = $input['role'];
-                Users::where('id', $input['user_id'])->update($userRole);
-                unset($input['role']);
-                $jobHistory['roleHistory'] = $userRole['role_id'];
+                unset($input['roleId']);
             }
+
+            Users::where('id', $input['user_id'])->update($userRole);
 
             if ($input['branchId']) {
                 $input['branch'] = $input['branchId'];
@@ -966,11 +965,15 @@ class EmployeeService
             }
 
             Employee::where('id', $id)->update($input);
-            //$user = Auth::user();
 
-            // add job history if any amendment has been made
             $jobHistory = [];
-            $changes = [];
+
+            if ($input['role'] !== $user->role) {
+                $jobHistory['roleHistory'] = $input['role'];
+
+            } else if ($input['role'] === $user->role) {
+                $jobHistory['roleHistory'] = null;
+            }
 
             if ($input['company'] !== $user->company) {
                 $jobHistory['companyHistory'] = $input['company'];
@@ -1000,6 +1003,13 @@ class EmployeeService
                 $jobHistory['branchHistory'] = null;
             }
 
+            if ($input['joinedDate'] !== $user->joinedDate) {
+                $jobHistory['joinedDateHistory'] = $input['joinedDate'];
+
+            } else if ($input['joinedDate'] === $user->joinedDate) {
+                $jobHistory['joinedDateHistory'] = null;
+            }
+
             if ($input['jobGrade'] !== $user->jobGrade) {
                 $jobHistory['jobGradeHistory'] = $input['jobGrade'];
 
@@ -1012,6 +1022,13 @@ class EmployeeService
 
             } else if ($input['designation'] === $user->designation) {
                 $jobHistory['designationHistory'] = null;
+            }
+
+            if ($input['report_to'] !== $user->report_to) {
+                $jobHistory['ReportToHistory'] = $input['report_to'];
+
+            } else if ($input['report_to'] === $user->report_to) {
+                $jobHistory['ReportToHistory'] = null;
             }
 
             if ($input['employmentType'] !== $user->employmentType) {
@@ -1042,6 +1059,7 @@ class EmployeeService
             $jobHistory['user_id'] = $input['user_id'];
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
+
             JobHistory::create($jobHistory);
 
             $data['status'] = config('app.response.success.status');
