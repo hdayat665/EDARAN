@@ -26,7 +26,8 @@ $('#branchShow').select2({placeholder: "PLEASE CHOOSE"});
 $('#jobGrade').select2();
 $('#designation').select2();
 $('#employmentType').select2();
-$('#event').select2();
+$('#reporttoo').select2();
+$('#event-id').select2();
 
     $("#data-table-default").dataTable({
         responsive: true,
@@ -4664,7 +4665,7 @@ if (permanentChecked && correspondentChecked) {
 
             errorPlacement: function(error, element) {
                 if (element.attr("name") === "event") {
-                  error.insertAfter("#event-id");
+                  error.insertAfter("#eventdiv");
                 } else {
                   error.insertAfter(element);
                 }

@@ -882,6 +882,20 @@ if (!function_exists('getBranchforJobHistory')) {
     }
 }
 
+if (!function_exists('getReportToforJobHistory')) {
+    function getReportToforJobHistory()
+    {
+        $user = Auth::user();
+        $reportto = [];
+
+        if ($user) {
+            $reportto = Employee::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $reportto->pluck('employeeName', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getJobGrade')) {
     function getJobGrade()
     {
