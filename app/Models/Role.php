@@ -20,14 +20,16 @@ class Role extends Authenticatable
 
     protected $table = 'role';
 
-    protected $fillable = [
-        'roleName',
-        'tenant_id',
-        'addedBy',
-        'addedTime',
-        'modifiedBy',
-        'modifiedTime',
-    ];
+    // protected $fillable = [
+    //     'roleName',
+    //     'tenant_id',
+    //     'addedBy',
+    //     'addedTime',
+    //     'modifiedBy',
+    //     'modifiedTime',
+    // ];
+
+    protected $guarded = [];
 
     public function permissions()
     {
