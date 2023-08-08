@@ -551,7 +551,7 @@ class SettingService
         $branchName = $input['branchName'];
 
         $existingBranch = Branch::where('branchName', $branchName)
-            ->where('id', '=', $id)
+            ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
 
