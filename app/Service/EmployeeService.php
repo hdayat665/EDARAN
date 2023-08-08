@@ -207,10 +207,10 @@ class EmployeeService
 
         $data['user'] = Users::where('id', $data['user_id'])->first();
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
-        $data['educations'] = UserQualificationEducation::where('user_id', $data['user_id'])->get();
-        $data['others'] = UserQualificationOthers::where('user_id', $data['user_id'])->get();
+        $data['educations'] = UserQualificationEducation::where('user_id', $data['user_id'])->latest()->get();
+        $data['others'] = UserQualificationOthers::where('user_id', $data['user_id'])->latest()->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
-        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
+        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->latest()->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->latest()->get();
@@ -218,7 +218,7 @@ class EmployeeService
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
-        $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
+        $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->latest()->get();
 
         $childId[] = '';
         if ($data['childrens']) {
