@@ -157,6 +157,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTravelMtcFinanChk/{id}', 'updateTravelMtcFinanChk');
             Route::post('/updateSubsMtcFinanChk', 'updateSubsMtcFinanChk');
             Route::post('/updateOtherMtcFinanChk', 'updateOtherMtcFinanChk');
+            Route::post('/updateSubsMtcSuperVApp', 'updateSubsMtcSuperVApp');
+            
             
             ////checked
             Route::post('/updateCheckMtc/{id}/{date}/{level}', 'updateCheckMtc');
