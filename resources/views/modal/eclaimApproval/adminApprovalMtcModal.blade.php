@@ -469,7 +469,7 @@
                                             </div>
                                             <div class="row p-2">
                                                 <div class="col-md-2" id="lodgingc">
-                                                    <label class="form-label">Lodging123</label>
+                                                    <label class="form-label">Lodging</label>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input type="number" class="form-control" readonly value="{{ $food[0]['lodging_allowance_value'] }}" id="lodgingcvUpdate" />

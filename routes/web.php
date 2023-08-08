@@ -143,6 +143,20 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTravelMtcAdminApp/{id}', 'updateTravelMtcAdminApp');
             Route::post('/updateSubsMtcAdminApp', 'updateSubsMtcAdminApp');
             Route::post('/updateOtherMtcAdminApp', 'updateOtherMtcAdminApp');
+            Route::post('/updateTravelMtcSuperVApp/{id}', 'updateTravelMtcSuperVApp');
+            Route::post('/updateOtherMtcSuperVApp', 'updateOtherMtcSuperVApp');
+            Route::post('/updateTravelMtcSuperVRec/{id}', 'updateTravelMtcSuperVRec');
+            Route::post('/updateSubsMtcSuperVRec', 'updateSubsMtcSuperVRec');
+            Route::post('/updateOtherMtcSuperVRec', 'updateOtherMtcSuperVRec');
+            Route::post('/updateTravelMtcFinanRec/{id}', 'updateTravelMtcFinanRec');
+            Route::post('/updateSubsMtcFinanRec', 'updateSubsMtcFinanRec');
+            Route::post('/updateOtherMtcFinanRec', 'updateOtherMtcFinanRec');
+            Route::post('/updateTravelMtcFinanApp/{id}', 'updateTravelMtcFinanApp');
+            Route::post('/updateSubsMtcFinanApp', 'updateSubsMtcFinanApp');
+            Route::post('/updateOtherMtcFinanApp', 'updateOtherMtcFinanApp');
+            Route::post('/updateTravelMtcFinanChk/{id}', 'updateTravelMtcFinanChk');
+            Route::post('/updateSubsMtcFinanChk', 'updateSubsMtcFinanChk');
+            Route::post('/updateOtherMtcFinanChk', 'updateOtherMtcFinanChk');
             
             
 
