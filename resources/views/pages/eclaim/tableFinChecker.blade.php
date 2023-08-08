@@ -32,11 +32,14 @@
                             @foreach ($travelClaims as $travel)
                             <tr>    
                                 <td>
-                                    <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
-                                    <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp; 
-                                    <input class="form-check-input" type="checkbox" id="checkbox1" checked/>   
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @php
+                                            $fieldName = 'f' . $i;
+                                            $isChecked = $travel->$fieldName;
+                                        @endphp
+
+                                        <input class="form-check-input" type="checkbox" id="checkbox{{ $i }}" name="{{ $fieldName }}" disabled {{ $isChecked ? 'checked' : '' }} />
+                                    @endfor
                                 </td>
                                 <td>{{ $travel->travel_date ?? '' }}</td>
                                 <td>{{ $travel->total_km ?? '0' }} KM</td>

@@ -78,6 +78,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -90,6 +91,7 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
                             </div>
                         </div>
                     </div>
@@ -123,7 +125,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>

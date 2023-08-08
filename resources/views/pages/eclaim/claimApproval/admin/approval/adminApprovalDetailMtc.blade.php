@@ -122,36 +122,65 @@
                     </div>
                 </div> -->
                 <div class="col-md-2">
-                    @if ($general->a_approval == 'recommend')
-                    @else
-                    <!-- button APPROVE changed to RECOMMEND -->
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a class="btn btn-lime" data-id="{{ $general->id }}" id="approveButton" style="color: black; width:60%" type="submit"> Approve</a>
+                    @php
+                        $allChecked = $travelClaims->every(function ($item) {
+                            return $item->adminapp === 'checked';
+                        });
+                    @endphp
+
+                    @if ($allChecked)
+                        @if ($general->a_approval == 'recommend')
+                        @else
+                        <!-- button APPROVE changed to RECOMMEND -->
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-lime" data-id="{{ $general->id }}" id="approveButton" style="color: black; width:60%" type="submit"> Approve</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                            </div>
                         </div>
-                    </div>
-                    @endif
-                     <!-- button CANCEL changed to PRINT -->
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                        @endif
+                        <!-- button CANCEL changed to PRINT -->
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                            <a href="/adminApprovalView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="/adminApprovalView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            </div>
                         </div>
-                    </div>
+                        @else
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="/adminApprovalView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            </div>
+                        </div>
+                        @endif
                 </div>
             </div>
 

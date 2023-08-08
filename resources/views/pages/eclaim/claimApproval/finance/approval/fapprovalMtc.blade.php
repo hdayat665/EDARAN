@@ -108,6 +108,13 @@
                     </div>
                 </div>
                 <div class="col-md-2">
+                    @php
+                        $allChecked = $travelClaims->every(function ($item) {
+                            return $item->financeapp === 'checked';
+                        });
+                    @endphp
+
+                    @if ($allChecked)
                     @if ($general->f_approval == 'recommend')
                     @else
                     <div class="row p-2">
@@ -137,6 +144,29 @@
                             <a href="/financeApprovalView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                     </div>
+                    @else
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="/financeApprovalView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        </div>
+                    </div>
+                    @endif 
                 </div>
                 <!-- <div class="row p-2">
                     <div class="col align-self-start">

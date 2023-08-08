@@ -173,19 +173,20 @@ class ClaimApprovalService
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
-            'travel_date','general_id',
+            'travel_date','general_id','sv','hod','adminrec','adminapp','f1','f2','f3','financerec','financeapp',
             
             DB::raw('SUM(total_km) AS total_km'),
             DB::raw('SUM(petrol) AS total_petrol'),
             DB::raw('SUM(toll) AS total_toll'),
             DB::raw('SUM(parking) AS total_parking')
         )
+        
         ->where('general_id', $id)
-        ->where('type_claim', 'travel')
+        ->where('type_claim', 'travel', 'sv')
         ->groupBy('travel_date')
         ->orderBy('travel_date', 'asc')
         ->get();
-
+        //pr($data);
         return $data;
     }
     public function getSubsClaimByGeneralId($id = '')
@@ -2565,6 +2566,25 @@ class ClaimApprovalService
 
         return $data;
     }
+    public function updateCheckMtc($r, $id, $date, $level)
+    {
+        $input = $r->input();
+        
+        // Add a condition to filter by 'travel_date' = $date
+        $input2 = array_merge($input, [$level => 'checked']);
+        
+        // Update the record with the new condition
+        TravelClaim::where('general_id', $id)->where('travel_date', $date)->update($input2);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Checked Claim';
+
+        return $data;
+    }
+
+
 
     public function updateTravelMtcSuperVApp($r,$id = '')
     {

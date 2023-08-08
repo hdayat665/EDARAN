@@ -77,6 +77,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -89,40 +90,43 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                    <table id="tableTravelling" class="table table-striped table-bordered align-middle">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th class="text-nowrap">Status</th>
+                                <th class="text-nowrap">Start Time</th>
+                                <th class="text-nowrap">End Time</th>
+                                <th class="text-nowrap">Start Location</th>
+                                <th class="text-nowrap">Destination</th>
+                                <th class="text-nowrap">Description</th>
+                                <th class="text-nowrap">Type Of Transport </th>
+                                <th class="text-nowrap">Mileage (KM)</th>
+                                <th class="text-nowrap">Petrol/fares</th>
+                                <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <!-- <tbody id="tableRowTravelling">
 
-                <table id="tableTravelling" class="table table-striped table-bordered align-middle">
-                    <thead>
-                        <tr style="text-align:center">
-                            <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Start Time</th>
-                            <th class="text-nowrap">End Time</th>
-                            <th class="text-nowrap">Start Location</th>
-                            <th class="text-nowrap">Destination</th>
-                            <th class="text-nowrap">Description</th>
-                            <th class="text-nowrap">Type Of Transport </th>
-                            <th class="text-nowrap">Mileage (KM)</th>
-                            <th class="text-nowrap">Petrol/fares</th>
-                            <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
-                            <th class="text-nowrap">Action</th>
-                        </tr>
-                    </thead>
-                    <!-- <tbody id="tableRowTravelling">
+                        </tbody> -->
+                        <tbody id="tableRowTravelling">
 
-                    </tbody> -->
-                    <tbody id="tableRowTravelling">
+                        </tbody>
 
-                    </tbody>
-
-                </table>
+                    </table>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>

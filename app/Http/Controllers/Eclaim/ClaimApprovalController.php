@@ -83,6 +83,7 @@ class ClaimApprovalController extends Controller
         
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+       
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -251,6 +252,7 @@ class ClaimApprovalController extends Controller
         $data['user_id'] = $data['general']->user_id ?? '';
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        //pr($data['travelClaims']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -412,6 +414,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['checkers'] = getFinanceChecker();
+        
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -1810,5 +1813,14 @@ class ClaimApprovalController extends Controller
         $result = $ps->updateOtherMtcFinanChk($r);
 
         return response()->json($result);
+    }
+
+    public function updateCheckMtc(Request $r, $id , $date, $level)
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->updateCheckMtc($r, $id, $date, $level);
+
+        return response()->json($data);
     }
 }
