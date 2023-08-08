@@ -213,7 +213,7 @@ class EmployeeService
         $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
-        $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
+        $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->latest()->get();
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->latest()->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
