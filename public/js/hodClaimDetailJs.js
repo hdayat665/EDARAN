@@ -501,11 +501,12 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = "hod";
+        var desc = "Finance Dept. processing";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -536,11 +537,11 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = "supervisor";
-
+        var desc = "Waiting for approval";
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -570,7 +571,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "reject";
         var stage = "hod";
-
+        var desc = "Rejected by Dept. Recommender";
         $("#supervisorRejectForm").validate({
             // Specify validation rules
             rules: {},
@@ -584,13 +585,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -622,7 +618,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "amend";
         var stage = "hod";
-
+        var desc = "Request to amend by Dept. Recommender";
         $("#supervisorAmendForm").validate({
             // Specify validation rules
             rules: {},
@@ -636,13 +632,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 

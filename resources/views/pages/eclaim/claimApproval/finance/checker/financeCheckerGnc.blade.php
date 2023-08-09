@@ -3,7 +3,7 @@
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| Claim Approval | Finance Checker | View General Claim </small></h1>
         <div class="panel panel" id="fcheckerGncJs">
-            <div class="panel-body">
+            <div class="panel-body"> 
                 <div class="row p-2">
                     <div class="col-md-7">
                         <div class="form-control">

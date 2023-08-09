@@ -98,7 +98,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(ClaimApprovalController::class)->group(function () {
             Route::get('/claimApprovalView/{type}', 'claimApprovalView');
-            Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
+            Route::post('/updateStatusClaim/{id}/{status}/{stage}/{desc}', 'updateStatusClaim');
             Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
             Route::get('/getTravelById/{id}', 'getTravelById');
             Route::get('/getPersonalById/{id}', 'getPersonalById');
@@ -626,7 +626,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/submitTravelClaim', 'submitTravelClaim');
             Route::post('/submitSubsClaim', 'submitSubsClaim');
             Route::get('/monthClaimEditView/edit/month/{id}', 'monthClaimEditView');
-            Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
+            Route::post('/submitMonthlyClaim/{id}/{desc}', 'submitMonthlyClaim');
             Route::post('/submitCaClaim', 'submitCaClaim');
             Route::get('/appealMtcView', 'appealMtcView');
             Route::post('/appealMtc', 'createAppealMtc');
@@ -660,7 +660,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteTravelAttachment/{id}', 'deleteTravelAttachment');
             Route::delete('/deleteSubsAttachment/{id}', 'deleteSubsAttachment');
             Route::delete('/deleteTravelDetail/{id}', 'deleteTravelDetail');
-            Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
+            Route::post('/updateStatusGeneralClaims/{id}/{desc}', 'updateStatusGeneralClaims');
             Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
             Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });

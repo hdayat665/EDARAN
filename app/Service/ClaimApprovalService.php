@@ -362,15 +362,16 @@ class ClaimApprovalService
         return $data;
     }
 
-    public function updateStatusClaim($r, $id, $status, $stage)
+    public function updateStatusClaim($r, $id, $status, $stage ,$desc)
     {
         $input = $r->input();
-
+        // pr($desc);
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
         // }
 
         $input['status'] = $status;
+        $input['status_desc'] = $desc;
         $input[$stage] = $status;
 
         GeneralClaim::where('id', $id)->update($input);
@@ -806,7 +807,7 @@ class ClaimApprovalService
         $input = $r->input();
 
         $input['status'] = 'paid';
-
+        $input['status_desc'] = 'Claim Paid';
         GeneralClaim::where('id', $id)->update($input);
 
         // email notification
@@ -898,8 +899,36 @@ class ClaimApprovalService
 
         $ids = $input['id'];
         $status['hod'] = 'recommend';
-        $status['status'] = 'pending';
+        $status['status'] = 'recommend';
+        $status['status_desc'] = 'Admin Dept. processing';
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
+        GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Skip The Queue';
+
+        return $data;
+    }
+    public function skipAllClaimApp($r)
+    {
+        $input = $r->input();
+        
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the claim submission first!';
+
+            return $data;
+        }
+
+        $ids = $input['id'];
+        $status['a_approval'] = 'recommend';
+        $status['status'] = 'recommend';
+        $status['status_desc'] = 'Finance Dept. processing';
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
         GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);

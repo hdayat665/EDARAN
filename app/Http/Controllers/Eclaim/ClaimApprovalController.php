@@ -22,11 +22,11 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.' . $view, $data);
     }
 
-    public function updateStatusClaim(Request $r, $id = '', $status, $stage)
+    public function updateStatusClaim(Request $r, $id = '', $status, $stage, $desc)
     {
         $msc = new ClaimApprovalService;
 
-        $data = $msc->updateStatusClaim($r, $id, $status, $stage);
+        $data = $msc->updateStatusClaim($r, $id, $status, $stage,$desc);
 
         return response()->json($data);
     }
@@ -410,7 +410,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        $data['gncs'] = $result['general'];
         $data['checkers'] = getFinanceChecker();
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
@@ -607,7 +607,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        $data['gncs'] = $result['general'];
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
@@ -1033,6 +1033,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
+        $data['gncs'] = $result['general'];
 
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
