@@ -1823,4 +1823,14 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+
+    
+    public function updateSubsMtcSuperVApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcSuperVApp($r);
+
+        return response()->json($result);
+    }
 }
