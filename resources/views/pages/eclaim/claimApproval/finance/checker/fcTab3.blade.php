@@ -23,7 +23,7 @@
                                     <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a> 
                                         
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ $claim->id }}</td>
@@ -43,8 +43,8 @@
                                     <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a>
                                     
                                     
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ $claim->id }}</td>

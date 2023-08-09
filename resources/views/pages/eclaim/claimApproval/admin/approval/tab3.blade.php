@@ -26,7 +26,7 @@
                             <div class="dropdown-menu">
                                 <a href="/adminApprovalDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                     MTC</a>
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div> -->
                                 <!-- <a href="javascript:;" id="approveButton3" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="rejectModalButton3" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal"><i class="fa fa-ban" aria-hidden="true"></i>
