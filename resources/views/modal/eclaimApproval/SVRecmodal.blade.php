@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -76,6 +77,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -88,40 +90,43 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                    <table id="tableTravelling" class="table table-striped table-bordered align-middle">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th class="text-nowrap">Status</th>
+                                <th class="text-nowrap">Start Time</th>
+                                <th class="text-nowrap">End Time</th>
+                                <th class="text-nowrap">Start Location</th>
+                                <th class="text-nowrap">Destination</th>
+                                <th class="text-nowrap">Description</th>
+                                <th class="text-nowrap">Type Of Transport </th>
+                                <th class="text-nowrap">Mileage (KM)</th>
+                                <th class="text-nowrap">Petrol/fares</th>
+                                <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <!-- <tbody id="tableRowTravelling">
 
-                <table id="tableTravelling" class="table table-striped table-bordered align-middle">
-                    <thead>
-                        <tr style="text-align:center">
-                            <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Start Time</th>
-                            <th class="text-nowrap">End Time</th>
-                            <th class="text-nowrap">Start Location</th>
-                            <th class="text-nowrap">Destination</th>
-                            <th class="text-nowrap">Description</th>
-                            <th class="text-nowrap">Type Of Transport </th>
-                            <th class="text-nowrap">Mileage (KM)</th>
-                            <th class="text-nowrap">Petrol/fares</th>
-                            <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                            <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
-                            <th class="text-nowrap">Action</th>
-                        </tr>
-                    </thead>
-                    <!-- <tbody id="tableRowTravelling">
+                        </tbody> -->
+                        <tbody id="tableRowTravelling">
 
-                    </tbody> -->
-                    <tbody id="tableRowTravelling">
+                        </tbody>
 
-                    </tbody>
-
-                </table>
+                    </table>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>
@@ -183,6 +188,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -344,7 +350,7 @@
                                                 <label class="form-label">Breakfast</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="BFUpdate">
+                                                <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" readonly value="" id="BFUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -364,7 +370,7 @@
                                                 <label class="form-label">Lunch</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="LHUpdate">
+                                                <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LHUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -384,7 +390,7 @@
                                                 <label class="form-label">Dinner</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="DNUpdate">
+                                                <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DNUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -433,21 +439,21 @@
                                                     <label class="form-label">Hotel</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input  type="hidden" class="form-control" value="" id="hotelcvUpdateHide">
-                                                    <input type="number" name="hotel_value" class="form-control" value="" id="hotelcvUpdate" />
+                                                    <input  type="hidden" class="form-control" value="{{ $food[0]['local_hotel_value'] }}" id="hotelcvUpdateHide">
+                                                    <input type="number"  readonly id="hotelCvModal" class="form-control" value="{{ $food[0]['local_hotel_value'] }}"  />
                                                 </div>
-
+                                                
                                                 <div class="col-md-1">
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="hotel" class="form-control" id="hnUpdate" value="0">
+                                                    <input type="text" name="hotel" class="form-control" readonly id="hnUpdate" value="0">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" readonly id="hnTotalUpdate" value="0">
+                                                    <input type="text" name="hotel_value" class="form-control"  id="hotelcvUpdate" value="0">
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -455,7 +461,7 @@
                                                     <label class="form-label">Lodging</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="number" class="form-control" readonly value="" id="lodgingcvUpdate" />
+                                                    <input type="number" class="form-control" readonly value="{{ $food[0]['lodging_allowance_value'] }}" id="lodgingcvUpdate" />
                                                 </div>
                                                 <div class="col-md-2" style="display: none">
                                                     <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
@@ -464,13 +470,13 @@
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="lodging" class="form-control" value="0" id="lnUpdate">
+                                                    <input type="text" name="lodging" readonly class="form-control" value="0" id="lnUpdate">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" readonly class="form-control" id="lnTotalUpdate" value="0">
+                                                    <input type="text" name="lodging_value"  class="form-control" id="lnTotalUpdate" value="0">
                                                 </div>
                                             </div>
 
@@ -519,28 +525,39 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row"  id="laundrydivUpdate">
-                                <div class="col-md-6">
-                                    <div class="form-control">
-                                        <div class="row p-2">
-                                            <label class="form-label">Laundry Allowance</label>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="col-md-4">
-                                                <label class="form-label">Amount</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <input type="number" name="" id="laundry_amount_update"class="form-control" placeholder="0.00">
-                                            </div>
+                            <div class="p-2"  id="laundrydivUpdate">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                            <div class="row p-2">
+                                                <label class="form-label">Laundry Allowance</label>
                                             </div>
                                             <div class="row p-2">
                                                 <div class="col-md-4">
-                                                    <label class="form-label">Description</label>
+                                                    <label class="form-label">Amount</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                    <input type="number" name="laundry_amount" id="laundry_amount_update"class="form-control" placeholder="0.00">
                                                 </div>
-                                            </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Description</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Supporting Document</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                        <a id="file_laundry_updat  </form>e" href="#"></a>
+                                                    </div> 
+                                                </div> -->
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -550,7 +567,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" style="color: black" data-bs-dismiss="modal">Back</button>
                         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit</button> -->
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                        {{-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button> --}}
+                        <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>
                         </form>
                     </div>
                 </div>
@@ -613,6 +631,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>

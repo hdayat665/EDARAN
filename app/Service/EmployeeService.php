@@ -168,7 +168,7 @@ class EmployeeService
         $jobHistory['remarks'] = $input['remarks'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
 
-        $jobHistory['statusHistory'] = $input['status'] = 'Deactivate';
+        $jobHistory['statusHistory'] = $input['status'] = 'terminate';
         $updateBy = Auth::user()->username;
         $jobHistory['updatedBy'] = $updateBy;
 
@@ -207,18 +207,18 @@ class EmployeeService
 
         $data['user'] = Users::where('id', $data['user_id'])->first();
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
-        $data['educations'] = UserQualificationEducation::where('user_id', $data['user_id'])->get();
-        $data['others'] = UserQualificationOthers::where('user_id', $data['user_id'])->get();
+        $data['educations'] = UserQualificationEducation::where('user_id', $data['user_id'])->latest()->get();
+        $data['others'] = UserQualificationOthers::where('user_id', $data['user_id'])->latest()->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
-        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
+        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->latest()->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
-        $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
-        $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
+        $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->latest()->get();
+        $data['parents'] = UserParent::where('user_id', $data['user_id'])->latest()->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
-        $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
+        $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->latest()->get();
 
         $childId[] = '';
         if ($data['childrens']) {
@@ -446,7 +446,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Emergency Contact';
+            $data['msg'] = 'Emergency Contact is Updated';
         }
 
         return $data;
@@ -926,7 +926,6 @@ class EmployeeService
     public function updateEmployee($r)
     {
         $input = $r->input();
-
         $id = $input['id'];
 
         $user = Employee::where('id', $id)->first();
@@ -939,13 +938,13 @@ class EmployeeService
 
         } else {
 
-            //update role user
-            if ($input['role'] !== $user->role_id) {
+            if ($input['roleId']) {
+                $input['role'] = $input['roleId'];
                 $userRole['role_id'] = $input['role'];
-                Users::where('id', $input['user_id'])->update($userRole);
-                unset($input['role']);
-                $jobHistory['roleHistory'] = $userRole['role_id'];
+                unset($input['roleId']);
             }
+
+            Users::where('id', $input['user_id'])->update($userRole);
 
             if ($input['branchId']) {
                 $input['branch'] = $input['branchId'];
@@ -966,11 +965,15 @@ class EmployeeService
             }
 
             Employee::where('id', $id)->update($input);
-            //$user = Auth::user();
 
-            // add job history if any amendment has been made
             $jobHistory = [];
-            $changes = [];
+
+            if ($input['role'] !== $user->role) {
+                $jobHistory['roleHistory'] = $input['role'];
+
+            } else if ($input['role'] === $user->role) {
+                $jobHistory['roleHistory'] = null;
+            }
 
             if ($input['company'] !== $user->company) {
                 $jobHistory['companyHistory'] = $input['company'];
@@ -1000,6 +1003,13 @@ class EmployeeService
                 $jobHistory['branchHistory'] = null;
             }
 
+            if ($input['joinedDate'] !== $user->joinedDate) {
+                $jobHistory['joinedDateHistory'] = $input['joinedDate'];
+
+            } else if ($input['joinedDate'] === $user->joinedDate) {
+                $jobHistory['joinedDateHistory'] = null;
+            }
+
             if ($input['jobGrade'] !== $user->jobGrade) {
                 $jobHistory['jobGradeHistory'] = $input['jobGrade'];
 
@@ -1012,6 +1022,13 @@ class EmployeeService
 
             } else if ($input['designation'] === $user->designation) {
                 $jobHistory['designationHistory'] = null;
+            }
+
+            if ($input['report_to'] !== $user->report_to) {
+                $jobHistory['ReportToHistory'] = $input['report_to'];
+
+            } else if ($input['report_to'] === $user->report_to) {
+                $jobHistory['ReportToHistory'] = null;
             }
 
             if ($input['employmentType'] !== $user->employmentType) {
@@ -1042,12 +1059,13 @@ class EmployeeService
             $jobHistory['user_id'] = $input['user_id'];
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
+
             JobHistory::create($jobHistory);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Employee';
+            $data['msg'] = 'Employment Details is updated.';
         }
 
         return $data;
@@ -1132,7 +1150,7 @@ class EmployeeService
             $jobHistory['user_id'] = $id;
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
-            $jobHistory['statusHistory'] = 'Active';
+            $jobHistory['statusHistory'] = 'active';
             JobHistory::create($jobHistory);
 
             $data['status'] = config('app.response.success.status');
@@ -1231,7 +1249,7 @@ class EmployeeService
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
         $data = Employee::where([['tenant_id', $tenant_id], ['id', $id]])->first();
-
+        // dd($data);
         return $data;
     }
 

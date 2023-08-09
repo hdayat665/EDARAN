@@ -66,7 +66,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
-        //pr($input);
+
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         $input['addedTime'] = date('Y-m-d h:m:s');
@@ -181,7 +181,7 @@ class SettingService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'role not found';
+            $data['msg'] = 'Role not found';
         } else {
             $role->delete();
 
@@ -551,7 +551,7 @@ class SettingService
         $branchName = $input['branchName'];
 
         $existingBranch = Branch::where('branchName', $branchName)
-            ->where('id', '=', $id)
+            ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
 

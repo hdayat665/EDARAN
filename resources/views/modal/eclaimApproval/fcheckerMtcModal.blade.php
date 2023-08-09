@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -76,6 +77,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -88,6 +90,9 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
+                                <input type="hidden" id="financeChecker" value='{{ $checkers  }}'>
+
                             </div>
                         </div>
                     </div>
@@ -121,7 +126,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>
@@ -185,6 +191,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -243,6 +250,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -548,7 +556,7 @@
                                                             <label class="form-label">Description</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                            <textarea class="form-control" name="laundry_desc" id="laundry_desc_update" rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="row p-2">

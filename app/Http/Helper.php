@@ -882,6 +882,20 @@ if (!function_exists('getBranchforJobHistory')) {
     }
 }
 
+if (!function_exists('getReportToforJobHistory')) {
+    function getReportToforJobHistory()
+    {
+        $user = Auth::user();
+        $reportto = [];
+
+        if ($user) {
+            $reportto = Employee::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $reportto->pluck('employeeName', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getJobGrade')) {
     function getJobGrade()
     {
@@ -1406,19 +1420,21 @@ if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
     {
         $data = DB::table('employment')
-            ->select('*')
-            ->whereNotIn('id', function ($query) use ($id) {
-                $query->select('employee_id')
-                    ->from('project_member')
-                    ->where('project_id', '=', $id);
-            })
-            ->get();
-
-        if (!$data) {
-            $data = [];
-        }
-
-        return $data;
+        ->select('*')
+        ->where([['tenant_id', Auth::user()->tenant_id]]) // Added condition
+        ->whereNotIn('id', function ($query) use ($id) {
+            $query->select('employee_id')
+                ->from('project_member')
+                ->where('project_id', '=', $id);
+        })
+        ->get();
+    
+    if (!$data) {
+        $data = [];
+    }
+    
+    return $data;
+    
     }
 }
 
@@ -1528,7 +1544,7 @@ if (!function_exists('prjManager')) {
             ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
             ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
-            ->sortBy('name')
+            // ->sortBy('name')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();

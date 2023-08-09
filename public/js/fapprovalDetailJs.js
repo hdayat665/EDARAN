@@ -42,6 +42,72 @@ function getPersonalById(id) {
     });
 }
 
+$("#hotelcvUpdate").on("input", function () {
+   
+
+    var a = parseFloat($("#hotelCvModal").val());
+    var b = parseFloat($("#hnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel_max = a * b;
+    
+    if (parseFloat($(this).val()) > hotel_max) {
+        $(this).val(hotel_max);
+    }
+
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+$("#lnTotalUpdate").on("input", function () {
+
+    var a = parseFloat($("#lodgingcvUpdate").val());
+    var b = parseFloat($("#lnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var lodging_max = a * b;
+    
+    if (parseFloat($(this).val()) > lodging_max) {
+        $(this).val(lodging_max);
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+
+$("#laundry_amount_update").on("input", function () {
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+
 
 //CASH ADVANCE LESS MODAL
 $(document).on("click", "#CAless", function () {
@@ -57,6 +123,9 @@ $(document).on("click", "#SVRtravel", function() {
     console.log(id);
     console.log(date);
     $("#date").val(date);
+    $("#id").val(id);
+    $("#checkedBtn").data("id", id);
+    $("#checkedBtn").data("date", date);
     travellingData.then(function(response) {
         var data = response.original;
 
@@ -67,8 +136,12 @@ $(document).on("click", "#SVRtravel", function() {
             table.clear();
             for (var i = 0; i < data.length; i++) {
                 var rowData = data[i];
+                var checkboxHTML = rowData.financeapp === 'checked' ?
+                "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>" :
+                "<input class='form-check-input' type='checkbox' id='checkbox1' disabled/>";
+
                 var row = [
-                    "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>",
+                    checkboxHTML,
                     rowData.start_time,
                     rowData.end_time,
                     rowData.location_start,
@@ -207,6 +280,95 @@ $(document).on("click", "#SVRtravel", function() {
         $("#travelModal").modal("show");
     });
 });
+
+$(document).on("click", "#saveButtonTravel", function() { 
+    var row = $(this).closest("tr");
+    var cells = row.find("td");
+    var rowData = {};
+    var id = row.find("#updateButtonTravel").data("id"); // Get the id from data attribute
+
+    var petrol, tolls, parking;
+
+    cells.each(function(index) {
+    var cell = $(this);
+    var columnName = cell.data("column");
+
+    if (index === 7) {
+        var input = cell.find("input.form-control");
+        millage = input.val();
+        cell.html(millage);
+        rowData[columnName] = millage;
+        console.log("millage value:", millage);
+    } else if (index === 8) {
+        var input = cell.find("input.form-control");
+        petrol = input.val();
+        cell.html(petrol);
+        rowData[columnName] = petrol;
+        console.log("Petrol value:", petrol);
+    } else if (index === 9) {
+        var input = cell.find("input.form-control");
+        tolls = input.val();
+        cell.html(tolls);
+        rowData[columnName] = tolls;
+        console.log("Tolls value:", tolls);
+    } else if (index === 10) {
+        var input = cell.find("input.form-control");
+        parking = input.val();
+        cell.html(parking);
+        rowData[columnName] = parking;
+        console.log("Parking value:", parking);
+    } else {
+        var value = cell.text().trim();
+        rowData[columnName] = value;
+    }
+    });
+        
+    // Show the updateButtonTravel button
+    row.find("#updateButtonTravel").show();
+
+    // Hide the saveButtonTravel button
+    $(this).hide();
+
+    // Call the updateTravelData function with the id and rowData
+    updateTravelData(id,millage,petrol,tolls, parking);
+});
+
+function updateTravelData(id,millage, petrol,tolls, parking) {
+    requirejs(["sweetAlert2"], function(swal) {
+      var formData = new FormData();
+      
+      // Append the values to the FormData object
+      formData.append("millage", millage);
+      formData.append("petrol", petrol);
+      formData.append("toll", tolls);
+      formData.append("parking", parking);
+  
+      formData.append("id", id); // Append the id to the formData
+  
+      $.ajax({
+        type: "POST",
+        url: "/updateTravelMtcFinanApp/" + id,
+        data: formData,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+      }).then(function(response) {
+        swal({
+          title: response.title,
+          text: response.msg,
+          type: response.type,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then(function() {
+          if (response.type !== "error") {
+            location.reload();
+          }
+        });
+      });
+    });
+  }
     
 
 //SUBSISTENCE MODAL
@@ -233,6 +395,7 @@ $(document).on("click", "#subsBtn", function () {
             var file_upload = firstResponse.file_upload;
             var project = firstResponse.project_id;
             var hotel = parseFloat(firstResponse.hotel_value);
+            var lodging = parseFloat(firstResponse.lodging_value);
             var startDateFood = formattedStartDate;
             var endDateFood = formattedEndDate;
             var startTimeFood = startTime;
@@ -369,12 +532,12 @@ $(document).on("click", "#subsBtn", function () {
             var lodgingValue = parseFloat($("#lodgingcvUpdate").val());
             var totalHotel = dayHotel*hotel;
             var totalLodging = dayLodging*lodgingValue;
-            $("#hnTotalUpdate").val(totalHotel);
+            
             
             $("#lnTotalUpdate").val(totalLodging);
-            $("#TAVUpdate").val(totalHotel+totalLodging);
+            $("#TAVUpdate").val(hotel+lodging);
             
-            $("#total2Update").val(totalHotel+totalLodging+(a * b + c * d + e * f));
+            $("#total2Update").val(hotel+lodging+(a * b + c * d + e * f) + laundry_amount);
             // Fetch the project name asynchronously
             getProjectNameById(project).done(function(projectData) {
                 var projectName = projectData && projectData.project_name ? projectData.project_name : 'N/A';
@@ -389,6 +552,7 @@ $(document).on("click", "#subsBtn", function () {
                 $("#desc_update").val(desc);
                 $("#project_update").val(projectName);
                 $("#hotelcvUpdate").val(hotel);
+                $("#lnTotalUpdate").val(lodging);
                 $("#file_upload").html(file_upload);
                 $("#laundry_amount_update").val(laundry_amount);
                 $("#laundry_desc_update").val(laundry_desc);
@@ -749,7 +913,39 @@ $(document).ready(function () {
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
     });
+    $("#checkedBtn").on("click", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        var date = $(this).data("date");
+        var level = 'financeapp';
+        requirejs(["sweetAlert2"], function (swal) {
+            $.ajax({
+                type: "POST",
+                url: "/updateCheckMtc/" + id +  "/" + date + "/" + level,
 
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+        // updating checked attribute of change event occurred element, this.checked returns current state
+        // $(".wrapper").val($(".container").html());
+        // updating the value of textarea
+    });
     $("#rejectButton").click(function (e) {
         var id = $(this).data("id");
         var status = "reject";
@@ -834,6 +1030,101 @@ $(document).ready(function () {
                         contentType: false,
                     }).then(function (data) {
                         console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#updateSubsMtcBtn").click(function (e) {
+       
+    
+        $("#updateSubsMtc").validate({
+            // Specify validation rules
+            rules: {
+                
+            },
+    
+            messages: {
+                
+            },
+            
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateSubsMtc")
+                    );
+                    console.log(data);   
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateSubsMtcFinanApp",
+                        data: data,
+                        dataType: "json",
+    
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#updateOtherMtcBtn").click(function (e) {
+    
+        $("#updateOtherMtc").validate({
+            // Specify validation rules
+            rules: {
+                
+            },
+    
+            messages: {
+                
+            },
+    
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateOtherMtc")
+                    );
+    
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateOtherMtcFinanApp",
+                        data: data,
+                        dataType: "json",
+    
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

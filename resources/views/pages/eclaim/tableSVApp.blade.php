@@ -41,7 +41,11 @@
                         @foreach ($travelClaims as $travel)
                         <tr>    
                             <td>
-                                <input class="form-check-input" type="checkbox" id="checkbox1" disabled checked/>   
+                                @if ($travel->hod)
+                                    <input class="form-check-input" type="checkbox" id="checkbox1" disabled checked/>
+                                @else
+                                    <input class="form-check-input" type="checkbox" id="checkbox1" disabled/>
+                                @endif
                             </td>
                             <td>{{ $travel->travel_date ?? '' }}</td>
                             <td>{{ $travel->total_km ?? '0' }} KM</td>

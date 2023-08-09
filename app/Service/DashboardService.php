@@ -189,11 +189,18 @@ $datewoutwknd = array_diff($datesInMonth, array_keys($leavesdate));
 
 
 $holidays = DB::table('leave_holiday')
-// ->whereRaw("FIND_IN_SET(state_id, ?)", [$cityId])
-->whereRaw("FIND_IN_SET($cityId, state_id)")
-->whereRaw("MONTH(start_date) = ?", [$currentMonth])
-->select('start_date', 'end_date','state_id')
-->get();
+    ->where(function ($query) use ($cityId) {
+        if ($cityId === null) {
+            $query->whereRaw("FIND_IN_SET(NULL, state_id)");
+        } else {
+            $query->whereRaw("FIND_IN_SET($cityId, state_id)");
+        }
+    })
+    ->whereRaw("MONTH(start_date) = ?", [$currentMonth])
+    ->where('leave_holiday.tenant_id', '=',Auth::user()->tenant_id)
+    ->select('start_date', 'end_date', 'state_id')
+    ->get();
+
 
 $holidaybystate = array();
 
@@ -397,12 +404,15 @@ foreach($finalArray as $date => $value) {
 
 $datesNotInFinalArray = array_diff($datewoutholiday, array_keys($finalArrayFiltered));
 
-$datesNotInFinalArray['unlogdate'] = count($datesNotInFinalArray);
+if ($cityId === null) {
+    $datesNotInFinalArray['unlogdate'] = 0;
+} else {
+    $datesNotInFinalArray['unlogdate'] = count($datesNotInFinalArray);
+}
 
 if (!$datesNotInFinalArray) {
     $datesNotInFinalArray = [];
 }
-
 
 return $datesNotInFinalArray;
 

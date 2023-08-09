@@ -148,13 +148,8 @@
                     </a>
                     <?php endif; ?>
                     <div class="dropdown-menu dropdown-menu-end me-1">
-                        <a href="myProfile" class="dropdown-item">Edit Profile</a>
-                        {{-- <a href="javascript:;" class="dropdown-item d-flex align-items-center">
-                            Inbox
-                            <span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
-                        </a> --}}
-                        <a href="myTimesheet" class="dropdown-item">Calendar</a>
-                        {{-- <a href="javascript:;" class="dropdown-item">Setting</a> --}}
+                        <a href="/myProfile" class="dropdown-item">Edit Profile</a>
+                        <a href="/myTimesheet" class="dropdown-item">Calendar</a>
                         <div class="dropdown-divider"></div>
                         <a href="/logout/tenant" class="dropdown-item">Log Out</a>
                     </div>
@@ -182,11 +177,11 @@
                             <?php
                             $datetime1 = strtotime($notification->created_at);
                             $datetime2 = strtotime(date('Y/m/d H:i:s'));
-                            
+
                             $diff = abs($datetime1 - $datetime2);
-                            
+
                             $dateNotify = getDateFormat($diff)['minutes'];
-                            
+
                             ?>
                             @if (!$notification->read_at)
                                 <?php $notify = json_decode($notification->data); ?>

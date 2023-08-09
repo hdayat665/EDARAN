@@ -139,10 +139,36 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/approveAllClaim', 'approveAllClaim');
             Route::post('/approveAllCa', 'approveAllCa');
             Route::post('/skipAllClaim', 'skipAllClaim');
+            Route::post('/skipAllClaimApp', 'skipAllClaimApp');
+            Route::post('/updateTravelMtcAdminApp/{id}', 'updateTravelMtcAdminApp');
+            Route::post('/updateSubsMtcAdminApp', 'updateSubsMtcAdminApp');
+            Route::post('/updateOtherMtcAdminApp', 'updateOtherMtcAdminApp');
+            Route::post('/updateTravelMtcSuperVApp/{id}', 'updateTravelMtcSuperVApp');
+            Route::post('/updateOtherMtcSuperVApp', 'updateOtherMtcSuperVApp');
+            Route::post('/updateTravelMtcSuperVRec/{id}', 'updateTravelMtcSuperVRec');
+            Route::post('/updateSubsMtcSuperVRec', 'updateSubsMtcSuperVRec');
+            Route::post('/updateOtherMtcSuperVRec', 'updateOtherMtcSuperVRec');
+            Route::post('/updateTravelMtcFinanRec/{id}', 'updateTravelMtcFinanRec');
+            Route::post('/updateSubsMtcFinanRec', 'updateSubsMtcFinanRec');
+            Route::post('/updateOtherMtcFinanRec', 'updateOtherMtcFinanRec');
+            Route::post('/updateTravelMtcFinanApp/{id}', 'updateTravelMtcFinanApp');
+            Route::post('/updateSubsMtcFinanApp', 'updateSubsMtcFinanApp');
+            Route::post('/updateOtherMtcFinanApp', 'updateOtherMtcFinanApp');
+            Route::post('/updateTravelMtcFinanChk/{id}', 'updateTravelMtcFinanChk');
+            Route::post('/updateSubsMtcFinanChk', 'updateSubsMtcFinanChk');
+            Route::post('/updateOtherMtcFinanChk', 'updateOtherMtcFinanChk');
+            Route::post('/updateSubsMtcSuperVApp', 'updateSubsMtcSuperVApp');
+            
+            
+            ////checked
+            Route::post('/updateCheckMtc/{id}/{date}/{level}', 'updateCheckMtc');
 
 
 
-
+            Route::post('/updateTravelMtcAdminRec/{id}', 'updateTravelMtcAdminRec');
+            Route::post('/updateSubsMtcAdminRec', 'updateSubsMtcAdminRec');
+            Route::post('/updateOtherMtcAdminRec', 'updateOtherMtcAdminRec');
+            
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
@@ -505,6 +531,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteProjectLocation/{id}', 'deleteProjectLocation');
             Route::post('/createProjectMember', 'createProjectMember');
             Route::get('/getProjectMemberById/{id}', 'getProjectMemberById');
+            Route::get('/getProjectandMemberById/{id}', 'getProjectandMemberById');
+            Route::get('/getProjectbyIdDate/{id}', 'getProjectbyIdDate');
             Route::post('/updateProjectMember/{id}', 'updateProjectMember');
             Route::post('/assignProjectMember', 'assignProjectMember');
             Route::get('/projectRequest', 'projectRequestView');

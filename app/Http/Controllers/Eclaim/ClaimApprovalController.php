@@ -83,6 +83,7 @@ class ClaimApprovalController extends Controller
         
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+       
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -251,6 +252,7 @@ class ClaimApprovalController extends Controller
         $data['user_id'] = $data['general']->user_id ?? '';
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
+        //pr($data['travelClaims']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -412,6 +414,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['checkers'] = getFinanceChecker();
+        
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -1033,6 +1036,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
+        
 
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
@@ -1615,11 +1619,225 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+    public function skipAllClaimApp(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+        
+        $result = $ss->skipAllClaimApp($r);
+
+        return response()->json($result);
+    }
     public function approveAllCa(Request $r)
     {
         $ss = new ClaimApprovalService;
 
         $result = $ss->approveAllCa($r);
+
+        return response()->json($result);
+    }
+    public function updateTravelMtcAdminRec(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcAdminRec($r,$id = '');
+
+        return response()->json($result);
+    }
+    public function updateTravelMtcAdminApp(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcAdminApp($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    public function updateSubsMtcAdminRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcAdminRec($r);
+
+        return response()->json($result);
+    }
+    public function updateOtherMtcAdminRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcAdminRec($r);
+
+        return response()->json($result);
+    }
+
+
+
+    // 
+    public function updateSubsMtcAdminApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcAdminApp($r);
+
+        return response()->json($result);
+    }
+
+    public function updateOtherMtcAdminApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcAdminApp($r);
+
+        return response()->json($result);
+    }
+
+    public function updateTravelMtcSuperVApp(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcSuperVApp($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    public function updateOtherMtcSuperVApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcSuperVApp($r);
+
+        return response()->json($result);
+    }
+
+    
+    public function updateTravelMtcSuperVRec(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcSuperVRec($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    public function updateSubsMtcSuperVRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcSuperVRec($r);
+
+        return response()->json($result);
+    }
+
+    // 
+    public function updateOtherMtcSuperVRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcSuperVRec($r);
+
+        return response()->json($result);
+    }
+
+    public function updateTravelMtcFinanRec(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcFinanRec($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    // 
+    public function updateSubsMtcFinanRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcFinanRec($r);
+
+        return response()->json($result);
+    }
+
+    
+    public function updateOtherMtcFinanRec(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcFinanRec($r);
+
+        return response()->json($result);
+    }
+
+    public function updateTravelMtcFinanApp(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcFinanApp($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    public function updateSubsMtcFinanApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcFinanApp($r);
+
+        return response()->json($result);
+    }
+
+    
+    public function updateOtherMtcFinanApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcFinanApp($r);
+
+        return response()->json($result);
+    }
+    
+    public function updateTravelMtcFinanChk(Request $r,$id = '')
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateTravelMtcFinanChk($r,$id = '');
+
+        return response()->json($result);
+    }
+
+    public function updateSubsMtcFinanChk(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcFinanChk($r);
+
+        return response()->json($result);
+    }
+
+    // updateOtherMtcFinanChk
+
+    public function updateOtherMtcFinanChk(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateOtherMtcFinanChk($r);
+
+        return response()->json($result);
+    }
+
+    public function updateCheckMtc(Request $r, $id , $date, $level)
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->updateCheckMtc($r, $id, $date, $level);
+
+        return response()->json($data);
+    }
+
+    
+    public function updateSubsMtcSuperVApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcSuperVApp($r);
 
         return response()->json($result);
     }

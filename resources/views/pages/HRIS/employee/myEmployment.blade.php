@@ -48,14 +48,13 @@
                                            <div class="card-body">
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Role*</label>
-                                                   <select class="form-select" name="role" id="role" style="width: 100%">
-                                                       <option value="">Please Choose</option>
+                                                   <select class="form-select" name="roleId" id="role" style="width: 100%">
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        <?php $roles = getAllRole(); ?>
                                                        @foreach ($roles as $role)
                                                            <option value="{{ $role->id }}"
                                                                {{ $user->role_id == $role->id ? 'selected="selected"' : '' }}
                                                                label="{{ $role->roleName }}">{{ $role->roleName }}</option>
-
                                                        @endforeach
                                                    </select>
                                                    <input type="hidden" name="id" value="{{ $employment->id }}">
@@ -63,7 +62,7 @@
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Company*</label>
                                                    <select class="form-select" name="company" id="companyForEmployment" style="width: 100%">
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        <?php $companys = getCompany(); ?>
                                                        @foreach ($companys as $company)
                                                            <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
@@ -75,7 +74,7 @@
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Department*</label>
                                                    <select class="form-select" name="departmentId" id="departmentShow" style="width: 100%">
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        <?php $Departments = getDepartment(); ?>
                                                        @foreach ($Departments as $Department)
                                                            <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
@@ -87,7 +86,7 @@
                                                    <label for="firstname" class="form-label">Unit</label>
                                                    <select class="form-select" name="unitId" id="unitShow" style="width: 100%">
                                                        <?php $Units = getUnit('', $employment->department); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($Units as $Unit)
                                                            <option value="{{ $Unit->id }}" <?php echo $employment->unit == $Unit->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $Unit->unitName }}">{{ $Unit->unitName }}</option>
@@ -98,7 +97,7 @@
                                                    <label for="firstname" class="form-label">Branch*</label>
                                                    <select class="form-select" name="branchId" id="branchShow" style="width: 100%">
                                                        <?php $Branchs = getBranch('', $employment->company); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($Branchs as $Branch)
                                                            <option value="{{ $Branch->id }}" <?php echo $employment->branch == $Branch->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
@@ -117,7 +116,7 @@
                                                    <label for="firstname" class="form-label">Job Grade*</label>
                                                    <select class="form-select" name="jobGrade"  id="jobGrade" style="width: 100%">
                                                        <?php $JobGrades = getJobGrade(); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($JobGrades as $JobGrade)
                                                            <option value="{{ $JobGrade->id }}" <?php echo $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $JobGrade->jobGradeName }}">{{ $JobGrade->jobGradeName }}</option>
@@ -128,7 +127,7 @@
                                                    <label for="firstname" class="form-label">Designation*</label>
                                                    <select class="form-select" name="designation" id="designation" style="width: 100%">
                                                        <?php $Designations = getDesignation(); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($Designations as $Designation)
                                                            <option value="{{ $Designation->id }}" <?php echo $employment->designation == $Designation->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $Designation->designationName }}">{{ $Designation->designationName }}</option>
@@ -139,7 +138,7 @@
                                                    <label for="firstname" class="form-label">Employment Type*</label>
                                                    <select class="form-select" name="employmentType" id="employmentType">
                                                        <?php $EmploymentTypes = getEmploymentType(); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($EmploymentTypes as $EmploymentType)
                                                            <option value="{{ $EmploymentType->id }}" label="{{ $EmploymentType->type }}"
                                                                {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
@@ -173,12 +172,11 @@
                                                    <label for="employee-id" class="form-label">Report To</label>
                                                    <select class="form-select" name="report_to" id="reporttoo">
                                                        <?php $employees = getEmployee(); ?>
-                                                       <option value="">Please Choose</option>
+                                                       <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($employees as $employee)
                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                               {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>
+                                                               {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>{{ $employee->employeeName }}
                                                            </option>
-
 
                                                            <!-- <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" > -->
                                                        @endforeach
@@ -228,24 +226,25 @@
                                                        value="" placeholder="YYYY-MM-DD"
                                                        aria-describedby="effective-from">
                                                </div>
-                                               <div class="col-sm-6">
-                                                   <label for="firstname" class="form-label">Event*</label>
-                                                   <select class="form-select" name="event" id="event">
+                                               <div class="col-sm-6" >
+                                                   <label for="firstname" class="form-label" >Event*</label>
+                                                   <select class="form-select" name="event" id="event-id">
                                                        <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE</option>
                                                        <?php $events = getEvent(); ?>
                                                        @foreach ($events as $key => $event)
                                                            <option value="{{ $key }}"
                                                            <?= $employment->event == $key ? : '' ?>>{{ $event }}</option>
-                                                   @endforeach
-                                               </select>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="modal-footer">
-                                       <button type="submit" class="btn btn-primary float-end" id="updateEmp">
-                                           Update
-                                       </button>
-                                   </div>
+                                                        @endforeach
+                                                    </select>
+                                                    <input type="hidden" id="eventdiv" name="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary float-end" id="updateEmp">
+                                                Update
+                                            </button>
+                                        </div>
                                    </form>
                                    </div>
                            </div>
@@ -296,6 +295,7 @@
                                                    <?php $showBranch = getBranchforJobHistory();?>
                                                    <?php $showJobGrade = getJobGradeforJobHistory();?>
                                                    <?php $showDesignation = getDesignationforJobHistory();?>
+                                                   <?php $showReportTo = getReportToforJobHistory();?>
                                                    <?php $showEmploymentType = getEmploymentTypeforJobHistory();?>
                                                    <?php $showTerminateStatus = getEmploymentTerminateStatusforJobHistory();?>
 
@@ -338,6 +338,13 @@
                                                                    </p>
                                                                    @endif
 
+
+                                                                   @if ($jobHistory->joinedDateHistory)
+                                                                   <p class="fw-bold">
+                                                                        Joined Date has changed to {{ $jobHistory->joinedDateHistory }}.
+                                                                   </p>
+                                                                   @endif
+
                                                                    @if ($jobHistory->jobGradeHistory)
                                                                    <p class="fw-bold">
                                                                        Job Grade has changed to {{ $showJobGrade[$jobHistory->jobGradeHistory] }}.
@@ -356,6 +363,12 @@
                                                                    </p>
                                                                    @endif
 
+                                                                   @if ($jobHistory->ReportToHistory)
+                                                                   <p class="fw-bold">
+                                                                    Report To has changed to {{  $showReportTo[$jobHistory->ReportToHistory] }}.
+                                                                   </p>
+                                                                   @endif
+
                                                                    @if ($jobHistory->CORHistory)
                                                                    <p class="fw-bold">
                                                                        Charge Out Rate has changed to {{ $jobHistory->CORHistory }}.
@@ -370,7 +383,7 @@
 
                                                                    @if ($jobHistory->effectiveDate && $jobHistory->effectiveDate !== '0000-00-00')
                                                                    <p class="text">
-                                                                       Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
+                                                                       Effective From: {{ $jobHistory->effectiveDate ?? '' }}
                                                                    </p>
                                                                    @endif
 
@@ -383,8 +396,8 @@
                                                                    </p>
 
                                                                    @if ($jobHistory->statusHistory)
-                                                                        @if ($jobHistory->statusHistory === 'Active')
-                                                                            <button type="button" style="pointer-events: none" data-id="{{$jobHistory->id}}" class="btn btn-success">{{ $jobHistory->statusHistory }}</button>
+                                                                        @if ($jobHistory->statusHistory === 'active')
+                                                                            <button type="button" style="pointer-events: none" data-id="{{$jobHistory->id}}" class="btn btn-success">Active</button>
                                                                             {{-- <a href="javascript:;" id="editVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">{{ $jobHistory->statusHistory }}</a> --}}
 
                                                                         @else
@@ -392,7 +405,7 @@
 
                                                                             {{-- <a href="javascript:;" id="ViewTerminateModal{{$jobHistory->id}}" data-bs-toggle="modal" data-id="{{$jobHistory->id}}" data-type="edit" class="btn btn-danger">{{ $jobHistory->statusHistory }}</a> --}}
                                                                             {{-- <a href="javascript:;" data-bs-toggle="modal" id="ViewTerminateModal{{$jobHistory->id}}" data-id="{{$jobHistory->id}}" data-type="edit" class="dropdown-item">Edit</a> --}}
-                                                                            <a href="javascript:;" id="ViewTerminateModal" data-id="{{$jobHistory->id}}" class="btn btn-danger">{{ $jobHistory->statusHistory }}</a>
+                                                                            <a href="javascript:;" id="ViewTerminateModal" data-id="{{$jobHistory->id}}" class="btn btn-danger">Deactivate</a>
 
                                                                         @endif
                                                                     @endif

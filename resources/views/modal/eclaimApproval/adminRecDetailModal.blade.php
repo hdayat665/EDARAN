@@ -77,6 +77,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -89,6 +90,7 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
                             </div>
                         </div>
                     </div>
@@ -122,7 +124,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>
@@ -238,7 +241,7 @@
                         </div>
                         <div class="modal-footer"> 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -250,7 +253,7 @@
         <div class="modal-dialog" style="max-width: 1000px">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Daily Subsistence Allowance & Accommodation</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Dailytest Subsistence Allowance & Accommodation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

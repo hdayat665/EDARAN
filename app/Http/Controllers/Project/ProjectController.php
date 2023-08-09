@@ -135,6 +135,29 @@ class ProjectController extends Controller
 
         return response()->json($data);
     }
+    public function getProjectandMemberById($id)
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->getProjectandMemberById($id);
+        // pr($data['project']);
+
+        return response()->json($data);
+    }
+
+    public function getProjectbyIdDate($id)
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->getProjectbyIdDate($id);
+        // pr($data['project']);
+
+        return response()->json($data);
+    }
 
     public function updateProjectMember(Request $r, $id)
     {

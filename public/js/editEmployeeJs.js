@@ -26,7 +26,8 @@ $('#branchShow').select2({placeholder: "PLEASE CHOOSE"});
 $('#jobGrade').select2();
 $('#designation').select2();
 $('#employmentType').select2();
-$('#event').select2();
+$('#reporttoo').select2();
+$('#event-id').select2();
 
     $("#data-table-default").dataTable({
         responsive: true,
@@ -4634,80 +4635,69 @@ if (permanentChecked && correspondentChecked) {
         var data = new FormData(document.getElementById("addEmpForm"));
 
         $("#addEmpForm").validate({
-            // Specify validation rules
+
             rules: {
                 role: "required",
                 company: "required",
                 departmentId: "required",
-                //unitId: "required",
                 branchId: "required",
                 jobGrade: "required",
                 designation: "required",
                 employmentType: "required",
-                // // supervisor: "required",
-
                 joinedDate: "required",
-
                 EffectiveFrom: "required",
-
                 event: "required",
             },
 
             messages: {
                 role: "Please Insert Employee Role",
-
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
-                //unitId: "Please Insert Employee Unit",
                 branchId: "Please Insert Employee Branch",
                 jobGrade: "Please Insert Employee Job Grade",
                 designation: "Please Insert Employee Designation",
                 employmentType: "Please Insert Employee Employment Type",
-                // // supervisor: "Please Insert Your Supervisor",
-
                 joinedDate: "Please Insert Employee Joined Date",
-
-                EffectiveFrom: "Please Choose Effective Form",
-
+                EffectiveFrom: "Please Choose Effective From",
                 event: "Please Choose Event",
             },
+
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "event") {
+                  error.insertAfter("#eventdiv");
+                } else {
+                  error.insertAfter(element);
+                }
+              },
+
             submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    swal({
-                        title: "Are you sure!",
-                        type: "error",
-                        confirmButtonClass: "btn-danger",
-                        confirmButtonText: "Yes!",
-                        showCancelButton: true,
+                var data = new FormData(document.getElementById("addEmpForm"));
+                $.ajax({
+                    type: "POST",
+                    url: "/updateEmployee",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                     }).then(function () {
-                        console.log(data);
-                        $.ajax({
-                            type: "POST",
-                            url: "/updateEmployee",
-                            data: data,
-                            dataType: "json",
-
-                            processData: false,
-                            contentType: false,
-                        }).then(function (data) {
-                            console.log(data);
-                            swal({
-                                title: data.title,
-                                text: data.msg,
-                                type: data.type,
-                                confirmButtonColor: "#3085d6",
-                                confirmButtonText: "OK",
-                                allowOutsideClick: false,
-                                allowEscapeKey: false,
-                            }).then(function () {
-                                if (data.type == "error") {
-                                } else {
-                                    location.reload();
-                                }
-                            });
-                        });
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                            // window.location.href = "/myProfile";
+                        }
                     });
                 });
             },

@@ -23,6 +23,72 @@ function getTravelDataByGeneralId(id, date) {
       url: "/getClaimCategoryNameById/" + id
     });
   }
+
+  $("#hotelcvUpdate").on("input", function () {
+   
+
+    var a = parseFloat($("#hotelCvModal").val());
+    var b = parseFloat($("#hnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel_max = a * b;
+    
+    if (parseFloat($(this).val()) > hotel_max) {
+        $(this).val(hotel_max);
+    }
+
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+$("#lnTotalUpdate").on("input", function () {
+
+    var a = parseFloat($("#lodgingcvUpdate").val());
+    var b = parseFloat($("#lnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var lodging_max = a * b;
+    
+    if (parseFloat($(this).val()) > lodging_max) {
+        $(this).val(lodging_max);
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+
+$("#laundry_amount_update").on("input", function () {
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
 $(document).on("click", "#viewCaBtn", function () {
     $("#viewCa").modal("show");
 });
@@ -35,6 +101,8 @@ $(document).on("click", "#SVRtravel", function() {
     console.log(id);
     console.log(date);
     $("#date").val(date);
+    $("#checkedBtn").data("id", id);
+    $("#checkedBtn").data("date", date);
     travellingData.then(function(response) {
         var data = response.original;
 
@@ -45,8 +113,12 @@ $(document).on("click", "#SVRtravel", function() {
             table.clear();
             for (var i = 0; i < data.length; i++) {
                 var rowData = data[i];
+                var checkboxHTML = rowData.hod === 'checked' ?
+                "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>" :
+                "<input class='form-check-input' type='checkbox' id='checkbox1' disabled/>";
+
                 var row = [
-                    "<input class='form-check-input' type='checkbox' id='checkbox1' disabled checked/>",
+                    checkboxHTML,
                     rowData.start_time,
                     rowData.end_time,
                     rowData.location_start,
@@ -185,6 +257,95 @@ $(document).on("click", "#SVRtravel", function() {
         $("#travelModal").modal("show");
     });
 });
+
+$(document).on("click", "#saveButtonTravel", function() { 
+    var row = $(this).closest("tr");
+    var cells = row.find("td");
+    var rowData = {};
+    var id = row.find("#updateButtonTravel").data("id"); // Get the id from data attribute
+
+    var petrol, tolls, parking;
+
+    cells.each(function(index) {
+    var cell = $(this);
+    var columnName = cell.data("column");
+
+    if (index === 7) {
+        var input = cell.find("input.form-control");
+        millage = input.val();
+        cell.html(millage);
+        rowData[columnName] = millage;
+        console.log("millage value:", millage);
+    } else if (index === 8) {
+        var input = cell.find("input.form-control");
+        petrol = input.val();
+        cell.html(petrol);
+        rowData[columnName] = petrol;
+        console.log("Petrol value:", petrol);
+    } else if (index === 9) {
+        var input = cell.find("input.form-control");
+        tolls = input.val();
+        cell.html(tolls);
+        rowData[columnName] = tolls;
+        console.log("Tolls value:", tolls);
+    } else if (index === 10) {
+        var input = cell.find("input.form-control");
+        parking = input.val();
+        cell.html(parking);
+        rowData[columnName] = parking;
+        console.log("Parking value:", parking);
+    } else {
+        var value = cell.text().trim();
+        rowData[columnName] = value;
+    }
+    });
+        
+    // Show the updateButtonTravel button
+    row.find("#updateButtonTravel").show();
+
+    // Hide the saveButtonTravel button
+    $(this).hide();
+
+    // Call the updateTravelData function with the id and rowData
+    updateTravelData(id,millage,petrol,tolls, parking);
+});
+
+function updateTravelData(id,millage, petrol,tolls, parking) {
+    requirejs(["sweetAlert2"], function(swal) {
+      var formData = new FormData();
+      
+      // Append the values to the FormData object
+      formData.append("millage", millage);
+      formData.append("petrol", petrol);
+      formData.append("toll", tolls);
+      formData.append("parking", parking);
+  
+      formData.append("id", id); // Append the id to the formData
+  
+      $.ajax({
+        type: "POST",
+        url: "/updateTravelMtcSuperVApp/" + id,
+        data: formData,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+      }).then(function(response) {
+        swal({
+          title: response.title,
+          text: response.msg,
+          type: response.type,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then(function() {
+          if (response.type !== "error") {
+            location.reload();
+          }
+        });
+      });
+    });
+  }
     
     //SUBSISTENCE MODAL
     $(document).on("click", "#SVAsubs", function () {
@@ -475,7 +636,39 @@ $(document).ready(function () {
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
     });
+    $("#checkedBtn").on("click", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        var date = $(this).data("date");
+        var level = 'hod';
+        requirejs(["sweetAlert2"], function (swal) {
+            $.ajax({
+                type: "POST",
+                url: "/updateCheckMtc/" + id +  "/" + date + "/" + level,
 
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+        // updating checked attribute of change event occurred element, this.checked returns current state
+        // $(".wrapper").val($(".container").html());
+        // updating the value of textarea
+    });
     $("#rejectButton").click(function (e) {
         var id = $(this).data("id");
         var status = "reject";
@@ -565,4 +758,330 @@ $(document).ready(function () {
             },
         });
     });
+
+//SUBSISTENCE MODAL
+$(document).on("click", "#subsBtn", function () {
+    var id = $(this).data("id");
+    var subsData = getSubsDataByGeneralId(id);
+    
+    subsData.done(function(response) {
+        if (Array.isArray(response) && response.length > 0) {
+            var firstResponse = response[0];
+            var id = firstResponse.id;
+            var general_id = firstResponse.general_id;
+            var startDate = firstResponse.start_date;
+            var startTime = firstResponse.start_time;
+            var endDate = firstResponse.end_date;
+            var endTime = firstResponse.end_time;
+            var laundry_amount = firstResponse.laundry_amount;
+            var laundry_desc = firstResponse.laundry_desc;
+            var file_laundry = firstResponse.file_laundry;
+            var formattedStartDate = startDate.substr(0, 10);
+            var formattedEndDate = endDate.substr(0, 10);
+            var travelDuration = firstResponse.travel_duration;
+            var desc = firstResponse.desc;
+            var file_upload = firstResponse.file_upload;
+            var project = firstResponse.project_id;
+            var hotel = parseFloat(firstResponse.hotel_value);
+            var lodging = parseFloat(firstResponse.lodging_value);
+            var startDateFood = formattedStartDate;
+            var endDateFood = formattedEndDate;
+            var startTimeFood = startTime;
+            var endTimeFood = endTime;
+            var dayHotel = firstResponse.hotel;
+            var dayLodging = firstResponse.lodging;
+            var startDateTime = new Date(startDateFood + ' ' + startTimeFood);
+            var endDateTime = new Date(endDateFood + ' ' + endTimeFood);
+            var durationInMs = endDateTime - startDateTime;
+            var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+            if (!laundry_amount) {
+                laundry_amount = null;
+                document.getElementById('laundrydivUpdate').style.display = 'none';
+            } else {
+                document.getElementById('laundrydivUpdate').style.display = 'block'; // or any other appropriate display value
+            }
+                
+            if (!laundry_desc) {
+                laundry_desc = null;
+            }
+            
+            if (!file_upload) {
+                file_upload = "No Attachment";
+            } else {
+                var fileLinks = file_upload.split(",");
+                file_upload = "";
+                for (var i = 0; i < fileLinks.length; i++) {
+                    var fileLink = fileLinks[i].trim();
+                    file_upload += `<a href="/storage/TravelFile/${fileLink}" target="_blank">${fileLink}</a>`;
+                    if (i < fileLinks.length - 1) {
+                        file_upload += "<br>";
+                    }
+                }
+            }
+            if (!file_laundry) {
+                file_laundry = "No Attachment";
+            } else {
+                var fileLinks = file_laundry.split(",");
+                file_laundry = "";
+                for (var i = 0; i < fileLinks.length; i++) {
+                    var fileLink = fileLinks[i].trim();
+                    file_laundry += `<a href="/storage/TravelFile/${fileLink}" target="_blank">${fileLink}</a>`;
+                    if (i < fileLinks.length - 1) {
+                        file_laundry += "<br>";
+                    }
+                }
+            }
+            // Calculate the number of breakfast, lunch, and dinner days
+            var breakfastDaysUpdate = 0;
+            var lunchDaysUpdate = 0;
+            var dinnerDaysUpdate = 0;
+        
+            // Check if the startDateTime and endDateTime are on the same day
+            if (startDateTime.toDateString() === endDateTime.toDateString()) {
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
+                    breakfastDaysUpdate++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13 && endDateTime.getHours() >= 12) {
+                    lunchDaysUpdate++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() >= 19 || endDateTime.getHours() >= 19) {
+                    dinnerDaysUpdate++;
+                }
+            } else {
+                // Start and end dates are different days
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
+                    breakfastDaysUpdate++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13) {
+                    lunchDaysUpdate++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() < 20) {
+                    dinnerDaysUpdate++;
+                }
+        
+                // Check for the intermediate days
+                for (var i = 1; i < days; i++) {
+                    breakfastDaysUpdate++;
+                    lunchDaysUpdate++;
+                    dinnerDaysUpdate++;
+                }
+                
+                // Check if the endDateTime has breakfast
+                if (endDateTime.getHours() >= 7) {
+                    breakfastDaysUpdate++;
+                }
+                
+                // Check if the endDateTime has lunch
+                if (endDateTime.getHours() >= 12) {
+                    lunchDaysUpdate++;
+                }
+                
+                // Check if the endDateTime has dinner
+                if (endDateTime.getHours() >= 19) {
+                    dinnerDaysUpdate++;
+                }
+            }
+            console.log(breakfastDaysUpdate);
+            console.log(lunchDaysUpdate);
+            console.log(dinnerDaysUpdate);
+
+            $("#DBFUpdate").val(breakfastDaysUpdate);
+            $("#DLHUpdate").val(lunchDaysUpdate);
+            $("#DDNUpdate").val(dinnerDaysUpdate);
+
+            var a = parseFloat($("#BFUpdate").val()); //float
+            var b = breakfastDaysUpdate;
+            var c = parseFloat($("#LHUpdate").val()); //float
+            var d = lunchDaysUpdate;
+            var e = parseFloat($("#DNUpdate").val()); //float
+            var f = dinnerDaysUpdate;
+            $("#TSUpdate").val((a * b + c * d + e * f).toFixed(2));
+            
+        
+            $("#totalbfUpdate").val((a * b).toFixed(2));
+            $("#totallhUpdate").val((c * d).toFixed(2));
+            $("#totaldnUpdate").val((e * f).toFixed(2));
+            
+            $("#hnUpdate").val(dayHotel);
+            $("#lnUpdate").val(dayLodging);
+            var lodgingValue = parseFloat($("#lodgingcvUpdate").val());
+            var totalHotel = dayHotel*hotel;
+            var totalLodging = dayLodging*lodgingValue;
+            
+            
+            $("#lnTotalUpdate").val(totalLodging);
+            $("#TAVUpdate").val(hotel+lodging);
+            
+            $("#total2Update").val(hotel+lodging+(a * b + c * d + e * f) + laundry_amount);
+            // Fetch the project name asynchronously
+            getProjectNameById(project).done(function(projectData) {
+                var projectName = projectData && projectData.project_name ? projectData.project_name : 'N/A';
+                console.log(projectName);
+                $("#claim_id").val(id);
+                $("#general_id_subs").val(general_id);
+                $("#start_date_update").val(formattedStartDate);
+                $("#start_time_update").val(startTime);
+                $("#end_date_update").val(formattedEndDate);
+                $("#end_time_update").val(endTime);
+                $("#travel_duration_update").val(travelDuration);
+                $("#desc_update").val(desc);
+                $("#project_update").val(projectName);
+                $("#hotelcvUpdate").val(hotel);
+                $("#lnTotalUpdate").val(lodging);
+                $("#file_upload").html(file_upload);
+                $("#laundry_amount_update").val(laundry_amount);
+                $("#laundry_desc_update").val(laundry_desc);
+                $("#file_laundry_update").html(file_laundry);
+
+            }).fail(function() {
+                console.log('Failed to fetch project name.');
+            });
+        } else {
+            console.log('Invalid response format or empty response.');
+        }
+    });
+    
+    $("#subsModal").modal("show");
+});
+
+$("#updateSubsMtcBtn").click(function (e) {
+       
+    
+    $("#updateSubsMtc").validate({
+        // Specify validation rules
+        rules: {
+            
+        },
+
+        messages: {
+            
+        },
+        
+        submitHandler: function (form) {
+            requirejs(["sweetAlert2"], function (swal) {
+                var data = new FormData(
+                    document.getElementById("updateSubsMtc")
+                );
+                console.log(data);   
+                $.ajax({
+                    type: "POST",
+                    url: "/updateSubsMtcSuperVApp",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        },
+    });
+});
+
+//OTHERS MODAL
+$(document).on("click", "#SVRothers", function () {
+    var id = $(this).data("id");
+    var othersData = getOthersDataByGeneralId(id);
+
+    othersData.done(function(response) {
+        if (Array.isArray(response) && response.length > 0) {
+            var firstResponse = response[0];
+            var id = firstResponse.id;
+            var claim_category = firstResponse.claim_category;
+            var amount = firstResponse.amount;
+            var desc = firstResponse.claim_desc;
+            var general_id = firstResponse.general_id;
+            var file = firstResponse.file_upload;
+
+            getClaimCategoryNameById(claim_category).done(function(claimData) {
+                $("#claim_id_other").val(id);
+                $("#general_id_other").val(general_id);
+                $("#claim_category_update").val(claimData);
+                $("#amount_other_update").val(amount);
+                $("#desc_other_update").val(desc);
+                $("#end_time_update").val(desc);
+            }).fail(function() {
+                console.log('Failed to fetch project name.');
+            });
+        } else {
+            console.log('Invalid response format or empty response.');
+        }
+    });
+
+    $("#othersModal").modal("show");
+});
+
+$("#updateOtherMtcBtn").click(function (e) {
+    
+    $("#updateOtherMtc").validate({
+        // Specify validation rules
+        rules: {
+            
+        },
+
+        messages: {
+            
+        },
+
+        submitHandler: function (form) {
+            requirejs(["sweetAlert2"], function (swal) {
+                var data = new FormData(
+                    document.getElementById("updateOtherMtc")
+                );
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateOtherMtcSuperVApp",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        },
+    });
+});
 });

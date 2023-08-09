@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </div>
     </div>
 </div>
@@ -76,6 +77,7 @@
             </div>
             <div class="modal-body">
             <div class="row p-2">
+            <form id="checkedform"> 
                     <div class="col-md-6">
 
                     </div>
@@ -88,6 +90,8 @@
                             </div>
                             <div class="col-md-2">
                                 <input type="text" id="date" class="form-control" readonly value=''>
+                                <input type="hidden" id="id" class="form-control" readonly value=''>
+
                             </div>
                         </div>
                     </div>
@@ -121,7 +125,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                <a  class="btn btn-primary" id="checkedBtn" data-bs-dismiss="modal">Check</a>
+                </form>
             </div>
         </div>
     </div>
@@ -183,6 +188,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -241,6 +247,7 @@
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -526,42 +533,42 @@
                                 </div>
                             </div>
                             <div class="p-2"  id="laundrydivUpdate">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-control">
-                                                <div class="row p-2">
-                                                    <label class="form-label">Laundry Allowance</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                            <div class="row p-2">
+                                                <label class="form-label">Laundry Allowance</label>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Amount</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="number" name="laundry_amount" id="laundry_amount_update"class="form-control" placeholder="0.00">
+                                                </div>
                                                 </div>
                                                 <div class="row p-2">
                                                     <div class="col-md-4">
-                                                        <label class="form-label">Amount</label>
+                                                        <label class="form-label">Description</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="number" name="laundry_amount" id="laundry_amount_update"class="form-control" placeholder="0.00">
+                                                        <textarea class="form-control" name="laundry_desc" id="laundry_desc_update" rows="3"></textarea>
                                                     </div>
+                                                </div>
+                                                <!-- <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Supporting Document</label>
                                                     </div>
-                                                    <div class="row p-2">
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Description</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="row p-2">
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Supporting Document</label>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
-                                                            <a id="file_laundry_update" href="#"></a>
-                                                        </div> 
-                                                    </div> -->
-                                                </div> 
-                                            </div>
+                                                    <div class="col-md-6">
+                                                        <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                        <a id="file_laundry_updat  </form>e" href="#"></a>
+                                                    </div> 
+                                                </div> -->
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>
