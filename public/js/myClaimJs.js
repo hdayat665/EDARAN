@@ -59,6 +59,7 @@ $("document").ready(function () {
 
     $(".cancelButton").click(function (e) {
         var id = $(this).data("id");
+        
         //console.log(id);
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({

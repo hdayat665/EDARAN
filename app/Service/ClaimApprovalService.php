@@ -363,15 +363,16 @@ class ClaimApprovalService
         return $data;
     }
 
-    public function updateStatusClaim($r, $id, $status, $stage)
+    public function updateStatusClaim($r, $id, $status, $stage ,$desc)
     {
         $input = $r->input();
-
+        // pr($desc);
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
         // }
 
         $input['status'] = $status;
+        $input['status_desc'] = $desc;
         $input[$stage] = $status;
         
         if ($stage == 'a_approval') {
@@ -850,7 +851,7 @@ class ClaimApprovalService
         $input = $r->input();
 
         $input['status'] = 'paid';
-
+        $input['status_desc'] = 'Claim Paid';
         GeneralClaim::where('id', $id)->update($input);
 
         // email notification
@@ -942,8 +943,8 @@ class ClaimApprovalService
 
         $ids = $input['id'];
         $status['hod'] = 'recommend';
-        $status['status'] = 'pending';
-
+        $status['status'] = 'recommend';
+        $status['status_desc'] = 'Admin Dept. processing';
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
         GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
@@ -971,7 +972,7 @@ class ClaimApprovalService
         $ids = $input['id'];
         $status['a_approval'] = 'recommend';
         $status['status'] = 'recommend';
-
+        $status['status_desc'] = 'Finance Dept. processing';
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
         GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
