@@ -1,9 +1,8 @@
-<div class="tab-pane fade show" id="default-tab-2">
-    <form id="skipAllForm">
-    <table id="buckettable" class="table table-striped table-bordered align-middle">
+<div class="tab-pane fade show" id="default-tab-5">
+    <table id="approveTable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th data-orderable="false"></th>
+                
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Claim Type</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -18,11 +17,9 @@
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
-                    @if ($claim->a_approval == 'bucket' && $claim->claim_type == 'MTC')
+                    @if ($claim->a_approval == 'recommend' && $claim->claim_type == 'MTC')
                         <tr>
-
-                            <td width="1%" class="fw-bold text-dark" style="text-align: center"><input class="form-check-input" value="{{ $claim->id }}" name="id[]" type="checkbox"
-                                                id="checkbox1" /></td>
+                            
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -56,5 +53,4 @@
             @endif
         </tbody>
     </table>
-    </form>
 </div>

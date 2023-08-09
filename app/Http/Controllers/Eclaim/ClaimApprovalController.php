@@ -1619,6 +1619,14 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+    public function skipAllClaimApp(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+        
+        $result = $ss->skipAllClaimApp($r);
+
+        return response()->json($result);
+    }
     public function approveAllCa(Request $r)
     {
         $ss = new ClaimApprovalService;
