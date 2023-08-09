@@ -27,7 +27,9 @@ class ProjectService
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.acc_manager', '=', 'c.id')
-            ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name')
+            ->leftJoin('employment as d', 'a.project_manager', '=', 'd.id') // Adjust the table and column names
+            ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name', 'd.employeeName as project_manager_name')
+            // ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name')
             ->where($cond)
             ->orderBy('id', 'desc')
             ->get();
@@ -69,6 +71,7 @@ class ProjectService
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
             ->select('a.*', 'b.customer_name', 'c.employeeName')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
             ->orderBy('id', 'desc')
@@ -449,14 +452,48 @@ class ProjectService
         $tenant_id = Auth::user()->tenant_id;
 
         $data = ProjectMember::where([['tenant_id', $tenant_id], ['id', $id]])->first();
-
+        // dd($data);
         if (!$data) {
             $data = [];
         }
-
-
         return $data;
     }
+
+    public function getProjectandMemberById($id)
+    {
+        $tenant_id = Auth::user()->tenant_id;
+    
+        // $data = ProjectMember::where([['tenant_id', $tenant_id], ['id', $id]])->first();
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->select('a.id', 'b.contract_start_date','b.id')
+            ->where([['a.tenant_id', $tenant_id], ['a.id', $id]]) // Specify 'a.tenant_id' to remove ambiguity
+            ->orderBy('a.id', 'desc') // Use 'a.id' for ordering
+            ->first();
+        // dd($data);
+        if (!$data) {
+            $data = [];
+        }
+        return $data;
+    }
+
+    public function getProjectbyIdDate($id)
+    {
+        $tenant_id = Auth::user()->tenant_id;
+    
+        // $data = ProjectMember::where([['tenant_id', $tenant_id], ['id', $id]])->first();
+        $data = DB::table('project as a')
+            ->select('a.*')
+            ->where([['a.tenant_id', $tenant_id], ['a.id', $id]]) // Specify 'a.tenant_id' to remove ambiguity
+            ->orderBy('a.id', 'desc') // Use 'a.id' for ordering
+            ->first();
+        // dd($data);
+        if (!$data) {
+            $data = [];
+        }
+        return $data;
+    }
+    
 
     public function updateProjectMember($r, $id)
     {

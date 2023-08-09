@@ -1249,7 +1249,7 @@ class EmployeeService
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
         $data = Employee::where([['tenant_id', $tenant_id], ['id', $id]])->first();
-
+        // dd($data);
         return $data;
     }
 

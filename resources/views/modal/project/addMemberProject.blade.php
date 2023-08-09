@@ -7,7 +7,6 @@
             </div>
             <div class="modal-body">
                 <form id="addProjectMemberForm">
-
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-6">Project Member Name*</label>
@@ -43,6 +42,24 @@
                             <input type="text" class="form-control" name="joined_date" id="datepicker-joineddate" placeholder="YYYY/MM/DD" />
                         </div>
                     </div>
+                    <!-- TRY -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label col-form-label col-md-6">Project Start</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label col-form-label col-md-4">Employee Join</label>
+                        </div>
+                    </div>
+                    <div class="row mb-15px">
+                        <div class="col-md-6">    
+                            <input type="text" class="form-control" value="" name="startProject" id="projectStart" style="text-transform: upppercase;" placeholder="YYYY/MM/DD">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" value="" name="joinDate" id="employeeJoin" style="text-transform: upppercase;" placeholder="YYY/MM/DD">
+                        </div>
+                    </div>
+                    <!-- TRY -->
 
                     <div class="row">
                         <div class="col-md-6">

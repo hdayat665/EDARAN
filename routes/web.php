@@ -531,6 +531,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteProjectLocation/{id}', 'deleteProjectLocation');
             Route::post('/createProjectMember', 'createProjectMember');
             Route::get('/getProjectMemberById/{id}', 'getProjectMemberById');
+            Route::get('/getProjectandMemberById/{id}', 'getProjectandMemberById');
+            Route::get('/getProjectbyIdDate/{id}', 'getProjectbyIdDate');
             Route::post('/updateProjectMember/{id}', 'updateProjectMember');
             Route::post('/assignProjectMember', 'assignProjectMember');
             Route::get('/projectRequest', 'projectRequestView');

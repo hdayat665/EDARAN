@@ -66,17 +66,35 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
     });
 
-    $("#datepicker-joineddate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
+    
 
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
     });
+
+    $("#datepicker-joineddate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    });
+    
+    $("#projectStart").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+        startDate: new Date() // Set the minimum date to today
+    });
+
+    $("#employeeJoin").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+        startDate: new Date()
+    });
+
+    
 
     $("#data-table-prevproject").DataTable({
         responsive: false,
@@ -518,12 +536,12 @@ $(document).ready(function () {
         var employee = getEmployeeById(employee_id);
 
         employee.then(function (data) {
-            console.log(data);
+           
             // $("#unit").prop("selectedIndex", data.unit);
             // $("#designation").prop("selectedIndex", data.designation);
             // $("#department").prop("selectedIndex", data.department);
             // $("#branchs").prop("selectedIndex", data.branch);
-            // $("#datepicker-joineddate").val(data.joinedDate);
+            $("#employeeJoin").val(data.joinedDate);
             $("#unit").val(data.unit);
             $("#designation").val(data.designation);
             $("#department").val(data.department);
@@ -538,20 +556,34 @@ $(document).ready(function () {
     }
 
     $(document).on("click", "#addProjectMemberButton", function () {
-        // Get the data-id value from the button
         var id = $(this).data("id");
-        // Add the id value to the modal as a data attribute
-        console.log(id);
-
+        var vehicleData = getProjectDate(id);
+        vehicleData.then(function (data) {
+            console.log(data.contract_start_date);
+            
+            console.log(vehicleData);
+            // $("#joined_date").val(data.joined_date);
+            // $("#employee_idE").val(data.employee_id);
+            // $("#unitE").val(data.unit);
+            // $("#designationE").val(data.designation);
+            // $("#departmentE").val(data.department);
+            // $("#branchE").val(data.branch);
+            // $("#exit_project").prop("checked", data.exit_project);
+            // $("#exit_project_date").val(data.exit_project_date);
+            $("#projectStart").val(data.contract_start_date);
+            // $("#idPM").val(data.id);
+            // console.log(data.assign_as);
+            // console.log(data.id);
+        });
         $("#addProjectMemberModal").data("id", id).modal("show");
     });
 
     $(document).on("click", "#editProjectMemberButton", function () {
         var id = $(this).data("id");
         var vehicleData = getProjectMember(id);
-
+        console.log(vehicleData)
         vehicleData.then(function (data) {
-            console.log(data);
+            console.log(id);
             $("#joined_date").val(data.joined_date);
             $("#employee_idE").val(data.employee_id);
             $("#unitE").val(data.unit);
@@ -561,13 +593,21 @@ $(document).ready(function () {
             $("#exit_project").prop("checked", data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
+            // console.log(data.assign_as);
+            // console.log(data.id);
         });
         $("#editProjectMemberModal").modal("show");
     });
 
     function getProjectMember(id) {
         return $.ajax({
-            url: "/getProjectMemberById/" + id,
+            url: "/getProjectandMemberById/" + id,
+        });
+    }
+
+    function getProjectDate(id) {
+        return $.ajax({
+            url: "/getProjectbyIdDate/" + id,
         });
     }
 
