@@ -40,7 +40,7 @@
                                     <a href="javascript:;" id="amendModalButton3" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-reply" aria-hidden="true"></i>
                                         Amend</a>
                                     <div class="dropdown-divider"></div> -->
-                                    <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ $claim->created_at ?? '-' }}</td>

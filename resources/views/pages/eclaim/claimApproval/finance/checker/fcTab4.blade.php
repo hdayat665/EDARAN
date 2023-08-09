@@ -40,7 +40,7 @@
                                         aria-hidden="true"></i>
                                     Amend</a>
                                 <div class="dropdown-divider"></div> -->
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+                                <!-- <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
                         </td>
                         <td>{{ $claim->claim_type ?? '-' }}</td> 

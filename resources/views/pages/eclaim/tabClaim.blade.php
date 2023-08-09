@@ -1,13 +1,13 @@
 <div class="tab-pane fade active show" id="card-pill-1">
     <div class="category-filter">
-        <select id="Statusclaim" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
+        <!-- <select id="Statusclaim" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
             <option value="">Show All</option>
             <option value="Draft">Draft</option>
             <option value="Active">Active</option>
             <option value="Rejected">Rejected</option>
             <option value="Amend">Amend</option>
             <option value="paid">Paid</option>
-        </select>
+        </select> -->
     </div>
     <table id="claimtable" class="table table-striped table-bordered align-middle">
         <thead>
@@ -48,7 +48,7 @@
                         @elseif ($claim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                         @elseif ($claim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activec" title="Active">Active</span></td>
+                            <td><span class="badge bg-lime" data-toggle="activec" title="In Queue for next batch process">In Queue</span></td>
                         @endif
                         <td>{{ date('Y-m-d', strtotime($claim->updated_at)) }}</td>
                         <td>
