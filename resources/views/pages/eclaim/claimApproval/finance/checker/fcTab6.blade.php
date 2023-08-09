@@ -30,7 +30,7 @@
                                     <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                         GNC</a>
                                 @endif
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div> -->
                                 <!-- <a href="javascript:;" id="approveButton6" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="rejectButton6" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"><i class="fa fa-ban"

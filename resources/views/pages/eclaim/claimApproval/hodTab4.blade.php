@@ -31,8 +31,8 @@
                                         <a href="/hodDetailClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                             GNC</a>
                                     @endif
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>

@@ -53,9 +53,9 @@
                                     <i class="fa fa-eye" aria-hidden="true"></i> View MTC
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item">
+                                <!-- <a href="javascript:;" id="" data-id="" class="dropdown-item">
                                     <i class="fa fa-times" aria-hidden="true"></i> Cancel
-                                </a>
+                                </a> -->
                             </div>
                         </td>
                         <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
@@ -77,10 +77,10 @@
                             <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
                                     <i class="fa fa-eye" aria-hidden="true"></i> View GNC
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item">
                                     <i class="fa fa-times" aria-hidden="true"></i> Cancel
-                                </a>
+                                </a> -->
                             </div>
                         </td>
                         <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
