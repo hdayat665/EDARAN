@@ -177,8 +177,6 @@
                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
                                                                {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>{{ $employee->employeeName }}
                                                            </option>
-
-                                                           <!-- <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" > -->
                                                        @endforeach
                                                    </select>
 
