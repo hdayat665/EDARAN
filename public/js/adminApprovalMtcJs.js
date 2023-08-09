@@ -869,7 +869,7 @@ $(document).ready(function () {
     $("#approveButton").on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var status = "recommend";
+        var status = "bucket";
         var stage = "a_approval";
 
         requirejs(["sweetAlert2"], function (swal) {

@@ -4,7 +4,7 @@
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim | Monthly Claim | View </small></h1>
         <div class="panel panel" id="monthlyClaimViewJs">
-            <div class="panel-body">
+            <div class="panel-body"> 
         
                 {{-- ROW 1 --}}
                 <div class="row p-2">
@@ -109,8 +109,7 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        @if ($GNC->supervisor == 'recommend')
-                        @else
+                        @if ($user->eclaimrecommender == '' && $GNC->supervisor == 'recommend')
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                             
@@ -118,6 +117,8 @@
                             
                             </div>
                         </div>
+                        @elseif ($user->eclaimrecommender != '' && $GNC->supervisor == 'recommend')
+                        
                         @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
