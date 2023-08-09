@@ -168,7 +168,7 @@ class EmployeeService
         $jobHistory['remarks'] = $input['remarks'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
 
-        $jobHistory['statusHistory'] = $input['status'] = 'Deactivate';
+        $jobHistory['statusHistory'] = $input['status'] = 'terminate';
         $updateBy = Auth::user()->username;
         $jobHistory['updatedBy'] = $updateBy;
 
@@ -446,7 +446,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Emergency Contact';
+            $data['msg'] = 'Emergency Contact is Updated';
         }
 
         return $data;
@@ -1150,7 +1150,7 @@ class EmployeeService
             $jobHistory['user_id'] = $id;
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
-            $jobHistory['statusHistory'] = 'Active';
+            $jobHistory['statusHistory'] = 'active';
             JobHistory::create($jobHistory);
 
             $data['status'] = config('app.response.success.status');

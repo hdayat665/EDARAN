@@ -396,8 +396,8 @@
                                                                    </p>
 
                                                                    @if ($jobHistory->statusHistory)
-                                                                        @if ($jobHistory->statusHistory === 'Active')
-                                                                            <button type="button" style="pointer-events: none" data-id="{{$jobHistory->id}}" class="btn btn-success">{{ $jobHistory->statusHistory }}</button>
+                                                                        @if ($jobHistory->statusHistory === 'active')
+                                                                            <button type="button" style="pointer-events: none" data-id="{{$jobHistory->id}}" class="btn btn-success">Active</button>
                                                                             {{-- <a href="javascript:;" id="editVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">{{ $jobHistory->statusHistory }}</a> --}}
 
                                                                         @else
@@ -405,7 +405,7 @@
 
                                                                             {{-- <a href="javascript:;" id="ViewTerminateModal{{$jobHistory->id}}" data-bs-toggle="modal" data-id="{{$jobHistory->id}}" data-type="edit" class="btn btn-danger">{{ $jobHistory->statusHistory }}</a> --}}
                                                                             {{-- <a href="javascript:;" data-bs-toggle="modal" id="ViewTerminateModal{{$jobHistory->id}}" data-id="{{$jobHistory->id}}" data-type="edit" class="dropdown-item">Edit</a> --}}
-                                                                            <a href="javascript:;" id="ViewTerminateModal" data-id="{{$jobHistory->id}}" class="btn btn-danger">{{ $jobHistory->statusHistory }}</a>
+                                                                            <a href="javascript:;" id="ViewTerminateModal" data-id="{{$jobHistory->id}}" class="btn btn-danger">Deactivate</a>
 
                                                                         @endif
                                                                     @endif
