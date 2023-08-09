@@ -2150,13 +2150,13 @@ $("#subsTableUpdate").DataTable({
     $("#editSubmitButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
             id = $("#generalId").val();
-            
+            desc= 'Waiting for recommendation';
             var data = new FormData(document.getElementById("balance"));
             console.log(data); // Add this line to log the data to the console
     
             $.ajax({
                 type: "POST",
-                url: "/submitMonthlyClaim/" + id,
+                url: "/submitMonthlyClaim/" + id + "/" + encodeURIComponent(desc),
                 data: data,
                 dataType: "json",
                 processData: false,

@@ -146,9 +146,11 @@ $(document).ready(function () {
         requirejs(["sweetAlert2"], function (swal) {
             // var id = $(this).data("id");
             var id = $("#idG").val();
+            desc = 'Waiting for recommendation';
             $.ajax({
                 type: "POST",
-                url: "/updateStatusGeneralClaims/" + id,
+                url: "/updateStatusGeneralClaims/" + id + "/" + encodeURIComponent(desc),
+
                 dataType: "json",
 
                 processData: false,

@@ -85,11 +85,11 @@ class generalClaimController extends Controller
 
         return response()->json($data);
     }
-    public function updateStatusGeneralClaims($id = '')
+    public function updateStatusGeneralClaims($id = '',$desc)
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->updateStatusGeneralClaims($id);
+        $data = $mcs->updateStatusGeneralClaims($id,$desc);
 
         return response()->json($data);
     }

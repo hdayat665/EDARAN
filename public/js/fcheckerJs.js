@@ -334,7 +334,7 @@ $(document).ready(function () {
             });
         });
     });
-
+ 
     $("#rejectButton").click(function (e) {
         var id = $("#rejectId").val();
         var stage = $("#checkers").val();

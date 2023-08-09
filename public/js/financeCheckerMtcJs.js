@@ -733,7 +733,7 @@ $(document).ready(function () {
         // var id = $("#rejectId").val();
         var status = "reject";
         var stage = $("#financeChecker").val();
-
+        var desc = "Rejected by Finance. Dept";
         $("#supervisorRejectForm").validate({
             // Specify validation rules
             rules: {},
@@ -747,13 +747,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -785,6 +780,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "amend";
         var stage = $("#financeChecker").val();
+        var desc = "Request to amend by Finance Dept.";
 
         $("#supervisorAmendForm").validate({
             // Specify validation rules
@@ -799,13 +795,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -1038,6 +1029,7 @@ $(document).ready(function () {
                     status +
                     "/" +
                     stage,
+                    
                 dataType: "json",
 
                 processData: false,
@@ -1118,11 +1110,12 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = $("#financeChecker").val();
+        var desc = "Finance Dept. processing";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
