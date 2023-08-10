@@ -41,7 +41,9 @@
                             <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
                             <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
-                            @elseif ($claim->status == 'approved')
+                        @elseif ($claim->status == 'bucket')
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                        @elseif ($claim->status == 'approved')
                             <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
                         @elseif ($claim->status == 'paid' )
                             <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
@@ -111,6 +113,16 @@
                                             <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a>
                                         </div>
                                     @elseif ($claim->status == 'recommend')
+                                        <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
+                                            <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
+                                            <a href="/monthlyClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                                MTC</a>
+                                            
+                                        </div>
+                                    @elseif ($claim->status == 'bucket')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
