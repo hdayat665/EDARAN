@@ -121,7 +121,22 @@
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
                                                                     <td><span class="badge bg-secondary">Paid</span></td>
-                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>    
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>   
+                                                                    @elseif ($checkMonth['status'] == 'recommend')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-secondary">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td> 
+                                                                    @elseif ($checkMonth['status'] == 'approved')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-secondary">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>
+                                                                    @elseif ($checkMonth['status'] == 'bucket')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-secondary">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>
                                                                     @else
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
