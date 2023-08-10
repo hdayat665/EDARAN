@@ -22,11 +22,11 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.' . $view, $data);
     }
 
-    public function updateStatusClaim(Request $r, $id = '', $status, $stage)
+    public function updateStatusClaim(Request $r, $id = '', $status, $stage, $desc)
     {
         $msc = new ClaimApprovalService;
 
-        $data = $msc->updateStatusClaim($r, $id, $status, $stage);
+        $data = $msc->updateStatusClaim($r, $id, $status, $stage,$desc);
 
         return response()->json($data);
     }
@@ -412,7 +412,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        $data['gncs'] = $result['general'];
         $data['checkers'] = getFinanceChecker();
         
         $data['general'] = $result['claim'];
@@ -610,7 +610,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        $data['gncs'] = $result['general'];
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travels'] = $result['travel'];
@@ -1036,7 +1036,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-        
+        $data['gncs'] = $result['general'];
 
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
@@ -1619,6 +1619,14 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+    public function skipAllClaimApp(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+        
+        $result = $ss->skipAllClaimApp($r);
+
+        return response()->json($result);
+    }
     public function approveAllCa(Request $r)
     {
         $ss = new ClaimApprovalService;
@@ -1822,5 +1830,15 @@ class ClaimApprovalController extends Controller
         $data = $msc->updateCheckMtc($r, $id, $date, $level);
 
         return response()->json($data);
+    }
+
+    
+    public function updateSubsMtcSuperVApp(Request $r)
+    {
+        $ps = new ClaimApprovalService;
+
+        $result = $ps->updateSubsMtcSuperVApp($r);
+
+        return response()->json($result);
     }
 }

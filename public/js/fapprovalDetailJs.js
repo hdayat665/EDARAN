@@ -882,13 +882,14 @@ $(document).ready(function () {
     $("#approveButton").on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var status = "recommend";
+        var status = "approved";
         var stage = "f_approval";
+        var desc = "Finance Dept. processing";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -950,6 +951,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "reject";
         var stage = "f_approval";
+        var desc = "Rejected by Finance. Dept";
 
         $("#supervisorRejectForm").validate({
             // Specify validation rules
@@ -964,13 +966,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -1016,13 +1013,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 

@@ -4,7 +4,7 @@
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim | Monthly Claim | View </small></h1>
         <div class="panel panel" id="monthlyClaimViewJs">
-            <div class="panel-body">
+            <div class="panel-body"> 
         
                 {{-- ROW 1 --}}
                 <div class="row p-2">
@@ -79,8 +79,28 @@
                                     <label class="form-label">Status</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->status ?? '-' }}">
+                                    <div class="d-grid"> <!-- Use d-grid to create a grid layout -->
+                                        @if ($claimData->status == 'amend')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Amend</a>
+                                        @elseif ($claimData->status == 'recommend')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'bucket')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'approved')
+                                            <a class="btn btn-info btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Approved</a>
+                                        @elseif ($claimData->status == 'paid' )
+                                            <a class="btn btn-secondary btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Paid</a>
+                                        @elseif ($claimData->status == 'draft')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="Draft">Draft</a>
+                                        @elseif ($claimData->status == 'reject')
+                                            <a class="btn btn-danger btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Rejected</a>
+                                        @elseif ($claimData->status == 'active')
+                                            <a class="btn btn-lime btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">In Queue</a>
+                                        @endif
+                                    </div>
                                 </div>
+
+
                                 <div class="col-md-3">
                                     <label class="form-label">Applied Date</label>
                                 </div>
@@ -109,8 +129,7 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        @if ($GNC->supervisor == 'recommend')
-                        @else
+                        @if ($user->eclaimrecommender == '' && $GNC->supervisor == 'recommend')
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                             
@@ -118,6 +137,8 @@
                             
                             </div>
                         </div>
+                        @elseif ($user->eclaimrecommender != '' && $GNC->supervisor == 'recommend')
+                        
                         @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
