@@ -38,17 +38,19 @@
                         @endif
 
                         @if ($claim->status == 'amend')
-                            <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
+                            <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
-                            <td><span class="badge bg-warning" data-toggle="paidc" title="Paid">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            @elseif ($claim->status == 'approved')
+                            <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
                         @elseif ($claim->status == 'paid' )
-                            <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
                         @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                         @elseif ($claim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                         @elseif ($claim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activec" title="In Queue for next batch process">In Queue</span></td>
+                            <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
                         @endif
                         <td>{{ date('Y-m-d', strtotime($claim->updated_at)) }}</td>
                         <td>
@@ -119,6 +121,13 @@
                                             
                                         </div>
                                     @elseif ($claim->status == 'paid')
+                                        <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/viewMtcClaim/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                                MTC</a>
+                                        </div>
+                                    @elseif ($claim->status == 'approved')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">

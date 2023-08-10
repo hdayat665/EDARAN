@@ -663,11 +663,11 @@ class myClaimController extends Controller
         return response()->json($data);
     }
 
-    public function submitMonthlyClaim(request $r, $id = '')
+    public function submitMonthlyClaim(request $r, $id = '',$desc)
     {
         $mcs = new myClaimService;
         
-        $data = $mcs->updateStatusMonthlyClaim($id, 'active',$r);
+        $data = $mcs->updateStatusMonthlyClaim($id, 'active',$r, $desc);
 
         return response()->json($data);
     }

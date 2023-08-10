@@ -980,14 +980,15 @@ class myClaimService
 
         return $data;
     }
-    public function updateStatusGeneralClaims($id)
+    public function updateStatusGeneralClaims($id ,$desc)
     {
         $update = [
             'status' => 'active',
             'supervisor' => 'recommend',
             'hod' => null,
         ];
- 
+        $update['status_desc'] = $desc;
+        //pr($desc);
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
             
@@ -3010,11 +3011,12 @@ class myClaimService
         return $data;
     }
 
-    public function updateStatusMonthlyClaim($id = '', $status = '', $r )
+    public function updateStatusMonthlyClaim($id = '', $status = '', $r ,$desc)
     {
         $input = $r->input();
-       
+        
         $claim['status'] = $status; 
+        $claim['status_desc'] = $desc; 
         $amount = (float) str_replace(',', '', $input['amount']);
         //pr($amount);
         $claim['total_amount'] = $amount; 
@@ -3189,7 +3191,7 @@ class myClaimService
         $claim['a3'] = null;
         $claim['a_recommender'] = null;
         $claim['a_approval'] = null;
-        
+        $claim['status_desc'] = 'draft';
 
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 
