@@ -46,7 +46,23 @@
                             <td>{{ $claim->id ?? '-' }}</td>
                             <td>{{ $claim->claim_type ?? '-' }}</td>
                             <td>{{ $claim->total_amount ?? '-' }}</td>
-                            <td>{{ $claim->status ?? '-' }}</td>
+                            @if ($claim->status == 'amend')
+                                <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
+                            @elseif ($claim->status == 'recommend')
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            @elseif ($claim->status == 'bucket')
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            @elseif ($claim->status == 'approved')
+                                <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
+                            @elseif ($claim->status == 'paid' )
+                                <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
+                            @elseif ($claim->status == 'draft')
+                                <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
+                            @elseif ($claim->status == 'reject')
+                                <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
+                            @elseif ($claim->status == 'active')
+                                <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                            @endif
                             <td>{{ $claim->updated_at ?? '-' }}</td>
                             <td>{{ $claim->remark ?? '-' }}</td>
                         </tr>

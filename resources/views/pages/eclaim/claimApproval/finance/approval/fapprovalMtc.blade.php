@@ -78,8 +78,26 @@
                                 <label class="form-label">Status</label>
                             </div>
                             <div class="col-md-3">
-                                <input readonly type="text"  class="form-control" value="{{ $claimData->status ?? '-' }}" style="text-align:center">
-                            </div>
+                                    <div class="d-grid"> <!-- Use d-grid to create a grid layout -->
+                                        @if ($claimData->status == 'amend')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Amend</a>
+                                        @elseif ($claimData->status == 'recommend')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'bucket')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'approved')
+                                            <a class="btn btn-info btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Approved</a>
+                                        @elseif ($claimData->status == 'paid' )
+                                            <a class="btn btn-secondary btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Paid</a>
+                                        @elseif ($claimData->status == 'draft')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="Draft">Draft</a>
+                                        @elseif ($claimData->status == 'reject')
+                                            <a class="btn btn-danger btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Rejected</a>
+                                        @elseif ($claimData->status == 'active')
+                                            <a class="btn btn-lime btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">In Queue</a>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="col-md-3">
                                 <label class="form-label">Applied Date</label>
                             </div>
