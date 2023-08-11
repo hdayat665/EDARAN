@@ -25,6 +25,8 @@ $(document).ready(function () {
         });
     });
 
+    
+
     $(document).ready(function () {
         if (
             $("#datepicker-date").val() ||

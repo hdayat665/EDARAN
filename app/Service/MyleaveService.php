@@ -156,8 +156,8 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r)
-    {
+    public function createtmyleave($r) {
+
         $input = $r->input();
 
         $checkleavetype = leavetypesModel::where([

@@ -9,11 +9,32 @@ $(document).ready(function () {
         window.location.hash = e.target.hash;
     });
 
+
     $(document).ready(function() {
+
+        var originalGetComputedStyle = window.getComputedStyle;
+
+        window.getComputedStyle = function(el, pseudo) {
+            try {
+                return originalGetComputedStyle(el, pseudo);
+            } catch (err) {
+                console.warn('getComputedStyle override: prevented error.', err);
+                return {
+                    getPropertyValue: function() { return ""; } // metode palsu
+                };
+            }
+        };
+
+
+
+
         $(".test").hide();
 
-        $(".dropdown-toggle").on("click", function() {
+        $(document).on("click", ".dropdown-toggle", function(e) {
+            e.stopPropagation(); // mencegah event dari bubbling ke atas
+
             var dropdownMenu = $(this).closest(".btn-group").find(".test");
+
             $(".test").not(dropdownMenu).hide();
             dropdownMenu.toggle();
         });
@@ -24,6 +45,8 @@ $(document).ready(function () {
             }
         });
     });
+
+
 
     $("#datepicker-date").datepicker({
         todayHighlight: true,
