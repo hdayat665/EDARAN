@@ -99,40 +99,64 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-12">
-                            <div class="form-control" id = "hiderec1">
-                                <div class="row">
-                                    <div class="col-sm-6">Recommended By:
-                                        <div id="recommended_by"></div>
-                                    </div>
-                                    <div class="col-sm-6">Approved By:
-                                        <div id="approved_by"></div>
-                                    </div>
+                    <div class="form-group">
+                        <div class="form-control" id = "hiderec1">
+                            <div class="row p-2">
+                                <div class = col-md-5>
+                                    <label for="text" >Recommended By:</label><br>
+                                    <div id="recommended_by" style="font-weight: lighter;"></div>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_1">Pending</div>
-                                    </div>
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_2">Pending</div>
-                                    </div>
+                                <div class = "col-md-1">
+                                </div>
+                                <div class = "col-md-6" id="hidenull1">
+                                    <label for="text" >Approved By:</label><br>
+                                    <div id="approved_by" style="font-weight: lighter;"></div>
                                 </div>
                             </div>
-                            <div class="form-control" id = "hiderec2">
-                                <div class="row">
-                                    <div class="col-sm-6">Approved By:
-                                        <div id="approved_by1"></div>
-                                    </div>
+                            <div class="row p-2">
+                                <div class = col-md-5>
+                                    <label for="text">Status:</label><br>
+                                <div id="status_1" style="font-weight: lighter;"></div>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_22">Pending</div>
-                                    </div>
+                                <div class = col-md-1>
+                                </div>
+                                <div class = "col-md-6" id="hidenull2">
+                                    <label for="text">Status:</label><br>
+                                <div id="status_2" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class = "col-md-5" id="hideRec">
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonRecommender" style="font-weight: lighter;"></div>
+                                </div>
+                                <div class = "col-md-1">
+                                </div>
+                                <div class = "col-md-5"id="hideApprPending">
+                                </div>
+                                <div class = "col-md-6 hidenull3" id="hideAppr">
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonApprover" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-control" id = "hiderec2">
+                            <div class="row p-2">
+                                <div class = "col-md-12">
+                                    <label for="text" >Approved By:</label><br>
+                                    <div id="approved_by1" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class = "col-md-12">
+                                    <label for="text">Status:</label><br>
+                                <div id="status_21" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2" id="viewmenu021">
+                                <div class = "col-md-12">
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonApprover1" style="font-weight: lighter;"></div>
                                 </div>
                             </div>
                         </div>
