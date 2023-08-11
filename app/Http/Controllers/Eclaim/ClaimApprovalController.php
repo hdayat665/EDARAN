@@ -1444,6 +1444,7 @@ class ClaimApprovalController extends Controller
 
         $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
         $data['mode'] = $mcs->cashAdvanceApproverModeTransport($id);
+        
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
         //pr($data['mode']);
         if ($type == 1) {

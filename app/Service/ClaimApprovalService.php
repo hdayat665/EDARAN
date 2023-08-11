@@ -365,7 +365,7 @@ class ClaimApprovalService
     public function updateStatusClaim($r, $id, $status, $stage ,$desc)
     {
         $input = $r->input();
-        // pr($desc);
+        //pr($id);
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
         // }
@@ -689,7 +689,7 @@ class ClaimApprovalService
         $ca[2] = ['cash_advance_id', $id];
 
         $data = ModeOfTransport::where($ca)->first();
-
+        // pr($data);
         return $data;
     }
     public function updateStatusCashAdvance($r, $id, $status, $stage)

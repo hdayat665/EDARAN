@@ -78,6 +78,8 @@
                                 <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
                             @elseif ($claim->status == 'bucket')
                                 <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            @elseif ($claim->status == 'pending')
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
                             @elseif ($claim->status == 'approved')
                                 <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
                             @elseif ($claim->status == 'paid' )
