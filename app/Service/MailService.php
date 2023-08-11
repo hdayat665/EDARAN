@@ -56,8 +56,8 @@ class MailService
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
             $response['nameFrom'] = Auth::user()->username;
-            $response['subject'] = 'Monthly Claim | Month';
-            $response['title'] = 'Monthly Claim | Month';
+            $response['subject'] = 'Monthly Claim | ' . $data->month;
+            $response['title'] = 'Monthly Claim | ' . $data->month;
             $response['supervisor'] = $supervisor['employeeName'];
             $response['employeeName'] = $user['employeeName'];
             $response['data'] = $data;
@@ -80,8 +80,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         $response['supervisor'] = $supervisor->employeeName;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
@@ -105,8 +105,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         $response['supervisor'] = $supervisor->employeeName;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
@@ -131,8 +131,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         // $response['supervisor'] = $supervisor->employeeName;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
@@ -151,8 +151,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 
@@ -169,8 +169,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 
@@ -187,8 +187,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'Monthly Claim | Month';
-        $response['title'] = 'Monthly Claim | Month';
+        $response['subject'] = 'Monthly Claim | ' . $data->month;
+        $response['title'] = 'Monthly Claim | ' . $data->month;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 
@@ -593,19 +593,19 @@ class MailService
                     ->where('employment.user_id', $data->user_id)
                     ->where('employment.tenant_id', Auth::user()->tenant_id)
                     ->first();
-    
+
             $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
                     ->join('designation', 'employment.designation', '=', 'designation.id')
                     ->join('department', 'employment.department', '=', 'department.id')
                     ->where('employment.user_id', $user->tsapprover)
                     ->where('employment.tenant_id', Auth::user()->tenant_id)
                     ->first();
-    
+
             if($user && $approvedby){
-    
+
                 $receiver = $user->workingEmail;
                 $response['typeEmail'] = 'emailToEmployeeAppeal';
-    
+
                 $response['from'] = env('MAIL_FROM_ADDRESS');
                 $response['nameFrom'] = $approvedby->employeeName;
                 $response['subject'] = 'Timesheet Appeal Application Status';
@@ -615,7 +615,7 @@ class MailService
                 $response['departmentName'] = $approvedby->departmentName;
                 $response['designationName'] = $approvedby->designationName;
                 $response['data'] = $data;
-    
+
                 Mail::to($receiver)->send(new MailMail($response));
             }
         }
@@ -650,7 +650,7 @@ class MailService
         DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_log.total_hour))) AS total_log_hours")
     )
     ->get();
-    
+
         foreach ($users as $user) {
 
             //can i use $twoDaysAgo
@@ -670,20 +670,20 @@ class MailService
             ->whereNull('a.start_time')
             ->pluck('a.day_of_week')
             ->toArray();
-        
-        
+
+
             $dow = $getweekend;
-            rsort($dow); 
+            rsort($dow);
             $wknd1 = $dow[0];
             $wknd2 = $dow[1];
 
-    
+
             $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
             $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
             $combinedHours = $eventHours->diff($logHours)->format('%H:%I:%S');
-    
+
             $working_hour = '08:00:00';
-    
+
             $data = [
                 'nameFrom' => $user->employeeName,
                 'user_id' => $user->user_id,
@@ -696,7 +696,7 @@ class MailService
                 'dow' => $dow,
                 'wknd1'=> $wknd1,
             ];
-    
+
             $response = [
                 'subject' => 'Timesheet Appeal Application Status',
                 'typeEmail' => 'emailmissedtimesheet',
@@ -710,8 +710,8 @@ class MailService
                 'dow' => $dow,
                 'wknd1'=> $wknd1,
             ];
-    
-    
+
+
             if ($combinedHours < $working_hour || $combinedHours === '00:00:00') {
                 Mail::to($receiver)->send(new MailMail($response, $data));
             }
@@ -741,7 +741,7 @@ class MailService
         'timesheet_event.event_name',
         'timesheet_event.start_date',
         'timesheet_event.venue',
-        
+
     )
     ->whereNotNull('timesheet_event.reminder')
     ->whereDate('timesheet_event.start_date', '=', $today) // Filtering rows for current date
@@ -752,12 +752,12 @@ class MailService
     foreach ($users as $user) {
         $startTime = strtotime($user->start_time);
         $currentTime = strtotime(date('H:i'));
-      
+
         $reminder = $user->reminder;
 
         if($reminder == 1) {
             $oneHourBefore = strtotime('-5 minutes', $startTime);
-        } 
+        }
         else if($reminder == 2) {
             $oneHourBefore = strtotime('-10 minutes', $startTime);
         }
@@ -773,11 +773,11 @@ class MailService
         else {
             $oneHourBefore = strtotime('-1 hour', $startTime);
         }
-    
+
         // If current time is exactly 1 hour before the start time, then send the email
         if ($currentTime == $oneHourBefore) {
             $receiver = $user->workingEmail;
-    
+
             $data = [
                 'nameFrom' => $user->employeeName,
                 'user_id' => $user->user_id,
@@ -791,7 +791,7 @@ class MailService
                 'venue' => $user->venue,
                 // Include any other data required for the email content
             ];
-    
+
             $response = [
                 'subject' => 'Event Reminder',
                 'typeEmail' => 'emaileventreminder',
@@ -806,11 +806,11 @@ class MailService
                 'venue' => $user->venue,
                 // Include any other data required for the email content
             ];
-    
+
             // Now, send the email
             Mail::to($receiver)->send(new MailMail($response, $data));
         }
     }
-    
+
 }
 }

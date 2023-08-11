@@ -7,7 +7,7 @@
 
 <body>
     <h1><strong>{{ $title }}</strong></h1>
-    {{-- {{ dd($data['data']) }} --}}
+
     <br>
     <br>
     <p>To : {{ $employeeName ?? '-' }}</p>
