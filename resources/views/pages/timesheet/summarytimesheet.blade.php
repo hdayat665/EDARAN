@@ -61,7 +61,7 @@
                                 <th width="8%" class="text-nowrap">Action</th>
                                 <th class="text-nowrap">Year</th>
                                 <th class="text-nowrap">Month</th>
-                                <th width="9%" data-orderable="false" class="align-middle">Status</th>
+                                <!-- <th width="9%" data-orderable="false" class="align-middle">Status</th> -->
                                 <th width="9%" data-orderable="false" class="align-middle">Tsr Status</th>
                             </tr>
                         </thead>
@@ -90,7 +90,7 @@
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($timesheet->created_at)->format('Y') }}</td>
                                 <td>{{$timesheet->month}}</td>
-                                <td>
+                                <!-- <td>
                                     @if ($timesheet->status == 'pending')
                                     <div id="awaitingapproval"> <span class="badge bg-warning rounded-pill">Awaiting Approval</span> </div>
                                     @endif
@@ -106,7 +106,7 @@
                                     @if ($timesheet->status == 'amend')
                                     <div id="amended"> <span class="badge bg-danger rounded-pill" data-toggle="tooltipamend"  data-placement="bottom" title="{{$timesheet->amendreason}}">Amended</span> </div>
                                     @endif
-                                </td>
+                                </td> -->
                                 <td>{{ $timesheetsday['workedDays'] }} / {{ $timesheetsday['workingDays'] }} days</td>
                             </tr>
                             @endforeach 

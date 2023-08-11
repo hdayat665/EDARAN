@@ -3050,9 +3050,11 @@ class SettingService
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
+        $data4 = $input['duration'];
 
         if ($existingLeaveType->leave_types_code === $data1 && $existingLeaveType->leave_types === $data2) {
             $existingLeaveType->day = $data3;
+            $existingLeaveType->duration = $data4;
             $existingLeaveType->save();
 
             $data['status'] = config('app.response.success.status');
@@ -3083,6 +3085,7 @@ class SettingService
             $existingLeaveType->leave_types_code = $data1;
             $existingLeaveType->leave_types = $data2;
             $existingLeaveType->day = $data3;
+            $existingLeaveType->duration = $data4;
             $existingLeaveType->save();
 
             $data['status'] = config('app.response.success.status');

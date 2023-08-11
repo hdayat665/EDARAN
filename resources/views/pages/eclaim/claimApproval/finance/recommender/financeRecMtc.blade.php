@@ -136,49 +136,49 @@
                     @else
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Recommend</a>
+                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Recommend</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                            <a href="javascript:;" class="btn btn-warning" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                            <a href="javascript:;" class="btn btn-danger" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
                         </div>
                     </div>
                     @endif
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="/financeRecView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            <a href="/financeRecView" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                     </div>
                     @else
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                            <a href="javascript:;" class="btn btn-warning" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                            <a href="javascript:;" class="btn btn-danger" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a href="/financeRecView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            <a href="/financeRecView" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                     </div>
                     @endif

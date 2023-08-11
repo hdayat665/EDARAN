@@ -4637,7 +4637,7 @@ if (permanentChecked && correspondentChecked) {
         $("#addEmpForm").validate({
 
             rules: {
-                role: "required",
+                roleId: "required",
                 company: "required",
                 departmentId: "required",
                 branchId: "required",
@@ -4650,7 +4650,7 @@ if (permanentChecked && correspondentChecked) {
             },
 
             messages: {
-                role: "Please Insert Employee Role",
+                roleId: "Please Insert Employee Role",
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
                 branchId: "Please Insert Employee Branch",

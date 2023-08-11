@@ -105,11 +105,13 @@
                         <td>{{ $claim->id ?? '-' }}</td>
                         <td>{{ $claim->claim_type ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>
-                        <@if ($claim->status == 'amend')
+                        @if ($claim->status == 'amend')
                             <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
                             <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
                         @elseif ($claim->status == 'bucket')
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                        @elseif ($claim->status == 'pending')
                             <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
                         @elseif ($claim->status == 'approved')
                             <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>

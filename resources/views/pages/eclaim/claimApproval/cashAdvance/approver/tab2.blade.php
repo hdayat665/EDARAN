@@ -39,7 +39,25 @@
                         <td>{{ $ca->travel_date ?? 'N/A' }}</td>
                         <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
-                        <td>{{ $ca->status ?? '-' }}</td>
+                        @if ($ca->status == 'amend')
+                            <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
+                        @elseif ($ca->status == 'recommend')
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$ca->status_desc}}">Pending</span></td>
+                        @elseif ($ca->status == 'bucket')
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$ca->status_desc}}">Pending</span></td>
+                        @elseif ($ca->status == 'check')
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$ca->status_desc}}">Pending</span></td>
+                        @elseif ($ca->status == 'approved')
+                            <td><span class="badge bg-info" data-toggle="approved" title="{{$ca->status_desc}}">Approved</span></td>
+                        @elseif ($ca->status == 'paid' )
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$ca->status_desc}}">Paid</span></td>
+                        @elseif ($ca->status == 'draft')
+                            <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
+                        @elseif ($ca->status == 'reject')
+                            <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
+                        @elseif ($ca->status == 'active')
+                            <td><span class="badge bg-lime" data-toggle="activec" title="{{$ca->status_desc}}">In Queue</span></td>
+                        @endif
                     </tr>
                 @endif
             @endforeach

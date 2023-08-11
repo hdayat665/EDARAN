@@ -963,7 +963,7 @@ $("#laundry_amount_update").on("input", function () {
     $("#rejectButton").click(function (e) {
         var id = $(this).data("id");
         var status = "reject";
-        var stage = "hod";
+        var stage = "supervisor";
         var desc = "Rejected by Dept. Recommender";
         $("#supervisorRejectForm").validate({
             // Specify validation rules
@@ -1008,9 +1008,9 @@ $("#laundry_amount_update").on("input", function () {
     });
 
     $("#amendButton").click(function (e) {
-        var id = $(this).data("id");
+        var id = $("#amendId").val();
         var status = "amend";
-        var stage = "hod";
+        var stage = "supervisor";
         var desc = "Request to amend by Dept. Recommender";
         $("#supervisorAmendForm").validate({
             // Specify validation rules

@@ -156,8 +156,8 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r)
-    {
+    public function createtmyleave($r) {
+
         $input = $r->input();
 
         $checkleavetype = leavetypesModel::where([
@@ -236,7 +236,7 @@ class MyleaveService
                 ])->first();
 
                 if (empty($getDateSameOther)) {
-                    $data['msg'] = 'This application only you use when you have apply ANUAL LEAVE and approved';
+                    $data['msg'] = 'There is Pending Leave Application for the Selected Date';
                     $data['status'] = config('app.response.error.status');
                     $data['type'] = config('app.response.error.type');
                     $data['title'] = config('app.response.error.title');
@@ -254,7 +254,7 @@ class MyleaveService
 
                 if ($getDateSame) {
 
-                    $data['msg'] = 'There is an existing application for the date selected';
+                    $data['msg'] = 'There is an Existing Application for the Selected Date';
                     $data['status'] = config('app.response.error.status');
                     $data['type'] = config('app.response.error.type');
                     $data['title'] = config('app.response.error.title');
@@ -301,7 +301,7 @@ class MyleaveService
                 ])->first();
 
                 if ($getDateSameOther) {
-                    $data['msg'] = 'There is an existing application for the date selected';
+                    $data['msg'] = 'There is an Existing Application for the Selected Date';
                     $data['status'] = config('app.response.error.status');
                     $data['type'] = config('app.response.error.type');
                     $data['title'] = config('app.response.error.title');
