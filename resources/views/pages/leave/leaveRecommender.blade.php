@@ -45,11 +45,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row p-2">
                                         <form action="/leaveRecommender#default-tab-1" method="POST">
                                             <div id="filterleave" style="display: none">
-                                                <h5>Filter</h5><br>
-                                                <div class="row">
+                                                <h5>Filter</h5>
+                                                <div class="row p-2">
                                                     <div class="col-md-3">
                                                         <div class="row p-1">
                                                             <label for="date">Apply Date</label>
@@ -83,7 +83,7 @@
                                                         <br>
                                                         <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                         &ensp;
-                                                        <button id="reset" class="btn btn-primary">Reset</button>
+                                                        <button id="reset" class="btn btn-primary"><i class="fas fa-repeat"></i> Reset</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,11 +192,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row p-2">
                                     <form action="/leaveRecommender#default-tab-2" method="POST">
                                         <div id="filterleaveH" style="display: none">
-                                            <h5>Filter</h5><br>
-                                            <div class="row">
+                                            <h5>Filter</h5>
+                                            <div class="row p-2">
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="date">Apply Date</label>
@@ -230,7 +230,7 @@
                                                     <br>
                                                     <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                     &ensp;
-                                                    <button id="resetH" class="btn btn-primary">Reset</button>
+                                                    <button id="resetH" class="btn btn-primary"><i class="fas fa-repeat"></i> Reset</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -5,11 +5,13 @@
     <style>
 
         .custom-dropdown-menu {
-            position: static ;
-            height: auto ;
-            max-height: none ;
-            overflow: visible ;
+            position: static !important;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
         }
+
+
 
     </style>
 
@@ -45,11 +47,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row p-2">
                                         <form action="/leaveApprover#default-tab-1" method="POST">
                                             <div id="filterleave" style="display: none">
                                                 <h5>Filter</h5><br>
-                                                <div class="row">
+                                                <div class="row p-2">
                                                     <div class="col-md-3">
                                                         <div class="row p-1">
                                                             <label for="date">Apply Date</label>
@@ -83,7 +85,7 @@
                                                         <!-- <div class="row"> -->
                                                             <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                             &ensp;
-                                                            <button  id="reset" class="btn btn-primary">Reset</button>
+                                                            <button id="reset" class="btn btn-primary"><i class="fas fa-repeat"></i> Reset</button>
                                                         <!-- </div> -->
                                                     </div>
                                                 </div>
@@ -114,7 +116,7 @@
                                                 <tr class="odd gradeX">
                                                     <td style="width: 1%;">{{ $id }}</td>
                                                     <td style="width: 1%;">
-                                                        <div class="btn-group">
+                                                       <div class="btn-group">
                                                             <div>
                                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                                             </div>
@@ -190,11 +192,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row p-2">
                                     <form action="/leaveApprover#default-tab-2" method="POST">
                                         <div id="filterleaveH" style="display: none">
-                                            <h5>Filter</h5><br>
-                                            <div class="row">
+                                            <h5>Filter</h5>
+                                            <div class="row p-2">
                                                 <div class="col-md-3">
                                                     <div class="row p-1">
                                                         <label for="date">Apply Date</label>
@@ -228,7 +230,7 @@
                                                     <!-- <div class="row"> -->
                                                         <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                                                         &ensp;
-                                                        <button  id="resetH" class="btn btn-primary">Reset</button>
+                                                        <button id="resetH" class="btn btn-primary"><i class="fas fa-repeat"></i> Reset</button>
                                                     <!-- </div> -->
                                                 </div>
                                             </div>
