@@ -129,11 +129,11 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        @if ($user->eclaimrecommender == '' && $GNC->supervisor == 'recommend')
+                        @if ($user->eclaimrecommender !=  '' && $GNC->supervisor == '')
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                             
-                                <a data-id="{{ $claimData->id }}" class="btn btn-primary" id="cancelButton" type="submit">Cancel</a>
+                                <a data-id="{{ $claimData->id }}" class="btn btn-primary" id="cancelButton" type="submit" style="color: white;width:100%">Cancel</a>
                             
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" onclick="window.history.back()">Back</button>
+                                <button class="btn btn-primary" onclick="window.history.back()" style="color: white;width:100%">Back</button>
                             </div>
                         </div>
                     </div>

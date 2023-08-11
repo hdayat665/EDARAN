@@ -23,7 +23,7 @@ function getTravelDataByGeneralId(id, date) {
       url: "/getClaimCategoryNameById/" + id
     });
   }
-
+ 
   $("#hotelcvUpdate").on("input", function () {
    
 
@@ -670,9 +670,10 @@ $(document).ready(function () {
         // updating the value of textarea
     });
     $("#rejectButton").click(function (e) {
-        var id = $(this).data("id");
+        var id = $("#rejectId").val();
         var status = "reject";
         var desc = "Rejected by Dept. Approval";
+        var stage = "hod";
         $("#supervisorRejectForm").validate({
             // Specify validation rules
             rules: {},
@@ -715,10 +716,10 @@ $(document).ready(function () {
     });
 
     $("#amendButton").click(function (e) {
-        var id = $(this).data("id");
+        var id = $("#amendId").val();
         var status = "amend";
         var desc = "Request to amend by Dept. Approval";
-
+        var stage = "hod";
         $("#supervisorAmendForm").validate({
             // Specify validation rules
             rules: {},
