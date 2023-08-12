@@ -227,7 +227,7 @@ class EmployeeService
         $data['data'] = DB::table('employment as a')
             ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
             ->leftjoin('department as c', 'a.department', '=', 'c.id')
-            ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
+            ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.email as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
             ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
             ->orderBy('id', 'desc')
             ->get();
@@ -1108,7 +1108,6 @@ class EmployeeService
     public function addEmployment($r)
     {
         $input = $r->input();
-
         $workingEmail = Employee::where('workingEmail', $input['workingEmail'])->first();
 
         if ($workingEmail) {
@@ -1118,6 +1117,7 @@ class EmployeeService
             $data['msg'] = 'Email already exist.';
 
         } else {
+
 
             if ($input['branchId']) {
                 $input['branch'] = $input['branchId'];
@@ -1144,6 +1144,9 @@ class EmployeeService
 
             $ec['user_id'] = $input['user_id'];
             UserEmergency::create($ec);
+
+            $userprofileEmail['email'] = $input['workingEmail'];
+            UserProfile::where('user_id', $input['user_id'])->update($userprofileEmail);
 
             $user['status'] = 'active';
             User::where('id', $input['user_id'])->update($user);
