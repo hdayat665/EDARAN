@@ -8,7 +8,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">HRIS | Policy & SOP</h1>
+    <h1 class="page-header">Settings <small> | Policy & SOP </small></h1>
 
 
 
