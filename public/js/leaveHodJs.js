@@ -184,7 +184,7 @@ $(document).ready(function () {
                 $("#viewstatus_21").text("Pending");
             } else if (data[0].up_app_status === "3") {
                 $("#viewstatus_2").text("Reject");
-                $("#viewstatus_21").text("Reject");
+                $("#viewstatus_21").text("Rejected");
             } else if (data[0].up_app_status === "4") {
                 $("#viewstatus_2").text("Approved");
                 $("#viewstatus_21").text("Approved");
