@@ -512,6 +512,7 @@ $(document).ready(function () {
         // console.log(myleaveData);
 
         myleaveData.then(function (data) {
+            console.log(data);
             $("#datepicker-applied1").val(data[0].applied_date);
             $("#typeofleave1").val(data[0].lt_type_id);
             // $("#dayApplied1").val(data[0].day_applied);
@@ -572,36 +573,63 @@ $(document).ready(function () {
 
             if (data[0].up_rec_status === "1") {
                 $("#status_1").text("Pending");
+                $("#hidenull1").show();
+                $("#hidenull2").show();
+                $(".hidenull3").show();
             } else if (data[0].up_rec_status === "2") {
                 $("#status_1").text("Pending");
+                $("#hidenull1").show();
+                $("#hidenull2").show();
+                $(".hidenull3").show();
             } else if (data[0].up_rec_status === "3") {
-                $("#status_1").text("Reject");
+                $("#status_1").text("Rejected");
+                $("#hidenull1").hide();
+                $("#hidenull2").hide();
+                $(".hidenull3").hide();
             } else if (data[0].up_rec_status === "4") {
                 $("#status_1").text("Approved");
+                $("#hidenull1").show();
+                $("#hidenull2").show();
+                $(".hidenull3").show();
             }
 
             if (data[0].up_app_status === "1") {
                 $("#status_2").text("Pending");
-                $("#status_22").text("Pending");
+                $("#status_21").text("Pending");
             } else if (data[0].up_app_status === "2") {
                 $("#status_2").text("Pending");
-                $("#status_22").text("Pending");
+                $("#status_21").text("Pending");
             } else if (data[0].up_app_status === "3") {
-                $("#status_2").text("Reject");
-                $("#status_22").text("Reject");
+                $("#status_2").text("Rejected");
+                $("#status_21").text("Rejected");
             } else if (data[0].up_app_status === "4") {
                 $("#status_2").text("Approved");
-                $("#status_22").text("Approved");
+                $("#status_21").text("Approved");
             }
 
-            if (data[0].up_app_status === "1") {
-                $("#status_2").text("Pending");
-            } else if (data[0].up_app_status === "2") {
-                $("#status_2").text("Pending");
-            } else if (data[0].up_app_status === "3") {
-                $("#status_2").text("Reject");
-            } else if (data[0].up_app_status === "4") {
-                $("#status_2").text("Approved");
+            if (data[0].up_rec_reason) {
+                $("#reasonRecommender").text(data[0].up_rec_reason);
+                $("#reasonRecommender1").text(data[0].up_rec_reason);
+                $("#hideRec").show();
+            } else {
+                $("#reasonRecommender").text("");
+                $("#reasonRecommender1").text("");
+                $("#hideRec").hide();
+                $("#hideApprPending").hide();
+            }
+
+            if (data[0].up_app_reason) {
+                $("#reasonApprover").text(data[0].up_app_reason);
+                $("#reasonApprover1").text(data[0].up_app_reason);
+                $("#hideAppr").show();
+                $("#hideApprPending").show();
+                $("#viewmenu021").show();
+            } else {
+                $("#reasonApprover").text("");
+                $("#reasonApprover1").text("");
+                $("#hideAppr").hide();
+                $("#hideApprPending").hide();
+                $("#viewmenu021").hide();
             }
 
             if (data[0].file_document) {
@@ -666,20 +694,20 @@ $(document).ready(function () {
             }
 
             if (data[0].username1) {
-                $("#recommended_by2").text(data[0].username1);
-                $("#hiderec22").hide();
-                $("#hiderec12").show();
+                $("#recommended_byh").text(data[0].username1);
+                $("#hiderec2h").hide();
+                $("#hiderec1h").show();
             } else {
-                $("#recommended_by2").text("");
-                $("#hiderec12").hide();
-                $("#hiderec22").show();
+                $("#recommended_byh").text("");
+                $("#hiderec1h").hide();
+                $("#hiderec2h").show();
             }
 
             if (data[0].username2) {
-                $("#approved_by2").text(data[0].username2);
-                $("#approved_by22").text(data[0].username2);
+                $("#approved_byh").text(data[0].username2);
+                $("#approved_by1h").text(data[0].username2);
             } else {
-                $("#approved_by2").text("");
+                $("#approved_byh").text("");
             }
 
             if (data[0].leave_session === "1") {
@@ -692,37 +720,63 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_10").text("Pending");
+                $("#status_1h").text("Pending");
+                $("#hidenull1h").show();
+                $("#hidenull2h").show();
+                $(".hidenull3h").show();
             } else if (data[0].up_rec_status === "2") {
-                $("#status_10").text("Pending");
+                $("#status_1h").text("Pending");
+                $("#hidenull1h").show();
+                $("#hidenull2h").show();
+                $(".hidenull3h").show();
             } else if (data[0].up_rec_status === "3") {
-                $("#status_10").text("Reject");
+                $("#status_1h").text("Rejected");
+                $("#hidenull1h").hide();
+                $("#hidenull2h").hide();
+                $(".hidenull3h").hide();
             } else if (data[0].up_rec_status === "4") {
-                $("#status_10").text("Approved");
+                $("#status_1h").text("Approved");
+                $("#hidenull1h").show();
+                $("#hidenull2h").show();
+                $(".hidenull3h").show();
             }
 
             if (data[0].up_app_status === "1") {
-                $("#status_20").text("Pending");
-                $("#status_202").text("Pending");
+                $("#status_2h").text("Pending");
+                $("#status_21h").text("Pending");
             } else if (data[0].up_app_status === "2") {
-                $("#status_20").text("Pending");
-                $("#status_202").text("Pending");
+                $("#status_2h").text("Pending");
+                $("#status_2h").text("Pending");
             } else if (data[0].up_app_status === "3") {
-                $("#status_20").text("Reject");
-                $("#status_202").text("Reject");
+                $("#status_2h").text("Rejected");
+                $("#status_21h").text("Rejected");
             } else if (data[0].up_app_status === "4") {
-                $("#status_20").text("Approved");
-                $("#status_202").text("Approved");
+                $("#status_2h").text("Approved");
+                $("#status_21h").text("Approved");
+            }
+            if (data[0].up_rec_reason) {
+                $("#reasonRecommenderh").text(data[0].up_rec_reason);
+                $("#reasonRecommender1h").text(data[0].up_rec_reason);
+                $("#hideRech").show();
+            } else {
+                $("#reasonRecommenderh").text("");
+                $("#reasonRecommender1h").text("");
+                $("#hideRech").hide();
+                $("#hideApprPendingh").hide();
             }
 
-            if (data[0].up_app_status === "1") {
-                $("#status_20").text("Pending");
-            } else if (data[0].up_app_status === "2") {
-                $("#status_20").text("Pending");
-            } else if (data[0].up_app_status === "3") {
-                $("#status_20").text("Reject");
-            } else if (data[0].up_app_status === "4") {
-                $("#status_20").text("Approved");
+            if (data[0].up_app_reason) {
+                $("#reasonApproverh").text(data[0].up_app_reason);
+                $("#reasonApprover1h").text(data[0].up_app_reason);
+                $("#hideApprh").show();
+                $("#hideApprPendingh").show();
+                $("#viewmenu021h").show();
+            } else {
+                $("#reasonApproverh").text("");
+                $("#reasonApprover1h").text("");
+                $("#hideApprh").hide();
+                $("#hideApprPendingh").hide();
+                $("#viewmenu021h").hide();
             }
 
             if (data[0].file_document) {

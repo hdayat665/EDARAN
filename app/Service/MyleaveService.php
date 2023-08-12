@@ -25,10 +25,10 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where(function ($query) {
-                $query->where('myleave.status_final', '=', 1)
-                    ->orWhere('myleave.status_final', '=', 2);
-            })
+            // ->where(function ($query) {
+            //     $query->where('myleave.status_final', '=', 1)
+            //         ->orWhere('myleave.status_final', '=', 2);
+            // })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -42,10 +42,10 @@ class MyleaveService
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where(function ($query) {
-                $query->where('myleave.status_final', '=', 3)
-                    ->orWhere('myleave.status_final', '=', 4);
-            })
+            // ->where(function ($query) {
+            //     $query->where('myleave.status_final', '=', 3)
+            //         ->orWhere('myleave.status_final', '=', 4);
+            // })
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
@@ -156,8 +156,8 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r)
-    {
+    public function createtmyleave($r) {
+
         $input = $r->input();
 
         $checkleavetype = leavetypesModel::where([
@@ -550,7 +550,10 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-            ->select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
+            ->where(function ($query) {
+                $query->where('myleave.up_rec_status', '=', '1')
+                    ->orWhere('myleave.up_rec_status', '=', '2');
+            })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -566,9 +569,13 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-            ->select('userProfile.user_id', 'userProfile.fullName')
+            ->where(function ($query) {
+                $query->where('myleave.up_rec_status', '=', '3')
+                    ->orWhere('myleave.up_rec_status', '=', '4');
+            })
             ->groupBy('userProfile.user_id')
             ->get();
+
         return $data;
     }
     public function idemployerhod()
