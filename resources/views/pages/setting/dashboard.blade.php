@@ -109,7 +109,7 @@
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/weekendEntitlement"><i class="fas fa-calendar-day fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Weekend Entitlement</h5>
+                    <h5 class="mb-5px">Working Hour</h5>
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/leavetypes"><i class="fa fa-calendar fa-4x text-blue"></i></a><br><br>
