@@ -14,7 +14,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header" id="departmentJs">Settings <small>| Department </small></h1>
+    <h1 class="page-header" id="departmentJs">Setting <small>| Department </small></h1>
 
     <!-- END page-header -->
     <!-- BEGIN panel -->
@@ -78,7 +78,7 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>
@@ -146,7 +146,7 @@
                             @endforeach
                         </select>
                     </div>
-                   
+
                     <div class="mb-3">
                         <label class="form-label">Department Code* </label>
                         <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="DEPARTMENT CODE" >

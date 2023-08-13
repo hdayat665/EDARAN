@@ -7,7 +7,7 @@
     <div id="content" class="app-content">
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
-        <h1 class="page-header">Setting | Leave Entitlements</h1>
+        <h1 class="page-header">Setting <small>| Leave Entitlement</small></h1>
         <div class="row">
             <div class="col-xl-15" id="anualLeaveJs">
                 <!-- BEGIN nav-tabs -->
@@ -35,7 +35,7 @@
                 <div class="tab-content panel m-0 rounded-0 p-3">
                     <div class="tab-pane fade active show" id="default-tab-1">
                         <form id="updateAnualLeave">
-                            <h3 class="mt-10px"></i> Annual Leave List </h3>
+                            {{-- <h3 class="mt-10px"></i> Annual Leave List </h3> --}}
                             <div class="panel-body">
                                 <table  id="tableannual"  class="table table-striped table-bordered align-middle">
                                     <thead>
@@ -82,7 +82,6 @@
 
                     <div class="tab-pane fade" id="default-tab-2">
                         <form id="updateSickLeave">
-                            <h3 class="mt-10px"></i> Sick Leave </h3>
                             <div class="panel-body">
                                 <table  id="tablesick"  class="table table-striped table-bordered align-middle table-sm">
                                     <thead>
@@ -131,7 +130,6 @@
 
                     <div class="tab-pane fade" id="default-tab-3">
                         <form id="updateCarryForward">
-                            <h3>Carried Forward Leave</h3>
                             <div class="panel-body">
                                 <table  id="tablecarryforward"  class="table table-striped table-bordered align-middle">
                                     <thead>

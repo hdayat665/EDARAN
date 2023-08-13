@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Setting | Approval Role</h1>
+        <h1 class="page-header">Setting <small>| Approval Role</small></h1>
         <div class="row" id="approveRoleJs">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">
@@ -30,7 +30,7 @@
                     @include('pages.setting.eclaim.approvalRoleCompanyTab')
                     <div class="row p-2">
                         <div class="col align-self-start">
-                            <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                     </div>
                 </div>
