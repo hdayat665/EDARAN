@@ -945,7 +945,7 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-money-check text-gray"></i>
                                     </div>
-                                    <div class="menu-text text-gray">Claim</div>
+                                    <div class="menu-text text-gray">E-Claim</div>
                                     <div class="menu-caret text-gray"></div>
                                 </a>
                                 <div class="menu-submenu">
@@ -999,7 +999,7 @@
                         <div class="menu-icon">
                             <i class="fa fa-gear text-gray"></i>
                         </div>
-                        <div class="menu-text text-gray">Settings</div>
+                        <div class="menu-text text-gray">Setting</div>
                     </a>
                 </div>
             @endif

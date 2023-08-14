@@ -3,40 +3,38 @@
 @section('content')
 
 <div id="content" class="app-content">
-			
-            <h1 class="page-header" id="cashadvancelistingReportJs">Report | Cash Advance Report </h1>
-            
+
+            <h1 class="page-header" id="cashadvancelistingReportJs">Reporting | E-Claim | Cash Advance</h1>
+
             <!-- END page-header -->
             <!-- BEGIN panel -->
             <div class="panel panel">
-                <div class="panel-heading">
-                 <h4>Cash Advance Report</h4>
-                </div>
-               
+
+
                 <h4 class="panel-titel"></h4>
             <!-- END panel -->
             <!-- BEGIN panel-body -->
             <form action="/eclaim/cashadvanceReport" method="POST">
-            <div class="panel-body">  
+            <div class="panel-body">
                 <div class="row p-2">
-                    <div class="col-md-4"> 
-                        <label class="form-label col-form-label col-md-4">Select Date: </label>
+                    <div class="col-md-4">
+                        <label class="form-label col-form-label col-md-4">Date: </label>
                     </div>
-        
-                    <div class="col-md-4"> 
+
+                    <div class="col-md-4">
                         <div class="input-group" id="default-date">
                             <input type="text" name="default-date" class="form-control" value="" id="datepicker-autoClose" />
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
-        
+
                 <div class="row p-2">
                     <div class="col-md-4">
-                        <label class="form-label col-form-label col-md-4">Select By: </label>
+                        <label class="form-label col-form-label col-md-4">By: </label>
                     </div>
-        
-                    <div class="col-md-4"> 
+
+                    <div class="col-md-4">
                         <select class="form-select" id="selectby" name="category">
                             <option value="" label="ALL" selected="selected"></option>
                             <option value="1" label="PROJECT">PROJECT</option>
@@ -50,8 +48,8 @@
                     <div class="col-md-4">
                         <label class="form-label col-form-label col-md-4">Select Project: </label>
                     </div>
-        
-                    <div class="col-md-4"> 
+
+                    <div class="col-md-4">
                         <select class="form-select" name="project">
                             <option class="form-label" value="">Please Select</option>
                             <?php $projects = project() ?>
@@ -61,13 +59,13 @@
                         </select>
                     </div>
                 </div>
-        
+
                 <div class="row p-2" id="hideDepart">
                     <div class="col-md-4">
                         <label class="form-label col-form-label col-md-4">Select Department: </label>
                     </div>
-        
-                    <div class="col-md-4"> 
+
+                    <div class="col-md-4">
                         <select class="form-select" name="department">
                             <option class="form-label" value="">Please Select</option>
                             <?php $departments = getDepartment() ?>
@@ -77,7 +75,7 @@
                         </select>
                     </div>
                 </div>
-        
+
                 <div class="row p-2" id="hideEmpName">
                     <div class="col-md-4">
                         <label class="form-label col-form-label col-md-4">Select Employee Name: </label>
@@ -92,7 +90,7 @@
                         </select>
                     </div>
                 </div>
-        
+
                 <div class="row p-2" id="hideRefNum">
                     <div class="col-md-4">
                         <label class="form-label col-form-label col-md-4">Select Reference Number: </label>
@@ -108,21 +106,21 @@
                             @endforeach
                         </select>
                     </div>
-                    
-                
+
+
                 </div>
-        
+
                 <div class="row p-2">
                     <div class="col-md-7">
                         <label class="form-label col-form-label col-md-4"></label>
                     </div>
                     <div class="row-p-2">
-                        <button type="submit" class="btn btn-primary col-sm-2">
+                        <button type="submit" class="btn btn-primary">
                             Submit
                         </button>
                     </div>
                 </div>
-                
+
             </div>
         </form>
         </div>

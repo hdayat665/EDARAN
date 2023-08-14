@@ -6,12 +6,12 @@
         }
     </style>
     <div id="content" class="app-content">
-        <h1 class="page-header">Setting <small> | eClaim | General </small></h1>
+        <h1 class="page-header">Setting <small> | General </small></h1>
         <form id="generalForm">
             <div class="panel panel" id="eclaimGenearalJs">
                 <div class="panel-body">
                     <div class="form-control">
-                        <h3>Claim Settings</h3>
+                        <h3>Claim Setting</h3>
                         <br>
                         <div class="row">
                             <div class="col-sm-6">
@@ -50,7 +50,7 @@
                 <br>
                 <div class="panel-body">
                     <div class="form-control">
-                        <h3>Cash Advance Settings</h3>
+                        <h3>Cash Advance Setting</h3>
                         <br>
                         <div class="row">
                             <label for="maximumpaidout" class="col-sm-3 col-form-label">Maximum Paid
@@ -60,10 +60,8 @@
                             </div>
                         </div>
                         <br>
-                        <h5>Subsistence Allowance</h5>
-                        <br>
                         <button type="button" class="btn btn-white mt-3 mb-3" id="addModalButton"><i class="fa fa-plus"></i>
-                            Area</button>
+                            New Area</button>
                         <div class="col-sm-6">
                             <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
                                 <thead>

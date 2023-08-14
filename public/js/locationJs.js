@@ -118,8 +118,8 @@ $(document).ready(function () {
                 state_code: "required",
             },
             messages: {
-                country_id: "Please Choose Country Name ",
-                state_name: "Please Choose State Name",
+                country_id: "Please Choose Country",
+                state_name: "Please Insert State",
                 state_code: "Please Insert State Code",
             },
             submitHandler: function (form) {
@@ -162,11 +162,13 @@ $(document).ready(function () {
             rules: {
                 country_id: "required",
                 state_name: "required",
+                city_name: "required",
                 postcode: "required",
             },
             messages: {
-                country_id: "Please Insert Country Name ",
-                state_name: "Please Choose State Name",
+                country_id: "Please Choose Country",
+                state_name: "Please Choose State",
+                city_name: "Please Insert City",
                 postcode: "Please Insert Postcode",
             },
             submitHandler: function (form) {
@@ -216,7 +218,7 @@ $(document).ready(function () {
                 addState3: "required",
             },
             messages: {
-                addCountry3: "Please Choose Country Name ",
+                addCountry3: "Please Choose Country",
                 addState3: "Please Choose State Name",
             },
             submitHandler: function (form) {

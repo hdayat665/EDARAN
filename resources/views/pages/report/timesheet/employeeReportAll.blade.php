@@ -24,20 +24,20 @@
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Year: {{ $year }}</h5>
+                    <h5>YEAR: {{ $year }}</h5>
                 </div>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Month: {{ date('F', mktime(0, 0, 0, $month, 1)) }}</h5>
+                    <h5>MONTH: {{ strtoupper(date('F', mktime(0, 0, 0, $month, 1))) }}</h5>
                 </div>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
                     @if(count($logs) > 0)
-                        <h5>Department Name: {{ $logs[0]->departmentName }}</h5>
+                        <h5>DEPARTMENT: {{ $logs[0]->departmentName }}</h5>
                     @else
-                    <h5>Department Name: No Result </h5>
+                    <h5>DEPARTMENT: NO RESULT </h5>
                     @endif
 
                 </div>
@@ -131,7 +131,7 @@
                     @endif --}}
 
                 {{-- </tbody> --}}
-            {{-- </table> --}} 
+            {{-- </table> --}}
 
            <div class="row p-2" style=" overflow: auto;">
             <table id="summarytable" class="table table-striped table-bordered align-middle">
@@ -144,38 +144,38 @@
                         <th>Designation</th>
                         <th>Status</th>
                         <th>Date</th>
-                        <th>1hb</th>
-                        <th>2hb</th>
-                        <th>3hb</th>
-                        <th>4hb</th>
-                        <th>5hb</th>
-                        <th>6hb</th>
-                        <th>7hb</th>
-                        <th>8hb</th>
-                        <th>9hb</th>
-                        <th>10hb</th>
-                        <th>11hb</th>
-                        <th>12hb</th>
-                        <th>13hb</th>
-                        <th>14hb</th>
-                        <th>15hb</th>
-                        <th>16hb</th>
-                        <th>17hb</th>
-                        <th>18hb</th>
-                        <th>19hb</th>
-                        <th>20hb</th>
-                        <th>21hb</th>
-                        <th>22hb</th>
-                        <th>23hb</th>
-                        <th>24hb</th>
-                        <th>25hb</th>
-                        <th>26hb</th>
-                        <th>27hb</th>
-                        <th>28hb</th>
-                        <th>29hb</th>
-                        <th>30hb</th>
-                        <th>31hb</th>
-                
+                        <th>1st</th>
+                        <th>2nd</th>
+                        <th>3rd</th>
+                        <th>4th</th>
+                        <th>5th</th>
+                        <th>6th</th>
+                        <th>7th</th>
+                        <th>8th</th>
+                        <th>9th</th>
+                        <th>10th</th>
+                        <th>11th</th>
+                        <th>12th</th>
+                        <th>13th</th>
+                        <th>14th</th>
+                        <th>15th</th>
+                        <th>16th</th>
+                        <th>17th</th>
+                        <th>18th</th>
+                        <th>19th</th>
+                        <th>20th</th>
+                        <th>21st</th>
+                        <th>22nd</th>
+                        <th>23rd</th>
+                        <th>24th</th>
+                        <th>25th</th>
+                        <th>26th</th>
+                        <th>27th</th>
+                        <th>28th</th>
+                        <th>29th</th>
+                        <th>30th</th>
+                        <th>31st</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -186,7 +186,7 @@
                             <td>{{ $row->departmentName }}</td>
                             <td>{{ $row->employeeName }}</td>
                             <td>{{ $row->designationName }}</td>
-                            <td>{{ $row->status }}</td>
+                            <td>{{ strtoupper($row->status) }}</td>
                             <td>{{ $row->date }}</td>
                             <td style="{{ isset($row->day_01) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_01) ? $row->day_01 : '-' }}</td>
                             <td style="{{ isset($row->day_02) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_02) ? $row->day_02 : '-' }}</td>
@@ -219,21 +219,21 @@
                             <td style="{{ isset($row->day_29) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_29) ? $row->day_29 : '-' }}</td>
                             <td style="{{ isset($row->day_30) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_30) ? $row->day_30 : '-' }}</td>
                             <td style="{{ isset($row->day_31) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_31) ? $row->day_31 : '-' }}</td>
-                           
+
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            
-            
-            
+
+
+
             {{-- <style>
                 .has-data {
-                    background-color: #AED6F1; 
+                    background-color: #AED6F1;
                 }
             </style> --}}
-            
-            
+
+
 
            </div>
 
@@ -244,9 +244,9 @@
         </div>
 
 
-            
+
         </div>
-       
+
 </div>
     </div>
     @endsection

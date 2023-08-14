@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="row p-2" id="viewmenu021">
                                     <div class = col-md-12>
-                                        <label for="text">Reason:</label><br>
+                                        <label for="text">Reason of Rejection:</label><br>
                                         <div id="reasonhod21" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>

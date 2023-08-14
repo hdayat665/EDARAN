@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header" id="newsJs">Settings <small>| News</small></h1>
+    <h1 class="page-header" id="newsJs">Setting <small>| News</small></h1>
     <div class="panel panel">
         <div class="panel-heading">
             <div class="col-md-6">
@@ -15,7 +15,7 @@
             <table id="tablenews" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th>No.</th>     
+                        <th>No.</th>
                         <th class="text-nowrap">Title</th>
                         <th class="text-nowrap">Content</th>
                         <th class="text-nowrap">Attachment</th>
@@ -35,7 +35,7 @@
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                         <td>{{$new->title}}</td>
                         <td>{{$new->content}}</td>
-                        <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  
+                        <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>
                         <td>{{$new->addedBy}}</td>
                         <td>{{$new->created_at}}</td>
                         <td>{{$new->modifiedBy}}</td>
@@ -54,11 +54,11 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 

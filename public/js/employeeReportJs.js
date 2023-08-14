@@ -99,7 +99,7 @@ $(document).on("change", "#departmentv", function () {
             .remove()
             .end()
             .append(
-                '<option label="Please Choose" value="" selected="selected"> </option>'
+                '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
             )
             .val("");
 

@@ -1,5 +1,4 @@
 <div class="tab-pane fade" id="default-tab-3">
-    <h3 class="mt-10px"></i> Company List </h3>
     <div class="panel-body">
         <div class="accordion" id="accordionFlushExample">
             @if ($companys)
