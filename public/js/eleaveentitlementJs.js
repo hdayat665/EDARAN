@@ -1,5 +1,40 @@
 $(document).ready(function () {
 
+    const input3 = document.getElementById("CurrentEntitlementBalance");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput3(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input3.value = input3.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input3.addEventListener("input", validateInput3);
+
+    const input1 = document.getElementById("SickLeaveEntitlementBalance");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput1(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input1.value = input1.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input1.addEventListener("input", validateInput1);
+
+    const input2 = document.getElementById("CurrentForwardBalance");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput2(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input2.value = input2.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input2.addEventListener("input", validateInput2);
+
+
+
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
         $('.nav-tabs a[href="#' + hash + '"]').tab("show");
