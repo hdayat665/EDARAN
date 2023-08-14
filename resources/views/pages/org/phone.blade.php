@@ -2,15 +2,15 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header" id="organization">General Information</h1>
+    <h1 class="page-header" id="organization">General Information  <small>| Phone Directory</small></h1>
     <div class="panel panel-with-tabs">
         <div class="panel-heading p-0">
             <div class="tab-overflow">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
-                            <span class="d-sm-none">Phone Directory</span>
-                            <span class="d-sm-block d-none">Phone Directory</span>
+                            {{-- <span class="d-sm-none">Phone Directory</span>
+                            <span class="d-sm-block d-none">Phone Directory</span> --}}
                         </a>
                     </li>
                 </ul>
@@ -174,7 +174,7 @@
                             <td class="text-center"><img src="{{ asset('../assets/img/user/user-13.jpg') }}" class="w-50px"></td>
                         @endif
 
-                      
+
 
                         <td>{{$phoneInfo->firstName}}</td>
                         <td>{{$phoneInfo->lastName}}</td>

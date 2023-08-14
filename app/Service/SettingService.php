@@ -649,7 +649,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Postcode';
+        $data['msg'] = 'Location is Created';
 
         return $data;
     }
@@ -670,7 +670,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Location';
+            $data['msg'] = 'Location is Deleted';
         }
 
         return $data;
@@ -714,7 +714,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State and Countries';
+        $data['msg'] = 'Country & State is Created.';
 
         return $data;
     }
@@ -2287,9 +2287,48 @@ class SettingService
         return $data;
     }
 
+    // public function createDomainList($r)
+    // {
+    //     $input = $r->input();
+    //     $input['user_id'] = Auth::user()->id;
+    //     $input['tenant_id'] = Auth::user()->tenant_id;
+
+    //     DomainList::create($input);
+
+    //     $data['status'] = config('app.response.success.status');
+    //     $data['type'] = config('app.response.success.type');
+    //     $data['title'] = config('app.response.success.title');
+    //     $data['msg'] = 'Success';
+
+    //     return $data;
+    // }
+
     public function createDomainList($r)
-    {
-        $input = $r->input();
+{
+    $input = $r->input();
+    $id = $input['id'];
+    // dd($id);
+
+    if (isset($input['id']) && $input['id'] !== null) {
+        $user = DomainList::where('id', $id)->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'domain not found';
+        } else {
+
+            DomainList::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Role is updated';
+        }
+
+        return $data;
+    } else {
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
 
@@ -2302,8 +2341,7 @@ class SettingService
 
         return $data;
     }
-
-
+}
 
     public function leaveEntitlementActive()
     {
@@ -2335,6 +2373,7 @@ class SettingService
             ->where(function ($query) use ($currentDateObj) {
                 $query->whereNull('leave_entitlement.id_employment');
             })
+            ->orderBy('employment.joinedDate', 'desc')
             ->get();
 
         return $data;
@@ -2354,7 +2393,8 @@ class SettingService
             ->leftJoin('jobgrade', 'leave_entitlement.id_jobgrade', '=', 'jobgrade.id')
             ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year', '=', $checkdate)
-            ->orderBy('id', 'desc')->get();
+            ->orderBy('employment.joinedDate', 'desc')
+            ->get();
 
         return $data;
     }
@@ -2705,9 +2745,10 @@ class SettingService
     public function holidaylistView()
     {
 
-        $dataallstate = holidayModel::select('*')
+        $dataallstate = holidayModel::select('*', 'country_name as country')
             ->where('tenant_id', '=', Auth::user()->tenant_id)
-            ->orderBy('id', 'desc')
+            ->leftJoin('location_country', 'leave_holiday.country_id', '=', 'location_country.country_id')
+            ->orderBy('leave_holiday.country_id', 'desc')
             ->get();
 
         $data = [];
@@ -3783,6 +3824,200 @@ class SettingService
         // dd($data);
         // die;
 
+        return $data;
+    }
+
+        public function getRoles()
+    {
+        // $data = DomainList::where('type', 'monthlyclaim')
+        //     ->where('category_role', 'admin')
+        //     ->latest('created_at')
+        //     ->first();
+
+            // dd($data);
+
+            $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftjoin('role as g','a.role', '=', 'g.id')
+            ->leftJoin('employment as h', 'a.checker4', '=', 'h.user_id')
+            ->leftJoin('employment as i', 'a.checker5', '=', 'i.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.roleName, "Na") AS roleNamee'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(i.employeeName, "Na") AS checker5Name')
+            )
+            ->where('a.type', 'monthlyClaim')
+            ->where('a.category_role', 'admin')
+            ->latest('a.created_at')
+            ->first();
+
+            // dd($data);
+
+        return $data;
+    }
+
+    public function getRolesFinances()
+    {
+
+            $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+            ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name')
+            )
+            ->where('a.type', 'monthlyClaim')
+            ->where('a.category_role', 'finance')
+            ->latest('a.created_at')
+            ->first();
+
+            // dd($data);
+
+        return $data;
+    }
+
+    public function getRolesCashA()
+    {
+
+            $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+            ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name'),
+            )
+            ->where('a.type', 'cashAdvance')
+            ->where('a.category_role', 'cash_advance')
+            ->latest('a.created_at')
+            ->first();
+
+            // dd($data);
+
+        return $data;
+    }
+
+    public function getroleAdmin($id)
+    {
+
+        $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftjoin('role as g','a.role', '=', 'g.id')
+            ->leftJoin('employment as h', 'a.checker4', '=', 'h.user_id')
+            ->leftJoin('employment as i', 'a.checker5', '=', 'i.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.roleName, "Na") AS roleNamee'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(i.employeeName, "Na") AS checker5Name')
+            )
+            ->where('a.type', 'monthlyClaim')
+            ->where('a.category_role', 'admin')
+            ->where('a.id', $id)
+            ->latest('a.created_at')
+            ->first();
+// dd($data);
+        return $data;
+    }
+
+    public function getroleFinance($id)
+    {
+
+        $data = DB::table('domain_list as a')
+        ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+        ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+        ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+        ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+        ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+        ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+        ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+        ->select(
+            'a.*',
+            DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+            DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+            DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+            DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+            DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+            DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+            DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name')
+        )
+            ->where('a.type', 'monthlyClaim')
+            ->where('a.category_role', 'finance')
+            ->where('a.id', $id)
+            ->latest('a.created_at')
+            ->first();
+
+        return $data;
+    }
+
+    public function getroleCA($id)
+    {
+
+        $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+            ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name'),
+            )
+            ->where('a.type', 'cashAdvance')
+            ->where('a.category_role', 'cash_advance')
+            ->where('a.id', $id)
+            ->latest('a.created_at')
+            ->first();
+
+            // dd($data);
         return $data;
     }
 }

@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">History</h5>
+                <h5 class="modal-title" id="exampleModalLabel">View Leave</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -100,40 +100,67 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-12">
-                            <div class="form-control" id= "hiderec12">
-                                <div class="row">
-                                    <div class="col-sm-6">Recommended By:
-                                        <div id="recommended_by2"></div>
-                                    </div>
-                                    <div class="col-sm-6">Approved By:
-                                        <div id="approved_by2"></div>
-                                    </div>
+
+                    <div class="form-group">
+                        <div class="form-control" id = "hiderec1h">
+                            <div class="row p-2">
+                                <div class = col-md-5>
+                                    <label for="text" >Recommended By:</label><br>
+                                    <div id="recommended_byh" style="font-weight: lighter;"></div>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_10">Pending</div>
-                                    </div>
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_20">Pending</div>
-                                    </div>
+                                <div class = "col-md-1">
+                                </div>
+                                <div class = "col-md-6" id="hidenull1h">
+                                    <label for="text" >Approved By:</label><br>
+                                    <div id="approved_byh" style="font-weight: lighter;"></div>
                                 </div>
                             </div>
-                            <div class="form-control" id= "hiderec22">
-                                <div class="row">
-                                    <div class="col-sm-6">Approved By:
-                                        <div id="approved_by22"></div>
-                                    </div>
+                            <div class="row p-2">
+                                <div class = "col-md-5">
+                                    <label for="text">Status:</label><br>
+                                <div id="status_1h" style="font-weight: lighter;"></div>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">Status:
-                                        <div id="status_202">Pending</div>
-                                    </div>
+                                <div class = col-md-1>
+                                </div>
+                                <div class = "col-md-6" id="hidenull2h">
+                                    <label for="text">Status:</label><br>
+                                <div id="status_2h" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class = "col-md-5" id="hideRech">
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonRecommenderh" style="font-weight: lighter;"></div>
+                                </div>
+                                <div class = "col-md-1">
+                                </div>
+                                <div class = "col-md-5"id="hideApprPendingh">
+                                </div>
+                                <div class = "col-md-6 hidenull3h" id="hideApprh">
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonApproverh" style="font-weight: lighter;"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="form-control" id = "hiderec2h">
+                            <div class="row p-2">
+                                <div class = "col-md-12">
+                                    <label for="text" >Approved By:</label><br>
+                                    <div id="approved_by1h" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class = "col-md-12">
+                                    <label for="text">Status:</label><br>
+                                <div id="status_21h" style="font-weight: lighter;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2" id="viewmenu021h">
+                                <div class = col-md-12>
+                                    <label for="text">Reason:</label><br>
+                                    <div id="reasonApprover1h" style="font-weight: lighter;"></div>
                                 </div>
                             </div>
                         </div>

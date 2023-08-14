@@ -16,15 +16,14 @@
 }
 </style>
 	<div id="content" class="app-content">
-		<h1 class="page-header" id="eleavetypesJs" >Setting | Leave Types</h1>
+		<h1 class="page-header" id="eleavetypesJs" >Setting <small>| Leave Type</small></h1>
 		<div class="panel panel">
 			<div class="panel-body">
 				<div class="form-control">
 					<div class="row p-2">
-						<h3>Leave Types List</h3>
 					</div>
 					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Types</button>
+						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Type</button>
 					</div>
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
@@ -34,6 +33,7 @@
 								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
 								<th class="text-nowrap">Leave Types</th>
+								<th class="text-nowrap">Duration</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -58,6 +58,7 @@
 									</td>
 									<td>{{$t->leave_types_code}}</td>
 									<td>{{$t->leave_types}}</td>
+									<td>{{$t->duration}}</td>
 								</tr>
 								@endforeach
                                 @endif

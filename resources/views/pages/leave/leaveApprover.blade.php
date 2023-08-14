@@ -16,7 +16,7 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="leaveHodJs"> | Leave Approval | Approver</h1>
+        <h1 class="page-header" id="leaveHodJs"> eLeave <small>| Leave Approval | Approver</small></h1>
         <div class="row p-2">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">

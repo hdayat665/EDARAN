@@ -15,7 +15,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" id="updateformstate">Save</button>
+                        <button class="btn btn-primary" id="updateformstate">Update</button>
                     </div>
                 </div>
             </div>

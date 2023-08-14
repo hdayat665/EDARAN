@@ -160,6 +160,23 @@ class MyleaveService
 
         $input = $r->input();
 
+        $currentDateEntitlement = Carbon::now();
+
+        $leave_entitlement = leaveEntitlementModel::select('*')
+        ->where('id_employment', '=', Auth::user()->id)
+        ->where('le_year', '=', $currentDateEntitlement->year)
+        ->first();
+
+        if (empty($leave_entitlement)) {
+            $data = [
+                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }
+
         $checkleavetype = leavetypesModel::where([
             ['id', '=', $input['typeofleave']],
             ['tenant_id', '=', Auth::user()->tenant_id]
@@ -380,7 +397,9 @@ class MyleaveService
             $fileDocument = null;
         }
 
-        $data9 = $input['reason'];
+        $data9 = strtoupper($input['reason']);
+
+
         $dataavailability = $input['availability'];
 
         if ($r->input('noofday') == 1) {
@@ -550,7 +569,10 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-            ->select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
+            ->where(function ($query) {
+                $query->where('myleave.up_rec_status', '=', '1')
+                    ->orWhere('myleave.up_rec_status', '=', '2');
+            })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -566,9 +588,13 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-            ->select('userProfile.user_id', 'userProfile.fullName')
+            ->where(function ($query) {
+                $query->where('myleave.up_rec_status', '=', '3')
+                    ->orWhere('myleave.up_rec_status', '=', '4');
+            })
             ->groupBy('userProfile.user_id')
             ->get();
+
         return $data;
     }
     public function idemployerhod()

@@ -83,7 +83,8 @@ $(document).ready(function () {
 
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
-        $("#checker1")
+        // console.log(roleId + "roleid");
+        $("#checker1,#checker2,#checker3,#checker4,#checker5,#recommender,#approver")
             .find("option")
             .remove()
             .end()
@@ -120,6 +121,18 @@ $(document).ready(function () {
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3").innerHTML +=
+                    '<option value="' +
+                    user["up_user_id"] +
+                    '">' +
+                    user["user_profile"]["fullName"] +
+                    "</option>";
+                document.getElementById("checker4").innerHTML +=
+                    '<option value="' +
+                    user["up_user_id"] +
+                    '">' +
+                    user["user_profile"]["fullName"] +
+                    "</option>";
+                document.getElementById("checker5").innerHTML +=
                     '<option value="' +
                     user["up_user_id"] +
                     '">' +
@@ -490,4 +503,200 @@ $(document).ready(function () {
             });
         });
     });
+
+    
+    function getroleAdmin(id) {
+        return $.ajax({
+            url: "/getroleAdmin/" + id,
+        });
+    }
+
+    // Event when 'addapproval' is clicked
+    $(document).on("click", "#addapproval", function () {
+        var id = $(this).data("id");
+        console.log(id + "id");
+        var vehicleData = getroleAdmin(id);
+
+        vehicleData.then(function (data) {
+            // console.log(data);
+            $("#roleId").val(data.role);
+            $("#id").val(data.id);
+            function addOption(elementId, value, name) {
+                var selectElement = document.getElementById(elementId);
+                if (value && name) {
+                    selectElement.innerHTML += '<option value="' + value + '">' + name + '</option>';
+                } else {
+                    selectElement.innerHTML += '<option value="">Please Choose</option>';
+                }
+            }
+            
+            addOption("checker1", data.checker1, data.checker1Name);
+            addOption("checker2", data.checker2, data.checker2Name);
+            addOption("checker3", data.checker3, data.checker3Name);
+            addOption("checker4", data.checker4, data.checker4Name);
+            addOption("checker5", data.checker5, data.checker5Name);
+            addOption("recommender", data.recommender, data.recommenderName);
+            addOption("approver", data.approver, data.approverName);
+        });
+
+        $("#addapprovalmodal").modal("show");
+    });
+
+    // To store the selected values
+    var dropdownValues = {};
+
+    // Capture the current value on mousedown for any dropdown
+    $(document).on("mousedown", ".checker-dropdown", function () {
+        var dropdownId = $(this).attr("id");
+        dropdownValues[dropdownId] = $(this).val();
+    });
+
+    // Common function for handling dropdown focus
+    function handleDropdownFocus(dropdownId) {
+        // Fetch the current value before clearing the dropdown
+        var currentValue = $("#" + dropdownId).val();
+    
+        // Clear existing options in dropdown
+        $("#" + dropdownId).empty();
+    
+        // Re-add the 'Please Choose' option as the first option
+        $("#" + dropdownId).append('<option label="Please Choose"> </option>');
+    
+        // Fetch and populate options based on currently selected 'roleId' or 'roleIdF'
+        var roleId;
+        if (["checker1F", "checker2F","checker3F", "checker4F", "checker5F", "recommenderF","approverF"].includes(dropdownId)) { //shortcut for below
+            // if (dropdownId === "checker2F" || dropdownId === "checker1F") {
+            roleId = $("#roleIdF").val();
+        } else if (["checker1C", "checker2C","checker3C", "checker4C", "checker5C","recommenderC","approverC"].includes(dropdownId)) {
+            roleId = $("#roleIdC").val();
+        }
+        else {
+            roleId = $("#roleId").val();
+        }
+    
+        function getUserByUserRole(roleId) {
+            return $.ajax({
+                url: "/getUserByUserRole/" + roleId,
+            });
+        }
+    
+        var users = getUserByUserRole(roleId);
+    
+        users.then(function (data) {
+            var dropdownElement = document.getElementById(dropdownId);
+            for (let i = 0; i < data.length; i++) {
+                const userItem = data[i];
+                var opt = document.createElement("option");
+                opt.value = userItem["up_user_id"];
+                opt.textContent = userItem["user_profile"]["fullName"];
+                dropdownElement.appendChild(opt);
+            }
+    
+            // Reselect the previously selected option
+            if (currentValue) {
+                $("#" + dropdownId).val(currentValue);
+            } else {
+                $("#" + dropdownId).val(dropdownValues[dropdownId]);
+            }
+        });
+    }
+    
+
+    // Simplify focus events for dropdowns
+    $(document).on("focus", ".dropdown-focus-handler", function () {
+        var dropdownId = $(this).attr("id");
+        handleDropdownFocus(dropdownId);
+    });
+
+    // Event when 'checker1' dropdown gets focus
+    $(document).on("focus", "#checker1, #checker2, #checker3, #checker4, #checker5, #recommender, #approver", function () {
+        handleDropdownFocus($(this).attr("id"));
+    });
+    
+
+
+    //finance
+    function getroleFinance(id) {
+        return $.ajax({
+            url: "/getroleFinance/" + id,
+        });
+    }
+
+     // Event when 'addapproval' is clicked
+     $(document).on("click", "#financemodal", function () {
+        var id = $(this).data("id");
+        console.log(id + "id");
+        var vehicleData = getroleFinance(id);
+
+        vehicleData.then(function (data) {
+            // console.log(data);
+            $("#roleIdF").val(data.role);
+            $("#idF").val(data.id);
+            function addOption(elementId, value, name) {
+                var selectElement = document.getElementById(elementId);
+                if (value && name) {
+                    selectElement.innerHTML += '<option value="' + value + '">' + name + '</option>';
+                } else {
+                    selectElement.innerHTML += '<option value="">Please Choose</option>';
+                }
+            }
+            
+            addOption("checker1F", data.checker1, data.checker1Name);
+            addOption("checker2F", data.checker2, data.checker2Name);
+            addOption("checker3F", data.checker3, data.checker3Name);
+            addOption("recommenderF", data.recommender, data.recommenderName);
+            addOption("approverF", data.approver, data.approverName);
+            addOption("checker4F", data.checker4, data.checker4Name);
+            addOption("checker5F", data.checker5, data.checker5Name);
+        });
+
+        $("#financeopenmodal").modal("show");
+    });
+
+    $(document).on("focus", "#checker1F, #checker2F, #checker3F, #checker4F, #checker5F, #recommenderF, #approverF", function () {
+        handleDropdownFocus($(this).attr("id"));
+    });
+
+    // addcashadvance
+
+    function getroleCA(id) {
+        return $.ajax({
+            url: "/getroleCA/" + id,
+        });
+    }
+
+    $(document).on("click", "#cashadvancemodal", function () {
+        var id = $(this).data("id");
+        console.log(id + "id");
+        var vehicleData = getroleCA(id);
+
+        vehicleData.then(function (data) {
+            // console.log(data);
+            $("#roleIdC").val(data.role);
+            $("#idCA").val(data.id);
+            function addOption(elementId, value, name) {
+                var selectElement = document.getElementById(elementId);
+                if (value && name) {
+                    selectElement.innerHTML += '<option value="' + value + '">' + name + '</option>';
+                } else {
+                    selectElement.innerHTML += '<option value="">Please Choose</option>';
+                }
+            }
+            
+            addOption("checker1C", data.checker1, data.checker1Name);
+            addOption("checker2C", data.checker2, data.checker2Name);
+            addOption("checker3C", data.checker3, data.checker3Name);
+            addOption("recommenderC", data.recommender, data.recommenderName);
+            addOption("approverC", data.approver, data.approverName);
+            addOption("checker4C", data.checker4, data.checker4Name);
+            addOption("checker5C", data.checker5, data.checker5Name);
+        });
+
+        $("#casheopenmodal").modal("show");
+    });
+
+    $(document).on("focus", "#checker1C, #checker2C, #checker3C, #checker4C, #checker5C, #recommenderC, #approverC", function () {
+        handleDropdownFocus($(this).attr("id"));
+    });
+    
 });

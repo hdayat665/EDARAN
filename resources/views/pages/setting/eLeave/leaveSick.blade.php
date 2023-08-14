@@ -3,7 +3,7 @@
 @section('content')
 
     {{-- content-start --}}
-	
+
 
     <div id="content" class="app-content">
     <!-- END breadcrumb -->
@@ -15,11 +15,11 @@
                     <div class="row p-2">
                         <h3>Sick Leave List</h3>
                     </div>
-                    
+
                     <div class="row p-2">
                         <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
                             <thead>
-                                <tr>	
+                                <tr>
                                 <th class="text-nowrap">No.</th>
                                 <th class="text-nowrap">Job Grade</th>
                                 <th class="text-nowrap">Permanent (0-2 years)</th>
@@ -31,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             <tr>
                                 <td>1</td>
                                 <td>No Hospitalization</td>
@@ -52,7 +52,7 @@
                                 <td><input type="text" id="fname" name="fname"></td>
                                 <td><input type="text" id="fname" name="fname"></td>
                             </tr>
-                            
+
                         </tbody>
                             </table>
                     </div>

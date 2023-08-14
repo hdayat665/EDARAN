@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content" >
-    <h1 class="page-header">Reporting | Eleave Report</h1>
+    <h1 class="page-header">Reporting <small>| E-leave</small></h1>
     <div class="row" id="eleavereportjs">
         <div class="col-xl-15">
             <ul class="nav nav-tabs">
@@ -20,14 +20,14 @@
                         <div class="panel-body">
                             <div class="row p-2">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Date</label>
+                                    <label for="emergency-firstname" class="form-label">Date</label>
                                     <input type="text" id="daterange" class="form-control" value="" name="date_range" placeholder="click to select the date range" />
 
                                 </div>
                             </div>
                             <div class="row p-2" id="rowproject">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Type of Leave</label>
+                                    <label for="emergency-firstname" class="form-label">Type of Leave</label>
                                     <select class="form-select" name="typelist">
                                         <option value="" label="ALL"></option>
                                             @foreach($types as $dt)
@@ -38,7 +38,7 @@
                             </div>
                             <div class="row p-2">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select By :</label>
+                                    <label for="emergency-firstname" class="form-label">By :</label>
                                     <select class="form-select" id="reportby" name="">
                                         <option value="" selected>ALL</option>
                                         <option value="1">DEPARTMENT</option>
@@ -59,7 +59,7 @@
                             </div>
                              <div class="row p-2" id="menu2" style="display: none">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Employer</label>
+                                    <label for="emergency-firstname" class="form-label">Employee Name</label>
                                     <select class="form-select" name="employer" id="employer">
                                         <option value="" label="ALL"></option>
                                             @foreach($employer as $de)
@@ -70,12 +70,12 @@
                             </div>
                             <div class="row p-2" id="rowdepartment">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Status: </label>
+                                    <label for="emergency-firstname" class="form-label">Status: </label>
                                     <select class="form-select" name="status">
                                         <option value="">ALL</option>
                                         <option value="1">PENDING</option>
-                                        <option value="2">PENDING TO APPROVED</option>
-                                        <option value="3">REJECT</option>
+                                        <option value="2">PENDING APPROVAL</option>
+                                        <option value="3">REJECTED</option>
                                         <option value="4">APPROVED</option>
 
                                     </select>
@@ -84,7 +84,7 @@
 
 
                             <div class="row p-2">
-                                <div class="col-sm-12" style="display: flex; justify-content: flex-end" >
+                                <div class="col-sm-12" >
                                     <button type="submit" class="btn btn-primary mt-3">
                                         Submit
                                     </button>

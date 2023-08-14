@@ -8,7 +8,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">HRIS | Policy & SOP</h1>
+    <h1 class="page-header">Setting <small> | Policy & SOP </small></h1>
 
 
 
@@ -38,7 +38,7 @@
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <!-- BEGIN tab-pane -->
                 <div class="tab-pane fade active show" id="default-tab-1">
-                    <h3 class="mt-10px"></i> Policy List </h3>
+                    {{-- <h3 class="mt-10px"></i> Policy List </h3> --}}
                     <div class="panel-heading-btn">
                         <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy</a>
                     </div>
@@ -150,7 +150,7 @@
             </div>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
 

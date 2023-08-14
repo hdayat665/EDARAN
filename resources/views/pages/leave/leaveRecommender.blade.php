@@ -14,7 +14,7 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="leaveApprJs"> | Leave Approval | Recommender</h1>
+        <h1 class="page-header" id="leaveApprJs"> eLeave <small>| Leave Approval | Recommender</small></h1>
         <div class="row p-2">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">

@@ -1,5 +1,4 @@
 <div class="tab-pane fade active show" id="default-tab-1">
-    <h3 class="mt-10px"></i> General List </h3>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
