@@ -36,12 +36,11 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="eleaveholidayJs">Setting | Holiday</h1>
+        <h1 class="page-header" id="eleaveholidayJs">Setting <small>| Holiday</small></h1>
         <div class="panel panel">
             <div class="panel-body">
                 <div class="form-control">
                     <div class="row p-2">
-                        <h3>Holiday List</h3>
                     </div>
                     <div class="row p-2 ">
                         <div class="col align-self-start">

@@ -649,7 +649,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Postcode';
+        $data['msg'] = 'Location is Created';
 
         return $data;
     }
@@ -670,7 +670,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Location';
+            $data['msg'] = 'Location is Deleted';
         }
 
         return $data;
@@ -714,7 +714,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State and Countries';
+        $data['msg'] = 'Country & State is Created.';
 
         return $data;
     }

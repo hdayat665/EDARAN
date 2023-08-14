@@ -1,12 +1,11 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Setting | Claim Category</h1>
+        <h1 class="page-header">Setting <small>| Claim Category</small></h1>
         <div class="panel panel">
             <div class="panel-body" style="relative">
                 <div>
                     <div class="row" id="claimCategoryJs">
-                        <h3>Claim Category List</h3>
                         <div class="form-check">
                             <a href="/setting/addClaimView" type="button" class="btn btn-white mt-3 mb-3" name="" id=""><i class="fa fa-plus"></i> Claim Category</a>
                         </div>

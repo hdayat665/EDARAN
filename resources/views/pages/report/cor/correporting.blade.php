@@ -6,7 +6,7 @@
 
     {{-- <h1 class="page-header" id="eclaimReportJs">Report | Claim Report </h1> --}}
 
-    <h1 class="page-header" id="reportcorJs">Charge Out Rate History</h1>
+    <h1 class="page-header" id="reportcorJs">Reporting | Charge Out Rate</h1>
     <div class="panel panel">
        <div class="panel-body">
            <div class="row p-2">
@@ -40,15 +40,17 @@
                    </div>
                </div>
            </div>
-       </div>
-   </div>
-   <div class="row p-2">
-       <div class="col d-flex justify-content-end">
-           <a href="/reportingchargeoutratet"><button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Submit</button></a>
-         </div>
-        </form>
-   </div>
 
+           <div class="row p-2">
+            <div class="col-md-7">
+                <label class="form-label col-form-label col-md-4"></label>
+            </div>
+            <div class="row-p-2">
+                <a href="/reportingchargeoutratet"><button class="btn btn-primary" type="submit"> Submit</button></a>
+            </div>
+            </div>
+        </form>
+       </div>
 
 
 

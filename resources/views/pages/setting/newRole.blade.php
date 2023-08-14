@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header" id="newRoleJs">Settings<small>| System Role</small></h1>
+        <h1 class="page-header" id="newRoleJs">Setting<small> | System Role</small></h1>
         <div class="panel panel">
             <div class="panel-heading">
                 <div class="col-md-12 d-flex justify-content-end">
@@ -44,7 +44,7 @@
                 </table>
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>

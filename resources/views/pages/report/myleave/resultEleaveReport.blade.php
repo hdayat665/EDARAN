@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| Eleave Report </small></h1>
+    <h1 class="page-header">Reporting <small>| E-leave </small></h1>
     <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             {{-- <div class="row p-2">
@@ -33,7 +33,7 @@
                     <?php $id = 0 ?>
                         @if ($myleavereport)
                         @foreach ($myleavereport as $m)
-                    <?php 
+                    <?php
                         $id++;
                         $applied_date = new DateTime($m->applied_date);
                         $start_date = new DateTime($m->start_date);
@@ -77,12 +77,12 @@
                     </tr>
                     @endforeach
                     @endif
-                  
+
                 </tbody>
                 <tfoot>
                     <tr>
                         <th colspan="6">Total:</th>
-                        
+
                     </tr>
                 </tfoot>
             </table>
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        
+
 </div>
     </div>
 

@@ -3,11 +3,11 @@
     <h3 class="page-header">Setting <small>| Show and change application settings</small></h3>
     <div class="panel panel">
         <div class="panel-body">
-            <h3 class="mt-10px"></i> General Settings</h3><br>
+            <h3 class="mt-10px"></i> General Setting</h3><br>
             <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/role"><i class="fas fa-circle-user fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Roles</h5>
+                    <h5 class="mb-5px">Role</h5>
                 </div>
             </div><br><br><br>
             <div class="row text-center">
@@ -80,7 +80,7 @@
                     <h5 class="mb-5px">Location</h5>
                 </div>
             </div><br>
-            <h3 class="mt-10px"></i> Timesheets Settings</h3> <br>
+            <h3 class="mt-10px"></i> Timesheets Setting</h3> <br>
             <div class="row text-center">
                 {{-- <div class="col-lg-2">
                     <a class="mb-10px" href="/timesheetperiod"><i class="fas fa-calendar-days fa-4x text-blue"></i></a><br><br>
@@ -93,11 +93,11 @@
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/typeOfLogs"><i
                             class="fa fa-pen-to-square fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Type of Logs</h5>
+                    <h5 class="mb-5px">Type of Log</h5>
                 </div>
             </div>
             <br>
-            <h3 class="mt-10px"></i> eLeave Settings</h3> <br>
+            <h3 class="mt-10px"></i> eLeave Setting</h3> <br>
             <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/leaveAnnual"><i class="fas fa-calendar fa-4x text-blue"></i></a><br><br>
@@ -109,11 +109,11 @@
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/weekendEntitlement"><i class="fas fa-calendar-day fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Weekend Entitlement</h5>
+                    <h5 class="mb-5px">Working Hour</h5>
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/leavetypes"><i class="fa fa-calendar fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Leave Types</h5>
+                    <h5 class="mb-5px">Leave Type</h5>
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/holidaylist"><i class="fas fa-plane-departure fa-4x text-blue"></i></a><br><br>
@@ -123,7 +123,7 @@
 
 
             <br>
-            <h3 class="mt-10px"></i> eClaim Settings</h3> <br>
+            <h3 class="mt-10px"></i> eClaim Setting</h3> <br>
             <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/setting/eclaimGeneralView"><i

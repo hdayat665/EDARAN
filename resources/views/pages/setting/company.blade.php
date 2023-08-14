@@ -14,7 +14,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header" id="companyJs">Settings <small>| Companies </small></h1>
+    <h1 class="page-header" id="companyJs">Setting <small>| Companies </small></h1>
     <div class="panel panel">
 
         <!-- BEGIN panel-heading -->
@@ -73,7 +73,7 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>
@@ -100,8 +100,8 @@
                         <div class="mb-3">
                             <label class="form-label">Company Name* </label>
                             <input type="text" class="form-control" name="companyName" placeholder="Company Name">
-                        </div> 
-                    
+                        </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    
+
                     <button class="btn btn-primary" id="updateButton">Update</button>
                 </div>
                 </form>

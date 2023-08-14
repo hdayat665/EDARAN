@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header" id="projectReportListingJs">Reporting <small>| Project | View Listing Report </small></h1>
+    <h1 class="page-header" id="projectReportListingJs">Reporting <small>| Project | Project Listing </small></h1>
     <div class="panel panel">
         <div class="panel-body">
             <h4 class="panel-title"> Project Information</h4>
@@ -143,12 +143,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $id = 0 ?> 
-                    
+                        <?php $id = 0 ?>
+
                         @if ($projectMembers)
                                 @foreach ($projectMembers as $projectMember)
                         <?php $id++ ?>
-                            
+
                                 <tr class="odd gradeX">
                                     <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                     <td>{{$projectMember->employeeName}}</td>

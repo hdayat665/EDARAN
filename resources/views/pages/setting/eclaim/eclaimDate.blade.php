@@ -1,13 +1,13 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Setting | Claims Date</h1>
+        <h1 class="page-header">Setting <small>| Claim Date</small></h1>
         <div class="panel panel" id="eclaimDateJs">
             <div class="panel-body">
                 <form id="submitForm">
                     <div class="">
                         <div class="row">
-                            <h3>Configure Claim Date</h3>
+                            <h3>Claim Date Setting</h3>
                         </div>
                         <div class="row p-2">
                             <div class="col">
@@ -23,10 +23,10 @@
                                             <option class="form-label" value="">Please Select</option>
                                             <?php $days = getDaysInMonth(); ?>
                                             @foreach ($days as $day)
-                                            <option class="form-control" 
+                                            <option class="form-control"
                                             @if ($data)
                                                 {{ $data->submit_claim_day_admin == $day ? 'selected' : '' }}
-                                            @endif 
+                                            @endif
                                             value="{{ $day }}">{{ $day }} hb</option>
                                             @endforeach
                                         </select>
@@ -35,17 +35,17 @@
                                 <br>
                                 <div class="row p-2">
                                     <label for="expiredate" class="col-sm-5 col-form-label">Open Claim Duration <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
-                                            data-toggle="tooltipexpiredate" title="User can decide duration to open claim 
+                                            data-toggle="tooltipexpiredate" title="User can decide duration to open claim
                             "></i></label>
                             <div class="col-sm-3">
                                 <select class="form-select" id="" name="open_claim_duration">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $noMonths = getNumberMonth(); ?>
                                     @foreach ($noMonths as $noMonth)
-                                    <option class="form-control" 
+                                    <option class="form-control"
                                     @if ($data)
                                         {{ $data->open_claim_duration == $noMonth ? 'selected' : '' }}
-                                    @endif 
+                                    @endif
                                     value="{{ $noMonth }}">{{ $noMonth }} Month</option>
                                     @endforeach
                                 </select>
@@ -56,7 +56,7 @@
                                 <div class="row p-2">
                                     <label for="claimfinance" class="col-sm-5 col-form-label">Submit Claim to
                                         Finance on Every: <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltipsubmitclaim"
-                                            title="Setup the claim batch date that should be 
+                                            title="Setup the claim batch date that should be
                             moved to Finance approver
                             "></i></label>
                             <div class="col-sm-3">
@@ -64,10 +64,10 @@
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $days = getDaysInMonth(); ?>
                                     @foreach ($days as $day)
-                                    <option class="form-control" 
+                                    <option class="form-control"
                                     @if ($data)
                                         {{ $data->submit_claim_day_finance == $day ? 'selected' : '' }}
-                                    @endif 
+                                    @endif
                                     value="{{ $day }}">{{ $day }} hb</option>
                                     @endforeach
                                 </select>
@@ -83,10 +83,10 @@
                                             <option class="form-label" value="">Please Select</option>
                                             <?php $rows = getDisplayRow(); ?>
                                             @foreach ($rows as $row)
-                                            <option class="form-control" 
+                                            <option class="form-control"
                                             @if ($data)
                                                 {{ $data->table_row_display == $row ? 'selected' : '' }}
-                                            @endif 
+                                            @endif
                                             value="{{ $row }}">{{ $row }} row</option>
                                             @endforeach
                                         </select>
