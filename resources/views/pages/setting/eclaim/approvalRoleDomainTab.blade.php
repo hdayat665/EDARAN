@@ -1,4 +1,5 @@
 <div class="tab-pane fade" id="default-tab-2">
+    {{-- <h3 class="mt-10px"></i> Domain List </h3>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
@@ -281,5 +282,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
