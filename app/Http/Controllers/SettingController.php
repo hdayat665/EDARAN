@@ -914,7 +914,7 @@ class SettingController extends Controller
 
         $result['datas'] = $ss->approvalRoleView();
         $result['companys'] = getCompany();
-
+        $result['roles'] = $ss->getRoles(); //admin
         return view('pages.setting.eclaim.eclaimApprovalRole', $result);
     }
 
@@ -1640,4 +1640,22 @@ class SettingController extends Controller
 
         return $result;
     }
+
+    public function getroleAdmin($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getroleAdmin($id);
+
+        return $result;
+    }
+
+    // public function getRoleFinances($id = '')
+    // {
+    //     $ss = new SettingService;
+
+    //     $result = $ss->getRoleFinances($id);
+
+    //     return $result;
+    // }
 }

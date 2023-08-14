@@ -83,7 +83,8 @@ $(document).ready(function () {
 
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
-        $("#checker1")
+        // console.log(roleId + "roleid");
+        $("#checker1,#checker2,#checker3,#recommender,#approver")
             .find("option")
             .remove()
             .end()
@@ -490,4 +491,116 @@ $(document).ready(function () {
             });
         });
     });
+
+    
+    function getroleAdmin(id) {
+        return $.ajax({
+            url: "/getroleAdmin/" + id,
+        });
+    }
+
+    // Event when 'addapproval' is clicked
+    $(document).on("click", "#addapproval", function () {
+        var id = $(this).data("id");
+        console.log(id + "id");
+        var vehicleData = getroleAdmin(id);
+
+        vehicleData.then(function (data) {
+            // console.log(data);
+            $("#roleId").val(data.role);
+            $("#id").val(data.id);
+            function addOption(elementId, value, name) {
+                var selectElement = document.getElementById(elementId);
+                if (value && name) {
+                    selectElement.innerHTML += '<option value="' + value + '">' + name + '</option>';
+                } else {
+                    selectElement.innerHTML += '<option value="">Please Choose</option>';
+                }
+            }
+            
+            addOption("checker1", data.checker1, data.checker1Name);
+            addOption("checker2", data.checker2, data.checker2Name);
+            addOption("checker3", data.checker3, data.checker3Name);
+            addOption("recommender", data.recommender, data.recommenderName);
+            addOption("approver", data.approver, data.approverName);
+        });
+
+        $("#addapprovalmodal").modal("show");
+    });
+
+    // To store the selected values
+    var dropdownValues = {};
+
+    // Capture the current value on mousedown for any dropdown
+    $(document).on("mousedown", ".checker-dropdown", function () {
+        var dropdownId = $(this).attr("id");
+        dropdownValues[dropdownId] = $(this).val();
+    });
+
+    // Common function for handling dropdown focus
+    function handleDropdownFocus(dropdownId) {
+        // Fetch the current value before clearing the dropdown
+        var currentValue = $("#" + dropdownId).val();
+
+        // Clear existing options in dropdown
+        $("#" + dropdownId).empty();
+
+        // Re-add the 'Please Choose' option as the first option
+        $("#" + dropdownId).append('<option label="Please Choose"> </option>');
+
+        // Fetch and populate options based on currently selected 'roleId'
+        var roleId = $("#roleId").val();
+
+        function getUserByUserRole(roleId) {
+            return $.ajax({
+                url: "/getUserByUserRole/" + roleId,
+            });
+        }
+
+        var users = getUserByUserRole(roleId);
+
+        users.then(function (data) {
+            var dropdownElement = document.getElementById(dropdownId);
+            for (let i = 0; i < data.length; i++) {
+                const userItem = data[i];
+                var opt = document.createElement("option");
+                opt.value = userItem["up_user_id"];
+                opt.textContent = userItem["user_profile"]["fullName"];
+                dropdownElement.appendChild(opt);
+            }
+
+            // Reselect the previously selected option
+            if (currentValue) {
+                $("#" + dropdownId).val(currentValue);
+            } else {
+                $("#" + dropdownId).val(dropdownValues[dropdownId]);
+            }
+        });
+    }
+
+    // Simplify focus events for dropdowns
+    $(document).on("focus", ".dropdown-focus-handler", function () {
+        var dropdownId = $(this).attr("id");
+        handleDropdownFocus(dropdownId);
+    });
+
+    // Event when 'checker1' dropdown gets focus
+    $(document).on("focus", "#checker1", function () {
+        handleDropdownFocus("checker1");
+    });
+    $(document).on("focus", "#checker2", function () {
+        handleDropdownFocus("checker2");
+    });
+    $(document).on("focus", "#checker3", function () {
+        handleDropdownFocus("checker3");
+    });
+    $(document).on("focus", "#recommender", function () {
+        handleDropdownFocus("recommender");
+    });
+    $(document).on("focus", "#approver", function () {
+        handleDropdownFocus("approver");
+    });
+
+
+    
 });

@@ -434,6 +434,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
+            Route::get('/getroleAdmin/{id}', 'getroleAdmin');
+            
 
 
             // eleave Anual leave
