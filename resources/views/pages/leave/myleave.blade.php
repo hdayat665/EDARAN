@@ -15,6 +15,10 @@
             overflow: visible ;
         }
 
+        .upperReason {
+            text-transform: uppercase;
+        }
+
     </style>
 
     <div id="content" class="app-content">
@@ -75,63 +79,65 @@
                                     <div class="row p-2">
                                         <div class="row">
                                             <div class="col d-flex justify-content-end">
-                                                <button class="btn btn-primary" type="button" id="filtermy"><i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
+                                                <a id="filtermy" class="btn btn-default btn-icon btn-lg">
+                                                    <i class="fa fa-filter"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <form action="/myleave#default-tab-1" method="POST">
                                             <div id="filterleavemy" style="display: none">
-                                                <div class="form-control">
-                                                    <div class="row p-2">
-                                                        <div class="col-md-2">
-                                                            <label class="form-label">Apply Date</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="applydatemy" value="<?php echo $applydatemy; ?>" id="datepicker-filtermy" placeholder="YYYY/MM/DD"/>
-
-                                                            </div>
+                                                <div class="row p-2">
+                                                    <h5>Filter</h5>
+                                                    <br>
+                                                    <br>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Apply Date</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="applydatemy" value="<?php echo $applydatemy; ?>" id="datepicker-filtermy" placeholder="YYYY/MM/DD"/>
                                                         </div>
-                                                        <div class="col-md-2">
-                                                            <label class="form-label">Type of Leave</label>
-                                                            <select class="form-select" name="typelistmy" id = "typelistmy">
-                                                                <option value="">PLEASE CHOOSE</option>
-                                                                @foreach($types as $dt)
-                                                                    <option value="{{ $dt->id }}" {{ old('typelistmy') == $dt->id ? 'selected' : ($typelistmy == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <label class="form-label">Status</label>
-                                                            <select class="form-select" id = "status_searchingmy" name="statusmy">
-                                                                <option value="">PLEASE CHOOSE</option>
-                                                                <option value="4" {{ old('statusmy') == '4' || $status_searchingmy == '4' ? 'selected' : '' }}>Approved</option>
-                                                                <option value="3" {{ old('statusmy') == '3' || $status_searchingmy == '3' ? 'selected' : '' }}>Rejected</option>
-                                                                <option value="2" {{ old('statusmy') == '2' || $status_searchingmy == '2' ? 'selected' : '' }}>Pending</option>
-                                                                <option value="1" {{ old('statusmy') == '1' || $status_searchingmy == '1' ? 'selected' : '' }}>Pending Approval</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-2"></div>
-
-                                                        <div class="col">
-                                                            <div class="row-p-2">
-                                                                <label for="test"></label>
-                                                            </div>
-                                                            <div class="row">
-                                                                <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                                                            </div>
-                                                        </div>&nbsp;
-                                                        <div class="col">
-                                                            <div class="row-p-2">
-                                                                <label for="test"></label>
-                                                            </div>
-                                                            <div class="row">
-                                                                <a href="#" class="btn btn-primary form-control" id="resetmy"> <i class="fas fa-repeat"></i> Reset</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2"></div>
-                                                        <div class="col-md-2"></div>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Type of Leave</label>
+                                                        <select class="form-select" name="typelistmy" id = "typelistmy">
+                                                            <option value="">PLEASE CHOOSE</option>
+                                                            @foreach($types as $dt)
+                                                                <option value="{{ $dt->id }}" {{ old('typelistmy') == $dt->id ? 'selected' : ($typelistmy == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Status</label>
+                                                        <select class="form-select" id = "status_searchingmy" name="statusmy">
+                                                            <option value="">PLEASE CHOOSE</option>
+                                                            <option value="4" {{ old('statusmy') == '4' || $status_searchingmy == '4' ? 'selected' : '' }}>Approved</option>
+                                                            <option value="3" {{ old('statusmy') == '3' || $status_searchingmy == '3' ? 'selected' : '' }}>Rejected</option>
+                                                            <option value="2" {{ old('statusmy') == '2' || $status_searchingmy == '2' ? 'selected' : '' }}>Pending</option>
+                                                            <option value="1" {{ old('statusmy') == '1' || $status_searchingmy == '1' ? 'selected' : '' }}>Pending Approval</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-2"></div>
+
+                                                    <div class="col">
+                                                        <div class="row-p-2">
+                                                            <label for="test"></label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                                        </div>
+                                                    </div>&nbsp;
+                                                    <div class="col">
+                                                        <div class="row-p-2">
+                                                            <label for="test"></label>
+                                                        </div>
+                                                        <div class="row">
+                                                            <a href="#" class="btn btn-primary form-control" id="resetmy"> <i class="fas fa-repeat"></i> Reset</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2"></div>
+                                                    <div class="col-md-2"></div>
                                                 </div>
                                             </div>
                                         </form>
@@ -232,58 +238,61 @@
                                 <div class="row p-2">
                                     <div class="row">
                                         <div class="col d-flex justify-content-end">
-                                            <button class="btn btn-primary" type="button" id="filter"><i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
+                                            <a id="filter" class="btn btn-default btn-icon btn-lg">
+                                                <i class="fa fa-filter"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <form action="/myleave#default-tab-2" method="POST">
                                         <div id="filterleave" style="display: none">
-                                            <div class="form-control">
-                                                <div class="row p-2">
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Apply Date</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="YYYY/MM/DD"/>
-                                                        </div>
+                                            <div class="row p-2">
+                                                <h5>Filter</h5>
+                                                <br>
+                                                <br>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Apply Date</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="YYYY/MM/DD"/>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Type of Leave</label>
-                                                        <select class="form-select" name="typelist" id = "typelist">
-                                                            <option value="">PLEASE CHOOSE</option>
-                                                            @foreach($types as $dt)
-                                                                <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typelist == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Status</label>
-                                                        <select class="form-select" id = "status_searching" name="status">
-                                                            <option value="">PLEASE CHOOSE</option>
-                                                            <option value="4" {{ old('status') == '4' || $status_searching == '4' ? 'selected' : '' }}>Approved</option>
-                                                            <option value="3" {{ old('status') == '3' || $status_searching == '3' ? 'selected' : '' }}>Rejected</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col">
-                                                        <div class="row-p-2">
-                                                            <label for="test"></label>
-                                                        </div>
-                                                        <div class="row">
-                                                            <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                                                        </div>
-                                                    </div>&nbsp;
-                                                    <div class="col">
-                                                        <div class="row-p-2">
-                                                            <label for="test"></label>
-                                                        </div>
-                                                        <div class="row">
-                                                            <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i> Reset</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-2"></div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Type of Leave</label>
+                                                    <select class="form-select" name="typelist" id = "typelist">
+                                                        <option value="">PLEASE CHOOSE</option>
+                                                        @foreach($types as $dt)
+                                                            <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typelist == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Status</label>
+                                                    <select class="form-select" id = "status_searching" name="status">
+                                                        <option value="">PLEASE CHOOSE</option>
+                                                        <option value="4" {{ old('status') == '4' || $status_searching == '4' ? 'selected' : '' }}>Approved</option>
+                                                        <option value="3" {{ old('status') == '3' || $status_searching == '3' ? 'selected' : '' }}>Rejected</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                                <div class="col">
+                                                    <div class="row-p-2">
+                                                        <label for="test"></label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                                    </div>
+                                                </div>&nbsp;
+                                                <div class="col">
+                                                    <div class="row-p-2">
+                                                        <label for="test"></label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i> Reset</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-2"></div>
                                             </div>
                                         </div>
                                     </form>

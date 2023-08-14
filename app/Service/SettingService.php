@@ -2335,6 +2335,7 @@ class SettingService
             ->where(function ($query) use ($currentDateObj) {
                 $query->whereNull('leave_entitlement.id_employment');
             })
+            ->orderBy('employment.joinedDate', 'desc')
             ->get();
 
         return $data;
@@ -2354,7 +2355,8 @@ class SettingService
             ->leftJoin('jobgrade', 'leave_entitlement.id_jobgrade', '=', 'jobgrade.id')
             ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year', '=', $checkdate)
-            ->orderBy('id', 'desc')->get();
+            ->orderBy('employment.joinedDate', 'desc')
+            ->get();
 
         return $data;
     }
@@ -2705,9 +2707,10 @@ class SettingService
     public function holidaylistView()
     {
 
-        $dataallstate = holidayModel::select('*')
+        $dataallstate = holidayModel::select('*', 'country_name as country')
             ->where('tenant_id', '=', Auth::user()->tenant_id)
-            ->orderBy('id', 'desc')
+            ->leftJoin('location_country', 'leave_holiday.country_id', '=', 'location_country.country_id')
+            ->orderBy('leave_holiday.country_id', 'desc')
             ->get();
 
         $data = [];

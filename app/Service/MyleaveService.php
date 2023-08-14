@@ -25,10 +25,10 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            // ->where(function ($query) {
-            //     $query->where('myleave.status_final', '=', 1)
-            //         ->orWhere('myleave.status_final', '=', 2);
-            // })
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 1)
+                    ->orWhere('myleave.status_final', '=', 2);
+            })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -42,10 +42,10 @@ class MyleaveService
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            // ->where(function ($query) {
-            //     $query->where('myleave.status_final', '=', 3)
-            //         ->orWhere('myleave.status_final', '=', 4);
-            // })
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 3)
+                    ->orWhere('myleave.status_final', '=', 4);
+            })
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
@@ -159,6 +159,23 @@ class MyleaveService
     public function createtmyleave($r) {
 
         $input = $r->input();
+
+        $currentDateEntitlement = Carbon::now();
+
+        $leave_entitlement = leaveEntitlementModel::select('*')
+        ->where('id_employment', '=', Auth::user()->id)
+        ->where('le_year', '=', $currentDateEntitlement->year)
+        ->first();
+
+        if (empty($leave_entitlement)) {
+            $data = [
+                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }
 
         $checkleavetype = leavetypesModel::where([
             ['id', '=', $input['typeofleave']],
@@ -380,7 +397,9 @@ class MyleaveService
             $fileDocument = null;
         }
 
-        $data9 = $input['reason'];
+        $data9 = strtoupper($input['reason']);
+
+
         $dataavailability = $input['availability'];
 
         if ($r->input('noofday') == 1) {

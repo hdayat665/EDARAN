@@ -55,9 +55,9 @@
                             <div class="">
                                 <select class="form-select" name="noofday" id="select3">
                                     <option value="" label="PLEASE CHOOSE"></option>
-                                    <option value="1" label="One Day"></option>
-                                    <option value="0.5" label="Half Day"></option>
-                                    <option value="-" label="Others"></option>
+                                    <option value="1" label="ONE DAY"></option>
+                                    <option value="0.5" label="HALF DAY"></option>
+                                    <option value="-" label="OTHERS"></option>
                                 </select>
                             </div>
                         </div>
@@ -135,9 +135,9 @@
                         </div>
                         <div class="col-sm-6" id="menu10">
                             <label class="form-label" for="Menu8">Reason*</label>
-                                <div class="">
-                                    <textarea class="form-control" rows="3" name="reason"></textarea>
-                                </div>
+                            <div class="">
+                                <textarea class="form-control upperReason" rows="3" name="reason"></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
