@@ -16,15 +16,14 @@
 }
 </style>
 	<div id="content" class="app-content">
-		<h1 class="page-header" id="eleavetypesJs" >Setting | Leave Types</h1>
+		<h1 class="page-header" id="eleavetypesJs" >Setting <small>| Leave Type</small></h1>
 		<div class="panel panel">
 			<div class="panel-body">
 				<div class="form-control">
 					<div class="row p-2">
-						<h3>Leave Types List</h3>
 					</div>
 					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Types</button>
+						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Type</button>
 					</div>
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
@@ -34,6 +33,7 @@
 								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
 								<th class="text-nowrap">Leave Types</th>
+								<th class="text-nowrap">Duration</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -58,6 +58,7 @@
 									</td>
 									<td>{{$t->leave_types_code}}</td>
 									<td>{{$t->leave_types}}</td>
+									<td>{{$t->duration}}</td>
 								</tr>
 								@endforeach
                                 @endif
@@ -67,110 +68,7 @@
 				</div>
 			</div>
 		</div>
-
-
-		{{-- modal addleave type --}}
-		<div class="modal fade" id="addleave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">New Leave Type</h5>
-						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form id="addForm">
-							<div class="mb-3">
-							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" name="leave_types_code" id="leave_types_code" placeholder="LEAVE CODE" style="text-transform:uppercase">
-							</div>
-							<div class="mb-3">
-							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="LEAVE TYPE" style="text-transform:uppercase">
-							</div>
-
-                            <div class="mb-3">
-                                <label for="duration" class="form-label">Duration*</label>
-                                <input type="text" class="form-control" id="duration" name="duration" value = "0">
-                            </div>
-
-							<div class="mb-3">
-								<div class="row g-3 align-items-center">
-									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="checkallowrequest" checked>
-									</div>
-
-										<div class="col-auto">
-											<p class="col-form-label">To be Applied</p>
-										</div>
-										<div class="col-md-2">
-											<input type="text" id="allowrequest" value="0" name="day" class="form-control">
-										</div>
-										<div class="col-auto">
-											<p class="col-form-label">days in advanced</p>
-										</div>
-								</div>
-							</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" id="saveButton">Save</button>
-					</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-		{{-- modal updateleave type --}}
-		<div class="modal fade" id="updateleave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Update Leave Type</h5>
-						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<form id="updateForm">
-							<div class="mb-3">
-							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="LEAVE CODE" style="text-transform:uppercase">
-							<input type="hidden" id="idtypes" class="form-control" name="idtypes" placeholder="">
-							</div>
-							<div class="mb-3">
-							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leavetypes"  name="leavetypes" placeholder="LEAVE TYPE" style="text-transform:uppercase">
-							</div>
-
-							<div class="mb-3">
-								<div class="row g-3 align-items-center">
-									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="ucheckallowrequest" checked>
-									</div>
-
-										<div class="col-auto">
-											<p class="col-form-label">To be Applied</p>
-										</div>
-										<div class="col-md-2">
-											<input type="text" id="uallowrequest" name="day" value="" class="form-control"  disabled>
-										</div>
-										<div class="col-auto">
-											<p class="col-form-label">days in advanced</p>
-										</div>
-								</div>
-							</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" id="updateButton">Update</button>
-					</form>
-					</div>
-				</div>
-			</div>
-		</div>
+        @include('modal.eleave.leavetypes.leaveTypesModelStore')
+        @include('modal.eleave.leavetypes.leaveTypesModelUpdate')
 	</div>
 @endsection

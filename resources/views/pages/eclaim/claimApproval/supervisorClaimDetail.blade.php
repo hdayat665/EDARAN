@@ -79,7 +79,25 @@
                                     <label class="form-label">Status</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly type="text"  class="form-control" value="{{ $claimData->status ?? '-' }}" style="text-align:center">
+                                    <div class="d-grid"> <!-- Use d-grid to create a grid layout -->
+                                        @if ($claimData->status == 'amend')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Amend</a>
+                                        @elseif ($claimData->status == 'recommend')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'bucket')
+                                            <a class="btn btn-success btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Pending</a>
+                                        @elseif ($claimData->status == 'approved')
+                                            <a class="btn btn-info btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Approved</a>
+                                        @elseif ($claimData->status == 'paid' )
+                                            <a class="btn btn-secondary btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Paid</a>
+                                        @elseif ($claimData->status == 'draft')
+                                            <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="Draft">Draft</a>
+                                        @elseif ($claimData->status == 'reject')
+                                            <a class="btn btn-danger btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Rejected</a>
+                                        @elseif ($claimData->status == 'active')
+                                            <a class="btn btn-lime btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">In Queue</a>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Applied Date</label>
@@ -120,57 +138,56 @@
                                 @else
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit">Approve</a>
+                                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit">Approve</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                                        <a href="javascript:;" class="btn btn-warning" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                                        <a href="javascript:;" class="btn btn-danger" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                                     </div>
                                 </div>
                                 @endif
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                                        <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>                                    </div>
                                     </div>
                                 </div>
                                 @else
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                                        <a href="javascript:;" class="btn btn-warning" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                                        <a href="javascript:;" class="btn btn-danger" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a href="" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-                                    </div>
+                                    <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>                                    </div>
                                 </div>
                             @endif
                     </div>

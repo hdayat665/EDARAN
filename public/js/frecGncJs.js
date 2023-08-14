@@ -66,11 +66,12 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = "f_recommender";
+        var desc = "Finance Dept. processing";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -100,6 +101,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "reject";
         var stage = "f_recommender";
+        var desc = "Rejected by Finance. Dept";
 
         $("#supervisorRejectForm").validate({
             // Specify validation rules
@@ -114,13 +116,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -152,6 +149,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var status = "amend";
         var stage = "f_recommender";
+        var desc = "Request to amend by Finance Dept.";
 
         $("#supervisorAmendForm").validate({
             // Specify validation rules
@@ -166,13 +164,8 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 

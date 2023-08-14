@@ -14,7 +14,7 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="eleaveentitlementJs"> | Staff Leave Entitlement</h1>
+        <h1 class="page-header" id="eleaveentitlementJs"> Setting <small>| Staff Leave Entitlement</small></h1>
         <div class="row p-2">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">

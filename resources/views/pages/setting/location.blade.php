@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Settings <small>| Location </small></h1>
+    <h1 class="page-header">Setting <small>| Location </small></h1>
     <div class="panel panel">
         <div class="panel-heading" id="locationJs">
             <div class="col-md-6">
@@ -45,7 +45,7 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>

@@ -46,6 +46,9 @@
                                             <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link " id="bucketTab">Bucket</a>
                                         </li>
                                         <li class="nav-item">
+                                            <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link " id="approvedTab">Approved</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link " id="ammendTab">Amend</a>
                                         </li>
                                         <li class="nav-item">
@@ -139,6 +142,7 @@
                         @include('pages.eclaim.claimApproval.admin.approval.tab2')
                         @include('pages.eclaim.claimApproval.admin.approval.tab3')
                         @include('pages.eclaim.claimApproval.admin.approval.tab4')
+                        @include('pages.eclaim.claimApproval.admin.approval.tab5')
                     </div>
                 </div>
             </div>

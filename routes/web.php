@@ -99,7 +99,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(ClaimApprovalController::class)->group(function () {
             Route::get('/claimApprovalView/{type}', 'claimApprovalView');
-            Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
+            Route::post('/updateStatusClaim/{id}/{status}/{stage}/{desc}', 'updateStatusClaim');
             Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
             Route::get('/getTravelById/{id}', 'getTravelById');
             Route::get('/getPersonalById/{id}', 'getPersonalById');
@@ -139,7 +139,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/approveAllClaim', 'approveAllClaim');
             Route::post('/approveAllCa', 'approveAllCa');
             Route::post('/skipAllClaim', 'skipAllClaim');
-            Route::post('/skipAllClaim', 'skipAllClaim');
+            Route::post('/skipAllClaimApp', 'skipAllClaimApp');
             Route::post('/updateTravelMtcAdminApp/{id}', 'updateTravelMtcAdminApp');
             Route::post('/updateSubsMtcAdminApp', 'updateSubsMtcAdminApp');
             Route::post('/updateOtherMtcAdminApp', 'updateOtherMtcAdminApp');
@@ -537,6 +537,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteProjectLocation/{id}', 'deleteProjectLocation');
             Route::post('/createProjectMember', 'createProjectMember');
             Route::get('/getProjectMemberById/{id}', 'getProjectMemberById');
+            Route::get('/getProjectandMemberById/{id}', 'getProjectandMemberById');
+            Route::get('/getProjectbyIdDate/{id}', 'getProjectbyIdDate');
             Route::post('/updateProjectMember/{id}', 'updateProjectMember');
             Route::post('/assignProjectMember', 'assignProjectMember');
             Route::get('/projectRequest', 'projectRequestView');
@@ -658,7 +660,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/submitTravelClaim', 'submitTravelClaim');
             Route::post('/submitSubsClaim', 'submitSubsClaim');
             Route::get('/monthClaimEditView/edit/month/{id}', 'monthClaimEditView');
-            Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
+            Route::post('/submitMonthlyClaim/{id}/{desc}', 'submitMonthlyClaim');
             Route::post('/submitCaClaim', 'submitCaClaim');
             Route::get('/appealMtcView', 'appealMtcView');
             Route::post('/appealMtc', 'createAppealMtc');
@@ -692,7 +694,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteTravelAttachment/{id}', 'deleteTravelAttachment');
             Route::delete('/deleteSubsAttachment/{id}', 'deleteSubsAttachment');
             Route::delete('/deleteTravelDetail/{id}', 'deleteTravelDetail');
-            Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
+            Route::post('/updateStatusGeneralClaims/{id}/{desc}', 'updateStatusGeneralClaims');
             Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
             Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });

@@ -2,13 +2,13 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header" id="systemUserJs">Settings<small>| System User</small></h1>
+    <h1 class="page-header" id="systemUserJs">Settings <small>| System User</small></h1>
     <div class="panel panel">
         <div class="panel-body">
             <table id="systemUserTable" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th>No.</th>     
+                        <th>No.</th>
                         <th class="text-nowrap">User ID</th>
                         <th class="text-nowrap">Employee Name</th>
                         <th class="text-nowrap">Email</th>

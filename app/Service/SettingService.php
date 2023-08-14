@@ -649,7 +649,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Postcode';
+        $data['msg'] = 'Location is Created';
 
         return $data;
     }
@@ -670,7 +670,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Location';
+            $data['msg'] = 'Location is Deleted';
         }
 
         return $data;
@@ -714,7 +714,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State and Countries';
+        $data['msg'] = 'Country & State is Created.';
 
         return $data;
     }
@@ -2373,6 +2373,7 @@ class SettingService
             ->where(function ($query) use ($currentDateObj) {
                 $query->whereNull('leave_entitlement.id_employment');
             })
+            ->orderBy('employment.joinedDate', 'desc')
             ->get();
 
         return $data;
@@ -2392,7 +2393,8 @@ class SettingService
             ->leftJoin('jobgrade', 'leave_entitlement.id_jobgrade', '=', 'jobgrade.id')
             ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year', '=', $checkdate)
-            ->orderBy('id', 'desc')->get();
+            ->orderBy('employment.joinedDate', 'desc')
+            ->get();
 
         return $data;
     }
@@ -2743,9 +2745,10 @@ class SettingService
     public function holidaylistView()
     {
 
-        $dataallstate = holidayModel::select('*')
+        $dataallstate = holidayModel::select('*', 'country_name as country')
             ->where('tenant_id', '=', Auth::user()->tenant_id)
-            ->orderBy('id', 'desc')
+            ->leftJoin('location_country', 'leave_holiday.country_id', '=', 'location_country.country_id')
+            ->orderBy('leave_holiday.country_id', 'desc')
             ->get();
 
         $data = [];
@@ -3088,9 +3091,11 @@ class SettingService
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
+        $data4 = $input['duration'];
 
         if ($existingLeaveType->leave_types_code === $data1 && $existingLeaveType->leave_types === $data2) {
             $existingLeaveType->day = $data3;
+            $existingLeaveType->duration = $data4;
             $existingLeaveType->save();
 
             $data['status'] = config('app.response.success.status');
@@ -3121,6 +3126,7 @@ class SettingService
             $existingLeaveType->leave_types_code = $data1;
             $existingLeaveType->leave_types = $data2;
             $existingLeaveType->day = $data3;
+            $existingLeaveType->duration = $data4;
             $existingLeaveType->save();
 
             $data['status'] = config('app.response.success.status');

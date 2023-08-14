@@ -168,7 +168,7 @@ class EmployeeService
         $jobHistory['remarks'] = $input['remarks'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
 
-        $jobHistory['statusHistory'] = $input['status'] = 'Deactivate';
+        $jobHistory['statusHistory'] = $input['status'] = 'terminate';
         $updateBy = Auth::user()->username;
         $jobHistory['updatedBy'] = $updateBy;
 
@@ -192,7 +192,7 @@ class EmployeeService
         $data['data'] = DB::table('employment as a')
             ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
             ->leftjoin('department as c', 'a.department', '=', 'c.id')
-            ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
+            ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.email as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
             ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
             ->orderBy('id', 'desc')
             ->get();
@@ -446,7 +446,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Emergency Contact';
+            $data['msg'] = 'Emergency Contact is Updated';
         }
 
         return $data;
@@ -1074,7 +1074,6 @@ class EmployeeService
     public function addEmployment($r)
     {
         $input = $r->input();
-
         $workingEmail = Employee::where('workingEmail', $input['workingEmail'])->first();
 
         if ($workingEmail) {
@@ -1084,6 +1083,7 @@ class EmployeeService
             $data['msg'] = 'Email already exist.';
 
         } else {
+
 
             if ($input['branchId']) {
                 $input['branch'] = $input['branchId'];
@@ -1110,6 +1110,9 @@ class EmployeeService
 
             $ec['user_id'] = $input['user_id'];
             UserEmergency::create($ec);
+
+            $userprofileEmail['email'] = $input['workingEmail'];
+            UserProfile::where('user_id', $input['user_id'])->update($userprofileEmail);
 
             $user['status'] = 'active';
             User::where('id', $input['user_id'])->update($user);
@@ -1150,7 +1153,7 @@ class EmployeeService
             $jobHistory['user_id'] = $id;
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
-            $jobHistory['statusHistory'] = 'Active';
+            $jobHistory['statusHistory'] = 'active';
             JobHistory::create($jobHistory);
 
             $data['status'] = config('app.response.success.status');
@@ -1249,7 +1252,7 @@ class EmployeeService
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
         $data = Employee::where([['tenant_id', $tenant_id], ['id', $id]])->first();
-
+        // dd($data);
         return $data;
     }
 

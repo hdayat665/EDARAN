@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content" >
-    <h1 class="page-header">Reporting | Timesheet | Employee Report</h1>
+    <h1 class="page-header">Reporting <small>| Timesheet | Employee Report</small></h1>
     <div class="row" id="employeeReportJs">
         <div class="col-xl-15">
             <ul class="nav nav-tabs">
@@ -26,9 +26,9 @@
                         <div class="panel-body">
                             <div class="row p-2">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Date</label>
+                                    <label for="emergency-firstname" class="form-label">Date</label>
                                     <input type="text" id="daterange" class="form-control" value="" name="date_range" placeholder="click to select the date range" />
-                                    
+
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -99,7 +99,7 @@
                         <div class="panel-body">
                             <div class="row p-2">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Year</label>
+                                    <label for="emergency-firstname" class="form-label">Year</label>
                                     <select class="form-select" id="yearv" name="year2">
                                         <option class="form-label" value="" >PLEASE CHOOSE</option>
                                         <?php $years = year() ?>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="row p-2">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Month</label>
+                                    <label for="emergency-firstname" class="form-label">Month</label>
                                     <select class="form-select" id="monthv" name="month2">
                                         <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $months = month() ?>
@@ -126,7 +126,7 @@
 
                             <div class="row p-2" >
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Select Department</label>
+                                    <label for="emergency-firstname" class="form-label">Department</label>
                                     {{-- <select class="form-select" id="departmentv" name="department2">
                                         <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
@@ -134,7 +134,7 @@
                                         <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>
                                         @endforeach
                                     </select> --}}
-                                   
+
                                     <select class="form-select" name="department2" id="departmentv">
                                         <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
@@ -145,15 +145,14 @@
                                     <div id="department_v" style="color: red;"></div>
                                 </div>
                             </div>
-                            <div class="row p-2" id="labelcategory"> 
-                                <div class="col-md-3">
-                                    <label class="form-label" id="">Select Employee</label>
+                            <div class="row p-2" id="labelcategory">
+                                <div class="col-sm-3">
+                                    <label class="form-label" id="">Employee</label>
                                 {{-- </div> --}}
                                 {{-- <div class="col-md-9"> --}}
                                     <select class="form-select" id="employeev" name="claim_category_detail" >
-                                        <option class="form-label" value="Please Select" selected>Please
-                                            Select</option>
-                                       
+                                        <option class="form-label" value="Please Select" selected>PLEASE CHOOSE</option>
+
                                     </select>
                                      <div id="employee_v" style="color: red;"></div>
                                 </div>
@@ -180,7 +179,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>

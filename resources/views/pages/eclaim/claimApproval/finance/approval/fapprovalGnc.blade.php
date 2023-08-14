@@ -124,7 +124,7 @@
                         <a href="/financeApprovalView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                    @if ($general->f_approval == 'recommend')
+                    @if ($general->f_approval == 'approved')
                         <!-- <p>This item has already been recommended.</p> -->
                     @else
                         <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;

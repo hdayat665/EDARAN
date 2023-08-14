@@ -117,7 +117,7 @@
                     <select class="form-select" name="project_manager" id="project_manager2" style="display:none" ></select>
                     <select class="form-select selectmng" name="project_manager" id="project_manager2_show">
                         <option value="" selected>PLEASE CHOOSE</option>
-                    <?php $Employees = getEmployee(); ?>
+                        <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
                             <option value="{{ $Employee->id }}" {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}

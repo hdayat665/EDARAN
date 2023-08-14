@@ -114,6 +114,7 @@ $(document).ready(function () {
             $("#leavetypescode").val(data.leave_types_code);
             $("#leavetypes").val(data.leave_types);
             $("#idtypes").val(data.id);
+            $("#durationU").val(data.duration);
             $("#uallowrequest").val(data.day);
             $("#uallowrequest").prop("disabled", false);
         });

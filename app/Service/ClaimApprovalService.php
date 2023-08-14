@@ -363,16 +363,60 @@ class ClaimApprovalService
         return $data;
     }
 
-    public function updateStatusClaim($r, $id, $status, $stage)
+    public function updateStatusClaim($r, $id, $status, $stage ,$desc)
     {
         $input = $r->input();
-
+        //pr($id);
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
         // }
 
         $input['status'] = $status;
+        $input['status_desc'] = $desc;
         $input[$stage] = $status;
+        
+        if ($stage == 'a_approval') {
+            $input['status'] = 'recommend';
+            $input['a_approval'] = 'bucket';
+            GeneralClaim::where('id', $id)->update($input);
+
+            $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+                if ($setting->notify_user) {
+
+                    $ms = new MailService;
+                    if ($stage == 'supervisor' && $status == 'recommend') {
+                        $ms->approvalEmailMTC($generalClaimData);
+                        $ms->emailToHodClaimMTC($generalClaimData);
+                    }
+
+                    if ($stage == 'a_approval' && $status == 'recommend') {
+                        $ms->approvalEmailMTC($generalClaimData);
+                        $ms->approvalEmailMTCForAdmin($generalClaimData);
+                    }
+
+                    if ($stage == 'f_approval' && $status == 'recommend') {
+                        $ms->approvalEmailMTC($generalClaimData);
+                    }
+
+                    if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'reject') {
+                        $ms->rejectEmailMTC($generalClaimData);
+                        // $ms->approvalEmailMTCForAdmin($generalClaimData);
+
+                    }
+                    if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'amend') {
+                        $ms->amendEmailMTC($generalClaimData);
+                        // $ms->approvalEmailMTCForAdmin($generalClaimData);
+                    }
+                }
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Status Claim';
+
+            return $data;
+
+        }
 
         GeneralClaim::where('id', $id)->update($input);
 
@@ -689,7 +733,7 @@ class ClaimApprovalService
         $ca[2] = ['cash_advance_id', $id];
 
         $data = ModeOfTransport::where($ca)->first();
-
+        // pr($data);
         return $data;
     }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
@@ -807,7 +851,7 @@ class ClaimApprovalService
         $input = $r->input();
 
         $input['status'] = 'paid';
-
+        $input['status_desc'] = 'Claim Paid';
         GeneralClaim::where('id', $id)->update($input);
 
         // email notification
@@ -899,8 +943,36 @@ class ClaimApprovalService
 
         $ids = $input['id'];
         $status['hod'] = 'recommend';
-        $status['status'] = 'pending';
+        $status['status'] = 'recommend';
+        $status['status_desc'] = 'Admin Dept. processing';
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
+        GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Skip The Queue';
+
+        return $data;
+    }
+    public function skipAllClaimApp($r)
+    {
+        $input = $r->input();
+        
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the claim submission first!';
+
+            return $data;
+        }
+
+        $ids = $input['id'];
+        $status['a_approval'] = 'recommend';
+        $status['status'] = 'recommend';
+        $status['status_desc'] = 'Finance Dept. processing';
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
         GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);

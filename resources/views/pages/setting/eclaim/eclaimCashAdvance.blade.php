@@ -1,13 +1,10 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Settings | Cash Advance Controller</h1>
+        <h1 class="page-header">Settings <small>| Cash Advanced Controller</small></h1>
         <div class="panel panel" id="cashAdvanceJs">
             <div class="panel-body">
                 <div>
-                    <div class="row">
-                        <h3>Claim Controller List</h3>
-                    </div>
                     <div class="row p-2">
                         <table id="cashAdvanceTable" class="table table-striped table-bordered align-middle">
                             <thead>

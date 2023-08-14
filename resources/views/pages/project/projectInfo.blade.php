@@ -41,6 +41,7 @@
                                     <th class="text-nowrap">Project Code</th>
                                     <th class="text-nowrap">Project Name</th>
                                     <th class="text-nowrap">Account Manager</th>
+                                    <th class="text-nowrap">Project Manager</th>
                                     <th class="text-nowrap">Contract Value</th>
                                     <th class="text-nowrap">Contract Start Date</th>
                                     <th class="text-nowrap">Contract End Date</th>
@@ -63,6 +64,7 @@
                                     <td>{{$projectInfo->project_code}}</td>
                                     <td>{{$projectInfo->project_name}}</td>
                                     <td>{{$projectInfo->acc_manager_name}}</td>
+                                    <td>{{$projectInfo->project_manager_name}}</td>
                                     <td>RM {{ number_format($projectInfo->contract_value, 2) }}</td>
                                     <td>{{$projectInfo->contract_start_date}}</td>
                                     <td>{{$projectInfo->contract_end_date}}</td>

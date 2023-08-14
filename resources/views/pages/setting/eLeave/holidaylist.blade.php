@@ -36,12 +36,11 @@
     </style>
 
     <div id="content" class="app-content">
-        <h1 class="page-header" id="eleaveholidayJs">Setting | Holiday</h1>
+        <h1 class="page-header" id="eleaveholidayJs">Setting <small>| Holiday</small></h1>
         <div class="panel panel">
             <div class="panel-body">
                 <div class="form-control">
                     <div class="row p-2">
-                        <h3>Holiday List</h3>
                     </div>
                     <div class="row p-2 ">
                         <div class="col align-self-start">
@@ -77,6 +76,7 @@
                                     <th width="1%" class="text-nowrap" data-orderable="false">Action</th>
                                     <th class="text-nowrap" data-orderable="false">Status</th>
                                     <th class="text-nowrap">State</th>
+                                    <th class="text-nowrap">Country</th>
                                     <th class="text-nowrap">Holiday Title</th>
                                     <th class="text-nowrap">Start Date</th>
                                     <th class="text-nowrap">End Date</th>
@@ -88,7 +88,6 @@
                                 @if ($holiday)
                                     @foreach ($holiday as $h)
                                         <?php $id++; ?>
-
                                         <tr>
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -104,6 +103,9 @@
                                                     <input class="form-check-input statusCheck" name="mainCompanion" type="checkbox" data-id="{{ $h->id }}" id="updateStatus"
                                                         {{ $h->status == '1' ? 'checked' : '' }}>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                {{ $h->country }}
                                             </td>
                                             <td style="text-align:center">
                                                 <a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-id="{{ $h->id }}" data-all = "{{ $h->total }}" id="holidayState" ></i>{{ $h->total }}</a></td>

@@ -31,7 +31,7 @@
 
                             <div class="row p-2">
                                 <div class="col-md-2"> </div>
-                                <div class="col-md-2"> 
+                                <div class="col-md-2">
                                     <label class="form-label">Checker 1</label>
                                 </div>
                                 <div class="col-md-6">

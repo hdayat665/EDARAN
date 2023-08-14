@@ -861,11 +861,12 @@ $("#laundry_amount_update").on("input", function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = "hod";
+        var desc = "Finance Dept. processing";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -929,11 +930,11 @@ $("#laundry_amount_update").on("input", function () {
         var id = $(this).data("id");
         var status = "recommend";
         var stage = "supervisor";
-
+        var desc = "Waiting for approval";
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
 
                 processData: false,
                 contentType: false,
@@ -962,8 +963,8 @@ $("#laundry_amount_update").on("input", function () {
     $("#rejectButton").click(function (e) {
         var id = $(this).data("id");
         var status = "reject";
-        var stage = "hod";
-
+        var stage = "supervisor";
+        var desc = "Rejected by Dept. Recommender";
         $("#supervisorRejectForm").validate({
             // Specify validation rules
             rules: {},
@@ -977,13 +978,8 @@ $("#laundry_amount_update").on("input", function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 
@@ -1012,10 +1008,10 @@ $("#laundry_amount_update").on("input", function () {
     });
 
     $("#amendButton").click(function (e) {
-        var id = $(this).data("id");
+        var id = $("#amendId").val();
         var status = "amend";
-        var stage = "hod";
-
+        var stage = "supervisor";
+        var desc = "Request to amend by Dept. Recommender";
         $("#supervisorAmendForm").validate({
             // Specify validation rules
             rules: {},
@@ -1029,13 +1025,8 @@ $("#laundry_amount_update").on("input", function () {
 
                     $.ajax({
                         type: "POST",
-                        url:
-                            "/updateStatusClaim/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
+                        url: "/updateStatusClaim/" + id + "/" + status + "/" + stage+ "/" + encodeURIComponent(desc),
+
                         data: data,
                         dataType: "json",
 

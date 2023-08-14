@@ -52,7 +52,7 @@
 </style>
 <div id="content" class="app-content">
 
-    <h1 class="page-header" id="roleJs">Roles <small>| Use roles to group permissions. </small></h1> <!-- END page-header -->
+    <h1 class="page-header" id="roleJs">Setting <small>| Role </small></h1> <!-- END page-header -->
     <div class="panel panel">
         <div class="panel-heading">
             <div class="col-md-6">
@@ -119,7 +119,7 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-primary" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
         </div>

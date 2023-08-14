@@ -79,13 +79,13 @@
                     <label class="form-label col-form-label">Subsistence Allowance :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->subs_allowance_total }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->subs_allowance_total }}">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label col-form-label">Accommodation :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->subs_allowance_total }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->subs_allowance_total }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -97,7 +97,7 @@
                     <label class="form-label col-form-label">Fuel Parking :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->fuel }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->fuel }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -107,7 +107,7 @@
                     <label class="form-label col-form-label">Toll/Parking :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->toll }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->toll }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -117,7 +117,7 @@
                     <label class="form-label col-form-label">Entertainment :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->entertainment }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->entertainment }}">
                 </div>
             </div>
             <div class="row p-2"> </div>
@@ -128,7 +128,7 @@
                     <label class="form-label col-form-label">Total :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->total }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->total }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -138,7 +138,7 @@
                     <label class="form-label col-form-label">Maximum Paid Out (75%) :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->max_total }}">
+                    <input readonly type="text" class="form-control" value="RM {{ $cashClaim->mode_of_transport->max_total }}">
                 </div>
             </div>
         </div>

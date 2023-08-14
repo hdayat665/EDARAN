@@ -112,16 +112,40 @@
                                                             @endif
                                                         @else
                                                             @if ($data['month'] == $checkMonth['month'])
-                                                                @if ($checkMonth['status'] == 'active' || $checkMonth['status'] == 'paid')
+                                                                @if ($checkMonth['status'] == 'active')
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
-                                                                    <td><span class="badge bg-info">Pending</span></td>
-                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>                                                                @else
+                                                                    <td><span class="badge bg-lime">In Queue</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>                                                                
+                                                                    @elseif ($checkMonth['status'] == 'paid')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-secondary">Paid</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>   
+                                                                    @elseif ($checkMonth['status'] == 'recommend')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-success">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td> 
+                                                                    @elseif ($checkMonth['status'] == 'approved')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-success">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>
+                                                                    @elseif ($checkMonth['status'] == 'bucket')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-success">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>
+                                                                    @else
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
                                                                     <td><span class="badge bg-warning">Draft</span></td>
                                                                     <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+                                                                
+
                                                                 @endif
+
                                                             @else
                                                                 <td>{{ $data['year'] }}</td>
                                                                 <td>{{ $data['month'] }}</td>

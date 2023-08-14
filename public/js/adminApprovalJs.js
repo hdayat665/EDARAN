@@ -12,7 +12,7 @@ $(document).ready(function () {
     const activeTab = document.getElementById('activeTab');
     const amendTab = document.getElementById('ammendTab');
     const rejectedTab = document.getElementById('rejectedTab');
-
+    const approvedTab = document.getElementById('approvedTab');
     // Function to hide the skipButton
     function hideSkipButton() {
     skipButton.style.display = 'none';
@@ -22,6 +22,7 @@ $(document).ready(function () {
     activeTab.addEventListener('click', hideSkipButton);
     amendTab.addEventListener('click', hideSkipButton);
     rejectedTab.addEventListener('click', hideSkipButton);
+    approvedTab.addEventListener('click', hideSkipButton);
 
 
     // Get the necessary elements
@@ -43,6 +44,7 @@ $(document).ready(function () {
     bucketTab.addEventListener('click', hideApproveAllButton);
     amendTab.addEventListener('click', hideApproveAllButton);
     rejectedTab.addEventListener('click', hideApproveAllButton);
+    approvedTab.addEventListener('click', hideApproveAllButton);
     
     
     $("#activetable").dataTable({
@@ -124,7 +126,45 @@ $(document).ready(function () {
         },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
-
+    $("#approveTable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
     $("#rejectedtable").dataTable({
         searching: true,
         lengthChange: true,
@@ -234,7 +274,7 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var stage = "a_approval";
-        var status = "recommend";
+        var status = "bucket";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -314,6 +354,34 @@ $(document).ready(function () {
                     });
                 });
             },
+        });
+    });
+    $("#skipButton").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(document.getElementById("skipAllForm"));
+            
+            $.ajax({
+                type: "POST",
+                url: "/skipAllClaimApp",
+                data: data,
+                dataType: "json",
+
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
         });
     });
 

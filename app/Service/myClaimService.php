@@ -34,8 +34,10 @@ class myClaimService
     {
         $user_id = Auth::user()->id;
 
-        $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $user_id]])->get();
-
+        $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $user_id]])
+        ->orderByRaw("FIELD(month, 'December', 'November', 'October', 'September', 'August', 'July', 'June', 'May', 'April', 'March', 'February', 'January')")
+        ->get();
+    // pr($data);
         return $data;
     }
     public function getUserData()
@@ -980,14 +982,15 @@ class myClaimService
 
         return $data;
     }
-    public function updateStatusGeneralClaims($id)
+    public function updateStatusGeneralClaims($id ,$desc)
     {
         $update = [
             'status' => 'active',
             'supervisor' => 'recommend',
             'hod' => null,
         ];
- 
+        $update['status_desc'] = $desc;
+        //pr($desc);
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
             
@@ -1851,6 +1854,41 @@ class myClaimService
             return $data;
         }
 
+        function isNegativeTravelDuration($input) {
+            $travelDuration = $input['travel_duration'];
+        
+            // Split travel_duration into parts (nights, hours, minutes)
+            $parts = explode(' : ', $travelDuration);
+        
+            $totalMinutes = 0;
+        
+            foreach ($parts as $part) {
+                if (preg_match('/^(-?\d+)\s+(\w+)/', $part, $matches)) {
+                    $value = intval($matches[1]);
+                    $unit = strtolower($matches[2]);
+        
+                    // Convert everything to minutes
+                    if ($unit === 'nights') {
+                        $totalMinutes += $value * 24 * 60;
+                    } elseif ($unit === 'hours') {
+                        $totalMinutes += $value * 60;
+                    } elseif ($unit === 'minutes') {
+                        $totalMinutes += $value;
+                    }
+                }
+            }
+        
+            return $totalMinutes < 0;
+        }
+        if (isNegativeTravelDuration($input)) {
+            // Return the error response
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['id'] = $generalClaimData->id;
+            $data['msg'] = 'Negative travel duration is not allowed.';
+            return $data;
+        }
 
         // If no overlapping claim, proceed with creating a new TravelClaim
         TravelClaim::create($input);
@@ -3010,14 +3048,28 @@ class myClaimService
         return $data;
     }
 
-    public function updateStatusMonthlyClaim($id = '', $status = '', $r )
+    public function updateStatusMonthlyClaim($id = '', $status = '', $r ,$desc)
     {
         $input = $r->input();
-       
+        
         $claim['status'] = $status; 
+        $claim['status_desc'] = $desc; 
         $amount = (float) str_replace(',', '', $input['amount']);
         //pr($amount);
         $claim['total_amount'] = $amount; 
+
+        $claim['supervisor'] = null;
+        $claim['hod'] = null;
+        $claim['f1'] = null;
+        $claim['f2'] = null;
+        $claim['f3'] = null;
+        $claim['f_recommender'] = null;
+        $claim['f_approval'] = null;
+        $claim['a1'] = null;
+        $claim['a2'] = null;
+        $claim['a3'] = null;
+        $claim['a_recommender'] = null;
+        $claim['a_approval'] = null;
         //pr($claim['total_amount']);
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
@@ -3037,7 +3089,18 @@ class myClaimService
             
             $claim['status'] = 'active';
             $claim['supervisor'] = 'recommend';
-        
+            $claim['hod'] = null;
+            $claim['f1'] = null;
+            $claim['f2'] = null;
+            $claim['f3'] = null;
+            $claim['f_recommender'] = null;
+            $claim['f_approval'] = null;
+            $claim['a1'] = null;
+            $claim['a2'] = null;
+            $claim['a3'] = null;
+            $claim['a_recommender'] = null;
+            $claim['a_approval'] = null;
+
             GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
         
             $generalClaimData = GeneralClaim::find($id);
@@ -3177,18 +3240,19 @@ class myClaimService
     {
 
         $claim['status'] = "draft";
-        $claim['hod'] = "";
-        $claim['f1'] = "";
-        $claim['f2'] = "";
-        $claim['f3'] = "";
-        $claim['f_recommender'] = "";
-        $claim['f_approval'] = "";
-        $claim['a1'] = "";
-        $claim['a2'] = "";
-        $claim['a3'] = "";
-        $claim['a_recommender'] = "";
-        $claim['a_approval'] = "";
-        
+        $claim['supervisor'] = null;
+        $claim['hod'] = null;
+        $claim['f1'] = null;
+        $claim['f2'] = null;
+        $claim['f3'] = null;
+        $claim['f_recommender'] = null;
+        $claim['f_approval'] = null;
+        $claim['a1'] = null;
+        $claim['a2'] = null;
+        $claim['a3'] = null;
+        $claim['a_recommender'] = null;
+        $claim['a_approval'] = null;
+        $claim['status_desc'] = 'draft';
 
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 
@@ -3203,6 +3267,19 @@ class myClaimService
     {
 
         $claim['status'] = "draft";
+        $claim['supervisor'] = null;
+        $claim['hod'] = null;
+        $claim['f1'] = null;
+        $claim['f2'] = null;
+        $claim['f3'] = null;
+        $claim['f_recommender'] = null;
+        $claim['f_approval'] = null;
+        $claim['a1'] = null;
+        $claim['a2'] = null;
+        $claim['a3'] = null;
+        $claim['a_recommender'] = null;
+        $claim['a_approval'] = null;
+        $claim['status_desc'] = 'draft';
         
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 

@@ -11,7 +11,7 @@
         <tbody>
             @foreach ($claims as $claim)
                 @if ($claim->claim_type == 'GNC')
-                    @if ($claim->f_approval == 'recommend' && $claim->pv_number == '')
+                    @if ($claim->f_approval == 'approved' && $claim->pv_number == '')
                         <tr>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -23,7 +23,7 @@
                                     <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a> 
                                         
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ $claim->id }}</td>
@@ -31,7 +31,7 @@
                         </tr>
                     @endif
                 @elseif($claim->claim_type == 'MTC')
-                    @if ($claim->f_approval == 'recommend' && $claim->pv_number == '')
+                    @if ($claim->f_approval == 'approved' && $claim->pv_number == '')
                         <tr>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -43,8 +43,8 @@
                                     <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a>
                                     
                                     
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                    <!-- <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a> -->
                                 </div>
                             </td>
                             <td>{{ $claim->id }}</td>
