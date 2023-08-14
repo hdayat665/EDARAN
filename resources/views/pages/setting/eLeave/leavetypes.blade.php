@@ -34,6 +34,7 @@
 								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
 								<th class="text-nowrap">Leave Types</th>
+								<th class="text-nowrap">Duration</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -58,6 +59,7 @@
 									</td>
 									<td>{{$t->leave_types_code}}</td>
 									<td>{{$t->leave_types}}</td>
+									<td>{{$t->duration}}</td>
 								</tr>
 								@endforeach
                                 @endif
