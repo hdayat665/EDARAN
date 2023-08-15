@@ -57,6 +57,7 @@
                                                                label="{{ $role->roleName }}">{{ $role->roleName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="rolediv" name="" class="form-control">
                                                    <input type="hidden" name="id" value="{{ $employment->id }}">
                                                </div>
                                                <div class="row p-2">
@@ -69,6 +70,7 @@
                                                                label="{{ $company->companyName }}">{{ $company->companyName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="companydiv" name="" class="form-control">
                                                    <input type="hidden" name="id" value="{{ $employment->id }}">
                                                </div>
                                                <div class="row p-2">
@@ -81,6 +83,7 @@
                                                                label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="deparmentdiv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Unit</label>
@@ -103,6 +106,7 @@
                                                                label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="branchdiv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
                                                    <div class="col md-6">
@@ -122,6 +126,7 @@
                                                                label="{{ $JobGrade->jobGradeName }}">{{ $JobGrade->jobGradeName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="jobgradediv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Designation*</label>
@@ -133,10 +138,11 @@
                                                                label="{{ $Designation->designationName }}">{{ $Designation->designationName }}</option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="designationdiv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Employment Type*</label>
-                                                   <select class="form-select" name="employmentType" id="employmentType">
+                                                   <select class="form-select" name="employmentType" id="employmentType" style="width: 100%">>
                                                        <?php $EmploymentTypes = getEmploymentType(); ?>
                                                        <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($EmploymentTypes as $EmploymentType)
@@ -146,6 +152,7 @@
                                                            </option>
                                                        @endforeach
                                                    </select>
+                                                   <input type="hidden" id="employmentypediv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
                                                    <div class="col-sm-6">
