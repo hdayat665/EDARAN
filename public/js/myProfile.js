@@ -2385,6 +2385,21 @@ $(document).ready(function () {
             );
         },
     });
+    $(document).ready(function() {
+        $(".child").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".child");
+            $(".child").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".child").hide();
+            }
+        });
+    });
 
     $("#education").DataTable({
         responsive: false,
@@ -2456,6 +2471,22 @@ $(document).ready(function () {
             );
         },
     });
+    $(document).ready(function() {
+        $(".myadd").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
+            $(".myadd").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".myadd").hide();
+            }
+        });
+    });
+
     $("#xName1,#lastName1").change(function () {
         var a = $("#firstName1").val();
         var b = $("#lastName1").val();
@@ -3461,6 +3492,19 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+    $(document).ready(function() {
+        $(".fam").hide();
+        $(document).on("click", ".dropdown-toggle", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".fam");
+            $(".fam").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".fam").hide();
+            }
+        });
     });
 
     $("#parentModalAdd").click(function (e) {

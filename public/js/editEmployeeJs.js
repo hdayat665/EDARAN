@@ -3417,6 +3417,23 @@ if (permanentChecked && correspondentChecked) {
             );
         },
     });
+    $(document).ready(function() {
+    $(".edu").hide();
+
+    $(".dropdown-toggle").on("click", function() {
+        var dropdownMenu = $(this).closest(".btn-group").find(".edu");
+        $(".edu").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".edu").hide();
+        }
+    });
+});
+
+
     $("#employeeOthers").DataTable({
         responsive: false,
         lengthMenu: [
