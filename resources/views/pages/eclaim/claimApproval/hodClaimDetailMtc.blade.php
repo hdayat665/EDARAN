@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                    <a href="/claimApprovalView/2" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>                                    </div>
+                                    <a href="/claimApprovalView/2" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>                                    </div>
                                     </div>
                                 </div>
                             @endif

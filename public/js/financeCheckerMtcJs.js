@@ -42,7 +42,10 @@ function getPersonalById(id) {
         url: "/getPersonalById/" + id,
     });
 }
-
+$(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
+});
 $("#hotelcvUpdate").on("input", function () {
    
 
