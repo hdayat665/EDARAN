@@ -621,7 +621,7 @@
                             <table id="claimtable" class="table table-striped table-bordered align-middle">
                                     <thead>
                                         <tr>
-                                            <th>-</th>
+                                            
                                             <th class="text-nowrap">No</th>
                                             <th class="text-nowrap">Form ID</th>
                                             <th class="text-nowrap">Type of Cash Advance
@@ -636,7 +636,6 @@
                                         <?php $no = 1; ?>
                                         @foreach ($cashAdvances as $cashAdvance)
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" value="{{ $cashAdvance->id }}" name="cashAdvanceId[]" /></td>
                                                 <td>{{ $no++ }}</td>
                                                 <td>Form ID {{ $cashAdvance->id }}</td>
                                                 <td> {{ getCashAdvanceType($cashAdvance->type) }}</td>
@@ -651,7 +650,7 @@
                             </div> 
                         </div>
                         <div class="modal-footer"> 
-                            <button type="submit" id="caSave" class="btn btn-primary">Save</button>
+                            <!-- <button type="submit" id="caSave" class="btn btn-primary">Save</button> -->
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         
                         </div>

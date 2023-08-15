@@ -1,3 +1,12 @@
+<style>  
+        .custom-dropdown-menu {
+        position: static ;
+        height: auto ;
+        max-height: none ;
+        overflow: visible ;
+    }
+</style>
+
 <div class="tab-pane fade" id="default-tab-2">
    <div class="card-header">
         <ul class="nav nav-tabs" id="myTab">
@@ -20,7 +29,6 @@
             <div class="row p-2">
                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> New Education</button>
             </div>
-            <!-- <div class="row p-2"> -->
                 <table id="education" style="width: 100%"  class="table table-striped align-middle">
                     <thead>
                         <tr>
@@ -42,15 +50,17 @@
                             <tr>
                                 <td> {{$id}} </td>
                                 <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
-                                        <!-- <div class="dropdown-divider"></div> -->
+                                    <div class="btn-group">
+                                        <div>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        </div>
+                                        <ul><div class="dropdown-menu custom-dropdown-menu edu">
+                                            <li><a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a></li>
+                                        </ul>
                                     </div>
                                 </td>
-
                                 <td> {{ $education->fromDate }} </td>
                                 <td> {{ $education->toDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
@@ -63,9 +73,7 @@
                         <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
                     </tbody>
                 </table>
-            <!-- </div> -->
-            
-        </div>
+            </div>
         <div class="tab-pane fade show" id="quali-tab-2">
             <div class="row p-2">
                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> New Others</button>
@@ -86,18 +94,20 @@
                     @if ($others)
                         @foreach ($others as $other)
                         <?php $id++ ?>
-                        <tr>
-                            <td> {{$id}} </td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                    <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
-                                    <!-- <div class="dropdown-divider"></div> -->
-                                </div>
-                            </td>
-
+                            <tr>
+                                <td> {{$id}} </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <div>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        </div>
+                                        <ul><div class="dropdown-menu custom-dropdown-menu oth">
+                                            <li><a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
                                 <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>

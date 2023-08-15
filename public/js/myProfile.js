@@ -2385,14 +2385,6 @@ $(document).ready(function () {
             );
         },
     });
-    // $("#education").DataTable({
-    //     responsive: false,
-    //     lengthMenu: [
-    //         [5, 10, 15, 20, -1],
-    //         [5, 10, 15, 20, "All"],
-    //     ],
-
-    // });
 
     $("#education").DataTable({
         responsive: false,
@@ -2406,7 +2398,21 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
-        // scrollX: true // enable horizontal scrolling if necessary
+    });
+    $(document).ready(function() {
+        $(".edu").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".edu");
+            $(".edu").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".edu").hide();
+            }
+        });
     });
 
     $("#qualificationOthers").DataTable({
@@ -2422,6 +2428,22 @@ $(document).ready(function () {
             );
         },
     });
+    $(document).ready(function() {
+        $(".oth").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".oth");
+            $(".oth").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".oth").hide();
+            }
+        });
+    });
+
     $("#profileAddress").DataTable({
         responsive: false,
         lengthMenu: [
