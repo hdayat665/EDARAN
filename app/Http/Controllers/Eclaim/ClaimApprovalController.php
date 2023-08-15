@@ -65,7 +65,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -235,7 +235,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
 
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['user'] = $mcs->getUserData($data['general']->user_id);
         $data['claimData'] = $mcs->getGeneralClaimDataById($id);
         $data['getadmin'] = $mcs->getDomainRoleAdmin();
@@ -413,7 +413,7 @@ class ClaimApprovalController extends Controller
         $data['gncs'] = $result['general'];
         $data['checkers'] = getFinanceChecker();
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['user'] = $mcs->getUserData($data['general']->user_id);
         $data['claimData'] = $mcs->getGeneralClaimDataById($id);
         $data['getadmin'] = $mcs->getDomainRoleAdmin();
@@ -609,7 +609,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
         $data['gncs'] = $result['general'];
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -1036,7 +1036,7 @@ class ClaimApprovalController extends Controller
         $data['gncs'] = $result['general'];
 
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['user'] = $mcs->getUserData($data['general']->user_id);
@@ -1213,7 +1213,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
         
         $data['general'] = $result['claim'];
-        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['user'] = $mcs->getUserData($data['general']->user_id);

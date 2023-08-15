@@ -1,7 +1,7 @@
 //CASH ADVANCE LESS MODAL
-$(document).on("click", "#CAless", function () {
-
-    $("#CAlessModal").modal("show");
+$(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
 });
 
 //TRAVEL MODAL
@@ -188,13 +188,11 @@ $(document).on("click", "#SVRtravel", function() {
     });
 });
 //SUBSISTENCE MODAL 
-$(document).on("click", "#SVRsubs", function () {
+//$(document).on("click", "#SVRsubs", function () {
 
-    $("#subsModal").modal("show");
-});
-$(document).on("click", "#viewCaBtn", function () {
-    $("#viewCa").modal("show");
-});
+//     $("#subsModal").modal("show");
+// });
+
 //OTHERS MODAL
 $(document).on("click", "#SVRothers", function () {
     var id = $(this).data("id");

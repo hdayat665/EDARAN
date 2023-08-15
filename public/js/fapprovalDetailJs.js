@@ -41,6 +41,75 @@ function getPersonalById(id) {
         url: "/getPersonalById/" + id,
     });
 }
+$(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
+});
+$("#hotelcvUpdate").on("input", function () {
+   
+
+    var a = parseFloat($("#hotelCvModal").val());
+    var b = parseFloat($("#hnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel_max = a * b;
+    
+    if (parseFloat($(this).val()) > hotel_max) {
+        $(this).val(hotel_max);
+    }
+
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+$("#lnTotalUpdate").on("input", function () {
+
+    var a = parseFloat($("#lodgingcvUpdate").val());
+    var b = parseFloat($("#lnUpdate").val());
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var lodging_max = a * b;
+    
+    if (parseFloat($(this).val()) > lodging_max) {
+        $(this).val(lodging_max);
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
+
+$("#laundry_amount_update").on("input", function () {
+    var laundry = parseFloat($("#laundry_amount_update").val());
+    if (isNaN(laundry)) {
+        laundry = 0;
+    }
+    var hotel = parseFloat($("#hotelcvUpdate").val()); //float
+    var lodging = parseFloat($("#lnTotalUpdate").val());
+    var total = parseFloat(hotel + lodging).toFixed(2);
+    $("#TAVUpdate").val(total);
+
+    var ts = parseFloat($("#TSUpdate").val());
+    var tav = parseFloat($("#TAVUpdate").val());
+    var total2 = parseFloat(ts + tav+laundry).toFixed(2);
+    $("#total2Update").val(total2);
+});
 
 
 //CASH ADVANCE LESS MODAL

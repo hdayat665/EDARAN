@@ -241,8 +241,11 @@ $(document).on("click", "#subsBtn", function () {
     
     $("#subsModal").modal("show");
 });
-
-//TRAVEL MODAL
+$(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
+});
+//TRAVEL MODAL 
 $(document).on("click", "#SVRtravel", function() {
     var date = $(this).data("date");
     var id = $(this).data("id");
