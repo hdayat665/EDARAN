@@ -1,23 +1,18 @@
 $(document).ready(function () {
-    let croppie;
+let croppie;
+let croppedImageShown = false;
 
-
-    // search bar in select box (eleave)
 $("#eleaverecommender").select2();
 $("#eleaveapprover").select2();
 
-// search bar in select box (eleave)
 $("#eclaimrecommender").select2();
 $("#eclaimapprover").select2();
 
-// search bar in select box (Cash Advance)
 $("#caapprover").select2();
 
-// search bar in select box (Timesheet)
 $("#tsapprover").select2();
 $("#tsapprover2").select2();
 
-// search bar in select box (Employment Information)
 $('#role').select2();
 $('#companyForEmployment').select2();
 $('#departmentShow').select2({placeholder: "PLEASE CHOOSE"});
@@ -29,60 +24,74 @@ $('#employmentType').select2();
 $('#reporttoo').select2();
 $('#event-id').select2();
 
-    $("#data-table-default").dataTable({
-        responsive: true,
-        bLengthChange: false,
-        bFilter: true,
-        initComplete: function (settings, json) {
-            $("#data-table-default").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
-            );
+$("#data-table-default").dataTable({
+    responsive: true,
+    bLengthChange: false,
+    bFilter: true,
+    initComplete: function (settings, json) {
+        $("#data-table-default").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
+});
+
+
+function initializeCroppie(src) {
+    if (croppie) {
+        croppie.destroy();
+    }
+
+    $("#croppie img").attr("src", src);
+
+    croppie = new Croppie($("#croppie img")[0], {
+        boundary: { width: 410, height: 410 },
+        viewport: {
+            width: 350,
+            height: 350,
+            type: "square",
         },
+        name: "profilePicture",
     });
+}
 
-    $("#edit-profile-picture").on("change", function () {
-        if (this.files && this.files[0]) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                $("#croppie img").attr("src", e.target.result);
-                croppie = new Croppie($("#croppie img")[0], {
-                    boundary: { width: 400, height: 400 },
-                    viewport: {
-                        width: 300,
-                        height: 300,
-                        type: "square",
-                        name: "profilePicture",
-                    },
-                });
-            };
-
+$("#edit-profile-picture").on("change", function () {
+    if (this.files && this.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            initializeCroppie(e.target.result);
             $("#showImage").show();
-            $("#crop").on("click", function () {
-                $("#showCroppedImage").show();
+            $("#showCroppedImage").hide();
+            croppedImageShown = false;
+        };
+        reader.readAsDataURL(this.files[0]);
+    }
+});
 
-                croppie
-                    .result({ type: "base64", circle: false })
-                    .then(function (dataImg) {
-                        var data = [
-                            { image: dataImg },
-                            { name: "profilePicture.jpg" },
-                        ];
-                        // use ajax to send data to php
-                        $("#result_image img").attr("src", dataImg);
-                    });
-                $("#showImage").hide();
-            });
-            reader.readAsDataURL(this.files[0]);
+$("#crop").on("click", function () {
+    if (croppie) {
+        croppie.result({ type: "base64", circle: false }).then(function (dataImg) {
+            $("#result_image img").attr("src", dataImg);
+            $("#showCroppedImage").show();
+            $("#showImage").hide();
+            croppedImageShown = true;
 
+            $('#uploadpicture').show();
+            $('#uploadcancel').show();
 
-            $('#crop').click(function() {
-                // Show the submit button
-                $('#uploadpicture').show();
-                $('#uploadcancel').show();
+            $("#edit-profile-picture").val("");
+        });
+    } else {
+        console.error("Croppie instance not found.");
+    }
+});
 
-            });
-        }
-    });
+$("#edit-profile-picture").on("click", function () {
+    if (croppedImageShown) {
+        $("#showCroppedImage").hide();
+        croppedImageShown = false;
+    }
+});
+
 
     $("#idNo").change(function () {
         if ($(this).val().length == 12) {
@@ -4664,12 +4673,26 @@ if (permanentChecked && correspondentChecked) {
 
 
             errorPlacement: function(error, element) {
-                if (element.attr("name") === "event") {
-                  error.insertAfter("#eventdiv");
+                if (element.attr("name") === "roleId") {
+                    error.insertAfter("#rolediv");
+                } else if (element.attr("name") === "company") {
+                    error.insertAfter("#companydiv");
+                } else if (element.attr("name") === "departmentId") {
+                    error.insertAfter("#deparmentdiv");
+                } else if (element.attr("name") === "branchId") {
+                    error.insertAfter("#branchdiv");
+                } else if (element.attr("name") === "jobGrade") {
+                    error.insertAfter("#jobgradediv");
+                } else if (element.attr("name") === "designation") {
+                    error.insertAfter("#designationdiv");
+                } else if (element.attr("name") === "employmentType") {
+                    error.insertAfter("#employmentypediv");
+                } else if (element.attr("name") === "event") {
+                    error.insertAfter("#eventdiv");
                 } else {
-                  error.insertAfter(element);
+                    error.insertAfter(element);
                 }
-              },
+            },
 
             submitHandler: function (form) {
                 var data = new FormData(document.getElementById("addEmpForm"));

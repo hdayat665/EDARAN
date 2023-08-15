@@ -170,6 +170,17 @@ class ClaimApprovalService
         
         
     }
+    public function getUsedCashAdvance($id = '')
+    {   
+        $data = GeneralClaim::where('id', $id)->first();
+
+        // Assuming $data->lessCash contains comma-separated IDs
+        $lessCashIds = explode(',', $data->lessCash);
+
+        $data2 = CashAdvanceDetail::whereIn('id', $lessCashIds)->get();
+
+        return $data2;
+    }
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
