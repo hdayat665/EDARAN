@@ -4673,12 +4673,26 @@ if (permanentChecked && correspondentChecked) {
 
 
             errorPlacement: function(error, element) {
-                if (element.attr("name") === "event") {
-                  error.insertAfter("#eventdiv");
+                if (element.attr("name") === "roleId") {
+                    error.insertAfter("#rolediv");
+                } else if (element.attr("name") === "company") {
+                    error.insertAfter("#companydiv");
+                } else if (element.attr("name") === "departmentId") {
+                    error.insertAfter("#deparmentdiv");
+                } else if (element.attr("name") === "branchId") {
+                    error.insertAfter("#branchdiv");
+                } else if (element.attr("name") === "jobGrade") {
+                    error.insertAfter("#jobgradediv");
+                } else if (element.attr("name") === "designation") {
+                    error.insertAfter("#designationdiv");
+                } else if (element.attr("name") === "employmentType") {
+                    error.insertAfter("#employmentypediv");
+                } else if (element.attr("name") === "event") {
+                    error.insertAfter("#eventdiv");
                 } else {
-                  error.insertAfter(element);
+                    error.insertAfter(element);
                 }
-              },
+            },
 
             submitHandler: function (form) {
                 var data = new FormData(document.getElementById("addEmpForm"));
