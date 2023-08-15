@@ -368,50 +368,44 @@
 <div class="modal fade" id="modal-dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title">Update Profile Picture</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-        </div>
-        <div class="modal-body">
-        <div class="col-sm-12">
-            <form id="profilepicform" enctype="multipart/form-data">
-                <input type="hidden" value="{{$user_id}}" name="user_id" id="user_id">
-                <input class="form-check-input" type="checkbox" id="Gravatar" />
-
-                <label class="form-check-label" for="Gravatar">Use Gravatar profile picture</label><br><br>
-                <label for="edit-profile-picture" class="form-label">Profile Picture</label>
-                <input type="file" id="edit-profile-picture" class="form-control" aria-describedby="edit-profile-picture">
-
-                <div class="d-flex" >
-                    <div class="mr-auto p-2" style="display: none;" id="showImage">
-                    <div class="col-12 border m-2">
-                    <div id="croppie" class="mt-2">
-
-                            <img src="" alt="">
-
-                    </div>
-                    <a href="javascript:;" class="btn btn-primary" id="crop">Crop</a>
-                    </div>
-                    </div>
-
-                    <div class="ml-auto p-2 mx-auto" style="display: none;" id="showCroppedImage">
-                        <div class="col-12">
-                            <p class="text-left bold" ><strong>Cropped Picture</strong></p>
-                        <div id="result_image"  class="p-2 m-2 border">
-                            <img src="" alt="">
-                    </div>
-                    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Update Profile Picture</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12">
+                    <form id="profilepicform" enctype="multipart/form-data">
+                        <input type="hidden" value="{{$user_id}}" name="user_id" id="user_id">
+                        <input class="form-check-input" type="checkbox" id="Gravatar" />
+                        <label class="form-check-label" for="Gravatar">Use Gravatar profile picture</label><br><br>
+                        <label for="edit-profile-picture" class="form-label">Profile Picture</label>
+                        <input type="file" id="edit-profile-picture" class="form-control" aria-describedby="edit-profile-picture">
+                        <div class="d-flex">
+                            <div class="mr-auto p-2" style="display: none;" id="showImage">
+                                <div class="col-12 border m-2">
+                                    <div id="croppie" class="mt-2">
+                                        <img src="" alt="">
+                                    </div>
+                                    <a href="javascript:;" class="btn btn-primary" id="crop">Crop</a>
+                                </div>
+                            </div>
+                            <div class="ml-auto p-2 mx-auto" style="display: none;" id="showCroppedImage">
+                                <div class="col-12">
+                                    <p class="text-left bold"><strong>Cropped Picture</strong></p>
+                                    <div id="result_image" class="p-2 m-2 border">
+                                        <img src="" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-        </div>
-        </div>
-            <div class="modal-footer">
-                <a href="javascript:;" id="uploadcancel"  class="btn btn-white" data-bs-dismiss="modal" style="display: none;">Close</a>
-                <button href="javascript:;" id="uploadpicture" class="btn btn-primary" style="display: none;">Save</button>
-            </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" id="uploadcancel" class="btn btn-white" data-bs-dismiss="modal" style="display: none;">Close</a>
+                    <button href="javascript:;" id="uploadpicture" class="btn btn-primary" style="display: none;">Save</button>
+                </div>
             </form>
         </div>
     </div>
-    </div>
+</div>
 @endsection
