@@ -1,3 +1,11 @@
+<style>  
+        .custom-dropdown-menu {
+        position: static ;
+        height: auto ;
+        max-height: none ;
+        overflow: visible ;
+    }
+</style>
 <head>
   <link rel="stylesheet" type="text/css" href="assets/css/customaddresstablemyprofile.css">
 </head>
@@ -24,12 +32,15 @@
                     <tr>
                         <td> {{$id}} </td>
                         <td>
-                            <div class="btn-group me-1 mb-1">
-                                <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                <a href="javascript:;" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit"class="dropdown-item" name="userAddress" >Edit</a>
+                            <div class="btn-group">
+                                <div>
+                                    <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                </div>
+                                <ul><div class="dropdown-menu custom-dropdown-menu myadd">
+                                    <li><a href="javascript:;" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit"class="dropdown-item" name="userAddress" >Edit</a></li>
                                     <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" class="dropdown-item">Delete</a>
+                                    <li><a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" class="dropdown-item">Delete</a></li>
+                                </ul>
                             </div>
                         </td>
                         <td style="text-transform: uppercase;">

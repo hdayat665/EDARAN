@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Settings <small>| Type of Logs </small></h1>
+    <h1 class="page-header">Setting <small>| Type of Log </small></h1>
     <div class="panel panel" id="typeOfLogsJs">
         <div class="panel-heading">
             <div class="col-md-6">
@@ -21,7 +21,7 @@
                         <th class="text-nowrap">Type of Logs</th>
                         <th class="text-nowrap">Project Name</th>
                         <th class="text-nowrap">Activity Name</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                                 2 => 'OFFICE',
                                 3 => 'PROJECT',
                                 4 => 'NON PROJECT',
-                               
+
                             ];
                         @endphp
                        <td>{{ isset($typeOfLogNames[$data->type_of_log]) ? $typeOfLogNames[$data->type_of_log] : '-' }}</td>
@@ -54,7 +54,7 @@
                         <td >
                             <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">CLICK HERE</a></td>
                         {{-- <td>1. Corrective Maintenance, <br> 2. Reviewing & Documenting, <br>3. Reporting </td> --}}
-                        
+
                     </tr>
                     @endforeach
                     @endif

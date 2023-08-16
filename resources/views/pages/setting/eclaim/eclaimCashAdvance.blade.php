@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Settings <small>| Cash Advanced Controller</small></h1>
+        <h1 class="page-header">Setting <small>| Cash Advanced Controller</small></h1>
         <div class="panel panel" id="cashAdvanceJs">
             <div class="panel-body">
                 <div>

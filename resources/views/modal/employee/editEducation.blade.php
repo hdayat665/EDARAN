@@ -14,13 +14,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="date" class="form-control" id="educationFromDate1" name="fromDate" value="{{ date_format(date_create($education->fromDate ?? ''), 'Y-m-d') }}"  placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationFromDate1" name="fromDate" value="{{ date_format(date_create($education->fromDate ?? ''), 'Y-m-d') }}"  placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="date" class="form-control" id="educationToDate1" name="toDate" value="{{ date_format(date_create($education->toDate ?? ''), 'Y-m-d') }}" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationToDate1" name="toDate" value="{{ date_format(date_create($education->toDate ?? ''), 'Y-m-d') }}" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -48,18 +48,21 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="file" name="file">
+                        <div class="col-sm-8">
+                            <input id="" type="file" name="file" multiple="multiple">
+                            Click <a id="fileDownloadOthers"></a> to see attachmentt.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="editEducation">Save</button>
+          <button class="btn btn-primary" id="editEducation">Save</button>
         </div>
     </form>
       </div>
     </div>
   </div>
-  
+
 {{-- end modal edit education --}}

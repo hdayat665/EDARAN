@@ -9,7 +9,7 @@
             </p>
          </div>
         <div class="card-body">
-            <button type="button"  data-bs-toggle="modal" id="addVehicleView"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Vehicle</button>
+            <button type="button"  data-bs-toggle="modal" id="addVehicleView"  class="btn btn-primary col-md-2"><i class="fa fa-plus"></i> New Vehicle</button>
             <table id="data-table-default" style="width: 100%" class="table table-striped align-middle">
                 <thead>
                         <th width="1%" data-orderable="false">Action</th>
@@ -21,14 +21,16 @@
                     @foreach ($vehicles as  $vehicle)
                     <tr>
                         <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                    <a href="javascript:;" id="editVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    {{-- <a href="javascript:;" id="viewVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">View</a>
-                                    <div class="dropdown-divider"></div> --}}
-                                    <a href="javascript:;" id="deleteVehicle" data-id="{{$vehicle->id}}" class="dropdown-item">Delete</a>
+                            <div class="btn-group">
+                                <div>
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 </div>
+                                <ul><div class="dropdown-menu custom-dropdown-menu vehi">
+                                    <li><a href="javascript:;" id="editVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li><a href="javascript:;" id="deleteVehicle" data-id="{{$vehicle->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a></li>
+                                </ul>
+                            </div>
                         </td>
                         <td>{{($vehicle->vehicle_type == 1) ? 'Car' : 'Motorcycle'}}</td>
                         <td style="text-transform:uppercase">{{$vehicle->plate_no}}</td>

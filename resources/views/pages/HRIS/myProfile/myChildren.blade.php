@@ -1,6 +1,14 @@
+<style>  
+        .custom-dropdown-menu {
+        position: static ;
+        height: auto ;
+        max-height: none ;
+        overflow: visible ;
+    }
+</style>
 <div class="tab-pane fade" id="default-tab-6">
     <div class="row p-2">
-        <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New children</button>
+        <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Children</button>
     </div>
     <table id="tableChildren" style="width: 100%" class="table table-striped align-middle">
         <thead>
@@ -13,9 +21,6 @@
             <th class="text-nowrap">Institution Name</th>
             <th class="text-nowrap">Marital Status</th>
         </thead>
-
-
-
         <tbody>
             <?php $id = 0 ?>
             @if ($childrens)
@@ -24,14 +29,17 @@
             <tr>
                 <td width="1%">{{$id}}</td>
                 <td>
-                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                    <div class="dropdown-menu">
-                        <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item" >Edit</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="javascript:;" data-bs-toggle="modal" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a>
+                    <div class="btn-group">
+                        <div>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                        </div>
+                        <ul><div class="dropdown-menu custom-dropdown-menu child">
+                            <li><a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item" >Edit</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a href="javascript:;" data-bs-toggle="modal" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a></li>
+                        </ul>
                     </div>
                 </td>
-
                 <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
 
                 @if($children->nonCitizen == 'on')

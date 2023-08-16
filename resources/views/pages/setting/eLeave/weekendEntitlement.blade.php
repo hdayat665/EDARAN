@@ -13,16 +13,13 @@
     {{-- content-start --}}
 
     <div id="content" class="app-content">
-        <h1 class="page-header">Setting <small>| Working Hours</small></h1>
+        <h1 class="page-header">Setting <small>| Working Hour</small></h1>
         <div class="row">
             <div class="col-xl-15" id="weekendEntitlementJs">
                 <div class="tab-content panel m-0 rounded-0 p-3">
                     <div class="tab-pane fade active show" id="default-tab-1">
                         <form id="updateWeekend">
-                            <h3 class="mt-10px"></i> Working Hours </h3>
                             <div class="panel-body">
-
-                                <br>
                                 <div class="panel-heading-btn">
                                     <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addcountry" class="btn btn-primary">+ New State</a>
                                 </div>
@@ -124,6 +121,12 @@
                             </div> --}}
                         </form>
                     </div> <!-- end tab-pane fade active show-->
+                    <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+
                 </div> <!--end tab-content panel m-0 rounded-0 p-3-->
             </div> <!-- end col-xl-15-->
         </div> <!--end row-->
