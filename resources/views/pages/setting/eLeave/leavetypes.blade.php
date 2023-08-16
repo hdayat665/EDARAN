@@ -66,6 +66,12 @@
 						</table>
 					</div>
 				</div>
+				<div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+
 			</div>
 		</div>
         @include('modal.eleave.leavetypes.leaveTypesModelStore')
