@@ -124,6 +124,12 @@
                             </div> --}}
                         </form>
                     </div> <!-- end tab-pane fade active show-->
+                    <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+
                 </div> <!--end tab-content panel m-0 rounded-0 p-3-->
             </div> <!-- end col-xl-15-->
         </div> <!--end row-->
