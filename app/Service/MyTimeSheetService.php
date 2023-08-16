@@ -917,9 +917,25 @@ public function getWorkingHourWeekendbyState($stateid)
 
     public function getActivityByProjectId($project_id = '')
     {
-        $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])->get();
+        $user_id = Auth::user()->id;
+        // $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])->get();
 
-        return $data;
+        $getDepartmentUser = DB::table('employment as a')
+        ->where('a.user_id', $user_id)
+        ->select('a.department')
+        ->first();
+
+        $department = $getDepartmentUser->department;
+        $data = DB::table('activity_logs as a')
+        ->where([
+            ['a.tenant_id', Auth::user()->tenant_id],
+            ['a.project_id', $project_id],
+            ['a.department', $department]
+        ])
+        ->get();
+    
+    return $data;
+    
     }
 
     public function getActivityNamebyLogsId($logs_id = '')
@@ -1820,7 +1836,6 @@ public function getWorkingHourWeekendbyState($stateid)
         $data['msg'] = 'Success Update Timesheet Log';
 
         return $data;
-    }
-    
+    }  
 
 }
