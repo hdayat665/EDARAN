@@ -22,8 +22,8 @@
 				<div class="form-control">
 					<div class="row p-2">
 					</div>
-					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Type</button>
+					<div class="panel-heading-btn">
+						<button class="btn btn-primary" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Type</button>
 					</div>
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">

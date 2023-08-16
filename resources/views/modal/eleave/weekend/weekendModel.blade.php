@@ -38,7 +38,7 @@
         <div class="modal-content">
             <form id="updateweekendmodal">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Working Hours</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Working Hour</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

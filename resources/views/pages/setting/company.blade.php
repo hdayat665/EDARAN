@@ -14,7 +14,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header" id="companyJs">Setting <small>| Companies </small></h1>
+    <h1 class="page-header" id="companyJs">Setting <small>| Company </small></h1>
     <div class="panel panel">
 
         <!-- BEGIN panel-heading -->

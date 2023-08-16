@@ -6,7 +6,7 @@
 
     {{-- <h1 class="page-header" id="eclaimReportJs">Report | Claim Report </h1> --}}
 
-    <h1 class="page-header" id="reportcorJs">Reporting | Charge Out Rate</h1>
+    <h1 class="page-header" id="reportcorJs">Reporting <small>| Charge Out Rate</small></h1>
     <div class="panel panel">
        <div class="panel-body">
            <div class="row p-2">

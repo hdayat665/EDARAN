@@ -6,14 +6,6 @@
     <h1 class="page-header">Reporting <small>| E-leave</small></h1>
     <div class="row" id="eleavereportjs">
         <div class="col-xl-15">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
-                        <span class="d-sm-none">Tab 1</span>
-                        <span class="d-sm-block d-none">Eleave Report</span>
-                    </a>
-                </li>
-            </ul>
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <div class="tab-pane fade active show" id="default-tab-1">
                     <form action="/searchEleaveReport" method="POST">

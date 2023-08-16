@@ -4,7 +4,7 @@
 
 <div id="content" class="app-content">
 
-            <h1 class="page-header" id="eclaimReportJs">Reporting | E-Claim | Claim </h1>
+            <h1 class="page-header" id="eclaimReportJs">Reporting <small>| E-Claim | Claim</small> </h1>
 
             <!-- END page-header -->
             <!-- BEGIN panel -->
