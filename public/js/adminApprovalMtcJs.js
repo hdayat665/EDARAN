@@ -23,8 +23,11 @@ function getTravelDataByGeneralId(id, date) {
       url: "/getClaimCategoryNameById/" + id
     });
   }
-
-
+  $(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
+});
+ 
   $("#hotelcvUpdate").on("input", function () {
    
 
