@@ -1,7 +1,7 @@
 //CASH ADVANCE LESS MODAL
-$(document).on("click", "#CAless", function () {
-
-    $("#CAlessModal").modal("show");
+$(document).on("click", "#viewCaBtn", function () {
+    
+    $("#viewCa").modal("show");
 });
 
 //TRAVEL MODAL
@@ -485,9 +485,7 @@ $(document).on("click", "#subsBtn", function () {
 
 //     $("#subsModal").modal("show");
 // });
-$(document).on("click", "#viewCaBtn", function () {
-    $("#viewCa").modal("show");
-});
+
 //OTHERS MODAL
 $(document).on("click", "#SVRothers", function () {
     var id = $(this).data("id");

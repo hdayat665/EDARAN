@@ -62,7 +62,7 @@
                                 <th class="text-nowrap">Year</th>
                                 <th class="text-nowrap">Month</th>
                                 <!-- <th width="9%" data-orderable="false" class="align-middle">Status</th> -->
-                                <th width="9%" data-orderable="false" class="align-middle">Tsr Status</th>
+                                <th width="9%" data-orderable="false" class="align-middle">TSR Status</th>
                             </tr>
                         </thead>
                         <tbody>
