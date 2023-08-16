@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Settings| Entitlement Group</h1>
+        <h1 class="page-header">Setting <small>| Entitlement Group</small></h1>
         <div class="panel panel" id="entitleJs">
             <div class="panel-body">
                 <div class="row">
