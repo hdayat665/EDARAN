@@ -47,7 +47,10 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Education Attachments</label>
-                        <input id="fileupload" type="file" name="file" multiple="multiple" >
+                        <div class="col-sm-8">
+                            <input id="" type="file" name="file" multiple="multiple">
+                            Click <a id="fileDownloadOthers"></a> to see attachmentt.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,5 +63,5 @@
       </div>
     </div>
   </div>
-  
+
 {{-- end modal edit education --}}

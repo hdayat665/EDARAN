@@ -1892,6 +1892,7 @@ $("#edit-profile-picture").on("click", function () {
                 instituteName: "required",
                 highestLevelAttained: "required",
                 result: "required",
+                file: "required",
             },
 
             messages: {
@@ -1900,6 +1901,7 @@ $("#edit-profile-picture").on("click", function () {
                 instituteName: "Please insert Institute Name",
                 highestLevelAttained: "Please insert Highest Level Attained",
                 result: "Please insert Result",
+                file: "Please upload valid file",
             },
 
             submitHandler: function (form) {
@@ -1937,35 +1939,61 @@ $("#edit-profile-picture").on("click", function () {
     });
 
     $("#editEducation").click(function (e) {
-        var data = new FormData(document.getElementById("educationModalEdit"));
+        $("#educationModalEdit").validate({
+            rules: {
+                fromDate: "required",
+                toDate: "required",
+                instituteName: "required",
+                highestLevelAttained: "required",
+                result: "required",
+                file: "required",
+            },
 
-        $.ajax({
-            type: "POST",
-            url: "/updateEmployeeEducation",
-            data: data,
-            dataType: "json",
+            messages: {
+                fromDate: "Please insert From Date",
+                toDate: "Please insert To Date",
+                instituteName: "Please insert Institute Name",
+                highestLevelAttained: "Please insert Highest Level Attained",
+                result: "Please insert Result",
+                file: "Please upload valid file",
+            },
 
-            processData: false,
-            contentType: false,
-        }).then(function (data) {
-            console.log(data);
-            Swal.fire({
-                title: data.title,
-                icon: "success",
-                text: data.msg,
-                type: data.type,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "OK",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                if (data.type == "error") {
-                } else {
-                    location.reload();
-                }
-            });
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("educationModalEdit"));
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeEducation",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+
+                    }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            },
+
         });
+
     });
+
 
     educationId = $("#educationId").val();
 
@@ -1992,9 +2020,9 @@ $("#edit-profile-picture").on("click", function () {
                     education.highestLevelAttained
                 );
                 $("#educationResult1").val(education.result);
-                if (data.file) {
+                if (education.file) {
                     $("#fileDownloadOthers").html(
-                        '<a href="/storage/' + data.file + '">Download File</a>'
+                        '<a href="/storage/' + education.file + '">Download File</a>'
                     );
                 }
             });
