@@ -4,7 +4,7 @@
 
 <div id="content" class="app-content">
 
-            <h1 class="page-header" id="cashadvancelistingReportJs">Reporting | E-Claim | Cash Advance</h1>
+            <h1 class="page-header" id="cashadvancelistingReportJs">Reporting <small>| E-Claim | Cash Advance</small></h1>
 
             <!-- END page-header -->
             <!-- BEGIN panel -->

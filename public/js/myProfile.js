@@ -956,61 +956,6 @@ $(document).ready(function () {
                 }).then((result) => {});
             },
         });
-        // Swal.fire({
-        //     allowOutsideClick: false,
-        //     showCancelButton: true,
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonColor: '#3085d6',
-        //     title: 'Declaration.',
-        //     icon: 'info',
-        //     html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-        //             '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-        //             '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-        //     confirmButtonText: 'Yes',
-
-        //     preConfirm: () => {
-        //         if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
-        //             Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
-
-        //     }
-        //     else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
-        //         var data = new FormData(document.getElementById("educationModalEdit"));
-
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "/updateEducation",
-        //             data: data,
-        //             dataType: "json",
-        //
-        //             processData: false,
-        //             contentType: false,
-        //         }).then(function(data) {
-        //             console.log(data);
-        //             Swal.fire({
-        //                 title: data.title,
-        //                 icon: 'success',
-        //                 text: data.msg,
-        //                 type: data.type,
-        //                     confirmButtonColor: '#3085d6',
-        //                 confirmButtonText: 'OK',
-        //                 allowOutsideClick: false,
-        //                 allowEscapeKey: false,
-        //             }).then(function() {
-        //                 if (data.type == 'error') {
-
-        //                 } else {
-        //                     location.reload();
-        //                 }
-        //             });
-        //         });
-        //     }
-        //     else {
-        //         Swal.showValidationMessage(
-        //             '<i class="fa fa-info-circle"></i> Error'
-        //         );
-        //     }
-        // },
-        // }).then((result) => {});
     });
 
     educationId = $("#educationId").val();
@@ -1251,61 +1196,6 @@ $(document).ready(function () {
                 }).then((result) => {});
             },
         });
-        //       Swal.fire({
-        //           allowOutsideClick: false,
-        //           showCancelButton: true,
-        //           cancelButtonColor: '#d33',
-        //           confirmButtonColor: '#3085d6',
-        //           title: 'Declaration.',
-        //           icon: 'info',
-        //           html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-        //                   '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-        //                   '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-        //           confirmButtonText: 'Yes',
-
-        //           preConfirm: () => {
-        //               if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
-        //                   Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
-
-        //           }
-        //           else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
-        //               var data = new FormData(document.getElementById("othersModalEdit"));
-
-        //               $.ajax({
-        //                   type: "POST",
-        //                   url: "/updateOthers",
-        //                   data: data,
-        //                   dataType: "json",
-        //
-        //                   processData: false,
-        //                   contentType: false,
-        //               }).then(function(data) {
-        //                   console.log(data);
-        //                   Swal.fire({
-        //                       title: data.title,
-        //                       icon: 'success',
-        //                       text: data.msg,
-        //                       type: data.type,
-        //                           confirmButtonColor: '#3085d6',
-        //                       confirmButtonText: 'OK',
-        //                       allowOutsideClick: false,
-        //                       allowEscapeKey: false,
-        //                   }).then(function() {
-        //                       if (data.type == 'error') {
-
-        //                       } else {
-        //                           location.reload();
-        //                       }
-        //                   });
-        //               });
-        //           }
-        //           else {
-        //               Swal.showValidationMessage(
-        //                   '<i class="fa fa-info-circle"></i> Error'
-        //               );
-        //           }
-        //       },
-        //    }).then((result) => {});
     });
 
     othersId = $("#othersId").val();
@@ -1326,9 +1216,7 @@ $(document).ready(function () {
                 // $("#othersDoc1").val(othersQualification.file);
                 if (othersQualification.file) {
                     $("#othersDoc1").html(
-
                         '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
-
                     );
                 }
             });
@@ -2385,6 +2273,21 @@ $(document).ready(function () {
             );
         },
     });
+    $(document).ready(function() {
+        $(".child").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".child");
+            $(".child").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".child").hide();
+            }
+        });
+    });
 
     $("#education").DataTable({
         responsive: false,
@@ -2456,6 +2359,22 @@ $(document).ready(function () {
             );
         },
     });
+    $(document).ready(function() {
+        $(".myadd").hide();
+
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
+            $(".myadd").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".myadd").hide();
+            }
+        });
+    });
+
     $("#xName1,#lastName1").change(function () {
         var a = $("#firstName1").val();
         var b = $("#lastName1").val();
@@ -3461,6 +3380,19 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+    $(document).ready(function() {
+        $(".fam").hide();
+        $(document).on("click", ".dropdown-toggle", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".fam");
+            $(".fam").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".fam").hide();
+            }
+        });
     });
 
     $("#parentModalAdd").click(function (e) {
