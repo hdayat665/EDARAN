@@ -430,6 +430,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getUserByUserRole/{id}', 'getUserByUserRole');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
+            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');

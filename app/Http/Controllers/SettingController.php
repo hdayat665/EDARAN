@@ -1098,7 +1098,12 @@ class SettingController extends Controller
 
         return response()->json($data);
     }
+    public function getClaimCategoryDetails($id = '')
+    {
+        $data = getClaimCategoryDetails($id);
 
+        return response()->json($data);
+    }
     public function getEntitlementContent($id = '')
     {
         $data = getareaContentById($id);

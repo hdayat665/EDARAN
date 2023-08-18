@@ -269,7 +269,7 @@
             </div>
         </div>
     </div>
-    <div class="row p-2">
+    <div class="row p-2"> 
         <div class="">
             <table id="otherTableUpdate" class="table table-striped table-bordered align-middle">
                 <thead>
@@ -292,8 +292,8 @@
                         <tr>    
                             <td>{{$id}}</td>
                             <td>{{ getClaimCategoryById($personal->claim_category)->claim_catagory ?? '-' }}</td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{ getProjectById($personal->project_id)->project_code ?? '-' }}</td>
+                            <td>{{ getProjectById($personal->project_id)->project_name ?? '-' }}</td>
                             <td>{{ $personal->claim_desc ?? '-' }}</td>
                             <td>RM {{ $personal->amount ?? '-' }}</td>
                             <td>

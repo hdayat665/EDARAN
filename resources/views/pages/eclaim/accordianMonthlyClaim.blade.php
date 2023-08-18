@@ -185,6 +185,25 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row p-0" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Location2</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="Location2" name="location_start2">
+                                            <option class="form-label" value="" selected>
+                                            PLEASE CHOOSE</option>
+                                            <option class="form-label">Home
+                                            </option>
+                                            <option class="form-label">Office
+                                            </option>
+                                            <option class="form-label">My Project
+                                            </option>
+                                            <option class="form-label">Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row p-0">
@@ -193,6 +212,24 @@
                                     </div>
                                     <div class="col-md-9">
                                         <select class="form-select" id="dest" name="location_end">
+                                            <option class="form-label" value="">PLEASE CHOOSE</option>
+                                            <option class="form-label">Home
+                                            </option>
+                                            <option class="form-label">Office
+                                            </option>
+                                            <option class="form-label">My Project
+                                            </option>
+                                            <option class="form-label">Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row p-0" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Destination2</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="dest2" name="location_end2">
                                             <option class="form-label" value="">PLEASE CHOOSE</option>
                                             <option class="form-label">Home
                                             </option>
@@ -254,6 +291,14 @@
                                         <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a Location">
                                     </div>
                                 </div>
+                                <div class="row p-0" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Address 2</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="address_start2" id="startaddress2" placeholder="Enter a Location">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row p-0">
@@ -262,6 +307,14 @@
                                     </div>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a Location">
+                                    </div>
+                                </div>
+                                <div class="row p-0" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Destination Address2</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="location_address2" id="destaddress2" placeholder="Enter a Location">
                                     </div>
                                 </div>
                             </div>
@@ -312,6 +365,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <input id="result" type="text" class="form-control" readonly name="total_km">
+                                        <input id="result2" type="text" class="form-control" readonly name="total_km2" style="display: none">
                                     </div>
                                     <div class="col-md-2">
                                         <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
@@ -1215,7 +1269,7 @@
                                         <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> 
                         </div>
                         {{-- akan tarik data dari  labelling name dlam setting add claim --}}
                         <div class="row p-2" id="labelCategory" style="display: none">
@@ -1237,6 +1291,24 @@
                                 <input type="number" name="amount" id="amount"class="form-control" placeholder="0.00">
                             </div>
                         </div> 
+
+                        <div class="row p-2" id="projectCategory" style="display: none">
+                            <div class="col-md-4">
+                                <label class="form-label">Project</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-select" name="project_id">
+                                    
+                                    <?php $projects = myProjectActive(); ?>
+                                    <option class="form-label" value="">
+                                        Please Select</option>
+                                    @foreach ($projects as $project)
+                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Description</label>
@@ -1245,9 +1317,11 @@
                                 <textarea class="form-control" name="claim_desc" id="claim_desc" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="row p-2">
+                        <div class="row p-2" id="fileAttachment" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Supporting Document</label>
+                                <input type="hidden" value="" id="mandatory" >
+
                             </div>
                             <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
@@ -1268,49 +1342,70 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow&libraries=places"></script>
 
 <script>
-    var startAddressInput = document.getElementById('autocomplete');
-    var destinationAddressInput = document.getElementById('autocomplete2');
-    var calculateButton = document.getElementById('calculateButton');
+        var startAddressInput = document.getElementById('autocomplete');
+        var destinationAddressInput = document.getElementById('autocomplete2');
+        var calculateButton = document.getElementById('calculateButton');
 
-    function initAutocomplete() {
-        var autocomplete = new google.maps.places.Autocomplete(startAddressInput);
-        autocomplete.setFields(['address_components', 'geometry', 'formatted_address']);
-        initAutocomplete2();
-    }
+        var startaddress2 = document.getElementById('startaddress2');
+        var destaddress2 = document.getElementById('destaddress2');
 
-    function initAutocomplete2() {
-        var autocomplete2 = new google.maps.places.Autocomplete(destinationAddressInput);
-        autocomplete2.setFields(['address_components', 'geometry', 'formatted_address']);
-    }
+        function initAutocomplete() {
+            var autocomplete = new google.maps.places.Autocomplete(startAddressInput);
+            autocomplete.setFields(['formatted_address']);
 
-    document.addEventListener("DOMContentLoaded", function() {
-        initAutocomplete();
-        calculateButton.addEventListener("click", calculateDistance);
-    });
+            autocomplete.addListener('place_changed', function() {
+                var selectedPlace = autocomplete.getPlace();
+                var selectedAddress = selectedPlace.formatted_address;
+                startaddress2.value = selectedAddress;
+            });
+        }
 
-    
-    function calculateDistance() {
-        var startAddress = startAddressInput.value;
-        var destinationAddress = destinationAddressInput.value;
+        function initAutocomplete2() {
+            var autocomplete2 = new google.maps.places.Autocomplete(destinationAddressInput);
+            autocomplete2.setFields(['formatted_address']);
 
-        var service = new google.maps.DistanceMatrixService();
-        service.getDistanceMatrix({
-            origins: [startAddress],
-            destinations: [destinationAddress],
-            travelMode: 'DRIVING',
-            unitSystem: google.maps.UnitSystem.METRIC,
-        }, function(response, status) {
-            if (status !== 'OK') {
-                alert('Error: ' + status);
-            } else {
-                var distance = response.rows[0].elements[0].distance.value;
-                var distanceInKm = distance / 1000;
-                var distanceFormatted = distanceInKm.toFixed(1);
-                document.getElementById('result').value = distanceFormatted;
+            autocomplete2.addListener('place_changed', function() {
+                var selectedPlace2 = autocomplete2.getPlace();
+                var selectedAddress2 = selectedPlace2.formatted_address;
+                destaddress2.value = selectedAddress2;
+            });
+        }
 
-
-                
-            }
+        document.addEventListener("DOMContentLoaded", function() {
+            initAutocomplete();
+            initAutocomplete2();
+            calculateButton.addEventListener("click", calculateDistance);
         });
-    }
-</script>
+
+        function calculateDistance() {
+            var startAddress = startAddressInput.value;
+            var startAddress2 = startaddress2.value;
+
+            var destinationAddress = destinationAddressInput.value;
+            var destinationAddress2 = destaddress2.value;
+
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [startAddress, startAddress2],
+                destinations: [destinationAddress, destinationAddress2],
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC,
+            }, function(response, status) {
+                if (status !== 'OK') {
+                    alert('Error: ' + status);
+                } else {
+                    var distance1 = response.rows[0].elements[0].distance.value;
+                    var distance2 = response.rows[1].elements[1].distance.value;
+
+                    var distanceInKm1 = distance1 / 1000;
+                    var distanceInKm2 = distance2 / 1000;
+
+                    var distanceFormatted1 = distanceInKm1.toFixed(1);
+                    var distanceFormatted2 = distanceInKm2.toFixed(1);
+
+                    document.getElementById('result').value = distanceFormatted1;
+                    document.getElementById('result2').value = distanceFormatted2;
+                }
+            });
+        }
+    </script>
