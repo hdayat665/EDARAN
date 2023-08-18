@@ -1433,7 +1433,7 @@ class myClaimService
     public function createTravelClaim($r)
     {
         $input = $r->input();
-        //pr($input);
+        // pr($input);
         $id = $input['general_id'];
 
         $monthlyClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'MTC']])->count();
@@ -1547,9 +1547,606 @@ class myClaimService
         //     $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
         //     return $data;
         // }
+        if ($input['total_km'] > $input['total_km2']) {
+            $input1['user_id'] = Auth::user()->id;
+            $input1['tenant_id'] = Auth::user()->tenant_id;
+            $input1['general_id'] = $generalClaimData->id;
+            $input1['travel_date'] = $input['travel_date'] ?? '';
+            
+            $input1['start_time'] = $input['start_time'] ?? '';
+            $input1['end_time'] = $input['end_time'] ?? '';
+            $input1['total_hour'] = $input['total_hour'] ?? '';
+            $input1['desc'] = $input['desc'] ?? '';
+            $input1['reason'] = $input['reason'] ?? '';
+            $input1['type_transport'] = $input['type_transport'] ?? '';
+            $input1['location_start'] = $input['location_start2'] ?? '';
+            $input1['location_end'] = $input['location_end2'] ?? '';
+            $input1['address_start'] = $input['address_start2'] ?? '';
+            $input1['log_id'] = $input['log_id'] ?? '';
+            
+            $input1['total_km'] = $input['total_km2'] ?? '';
+            $input1['petrol'] = $input['petrol'] ?? '';
+            $input1['toll'] = $input['toll'] ?? '';
+            $input1['parking'] = $input['parking'] ?? '';
+            $input1['location_address'] = $input['location_address2'] ?? '';
+            $input1['amount'] = $input['toll']  + $input['petrol'] + $input['parking'];
+            $input1['type_claim'] = 'travel';
+            // $input1['file_upload'] = $fileString ?? '';
+            $input1['project_id'] = $input['project_id2'] ?? $input['project_id'] ?? '';
+            
+            $startTime = date('Y-m-d H:i:s', strtotime($input1['start_time']));
+            $endTime = date('Y-m-d H:i:s', strtotime($input1['end_time']));
+
+            // $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
+            // ->where(function ($query) use ($input1) {
+            //     $query->where('travel_date', $input1['travel_date'])
+            //         ->where('start_time', '<=', $input1['end_time'])
+            //         ->where('end_time', '>=', $input1['start_time']);
+            // })
+            // ->exists();
+            
+            $existingLogs = TravelClaim::where('general_id', $input['general_id'])
+            ->where('travel_date', $input1['travel_date'])
+            ->where(function ($query) use ($startTime, $endTime) {
+                $query->where(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+                });
+            })
+            ->get();
+            
+            if ($existingLogs->isNotEmpty()) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['id'] = $generalClaimData->id;
+                $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
+                return $data;
+            }
+            TravelClaim::create($input1);
+
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($personalClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        foreach ($travelClaims as $claims) {
+            $totals[] = $claims->amount;
+        }
+        
+        
+
+        $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
+        
+        $totalAmount = [
+            'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
+        ];
+
+        
+
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
+
+        function getTotalCarClaimByGeneralId($generalId)
+        {
+            $data = TravelClaim::select(DB::raw('SUM(total_km) AS total_km'))
+                ->where('general_id', $generalId)
+                ->where('type_claim', 'travel')
+                ->where('type_transport', 'Personal Car')
+                ->groupBy('general_id')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return 0; // Return 0 if no records found
+            }
+
+            return $data[0]->total_km;
+        }
+
+        function getTotalMotorClaimByGeneralId($generalId)
+        {
+            $data = TravelClaim::select(DB::raw('SUM(total_km) AS total_km'))
+                ->where('general_id', $generalId)
+                ->where('type_claim', 'travel')
+                ->where('type_transport', 'Personal Motocycle')
+                ->groupBy('general_id')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return 0; // Return 0 if no records found
+            }
+
+            return $data[0]->total_km;
+        }
+
+        $data['totalCar'] = getTotalCarClaimByGeneralId($generalClaimData->id) ?? 0;
+        
+        $data['totalMotor'] = getTotalMotorClaimByGeneralId($generalClaimData->id) ?? 0;
+       
+        function getEntitlementByJobGradeCar($id = '')
+        {
+            $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+            $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+            $car = TransportMillage::where('entitle_id', $entitle)
+                ->where('type', 'car')
+                ->get();
+
+            return $car;
+        }
+
+        $data['car'] = getEntitlementByJobGradeCar(Auth::user()->id);
+        
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+       
+        $carValue = $data['totalCar'] ??0;
+       
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+            
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+        
+        $data['ansCar']= $ansCar ;
+        
+        function getEntitlementByJobGradeMotor($id = '')
+        {
+            $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+            $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+            $motor = TransportMillage::where('entitle_id', $entitle)
+                ->where('type', 'motor')
+                ->get();
+
+            return $motor;
+        }
+
+        $data['motor'] = getEntitlementByJobGradeMotor(Auth::user()->id);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'] ?? 0;
+        
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+            
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+        
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        //pr($totalcarmotor);
+
+        
+        
+        function getSummaryTravellingClaimByGeneralId($id = '')
+        {
+            $data = TravelClaim::select(
+                    DB::raw('SUM(total_km) AS total_km'),
+                    DB::raw('SUM(petrol) AS total_petrol'),
+                    DB::raw('SUM(toll) AS total_toll'),
+                    DB::raw('SUM(parking) AS total_parking'),
+                    DB::raw('SUM(petrol) + SUM(toll) + SUM(parking) AS total_travelling')
+                )
+                ->where('general_id', $id)
+                ->where('type_claim', 'travel')
+                ->groupBy('general_id')
+                ->get();
+
+            return $data;
+        }
+
+        
+        $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
+        $realAmount = $IdGeneral->total_amount;
+
+       
+
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor ;
+        
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Travel Log Created';
+
+        return $data;
+
+        }elseif ($input['total_km'] < $input['total_km2']) {
+            $input1['user_id'] = Auth::user()->id;
+            $input1['tenant_id'] = Auth::user()->tenant_id;
+            $input1['general_id'] = $generalClaimData->id;
+            $input1['travel_date'] = $input['travel_date'] ?? '';
+            
+            $input1['start_time'] = $input['start_time'] ?? '';
+            $input1['end_time'] = $input['end_time'] ?? '';
+            $input1['total_hour'] = $input['total_hour'] ?? '';
+            $input1['desc'] = $input['desc'] ?? '';
+            $input1['reason'] = $input['reason'] ?? '';
+            $input1['type_transport'] = $input['type_transport'] ?? '';
+            $input1['location_start'] = $input['location_start'] ?? '';
+            $input1['location_end'] = $input['location_end'] ?? '';
+            $input1['address_start'] = $input['address_start'] ?? '';
+            $input1['log_id'] = $input['log_id'] ?? '';
+            
+            $input1['total_km'] = $input['total_km'] ?? '';
+            $input1['petrol'] = $input['petrol'] ?? '';
+            $input1['toll'] = $input['toll'] ?? '';
+            $input1['parking'] = $input['parking'] ?? '';
+            $input1['location_address'] = $input['location_address'] ?? '';
+            $input1['amount'] = $input['toll']  + $input['petrol'] + $input['parking'];
+            $input1['type_claim'] = 'travel';
+            // $input1['file_upload'] = $fileString ?? '';
+            $input1['project_id'] = $input['project_id2'] ?? $input['project_id'] ?? '';
+            
+            $startTime = date('Y-m-d H:i:s', strtotime($input1['start_time']));
+            $endTime = date('Y-m-d H:i:s', strtotime($input1['end_time']));
+
+            // $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
+            // ->where(function ($query) use ($input1) {
+            //     $query->where('travel_date', $input1['travel_date'])
+            //         ->where('start_time', '<=', $input1['end_time'])
+            //         ->where('end_time', '>=', $input1['start_time']);
+            // })
+            // ->exists();
+            
+            $existingLogs = TravelClaim::where('general_id', $input['general_id'])
+            ->where('travel_date', $input1['travel_date'])
+            ->where(function ($query) use ($startTime, $endTime) {
+                $query->where(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+                });
+            })
+            ->get();
+            
+            if ($existingLogs->isNotEmpty()) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['id'] = $generalClaimData->id;
+                $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
+                return $data;
+            }
+            TravelClaim::create($input1);
+
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($personalClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        foreach ($travelClaims as $claims) {
+            $totals[] = $claims->amount;
+        }
+        
+        
+
+        $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
+        
+        $totalAmount = [
+            'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
+        ];
+
+        
+
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
+
+        function getTotalCarClaimByGeneralId($generalId)
+        {
+            $data = TravelClaim::select(DB::raw('SUM(total_km) AS total_km'))
+                ->where('general_id', $generalId)
+                ->where('type_claim', 'travel')
+                ->where('type_transport', 'Personal Car')
+                ->groupBy('general_id')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return 0; // Return 0 if no records found
+            }
+
+            return $data[0]->total_km;
+        }
+
+        function getTotalMotorClaimByGeneralId($generalId)
+        {
+            $data = TravelClaim::select(DB::raw('SUM(total_km) AS total_km'))
+                ->where('general_id', $generalId)
+                ->where('type_claim', 'travel')
+                ->where('type_transport', 'Personal Motocycle')
+                ->groupBy('general_id')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return 0; // Return 0 if no records found
+            }
+
+            return $data[0]->total_km;
+        }
+
+        $data['totalCar'] = getTotalCarClaimByGeneralId($generalClaimData->id) ?? 0;
+        
+        $data['totalMotor'] = getTotalMotorClaimByGeneralId($generalClaimData->id) ?? 0;
+       
+        function getEntitlementByJobGradeCar($id = '')
+        {
+            $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+            $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+            $car = TransportMillage::where('entitle_id', $entitle)
+                ->where('type', 'car')
+                ->get();
+
+            return $car;
+        }
+
+        $data['car'] = getEntitlementByJobGradeCar(Auth::user()->id);
+        
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+       
+        $carValue = $data['totalCar'] ??0;
+       
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+            
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+        
+        $data['ansCar']= $ansCar ;
+        
+        function getEntitlementByJobGradeMotor($id = '')
+        {
+            $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+            $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+            $motor = TransportMillage::where('entitle_id', $entitle)
+                ->where('type', 'motor')
+                ->get();
+
+            return $motor;
+        }
+
+        $data['motor'] = getEntitlementByJobGradeMotor(Auth::user()->id);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+        $MotorValue = $data['totalMotor'] ?? 0;
+        
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+            
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+        
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+
+        //pr($totalcarmotor);
+
+        
+        
+        function getSummaryTravellingClaimByGeneralId($id = '')
+        {
+            $data = TravelClaim::select(
+                    DB::raw('SUM(total_km) AS total_km'),
+                    DB::raw('SUM(petrol) AS total_petrol'),
+                    DB::raw('SUM(toll) AS total_toll'),
+                    DB::raw('SUM(parking) AS total_parking'),
+                    DB::raw('SUM(petrol) + SUM(toll) + SUM(parking) AS total_travelling')
+                )
+                ->where('general_id', $id)
+                ->where('type_claim', 'travel')
+                ->groupBy('general_id')
+                ->get();
+
+            return $data;
+        }
+
+        
+        $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
+        $realAmount = $IdGeneral->total_amount;
+
+       
+
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor ;
+        
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Travel Log Created';
+
+        return $data;
+
+        }
+        else {
 
         TravelClaim::create($input1);
-
         $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
         $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
 
@@ -1786,6 +2383,10 @@ class myClaimService
         $data['msg'] = 'Travel Log Created';
 
         return $data;
+        }
+        
+        
+        
     }
 
     public function createSubsClaim($r)
