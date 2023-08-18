@@ -835,17 +835,27 @@ $("#subsTableUpdate").DataTable({
         if ($(this).val() == "My Project") {
             $("#project").show();
             $("#autocomplete").val('');
+            $("#Location2").val("My Project");
+            $("#startaddress2").val('');
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
+            var permanentValue = $("#permanentAddress").val() || "-";
             $("#autocomplete").val(officeValue);
             $("#project").hide();
+            $("#startaddress2").val(permanentValue);
+            $("#Location2").val("Home");
         } else if ($(this).val() == "Home") {
+            var officeValue = $("#office").val() || "-";
             var permanentValue = $("#permanentAddress").val() || "-";
             $("#project").hide();
             $("#autocomplete").val(permanentValue);
+            $("#startaddress2").val(officeValue);
+            $("#Location2").val("Office");
         } else {
             $("#project").hide();
             $("#autocomplete").val('');
+            $("#Location2").val("Others");
+            $("#startaddress2").val('');
         }
     });
 
@@ -855,18 +865,28 @@ $("#subsTableUpdate").DataTable({
             $("#projectdest").show();
             $("#logname").hide();
             $("#autocomplete2").val('');
+            $("#dest2").val("My Project");
+            $("#destaddress2").val('');
         } else if ($(this).val() == "Others") {
             $("#projectdest").hide();
             $("#logname").hide();
             $("#autocomplete2").val('');
+            $("#dest2").val("Others");
+            $("#destaddress2").val('');
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
+            var permanentValue = $("#permanentAddress").val() || "-";
             $("#autocomplete2").val(officeValue);
             $("#projectdest").hide();
+            $("#destaddress2").val(permanentValue);
+            $("#dest2").val("Home");
         } else if ($(this).val() == "Home") {
             var permanentValue = $("#permanentAddress").val() || "-";
+            var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(permanentValue);
             $("#projectdest").hide();
+            $("#destaddress2").val(officeValue);
+            $("#dest2").val("Office");
         } else {
             $("#projectdest").hide();
             $("#logname").hide();
@@ -1271,7 +1291,13 @@ $("#subsTableUpdate").DataTable({
 
         return result;
     }
+    $("#autocomplete").focus(function() {
+        // Get the value from the source input
+        var inputValue = $(this).val();
 
+        // Paste the value to the destination input
+        $("#startaddress2").val(inputValue);
+    });
     var resultInput = document.getElementById("result");
     $("#result,#toll,#parking,#petrol,#autocomplete2,#calculateButton").focus(function () {
     var total = parseInt(resultInput.value);
@@ -1281,6 +1307,8 @@ $("#subsTableUpdate").DataTable({
 
     // round up the result and remove decimal places
     var roundedResult = Math.ceil(result);
+    
+    
 
     // display the rounded result in the millage input field
     $("#millage").val(roundedResult);
@@ -1503,7 +1531,10 @@ $("#subsTableUpdate").DataTable({
             $("#lnca").val(0);
         }
     });
+    
+
     $(document).on("change", "#claimcategory", function () { 
+        
         $("#labelCategory").hide();
         id = $(this).val();
         const inputs = ["contentLabel"];
@@ -1523,6 +1554,12 @@ $("#subsTableUpdate").DataTable({
                     url: "/getClaimCategoryContent/" + id,
                 });
             }
+            function getClaimCategoryDetails(id) {
+                return $.ajax({
+                    url: "/getClaimCategoryDetails/" + id,
+                });
+            }
+
             $("#" + inputs[i] + "")
                 .find("option")
                 .end();
@@ -1530,7 +1567,27 @@ $("#subsTableUpdate").DataTable({
 
         var user = getClaimCategoryContent(id);
 
+        var user2 = getClaimCategoryDetails(id);
+
+        user2.then(function (data) {
+            console.log("Claim Category Details:", data);
+    
+            // Rest of your code...
+            $("#mandatory").val(data[0].attachstatus);
+            if (data[0].addattach == 1) {
+                $("#fileAttachment").show(); // Show the element
+                } else {
+                    $("#fileAttachment").hide(); // Hide the element
+                }
+            if (data[0].addproject == 1) {
+                $("#projectCategory").show(); // Show the element
+                } else {
+                    $("#projectCategory").hide(); // Hide the element
+                }
+
+        });
         user.then(function (data) {
+            
             $("#label").text(data[0].label);
     
             // Check if data is available
@@ -1751,6 +1808,12 @@ $("#subsTableUpdate").DataTable({
                     }
                 },
                 amount: "required",
+                "file_upload[]": {
+                    required: function () {
+                        // Check if labelcategory div is visible
+                        return $("#mandatory").val() === "1";
+                    }
+                },
                 // "file_upload[]": "required",
             },
 
@@ -1758,7 +1821,7 @@ $("#subsTableUpdate").DataTable({
                 claim_category: "Please Select Claim Category",
                 claim_category_detail: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
-                // "file_upload[]": "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

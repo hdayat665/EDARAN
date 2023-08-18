@@ -287,6 +287,7 @@ $(document).ready(function () {
         var user = getClaimCategoryContent(id);
 
         user.then(function (data) {
+            
             $("#label").text(data[0].label);
 
             // Check if data is available

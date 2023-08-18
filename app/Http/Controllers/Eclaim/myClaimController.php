@@ -434,6 +434,7 @@ class myClaimController extends Controller
         $data['travelDate'] = $mcs->getTravelDateClaimByGeneralId($id);
         //pr($data['travelDate']);
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
+        //pr($data['personalClaims']);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         //pr($data['summaryOthers']);
 

@@ -2117,7 +2117,7 @@ if (!function_exists('getClaimCategoryMtc')) {
         if (!$data) {
             $data = [];
         }
-
+        
         return $data;
     }
 }
@@ -2134,7 +2134,18 @@ if (!function_exists('getClaimCategoryContentByClaimId')) {
         return $data;
     }
 }
+if (!function_exists('getClaimCategoryDetails')) {
+    function getClaimCategoryDetails($id = '')
+    {
+        $data = ClaimCategory::where([['id', $id]])->get();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getareaContentById')) {
     function getareaContentById($id = '')
     {
