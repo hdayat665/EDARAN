@@ -17,7 +17,7 @@
                             <th class="text-nowrap">Description</th>
                             <th class="text-nowrap">Project Manager</th>
                             <th class="text-nowrap">Contract End Date</th>
-                            {{-- <th class="text-nowrap">Status</th> --}}
+                            <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Location</th>
                         </tr>
                     </thead>
@@ -32,7 +32,7 @@
                             <td>{{$myProject->desc}}</td>
                             <td>{{($myProject->project_manager) ? getEmployeeNameById($myProject->project_manager)->employeeName ?? '-' : '-'}}</td>
                             <td>{{$myProject->contract_end_date}}</td>
-                            {{-- <td>{{$myProject->request_status}}</td> --}}
+                            <td>{{$myProject->status}}</td>
                             <!-- <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal">{{count(explode(',',$myProject->location))}}</a></td> -->
                                 <td><a href="/projectViewAssignLocation/{{$myProject->member_id}}" data-id="{{$myProject->member_id}}"  class="btn btn-primary"> View </a></td>
                         </tr>
