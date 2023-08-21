@@ -167,40 +167,6 @@
                                                     </select>
                                                     <input type="hidden" id="reporttoodiv" name="" class="form-control">
                                                 </div>
-                                               {{-- <div class="row p-2">
-                                                   <div class="col-sm-6">
-                                                       <label class="form-label" for="supervisor">
-                                                           User Role
-                                                       </label>
-                                                       <div class="form-check form-switch">
-                                                           <input class="form-check-input partCheck2" id="supervisor" name="supervisor"
-                                                               {{ $employment->supervisor == 'on' ? 'checked' : '' }} type="checkbox"
-                                                               name="supervisor" id="supervisor">
-                                                           <label class="form-label" for="supervisor">
-                                                               Supervisor
-                                                           </label>
-                                                           <div class="form-text">
-                                                               If enabled, report-to will enabled the username
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                                   @if ($employment->supervisor == 'on')
-                                                       <div class="col-sm-6" id="reportto">
-                                                       @else
-                                                           <div class="col-sm-6" style="display: none;" id="reportto">
-                                                   @endif
-                                                   <label for="employee-id" class="form-label">Report To</label>
-                                                   <select class="form-select" name="report_to" id="reporttoo">
-                                                       <?php $employees = getEmployee(); ?>
-                                                       <option value="">PLEASE CHOOSE</option>
-                                                       @foreach ($employees as $employee)
-                                                           <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                               {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>{{ $employee->employeeName }}
-                                                           </option>
-                                                       @endforeach
-                                                   </select>
-                                                </div> --}}
-                                           {{-- </div> --}}
                                            <hr>
                                            <div class="row p-2">
                                                <div class="col-sm-6">
