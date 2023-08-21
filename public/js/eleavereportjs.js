@@ -30,4 +30,10 @@ $(document).ready(function () {
             $("#menu2").hide();
         }
     });
+
+    $('#typeofleave, #department, #employer').select2({});
+
+    $('#reportby, #status').select2({
+        minimumResultsForSearch: Infinity,
+    });
 });

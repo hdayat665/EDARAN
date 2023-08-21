@@ -5,7 +5,6 @@
 <div id="content" class="app-content">
 
     {{-- <h1 class="page-header" id="eclaimReportJs">Report | Claim Report </h1> --}}
-
     <h1 class="page-header" id="reportcorJs">Reporting <small>| Charge Out Rate</small></h1>
     <div class="panel panel">
        <div class="panel-body">
@@ -14,8 +13,7 @@
                <div class="mb-3 row">
                    <label for="staticEmail" class="col-sm-2 col-form-label">Date</label>
                    <div class="col-sm-3">
-                     <input type="text" class="form-control" id="datepickercor" name="date_range" value="">
-
+                        <input type="text" class="form-control" id="datepickercor" name="date_range" value="">
                    </div>
                </div>
                <div class="mb-3 row">
@@ -33,7 +31,7 @@
                        <select class="form-select" id="employeeid" name="user_id">
                         <option class="form-label" value="" >PLEASE CHOOSE</option>
                         <?php $employees = getEmployee() ?>
-                        @foreach ($employees as $employee)
+                        @foreach ($employees->sortBy('employeeName') as $employee)
                         <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                         @endforeach
                     </select>

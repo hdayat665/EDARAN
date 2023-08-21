@@ -5,17 +5,17 @@
 <div id="content" class="app-content">
 			<!-- BEGIN breadcrumb -->
 
-	<h1 class="page-header" id="cashadvancelistingReportJs">Report | Cash Advance Report </h1>
-	
+	<h1 class="page-header" id="cashadvancelistingReportJs">Reporting <small>| eClaim | Cash Advance</small></h1>
+
 	<!-- END page-header -->
 	<!-- BEGIN panel -->
 	<div class="panel panel">
-		
+
 		<!-- BEGIN panel-heading -->
 		<div class="panel-heading">
 		<div class="col-md-6">
 		<h4> Cash Advance Report </h4>
-		
+
 		</div>
 			<h4 class="panel-title"></h4>
 		</div>
@@ -94,11 +94,11 @@
                     <td></td>
                 </tr>
                 @endforeach
-                @endif 
+                @endif
 
             </tbody>
         </table>
-			
+
 		</div>
 	</div>
 

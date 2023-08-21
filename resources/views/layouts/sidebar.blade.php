@@ -896,7 +896,7 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-user-minus text-gray"></i>
                                     </div>
-                                    <div class="menu-text text-gray">E-Leave</div>
+                                    <div class="menu-text text-gray">eLeave</div>
                                 </a>
                             </div>
                         @endif
@@ -945,7 +945,7 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-money-check text-gray"></i>
                                     </div>
-                                    <div class="menu-text text-gray">E-Claim</div>
+                                    <div class="menu-text text-gray">eClaim</div>
                                     <div class="menu-caret text-gray"></div>
                                 </a>
                                 <div class="menu-submenu">
