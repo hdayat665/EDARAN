@@ -2273,20 +2273,17 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".child").hide();
-
-        $(".dropdown-toggle").on("click", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".child");
-            $(".child").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".child").hide();
-            }
-        });
+    $(".child").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".child");
+        $(".child").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".child").hide();
+        }
     });
 
     $("#education").DataTable({
@@ -2302,21 +2299,19 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".edu").hide();
-
-        $(".dropdown-toggle").on("click", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".edu");
-            $(".edu").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".edu").hide();
-            }
-        });
+    $(".edu").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".edu");
+        $(".edu").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
     });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".edu").hide();
+        }
+    });
+
 
     $("#qualificationOthers").DataTable({
         responsive: false,
@@ -2331,20 +2326,17 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".oth").hide();
-
-        $(".dropdown-toggle").on("click", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".oth");
-            $(".oth").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".oth").hide();
-            }
-        });
+    $(".oth").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".oth");
+        $(".oth").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".oth").hide();
+        }
     });
 
     $("#profileAddress").DataTable({
@@ -2359,20 +2351,17 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".myadd").hide();
-
-        $(".dropdown-toggle").on("click", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
-            $(".myadd").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".myadd").hide();
-            }
-        });
+    $(".myadd").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
+        $(".myadd").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".myadd").hide();
+        }
     });
 
     $("#xName1,#lastName1").change(function () {
@@ -3381,18 +3370,17 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".fam").hide();
-        $(document).on("click", ".dropdown-toggle", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".fam");
-            $(".fam").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".fam").hide();
-            }
-        });
+    $(".fam").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".fam");
+        $(".fam").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".fam").hide();
+        }
     });
 
     $("#parentModalAdd").click(function (e) {
