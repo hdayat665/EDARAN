@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content" >
-    <h1 class="page-header">Reporting <small>| E-leave</small></h1>
+    <h1 class="page-header">Reporting <small>| eLeave</small></h1>
     <div class="row" id="eleavereportjs">
         <div class="col-xl-15">
             <div class="tab-content panel m-0 rounded-0 p-3">
@@ -20,8 +20,8 @@
                             <div class="row p-2" id="rowproject">
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Type of Leave</label>
-                                    <select class="form-select" name="typelist">
-                                        <option value="" label="ALL"></option>
+                                    <select class="form-select" name="typelist" id="typeofleave">
+                                        <option value="" label="ALL">ALL</option>
                                             @foreach($types as $dt)
                                                 <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
                                             @endforeach
@@ -32,7 +32,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">By :</label>
                                     <select class="form-select" id="reportby" name="">
-                                        <option value="" selected>ALL</option>
+                                        <option value="0" selected>ALL</option>
                                         <option value="1">DEPARTMENT</option>
                                         <option value="2">EMPLOYEE NAME</option>
                                     </select>
@@ -40,10 +40,10 @@
                             </div>
                              <div class="row p-2" id="menu1"  style="display: none" >
                                 <div class="col-sm-3" >
-                                    <label for="emergency-firstname" class="form-label">Department</label>
+                                    <label for="emergency-firstname" class="form-label">Department :</label>
                                     <select class="form-select" name="department" id="department">
-                                        <option value="" label="ALL"></option>
-                                            @foreach($department as $d)
+                                        <option value="" label="ALL">ALL</option>
+                                            @foreach($department->sortBy('department') as $d)
                                                 <option value="{{ $d->id }}" {{ old('department') == $d->id ? 'selected' : '' }}>{{ $d->departmentName }}</option>
                                             @endforeach
                                     </select>
@@ -51,10 +51,10 @@
                             </div>
                              <div class="row p-2" id="menu2" style="display: none">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Employee Name</label>
+                                    <label for="emergency-firstname" class="form-label">Employee Name :</label>
                                     <select class="form-select" name="employer" id="employer">
-                                        <option value="" label="ALL"></option>
-                                            @foreach($employer as $de)
+                                        <option value="" label="ALL">ALL</option>
+                                            @foreach($employer->sortBy('employer') as $de)
                                                 <option value="{{ $de->user_id }}" {{ old('employer') == $de->user_id ? 'selected' : '' }}>{{ $de->fullName }}</option>
                                             @endforeach
                                     </select>
@@ -62,9 +62,9 @@
                             </div>
                             <div class="row p-2" id="rowdepartment">
                                 <div class="col-sm-3">
-                                    <label for="emergency-firstname" class="form-label">Status: </label>
-                                    <select class="form-select" name="status">
-                                        <option value="">ALL</option>
+                                    <label for="emergency-firstname" class="form-label">Status :</label>
+                                    <select class="form-select" name="status" id="status">
+                                        <option value="0">ALL</option>
                                         <option value="1">PENDING</option>
                                         <option value="2">PENDING APPROVAL</option>
                                         <option value="3">REJECTED</option>

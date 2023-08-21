@@ -134,7 +134,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
           <i class="material-icons">grid_on</i>
-          <p> E-Leave
+          <p> eLeave
             <b class="caret"></b>
           </p>
         </a>
@@ -320,7 +320,7 @@
             <li class="nav-item active ">
                 <a class="nav-link" aria-expanded="true">
                   <span class="sidebar-mini"> EL </span>
-                  <span class="sidebar-normal"> E-Leave
+                  <span class="sidebar-normal"> eLeave
                   </span>
                 </a>
             </li>
@@ -532,7 +532,7 @@
             <li class="nav-item active ">
                 <a class="nav-link" data-toggle="collapse" href="#leave" aria-expanded="true">
                   <span class="sidebar-mini"> E </span>
-                  <span class="sidebar-normal"> E-Leave
+                  <span class="sidebar-normal"> eLeave
                     <b class="caret"></b>
                   </span>
                 </a>

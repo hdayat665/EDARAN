@@ -138,19 +138,6 @@ class EmployeeService
         // dd($input);
         $status['status'] = 'terminate';
 
-        if ($r->hasFile('file')) {
-            $uploadedFile = $r->file('file');
-            $statusfile = upload($uploadedFile);
-
-            if ($statusfile['filename']) {
-                $attch['file'] = $statusfile['filename'];
-            }
-
-            $attch['user_id'] = $input['user_id'];
-            $attch['type'] = 'termination';
-
-            Attachments::create($attch);
-        }
 
         // update status users and employment $table
         Users::where('id', $input['user_id'])->update($status);
@@ -167,12 +154,29 @@ class EmployeeService
         $jobHistory['user_id'] = $input['user_id'];
         $jobHistory['remarks'] = $input['remarks'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
-
         $jobHistory['statusHistory'] = $input['status'] = 'terminate';
         $updateBy = Auth::user()->username;
         $jobHistory['updatedBy'] = $updateBy;
 
-        JobHistory::create($jobHistory);
+        $jobHistory = new JobHistory($jobHistory);
+        $jobHistory->save();
+        $lastInsertedId = $jobHistory->id;
+
+        if ($r->hasFile('file')) {
+            $uploadedFile = $r->file('file');
+            $statusfile = upload($uploadedFile);
+
+            if ($statusfile['filename']) {
+                $attch['file'] = $statusfile['filename'];
+            }
+            $attch['user_id'] = $input['user_id'];
+            $attch['type'] = 'termination';
+            $attch['jobHistoryId'] = $lastInsertedId;
+
+            Attachments::create($attch);
+        }
+
+
 
         $data = [];
         $data['status'] = true;
@@ -1717,13 +1721,15 @@ class EmployeeService
 
     public function getEmployeeByJobHistory($id)
     {
-        $jobstatus = JobHistory::select('jobhistory.id', 'employment.employeeId', 'employment.user_id',
-        'employment.employeeName', 'employment.employeeEmail', 'employment.effectiveFrom', 'employment.report_to',
-        'jobhistory.employmentDetail', 'jobhistory.remarks', 'jobhistory.statusHistory', 'attachments.file')
-            ->join('employment', 'jobhistory.user_id', '=', 'employment.user_id')
-            ->join('attachments', 'attachments.user_id', '=', 'employment.user_id')
-            ->where('jobhistory.id', $id)
-            ->get();
+        $jobstatus = DB::table('jobhistory as jh')
+        ->select('jh.id', 'e.employeeId', 'e.user_id', 'e.employeeName', 'e.employeeEmail', 'e.effectiveFrom', 'e.report_to',
+            'jh.employmentDetail', 'jh.remarks', 'jh.statusHistory', 'a1.file' ,'up.fullName')
+        ->join('employment as e', 'jh.user_id', '=', 'e.user_id')
+        ->join('userprofile as up', 'e.report_to', '=', 'up.id')
+        ->join('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
+        ->where('jh.id', $id)
+        ->get();
+
 
         if(!$jobstatus)
         {
@@ -1744,12 +1750,13 @@ class EmployeeService
 
     public function getEmployeeByJobHistoryById($id = '')
     {
-        $data['data'] = JobHistory::select('jobhistory.id', 'employment.employeeId', 'employment.user_id',
-        'employment.employeeName', 'employment.employeeEmail', 'employment.effectiveFrom', 'employment.report_to',
-        'jobhistory.employmentDetail', 'jobhistory.remarks', 'jobhistory.statusHistory', 'attachments.file')
-            ->join('employment', 'jobhistory.user_id', '=', 'employment.user_id')
-            ->join('attachments', 'attachments.user_id', '=', 'employment.user_id')
-            ->where('jobhistory.id', $id)
+        $data['data'] =  DB::table('jobhistory as jh')
+        ->select('jh.id', 'e.employeeId', 'e.user_id', 'e.employeeName', 'e.employeeEmail', 'e.effectiveFrom', 'e.report_to',
+            'jh.employmentDetail', 'jh.remarks', 'jh.statusHistory', 'a1.file' ,'up.fullName')
+        ->join('employment as e', 'jh.user_id', '=', 'e.user_id')
+        ->join('userprofile as up', 'e.report_to', '=', 'up.id')
+        ->join('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
+        ->where('jh.id', $id)
             ->first();
         $data['msg'] = 'Success Get Job History Data';
 

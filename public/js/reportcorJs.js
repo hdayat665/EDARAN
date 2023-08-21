@@ -12,9 +12,6 @@ $("document").ready(function () {
           },
         });
       });
-    // , function(start, end) {
-    //     $("#default-daterange input").val(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
-    // });
 
       $(document).on('change', "#staffn", function() {
         if ($(this).val() == "2")  {
@@ -48,6 +45,20 @@ $("document").ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+
+    $('#staffn').select2({
+        placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+        escapeMarkup: function(markup) {
+        return markup
+        },
+        minimumResultsForSearch: Infinity,
+    });
+    $('#employeeid').select2({
+        placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+        escapeMarkup: function(markup) {
+        return markup;
+        }
     });
 
 });
