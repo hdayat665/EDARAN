@@ -270,6 +270,14 @@
                                 </a>
                             </div>
                         @endif
+                        <div class="menu-item">
+                                <a href="/customer" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-location-pin text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Project Location</i></div>
+                                </a>
+                            </div>
                         <?php $target = ['project_info']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
