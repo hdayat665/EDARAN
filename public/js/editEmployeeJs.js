@@ -15,9 +15,24 @@ $("#tsapprover2").select2();
 
 $('#role').select2();
 $('#companyForEmployment').select2();
-$('#departmentShow').select2({placeholder: "PLEASE CHOOSE"});
-$('#unitShow').select2({placeholder: "PLEASE CHOOSE"});
-$('#branchShow').select2({placeholder: "PLEASE CHOOSE"});
+$('#departmentShow').select2({
+    placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+    escapeMarkup: function(markup) {
+    return markup
+    },
+});
+$('#unitShow').select2({
+    placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+    escapeMarkup: function(markup) {
+    return markup
+    },
+});
+$('#branchShow').select2({
+    placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+    escapeMarkup: function(markup) {
+    return markup
+    },
+});
 $('#jobGrade').select2();
 $('#designation').select2();
 $('#employmentType').select2();
@@ -4698,21 +4713,23 @@ if (permanentChecked && correspondentChecked) {
                 jobGrade: "required",
                 designation: "required",
                 employmentType: "required",
+                report_to: "required",
                 joinedDate: "required",
                 EffectiveFrom: "required",
                 event: "required",
             },
 
             messages: {
-                roleId: "Please Insert Employee Role",
-                company: "Please Insert Employee Company",
-                departmentId: "Please Insert Employee Department",
-                branchId: "Please Insert Employee Branch",
-                jobGrade: "Please Insert Employee Job Grade",
-                designation: "Please Insert Employee Designation",
-                employmentType: "Please Insert Employee Employment Type",
+                roleId: "Please Choose Employee Role",
+                company: "Please Choose Employee Company",
+                departmentId: "Please Choose Employee Department",
+                branchId: "Please Choose Employee Branch",
+                jobGrade: "Please Choose Employee Job Grade",
+                designation: "Please Choose Employee Designation",
+                employmentType: "Please Choose Employment Type",
+                report_to: "Please Choose Report To",
                 joinedDate: "Please Insert Employee Joined Date",
-                EffectiveFrom: "Please Choose Effective From",
+                EffectiveFrom: "Please Insert Effective From",
                 event: "Please Choose Event",
             },
 
@@ -4732,6 +4749,8 @@ if (permanentChecked && correspondentChecked) {
                     error.insertAfter("#designationdiv");
                 } else if (element.attr("name") === "employmentType") {
                     error.insertAfter("#employmentypediv");
+                } else if (element.attr("name") === "report_to") {
+                    error.insertAfter("#reporttoodiv");
                 } else if (element.attr("name") === "event") {
                     error.insertAfter("#eventdiv");
                 } else {

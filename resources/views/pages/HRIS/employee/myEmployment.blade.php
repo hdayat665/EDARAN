@@ -142,7 +142,7 @@
                                                </div>
                                                <div class="row p-2">
                                                    <label for="firstname" class="form-label">Employment Type*</label>
-                                                   <select class="form-select" name="employmentType" id="employmentType" style="width: 100%">>
+                                                   <select class="form-select" name="employmentType" id="employmentType" style="width: 100%">
                                                        <?php $EmploymentTypes = getEmploymentType(); ?>
                                                        <option value="">PLEASE CHOOSE</option>
                                                        @foreach ($EmploymentTypes as $EmploymentType)
@@ -155,6 +155,19 @@
                                                    <input type="hidden" id="employmentypediv" name="" class="form-control">
                                                </div>
                                                <div class="row p-2">
+                                               <label for="employee-id" class="form-label">Report To</label>
+                                                    <select class="form-select" name="report_to" id="reporttoo" style="width: 100%">
+                                                       <?php $employees = getEmployee(); ?>
+                                                       <option value="">PLEASE CHOOSE</option>
+                                                       @foreach ($employees->sortBy('employeeName') as $employee)
+                                                           <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
+                                                               {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>{{ $employee->employeeName }}
+                                                           </option>
+                                                       @endforeach
+                                                    </select>
+                                                    <input type="hidden" id="reporttoodiv" name="" class="form-control">
+                                                </div>
+                                               {{-- <div class="row p-2">
                                                    <div class="col-sm-6">
                                                        <label class="form-label" for="supervisor">
                                                            User Role
@@ -186,11 +199,10 @@
                                                            </option>
                                                        @endforeach
                                                    </select>
-
-                                               </div>
-                                           </div>
+                                                </div> --}}
+                                           {{-- </div> --}}
                                            <hr>
-                                           <div class="row">
+                                           <div class="row p-2">
                                                <div class="col-sm-6">
                                                    <label for="employee-id" class="form-label">Charge Out Rate</label>
                                                    <input type="number" id="" name="COR"
@@ -224,7 +236,7 @@
                                            </div>
                                            <hr>
                                            <p class="mt-3 mb-3 fw-bold">Confirm Changes</p>
-                                           <div class="row">
+                                           <div class="row p-2">
                                                <div class="col-sm-6">
                                                    <label for="effective-from" class="form-label">Effective From*</label>
                                                    <input type="text" id="effective-from" name="EffectiveFrom" class="form-control"
