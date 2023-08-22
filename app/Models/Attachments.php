@@ -26,6 +26,7 @@ class Attachments extends Authenticatable
         'status',
         'file',
         'status',
+        'jobHistoryId',
     ];
 
     public function unit()

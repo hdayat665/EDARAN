@@ -111,9 +111,9 @@
 				</table>
 
 
-						
+
 				</div>
-					
+
 			</div>
 		</div>
     <!-- END col-8 -->
@@ -122,7 +122,7 @@
 				<div class="panel-heading mt-15px">
 							<h4 class="panel-title"> <i class="fas fa-newspaper fa-fw me-3"></i>Events</h4>
 				</div>
-				
+
 				<div class="panel-body">
 				<table id="timesheetapproval-dashboard" style="width: 100%;"  class="table table-striped table-bordered align-middle">
 				<thead>
@@ -165,7 +165,7 @@
 
 				</table>
 				</div>
-					
+
 			</div>
 		</div>
 
@@ -327,16 +327,16 @@
 				</tbody>
 			</table>
 
-						
+
 				</div>
-					
+
 			</div>
 		</div>
 
 	 -->
     <!-- END col-8 -->
     <!-- BEGIN col-4 -->
-    
+
 	<!-- <div class="row">
 					<div class="col-lg-6 panel panel-inverse">
 						<div class="panel-heading mt-15px">
@@ -357,12 +357,12 @@
 					<canvas id="bar-chart" style="width:100%;max-width:700px"></canvas>
 							</div></div>
 				</div> -->
-				
-					
-		
+
+
+
     <!-- END col-4 -->
-   
-    
+
+
     <!-- END row -->
     <!-- BEGIN row -->
     <div class="row">

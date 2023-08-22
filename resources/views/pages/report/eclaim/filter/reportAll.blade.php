@@ -5,17 +5,17 @@
 <div id="content" class="app-content">
 			<!-- BEGIN breadcrumb -->
 
-	<h1 class="page-header" id="eclaimReportJs">Report | Claim Report </h1>
-	
+	<h1 class="page-header" id="eclaimReportJs">Reporting <small>| eClaim | Claim</small></h1>
+
 	<!-- END page-header -->
 	<!-- BEGIN panel -->
 	<div class="panel panel">
-		
+
 		<!-- BEGIN panel-heading -->
 		<div class="panel-heading">
 		<div class="col-md-6">
 		<h4> Claim Report </h4>
-		
+
 		</div>
 			<h4 class="panel-title"></h4>
 		</div>
@@ -98,7 +98,7 @@
 
             </tbody>
         </table>
-			
+
 		</div>
 	</div>
 

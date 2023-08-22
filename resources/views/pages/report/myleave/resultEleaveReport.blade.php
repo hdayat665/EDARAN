@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| E-leave </small></h1>
+    <h1 class="page-header">Reporting <small> | eLeave </small></h1>
     <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             {{-- <div class="row p-2">

@@ -224,7 +224,7 @@ class MyleaveService
             ->first();
 
         if (empty($getdata->eleaveapprover) && empty($getdata->eleaverecommender)) {
-            $data['msg'] = 'The E-Leave approver or recommender is empty. Please contact the admin for assistance';
+            $data['msg'] = 'The eLeave approver or recommender is empty. Please contact the admin for assistance';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');

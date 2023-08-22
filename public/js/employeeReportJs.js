@@ -81,15 +81,9 @@ function validateForm1() {
     return true;
 }
 
-$("#projectid").picker({ search: true });
-$("#departmentid").picker({ search: true });
-$("#employeeid").picker({ search: true });
 
-// $('#departmentv').picker({ search: true });
-// $('#employeev').picker({ search: true });
 
 $(document).on("change", "#departmentv", function () {
-    // $("#labelcategory").show();
     id = $(this).val();
     const inputs = ["employeev"];
 
@@ -116,8 +110,10 @@ $(document).on("change", "#departmentv", function () {
     var user = getEmployeeNamebyDepartment(id);
 
     user.then(function (data) {
-        // $("#label").text(data[0].label);
-        // console.log(data[0].label);
+        data.sort(function(a, b) {
+            return a.employeeName.localeCompare(b.employeeName);
+        });
+
         for (let i = 0; i < data.length; i++) {
             const user = data[i];
             var opt = document.createElement("option");
@@ -129,4 +125,28 @@ $(document).on("change", "#departmentv", function () {
                 "</option>";
         }
     });
+});
+
+$('#reportby').select2({
+    minimumResultsForSearch: Infinity,
+});
+
+$('#projectid, #departmentid, #employeeid').select2({});
+
+$('#yearv').select2({
+    minimumResultsForSearch: Infinity,
+});
+
+$('#monthv').select2({
+    minimumResultsForSearch: Infinity,
+});
+
+$('#departmentv').select2({
+
+});
+$('#employeev').select2({
+    placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+    escapeMarkup: function(markup) {
+    return markup
+    },
 });
