@@ -75,8 +75,8 @@
                                 <tr>
                                     <th width="1%" class="text-nowrap" data-orderable="false">Action</th>
                                     <th class="text-nowrap" data-orderable="false">Status</th>
-                                    <th class="text-nowrap">State</th>
                                     <th class="text-nowrap">Country</th>
+                                    <th class="text-nowrap">State</th>
                                     <th class="text-nowrap">Holiday Title</th>
                                     <th class="text-nowrap">Start Date</th>
                                     <th class="text-nowrap">End Date</th>

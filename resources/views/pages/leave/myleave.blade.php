@@ -142,6 +142,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="row p-2"></div>
                                     <div class="row p-2">
                                         <table id="table-leave" class="table table-striped table-bordered align-middle">
                                             <thead>
@@ -244,7 +245,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row ">
                                     <form action="/myleave#default-tab-2" method="POST">
                                         <div id="filterleave" style="display: none">
                                             <div class="row p-2">
@@ -297,7 +298,8 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="row">
+                                <div class="row p-2"></div>
+                                <div class="row p-2">
                                     <table id="tableleavedua" class="table table-striped table-bordered align-middle">
                                         <thead>
                                             <tr>
