@@ -315,11 +315,15 @@ class EmployeeService
         } else {
 
 
-             if ($input['fullName']) {
+            if ($input['fullName']) {
                  $employee['employeeName'] = $input['fullName'];
-
                  Employee::where('user_id', $user_id)->update($employee);
-             }
+            }
+
+            if ($input['personalEmail']) {
+                $employee['employeeEmail'] = $input['personalEmail'];
+                Employee::where('user_id', $user_id)->update($employee);
+            }
 
             if (!$input['religion']) {
                 unset($input['religion']);
