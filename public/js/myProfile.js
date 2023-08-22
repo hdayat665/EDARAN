@@ -5,6 +5,13 @@ $(document).ready(function () {
         $("#fullName").val(a + " " + b);
     });
 
+    $('#firstname,#lastname').keypress(function (e) {
+        var txt = String.fromCharCode(e.which);
+        if (!txt.match(/[A-Za-z0-9&. ]/)) {
+            return false;
+        }
+    });
+
     $("#tableSibling").DataTable({
         responsive: false,
         lengthMenu: [
@@ -85,12 +92,18 @@ $(document).ready(function () {
         $("#dob").prop("readonly", false);
         $("#dob").css("pointer-events", "auto");
         $("#idnumber").val("");
-        $("#gendermyprofile").prop("disabled", false);
+        $("#gendermyprofile").prop("readonly", false);
+        $("#gendermyprofile").css({
+            "pointer-events": "auto",
+            background: "none"});
     } else {
         $("#idnumber").prop("disabled", false);
         $("#dob").prop("readonly", true);
-        $("#dob").css("pointer-events", "auto");
-        $("#gendermyprofile").prop("disabled", true);
+        $("#dob").css("pointer-events", "none");
+        $("#gendermyprofile").prop("readonly", true);
+        $("#gendermyprofile").css({
+            "pointer-events": "none",
+            background: "#e9ecef"});
     }
 
 
@@ -224,21 +237,6 @@ $(document).ready(function () {
         });
     });
 
-    // var nonCitizenCheckbox = $('#nonNetizen');
-    // var idInput = $('#idnumber');
-
-    // if (nonCitizenCheckbox.prop('checked')) {
-    //     idInput.prop('disabled', true);
-    // }
-
-    // nonCitizenCheckbox.change(function() {
-    //     if (this.checked) {
-    //     idInput.prop('disabled', true);
-    //     } else {
-    //     idInput.prop('disabled', false);
-    //     }
-    // });
-
     $('input[name="okuStatus2"]').click(function () {
         if ($(this).is(":checked")) {
             $("#okucard5").prop("disabled", false);
@@ -330,30 +328,6 @@ $(document).ready(function () {
             $("#issuingCountryAddCompanion").prop("disabled", false);
             $("#issuingCountryAddCompanion").css("pointer-events", "auto");
             $("#issuingCountryAddCompanion").val("");
-        }
-    });
-
-    // $('#fileupload').on('change', function() {
-    //     var files = $(this).get(0).files;
-    //     if (files.length > 0) {
-    //         var filename = files[0].name;
-    //         $('#filename').html(filename);
-    //     } else {
-    //         $('#filename').empty();
-    //     }
-    // });
-
-    $('input[name="nonCitizen"]').click(function () {
-        if ($(this).is(":checked")) {
-            $("#idnumber2").val("").prop("disabled", true);
-            $("#gendermyprofile").prop("disabled", false);
-            $("#ageAddCompanion").val("").prop("readonly", false);
-            $("#dobAddCompanion").val("").prop("readonly", false);
-        } else {
-            $("#idnumber2").prop("disabled", false);
-            $("#gendermyprofile").prop("disabled", true);
-            $("#ageAddCompanion").val("").prop("readonly", true);
-            $("#dobAddCompanion").val("").prop("readonly", true);
         }
     });
 
@@ -647,12 +621,15 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [10, 11],
                 },
-                // issuingCountry: "required",
+                okuFile: {
+                    required: true,
+                },
+
             },
 
             messages: {
                 personalEmail: {
-                    email: "Please Insert Valid Email Address",
+                    email: "Please Insert Valid Personal Email",
                 },
                 firstName: {
                     required: "Please Insert First Name",
@@ -698,7 +675,9 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid OKU Card Number",
                     digits: "Please Insert Valid OKU Card Number",
                 },
-                //okuFile: "Please Input Valid File",
+                okuFile: {
+                    required: "Please Upload OKU Attachment",
+                },
             },
             submitHandler: function (form) {
                 Swal.fire({
@@ -1908,7 +1887,7 @@ $(document).ready(function () {
                     digits: "Please Insert Valid OKU Card Number",
                 },
                 okuID: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
             },
             submitHandler: function (form) {
@@ -2092,7 +2071,7 @@ $(document).ready(function () {
                         digits: "Please Insert Valid OKU Card Number",
                     },
                     okuID: {
-                        required: "Please Insert OKU Attachment",
+                        required: "Please Upload OKU Attachment",
                     },
                 },
 
@@ -2167,62 +2146,6 @@ $(document).ready(function () {
             });
         });
 
-        // $("#updateCompanion" + no).click(function (e) {
-        //     e.preventDefault();
-        //     Swal.fire({
-        //         allowOutsideClick: false,
-        //         showCancelButton: true,
-        //         cancelButtonColor: "#d33",
-        //         confirmButtonColor: "#3085d6",
-        //         title: "Declaration.",
-        //         icon: "info",
-        //         html:
-        //             '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-        //             '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-        //             '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-        //         confirmButtonText: "Yes",
-        //         preConfirm: () => {
-        //             if (
-        //                 !$("#t1").prop("checked") ||
-        //                 !$("#t2").prop("checked") ||
-        //                 !$("#t3").prop("checked")
-        //             ) {
-        //                 Swal.showValidationMessage(
-        //                     '<i class="fa fa-info-circle"></i> Please check all term to proceed'
-        //                 );
-        //             } else {
-        //                 var data = new FormData(document.getElementById("updateCompanionForm" + no));
-
-        //                 $.ajax({
-        //                     type: "POST",
-        //                     url: "/updateCompanion",
-        //                     data: data,
-        //                     dataType: "json",
-        //
-        //                     processData: false,
-        //                     contentType: false,
-        //                 }).then(function (data) {
-        //                     console.log(data);
-        //                     Swal.fire({
-        //                         title: data.title,
-        //                         icon: "success",
-        //                         text: data.msg,
-        //                         type: data.type,
-        //                         confirmButtonColor: "#3085d6",
-        //                         confirmButtonText: "OK",
-        //                         allowOutsideClick: false,
-        //                         allowEscapeKey: false,
-        //                     }).then(function () {
-        //                         if (data.type == "error") {
-        //                         } else {
-        //                             location.reload();
-        //                         }
-        //                     });
-        //                 });
-        //             }
-        //         },
-        //     }).then((result) => {});
-        // });
     }
 
     $(document).on("click", "#deleteCompanion", function () {
@@ -2408,13 +2331,19 @@ $(document).ready(function () {
             $("#dob").val("").prop("readonly", false);
             $("#dob").css("pointer-events", "auto");
             $("#idnumber").val("");
-            $("#gendermyprofile").val("").prop("disabled", false);
+            $("#gendermyprofile").val("").prop("readonly", false);
+            $("#gendermyprofile").css({
+                "pointer-events": "auto",
+                background: "none"});
         } else {
             $("#idnumber").prop("disabled", false);
             $("#dob").val("").prop("readonly", true);
             $("#dob").css("pointer-events", "none");
-            $("#gendermyprofile").val("").prop("disabled", true);
-        }
+            $("#gendermyprofile").val("").prop("readonly", true);
+            $("#gendermyprofile").css({
+                "pointer-events": "none" ,
+                background: "#e9ecef"});
+            }
     });
 
 
@@ -2658,7 +2587,7 @@ $(document).ready(function () {
                 },
 
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 expiryDate: {
@@ -2810,7 +2739,7 @@ $(document).ready(function () {
                 },
 
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 expiryDate: {
@@ -3574,7 +3503,7 @@ $(document).ready(function () {
                 },
 
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
             },
 
@@ -3752,7 +3681,7 @@ $(document).ready(function () {
                 },
 
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
             },
 
@@ -4540,18 +4469,6 @@ function getAddressforCompanion(id) {
         url: "/getAddressforCompanion/" + id,
     });
 }
-
-// $("#datepicker-fromdate").datepicker({
-//     todayHighlight: true,
-//     autoclose: true,
-//     format: "yyyy/mm/dd",
-// });
-
-// $("#datepicker-todate").datepicker({
-//     todayHighlight: true,
-//     autoclose: true,
-//     format: "yyyy/mm/dd",
-// });
 
 // Initialize the datepicker for the from date
 $("#datepicker-fromdate").datepicker({

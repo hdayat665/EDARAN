@@ -154,11 +154,14 @@ $("#edit-profile-picture").on("click", function () {
         var b = $("#lastname").val();
         $("#fullname").val(a + " " + b);
     });
-    $("#gender").css({
-        "pointer-events": "none",
-        "touch-action": "none",
-        background: "#e9ecef",
+
+    $('#firstname,#lastname').keypress(function (e) {
+        var txt = String.fromCharCode(e.which);
+        if (!txt.match(/[A-Za-z0-9&. ]/)) {
+            return false;
+        }
     });
+
     $("#childgender").css({
         "pointer-events": "none",
         "touch-action": "none",
@@ -350,6 +353,40 @@ $("#edit-profile-picture").on("click", function () {
     });
 
     // Update Children Details
+    if ($("#passport").val() !== "") {
+        // Enable expiration date and passport country fields
+        $("#expirydate").prop("disabled", false);
+        $("#expirydate").css("pointer-events", "auto");
+        $("#issuingCountry").prop("disabled", false);
+        $("#issuingCountry").css("pointer-events", "auto");
+    } else {
+        // Disable expiration date and passport country fields
+        $("#expirydate").prop("disabled", true);
+        $("#expirydate").css("pointer-events", "none");
+        $("#expirydate").val("");
+        $("#issuingCountry").prop("disabled", true);
+        $("#issuingCountry").css("pointer-events", "none");
+        $("#issuingCountry").val("");
+    }
+
+
+    $("#passport").change(function () {
+        if ($("#passport").val() !== "") {
+            // Enable expiration date and passport country fields
+            $("#expirydate").prop("disabled", false);
+            $("#expirydate").css("pointer-events", "auto");
+            $("#issuingCountry").prop("disabled", false);
+            $("#issuingCountry").css("pointer-events", "auto");
+        } else {
+            // Disable expiration date and passport country fields
+            $("#expirydate").prop("disabled", true);
+            $("#expirydate").css("pointer-events", "none");
+            $("#expirydate").val("");
+            $("#issuingCountry").prop("disabled", true);
+            $("#issuingCountry").css("pointer-events", "none");
+            $("#issuingCountry").val("");
+        }
+    });
 
     $("#passports1").change(function () {
         if (($("#expiryDate1").val() !== "") ) {
@@ -590,6 +627,21 @@ $("#edit-profile-picture").on("click", function () {
         }
     });
 
+
+    $("#idnumber").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+
+            var lastIc = idn.substring(10, 12);
+
+            if (lastIc % 2 == 0) {
+                $("#gender").val(2);
+            } else {
+                $("#gender").val(1);
+            }
+        }
+    });
+
     ////update companion
     $("#idnumber2s").change(function () {
         if ($(this).val().length == 12) {
@@ -810,12 +862,6 @@ $("#edit-profile-picture").on("click", function () {
             $("#issuingCountry2s").css("pointer-events", "auto");
             $("#issuingCountry2s").val("");
         }
-    });
-
-    $("#gender").css({
-        "pointer-events": "none",
-        "touch-action": "none",
-        background: "#e9ecef",
     });
 
     $("#datepicker-fromdate").datepicker({
@@ -1373,41 +1419,47 @@ $("#edit-profile-picture").on("click", function () {
             url: "/getEmployeeAddressforCompanion/" + id,
         });
     }
+
+    if ($(".partCheck").is(":checked")) {
+        $("#idnumber").prop("disabled", true);
+        $("#dob").prop("readonly", false);
+        $("#dob").css("pointer-events", "auto");
+        $("#idnumber").val("");
+        $("#gender").prop("readonly", false);
+        $("#gender").css({
+            "pointer-events": "auto",
+            background: "none"});
+    } else {
+        $("#idnumber").prop("disabled", false);
+        $("#dob").prop("readonly", true);
+        $("#dob").css("pointer-events", "auto");
+        $("#dob").css("pointer-events", "none");
+        $("#gender").prop("readonly", true);
+        $("#gender").css({
+            "pointer-events": "none",
+            background: "#e9ecef"});
+    }
+
     $(".partCheck").click(function () {
         if ($(this).prop("checked")) {
-            $("#idnumber").prop("readonly", true);
-            $("#idnumber").val("");
-
-            $("#passport").prop("readonly", false);
-            $("#expirydate").prop("readonly", false);
-            $("#expirydate").css("pointer-events", "auto");
-
-            $("#dob").prop("readonly", false);
+            $("#idnumber").prop("disabled", true);
+            $("#dob").val("").prop("readonly", false);
             $("#dob").css("pointer-events", "auto");
-
-            $("#issuingCountry").prop("readonly", false);
-            $("#issuingCountry").css("pointer-events", "auto");
+            $("#idnumber").val("");
+            $("#gender").val("").prop("readonly", false);
+            $("#gender").css({
+                "pointer-events": "auto",
+                background: "none"});
         } else {
-            $("#idnumber").prop("readonly", false);
-
-            $("#passport").prop("readonly", false);
-
-            $("#expirydate").prop("readonly", false);
-            $("#expirydate").css("pointer-events", "none");
-
-            $("#dob").prop("readonly", true);
+            $("#idnumber").prop("disabled", false);
+            $("#dob").val("").prop("readonly", true);
             $("#dob").css("pointer-events", "none");
-
-            $("#expirydate").val("");
-
-            $("#passport").val("");
-
-            $("#issuingCountry").val("");
-            $("#issuingCountry").prop("readonly", true);
-            $("#issuingCountry").css("pointer-events", "none");
-        }
+            $("#gender").val("").prop("readonly", true);
+            $("#gender").css({
+                "pointer-events": "none" ,
+                background: "#e9ecef"});
+            }
     });
-
 
     $(".partCheck2").click(function () {
         if ($(this).prop("checked")) {
@@ -1676,7 +1728,6 @@ $("#edit-profile-picture").on("click", function () {
             rules: {
                 username: "required",
                 personalEmail: {
-                    required: true,
                     email: true,
                 },
 
@@ -1709,11 +1760,6 @@ $("#edit-profile-picture").on("click", function () {
                     digits: true,
                     rangelength: [10, 12],
                 },
-                // phoneNo2: {
-                //     required: true,
-                //     digits: true,
-                //     rangelength: [10, 12],
-                // },
                 homeNo: {
                     digits: true,
                     rangelength: [9, 9],
@@ -1726,7 +1772,7 @@ $("#edit-profile-picture").on("click", function () {
                     digits: true,
                     rangelength: [10, 11],
                 },
-                okuattach: {
+                okuFile: {
                     required: true,
                 },
             },
@@ -1734,8 +1780,7 @@ $("#edit-profile-picture").on("click", function () {
             messages: {
                 username: "Please Insert Username",
                 personalEmail: {
-                    required: "Please Insert Personal Email",
-                    email: "Please Insert Valid Email",
+                    email: "Please Insert Valid Personal Email",
                 },
                 firstName: {
                     required: "Please Insert First Name",
@@ -1779,8 +1824,8 @@ $("#edit-profile-picture").on("click", function () {
                     rangelength: "Please Insert Valid OKU Card Number",
 
                 },
-                okuattach: {
-                    required: "Please Insert OKU Attachment",
+                okuFile: {
+                    required: "Please Upload OKU Attachment",
                 },
             },
             submitHandler: function (form) {
@@ -2807,7 +2852,7 @@ if (permanentChecked && correspondentChecked) {
                     rangelength: "Please Insert Valid OKU Card Number",
                 },
                 okuattach: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -2980,7 +3025,7 @@ if (permanentChecked && correspondentChecked) {
                         rangelength: "Please Insert Valid OKU Card Number",
                     },
                     okuID: {
-                        required: "Please Insert OKU Attachment",
+                        required: "Please Upload OKU Attachment",
                     },
                     homeNo: {
                         digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -3147,7 +3192,7 @@ if (permanentChecked && correspondentChecked) {
                     rangelength: "Please Insert Valid OKU Card Number",
                 },
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 oldIDNo: {
@@ -3267,7 +3312,7 @@ if (permanentChecked && correspondentChecked) {
                 },
 
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 expiryDate: {
@@ -3926,7 +3971,7 @@ if (permanentChecked && correspondentChecked) {
 
                 },
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 expiryDate: "Please Insert Expiry Date",
@@ -4061,7 +4106,7 @@ if (permanentChecked && correspondentChecked) {
                     digits: "Please Insert Valid OKU Card Number",
                 },
                 okuFile: {
-                    required: "Please Insert OKU Attachment",
+                    required: "Please Upload OKU Attachment",
                 },
 
                 expiryDate: "Please Insert Expiry Date",

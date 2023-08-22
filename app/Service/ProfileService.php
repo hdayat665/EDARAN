@@ -106,9 +106,7 @@ class ProfileService
             }
 
             if ($input['username']) {
-
                 $username['username'] = $input['username'];
-
                 Users::where('id', $user_id)->update($username);
             }
 

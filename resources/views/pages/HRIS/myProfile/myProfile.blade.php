@@ -189,7 +189,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gender" class="form-label">Gender*</label>
-                                        <select class="form-select" name="gender" id="gendermyprofile" style="text-transform:uppercase" required disabled>
+                                        <select class="form-select" name="gender" id="gendermyprofile" style="text-transform: uppercase; pointer-events: none;" readonly>
                                             <?php $gender = gender() ?>
                                             <option value="" label="PLEASE CHOOSE" selected></option>
                                             @foreach ($gender as $key => $status)
