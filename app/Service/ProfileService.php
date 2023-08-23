@@ -530,7 +530,7 @@ class ProfileService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Max Companion can add only 4';
+            $data['msg'] = 'You have exceeded the maximum companion data.';
 
         } else {
 
