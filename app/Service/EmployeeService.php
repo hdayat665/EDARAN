@@ -364,13 +364,11 @@ class EmployeeService
                 }
             }
 
-            if ($_FILES['okuFile']['name']) {
+            if (isset($_FILES['okuFile']['name'])) {
                 $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-
-                if (!$input['okuFile']) {
-                    unset($input['okuFile']);
-                }
+            } else {
+                $input['okuFile'] = null;
             }
 
             if(isset($input['nonNetizen']) && $input['nonNetizen'] == 'on') {
