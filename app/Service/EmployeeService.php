@@ -630,8 +630,33 @@ class EmployeeService
             $data['msg'] = 'user not found';
         } else {
 
+            if ($_FILES['birthID']['name']) {
+                $payslip = upload($r->file('birthID'));
+                $input['birthID'] = $payslip['filename'];
+
+                if (!$input['birthID']) {
+                    unset($input['birthID']);
+                }
+            }
+
+            if ($_FILES['idFile']['name']) {
+                $payslip = upload($r->file('idFile'));
+                $input['idFile'] = $payslip['filename'];
+
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
+                }
+            }
+
+            if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
+                $payslip = upload(request()->file('okuFile'));
+                $input['okuFile'] = $payslip['filename'];
+            } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
+                $input['okuFile'] = null;
+            }
+
             if ($_FILES['supportDoc']['name']) {
-                $payslip = upload($r, 'supportDoc');
+                $payslip = upload($r->file('supportDoc'));
                 $input['supportDoc'] = $payslip['filename'];
 
                 if (!$input['supportDoc']) {
@@ -639,16 +664,29 @@ class EmployeeService
                 }
             }
 
-
-            if(!isset($input['expiryDate']))
+            if(!isset($input['okuStatus']))
             {
-                $input['expiryDate'] = null;
+                $input['okuStatus'] = null;
+                $input['okuNo'] = null;
+                $input['okuFile'] = null;
             }
 
-
-            if(!isset($input['issuingCountry']))
+            if(!isset($input['passport']))
             {
+                $input['passport'] = null;
+                $input['expiryDate'] = null;
                 $input['issuingCountry'] = null;
+            }
+
+            if(!isset($input['idNo']))
+            {
+                $input['idNo'] = null;
+
+            }
+
+            if(!isset($input['nonCitizen']))
+            {
+                $input['nonCitizen'] = null;
             }
 
             UserChildren::where('id', $id)->update($input);
