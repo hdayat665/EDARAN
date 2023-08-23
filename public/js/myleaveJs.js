@@ -1,5 +1,43 @@
 $(document).ready(function () {
 
+
+    var checkLeaveEntitlement = checkLeaveEntitlement();
+
+    function checkLeaveEntitlement() {
+        return $.ajax({
+            url: "/checkLeaveEntitlement",
+        });
+    }
+
+    checkLeaveEntitlement.then(function (data) {
+        requirejs(["sweetAlert2"], function (swal) {
+            if (data) {
+                $("#hideButton").hide();
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type === "error") {
+                        // Lakukan sesuatu jika jenis data adalah 'error'
+                    } else {
+                        location.reload();
+                    }
+                });
+            } else {
+                // Lakukan sesuatu jika data tidak tersedia
+                $("#hideButton").show();
+            }
+        });
+    });
+
+
+
+
     $(document).ready(function() {
         $(".test").hide();
 

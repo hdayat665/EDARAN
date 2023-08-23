@@ -158,8 +158,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateSubsMtcFinanChk', 'updateSubsMtcFinanChk');
             Route::post('/updateOtherMtcFinanChk', 'updateOtherMtcFinanChk');
             Route::post('/updateSubsMtcSuperVApp', 'updateSubsMtcSuperVApp');
-            
-            
+
+
             ////checked
             Route::post('/updateCheckMtc/{id}/{date}/{level}', 'updateCheckMtc');
 
@@ -168,7 +168,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTravelMtcAdminRec/{id}', 'updateTravelMtcAdminRec');
             Route::post('/updateSubsMtcAdminRec', 'updateSubsMtcAdminRec');
             Route::post('/updateOtherMtcAdminRec', 'updateOtherMtcAdminRec');
-            
+
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
@@ -430,17 +430,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getUserByUserRole/{id}', 'getUserByUserRole');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
-            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
-            Route::get('/getroleAdmin/{id}', 'getroleAdmin');
-            Route::get('/getroleFinance/{id}', 'getroleFinance');
-            Route::get('/getroleCA/{id}', 'getroleCA');
-            
-            
-            
 
 
             // eleave Anual leave
@@ -726,6 +719,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getEarnedLeave', 'getEarnedLeave');
             Route::get('/getLapseLeave', 'getLapseLeave');
             Route::get('/totalNoPaidLeave', 'totalNoPaidLeave');
+
+
+            Route::get('/checkLeaveEntitlement', 'checkLeaveEntitlement');
+
+
 
             //checking holiday
 

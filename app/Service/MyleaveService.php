@@ -160,21 +160,68 @@ class MyleaveService
 
         $input = $r->input();
 
-        $currentDateEntitlement = Carbon::now();
+        $typeofleave = $r->input('typeofleave'); // Get the input value
 
-        $leave_entitlement = leaveEntitlementModel::select('*')
-        ->where('id_employment', '=', Auth::user()->id)
-        ->where('le_year', '=', $currentDateEntitlement->year)
-        ->first();
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
+            ->get();
 
-        if (empty($leave_entitlement)) {
-            $data = [
-                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
-                'status' => config('app.response.error.status'),
-                'type' => config('app.response.error.type'),
-                'title' => config('app.response.error.title')
-            ];
-            return $data;
+        $checkTypeIds = $checkType->pluck('id')->toArray();
+
+        // Check if the input typeofleave is in the allowed leave type IDs
+        if (in_array($typeofleave, $checkTypeIds)) {
+            $currentYearbalance = Carbon::now()->format('Y');
+            $checkleavebalance = leaveEntitlementModel::select('current_entitlement_balance')
+                ->where('id_employment', Auth::user()->id)
+                ->whereYear('le_year', '=', $currentYearbalance)
+                ->first();
+
+            $currentYear = Carbon::now()->format('Y');
+
+            $checkleavepending = MyLeaveModel::select(DB::raw('SUM(total_day_applied) as total_day_applied'))
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->where('myleave.status_final', '!=', 3)
+                ->where(function ($query) {
+                    $query->where('myleave.status_final', '=', 1)
+                        ->orWhere('myleave.status_final', '=', 2);
+                })
+                ->where(function ($query) {
+                    $query->where('myleave.calculate', '=', null)
+                        ->orWhere('myleave.calculate', '=', '');
+                })
+                ->whereIn('myleave.lt_type_id', $checkTypeIds)
+                ->where('myleave.up_user_id', Auth::user()->id)
+                ->whereYear('myleave.applied_date', '=', $currentYear)
+                ->first();
+
+            if ($checkleavebalance->current_entitlement_balance <= 0) {
+                $data = [
+                    'msg' => 'Please review your total leave balance, as it has reached the limit.',
+                    'status' => config('app.response.error.status'),
+                    'type' => config('app.response.error.type'),
+                    'title' => config('app.response.error.title')
+                ];
+
+                return $data;
+            }
+
+            if ($checkleavebalance && $checkleavepending) {
+                $totalbalance = $checkleavebalance->current_entitlement_balance - $checkleavepending->total_day_applied;
+
+                $wan = $totalbalance - $r->input('total_day_appied'); // Assuming 'total_day_appied' is the number of days applied
+
+                if ($wan < 0) {
+                    $data = [
+                        'msg' => 'Please review your total leave balance, as it has reached the limit.',
+                        'status' => config('app.response.error.status'),
+                        'type' => config('app.response.error.type'),
+                        'title' => config('app.response.error.title')
+                    ];
+
+                    return $data;
+                }
+            }
         }
 
         $checkleavetype = leavetypesModel::where([
@@ -556,6 +603,26 @@ class MyleaveService
         }
 
         return $data;
+    }
+
+    public function checkLeaveEntitlement()
+    {
+         $currentDateEntitlement = Carbon::now();
+
+        $leave_entitlement = leaveEntitlementModel::select('*')
+        ->where('id_employment', '=', Auth::user()->id)
+        ->where('le_year', '=', $currentDateEntitlement->year)
+        ->first();
+
+        if (empty($leave_entitlement)) {
+            $data = [
+                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }
     }
 
 
