@@ -169,11 +169,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-6">
                                                         <label for="idattach" class="form-label" >ID Attachment</label>
                                                         <input type="file" value="" name="fileID" id="fileupload" class="form-control" aria-describedby="">
                                                         @if ($profile->fileID)
-                                                            Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
+                                                            Click <a href="{{ route('view', ['filename' => $profile->fileID]) }}" target="_blank">here</a> to see ID Attachment.
                                                         @endif
                                                     </div>
                                                 </div>
@@ -280,17 +280,17 @@
 
                                                             <div class="col-sm-12">
                                                                 <label for="" class="form-label" >OKU Card Number*</label>
-                                                                <input type="text" disabled value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" readonly class="form-control" placeholder="OKU CARD NUMBER">
+                                                                <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard"  class="form-control" placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3 part">
+                                                    <div class="col-sm-6 part">
                                                         <label for="idattach" class="form-label" >OKU Attachment*</label>
                                                         <input type="file" class="form-control"  name="okuFile"   id="okuattach" style= "pointer-events: none;" >
                                                         @if ($profile->okuFile)
-                                                        Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                                        Click <a href="{{ route('view', ['filename' => $profile->okuFile]) }}" target="_blank">here</a> to see the OKU Attachment.
                                                         @endif
                                                     </div>
                                                 </div>

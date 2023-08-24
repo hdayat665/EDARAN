@@ -127,22 +127,9 @@
                                 <label for="idattach" class="form-label" >ID Attachment</label>
                                 <input id="fileupload" type="file" name="fileID" class="form-control">
                                 @if ($profile->fileID)
-                                    Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
+                                Click <a href="{{ route('view', ['filename' => $profile->fileID]) }}" target="_blank">here</a> to see the ID Attachment.
                                 @endif
                             </div>
-
-
-                            {{-- </div>
-                            <div class="col-sm-3 ">
-                                <div class="row p-2"></div>
-                               <div class="row p-2">
-                                @if ($profile->file)
-                                <span class="file-link">
-                                    <a href="{{ route('download', ['filename' => $profile->file]) }}">{{$profile->file}}</a>
-                                </span>
-                            @endif
-                               </div>
-                            </div> --}}
                         </div>
 
                         <div class="row p-2">
@@ -177,7 +164,6 @@
                                         @endforeach
                                     </optgroup>
                                 </select>
-                                {{-- <input type="hidden" name="issuingCountry" id=""> --}}
                             </div>
                         </div>
                         <div class="row p-2">
@@ -261,7 +247,7 @@
                                 <label for="idattach" class="form-label" >OKU Attachment*</label>
                                 <input type="file" class="form-control" id="okuattach" name="okuFile" required disabled>
                                 @if ($profile->okuFile)
-                                    Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                    Click <a href="{{ route('view', ['filename' => $profile->okuFile]) }}" target="_blank">here</a> to see the OKU Attachment.
                                 @endif
                             </div>
                         </div>

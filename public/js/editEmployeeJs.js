@@ -1546,17 +1546,17 @@ $("#edit-profile-picture").on("click", function () {
         }
     });
 
-    $('input[name="okuStatus"]').click(function () {
-        if ($(this).is(":checked")) {
-            $("#okucard").prop("disabled", false);
+    // $('input[name="okuStatus"]').click(function () {
+    //     if ($(this).is(":checked")) {
+    //         $("#okucard").prop("disabled", false);
 
-            $("#okuattach").prop("disabled", false);
-        } else {
-            $("#okucard").val("").prop("disabled", true);
+    //         $("#okuattach").prop("disabled", false);
+    //     } else {
+    //         $("#okucard").val("").prop("disabled", true);
 
-            $("#okuattach").val("").prop("disabled", true);
-        }
-    });
+    //         $("#okuattach").val("").prop("disabled", true);
+    //     }
+    // });
 
     $('input[name="nonNetizen1"]').click(function () {
         if ($(this).is(":checked")) {
@@ -1754,7 +1754,11 @@ $("#edit-profile-picture").on("click", function () {
                     rangelength: [10, 11],
                 },
                 okuFile: {
-                    required: true,
+                    required: {
+                        depends: function(element) {
+                            return $(element).prop("pointer-events: auto;") === false;
+                        }
+                    }
                 },
             },
 
@@ -4047,9 +4051,12 @@ if (permanentChecked && correspondentChecked) {
                     rangelength: [10, 11],
                 },
                 okuFile: {
-                    required: true,
+                    required: {
+                        depends: function(element) {
+                            return $(element).prop("readonly") === false;
+                        }
+                    }
                 },
-
                 expiryDate: "required",
                 issuingCountry: {
                     required: true,
@@ -4982,23 +4989,32 @@ if (permanentChecked && correspondentChecked) {
     $(".okuCheck").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard").prop("readonly", false);
+            $("#okucard").prop("disabled", false);
 
+            $("#okuattach").prop("disabled", false);
             $("#okuattach").prop("readonly", false);
 
             $("#okuattach").css("pointer-events", "auto");
             // $("#okuattach").css("pointer-events", "none");
         } else {
             $("#okucard").prop("readonly", true);
-            $("#okucard").val("");
-
-            // $("#okuattach").css("readonly", false);
-            // $("#okuattach").css("pointer-events", "auto");
+            $("#okucard").val("").prop("disabled", true);
+            $("#okuattach").prop("disabled", true);
 
             $("#okuattach").prop("readonly", true);
             $("#okuattach").val("");
         }
     });
 
+    if ($(".okuCheck").is(":checked")) {
+        $("#okucard").prop("disabled", false);
+        $("#okuattach").prop("disabled", false);
+        $("#okuattach").css("pointer-events", "auto");
+    } else {
+        $("#okucard").val("").prop("disabled", true);
+        $("#okuattach").prop("disabled", true);
+        $("#okuattach").css("pointer-events", "none");
+    }
     //oku check companion
     $(".okuCheck1").click(function () {
         if ($(this).prop("checked")) {

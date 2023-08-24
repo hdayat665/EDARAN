@@ -628,9 +628,12 @@ $(document).ready(function () {
                     rangelength: [10, 11],
                 },
                 okuFile: {
-                    required: true,
+                    required: {
+                        depends: function(element) {
+                            return $(element).prop("pointer-events: auto;") === false;
+                        }
+                    }
                 },
-
             },
 
             messages: {

@@ -96,6 +96,8 @@ class ProfileService
             {
                 $input['okuStatus'] = null;
                 $input['okuCardNum'] = null;
+                $input['okuFile'] = null;
+
             }
 
             if(!isset($input['passport']))
@@ -119,10 +121,10 @@ class ProfileService
                 }
             }
 
-            if (isset($_FILES['okuFile']['name'])) {
+            if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
                 $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-            } else {
+            } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
                 $input['okuFile'] = null;
             }
 
@@ -131,9 +133,8 @@ class ProfileService
                 $input['idNo'] = null;
             }
 
+
             UserProfile::where('user_id', $user_id)->update($input);
-            // $profileEmployment->fill($input);
-            // $profileEmployment->save();
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
@@ -168,8 +169,6 @@ class ProfileService
 
         return $data;
     }
-
-
 
     public function getEducation($id = '')
     {
