@@ -31,43 +31,56 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
+        if (isset($r['username'])) {
+            // $user = Users::join('userprofile', 'users.id', '=', 'userprofile.user_id')
+            //     ->where('users.tenant_id', Auth::user()->tenant_id)
+            //     ->where('userprofile.personalEmail', $r['personalEmail'])
+            //     ->where('users.status', 'active')
+            //     ->select('users.*', 'userprofile.personalEmail')
+            //     ->first();
+            $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
-        if ($user) {
+
+            if ($user) {
+                $data['status'] = false;
+                $data['title'] = 'Error';
+                $data['type'] = 'error';
+                $data['msg'] = 'email already exists';
+            } else {
+                $user['type'] = 'employee';
+                $user['status'] = 'not complete';
+                $user['username'] = $r['username'];
+                $user['tenant_id'] = Auth::user()->tenant_id;
+                $user['tenant'] = Auth::user()->tenant;
+                $user['password'] = Hash::make('password');
+
+                Users::create($user);
+
+                $user = Users::where('username', $r['username'])->first();
+
+                $input['user_id'] = $user->id;
+                $input['DOB'] = date_format(date_create($input['DOB']), "Y/m/d H:i:s");
+                $input['expiryDate'] = date_format(date_create($input['expiryDate']), "Y/m/d H:i:s");
+                $input['tenant_id'] = Auth::user()->tenant_id;
+
+                UserProfile::create($input);
+
+                $data['status'] = true;
+                $data['title'] = 'Success';
+                $data['type'] = 'success';
+                $data['msg'] = 'Employee Profile is created';
+                $data['data'] = UserProfile::where('user_id', $user->id)->first();
+            }
+        } else {
+            // Handle the case when personalEmail is not provided
             $data['status'] = false;
             $data['title'] = 'Error';
             $data['type'] = 'error';
-            $data['msg'] = 'email already exist';
-        } else {
-            $user['type'] = 'employee';
-            $user['status'] = 'not complete';
-            $user['username'] = $r['username'];
-            $user['tenant_id'] = Auth::user()->tenant_id;
-            $user['tenant'] = Auth::user()->tenant;
-            $user['type'] = 'employee';
-            $user['password'] = Hash::make('password');
-
-            Users::create($user);
-
-            $user = Users::where('username', $r['username'])->first();
-
-            $input['user_id'] = $user->id;
-            $input['DOB'] = date_format(date_create($input['DOB']), "Y/m/d H:i:s");
-            $input['expiryDate'] = date_format(date_create($input['expiryDate']), "Y/m/d H:i:s");
-            $input['tenant_id'] = Auth::user()->tenant_id;
-
-            UserProfile::create($input);
-
-            $data['status'] = true;
-            $data['title'] = 'Success';
-            $data['type'] = 'success';
-            $data['msg'] = 'Success Create User Profile';
-            $data['data'] = UserProfile::where('user_id', $user->id)->first();
+            $data['msg'] = 'Personal Email is required';
         }
 
         return $data;
     }
-
 
     public function addAddress($r)
     {
@@ -115,7 +128,7 @@ class EmployeeService
         $data['status'] = true;
         $data['title'] = 'Success';
         $data['type'] = 'success';
-        $data['msg'] = 'Success Create Address';
+        $data['msg'] = 'Address is created';
         $data['data'] = UserAddress::where('user_id', $input['user_id'])->first();
 
         return $data;
@@ -1170,7 +1183,7 @@ class EmployeeService
             $data['status'] = true;
             $data['title'] = 'Success';
             $data['type'] = 'success';
-            $data['msg'] = 'Success Create User Employment';
+            $data['msg'] = 'Employment Details is created';
             $data['data'] = Employee::where('user_id', $input['user_id'])->first();
         }
 

@@ -20,12 +20,12 @@
 
             <label class="form-label col-form-label col-md-1">Department*</label>
             <div class="col-md-5">
-                
+
 
                 <select class="form-select" name="departmentId"  id="departmentShow">
-                    
+
                 <option label="PLEASE CHOOSE" selected="selected"> </option>
-               
+
                 </select>
             </div>
         </div>
@@ -33,23 +33,23 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Unit</label>
             <div class="col-md-5">
-                
+
 
                 <select class="form-select" name="unitId"  id="unitShow">
-                    
+
                 <option label="PLEASE CHOOSE" selected="selected" value=""> </option>
-                
+
                 </select>
 
             </div>
             <label class="form-label col-form-label col-md-1">Branch*</label>
             <div class="col-md-5">
-                
+
 
                 <select class="form-select" name="branchId"  id="branchShow">
-                   
+
                 <option label="PLEASE CHOOSE" selected="selected"> </option>
-                
+
                 </select>
 
             </div>
@@ -126,13 +126,13 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Working Email*</label>
             <div class="col-md-5">
-                <input type="email" name="workingEmail" class="form-control mb-10px" placeholder="Email" required />
+                <input type="email" name="workingEmail" class="form-control mb-5px" placeholder="Email" required />
 
             </div>
 
             <label class="form-label col-form-label col-md-1">Joined Date*</label>
             <div class="col-md-5">
-                <input type="text" name="joinedDate" class="form-control" id="datepicker-joindate" style="text-transform:uppercase" required />
+                <input type="text" name="joinedDate" class="form-control" placeholder="YYYY/MM/DD" id="datepicker-joindate" style="text-transform:uppercase" required />
                 <input type="hidden" name="user_id" id="user_id1" class="form-control mb-10px" />
                 <input type="hidden" name="employeeId" id="employeeId" class="form-control mb-10px" />
                 <input type="hidden" name="employeeName" id="employeeName" class="form-control mb-10px" />
