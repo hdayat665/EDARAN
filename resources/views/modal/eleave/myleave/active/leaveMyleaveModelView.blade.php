@@ -90,6 +90,7 @@
                             <label class="form-label">Supporting Document</label>
                             <div class="input-group">
                                 <span id="fileDownloadPolicya"></span>
+                                <span id="fileDownloadPolicyb"></span>
                             </div>
                         </div>
                         <div class="col-sm-6">

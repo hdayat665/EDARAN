@@ -40,12 +40,12 @@
                     </li>
                 </ul>
                 <div class="tab-content panel m-0 rounded-0 p-3">
-                    <div class="tab-pane fade active show" id="default-tab-1">
+                    <div class="tab-pane fade active show " id="default-tab-1">
                         <div class="panel-heading-btn" id="hideButton">
                             <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ Apply Leave</a>
                         </div>
-                        <div class="panel-body">
-                            <div class="row">
+                        <div class="panel-body" >
+                            <div class="row" id="hideButton1">
                                 <div class="col-sm-6">
                                     <div class="panel-heading mt-15px">
                                         <h5 class="panel-title">Leave Entitlement</h5>
@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" >
                                         <form action="/myleave#default-tab-1" method="POST">
                                             <div id="filterleavemy" style="display: none">
                                                 <div class="row p-2">

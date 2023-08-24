@@ -13,6 +13,7 @@ $(document).ready(function () {
         requirejs(["sweetAlert2"], function (swal) {
             if (data) {
                 $("#hideButton").hide();
+                $("#hideButton1").hide();
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -31,6 +32,7 @@ $(document).ready(function () {
             } else {
                 // Lakukan sesuatu jika data tidak tersedia
                 $("#hideButton").show();
+                $("#hideButton1").show();
             }
         });
     });
@@ -671,16 +673,16 @@ $(document).ready(function () {
             }
 
             if (data[0].file_document) {
+
                 var filename = data[0].file_document.split("/").pop();
                 $("#fileDownloadPolicya").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
+
             } else {
                 $("#fileDownloadPolicya").html("No File Upload");
             }
@@ -818,15 +820,14 @@ $(document).ready(function () {
             }
 
             if (data[0].file_document) {
+
                 var filename = data[0].file_document.split("/").pop();
                 $("#fileDownloadPolicya2").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
             } else {
                 $("#fileDownloadPolicya2").html("No File Upload");
