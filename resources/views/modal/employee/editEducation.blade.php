@@ -50,7 +50,7 @@
                         <label for="" class="form-label">Education Attachments</label>
                         <div class="col-sm-8">
                             <input id="" type="file" name="file" multiple="multiple">
-                            Click <a id="fileDownloadOthers"></a> to see attachmentt.
+                            Click <a id="fileDownloadOthers"></a> to see attachment.
                         </div>
                     </div>
                 </div>

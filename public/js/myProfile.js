@@ -971,7 +971,7 @@ $(document).ready(function () {
                 $("#educationResult1").val(education.result);
                 if (education.file) {
                     $("#fileDownloadOthers").html(
-                        '<a href="/storage/' + education.file + '">Download File</a>'
+                        '<a href="/storage/' + education.file + '" target="_blank">here</a>'
                     );
                 }
             });
@@ -1204,10 +1204,9 @@ $(document).ready(function () {
                 $("#idOthers").val(othersQualification.id);
                 $("#othersDate1").val(othersQualification.otherDate);
                 $("#othersPQDetails1").val(othersQualification.otherPQDetails);
-                // $("#othersDoc1").val(othersQualification.file);
                 if (othersQualification.file) {
                     $("#othersDoc1").html(
-                        '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
+                        '<a href="/storage/' + othersQualification.file + '" target="_blank">here</a>'
                     );
                 }
             });

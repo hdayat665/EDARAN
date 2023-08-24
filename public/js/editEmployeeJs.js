@@ -2065,7 +2065,7 @@ $("#edit-profile-picture").on("click", function () {
                 $("#educationResult1").val(education.result);
                 if (education.file) {
                     $("#fileDownloadOthers").html(
-                        '<a href="/storage/' + education.file + '">Download File</a>'
+                        '<a href="/storage/' + education.file + '" target="_blank">here</a>'
                     );
                 }
             });
@@ -2211,9 +2211,7 @@ $("#edit-profile-picture").on("click", function () {
                 $("#othersPQDetails1").val(othersQualification.otherPQDetails);
                 if (othersQualification.file) {
                     $("#othersDoc1").html(
-
-                        '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
-
+                        '<a href="/storage/' + othersQualification.file + '" target="_blank">here</a>'
                     );
                 }
             });

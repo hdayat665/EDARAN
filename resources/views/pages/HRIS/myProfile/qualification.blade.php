@@ -1,4 +1,4 @@
-<style>  
+<style>
         .custom-dropdown-menu {
         position: static ;
         height: auto ;
@@ -32,7 +32,7 @@
                 <table id="education" style="width: 100%"  class="table table-striped align-middle">
                     <thead>
                         <tr>
-                            <th data-orderable="false">No</th>	
+                            <th data-orderable="false">No</th>
                             <th data-orderable="false">Action</th>
                             <th class="text-nowrap">From Date</th>
                             <th class="text-nowrap">To Date</th>
@@ -66,7 +66,7 @@
                                 <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                                 <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                                 <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                                <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $education->file]) }}" target="_blank">{{$education->file}}</a></td>
                             </tr>
                             @endforeach
                         @endif
@@ -82,7 +82,7 @@
                 <table id="qualificationOthers" style="width: 100%"  class="table table-striped align-middle">
                     <thead>
                         <tr>
-                            <th data-orderable="false">No</th>	
+                            <th data-orderable="false">No</th>
                             <th data-orderable="false">Action</th>
                             <th class="text-nowrap"> Date</th>
                             <th class="text-nowrap">Professional Qualification Details</th>
@@ -110,7 +110,7 @@
                                 </td>
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
-                                <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $other->file]) }}" target="_blank">{{$other->file}}</a></td>
                             </tr>
                             @endforeach
                         @endif
@@ -123,7 +123,7 @@
     <div class="row p-2">
         <div class="modal-footer">
             <a class="btn btn-white me-5px btnPrevious">Previous</a>
-            
+
             <a class="btn btn-white me-5px btnNext">Next</a>
         </div>
     </div>
