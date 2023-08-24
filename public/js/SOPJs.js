@@ -3,10 +3,6 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
-    $("textarea[type=text]").keyup(function () {
-        $(this).val($(this).val().toUpperCase());
-    });
-
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -128,7 +124,6 @@ $(document).ready(function () {
                     var data = new FormData(
                         document.getElementById("addForm1")
                     );
-                    // var data = $('#tree').jstree("get_selected");
 
                     $.ajax({
                         type: "POST",
