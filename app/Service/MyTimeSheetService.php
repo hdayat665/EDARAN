@@ -48,195 +48,192 @@ class MyTimeSheetService
     }
 
     public function myTimesheetState()
-{
-    $userId = auth()->user()->id;
+    {
+        $userId = auth()->user()->id;
 
-    $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
-        ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
-        // ->leftJoin('location_states as d', 'd.id', '=', 'c.id')
-        ->where('employment.user_id', $userId)
-        ->select('c.state_id')
-        ->first();
+        $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
+            ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
+            // ->leftJoin('location_states as d', 'd.id', '=', 'c.id')
+            ->where('employment.user_id', $userId)
+            ->select('c.state_id')
+            ->first();
 
-    // dd($data);
+        // dd($data);
 
-    return $data;
-}
+        return $data;
+    }
 
 
-//     public function getTimesheetEvents()
-// {
-//     $employee = Employee::where([
-//         ['tenant_id', Auth::user()->tenant_id],
-//         ['user_id', Auth::user()->id]
-//     ])->first();
+    //     public function getTimesheetEvents()
+    // {
+    //     $employee = Employee::where([
+    //         ['tenant_id', Auth::user()->tenant_id],
+    //         ['user_id', Auth::user()->id]
+    //     ])->first();
 
-//     $timesheet_events = TimesheetEvent::whereRaw("FIND_IN_SET($employee->user_id, participant) > 0")->get();
+    //     $timesheet_events = TimesheetEvent::whereRaw("FIND_IN_SET($employee->user_id, participant) > 0")->get();
 
-//     $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+    //     $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
 
-//     $participant_ids = [];
-//     foreach ($timesheet_events as $event) {
-//         $ids = explode(",", $event->participant);
-//         $participant_ids = array_merge($participant_ids, $ids);
-//     }
-//     $participant_ids = array_unique($participant_ids);
+    //     $participant_ids = [];
+    //     foreach ($timesheet_events as $event) {
+    //         $ids = explode(",", $event->participant);
+    //         $participant_ids = array_merge($participant_ids, $ids);
+    //     }
+    //     $participant_ids = array_unique($participant_ids);
 
-//     return collect([
-//         'employees' => $employees,
-//         'participant_ids' => $participant_ids
-//     ]);
-// }
+    //     return collect([
+    //         'employees' => $employees,
+    //         'participant_ids' => $participant_ids
+    //     ]);
+    // }
 
 
     public function createLog($r)
-{
-    $input = $r->input();
-    $user = Auth::user();
+    {
+        $input = $r->input();
+        $user = Auth::user();
 
-    $input['user_id'] = $user->id;
-    $input['tenant_id'] = $user->tenant_id;
-    $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
+        $input['user_id'] = $user->id;
+        $input['tenant_id'] = $user->tenant_id;
+        $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-    $currentDate = date('Y/m/d');
-    $twoDaysBefore = date('Y/m/d', strtotime('-2 days'));
+        $currentDate = date('Y/m/d');
+        $twoDaysBefore = date('Y/m/d', strtotime('-2 days'));
 
-    $dayOfWeek = date('N', strtotime($twoDaysBefore)); 
+        $dayOfWeek = date('N', strtotime($twoDaysBefore));
 
-    $monday = 1;
-    $tuesday = 2;
+        $monday = 1;
+        $tuesday = 2;
 
-    // $branch = Branch::join('employment', 'branch.id', '=', 'employment.branch')
-    // ->where('employment.user_id', $user->id)
-    // ->select('branch.*')
-    // ->first();
+        // $branch = Branch::join('employment', 'branch.id', '=', 'employment.branch')
+        // ->where('employment.user_id', $user->id)
+        // ->select('branch.*')
+        // ->first();
 
-//     $getstate = Employee::join('employment as emp1', 'employees.id', '=', 'emp1.employee_id')
-//     ->join('branch', 'emp1.branch', '=', 'branch.id')
-//     ->join('location_cities', 'branch.ref_cityid', '=', 'location_cities.id')
-//     ->join('employment as emp2', 'employees.id', '=', 'emp2.employee_id')
-//     ->where('emp2.user_id', $user->id)
-//     ->select('location_cities.id')
-//     ->first();
+        //     $getstate = Employee::join('employment as emp1', 'employees.id', '=', 'emp1.employee_id')
+        //     ->join('branch', 'emp1.branch', '=', 'branch.id')
+        //     ->join('location_cities', 'branch.ref_cityid', '=', 'location_cities.id')
+        //     ->join('employment as emp2', 'employees.id', '=', 'emp2.employee_id')
+        //     ->where('emp2.user_id', $user->id)
+        //     ->select('location_cities.id')
+        //     ->first();
 
-// dd($getstate);
+        // dd($getstate);
 
-    $getstate = DB::table('employment as a')
-        ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
-        ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
-        ->where('a.user_id', $user->id)
-        ->select('c.state_id')
-        ->first();
+        $getstate = DB::table('employment as a')
+            ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
+            ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
+            ->where('a.user_id', $user->id)
+            ->select('c.state_id')
+            ->first();
 
-    $cityId = $getstate->state_id;
-    // echo $cityId;
+        $cityId = $getstate->state_id;
+        // echo $cityId;
 
-    $getweekend = DB::table('leave_weekend as a')
-    ->where('a.state_id', '=', $cityId)
-    ->whereNull('a.total_time')
-    ->select('a.day_of_week')
-    ->get();
+        $getweekend = DB::table('leave_weekend as a')
+            ->where('a.state_id', '=', $cityId)
+            ->whereNull('a.total_time')
+            ->select('a.day_of_week')
+            ->get();
 
-    $sortedWeekendDays = $getweekend->pluck('day_of_week')->sort();
+        $sortedWeekendDays = $getweekend->pluck('day_of_week')->sort();
 
-    $higherNumber = $sortedWeekendDays->last();
-    $lowerNumber = $sortedWeekendDays->first();
+        $higherNumber = $sortedWeekendDays->last();
+        $lowerNumber = $sortedWeekendDays->first();
 
 
-    if ($lowerNumber >= 0 && $lowerNumber <= 7) {
-        $lowerNumber = $lowerNumber + 1;
-        }
-        else
-        $lowerNumber = 0;
+        if ($lowerNumber >= 0 && $lowerNumber <= 7) {
+            $lowerNumber = $lowerNumber + 1;
+        } else
+            $lowerNumber = 0;
 
         if ($higherNumber >= 0 && $higherNumber <= 5) {
             $higherNumber = $higherNumber + 2;
-        }
-        else if($higherNumber == 6) {
+        } else if ($higherNumber == 6) {
             $higherNumber = 2;
-        }
-        else if($higherNumber == 7) {
+        } else if ($higherNumber == 7) {
             $higherNumber = 3;
         }
         // dd($higherNumber, $lowerNumber);
-    if ($dayOfWeek == $higherNumber || $dayOfWeek ==  $lowerNumber) {
-        $twoDaysBefore = date('Y/m/d', strtotime('-4 days'));
-    }
-    
-    if ($input['date'] < $twoDaysBefore) {
-        $input['appealstatus'] = "1";
-    } else {
-        $input['appealstatus'] = "2";
-    }
+        if ($dayOfWeek == $higherNumber || $dayOfWeek ==  $lowerNumber) {
+            $twoDaysBefore = date('Y/m/d', strtotime('-4 days'));
+        }
 
-    $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
-    $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
+        if ($input['date'] < $twoDaysBefore) {
+            $input['appealstatus'] = "1";
+        } else {
+            $input['appealstatus'] = "2";
+        }
 
-    if (isset($input['office_log_project'])) {
-        $input['project_id'] = $input['office_log_project'];
-    }
+        $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
+        $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
-    if (isset($input['activity_office'])) {
-        $input['activity_name'] = $input['activity_office'];
-    }
+        if (isset($input['office_log_project'])) {
+            $input['project_id'] = $input['office_log_project'];
+        }
 
-    if (isset($input['project_location_office'])) {
-        $input['project_location'] = $input['project_location_office'];
-    }
+        if (isset($input['activity_office'])) {
+            $input['activity_name'] = $input['activity_office'];
+        }
 
-    $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
+        if (isset($input['project_location_office'])) {
+            $input['project_location'] = $input['project_location_office'];
+        }
 
-    $h = intval($totaltime / 3600);
-    $totaltime = $totaltime - ($h * 3600);
-    $m = intval($totaltime / 60);
-    $s = $totaltime - ($m * 60);
-    $input['total_hour'] = "$h:$m:$s";
+        $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
 
-    if ($input['lunch_break'] == 1) {
-        $h -= 1;
+        $h = intval($totaltime / 3600);
+        $totaltime = $totaltime - ($h * 3600);
+        $m = intval($totaltime / 60);
+        $s = $totaltime - ($m * 60);
         $input['total_hour'] = "$h:$m:$s";
+
+        if ($input['lunch_break'] == 1) {
+            $h -= 1;
+            $input['total_hour'] = "$h:$m:$s";
+        }
+
+        $existingLogs = TimesheetLog::where('user_id', $user->id)
+            ->where('date', $input['date'])
+            ->where(function ($query) use ($startTime, $endTime) {
+                $query->where(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+                });
+            })
+            ->get();
+
+        if ($existingLogs->isNotEmpty()) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Unable to add log due to overlapped time';
+            return $data;
+        }
+
+
+
+        // $dayOfWeek = date('N', strtotime($input['date']));
+
+        // if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+        //     $data['msg'] = 'Cannot Apply Log On Weekend';
+        //     return $data;
+        // }
+
+        TimesheetLog::create($input);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Timesheet Logs';
+        return $data;
     }
-
-    $existingLogs = TimesheetLog::where('user_id', $user->id)
-    ->where('date', $input['date'])
-    ->where(function ($query) use ($startTime, $endTime) {
-        $query->where(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
-        })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
-        })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
-        });
-    })
-    ->get();
-
-if ($existingLogs->isNotEmpty()) {
-    $data['status'] = config('app.response.error.status');
-    $data['type'] = config('app.response.error.type');
-    $data['title'] = config('app.response.error.title');
-    $data['msg'] = 'Unable to add log due to overlapped time';
-    return $data;
-}
-
-
-
-    // $dayOfWeek = date('N', strtotime($input['date']));
-
-    // if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
-    //     $data['status'] = config('app.response.error.status');
-    //     $data['type'] = config('app.response.error.type');
-    //     $data['title'] = config('app.response.error.title');
-    //     $data['msg'] = 'Cannot Apply Log On Weekend';
-    //     return $data;
-    // }
-
-    TimesheetLog::create($input);
-    $data['status'] = config('app.response.success.status');
-    $data['type'] = config('app.response.success.type');
-    $data['title'] = config('app.response.success.title');
-    $data['msg'] = 'Success Create Timesheet Logs';
-    return $data;
-}
 
     public function updateLog($r, $id)
     {
@@ -281,7 +278,7 @@ if ($existingLogs->isNotEmpty()) {
         $h = intval($totaltime / 3600);
         $totaltime = $totaltime - ($h * 3600);
 
-       
+
 
         // Minutes is obtained by dividing
         // remaining total time with 60
@@ -299,45 +296,46 @@ if ($existingLogs->isNotEmpty()) {
         }
 
         $existingLogs = TimesheetLog::where('user_id', $user->id)
-        ->where('date', $input['date'])
-        ->where(function ($query) use ($startTime, $endTime, $id) {
-            $query->where(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
-            })->orWhere(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
-            })->orWhere(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
-            });
-        })
-        ->where(function ($query) use ($id, $input) {
-            // Exclude the current log being updated if start_time or end_time changes
-            if ($input['start_time'] !== $input['end_time']) {
-                $query->where('id', '<>', $id);
-            }
-        })
-        ->get();
-    
-    if ($existingLogs->isNotEmpty()) {
-        $updatedStartTime = strtotime($input['start_time']);
-        $updatedEndTime = strtotime($input['end_time']);
-    
-        foreach ($existingLogs as $log) {
-            $existingStartTime = strtotime($log->start_time);
-            $existingEndTime = strtotime($log->end_time);
-    
-            // Check if the updated start_time and end_time overlap with any existing logs
-            if (($updatedStartTime >= $existingStartTime && $updatedStartTime < $existingEndTime) ||
-                ($updatedEndTime > $existingStartTime && $updatedEndTime <= $existingEndTime)) {
-                $data['status'] = config('app.response.error.status');
-                $data['type'] = config('app.response.error.type');
-                $data['title'] = config('app.response.error.title');
-                $data['msg'] = 'Unable to update log due to overlapped time';
-                return $data;
+            ->where('date', $input['date'])
+            ->where(function ($query) use ($startTime, $endTime, $id) {
+                $query->where(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') < ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+                })->orWhere(function ($query) use ($startTime, $endTime) {
+                    $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+                });
+            })
+            ->where(function ($query) use ($id, $input) {
+                // Exclude the current log being updated if start_time or end_time changes
+                if ($input['start_time'] !== $input['end_time']) {
+                    $query->where('id', '<>', $id);
+                }
+            })
+            ->get();
+
+        if ($existingLogs->isNotEmpty()) {
+            $updatedStartTime = strtotime($input['start_time']);
+            $updatedEndTime = strtotime($input['end_time']);
+
+            foreach ($existingLogs as $log) {
+                $existingStartTime = strtotime($log->start_time);
+                $existingEndTime = strtotime($log->end_time);
+
+                // Check if the updated start_time and end_time overlap with any existing logs
+                if (($updatedStartTime >= $existingStartTime && $updatedStartTime < $existingEndTime) ||
+                    ($updatedEndTime > $existingStartTime && $updatedEndTime <= $existingEndTime)
+                ) {
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+                    $data['msg'] = 'Unable to update log due to overlapped time';
+                    return $data;
+                }
             }
         }
-    }
-    
-    
+
+
 
 
 
@@ -381,22 +379,22 @@ if ($existingLogs->isNotEmpty()) {
     // }
 
     public function getLogsById($id)
-{
-    $logs = TimesheetLog::find($id);
-    
-    $logs = $logs->leftJoin('project_location as b', 'timesheet_log.project_location', '=', 'b.id')
-    ->select('timesheet_log.*','b.location_name')
-    ->find($id);
-    // dd($logs);
-    return $logs;
-}
+    {
+        $logs = TimesheetLog::find($id);
+
+        $logs = $logs->leftJoin('project_location as b', 'timesheet_log.project_location', '=', 'b.id')
+            ->select('timesheet_log.*', 'b.location_name')
+            ->find($id);
+        // dd($logs);
+        return $logs;
+    }
 
 
     public function employeeNamebyId($userId)
     {
         $employee = DB::table('employment')
-                        ->where('user_id', $userId)
-                        ->first();
+            ->where('user_id', $userId)
+            ->first();
 
         return $employee ? $employee->name : '';
     }
@@ -405,42 +403,42 @@ if ($existingLogs->isNotEmpty()) {
     {
         $input = $r->input();
         $user = Auth::user();
-    
+
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-    
+
         $participants = isset($input['participant']) ? $input['participant'] : [];
         $participants[] = $user->id; // Add the logged-in user to the participants array
 
         $participants = array_unique($participants);
-    
+
         $input['participant'] = implode(',', $participants);
-    
+
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
-    
+
         $start_time = strtotime($input['start_time']);
         $end_time = strtotime($input['end_time']);
         $totaltime = $end_time - $start_time;
-    
+
         $h = intval($totaltime / 3600);
-    
+
         $totaltime = $totaltime - ($h * 3600);
-    
+
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
-    
+
         // Remaining value is seconds
         $s = $totaltime - ($m * 60);
-    
+
         // Printing the result
         // $input['total_hour'] = "$h:$m:$s";
-    
+
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
             $input['file_upload'] = $file_upload['filename'];
-    
+
             if (!$input['file_upload']) {
                 unset($input['file_upload']);
             }
@@ -448,18 +446,18 @@ if ($existingLogs->isNotEmpty()) {
         // $input['total_hour'] = $input['start_time'] - $input['end_time'];
         // pr($input);
         TimesheetEvent::create($input);
-    
+
         $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
         $employeeName = getEmployeeName($user->id);
         $venue = projectLocationById($eventDetails->location);
-    
+
         $participants = explode(',', $eventDetails->participant);
-    
+
         $participantDetail = Employee::whereIn('user_id', $participants)->get();
 
         $eventid = $eventDetails->id;
-        $eventpaerr= $eventDetails->participant;
+        $eventpaerr = $eventDetails->participant;
         $explode = explode(',', $eventpaerr);
 
         foreach ($explode as $key => $participant) {
@@ -504,64 +502,64 @@ if ($existingLogs->isNotEmpty()) {
     }
 
     public function updateEvent($r, $id)
-{
-    $input = $r->input();
-    $user = Auth::user();
+    {
+        $input = $r->input();
+        $user = Auth::user();
 
-    $input['tenant_id'] = $user->tenant_id;
-    if (isset($input['type_recurring'])) {
-        $input['type_recurring'] = implode(',', $input['type_recurring']);
-    }
-    if (isset($input['set_reccuring'])) {
-        $input['set_reccuring'] = implode(',', $input['set_reccuring']);
-    }
-
-    $currentEvent = TimesheetEvent::find($id);
-    $currentParticipants = explode(',', $currentEvent->participant);
-
-    if (isset($input['participant'])) {
-        $newParticipants = $input['participant'];
-        $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
-
-        // Add new participants to attendance_event table
-        $addedParticipants = array_diff($newParticipants, $currentParticipants);
-        foreach ($addedParticipants as $participant) {
-            $attendanceInput = [
-                'event_id' => $id,
-                'user_id' => $participant,
-                'status' => 'no response',
-            ];
-            AttendanceEvent::create($attendanceInput);
+        $input['tenant_id'] = $user->tenant_id;
+        if (isset($input['type_recurring'])) {
+            $input['type_recurring'] = implode(',', $input['type_recurring']);
         }
-    } else {
-        $input['participant'] = implode(',', $currentParticipants);
-    }
-
-    $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
-    $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
-    unset($input['inlineRadioOptions']);
-
-    if ($_FILES['file_upload']['name']) {
-        $file_upload = upload($r->file('file_upload'));
-        $input['file_upload'] = $file_upload['filename'];
-
-        if (!$input['file_upload']) {
-            unset($input['file_upload']);
+        if (isset($input['set_reccuring'])) {
+            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }
-    }
-    
 
-   //this code is to make datatble in editeventmodal not return err when updating
-    // Define the disallowed keys
-    $disallowed = ['tableviewparticipant_length'];
+        $currentEvent = TimesheetEvent::find($id);
+        $currentParticipants = explode(',', $currentEvent->participant);
 
-    // Filter the inputs
-    $filtered = Arr::except($input, $disallowed);
+        if (isset($input['participant'])) {
+            $newParticipants = $input['participant'];
+            $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
 
-    // Update the event
-    TimesheetEvent::where('id', $id)->update($filtered);
+            // Add new participants to attendance_event table
+            $addedParticipants = array_diff($newParticipants, $currentParticipants);
+            foreach ($addedParticipants as $participant) {
+                $attendanceInput = [
+                    'event_id' => $id,
+                    'user_id' => $participant,
+                    'status' => 'no response',
+                ];
+                AttendanceEvent::create($attendanceInput);
+            }
+        } else {
+            $input['participant'] = implode(',', $currentParticipants);
+        }
 
-    // TimesheetEvent::where('id', $id)->update($input);
+        $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
+        $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
+        unset($input['inlineRadioOptions']);
+
+        if ($_FILES['file_upload']['name']) {
+            $file_upload = upload($r->file('file_upload'));
+            $input['file_upload'] = $file_upload['filename'];
+
+            if (!$input['file_upload']) {
+                unset($input['file_upload']);
+            }
+        }
+
+
+        //this code is to make datatble in editeventmodal not return err when updating
+        // Define the disallowed keys
+        $disallowed = ['tableviewparticipant_length'];
+
+        // Filter the inputs
+        $filtered = Arr::except($input, $disallowed);
+
+        // Update the event
+        TimesheetEvent::where('id', $id)->update($filtered);
+
+        // TimesheetEvent::where('id', $id)->update($input);
 
         $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
@@ -677,17 +675,17 @@ if ($existingLogs->isNotEmpty()) {
     public function getEventById($id)
     {
         $event = TimesheetEvent::find($id);
-    
+
         $event = $event->leftJoin('employment as b', 'timesheet_event.user_id', '=', 'b.user_id')
-                    ->select('timesheet_event.*', 'b.employeeName')
-                    ->find($id);
-    
+            ->select('timesheet_event.*', 'b.employeeName')
+            ->find($id);
+
         $participantIds = explode(',', $event->participant);
-    
+
         $participants = DB::table('employment')
-                        ->whereIn('user_id', $participantIds)
-                        ->get();
-    
+            ->whereIn('user_id', $participantIds)
+            ->get();
+
         $participantData = [];
         foreach ($participants as $participant) {
             $participantData[] = [
@@ -695,13 +693,13 @@ if ($existingLogs->isNotEmpty()) {
                 'name' => $participant->employeeName,
             ];
         }
-    
+
         $event->participants = $participantData;
-    
+
         $nonParticipants = DB::table('employment')
-                            ->whereNotIn('user_id', $participantIds)
-                            ->get();
-    
+            ->whereNotIn('user_id', $participantIds)
+            ->get();
+
         $nonParticipantData = [];
         foreach ($nonParticipants as $nonParticipant) {
             $nonParticipantData[] = [
@@ -711,60 +709,60 @@ if ($existingLogs->isNotEmpty()) {
         }
 
         // dd($nonParticipantData);
-    
+
         $event->nonParticipants = $nonParticipantData;
 
-    
+
         $attendanceStatus = DB::table('attendance_event')
             ->where('event_id', $id)
             ->get();
-    
+
         $event->attendanceStatus = $attendanceStatus;
-    
+
         return $event;
     }
 
-//     public function getStateById($id)
-// {
-//     $loggedInEmployee = DB::table('employment')
-//                         ->where('user_id', '=', Auth::user()->id)
-//                         ->first();
+    //     public function getStateById($id)
+    // {
+    //     $loggedInEmployee = DB::table('employment')
+    //                         ->where('user_id', '=', Auth::user()->id)
+    //                         ->first();
 
-//     dd($loggedInEmployee);
-// }
+    //     dd($loggedInEmployee);
+    // }
 
-public function getStateById($id)
-{
-    $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
-        ->leftJoin('ref_cities as c', 'b.ref_cities', '=', 'c.id')
-        ->leftJoin('ref_states as d', 'd.id', '=', 'c.state_id')
-        ->where('employment.user_id', $id)
-        ->select('c.state_id')
-        ->first();
+    public function getStateById($id)
+    {
+        $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
+            ->leftJoin('ref_cities as c', 'b.ref_cities', '=', 'c.id')
+            ->leftJoin('ref_states as d', 'd.id', '=', 'c.state_id')
+            ->where('employment.user_id', $id)
+            ->select('c.state_id')
+            ->first();
 
-    // dd($data);
+        // dd($data);
 
-    return $data;
-}
+        return $data;
+    }
 
-public function getWorkingHourWeekendbyState($stateid)
-{
-    $data = DB::table('leave_weekend as a')
-        ->where('state_id', $stateid)
-        ->select('a.*')
-        ->get();
-    // dd($data);
-    return $data;
-}
-
-
+    public function getWorkingHourWeekendbyState($stateid)
+    {
+        $data = DB::table('leave_weekend as a')
+            ->where('state_id', $stateid)
+            ->select('a.*')
+            ->get();
+        // dd($data);
+        return $data;
+    }
 
 
 
 
-    
 
-    
+
+
+
+
 
 
 
@@ -776,7 +774,7 @@ public function getWorkingHourWeekendbyState($stateid)
     //     return $data;
     // }
 
-        public function getHolidays()
+    public function getHolidays()
     {
         // $data = holidayModel::where([['tenant_id', Auth::user()->tenant_id]])->get();
         // dd($data);
@@ -792,45 +790,45 @@ public function getWorkingHourWeekendbyState($stateid)
         // dd($stateId);
         // return $stateId; // Optionally return the state_id if needed
 
-        
+
         $getpublicbystate = DB::table('leave_holiday as a')
-        ->whereRaw("FIND_IN_SET($stateId, a.state_id)")
-        ->select('a.*')
-        ->get();
-    
+            ->whereRaw("FIND_IN_SET($stateId, a.state_id)")
+            ->select('a.*')
+            ->get();
+
         return  $getpublicbystate;
-    // dd($getpublicbystate);
-        
-        }
+        // dd($getpublicbystate);
+
+    }
 
 
     public function getLeaves()
     {
-           // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+        // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
         $data = DB::table('myleave as a')
             ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
             ->select('a.*', 'b.leave_types')
             ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
             ->where('a.status_final', 4)
             ->get();
-    
+
         if (!$data) {
             $data = [];
         }
-    
+
         return $data;
     }
-    
+
 
 
     public function getLogs()
     {
         $data = DB::table('timesheet_log as a')
-        ->leftjoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftjoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
-        ->select('a.*', 'b.project_name','c.activity_name as activitynameas')
+            ->leftjoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftjoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
+            ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
             // ->whereNotIn('a.id', $projectId)
-           -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
             ->get();
 
         if (!$data) {
@@ -862,7 +860,7 @@ public function getWorkingHourWeekendbyState($stateid)
             // ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
             ->where('attendance_event.status', '!=', 'attend')
             ->get();
-    
+
         return $data;
     }
 
@@ -877,15 +875,15 @@ public function getWorkingHourWeekendbyState($stateid)
             ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
             // ->where('attendance_event.status', '!=', 'attend')
             ->get();
-    
+
         return $data;
     }
-    
-    
-    
-    
 
-    
+
+
+
+
+
 
     // public function getEventattend()
     // {
@@ -901,16 +899,16 @@ public function getWorkingHourWeekendbyState($stateid)
     //         })
     //         ->distinct()
     //         ->get();
-    
+
     //     return $data;
     // }
-    
+
 
     public function getLocationByProjectId($project_id = '')
     {
         $data = ProjectLocation::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])
-        ->orderBy('location_name', 'asc')
-        ->get();
+            ->orderBy('location_name', 'asc')
+            ->get();
 
         return $data;
     }
@@ -921,21 +919,20 @@ public function getWorkingHourWeekendbyState($stateid)
         // $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])->get();
 
         $getDepartmentUser = DB::table('employment as a')
-        ->where('a.user_id', $user_id)
-        ->select('a.department')
-        ->first();
+            ->where('a.user_id', $user_id)
+            ->select('a.department')
+            ->first();
 
         $department = $getDepartmentUser->department;
         $data = DB::table('activity_logs as a')
-        ->where([
-            ['a.tenant_id', Auth::user()->tenant_id],
-            ['a.project_id', $project_id],
-            ['a.department', $department]
-        ])
-        ->get();
-    
-    return $data;
-    
+            ->where([
+                ['a.tenant_id', Auth::user()->tenant_id],
+                ['a.project_id', $project_id],
+                ['a.department', $department]
+            ])
+            ->get();
+
+        return $data;
     }
 
     public function getActivityNamebyLogsId($logs_id = '')
@@ -946,90 +943,90 @@ public function getWorkingHourWeekendbyState($stateid)
     }
 
     public function submitForApproval($userId = '')
-{
-    $cond[1] = ['user_id', $userId];
+    {
+        $cond[1] = ['user_id', $userId];
 
-    $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
+        $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
 
-    $events = TimesheetEvent::where($cond)
-        ->whereMonth('end_date', date('m'))
-        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
-        ->select('id')
-        ->get();
-
-
-    $leaves = MyLeaveModel::where('up_user_id', $userId)->whereMonth('end_date', date('m'))->select('id')->get();
-    $holidays = holidayModel::whereMonth('end_date', date('m'))->select('id')->get();
+        $events = TimesheetEvent::where($cond)
+            ->whereMonth('end_date', date('m'))
+            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+            ->select('id')
+            ->get();
 
 
-    $log_id = [];
-    foreach ($logs as $log) {
-        $log_id[] = $log->id;
-    }
+        $leaves = MyLeaveModel::where('up_user_id', $userId)->whereMonth('end_date', date('m'))->select('id')->get();
+        $holidays = holidayModel::whereMonth('end_date', date('m'))->select('id')->get();
 
-    $event_id = [];
-    foreach ($events as $event) {
-        $event_id[] = $event->id;
-    }
 
-    $leave_id = [];
-    foreach ($leaves as $leave) {
-        $leave_id[] = $leave->id;
-    }
+        $log_id = [];
+        foreach ($logs as $log) {
+            $log_id[] = $log->id;
+        }
 
-    $holiday_id = [];
-    foreach ($holidays as $holiday) {
-        $holiday_id[] = $holiday->id;
-    }
+        $event_id = [];
+        foreach ($events as $event) {
+            $event_id[] = $event->id;
+        }
 
-    $employee =  DB::table('employment as a')
-        ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
-        ->leftJoin('department as c', 'a.department', '=', 'c.id')
-        ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
-        ->where([['user_id', $userId]])
-        ->first();
+        $leave_id = [];
+        foreach ($leaves as $leave) {
+            $leave_id[] = $leave->id;
+        }
 
-    $input['tenant_id'] = Auth::user()->tenant_id;
-    $input['user_id'] = $userId;
-    $input['month'] = date('M');
-    if (isset($log_id)) {
-        $input['log_id'] = implode(',', $log_id);
-    }
-    if (isset($event_id)) {
-        $input['event_id'] = implode(',', $event_id);
-    }
-    if (isset($leave_id)) {
-        $input['leave_id'] = implode(',', $leave_id);
-    }
-    if (isset($holiday_id)) {
-        $input['holiday_id'] = implode(',', $holiday_id);
-    }
-    $input['employee_id'] = $employee->id;
-    $input['employee_name'] = $employee->employeeName;
-    $input['department'] = $employee->departmentName;
-    $input['designation'] = $employee->designationName;
+        $holiday_id = [];
+        foreach ($holidays as $holiday) {
+            $holiday_id[] = $holiday->id;
+        }
 
-    // Add a check for existing data in TimesheetApproval with the same month
-    $existing_approval = TimesheetApproval::where('user_id', $userId)->where('month', date('M'))->first();
-    if ($existing_approval) {
-        $data['status'] = config('app.response.error.status');
-        $data['type'] = config('app.response.error.type');
-        $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'You already submit log for this month';
+        $employee =  DB::table('employment as a')
+            ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
+            ->leftJoin('department as c', 'a.department', '=', 'c.id')
+            ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
+            ->where([['user_id', $userId]])
+            ->first();
+
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['user_id'] = $userId;
+        $input['month'] = date('M');
+        if (isset($log_id)) {
+            $input['log_id'] = implode(',', $log_id);
+        }
+        if (isset($event_id)) {
+            $input['event_id'] = implode(',', $event_id);
+        }
+        if (isset($leave_id)) {
+            $input['leave_id'] = implode(',', $leave_id);
+        }
+        if (isset($holiday_id)) {
+            $input['holiday_id'] = implode(',', $holiday_id);
+        }
+        $input['employee_id'] = $employee->id;
+        $input['employee_name'] = $employee->employeeName;
+        $input['department'] = $employee->departmentName;
+        $input['designation'] = $employee->designationName;
+
+        // Add a check for existing data in TimesheetApproval with the same month
+        $existing_approval = TimesheetApproval::where('user_id', $userId)->where('month', date('M'))->first();
+        if ($existing_approval) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'You already submit log for this month';
+            return $data;
+        }
+
+        // If there is no existing data, create a new one
+        $input['status'] = 'pending';
+        TimesheetApproval::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Sumbit Log';
+
         return $data;
     }
-
-    // If there is no existing data, create a new one
-    $input['status'] = 'pending';
-    TimesheetApproval::create($input);
-
-    $data['status'] = config('app.response.success.status');
-    $data['type'] = config('app.response.success.type');
-    $data['title'] = config('app.response.success.title');
-    $data['msg'] = 'Success Sumbit Log';
-
-    return $data;
-}
 
 
     public function timesheetApprovalView()
@@ -1043,9 +1040,9 @@ public function getWorkingHourWeekendbyState($stateid)
     {
         $user = Auth::user();
         $data = TimesheetApproval::where('tenant_id', $user->tenant_id)
-                ->where('user_id', $user->id)
-                ->orderBy('created_at', 'DESC')
-                ->get();
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return $data;
     }
@@ -1060,14 +1057,14 @@ public function getWorkingHourWeekendbyState($stateid)
         $weekends = 0;
         $holidays = 0;
         $workedDays = 0;
-    
+
         $startOfMonth = Carbon::createFromDate($currentYear, $currentMonth, 1)->startOfDay();
         $endOfMonth = Carbon::createFromDate($currentYear, $currentMonth, $totalDays)->endOfDay();
-    
+
         $holidays = holidayModel::where('start_date', '>=', $startOfMonth)
-                                ->where('end_date', '<=', $endOfMonth)
-                                ->count();
-    
+            ->where('end_date', '<=', $endOfMonth)
+            ->count();
+
         for ($day = 1; $day <= $totalDays; $day++) {
             $date = Carbon::create($currentYear, $currentMonth, $day);
             if ($date->isWeekend()) {
@@ -1076,18 +1073,18 @@ public function getWorkingHourWeekendbyState($stateid)
                 $weekdays++;
             }
         }
-    
+
         $workedDays = TimesheetLog::where('user_id', $user->id)
-                                ->where('date', '>=', $startOfMonth)
-                                ->where('date', '<=', $endOfMonth)
-                                ->distinct('date')
-                                ->pluck('date')
-                                ->count();
-    
+            ->where('date', '>=', $startOfMonth)
+            ->where('date', '<=', $endOfMonth)
+            ->distinct('date')
+            ->pluck('date')
+            ->count();
+
         $workingDays = $weekdays - $holidays;
 
         $remaininingtsr = $workingDays - $workedDays;
-    
+
         return [
             'totalDays' => $totalDays,
             'weekdays' => $weekdays,
@@ -1098,7 +1095,7 @@ public function getWorkingHourWeekendbyState($stateid)
             'remaininingtsr' => $remaininingtsr,
         ];
     }
-    
+
     public function deleteTimesheet($id)
     {
         $timesheetApproval = TimesheetApproval::find($id);
@@ -1204,7 +1201,8 @@ public function getWorkingHourWeekendbyState($stateid)
         return $data;
     }
 
-    public function getTimesheetByIdLeave($userId = ''){
+    public function getTimesheetByIdLeave($userId = '')
+    {
 
         if ($userId) {
             $data = Employee::where([['user_id', $userId]])->first();
@@ -1256,10 +1254,10 @@ public function getWorkingHourWeekendbyState($stateid)
 
 
         $data = DB::table('myleave as a')
-        ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
-        ->select('a.*', 'b.leave_types')
-        ->whereIn('a.id', $ids)
-        ->get();
+            ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+            ->select('a.*', 'b.leave_types')
+            ->whereIn('a.id', $ids)
+            ->get();
 
         return $data;
     }
@@ -1271,34 +1269,31 @@ public function getWorkingHourWeekendbyState($stateid)
             ->where('employment.tenant_id', Auth::user()->tenant_id)
             ->first();
 
-        if($Check->eleaverecommender == Auth::user()->id){
+        if ($Check->eleaverecommender == Auth::user()->id) {
 
-            $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
-            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
-            ->where('myleave.up_recommendedby_id', '=', $Check->eleaverecommender )
-            ->where('myleave.up_user_id', '=', $id )
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->get();
-
-            return $data;
-
-        }
-
-        if($Check->eleaveapprover == Auth::user()->id){
-
-            $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
-            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
-            ->where('myleave.up_approvedby_id', '=', $Check->eleaveapprover)
-            ->where('myleave.up_user_id', '=', $id )
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->get();
+            $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types', 'employment.employeeName')
+                ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
+                ->where('myleave.up_recommendedby_id', '=', $Check->eleaverecommender)
+                ->where('myleave.up_user_id', '=', $id)
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->get();
 
             return $data;
-
         }
 
+        if ($Check->eleaveapprover == Auth::user()->id) {
+
+            $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types', 'employment.employeeName')
+                ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
+                ->where('myleave.up_approvedby_id', '=', $Check->eleaveapprover)
+                ->where('myleave.up_user_id', '=', $id)
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->get();
+
+            return $data;
+        }
     }
 
     public function getHolidaysByLotId($id)
@@ -1310,7 +1305,8 @@ public function getWorkingHourWeekendbyState($stateid)
         return $data;
     }
 
-    public function getHolidaysByLotIdLeave(){
+    public function getHolidaysByLotIdLeave()
+    {
 
         $data = holidayModel::all();
 
@@ -1336,11 +1332,11 @@ public function getWorkingHourWeekendbyState($stateid)
         // return $data;
 
         $data = DB::table('timesheet_log as a')
-        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
-        ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
-        ->whereIn('a.id', $ids)
-        ->get();
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
+            ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
+            ->whereIn('a.id', $ids)
+            ->get();
 
         return $data;
     }
@@ -1425,12 +1421,12 @@ public function getWorkingHourWeekendbyState($stateid)
         //     ->get();
 
         $data = DB::table('timesheet_event as a')
-        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        ->select('a.*', 'b.employeeName')
-        ->orderBy('a.start_date', 'desc')
-        ->get();
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+            ->select('a.*', 'b.employeeName')
+            ->orderBy('a.start_date', 'desc')
+            ->get();
         return $data;
-    }   
+    }
 
 
     public function gettimesheetid($id)
@@ -1450,7 +1446,6 @@ public function getWorkingHourWeekendbyState($stateid)
 
 
         return $data;
-
     }
 
 
@@ -1504,7 +1499,6 @@ public function getWorkingHourWeekendbyState($stateid)
 
 
         return $data;
-
     }
 
 
@@ -1532,23 +1526,22 @@ public function getWorkingHourWeekendbyState($stateid)
 
 
         return $data;
-
     }
 
     public function getAppeals()
     {
 
 
-    $data = DB::table('timesheet_appeal as a')
-    ->select('a.*')
-       -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
-        ->get();
+        $data = DB::table('timesheet_appeal as a')
+            ->select('a.*')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
+            ->get();
 
-    if (!$data) {
-        $data = [];
-    }
+        if (!$data) {
+            $data = [];
+        }
 
-    return $data;
+        return $data;
     }
 
     public function createAppealTimesheet($r)
@@ -1592,13 +1585,13 @@ public function getWorkingHourWeekendbyState($stateid)
         $input['logid'] = $nextLogid;
 
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-        ->where('user_id', $user->id)
-        ->where('applied_date', $input['applied_date'])
-        ->first();
+            ->where('user_id', $user->id)
+            ->where('applied_date', $input['applied_date'])
+            ->first();
 
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-        ->where('logid', $input['logid'])
-        ->first();
+            ->where('logid', $input['logid'])
+            ->first();
 
         if ($existingAppealdate) {
             $data['status'] = config('app.response.error.status');
@@ -1616,22 +1609,22 @@ public function getWorkingHourWeekendbyState($stateid)
             return $data;
         }
 
-       
-    
+
+
         TimesheetAppeals::create($input);
 
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
-        ->orderBy('timesheet_appeal.id', 'DESC')
-        ->first();
+            ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('timesheet_appeal.id', 'DESC')
+            ->first();
 
         if ($settingEmail) {
 
             $ms = new MailService;
             $ms->emailToApproverAppeal($settingEmail);
         }
-    
+
         // Return success response
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1644,26 +1637,24 @@ public function getWorkingHourWeekendbyState($stateid)
     {
 
         $employees = Employee::where('tsapprover', Auth::user()->id)->get();
-        
+
         $userId = [];
         foreach ($employees as $key => $employee) {
             $userId[] = $employee->user_id;
-            
         }
         // pr($userId);
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')
-        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        ->select('a.*', 'b.employeeName')
-        ->where('a.tenant_id', Auth::user()->tenant_id)
-        ->whereIn('a.user_id', $userId)
-        ->where('a.status', '=', 'Locked')
-        ->orderby('a.created_at' ,'desc')
-        ->get();
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+            ->select('a.*', 'b.employeeName')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->whereIn('a.user_id', $userId)
+            ->where('a.status', '=', 'Locked')
+            ->orderby('a.created_at', 'desc')
+            ->get();
 
         return $data;
-
     }
 
 
@@ -1680,16 +1671,15 @@ public function getWorkingHourWeekendbyState($stateid)
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')
-        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        ->select('a.*', 'b.employeeName')
-        ->where('a.tenant_id', Auth::user()->tenant_id)
-        ->whereIn('a.user_id', $userId)
-        ->where('a.status', '!=', 'Locked')
-        ->orderby('a.created_at' ,'desc')
-        ->get();
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+            ->select('a.*', 'b.employeeName')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->whereIn('a.user_id', $userId)
+            ->where('a.status', '!=', 'Locked')
+            ->orderby('a.created_at', 'desc')
+            ->get();
 
         return $data;
-
     }
 
 
@@ -1700,9 +1690,9 @@ public function getWorkingHourWeekendbyState($stateid)
         TimesheetAppeals::where('id', $id)->update($input);
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
-        ->where('timesheet_appeal.id', $id)
-        ->first();
+            ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+            ->where('timesheet_appeal.id', $id)
+            ->first();
 
         if ($settingEmail) {
 
@@ -1713,7 +1703,7 @@ public function getWorkingHourWeekendbyState($stateid)
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Log Appeal is '. $status;
+        $data['msg'] = 'Log Appeal is ' . $status;
 
         return $data;
     }
@@ -1773,19 +1763,19 @@ public function getWorkingHourWeekendbyState($stateid)
     {
         $user = Auth::user();
         $user_id = $user->id;
-    
+
         $employment = DB::table('employment')
             ->select('tsapprover', 'employeeName')
             ->where('user_id', $user_id)
             ->first(); // Retrieve only the first matching record
-    
+
         $approverName = null;
         if (!empty($employment->tsapprover)) {
             $approverName = DB::table('employment')
                 ->where('user_id', $employment->tsapprover)
                 ->value('employeeName');
         }
-    
+
         return $approverName;
     }
 
@@ -1796,7 +1786,7 @@ public function getWorkingHourWeekendbyState($stateid)
             ['employeeid', '!=', null],
             ['status', 'active'],
         ])->get();
-    
+
         return $data;
     }
 
@@ -1816,13 +1806,13 @@ public function getWorkingHourWeekendbyState($stateid)
 
         // $input['reasonreject'] = $input['reasonreject'];
         $input['status'] = "Rejected";
-        
+
         TimesheetAppeals::where('id', $id)->update($input);
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
-        ->where('timesheet_appeal.id', $id)
-        ->first();
+            ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+            ->where('timesheet_appeal.id', $id)
+            ->first();
 
         if ($settingEmail) {
 
@@ -1836,6 +1826,5 @@ public function getWorkingHourWeekendbyState($stateid)
         $data['msg'] = 'Success Update Timesheet Log';
 
         return $data;
-    }  
-
+    }
 }

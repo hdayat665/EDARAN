@@ -47,6 +47,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\GeneralNotification;
+use App\Service\myClaimService;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -1420,21 +1421,20 @@ if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
     {
         $data = DB::table('employment')
-        ->select('*')
-        ->where([['tenant_id', Auth::user()->tenant_id]]) // Added condition
-        ->whereNotIn('id', function ($query) use ($id) {
-            $query->select('employee_id')
-                ->from('project_member')
-                ->where('project_id', '=', $id);
-        })
-        ->get();
-    
-    if (!$data) {
-        $data = [];
-    }
-    
-    return $data;
-    
+            ->select('*')
+            ->where([['tenant_id', Auth::user()->tenant_id]]) // Added condition
+            ->whereNotIn('id', function ($query) use ($id) {
+                $query->select('employee_id')
+                    ->from('project_member')
+                    ->where('project_id', '=', $id);
+            })
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
     }
 }
 
@@ -2117,7 +2117,7 @@ if (!function_exists('getClaimCategoryMtc')) {
         if (!$data) {
             $data = [];
         }
-        
+
         return $data;
     }
 }
@@ -2753,10 +2753,10 @@ if (!function_exists('getClaimData')) {
                 }
             }
             // $cond[1] = ['supervisor', NULL];
-            $cond[6] = ['status', 'active'];
-            $cond[3] = ['claim_type', 'MTC'];
-            $cond[8] = ['a_approval', 'recommend'];
-            $cond[9] = ['f1', ''];
+            // $cond[6] = ['status', 'active'];
+            // $cond[3] = ['claim_type', 'MTC'];
+            $cond[8] = ['f_recommender', ''];
+            $cond[9] = ['f1', 'recommend'];
             $cond[10]  =  $condByPass;
         }
 
@@ -2787,11 +2787,17 @@ if (!function_exists('getClaimData')) {
             }
             // $cond[1] = ['supervisor', NULL];
             $cond[11] = ['f_recommender', 'recommend'];
-            $cond[12] = ['f_approval', ''];
+            $cond[12] = ['f_approval', NULL];
             $cond[13]  =  $condByPass;
         }
 
-        if ($roleApprover == 'FinanceChecker') {
+        if ($roleApprover == 'FinanceCheckerGNC') {
+            $cond[344] = ['hod', 'recommend'];
+            $cond[333] = ['claim_typE', 'GNC'];
+            $cond[1633] = ['f1', null];
+        }
+
+        if ($roleApprover == 'FinanceCheckerMTC') {
             $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER'];
             $condByPass = ['id', '!=', ""];
             $configData = null;
@@ -2813,9 +2819,10 @@ if (!function_exists('getClaimData')) {
                 }
             }
             // $cond[1] = ['supervisor', NULL];
-            $cond[3] = ['claim_type', 'MTC'];
+            // $cond[3] = ['hod', 'recommend'];
+            $cond[3] = ['claim_typE', 'MTC'];
             $cond[15] = ['a_approval', 'recommend'];
-            $cond[16] = ['f1', ''];
+            $cond[16] = ['f1', null];
             $cond[17]  =  $condByPass;
         }
 
@@ -2836,7 +2843,7 @@ if (!function_exists('getClaimData')) {
                     }
                 }
             }
-            $cond[18] = ['a_recommender', ''];
+            $cond[18] = ['a_recommender', NULL];
             $cond[3] = ['claim_type', 'MTC'];
             // $cond[16] = ['f1', ''];
             $cond[20]  =  $condByPass;
@@ -2863,8 +2870,7 @@ if (!function_exists('getClaimData')) {
                 }
             }
 
-            $cond[21] = ['a_recommender', 'recommend'];
-            $cond[22] = ['a_approval', ''];
+            $cond[22] = ['a_approval', NULL];
             $cond[3] = ['claim_type', 'MTC'];
             $cond[24]  =  $condByPass;
         }
@@ -2884,14 +2890,15 @@ if (!function_exists('getClaimData')) {
                 }
             }
 
-            $cond[25] = ['a1', ''];
+            $cond[25] = ['a1', NULL];
             // $cond[19] = ['a_approval', ''];
             $cond[3] = ['claim_type', 'MTC'];
             $cond[27]  =  $condByPass;
         }
 
         $cond[99] = ['status', '!=', 'draft'];
-
+        $cond[100] = ['tenant_id', Auth::user()->tenant_id];
+        // dd($cond);
         $data = GeneralClaim::where($cond)->get();
 
         if (!$data) {
@@ -2944,8 +2951,12 @@ if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
         }
 
         $cond[99] = ['status', '!=', 'draft'];
-        // dd($cond);
-        $data = GeneralClaim::where($cond)->whereIn('user_id', $userRecId)->get();
+
+        $data = GeneralClaim::where($cond)->where(function ($query) use ($userRecId) {
+            if ($userRecId) {
+                $query->whereIn('user_id', $userRecId);
+            }
+        })->get();
 
         if (!$data) {
             $data = [];
@@ -3037,7 +3048,7 @@ if (!function_exists('getProjectApproverData')) {
     {
         $ss = new ProjectService;
 
-        $data = $ss->projectApprovalData();
+        $data = $ss->projectInfoView();
         // if ($role == 'recommender') {
         // } else {
         //     $data = $ss->leaveApprhodView();
@@ -3057,20 +3068,40 @@ if (!function_exists('getCaClaimData')) {
     {
         $ss = new ClaimApprovalService;
 
+        $data = [];
+
         if ($role == 'departApprover') {
             $data = $ss->cashAdvanceApprovalView($role);
         }
 
-        if (in_array($role, ['financeRec', 'financeApprover'])) {
+        if (in_array($role, ['financeApprover'])) {
             $data = $ss->cashAdvanceFapproverView($role);
         }
 
-        if ($role == 'financeChecker') {
-            $data = $ss->cashAdvanceFcheckerView()['general'];
-            // $ca[0] = ['tenant_id', Auth::user()->tenant_id];
-            // $ca[1] = ['status', '!=', 'draft'];
+        if ($role == 'financeRec') {
+            // $data = $ss->cashAdvanceFcheckerView()['general'];
+            // $ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status == null
+            $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+            $ca[1] = ['status', '!=', 'draft'];
+            // $ca[2] = ['f_recommende', '!=', 'recommend'];
+            $ca[3] = ['f_status', 'recommend'];
 
-            // $data = CashAdvanceDetail::where($ca)->get();
+            $data = CashAdvanceDetail::where($ca)->where(function ($query) {
+                $query->orWhere('f_recommender', null)->orWhere('f_recommender', '!=', 'recommend');
+            })->get();
+        }
+
+        if ($role == 'financeChecker') {
+            // $data = $ss->cashAdvanceFcheckerView()['general'];
+            // $ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status == null
+            $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+            $ca[1] = ['status', '!=', 'draft'];
+            $ca[2] = ['approver', 'recommend'];
+            $ca[3] = ['f_status', null];
+
+            $data = CashAdvanceDetail::where($ca)->where(function ($query) {
+                $query->orWhere('f1', null)->orWhere('f2', 'check')->orWhere('f3', 'check');
+            })->get();
         }
 
         if (!$data) {
@@ -3086,6 +3117,47 @@ if (!function_exists('getMenuPermissionById')) {
     function getMenuPermission()
     {
         $data = MenuPermissionCode::get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimDataForNotification')) {
+    function getClaimDataForNotification($type = '', $menu = 'DepartRecommender')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data = $mcs->getGeneralClaim($type);
+
+        if ($menu == 'DepartmentRecommender') {
+            foreach ($data as $claim) {
+                if ($claim->status == 'active' && $claim->claim_type == 'MTC') {
+                    $claims[] = $data;
+                }
+            }
+        }
+
+        if (!$data) {
+            $claims = [];
+        }
+
+        return $claims;
+    }
+}
+
+if (!function_exists('getAppealData')) {
+    function getAppealData($role = '')
+    {
+        $data = [];
+        if ($role == 'approval') {
+            $mcs = new myClaimService;
+
+            $data = $mcs->getAppealData();
+        }
 
         if (!$data) {
             $data = [];

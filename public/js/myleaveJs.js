@@ -1,5 +1,45 @@
 $(document).ready(function () {
 
+
+    var checkLeaveEntitlement = checkLeaveEntitlement();
+
+    function checkLeaveEntitlement() {
+        return $.ajax({
+            url: "/checkLeaveEntitlement",
+        });
+    }
+
+    checkLeaveEntitlement.then(function (data) {
+        requirejs(["sweetAlert2"], function (swal) {
+            if (data) {
+                $("#hideButton").hide();
+                $("#hideButton1").hide();
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type === "error") {
+                        // Lakukan sesuatu jika jenis data adalah 'error'
+                    } else {
+                        location.reload();
+                    }
+                });
+            } else {
+                // Lakukan sesuatu jika data tidak tersedia
+                $("#hideButton").show();
+                $("#hideButton1").show();
+            }
+        });
+    });
+
+
+
+
     $(document).ready(function() {
         $(".test").hide();
 
@@ -633,16 +673,16 @@ $(document).ready(function () {
             }
 
             if (data[0].file_document) {
+
                 var filename = data[0].file_document.split("/").pop();
                 $("#fileDownloadPolicya").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
+
             } else {
                 $("#fileDownloadPolicya").html("No File Upload");
             }
@@ -780,15 +820,14 @@ $(document).ready(function () {
             }
 
             if (data[0].file_document) {
+
                 var filename = data[0].file_document.split("/").pop();
                 $("#fileDownloadPolicya2").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
             } else {
                 $("#fileDownloadPolicya2").html("No File Upload");

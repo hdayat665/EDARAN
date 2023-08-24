@@ -96,7 +96,8 @@
                                         $timesheets = getTimesheetDataToApprove();
                                     @endphp
                                     <div class="menu-text text-gray">Timesheets Approval</div>
-                                    @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id)
+                                    {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
+                                    @if (isset($timesheets))
                                         <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
                                     @endif
                                 </a>
@@ -123,7 +124,8 @@
                                     $appealTs = getTimesheetAppealData();
                                 @endphp
                                 <div class="menu-text text-gray">Appeal Approval </div>
-                                @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id)
+                                {{-- @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id) --}}
+                                @if (isset($appealTs))
                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $appealTs->count() }}</span>
                                 @endif
                             </a>
@@ -361,20 +363,20 @@
                                     @php
                                         $ruleDepartments1 = ['DepartRecommender', 'DepartApprover'];
                                         $totalCount1 = 0;
-
+                                        
                                         foreach ($ruleDepartments1 as $department) {
                                             $count = getGeneralClaimMenuNotifyForDepartment($department)->count();
                                             $totalCount1 += $count;
                                         }
-
-                                        $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceChecker'];
+                                        
+                                        $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
                                         $totalCount2 = 0;
-
+                                        
                                         foreach ($ruleDepartments2 as $department) {
                                             $count = getClaimData($department)->count();
                                             $totalCount2 += $count;
                                         }
-
+                                        
                                         $totalCounts = $totalCount1 + $totalCount2;
                                     @endphp
                                     <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>
@@ -459,7 +461,7 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                                 @php
-                                                    $ruleDepartments = ['FinanceRec', 'FinanceApprover', 'FinanceChecker'];
+                                                    $ruleDepartments = ['FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
                                                     $totalCount = 0;
                                                     foreach ($ruleDepartments as $department) {
                                                         $count = getClaimData($department)->count();
@@ -519,7 +521,8 @@
                                                                 $config = getApprovalConfig(6, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('FinanceChecker')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getClaimData('FinanceCheckerMTC')->count() + getClaimData('FinanceCheckerGNC')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -599,9 +602,9 @@
                                                             @php
                                                                 $config = getApprovalConfig(3, 'monthly');
                                                             @endphp
-                                                            @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('AdminChecker')->count() }}</span>
-                                                            @endif
+                                                            {{-- @if (isset($config->status)) --}}
+                                                            <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('AdminChecker')->count() }}</span>
+                                                            {{-- @endif --}}
                                                         </a>
                                                     </div>
                                                 @endif
@@ -622,6 +625,18 @@
                                     <div class="menu-text text-gray">CA Approval</div>
                                     <div class="menu-caret text-gray">
                                     </div>
+                                    @php
+                                        $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
+                                        if ($employmentData->caapprover == Auth::user()->id) {
+                                            $ruleDepartments[100] = 'departApprover';
+                                        }
+                                        $totalCount = 0;
+                                        foreach ($ruleDepartments as $department) {
+                                            $count = getCaClaimData($department)->count();
+                                            $totalCount += $count;
+                                        }
+                                    @endphp
+                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                 </a>
 
                                 <div class="menu-submenu">
@@ -638,6 +653,15 @@
                                                     </div>
                                                     <div class="menu-caret text-gray">
                                                     </div>
+                                                    @php
+                                                        $ruleDepartments = ['departApprover'];
+                                                        $totalCount = 0;
+                                                        foreach ($ruleDepartments as $department) {
+                                                            $count = getCaClaimData($department)->count();
+                                                            $totalCount += $count;
+                                                        }
+                                                    @endphp
+                                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                                 </a>
                                                 <?php $target = ['cash_deparment_approver']; ?>
                                                 @if (array_intersect($role_permission, $target))
@@ -647,13 +671,14 @@
                                                                 <div class="menu-icon">
                                                                     <i class="fa fa-list-check text-gray"></i>
                                                                 </div>
-
                                                                 @php
                                                                     $caClaim = getCaClaimData('departApprover');
                                                                 @endphp
                                                                 <div class="menu-text text-gray">Approver</div>
                                                                 @if (isset($caClaim) && $employmentData->caapprover == Auth::user()->id)
                                                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                @else
+                                                                    <span class="badge bg-danger badge-number" id="numberNotify">0</span>
                                                                 @endif
                                                             </a>
                                                         </div>
@@ -674,6 +699,15 @@
                                                 </div>
                                                 <div class="menu-caret text-gray">
                                                 </div>
+                                                @php
+                                                    $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
+                                                    $totalCount = 0;
+                                                    foreach ($ruleDepartments as $department) {
+                                                        $count = getCaClaimData($department)->count();
+                                                        $totalCount += $count;
+                                                    }
+                                                @endphp
+                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -747,6 +781,12 @@
                                         <i class="fa fa-envelope-open-text text-gray"></i>
                                     </div>
                                     <div class="menu-text text-gray">Appeal Approval</div>
+                                    @php
+                                        $appealData = getAppealData('approval');
+                                    @endphp
+                                    @if (isset($appealData))
+                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ count($appealData) }}</span>
+                                    @endif
                                 </a>
                             </div>
                         @endif

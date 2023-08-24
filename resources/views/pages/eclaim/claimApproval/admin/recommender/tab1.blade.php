@@ -3,7 +3,7 @@
     <table id="activetable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                
+
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Applied Date</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -16,14 +16,14 @@
             </tr>
         </thead>
         <tbody>
-        {{-- check if config approval status enable or disable for role before approver  --}}
+            {{-- check if config approval status enable or disable for role before approver  --}}
             @php
                 $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER'];
                 
                 $condByPass = ' $claim->id != ""';
                 foreach ($roles as $role) {
                     $configData = getApprovalConfigClaim($role);
-                    
+                
                     if ($configData->status) {
                         if ($role == 'SUPERVISOR - RECOMMENDER') {
                             $condByPass = ' $claim->supervisor == "recommend"';
@@ -32,21 +32,22 @@
                         if ($role == 'HOD / CEO - APPROVER') {
                             $condByPass = ' $claim->hod == "recommend"';
                         }
-                        
+                
                         if ($role == 'ADMIN - CHECKER') {
                             $condByPass = ' $claim->a1 == "recommend"';
                         }
                     }
                 }
             @endphp
-             {{-- {{ dd($configData->status) }} --}}
+            @php
+                
+                // dd($condByPass);
+                // dd(getClaimData('AdminRec'));
+            @endphp
             @foreach ($claims as $claim)
                 @if (isset($config->status))
-                    @if ( $claim->a_recommender == '' && $claim->claim_type == 'MTC' && eval("return $condByPass;"))
-
-            
+                    @if ($claim->a_recommender == '' && $claim->claim_type == 'MTC' && eval("return $condByPass;"))
                         <tr>
-                        
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -64,7 +65,7 @@
                                         Amend</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
-                                 </div>
+                                </div>
                             </td>
                             <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                             <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
@@ -75,21 +76,21 @@
                             @if ($claim->status == 'amend')
                                 <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                             @elseif ($claim->status == 'recommend')
-                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                             @elseif ($claim->status == 'bucket')
-                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                             @elseif ($claim->status == 'pending')
-                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                             @elseif ($claim->status == 'approved')
-                                <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
-                            @elseif ($claim->status == 'paid' )
-                                <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
+                                <td><span class="badge bg-info" data-toggle="approved" title="{{ $claim->status_desc }}">Approved</span></td>
+                            @elseif ($claim->status == 'paid')
+                                <td><span class="badge bg-secondary" data-toggle="paidc" title="{{ $claim->status_desc }}">Paid</span></td>
                             @elseif ($claim->status == 'draft')
                                 <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                             @elseif ($claim->status == 'reject')
                                 <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                             @elseif ($claim->status == 'active')
-                                <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                                <td><span class="badge bg-lime" data-toggle="activec" title="{{ $claim->status_desc }}">In Queue</span></td>
                             @endif
                             <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>

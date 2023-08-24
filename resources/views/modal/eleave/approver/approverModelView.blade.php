@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-12" style="width:50%">
                                 <label>Reason*</label><br>
-                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewreason1">
+                                <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="viewreason1"></textarea>
                             </div>
                             <div class="col-12" style="width:50%" id="viewmenu01">
                                 <label>Leave Session</label><br>
@@ -45,39 +45,39 @@
                         <div class="form-group">
                             <div class="form-control" id = "hiderec1">
                                 <div class="row p-2">
-                                    <div class = col-md-4>
+                                    <div class = col-md-5>
                                         <label for="text" >Recommended By:</label><br>
                                         <div id="viewrecommended_by" style="font-weight: lighter;"></div>
                                     </div>
-                                    <div class = "col-md-2">
+                                    <div class = "col-md-1">
                                     </div>
-                                    <div class = "col-md-4">
+                                    <div class = "col-md-6">
                                         <label for="text" >Approved By:</label><br>
                                         <div id="viewapproved_by" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <div class = col-md-4>
+                                    <div class = col-md-5>
                                         <label for="text">Status:</label><br>
                                     <div id="viewstatus_1" style="font-weight: lighter;"></div>
                                     </div>
-                                    <div class = col-md-2>
+                                    <div class = col-md-1>
                                     </div>
-                                    <div class = "col-md-4">
+                                    <div class = "col-md-6">
                                         <label for="text">Status:</label><br>
                                     <div id="viewstatus_2" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>
                                 <div class="row p-2" id="viewmenu02">
-                                    <div class = "col-md-4">
+                                    <div class = "col-md-5">
                                         {{-- <label for="text">Reason:</label><br>
                                     <div id="reasonhod1" style="font-weight: lighter;"></div> --}}
                                     </div>
-                                    <div class = "col-md-2">
+                                    <div class = "col-md-1">
                                     </div>
-                                    <div class = col-md-4>
-                                        <label for="text">Reason:</label><br>
-                                    <div id="reasonhod2" style="font-weight: lighter;"></div>
+                                    <div class = col-md-6>
+                                        <label for="text">Reason of Rejection:</label><br>
+                                        <div id="reasonhod2" style="font-weight: lighter; word-wrap: break-word;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -95,10 +95,11 @@
                                     </div>
                                 </div>
                                 <div class="row p-2" id="viewmenu021">
-                                    <div class = col-md-12>
+                                    <div class="col-md-12">
                                         <label for="text">Reason of Rejection:</label><br>
-                                        <div id="reasonhod21" style="font-weight: lighter;"></div>
+                                        <div id="reasonhod21" style="font-weight: lighter; word-wrap: break-word;"></div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

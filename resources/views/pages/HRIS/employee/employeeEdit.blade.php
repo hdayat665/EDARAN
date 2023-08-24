@@ -169,11 +169,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-6">
                                                         <label for="idattach" class="form-label" >ID Attachment</label>
                                                         <input type="file" value="" name="fileID" id="fileupload" class="form-control" aria-describedby="">
                                                         @if ($profile->fileID)
-                                                            Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
+                                                            Click <a href="{{ route('view', ['filename' => $profile->fileID]) }}" target="_blank">here</a> to see ID Attachment.
                                                         @endif
                                                     </div>
                                                 </div>
@@ -189,11 +189,11 @@
                                                     </div>
                                                      <div class="col-sm-3">
                                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                                        <input type="text" id="expirydate" name="expiryDate" value="{{ $profile->expiryDate ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" style= "pointer-events: none;" readonly>
+                                                        <input type="text" id="expirydate" name="expiryDate" value="{{ $profile->expiryDate ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" >
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="issuing-country" class="form-label">Issuing Country</label>
-                                                        <select class="form-select" name="issuingCountry" id="issuingCountry" style= "pointer-events: none;" >
+                                                        <select class="form-select" name="issuingCountry" id="issuingCountry"  >
                                                             <option value="" label="PLEASE CHOOSE" ></option>
                                                             <?php
                                                             $americass = americas();
@@ -221,9 +221,9 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="gender" class="form-label">Gender</label>
-                                                                <select class="form-select" name="gender" id="gender">
+                                                                <select class="form-select" name="gender" id="gender" style= "pointer-events: none;" readonly>
                                                                     <?php $gender = gender() ?>
-                                                                    <option value="" label="PLEASE CHOOSE" selected disabled></option>
+                                                                    <option value="" label="PLEASE CHOOSE" selected ></option>
                                                                     @foreach ($gender as $key => $status)
                                                                     <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                                     @endforeach
@@ -280,17 +280,17 @@
 
                                                             <div class="col-sm-12">
                                                                 <label for="" class="form-label" >OKU Card Number*</label>
-                                                                <input type="text" disabled value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" readonly class="form-control" placeholder="OKU CARD NUMBER">
+                                                                <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard"  class="form-control" placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3 part">
-                                                        <label for="idattach" class="form-label" >OKU Attachment</label>
+                                                    <div class="col-sm-6 part">
+                                                        <label for="idattach" class="form-label" >OKU Attachment*</label>
                                                         <input type="file" class="form-control"  name="okuFile"   id="okuattach" style= "pointer-events: none;" >
                                                         @if ($profile->okuFile)
-                                                        Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                                        Click <a href="{{ route('view', ['filename' => $profile->okuFile]) }}" target="_blank">here</a> to see the OKU Attachment.
                                                         @endif
                                                     </div>
                                                 </div>
