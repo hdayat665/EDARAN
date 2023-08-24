@@ -22,7 +22,6 @@
                     <th class="text-nowrap">Previous COR</th>
                     <th class="text-nowrap">Updated By</th>
                     <th class="text-nowrap">Updated  On</th>
-                    <th class="text-nowrap">Created Date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,8 +41,6 @@
                         <td>-</td>
                         <td>{{ $employee->updated_by ?? '-' }}</td>
                         <td>{{ \Carbon\Carbon::parse($employee->updated_at)->format('Y-m-d H:i:s') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($employee->created_at)->format('Y-m-d H:i:s') }}</td>
-
                     </tr>
                     @endforeach
                     @endif

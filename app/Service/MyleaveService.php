@@ -181,7 +181,8 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r) {
+    public function createtmyleave($r)
+    {
 
         $input = $r->input();
 
@@ -191,6 +192,11 @@ class MyleaveService
             ->where('leave_types.tenant_id', Auth::user()->tenant_id)
             ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
             ->get();
+
+        $leave_entitlement = leaveEntitlementModel::select('*')
+            ->where('id_employment', '=', Auth::user()->id)
+            ->where('le_year', '=', $currentDateEntitlement->year)
+            ->first();
 
         $checkTypeIds = $checkType->pluck('id')->toArray();
 
@@ -657,7 +663,7 @@ class MyleaveService
     {
 
         $data =
-            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
@@ -676,7 +682,7 @@ class MyleaveService
     {
 
         $data =
-            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)

@@ -186,7 +186,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
-
             Route::post('/addEducation', 'addEducation');
             Route::post('/addEducation2', 'addEducation2');
             Route::post('/updateEducation', 'updateEducation');
@@ -197,7 +196,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateOthers', 'updateOthers');
             Route::get('/getOthers/{id}', 'getOthers');
             Route::delete('/deleteOthers/{id}', 'deleteOthers');
-
             Route::post('/addAddressDetails', 'addAddressDetails');
             Route::get('/getAddressDetails/{id}', 'getAddressDetails');
             Route::post('/updateAddressDetails', 'updateAddressDetails');
@@ -219,6 +217,31 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');
+            Route::get('/view/{filename}', function ($filename) {
+                $path = 'public/' . $filename;
+
+                if (!Storage::disk('local')->exists($path)) {
+                    abort(404);
+                }
+
+                $file = Storage::disk('local')->get($path);
+                $mimeType = Storage::disk('local')->mimeType($path);
+
+                $headers = [
+                    'Content-Type' => $mimeType,
+                    'Content-Disposition' => 'inline',
+                ];
+
+                return response($file, 200, $headers);
+            })->name('view');
+
+            Route::get('/download/{filename}', function ($filename) {
+                $path = 'public/' . $filename;
+                if (!Storage::disk('local')->exists($path)) {
+                    abort(404);
+                }
+                return Storage::download($path);
+            })->name('download');
             Route::get('/myProfile', 'myProfileView');
             Route::delete('/deleteChildren/{id}', 'deleteChildren');
             Route::delete('/deleteParent/{id}', 'deleteParent');
@@ -261,15 +284,29 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
             Route::get('/getEmployeeByJobHistory', 'getEmployeeByJobHistory');
             Route::get('/getEmployeeByJobHistoryById/{id}', 'getEmployeeByJobHistoryById');
-
-            //
             Route::post('/updateProfile_Picture/{id}', 'updateProfile_Picture');
-            // hierarchy
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updatetimehierarchy/{id}', 'updatetimehierarchy');
             Route::post('/updatetimehierarchy2/{id}', 'updatetimehierarchy2');
+            Route::get('/view/{filename}', function ($filename) {
+                $path = 'public/' . $filename;
+
+                if (!Storage::disk('local')->exists($path)) {
+                    abort(404);
+                }
+
+                $file = Storage::disk('local')->get($path);
+                $mimeType = Storage::disk('local')->mimeType($path);
+
+                $headers = [
+                    'Content-Type' => $mimeType,
+                    'Content-Disposition' => 'inline',
+                ];
+
+                return response($file, 200, $headers);
+            })->name('view');
 
             Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 
@@ -434,6 +471,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
+            Route::get('/getroleAdmin/{id}', 'getroleAdmin');
+            Route::get('/getroleFinance/{id}', 'getroleFinance');
+            Route::get('/getroleCA/{id}', 'getroleCA');
+
+
+
 
 
             // eleave Anual leave
