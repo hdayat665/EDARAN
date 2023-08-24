@@ -120,9 +120,6 @@ $(document).ready(function () {
         $("#DOB1").prop("readonly", true);
         $("#DOB1").css("pointer-events", "none");
         $("#passports1").val("");
-        $("#expiryDate1").val("");
-        $("#expiryDate1").prop("readonly", true);
-        $("#expiryDate1").css("pointer-events", "none");
         $("#nonCitizen1").prop("checked", false);
     }
 
@@ -541,15 +538,15 @@ $(document).ready(function () {
         }
     });
 
-    $('input[name="nonCitizen"]').click(function () {
-        if ($(this).is(":checked")) {
-            $("#expiryDate1").val("").prop("disabled", false);
-            $("#issuingCountry1").val("").prop("disabled", false);
-        } else {
-            $("#expiryDate1").val("").prop("disabled", true);
-            $("#issuingCountry1").val("").prop("disabled", true);
-        }
-    });
+    // $('input[name="nonCitizen"]').click(function () {
+    //     if ($(this).is(":checked")) {
+    //         $("#expiryDate1").val("").prop("disabled", false);
+    //         $("#issuingCountry1").val("").prop("disabled", false);
+    //     } else {
+    //         $("#expiryDate1").val("").prop("disabled", true);
+    //         $("#issuingCountry1").val("").prop("disabled", true);
+    //     }
+    // });
 
     // $('input[name="okuStatus"]').click(function () {
     //     if ($(this).is(":checked")) {
@@ -3667,8 +3664,11 @@ $(document).ready(function () {
                  },
 
                  okuFile: {
-                     required: true,
-                },
+                    required: {
+                        depends: function(element) {
+                            return $(element).prop("readonly") === false;
+                        }
+                    }                },
             },
 
             messages: {
@@ -3825,13 +3825,26 @@ $(document).ready(function () {
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
                 $("#fullNameP1").val(parent.fullName);
+                if (parent.okuFile) {
+                    $("#okuAttachmentViewParent").html(
+                        '<a href="/storage/' + parent.okuFile + '" target="_blank">here</a>'
+                    );
+                }
                 $("#idnumber7").val(parent.idNo);
+                if (parent.idFile) {
+                    $("#idAttachmentViewParent").html(
+                        '<a href="/storage/' + parent.idFile + '" target="_blank">here</a>'
+                    );
+                }
                 $("#oldIDNoP1").val(parent.oldIDNo);
                 $("#relationshipP1").val(parent.relationship);
                 if (parent.non_citizen == "on") {
                     $("#non_citizen").prop("checked", true);
                     $("#idnumber7").prop("disabled", true);
                     $("#idnumber7").prop("readonly", true);
+
+                    $("#age7").prop("readonly", false);
+                    $("#age7").css("pointer-events", "auto");
 
                     $("#DOBP1").prop("readonly", false);
                     $("#DOBP1").css("pointer-events", "auto");
@@ -3840,26 +3853,29 @@ $(document).ready(function () {
                     $("#idnumber7").prop("disabled", false);
                     $("#idnumber7").prop("readonly", false);
 
+                    $("#age7").prop("readonly", true);
+                    $("#age7").css("pointer-events", "auto");
+
                     $("#DOBP1").prop("readonly", true);
                     $("#DOBP1").css("pointer-events", "auto");
                 }
                 if (parent.oku_status == "on") {
-                    $("#oku_status").prop("checked", true);
-                    $("#okucard6").prop("readonly", false);
-                    $("#okucard6").prop("disabled", false);
-                    $("#okucard6").val(parent.okuCardNum);
+                $("#oku_status").prop("checked", true);
+                $("#okucard6").prop("readonly", false);
+                $("#okucard6").prop("disabled", false);
+                $("#okucard6").val(parent.okuCardNum);
 
-                    $("#okuattach6").prop("disabled", true);
-                    $("#okuattach6").css("pointer-events", "auto");
+                $("#okuattach6").prop("readonly", true);
+                $("#okuattach6").css("pointer-events", "auto");
                 } else {
-                    $("#oku_status").prop("checked", false);
+                $("#oku_status").prop("checked", false);
 
-                    $("#okucard6").prop("disabled", true);
-                    $("#okucard6").prop("readonly", true);
-                    $("#okucard6").val();
+                $("#okucard6").prop("disabled", true);
+                $("#okucard6").prop("readonly", true);
+                $("#okucard6").val();
 
-                    $("#okuattach6").prop("disabled", true);
-                    $("#okuattach6").css("pointer-events", "auto");
+                $("#okuattach6").prop("readonly", true);
+                $("#okuattach6").css("pointer-events", "none");
                 }
             });
             $("#edit-parent").modal("show");
@@ -4640,7 +4656,7 @@ $(".okuCheck4").click(function () {
         $("#okucard4").prop("readonly", false);
         $("#okucard4").prop("disabled", false);
 
-        $("#okuattach4").prop("readonly", true);
+        $("#okuattach4").prop("readonly", false);
         $("#okuattach4").css("pointer-events", "auto");
     } else {
         $("#okucard4").prop("readonly", true);
@@ -4680,14 +4696,14 @@ $(".okuCheck6").click(function () {
         $("#okucard6").prop("readonly", false);
         $("#okucard6").prop("disabled", false);
 
-        $("#okuattach6").prop("disabled", false);
+        $("#okuattach6").prop("readonly", false);
         $("#okuattach6").css("pointer-events", "auto");
     } else {
         $("#okucard6").prop("readonly", true);
         $("#okucard6").prop("disabled", true);
         $("#okucard6").val("");
 
-        $("#okuattach6").prop("disabled", true);
+        $("#okuattach6").prop("readonly", true);
         $("#okuattach6").css("pointer-events", "none");
     }
 });
@@ -4901,7 +4917,8 @@ $(".partCheck8").click(function () {
             $("#DOBP1").val("").prop("readonly", false);
             $("#DOBP1").css("pointer-events", "auto");
 
-            // $("#expiryDateParent").prop("readonly", false);
+            $("#age7").val("").prop("readonly", false);
+            $("#age7").css("pointer-events", "auto");
         } else {
             $("#idnumber7").prop("disabled", false);
             $("#idnumber7").prop("readonly", false);
@@ -4909,8 +4926,7 @@ $(".partCheck8").click(function () {
             $("#DOBP1").val("").prop("readonly", true);
             $("#DOBP1").css("pointer-events", "none");
 
-            // $("#expiryDateParent").val("");
-            // $("#expiryDateParent").prop("readonly", true);
-            // $("#expiryDateParent").css("pointer-events", "none");
+            $("#age7").val("").prop("readonly", true);
+            $("#age7").css("pointer-events", "none");
         }
     });

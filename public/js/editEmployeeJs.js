@@ -950,6 +950,12 @@ $("#edit-profile-picture").on("click", function () {
         autoclose: true,
     });
 
+    $("#DOBP1").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
+
     //new add family address
     $("#same-address2").change(function () {
         if (this.checked) {
@@ -3050,37 +3056,6 @@ if (permanentChecked && correspondentChecked) {
         });
     }
 
-    // $("#updateCompanion" + no).click(function (e) {
-    //     var data = new FormData(document.getElementById("updateCompanionForm" + no));
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/updateEmployeeCompanion",
-    //         data: data,
-    //         dataType: "json",
-    //
-    //         processData: false,
-    //         contentType: false,
-    //     }).then(function (data) {
-    //         console.log(data);
-    //         Swal.fire({
-    //             title: data.title,
-    //             icon: "success",
-    //             text: data.msg,
-    //             type: data.type,
-    //             confirmButtonColor: "#3085d6",
-    //             confirmButtonText: "OK",
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //         }).then(function () {
-    //             if (data.type == "error") {
-    //             } else {
-    //                 location.reload();
-    //             }
-    //         });
-    //     });
-    // });
-
     $("#tableChildren").DataTable({
         responsive: false,
         lengthMenu: [
@@ -4038,6 +4013,7 @@ if (permanentChecked && correspondentChecked) {
                     required: true,
                 },
                 DOB: "required",
+                age: "required",
                 gender: {
                     required: false,
                 },
@@ -4088,6 +4064,7 @@ if (permanentChecked && correspondentChecked) {
                     required: "Please Insert Last Name",
                 },
                 DOB: "Please Insert Date Of Birth",
+                age: "Please Insert Age",
                 gender: "Please Choose Gender",
                 contactNo: {
                     required: "Please Insert Phone Number",
@@ -4197,8 +4174,17 @@ if (permanentChecked && correspondentChecked) {
                 $("#postcodeP1").val(parent.postcode);
                 $("#relationshipP1").val(parent.relationship);
                 $("#idno7").val(parent.idNo);
+                if (parent.okuFile) {
+                    $("#okuAttachmentViewParent").html(
+                        '<a href="/storage/' + parent.okuFile + '" target="_blank">here</a>'
+                    );
+                }
+                if (parent.idFile) {
+                    $("#idAttachmentViewParent").html(
+                        '<a href="/storage/' + parent.idFile + '" target="_blank">here</a>'
+                    );
+                }
                 $("#okucard6").val(parent.okuCardNum);
-                // $("#okuattach6").val(parent.okuFile);
                 $("#age7").val(parent.age);
                 if (parent.non_citizen == "on") {
                     $("#non_citizen").prop("checked", true);
@@ -4209,8 +4195,11 @@ if (permanentChecked && correspondentChecked) {
                     $("#DOBP1").css("pointer-events", "auto");
                 } else {
                     $("#non_citizen").prop("checked", false);
-                    $("#idno7").prop("disabled", false);
-                    $("#idno7").prop("readonly", false);
+                    $("#idnumber7").prop("disabled", false);
+                    $("#idnumber7").prop("readonly", false);
+
+                    $("#idno7").prop("readonly", true);
+                    $("#idno7").css("pointer-events", "auto");
 
                     $("#DOBP1").prop("readonly", true);
                     $("#DOBP1").css("pointer-events", "auto");
@@ -4221,17 +4210,18 @@ if (permanentChecked && correspondentChecked) {
                     $("#okucard6").prop("disabled", false);
                     $("#okucard6").val(parent.okuCardNum);
 
-                    $("#okuattach6").prop("disabled", true);
+                    $("#okuattach6").prop("readonly", true);
                     $("#okuattach6").css("pointer-events", "auto");
-                } else {
+                    } else {
                     $("#oku_status").prop("checked", false);
+
                     $("#okucard6").prop("disabled", true);
                     $("#okucard6").prop("readonly", true);
-                    $("#okucard6").val("");
+                    $("#okucard6").val();
 
-                    $("#okuattach6").prop("disabled", true);
-                    $("#okuattach6").css("pointer-events", "auto");
-                }
+                    $("#okuattach6").prop("readonly", true);
+                    $("#okuattach6").css("pointer-events", "none");
+                    }
             });
             $("#edit-parent").modal("show");
         });
@@ -5077,7 +5067,7 @@ if (permanentChecked && correspondentChecked) {
             $("#okucard4").prop("readonly", false);
             $("#okucard4").prop("disabled", false);
 
-            $("#okuattach4").prop("readonly", true);
+            $("#okuattach4").prop("readonly", false);
             $("#okuattach4").css("pointer-events", "auto");
         } else {
             $("#okucard4").prop("readonly", true);
@@ -5226,7 +5216,7 @@ if (permanentChecked && correspondentChecked) {
 
      //UPDATE FAMILY DETAILS
 
-     $(".partCheck7").click(function () {
+    $(".partCheck7").click(function () {
         if ($(this).prop("checked")) {
             $("#idno7").prop("disabled", true);
             $("#idno7").prop("readonly", true);
@@ -5235,6 +5225,8 @@ if (permanentChecked && correspondentChecked) {
             $("#DOBP1").val("").prop("readonly", false);
             $("#DOBP1").css("pointer-events", "auto");
 
+            $("#age7").val("").prop("readonly", false);
+            $("#age7").css("pointer-events", "auto");
         } else {
             $("#idno7").prop("disabled", false);
             $("#idno7").prop("readonly", false);
@@ -5242,8 +5234,11 @@ if (permanentChecked && correspondentChecked) {
             $("#DOBP1").val("").prop("readonly", true);
             $("#DOBP1").css("pointer-events", "none");
 
+            $("#age7").val("").prop("readonly", true);
+            $("#age7").css("pointer-events", "none");
         }
     });
+
 
     $("#expiryDate1").datepicker({
         todayHighlight: true,

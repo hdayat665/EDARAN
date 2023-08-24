@@ -912,33 +912,19 @@ class EmployeeService
             }
         }
 
-
-        if(!isset($input['non_citizen']))
-        {
-            $input['non_citizen'] = null;
+       if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
+            $payslip = upload(request()->file('okuFile'));
+            $input['okuFile'] = $payslip['filename'];
+        } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
+            $input['okuFile'] = null;
         }
-
-        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
-            $input['idNo'] = null;
-        }
-
 
         if(!isset($input['oku_status']))
-        {
-            $input['oku_status'] = null;
-        }
-
-        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
-            $input['okuFile'] = null;
-            $input['okuCardNum'] = null;
-        }
-
-        if (isset($_FILES['okuFile']['name'])) {
-            $idOKU = upload(request()->file('okuFile'));
-            $input['okuFile'] = $idOKU['filename'];
-        } else {
-            $input['okuFile'] = null;
-        }
+            {
+                $input['oku_status'] = null;
+                $input['okuFile'] = null;
+                $input['okuCardNum'] = null;
+            }
 
         if(!isset($input['passport']))
         {
@@ -947,21 +933,37 @@ class EmployeeService
             $input['issuingCountry'] = null;
         }
 
+        if(!isset($input['idNo']))
+        {
+            $input['idNo'] = null;
+
+        }
+
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
+
+
         $user = UserParent::where('id', $id)->first();
 
-        if (!$user) {
+        if(!$user)
+        {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
+
         } else {
             unset($input['sameAddress']);
+
             UserParent::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Family is Updated';
+            $data['msg'] = 'Family is updated.';
         }
 
         return $data;
