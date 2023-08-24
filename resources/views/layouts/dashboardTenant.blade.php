@@ -177,11 +177,11 @@
                             <?php
                             $datetime1 = strtotime($notification->created_at);
                             $datetime2 = strtotime(date('Y/m/d H:i:s'));
-
+                            
                             $diff = abs($datetime1 - $datetime2);
-
+                            
                             $dateNotify = getDateFormat($diff)['minutes'];
-
+                            
                             ?>
                             @if (!$notification->read_at)
                                 <?php $notify = json_decode($notification->data); ?>

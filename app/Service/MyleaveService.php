@@ -156,16 +156,17 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r) {
+    public function createtmyleave($r)
+    {
 
         $input = $r->input();
 
         $currentDateEntitlement = Carbon::now();
 
         $leave_entitlement = leaveEntitlementModel::select('*')
-        ->where('id_employment', '=', Auth::user()->id)
-        ->where('le_year', '=', $currentDateEntitlement->year)
-        ->first();
+            ->where('id_employment', '=', Auth::user()->id)
+            ->where('le_year', '=', $currentDateEntitlement->year)
+            ->first();
 
         if (empty($leave_entitlement)) {
             $data = [
@@ -565,7 +566,7 @@ class MyleaveService
     {
 
         $data =
-            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
@@ -584,7 +585,7 @@ class MyleaveService
     {
 
         $data =
-            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)

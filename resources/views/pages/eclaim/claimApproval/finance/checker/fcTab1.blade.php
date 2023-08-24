@@ -3,7 +3,7 @@
     <table id="activetable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                
+
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Applied Date</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-        {{-- check if config approval status enable or disable for role before approver  --}}
+            {{-- check if config approval status enable or disable for role before approver  --}}
             @php
                 $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER'];
                 $condByPass = '$claim->id != ""';
@@ -40,18 +40,25 @@
                 }
             @endphp
 
-        {{-- {{ dd($configData->status) }} --}}
             @foreach ($claims as $claim)
-                @if ($claim->claim_type == 'MTC' && isset($config->status) && $claim->a_approval == 'recommend' && $claim->f1 == '' && eval("return $condByPass;"))
+                @if (isset($config->status) && $claim->a_approval == 'recommend' && $claim->f1 == null && eval("return $condByPass;"))
+                    {{ $claim->id }}
+
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
                                 <i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i>
                             </a>
                             <div class="dropdown-menu">
-                                <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
-                                    <i class="fa fa-eye" aria-hidden="true"></i> View MTC
-                                </a>
+                                @if ($claim->type == 'MTC')
+                                    <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> View MTC
+                                    </a>
+                                @else
+                                    <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> View GNC
+                                    </a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <!-- <a href="javascript:;" id="" data-id="" class="dropdown-item">
                                     <i class="fa fa-times" aria-hidden="true"></i> Cancel
@@ -67,30 +74,30 @@
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
-                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                         @elseif ($claim->status == 'bucket')
-                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                         @elseif ($claim->status == 'approved')
-                            <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
-                        @elseif ($claim->status == 'paid' )
-                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
+                            <td><span class="badge bg-info" data-toggle="approved" title="{{ $claim->status_desc }}">Approved</span></td>
+                        @elseif ($claim->status == 'paid')
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{ $claim->status_desc }}">Paid</span></td>
                         @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                         @elseif ($claim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                         @elseif ($claim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                            <td><span class="badge bg-lime" data-toggle="activec" title="{{ $claim->status_desc }}">In Queue</span></td>
                         @endif
                         <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                     </tr>
-                @elseif ($claim->claim_type == 'GNC' && $claim->hod == 'recommend' && $claim->f1 == '')
+                @elseif ($claim->claim_type == 'GNC' && $claim->hod == 'recommend' && $claim->f1 == null)
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
                                 <i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i>
                             </a>
                             <div class="dropdown-menu">
-                            <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
+                                <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">
                                     <i class="fa fa-eye" aria-hidden="true"></i> View GNC
                                 </a>
                                 <!-- <div class="dropdown-divider"></div>
@@ -108,27 +115,27 @@
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
-                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                         @elseif ($claim->status == 'bucket')
-                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                         @elseif ($claim->status == 'pending')
-                            <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                            <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                         @elseif ($claim->status == 'approved')
-                            <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
-                        @elseif ($claim->status == 'paid' )
-                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
+                            <td><span class="badge bg-info" data-toggle="approved" title="{{ $claim->status_desc }}">Approved</span></td>
+                        @elseif ($claim->status == 'paid')
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="{{ $claim->status_desc }}">Paid</span></td>
                         @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                         @elseif ($claim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                         @elseif ($claim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                            <td><span class="badge bg-lime" data-toggle="activec" title="{{ $claim->status_desc }}">In Queue</span></td>
                         @endif
                         <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                     </tr>
                 @endif
             @endforeach
-        </tbody> 
+        </tbody>
 
     </table>
 </div>
