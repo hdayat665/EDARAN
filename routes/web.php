@@ -561,6 +561,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getCustomerById/{id}', 'getCustomerById');
             Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
             Route::post('/updateStatusCustomer/{id}/{status}', 'updateStatus');
+
+            Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
+            Route::get('/getCitybyState/{id}', 'getCitybyState');
+            Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
+
+
         });
 
         Route::controller(ProjectController::class)->group(function () {
@@ -592,6 +598,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/projectNameByCustomerId/{id}', 'projectNameByCustomerId');
             Route::get('/getRejectProject/{id}', 'getRejectProject');
             Route::get('/projectViewAssignLocation/{id}', 'projectViewAssignLocationView');
+            Route::get('/projectLocationTable', 'projectLocationTable');
+
         });
 
         Route::controller(ProjectReportController::class)->group(function () {

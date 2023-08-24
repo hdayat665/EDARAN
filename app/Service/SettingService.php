@@ -1399,8 +1399,6 @@ class SettingService
         $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
             ->where('location_states.country_id', $id)
             ->get();
-
-
         return $data;
     }
 

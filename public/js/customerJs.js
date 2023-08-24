@@ -1,4 +1,186 @@
 $(document).ready(function () {
+    $(document).on("change", "#CountryId", function () {
+        var getCountry = $("#CountryId").val();
+        var getState = getStatebyCountry(getCountry);
+        getState.then(function (data) {
+            $("#StateId").empty();
+            $("#StateId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#CityId").empty();
+            $("#CityId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, state) {
+                $("#StateId").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+            });
+        });
+            $("#StateId").empty();
+            $("#StateId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#CityId").empty();
+            $("#CityId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getStatebyCountry(id) {
+        return $.ajax({
+            url: "/getStatebyCountry/" + id,
+        });
+    }
+
+    $(document).on("change", "#StateId", function () {
+        var getCity = $("#StateId").val();
+        var getCity = getCitybyState(getCity);
+        getCity.then(function (data) {
+            $("#CityId").empty();
+            $("#CityId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, city) {
+                $("#CityId").append('<option value="' + city.name + '">' + city.name + '</option>');
+            });
+        });
+            $("#CityId").empty();
+            $("#CityId").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getCitybyState(id) {
+        return $.ajax({
+            url: "/getCitybyState/" + id,
+        });
+    }
+    
+    $(document).on("change", "#CityId", function () {
+        var getPostcode = $("#CityId").val();
+        var getPostcode = getPostcodeByCity(getPostcode);
+        getPostcode.then(function (data) {
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, postcode) {
+                $("#PostcodeId").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+            });
+        });
+            $("#PostcodeId").empty();
+            $("#PostcodeId").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getPostcodeByCity(id) {
+        return $.ajax({
+            url: "/getPostcodeByCity/" + id,
+        });
+    }
+
+    $(document).on("change", "#CountryEd", function () {
+        var getCountry = $("#CountryEd").val();
+        var getState = getStatebyCountry(getCountry);
+        getState.then(function (data) {
+            $("#StateEd").empty();
+            $("#StateEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#CityEd").empty();
+            $("#CityEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, state) {
+                $("#StateEd").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+            });
+        });
+            $("#StateEd").empty();
+            $("#StateEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#CityEd").empty();
+            $("#CityEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getStatebyCountry(id) {
+        return $.ajax({
+            url: "/getStatebyCountry/" + id,
+        });
+    }
+
+    $(document).on("change", "#StateEd", function () {
+        var getCity = $("#StateEd").val();
+        var getCity = getCitybyState(getCity);
+        getCity.then(function (data) {
+            $("#CityEd").empty();
+            $("#CityEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, city) {
+                $("#CityEd").append('<option value="' + city.name + '">' + city.name + '</option>');
+            });
+        });
+            $("#CityEd").empty();
+            $("#CityEd").append('<option value="">PLEASE CHOOSE</option>');
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getCitybyState(id) {
+        return $.ajax({
+            url: "/getCitybyState/" + id,
+        });
+    }
+    
+    $(document).on("change", "#CityEd", function () {
+        var getPostcode = $("#CityEd").val();
+        var getPostcode = getPostcodeByCity(getPostcode);
+        getPostcode.then(function (data) {
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+            $.each(data, function (index, postcode) {
+                $("#PostcodeEd").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+            });
+        });
+            $("#PostcodeEd").empty();
+            $("#PostcodeEd").append('<option value="">PLEASE CHOOSE</option>');
+    });
+    function getPostcodeByCity(id) {
+        return $.ajax({
+            url: "/getPostcodeByCity/" + id,
+        });
+    }
+
+
+    $(document).ready(function() {
+        $('.sel1').select2({
+            placeholder: "PLEASE CHOOSE",
+            allowClear: true,
+            dropdownParent: $('#addModal'),
+        });
+        $('.sel2').select2({
+            placeholder: 'PLEASE CHOOSE',
+            allowClear: true ,
+            dropdownParent: $('#addModal'),
+        });
+        $('.sel3').select2({
+            placeholder: 'PLEASE CHOOSE',
+            allowClear: true,
+            dropdownParent: $('#addModal'), 
+        });
+        $('.sel4').select2({
+            placeholder: 'PLEASE CHOOSE',
+            allowClear: true,
+            dropdownParent: $('#addModal'), 
+        });
+        // $('.sel5').select2({
+        //     placeholder: 'PLEASE CHOOSE',
+        //     allowClear: true,
+        //     dropdownParent: $('#editModal'), 
+        // });
+        // // $('.sel6').select2({
+        // //     placeholder: 'PLEASE CHOOSE',
+        // //     allowClear: true,
+        // //     dropdownParent: $('#editModal'), 
+        // // });
+        // $('.sel7').select2({
+        //     placeholder: 'PLEASE CHOOSE',
+        //     allowClear: true,
+        //     dropdownParent: $('#editModal'), 
+        // });
+        // $('.sel8').select2({
+        //     placeholder: 'PLEASE CHOOSE',
+        //     allowClear: true,
+        //     dropdownParent: $('#editModal'), 
+        // });
+    });
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -88,16 +270,31 @@ $(document).ready(function () {
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");
         var vehicleData = getData(id);
-
         vehicleData.then(function (data) {
-            console.log(data);
+            // console.log(data);
             $("#customer_name").val(data.customer_name);
             $("#address").val(data.address);
             $("#address2").val(data.address2);
-            $("#postcode").val(data.postcode);
-            $("#city").val(data.city);
-            $("#state").val(data.state);
-            $("#country").val(data.country);
+            $("#PostcodeEd").val(data.postcode).select2({
+                placeholder: 'PLEASE CHOOSE',
+                allowClear: true,
+                dropdownParent: $('#editModal'), 
+            });
+            $("#CityEd").val(data.city).select2({
+                placeholder: 'PLEASE CHOOSE',
+                allowClear: true,
+                dropdownParent: $('#editModal'), 
+            });
+            $("#StateEd").val(data.state).select2({
+                placeholder: 'PLEASE CHOOSE',
+                allowClear: true,
+                dropdownParent: $('#editModal'), 
+            });
+            $("#CountryEd").val(data.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editModal'), 
+                });
             $("#phoneNo").val(data.phoneNo);
             $("#idC").val(data.id);
             $("#email").val(data.email);
@@ -105,20 +302,11 @@ $(document).ready(function () {
         $("#editModal").modal("show");
     });
 
-    $(document).on("click", "#viewButton", function () {
-        var id = $(this).data("id");
-        var vehicleData = getData(id);
-        $("input").prop("disabled", true);
-        $("select").prop("disabled", true);
-
-        vehicleData.then(function (data) {
-            $("input").val("");
-            vdata = data.data;
-            $("#vehicleType1").prop("selectedIndex", vdata.vehicle_type);
-            $("#plateNo1").val(vdata.plate_no);
+    function getData(id) {
+        return $.ajax({
+            url: "/getCustomerById/" + id,
         });
-        $("#viewModal").modal("show");
-    });
+    }
 
     $("input[type=text]").keyup(function () {
         $(this).val($(this).val().toUpperCase());
@@ -200,11 +388,7 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode:  "required",
                 city: "required",
                 state: "required",
                 country: "required",
@@ -228,11 +412,7 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                postcode: "Please Insert Postcode",
                 city: "Please Insert City",
                 state: "Please Insert State",
                 country: "Please Insert Country",
@@ -280,11 +460,7 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 city: "required",
                 state: "required",
                 country: "required",
@@ -308,11 +484,7 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                postcode: "Please Insert Postcode",
                 city: "Please Insert City",
                 state: "Please Insert State",
                 country: "Please insert Country",
@@ -358,6 +530,11 @@ $(document).ready(function () {
             },
         });
     });
+     function getData(id) {
+        return $.ajax({
+            url: "/getCustomerById/" + id,
+        });
+    }
 
     $(".statusCheck").on("change", function () {
         var id = $(this).data("id");

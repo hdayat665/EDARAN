@@ -127,6 +127,9 @@ requirejs.config({
 
         // systemUser Js
         systemUserJs: assets + "/js/systemUserJs",
+
+        //new project location Js
+        projectLocationJs: assets + "/js/projectlocationJs"
     },
 });
 
@@ -543,6 +546,10 @@ if ($("#newRoleJs").length > 0) {
 
 if ($("#systemUserJs").length > 0) {
     requirejs(["systemUserJs"]);
+}
+
+if ($("#projectLocationJs").length > 0) {
+    requirejs(["projectLocationJs"]);
 }
 
 $(document).ajaxStart(function () {

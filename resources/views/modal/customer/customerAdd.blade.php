@@ -42,56 +42,45 @@
                     <br>
                     <div class="row ">
                         <div class="col-md-6">
-                            <label class="form-label">Postcode*</label>
+                            <label class="form-label">Country*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">City*</label>
+                            <label class="form-label">State*</label>
                         </div>
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="text" name="postcode" class="form-control" placeholder="00000">
+                            <select class="form-select sel1" name="country" id="CountryId">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="city" class="form-control" placeholder="CITY">
+                            <select class="form-select sel2" name="state" id="StateId" style="text-transform: uppercase;">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
+                            </select>
                         </div>
                     </div>
                     <br>
                     <div class="row ">
                         <div class="col-md-6">
-                            <label class="form-label">State*</label>
+                            <label class="form-label">City*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Country*</label>
+                            <label class="form-label">Postcode*</label>
                         </div>
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                        <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                            <option value="" label="PLEASE CHOOSE" selected ></option>
-                            <?php $getState = getState(); ?>
-                            @if ($getState)
-                                @foreach ($getState as $key => $name)
-                                    <option value="{{ $key }}">{{ $name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
+                            <select name="city" id="CityId" class="form-select sel3">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
+                            </select>
                         </div>
                         <div class="col-md-6">
-                        <select class="form-select" name="country" id="">
-                                <option value="MALAYSIA" label="MALAYSIA" selected ></option>
-                                <optgroup id="country-optgroup-Americas" label="Americas">
-                                <?php $americass = americas(); ?>
-                                    @foreach ($americass as $key => $america)
-                                    <option value="{{$key}}">{{$america}}</option>
-                                    @endforeach
-                                </optgroup>
-                                <?php $asia = asias(); ?>
-                                <optgroup id="country-optgroup-Asia" label="Asia">
-                                    @foreach ($asia as $key => $asia)
-                                    <option value="{{$key}}">{{$asia}}</option>
-                                    @endforeach
-                                </optgroup>
+                            <select name="postcode" id="PostcodeId" class="form-select sel4">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
                             </select>
                         </div>
                     </div>

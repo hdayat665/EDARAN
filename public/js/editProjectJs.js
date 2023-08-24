@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     // google map
 
     $(".partCheck").click(function () {
@@ -340,7 +341,7 @@ $(document).ready(function () {
         var locationData = getProjectLocations(id);
 
         locationData.then(function (data) {
-            console.log(data);
+            // console.log(data);
             $("#location_name").val(data.location_name);
             $("#address").val(data.address);
             $("#address1").val(data.address2);
@@ -544,16 +545,17 @@ $(document).ready(function () {
             
             var a = data.joinedDate;
             var b = globalContractStartDate;
-            var earliestDate;
-            if (b < a) {
-                earliestDate = b;
-                $("#datepicker-joineddate").val(earliestDate);
+            var latestDate; // Change the variable name to "latestDate"
+
+            if (b > a) { // Change the comparison from "<" to ">"
+                latestDate = b; // Change the variable assignment to "latestDate"
+                $("#datepicker-joineddate").val(latestDate);
             } else {
-                earliestDate = a;
-                $("#datepicker-joineddate").val(earliestDate);
+                latestDate = a;
+                $("#datepicker-joineddate").val(latestDate);
             }
-            $("#datepicker-joineddate").datepicker("setStartDate", earliestDate);
-            $("#datepicker-joineddate").val(""); 
+            $("#datepicker-joineddate").datepicker("setStartDate", latestDate); // Change the function argument to "latestDate"
+            $("#datepicker-joineddate").val("");
         });
     });
     function getEmployeeById(id) {

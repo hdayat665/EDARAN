@@ -331,4 +331,9 @@ class ProjectController extends Controller
 
         return response()->json($result);
     }
+    public function projectLocationTable()
+    {
+    
+    return view('pages.project.projectLocationTable');
+}
 }
