@@ -41,21 +41,40 @@
                                         Terminate Date* :
                                         <input type="text" readonly id="effectiveFrom" name="" class="form-control" >
                                     </div>
-                                    <div class="mb-3">
-                                        Remarks :
-                                        <input type="text" readonly id="remarks" name="" class="form-control" >
                                     </div>
-                                    <div class="mb-3">
-                                        Attachments* : <br/>
-                                        Click <a id="attachment"></a> to see attachment.
-                                    </div>
-                                </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
                                         Terminate Type* :
                                         <input type="text" readonly id="employmentDetail" name="" class="form-control" >
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-12">
+                                Remarks :
+                                <textarea  rows="4" cols="50" readonly id="remarks" name="" class="form-control" ></textarea>
+                            </div>
+                            <div class="col-sm-12 mt-3">
+                                {{-- [Web Pilot Test] HRIS - Exit Employee - Error data retrieved --}}
+                                {{-- Attachments* : <br/> --}}
+                                {{-- Click <span id="attachment"></span> to see attachments. --}}
+                                {{-- <span id="attachment"></span> --}}
+                                {{-- @if ($details)
+                                @foreach ($details as $detail)
+                                @if(!empty($detail->file_upload))
+                                            @php
+                                            $filenames = explode(',', $detail->file_upload);
+                                            @endphp
+                                            @foreach($filenames as $filename)
+                                            <a href="/storage/GeneralFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                            @endforeach
+                                @endif
+                                @endforeach
+                                @endif --}}
+                                <div class="mb-3">
+                                    Attachments* : <br/>
+                                    Click <a id="attachment"></a> to see attachment.
+                                </div>
+
                             </div>
                         </div>
             </div>
