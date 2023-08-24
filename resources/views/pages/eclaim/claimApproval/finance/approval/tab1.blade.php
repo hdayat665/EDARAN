@@ -3,7 +3,7 @@
     <table id="activetable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                
+
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Applied Date</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @php
-                $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER','FINANCE - CHECKER','FINANCE - RECOMMENDER'];
+                $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - CHECKER', 'FINANCE - RECOMMENDER'];
                 $condByPass = '$claim->id != ""';
                 $configData = null;
                 foreach ($roles as $role) {
@@ -45,10 +45,9 @@
 
             @foreach ($claims as $claim)
                 @if (isset($config->status))
-                    @if ( $claim->f_recommender == 'recommend' && $claim->f_approval == '' && eval("return $condByPass;"))
-            
+                    @if ($claim->f_recommender == 'recommend' && ($claim->f_approval == '' || $claim->f_approval == null) && eval("return $condByPass;"))
                         <tr>
-                        
+
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -82,19 +81,19 @@
                             @if ($claim->status == 'amend')
                                 <td><span class="badge bg-warning" data-toggle="amendc" title="Amend">Amend</span></td>
                             @elseif ($claim->status == 'recommend')
-                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                             @elseif ($claim->status == 'bucket')
-                                <td><span class="badge bg-success" data-toggle="paidc" title="{{$claim->status_desc}}">Pending</span></td>
+                                <td><span class="badge bg-success" data-toggle="paidc" title="{{ $claim->status_desc }}">Pending</span></td>
                             @elseif ($claim->status == 'approved')
-                                <td><span class="badge bg-info" data-toggle="approved" title="{{$claim->status_desc}}">Approved</span></td>
-                            @elseif ($claim->status == 'paid' )
-                                <td><span class="badge bg-secondary" data-toggle="paidc" title="{{$claim->status_desc}}">Paid</span></td>
+                                <td><span class="badge bg-info" data-toggle="approved" title="{{ $claim->status_desc }}">Approved</span></td>
+                            @elseif ($claim->status == 'paid')
+                                <td><span class="badge bg-secondary" data-toggle="paidc" title="{{ $claim->status_desc }}">Paid</span></td>
                             @elseif ($claim->status == 'draft')
                                 <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                             @elseif ($claim->status == 'reject')
                                 <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                             @elseif ($claim->status == 'active')
-                                <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                                <td><span class="badge bg-lime" data-toggle="activec" title="{{ $claim->status_desc }}">In Queue</span></td>
                             @endif
                             <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
