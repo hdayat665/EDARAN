@@ -1588,17 +1588,17 @@ $("#edit-profile-picture").on("click", function () {
         }
     });
 
-    $('input[name="okuStatus1s"]').click(function () {
-        if ($(this).is(":checked")) {
-            $("#okucard1s").prop("disabled", false);
+    if ($(".okuCheck1s").is(":checked")) {
+        $("#okucard1s").prop("disabled", false);
+        $("#okuattach1s").prop("disabled", false);
+        $("#okuattach1s").prop("readonly", true);
 
-            $("#okuattach1s").prop("disabled", false);
-        } else {
-            $("#okucard1s").val("").prop("disabled", true);
+    } else {
+        $("#okucard1s").val("").prop("disabled", true);
+        $("#okuattach1s").val("").prop("disabled", true);
+        $("#okuattach1s").prop("readonly", false);
 
-            $("#okuattach1s").val("").prop("disabled", true);
-        }
-    });
+    }
 
     //add Child
     $('input[name="nonNetizen2"]').click(function () {
@@ -2941,7 +2941,11 @@ if (permanentChecked && correspondentChecked) {
                         rangelength: [10, 11],
                     },
                     okuID: {
-                        required: true,
+                        required: {
+                            depends: function(element) {
+                                return $(element).prop("readonly") === false;
+                            }
+                        }
                     },
                     homeNo: {
                         digits: true,
@@ -5044,18 +5048,17 @@ if (permanentChecked && correspondentChecked) {
     $(".okuCheck1s").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard1s").prop("readonly", false);
+            $("#okucard1s").prop("disabled", false);
 
             $("#okuattach1s").prop("readonly", false);
-
-            //  $("#okuattach").css("readonly", true);
+            $("#okuattach1s").prop("disabled", false);
             $("#okuattach1s").css("pointer-events", "auto");
         } else {
             $("#okucard1s").prop("readonly", true);
             $("#okucard1s").val("");
+            $("#okucard1s").val("").prop("disabled", true);
 
-            // $("#okuattach").css("readonly", false);
-            // $("#okuattach").css("pointer-events", "auto");
-
+            $("#okuattach1s").val("").prop("disabled", true);
             $("#okuattach1s").prop("readonly", true);
             $("#okuattach1s").val("");
         }

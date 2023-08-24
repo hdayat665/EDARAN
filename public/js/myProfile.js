@@ -172,10 +172,14 @@ $(document).ready(function () {
         $("#okucard2").prop("disabled", false);
         $("#okuattach2").prop("disabled", false);
         $("#okuattach2").css("pointer-events", "auto");
+        $("#okuattach2").css("readonly", true);
+
     } else {
         $("#okucard2").val("").prop("disabled", true);
         $("#okuattach2").prop("disabled", true);
         $("#okuattach2").css("pointer-events", "none");
+        $("#okuattach2").css("readonly", false);
+
     }
 
 
@@ -2022,8 +2026,13 @@ $(document).ready(function () {
                         rangelength: [10, 11],
                     },
                     okuID: {
-                        required: true,
+                        required: {
+                            depends: function(element) {
+                                return $(element).prop("readonly") === false;
+                            }
+                        }
                     },
+
                 },
 
                 messages: {
@@ -4622,6 +4631,7 @@ $(".okuCheck2").click(function () {
 
         $("#okuattach2").css("pointer-events", "auto");
         $("#okuattach2").prop("disabled", false);
+        $("#okuattach2").prop("readonly", false);
 
         okuStatus = 1;
     } else {
@@ -4630,6 +4640,7 @@ $(".okuCheck2").click(function () {
 
         $("#okuattach2").css("pointer-events", "none");
         $("#okuattach2").prop("disabled", true);
+        $("#okuattach2").prop("readonly", true);
 
         okuStatus = 0;
     }

@@ -506,12 +506,15 @@ class EmployeeService
                 }
             }
 
-
-            if (isset($_FILES['okuID']['name'])) {
-                $idOKU = upload($r()->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
-            } else {
+            if (isset($_FILES['okuID']['name']) && !empty($_FILES['okuID']['name'])) {
+                $payslip = upload(request()->file('okuID'));
+                $input['okuID'] = $payslip['filename'];
+            } elseif (isset($_FILES['okuID']['name']) && empty($_FILES['okuID']['name']) && isset($_POST['okuID_disabled'])) {
                 $input['okuID'] = null;
+            }
+
+            if (!$input['DOM']) {
+                unset($input['DOM']);
             }
 
             if (!$input['DOM']) {
@@ -536,6 +539,13 @@ class EmployeeService
 
             if (!$input['address2E']) {
                 unset($input['address2E']);
+            }
+
+            if(!isset($input['okuStatus']))
+            {
+                $input['okuStatus'] = null;
+                $input['okuNumber'] = null;
+                $input['okuID'] = null;
             }
 
             $id = $input['id'];
