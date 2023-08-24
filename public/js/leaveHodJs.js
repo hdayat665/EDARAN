@@ -229,12 +229,10 @@ $(document).ready(function () {
                 var filename = data[0].file_document.split("/").pop();
                 $("#viewfileDownloadPolicya").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
             } else {
                 $("#viewfileDownloadPolicya").html("No File Upload");
@@ -327,14 +325,12 @@ $(document).ready(function () {
 
             if (data[0].file_document) {
                 var filename = data[0].file_document.split("/").pop();
-                $("#fileDownloadPolicya").html(
+                $("#viewfileDownloadPolicya").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
             } else {
                 $("#fileDownloadPolicya").html("No File Upload");
@@ -409,13 +405,12 @@ $(document).ready(function () {
                 var filename = data[0].file_document.split("/").pop();
                 $("#fileDownloadPolicya2").html(
                     '<a href="/storage/' +
-                        data[0].file_document +
-                        '" download="' +
-                        filename +
-                        '">Download : ' +
-                        filename +
-                        "</a>"
+                    data[0].file_document +
+                    '" target="_blank">View: ' +
+                    filename +
+                    '</a>'
                 );
+
             } else {
                 $("#fileDownloadPolicya2").html("No File Upload");
             }

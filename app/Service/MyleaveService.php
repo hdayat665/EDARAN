@@ -21,27 +21,36 @@ class MyleaveService
     public function myleaveView()
     {
 
+        $today = Carbon::now();
+
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where(function ($query) {
-                $query->where('myleave.status_final', '=', 1)
-                    ->orWhere('myleave.status_final', '=', 2);
+            ->where('myleave.up_user_id', Auth::user()->id)
+            ->where(function ($query) use ($today) {
+                $query->whereDate('myleave.leave_date', '>=', $today)
+                    ->orWhere(function ($subquery) {
+                        $subquery->where('myleave.status_final', '=', 1)
+                                ->orWhere('myleave.status_final', '=', 2);
+                    });
             })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
 
         return $data;
+
+
     }
 
     public function myleaveHistoryView()
     {
+        $today = Carbon::now();
 
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->whereDate('myleave.leave_date', '<', $today)
             ->where(function ($query) {
                 $query->where('myleave.status_final', '=', 3)
                     ->orWhere('myleave.status_final', '=', 4);
@@ -57,10 +66,17 @@ class MyleaveService
     public function searcmyleavehistory($r)
     {
         $input = $r->input();
+
+        $today = Carbon::now();
+
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
+            ->whereDate('myleave.leave_date', '<', $today)
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 3)
+                    ->orWhere('myleave.status_final', '=', 4);
+            })
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc');
@@ -88,10 +104,19 @@ class MyleaveService
     public function searchmyleaveView($r)
     {
         $input = $r->input();
+
+        $today = Carbon::now();
+
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
+            ->where(function ($query) use ($today) {
+                $query->whereDate('myleave.leave_date', '>=', $today)
+                    ->orWhere(function ($subquery) {
+                        $subquery->where('myleave.status_final', '=', 1)
+                                ->orWhere('myleave.status_final', '=', 2);
+                    });
+            })
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc');
@@ -158,24 +183,77 @@ class MyleaveService
 
     public function createtmyleave($r)
     {
+        //wan
 
         $input = $r->input();
 
-        $currentDateEntitlement = Carbon::now();
+        $typeofleave = $r->input('typeofleave'); // Get the input value
+
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
+            ->get();
 
         $leave_entitlement = leaveEntitlementModel::select('*')
             ->where('id_employment', '=', Auth::user()->id)
             ->where('le_year', '=', $currentDateEntitlement->year)
             ->first();
 
-        if (empty($leave_entitlement)) {
-            $data = [
-                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
-                'status' => config('app.response.error.status'),
-                'type' => config('app.response.error.type'),
-                'title' => config('app.response.error.title')
-            ];
-            return $data;
+        $checkTypeIds = $checkType->pluck('id')->toArray();
+
+        // Check if the input typeofleave is in the allowed leave type IDs
+        if (in_array($typeofleave, $checkTypeIds)) {
+            $currentYearbalance = Carbon::now()->format('Y');
+            $checkleavebalance = leaveEntitlementModel::select('current_entitlement_balance')
+                ->where('id_employment', Auth::user()->id)
+                ->whereYear('le_year', '=', $currentYearbalance)
+                ->first();
+
+            $currentYear = Carbon::now()->format('Y');
+
+            $checkleavepending = MyLeaveModel::select(DB::raw('SUM(total_day_applied) as total_day_applied'))
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->where('myleave.status_final', '!=', 3)
+                ->where(function ($query) {
+                    $query->where('myleave.status_final', '=', 1)
+                        ->orWhere('myleave.status_final', '=', 2);
+                })
+                ->where(function ($query) {
+                    $query->where('myleave.calculate', '=', null)
+                        ->orWhere('myleave.calculate', '=', '');
+                })
+                ->whereIn('myleave.lt_type_id', $checkTypeIds)
+                ->where('myleave.up_user_id', Auth::user()->id)
+                ->whereYear('myleave.applied_date', '=', $currentYear)
+                ->first();
+
+            if ($checkleavebalance->current_entitlement_balance <= 0) {
+                $data = [
+                    'msg' => 'You have exceeded your leave entitlement.',
+                    'status' => config('app.response.error.status'),
+                    'type' => config('app.response.error.type'),
+                    'title' => config('app.response.error.title')
+                ];
+
+                return $data;
+            }
+
+            if ($checkleavebalance && $checkleavepending) {
+                $totalbalance = $checkleavebalance->current_entitlement_balance - $checkleavepending->total_day_applied;
+
+                $wan = $totalbalance - $r->input('total_day_appied'); // Assuming 'total_day_appied' is the number of days applied
+
+                if ($wan < 0) {
+                    $data = [
+                        'msg' => 'You have exceeded your leave entitlement',
+                        'status' => config('app.response.error.status'),
+                        'type' => config('app.response.error.type'),
+                        'title' => config('app.response.error.title')
+                    ];
+
+                    return $data;
+                }
+            }
         }
 
         $checkleavetype = leavetypesModel::where([
@@ -557,6 +635,26 @@ class MyleaveService
         }
 
         return $data;
+    }
+
+    public function checkLeaveEntitlement()
+    {
+         $currentDateEntitlement = Carbon::now();
+
+        $leave_entitlement = leaveEntitlementModel::select('*')
+        ->where('id_employment', '=', Auth::user()->id)
+        ->where('le_year', '=', $currentDateEntitlement->year)
+        ->first();
+
+        if (empty($leave_entitlement)) {
+            $data = [
+                'msg' => 'You are not entitled to apply the leave or kindly set up the leave entitlement.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }
     }
 
 
@@ -1010,10 +1108,14 @@ class MyleaveService
             if ($today <= $check->lapsed_date) {
 
                 if ($check->carry_forward_balance >= $settingEmail->total_day_applied) {
+
                     $balance1 = $check->carry_forward_balance - $settingEmail->total_day_applied;
+
                 } else {
+
                     $balance1 = 0;
                     $remainingFromEntitlement = $settingEmail->total_day_applied - $check->carry_forward_balance;
+
                 }
 
                 if (isset($remainingFromEntitlement)) {
@@ -1036,7 +1138,9 @@ class MyleaveService
                 ];
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
+
                 MyLeaveModel::where('id', $id)->update($inputCalculate);
+
             } else {
 
                 $leave = $check->current_entitlement_balance - $settingEmail->total_day_applied;
@@ -1050,6 +1154,7 @@ class MyleaveService
                 ];
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
+
                 MyLeaveModel::where('id', $id)->update($inputCalculate);
             }
         }
@@ -1074,11 +1179,37 @@ class MyleaveService
 
             if ($settingEmail->availability == 2) {
 
-                $leave1 = $check->current_entitlement_balance + $settingEmail->total_day_applied;
-                $input1 = [
-                    'current_entitlement_balance' => $leave1,
-                ];
-                leaveEntitlementModel::where('id', $check->id)->update($input1);
+                $today = Carbon::now();
+
+                if ($today <= $check->lapsed_date) {
+
+                    $total = $check->current_entitlement_balance + $settingEmail->total_day_applied;
+
+                    if ($total <= $check->current_entitlement) {
+                        $balance1 = 0;
+                        $current_entitlement_balance = $total;
+                    } else {
+                        $balance1 = $total - $check->current_entitlement + $check->carry_forward_balance;
+                        $current_entitlement_balance = $check->current_entitlement;
+                    }
+
+                    $input = [
+                        'carry_forward_balance' => $balance1,
+                        'current_entitlement_balance' => $current_entitlement_balance,
+                    ];
+
+                    leaveEntitlementModel::where('id', $check->id)->update($input);
+
+                } else {
+
+                    $leave1 = $check->current_entitlement_balance + $settingEmail->total_day_applied;
+                    $input1 = [
+                        'current_entitlement_balance' => $leave1,
+                    ];
+                    leaveEntitlementModel::where('id', $check->id)->update($input1);
+
+                }
+
             }
 
             leaveEntitlementModel::where('id', $check->id)->update($input);
@@ -1218,11 +1349,54 @@ class MyleaveService
 
             if ($settingEmail->availability == 2) {
 
-                $leave1 = $check->current_entitlement_balance - $settingEmail->total_day_applied;
-                $input1 = [
-                    'current_entitlement_balance' => $leave1,
-                ];
-                leaveEntitlementModel::where('id', $check->id)->update($input1);
+                $today = Carbon::now();
+
+                if ($today <= $check->lapsed_date) {
+
+                    if ($check->carry_forward_balance >= $settingEmail->total_day_applied) {
+
+                        $balance1 = $check->carry_forward_balance - $settingEmail->total_day_applied;
+
+                    } else {
+
+                        $balance1 = 0;
+                        $remainingFromEntitlement = $settingEmail->total_day_applied - $check->carry_forward_balance;
+
+                    }
+
+                    if (isset($remainingFromEntitlement)) {
+                        if ($check->current_entitlement_balance >= $remainingFromEntitlement) {
+                            $leave = $check->current_entitlement_balance - $remainingFromEntitlement;
+                        } else {
+                            $leave = 0;
+                        }
+                    } else {
+                        $leave = $check->current_entitlement_balance;
+                    }
+
+                    $input = [
+                        'carry_forward_balance' => $balance1,
+                        'current_entitlement_balance' => $leave,
+                    ];
+
+                    $inputCalculate = [
+                        'calculate' => 1,
+                    ];
+
+                    leaveEntitlementModel::where('id', $check->id)->update($input);
+
+                    MyLeaveModel::where('id', $id)->update($inputCalculate);
+
+                } else {
+
+                    $leave1 = $check->current_entitlement_balance - $settingEmail->total_day_applied;
+                    $input1 = [
+                        'current_entitlement_balance' => $leave1,
+                    ];
+                    leaveEntitlementModel::where('id', $check->id)->update($input1);
+                }
+
+
             }
 
             leaveEntitlementModel::where('id', $check->id)->update($input);

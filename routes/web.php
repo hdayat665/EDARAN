@@ -307,7 +307,7 @@ Route::group(['middleware' => ['web']], function () {
 
                 return response($file, 200, $headers);
             })->name('view');
-            
+
             Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 
             Route::post('/addEmployeeEducation', 'addEmployeeEducation');
@@ -467,7 +467,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getUserByUserRole/{id}', 'getUserByUserRole');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
-            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
@@ -763,6 +762,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getEarnedLeave', 'getEarnedLeave');
             Route::get('/getLapseLeave', 'getLapseLeave');
             Route::get('/totalNoPaidLeave', 'totalNoPaidLeave');
+
+
+            Route::get('/checkLeaveEntitlement', 'checkLeaveEntitlement');
+
+
 
             //checking holiday
 
