@@ -273,7 +273,7 @@
                             </div>
                         @endif
                         <div class="menu-item">
-                                <a href="/projectLocationTable" class="menu-link">
+                                <a href="/projectLocTable" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-location-pin text-gray"></i>
                                     </div>

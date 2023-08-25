@@ -598,7 +598,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/projectNameByCustomerId/{id}', 'projectNameByCustomerId');
             Route::get('/getRejectProject/{id}', 'getRejectProject');
             Route::get('/projectViewAssignLocation/{id}', 'projectViewAssignLocationView');
-            Route::get('/projectLocationTable', 'projectLocationTable');
+            Route::get('/projectLocTable', 'projectLocTable');
 
         });
 

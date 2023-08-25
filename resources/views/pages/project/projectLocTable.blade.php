@@ -7,7 +7,7 @@
         <div class="panel-body">
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="newProjectLocationButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Location</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="newProjectLocBtn" class="btn btn-primary"><i class="fa fa-plus"></i> New Location</a>
             </div>
             <h4 class="panel-title"></h4>
         </div>
@@ -42,7 +42,7 @@
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a href="/systemUserUpdate" id="" data-id="" class="dropdown-item"> Edit</a>
+                            <a href="javascript:;" data-bs-toggle="modal" id="updateProjectLocBtn" class="dropdown-item"> Edit</a>
                             <div class="dropdown-divider"></div>
                             <a id="" data-id="" class="dropdown-item"> Delete</a>
                         </td>
@@ -64,9 +64,9 @@
                         <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a href="" id="" data-id="" class="dropdown-item"> Edit</a>
+                            <a href="javascript:;" id="updateProjectLocBtn" data-id="" class="dropdown-item"> Edit</a>
                             <div class="dropdown-divider"></div>
-                            <a id="" data-id="" class="dropdown-item"> Delete</a>
+                            <a id="" data-id="" class="dropdown-item">Delete</a>
                         </td>
                     </tr>
                 </tbody>
@@ -79,5 +79,6 @@
         </div>
     </div>
 </div>
-
+@include('modal.project.newProjectLoc')
+@include('modal.project.updateProjectLoc')
 @endsection
