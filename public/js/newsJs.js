@@ -36,10 +36,6 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
-    $("textarea[type=text]").keyup(function () {
-        $(this).val($(this).val().toUpperCase());
-    });
-
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");
         var vehicleData = getNews(id);
