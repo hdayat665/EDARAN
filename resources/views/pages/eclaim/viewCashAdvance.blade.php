@@ -1,7 +1,15 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Project ( Outstation )</small></h1>
+        @if ($cashClaim->type == 1)
+            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Project ( Outstation )</small></h1>
+            @elseif($cashClaim->type == 2)
+            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Project ( Non Outstation )</small></h1>
+            @elseif($cashClaim->type == 3)
+            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Others (Outstation )</small></h1>
+            @elseif($cashClaim->type == 4)
+            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Others (Non Outstation )</small></h1>
+        @endif
         <div class="panel panel">
             <div class="panel-body">
                 @if ($cashClaim->type == 1)

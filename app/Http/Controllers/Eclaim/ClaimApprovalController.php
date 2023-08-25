@@ -1446,8 +1446,13 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
+        // dd($data);
         $data['mode'] = $mcs->cashAdvanceApproverModeTransport($id);
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
 
+        // dd($data);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
         //pr($data['mode']);
         if ($type == 1) {
@@ -1493,6 +1498,10 @@ class ClaimApprovalController extends Controller
         $data['checkers'] = getFinanceChecker();
         $data['ca'] = $result['general'];
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
@@ -1528,6 +1537,10 @@ class ClaimApprovalController extends Controller
         $data['ca'] = $result['general'];
 
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
@@ -1562,6 +1575,10 @@ class ClaimApprovalController extends Controller
         $result = $mcs->cashAdvanceFcheckerDetail($id);
         $data['ca'] = $result['general'];
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
