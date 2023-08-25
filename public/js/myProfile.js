@@ -172,10 +172,14 @@ $(document).ready(function () {
         $("#okucard2").prop("disabled", false);
         $("#okuattach2").prop("disabled", false);
         $("#okuattach2").css("pointer-events", "auto");
+        $("#okuattach2").css("readonly", true);
+
     } else {
         $("#okucard2").val("").prop("disabled", true);
         $("#okuattach2").prop("disabled", true);
         $("#okuattach2").css("pointer-events", "none");
+        $("#okuattach2").css("readonly", false);
+
     }
 
 
@@ -967,7 +971,7 @@ $(document).ready(function () {
                 $("#educationResult1").val(education.result);
                 if (education.file) {
                     $("#fileDownloadOthers").html(
-                        '<a href="/storage/' + education.file + '">Download File</a>'
+                        '<a href="/storage/' + education.file + '" target="_blank">here</a>'
                     );
                 }
             });
@@ -1200,10 +1204,9 @@ $(document).ready(function () {
                 $("#idOthers").val(othersQualification.id);
                 $("#othersDate1").val(othersQualification.otherDate);
                 $("#othersPQDetails1").val(othersQualification.otherPQDetails);
-                // $("#othersDoc1").val(othersQualification.file);
                 if (othersQualification.file) {
                     $("#othersDoc1").html(
-                        '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
+                        '<a href="/storage/' + othersQualification.file + '" target="_blank">here</a>'
                     );
                 }
             });
@@ -2022,8 +2025,13 @@ $(document).ready(function () {
                         rangelength: [10, 11],
                     },
                     okuID: {
-                        required: true,
+                        required: {
+                            depends: function(element) {
+                                return $(element).prop("readonly") === false;
+                            }
+                        }
                     },
+
                 },
 
                 messages: {
@@ -4622,6 +4630,7 @@ $(".okuCheck2").click(function () {
 
         $("#okuattach2").css("pointer-events", "auto");
         $("#okuattach2").prop("disabled", false);
+        $("#okuattach2").prop("readonly", false);
 
         okuStatus = 1;
     } else {
@@ -4630,6 +4639,7 @@ $(".okuCheck2").click(function () {
 
         $("#okuattach2").css("pointer-events", "none");
         $("#okuattach2").prop("disabled", true);
+        $("#okuattach2").prop("readonly", true);
 
         okuStatus = 0;
     }

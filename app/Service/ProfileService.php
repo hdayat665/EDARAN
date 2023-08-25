@@ -449,13 +449,12 @@ class ProfileService
                 }
             }
 
-            if (isset($_FILES['okuID']['name'])) {
+            if (isset($_FILES['okuID']['name']) && !empty($_FILES['okuID']['name'])) {
                 $payslip = upload(request()->file('okuID'));
                 $input['okuID'] = $payslip['filename'];
-            } else {
+            } elseif (isset($_FILES['okuID']['name']) && empty($_FILES['okuID']['name']) && isset($_POST['okuID_disabled'])) {
                 $input['okuID'] = null;
             }
-
 
             if(!$input['DOM'])
             {
@@ -501,10 +500,6 @@ class ProfileService
                 $input['issuingCountry'] = null;
             }
 
-            // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
-            // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
-            // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
-            // $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
             $id = $input['id'];
             UserCompanion::where('id', $id)->update($input);
 

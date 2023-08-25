@@ -169,7 +169,6 @@
             </div>
             <div class="modal-body">
                 <form id="addForm1">
-
                     <div class="mb-3">
                         <label class="form-label">Policy*</label>
                         <input type="text" class="form-control" name="code" placeholder="POLICY" >

@@ -15,8 +15,8 @@
              </li>
          </ul>
     </div>
- 
- 
+
+
      <div class="tab-content panel m-0 rounded-0 p-3">
          <div class="tab-pane fade active show" id="quali-tab-1">
              <div class="row p-2">
@@ -26,7 +26,7 @@
                 <table id="employeeEducation" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
-                         <th data-orderable="false">No</th>	
+                         <th data-orderable="false">No</th>
                          <th data-orderable="false">Action</th>
                          <th class="text-nowrap">From Date</th>
                          <th class="text-nowrap">To Date</th>
@@ -58,7 +58,7 @@
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                            <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
+                            <td><a href="{{ route('view', ['filename' => $education->file]) }}" target="blank_">{{$education->file}}</a></td>
                         </tr>
                         @endforeach
                     @endif
@@ -66,7 +66,7 @@
                      </tbody>
                  </table>
              </div>
-             
+
          </div>
          <div class="tab-pane fade show" id="quali-tab-2">
              <div class="row p-2">
@@ -76,7 +76,7 @@
                 <table id="employeeOthers" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
-                         <th data-orderable="false">No</th>	
+                         <th data-orderable="false">No</th>
                          <th data-orderable="false">Action</th>
                          <th class="text-nowrap"> Date</th>
                          <th class="text-nowrap">Professional Qualification Details</th>
@@ -102,7 +102,7 @@
 
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
-                                <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $other->file]) }}" target="blank_">{{$other->file}}</a></td>
                             </tr>
                             @endforeach
                         @endif
@@ -115,7 +115,7 @@
      <div class="row p-2">
          <div class="modal-footer">
              <a class="btn btn-white me-5px btnPrevious">Previous</a>
-             
+
              <a class="btn btn-white me-5px btnNext">Next</a>
          </div>
      </div>
