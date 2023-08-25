@@ -745,6 +745,7 @@ class ClaimApprovalService
 
         $data = ModeOfTransport::where($ca)->first();
         // pr($data);
+        // dd($data);
         return $data;
     }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
@@ -6657,6 +6658,67 @@ class ClaimApprovalService
 
         return $data;
     }
+
+    public function cashAdvanceEmployeeInfo($id = '')
+    {
+        $data = DB::table("cash_advance_detail as a")
+        ->leftJoin("employment as b", "a.user_id", "=", "b.user_id")
+        ->leftJoin("designation as c", "b.designation", "=", "c.id")
+        ->leftJoin("department as d", "b.department", "=", "d.id")
+        ->leftJoin("branch as e", "b.branch", "=", "e.id")
+        ->where('a.tenant_id', Auth::user()->tenant_id)
+        ->where('a.id', $id)
+        ->select("b.employeeName","c.designationName","d.departmentName","e.address2")
+        ->first();
+        // dd($data);
+        return $data;
+
+
+    }
+
+    public function cashAdvanceApprovalInfo()
+    {
+
+        $data = DB::table('domain_list as a')
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+            ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name'),
+            )
+            ->where('a.type', 'cashAdvance')
+            ->where('a.category_role', 'cash_advance')
+            ->latest('a.created_at')
+            ->first();
+
+            // dd($data);
+        return $data;
+    }
+
+    public function cashAdvanceDeptApprover($id = '')
+    {
+        $data = DB::table("cash_advance_detail as a")
+            ->leftJoin("employment as b", "a.user_id", "=", "b.user_id")
+            ->leftJoin("employment as c", "b.caapprover", "=", "c.user_id") // Joining the table with itself
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->where('a.id', $id)
+            ->select("b.user_id","b.employeeName","c.employeeName as caapprover_name")  // getting the name
+            ->first();
+        // dd($data);
+        return $data;
+    }
+    
 
 
 }
