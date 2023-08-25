@@ -6,12 +6,6 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
-    $("#gender").css({
-        "pointer-events": "none",
-        "touch-action": "none",
-        background: "#e9ecef",
-    });
-
     $("#idnumber").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
@@ -29,19 +23,28 @@ $(document).ready(function () {
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy/mm/dd",
+
     });
 
     $("#datepicker-birth").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy/mm/dd",
+
     });
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy/mm/dd",
+
     });
     $("#datepicker-expiryDate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy/mm/dd",
+
     });
 
     $("#firstName,#lastName").change(function () {
@@ -83,18 +86,36 @@ $(document).ready(function () {
         if (this.checked) {
             $("#passport").prop("readonly", false);
             $("#passport").prop("required", true);
+
+            $("#gender").prop("readonly", false);
+            $("#gender").prop("required", true);
+            $("#gender").removeAttr("style");
+            $("#gender").css({
+                background: "none",
+            });
+
             $("#datepicker-expiryDate").prop("readonly", false);
             $("#datepicker-expiryDate").prop("required", true);
+            $("#datepicker-expiryDate").removeAttr("style");
+
             $("#datepicker-birth").prop("readonly", false);
             $("#datepicker-birth").removeAttr("style");
-            $("#datepicker-expiryDate").removeAttr("style");
         } else {
             $("#passport").prop("readonly", true);
-            $("#datepicker-expiryDate").prop("readonly", true);
             $("#passport").prop("required", false);
+
+            $("#gender").prop("readonly", true);
+            $("#gender").prop("required", false);
+            $("#gender").attr("style", "pointer-events: none");
+            $("#gender").css({
+                background: "#e9ecef",
+            });
+
+            $("#datepicker-expiryDate").prop("readonly", true);
             $("#datepicker-expiryDate").prop("required", false);
-            $("#datepicker-birth").prop("readonly", true);
             $("#datepicker-expiryDate").attr("style", "pointer-events: none");
+
+            $("#datepicker-birth").prop("readonly", true);
             $("#datepicker-birth").attr("style", "pointer-events: none");
         }
     });
@@ -134,42 +155,72 @@ $(document).ready(function () {
 
     $(".partCheck").click(function () {
         if ($(this).prop("checked")) {
-            $("#idnumber").prop("readonly", true);
+            $("#idnumber").prop("disabled", true);
             $("#idnumber").prop("required", false);
-            // $('#passport').prop('required', true);
-            // $('#datepicker-autoClose').prop('required', true);
         } else {
-            $("#idnumber").prop("readonly", false);
+            $("#idnumber").prop("disabled", false);
             $("#idnumber").prop("required", true);
         }
     });
 
+    // $("#passport").change(function () {
+    //     if ($("#datepicker-expiryDate").prop("readonly")) {
+    //         $("#datepicker-expiryDate").prop("readonly", false);
+    //         $("#datepicker-expiryDate").css("pointer-events", "auto");
+    //     } else {
+    //         $("#datepicker-expiryDate").prop("readonly", true);
+    //         $("#datepicker-expiryDate").css("pointer-events", "none");
+    //     }
+    // });
+
+    // if ($("#passport").val() !== "") {
+    //     $("#datepicker-expiryDate").prop("readonly", false);
+    //     $("#datepicker-expiryDate").css("pointer-events", "auto");
+    //     $("#datepicker-expiryDate").css("pointer-events", "auto");
+    // } else {
+    //     $("#datepicker-expiryDate").prop("readonly", true);
+    //     $("#datepicker-expiryDate").css("pointer-events", "none");
+    // }
+
     $("#passport").change(function () {
-        if ($("#datepicker-expiryDate").prop("readonly")) {
+        if (($("#passport").val() !== "") ) {
             $("#datepicker-expiryDate").prop("readonly", false);
             $("#datepicker-expiryDate").css("pointer-events", "auto");
+
+            $("#issuingCountry2").prop("readonly", false);
+            $("#issuingCountry2").css("pointer-events", "auto");
         } else {
             $("#datepicker-expiryDate").prop("readonly", true);
             $("#datepicker-expiryDate").css("pointer-events", "none");
+
+            $("#issuingCountry2").prop("readonly", true);
+            $("#issuingCountry2").css("pointer-events", "none");
         }
     });
 
-    $(".partCheck").click(function () {
-        if ($(this).prop("checked")) {
-            $("#idnumber").prop("readonly", true);
+    // $(".partCheck").click(function () {
+    //     if ($(this).prop("checked")) {
+    //         $("#idnumber").prop("readonly", true);
 
-            $("#datepicker-expiryDate").prop("readonly", false);
-            $("#datepicker-birth").prop("readonly", false);
-            $("#datepicker-birth").css("pointer-events", "auto");
-            $("#idnumber").val("");
-        } else {
-            $("#idnumber").prop("readonly", false);
+    //         $("#gender").prop("readonly", false);
+    //         $("#gender").prop("required", true);
 
-            $("#datepicker-expiryDate").prop("readonly", false);
-            $("#datepicker-birth").prop("readonly", true);
-            $("#datepicker-birth").css("pointer-events", "none");
-        }
-    });
+    //         $("#datepicker-expiryDate").prop("readonly", false);
+    //         $("#datepicker-birth").prop("readonly", false);
+    //         $("#datepicker-birth").css("pointer-events", "auto");
+
+    //         $("#idnumber").val("");
+    //     } else {
+    //         $("#idnumber").prop("readonly", false);
+
+    //         $("#gender").prop("readonly", true);
+    //         $("#gender").prop("required", false);
+
+    //         $("#datepicker-expiryDate").prop("readonly", false);
+    //         $("#datepicker-birth").prop("readonly", true);
+    //         $("#datepicker-birth").css("pointer-events", "none");
+    //     }
+    // });
 
     $.validator.addMethod(
         "noSpecialChars",
@@ -242,7 +293,7 @@ $(document).ready(function () {
                 maritialStatus: "required",
                 religion: "required",
                 personalEmail: {
-                    required: true,
+                    required: false,
                     email: true, // Use the email validation method
                 },
                 phoneNo: {
@@ -272,11 +323,10 @@ $(document).ready(function () {
                 issuingCountry: "Please Insert Issuing Country",
                 DOB: "Please Insert Date Of Birth",
                 gender: "Please Insert Gender",
-                maritialStatus: "Please Insert Marital Status",
-                religion: "Please Insert Religion",
+                maritialStatus: "Please Choose Marital Status",
+                religion: "Please Choose Religion",
                 personalEmail: {
-                    required: "Please Insert Personal Email",
-                    email: "Please Insert Valid Email",
+                    email: "Please Insert Valid Personal Email",
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",

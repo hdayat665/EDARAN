@@ -164,16 +164,10 @@ $(document).ready(function () {
 
         ParentData.then(function (data) {
             parent = data;
-            console.log(parent);
             $("#employeeId").val(parent.employeeId);
             $("#employeeName").val(parent.employeeName);
             $("#employeeEmail").val(parent.employeeEmail);
-            supervisor = getEmployee(parent.supervisor);
-
-            supervisor.then(function (superdata) {
-                console.log(superdata);
-                $("#reportTo").val(superdata.employeeName);
-            });
+            $("#reportTo").val(parent.fullName);
         });
     });
 

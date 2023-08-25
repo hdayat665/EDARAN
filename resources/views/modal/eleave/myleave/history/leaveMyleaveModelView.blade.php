@@ -130,7 +130,7 @@
                             <div class="row p-2">
                                 <div class = "col-md-5" id="hideRech">
                                     <label for="text">Reason:</label><br>
-                                    <div id="reasonRecommenderh" style="font-weight: lighter;"></div>
+                                    <div id="reasonRecommenderh" style="font-weight: lighter; word-wrap: break-word;"></div>
                                 </div>
                                 <div class = "col-md-1">
                                 </div>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class = "col-md-6 hidenull3h" id="hideApprh">
                                     <label for="text">Reason:</label><br>
-                                    <div id="reasonApproverh" style="font-weight: lighter;"></div>
+                                    <div id="reasonApproverh" style="font-weight: lighter; word-wrap: break-word;"></div>
                                 </div>
 
 
@@ -160,7 +160,7 @@
                             <div class="row p-2" id="viewmenu021h">
                                 <div class = col-md-12>
                                     <label for="text">Reason:</label><br>
-                                    <div id="reasonApprover1h" style="font-weight: lighter;"></div>
+                                    <div id="reasonApprover1h" style="font-weight: lighter; word-wrap: break-word;"></div>
                                 </div>
                             </div>
                         </div>

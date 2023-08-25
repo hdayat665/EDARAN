@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-12" style="width:50%">
                         <label>Reason*</label><br>
-                        <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewreason1">
+                        <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="viewreason1"></textarea>
                     </div>
                     <div class="col-12" style="width:50%" id="viewmenu01">
                         <label>Leave Session</label><br>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="row p-2" id="viewmenu02">
                             <label for="text">Reason:</label><br>
-                            <div id="viewreasonsv" style="font-weight: lighter;"></div>
+                            <div id="viewreasonsv" style="font-weight: lighter; word-wrap: break-word;"></div>
                         </div>
                     </div>
                 </div>

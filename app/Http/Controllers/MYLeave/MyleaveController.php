@@ -163,8 +163,8 @@ class MyleaveController extends Controller
 
         return $result;
     }
-    public function getuserleaveApprhodview($id = '')
-    {
+
+    public function getuserleaveApprhodview($id = '') {
         $ms = new MyleaveService;
 
         $result = $ms->getuserleaveApprhodview($id);
@@ -172,6 +172,15 @@ class MyleaveController extends Controller
 
         return $result;
     }
+
+    public function checkLeaveEntitlement()
+    {
+        $ms = new MyleaveService;
+        $result = $ms->checkLeaveEntitlement();
+        return $result;
+    }
+
+
 
 
     //supervisor

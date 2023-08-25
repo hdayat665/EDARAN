@@ -50,11 +50,11 @@
                         {{-- new --}}
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="dob" class="form-label" >ID Attachment</label>
                                     <input type="file" id="idFile" name="idFile" class="form-control" aria-describedby="">
                                     @if ($parent->idFile ?? '')
-                                        Click <a href="{{ route('download', ['filename' => $parent->idFile]) }}">here</a> to see ID Attachment.
+                                    Click <a id="idAttachmentViewParent"></a> to see ID Attachment.
                                     @endif
                                 </div>
                             </div>
@@ -93,12 +93,12 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label">Date Of Birth</label>
-                            <input type="date" id="DOBP1" name="DOB" readonly class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
+                            <label for="dob" class="form-label">Date Of Birth*</label>
+                            <input type="text" id="DOBP1" name="DOB" readonly class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label" >Age</label>
-                            <input type="text" id="age7" name="age" readonly class="form-control" aria-describedby="" placeholder="AGE">
+                            <label for="dob" class="form-label" >Age*</label>
+                            <input type="text" id="age7" name="age" class="form-control" aria-describedby="" placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender</label>
@@ -146,12 +146,12 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
                                     <input type="file" id="okuattach6" name="okuFile" class="form-control"  aria-describedby="">
-                                    @if ($parent->okuFile ?? '')
-                                    Click <a href="{{ route('download', ['filename' => $parent->okuFile]) }}">here</a> to see OKU ID.
-                                    @endif
+                                        @if ($parent->okuFile ?? '')
+                                        Click <a id="okuAttachmentViewParent"></a> to see attachment.
+                                        @endif
                                 </div>
                             </div>
                         </div>

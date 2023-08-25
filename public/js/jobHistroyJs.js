@@ -30,6 +30,16 @@ $(document).ready(function () {
                 );
             }
 
+            // statusData.forEach(function(data) {
+            //     if (data.file) {
+            //         const attachmentLink = '<a href="/storage/' + data.file + '" target="_blank">here</a><br>';
+            //         $("#attachment").append(attachmentLink);
+            //     }
+            // });
+
+            // $.each($('#attachment'), function() {
+            //     '<a href="/storage/' + statusData.file + '" target="_blank">here</a>'
+            //   });
 
 
             $("#idc").val(statusData.id);
