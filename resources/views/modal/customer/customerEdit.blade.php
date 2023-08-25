@@ -42,68 +42,57 @@
                     <br>
                     <div class="row ">
                         <div class="col-md-6">
-                            <label class="form-label">Postcode*</label>
+                            <label class="form-label">Country*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">City*</label>
+                            <label class="form-label">State*</label>
                         </div>
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="text" id="postcode" name="postcode" class="form-control" placeholder="00000">
+                            <select class="form-select sel5" name="country" id="CountryEd">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>
+                                        {{ $ct->country_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" id="city" name="city" class="form-control" placeholder="CITY">
+                            <select class="form-select sel6" name="state" id="StateEd" style="text-transform: uppercase;">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
+                                @foreach($state as $st)
+                                    <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <br>
                     <div class="row ">
                         <div class="col-md-6">
-                            <label class="form-label">State*</label>
+                            <label class="form-label">City*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Country*</label>
+                            <label class="form-label">Postcode*</label>
                         </div>
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <?php
-                            $customers = getCustomer(); // assuming this function returns a collection of customer objects
-                            $state = state();
-                            ?>
-                            <select class="form-select" name="state" value="" style="text-transform:uppercase">
-                                <option value="" label="PLEASE CHOOSE"></option>
-                                @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo (isset($customer) && $key == $customer->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                            <select name="city" id="CityEd" class="form-select sel7">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
+                                @foreach($city as $cty)
+                                    <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <?php
-                            $customers = getCustomer(); // assuming this function returns a collection of customer objects
-                            $state = state();
-
-                            $americass = americas();
-                            $asias = asias();
-                            ?>
-                            @if($customers->isNotEmpty())
-                                <select class="form-select" name="country">
-                                    <option value="" label="PLEASE CHOOSE"></option>
-
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                            @else
-                                <p>No customers found</p>
-                            @endif
+                            <select name="postcode" id="PostcodeEd" class="form-select sel8">
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
+                                @foreach($postcode as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <br>

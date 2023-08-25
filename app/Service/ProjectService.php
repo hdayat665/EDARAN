@@ -645,6 +645,8 @@ class ProjectService
     public function updateStatusProjectMember($r, $id, $status)
     {
         $input = $r->input();
+        // dd($input, $r, $id, $status);
+        // die;
         $input['status'] = $status;
         if ($status != 'reject') {
             unset($input['reason']);

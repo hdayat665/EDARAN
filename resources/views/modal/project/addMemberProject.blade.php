@@ -20,15 +20,12 @@
                         <div class="col-md-6">    
                             <select class="form-select select1" id="employee_id" name="employee_id" style="text-transform: uppercase;">
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
-
                                 <?php
                                     $id = $project->id;
                                     $employees = getEmployeeNotInProject($id);
-
                                     if ($employees) {
                                         // Sort employees by name alphabetically
                                         $sortedEmployees = $employees->sortBy('employeeName');
-
                                         foreach ($sortedEmployees as $employee) {
                                             echo '<option value="' . $employee->id . '">' . $employee->employeeName . '</option>';
                                         }
@@ -43,7 +40,7 @@
                         </div>
                     </div>
                     <!-- TRY -->
-                    <div class="row">
+                    <div class="row" style="display: none;">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-6">Project Start</label>
                         </div>
@@ -51,7 +48,7 @@
                             <label class="form-label col-form-label col-md-4">Employee Join</label>
                         </div>
                     </div>
-                    <div class="row mb-15px">
+                    <div class="row mb-15px" style="display: none;">
                         <div class="col-md-6">    
                             <input type="text" class="form-control" value="" name="startProject" id="projectStart" style="text-transform: upppercase;" placeholder="YYYY/MM/DD">
                         </div>
@@ -60,7 +57,6 @@
                         </div>
                     </div>
                     <!-- TRY -->
-
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Designation</label>

@@ -79,7 +79,8 @@
                                                        <option value="">PLEASE CHOOSE</option>
                                                        <?php $Departments = getDepartment(); ?>
                                                        @foreach ($Departments as $Department)
-                                                           <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
+                                                           <option value="{{ $Department->id ?? null }}" 
+                                                           <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
                                                        @endforeach
                                                    </select>

@@ -206,7 +206,7 @@
                     </li> --}}
                     </ul><!-- End Notification Dropdown Items -->
                 </li><!-- End Notification Nav -->
-            </div>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- END header-nav -->
         </div>
         <!-- END #header -->

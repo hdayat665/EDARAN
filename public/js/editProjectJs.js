@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     // google map
 
     $(".partCheck").click(function () {
@@ -66,8 +67,6 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
     });
 
-    
-
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -84,17 +83,13 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        startDate: new Date() // Set the minimum date to today
     });
 
     $("#employeeJoin").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        startDate: new Date()
     });
-
-    
 
     $("#data-table-prevproject").DataTable({
         responsive: false,
@@ -346,7 +341,7 @@ $(document).ready(function () {
         var locationData = getProjectLocations(id);
 
         locationData.then(function (data) {
-            console.log(data);
+            // console.log(data);
             $("#location_name").val(data.location_name);
             $("#address").val(data.address);
             $("#address1").val(data.address2);
@@ -531,6 +526,7 @@ $(document).ready(function () {
         });
     });
 
+   
     $(document).on("change", "#employee_id", function () {
         var employee_id = $(this).val();
         var employee = getEmployeeById(employee_id);
@@ -546,22 +542,33 @@ $(document).ready(function () {
             $("#designation").val(data.designation);
             $("#department").val(data.department);
             $("#branchs").val(data.branch);
+            
+            var a = data.joinedDate;
+            var b = globalContractStartDate;
+            var latestDate; // Change the variable name to "latestDate"
+
+            if (b > a) { // Change the comparison from "<" to ">"
+                latestDate = b; // Change the variable assignment to "latestDate"
+                $("#datepicker-joineddate").val(latestDate);
+            } else {
+                latestDate = a;
+                $("#datepicker-joineddate").val(latestDate);
+            }
+            $("#datepicker-joineddate").datepicker("setStartDate", latestDate); // Change the function argument to "latestDate"
+            $("#datepicker-joineddate").val("");
         });
     });
-
     function getEmployeeById(id) {
         return $.ajax({
             url: "/getEmployeeById/" + id,
         });
     }
 
+    var globalContractStartDate;
     $(document).on("click", "#addProjectMemberButton", function () {
         var id = $(this).data("id");
         var vehicleData = getProjectDate(id);
         vehicleData.then(function (data) {
-            console.log(data.contract_start_date);
-            
-            console.log(vehicleData);
             // $("#joined_date").val(data.joined_date);
             // $("#employee_idE").val(data.employee_id);
             // $("#unitE").val(data.unit);
@@ -572,8 +579,7 @@ $(document).ready(function () {
             // $("#exit_project_date").val(data.exit_project_date);
             $("#projectStart").val(data.contract_start_date);
             // $("#idPM").val(data.id);
-            // console.log(data.assign_as);
-            // console.log(data.id);
+             globalContractStartDate = data.contract_start_date;
         });
         $("#addProjectMemberModal").data("id", id).modal("show");
     });
@@ -581,10 +587,11 @@ $(document).ready(function () {
     $(document).on("click", "#editProjectMemberButton", function () {
         var id = $(this).data("id");
         var vehicleData = getProjectMember(id);
-        console.log(vehicleData)
+        // console.log(vehicleData)
         vehicleData.then(function (data) {
-            console.log(id);
+            // console.log(id);
             $("#joined_date").val(data.joined_date);
+            $("#joined_date").datepicker("setStartDate", data.joined_date);
             $("#employee_idE").val(data.employee_id);
             $("#unitE").val(data.unit);
             $("#designationE").val(data.designation);
@@ -593,8 +600,8 @@ $(document).ready(function () {
             $("#exit_project").prop("checked", data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
-            // console.log(data.assign_as);
-            // console.log(data.id);
+            // console.log(data);
+            
         });
         $("#editProjectMemberModal").modal("show");
     });
@@ -669,11 +676,11 @@ $(document).ready(function () {
         });
     });
 
-    // function getProjectMember(id) {
-    //     return $.ajax({
-    //         url: "/getProjectMemberById/" + id
-    //     });
-    // }
+    function getProjectMember(id) {
+        return $.ajax({
+            url: "/getProjectMemberById/" + id
+        });
+    }
 
     $(document).on("click", "#assignProjectMemberButton", function () {
         $("#assignProjectMemberModal").modal("show");
