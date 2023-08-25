@@ -214,6 +214,66 @@ $(document).ready(function () {
         });
     }
 
+    // mypie2.then(function (datapie2) {
+    //     Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
+    //     Chart.defaults.font.family = app.font.family;
+    //     Chart.defaults.font.weight = 500;
+    //     Chart.defaults.scale.grid.color =
+    //         "rgba(" + app.color.componentColorRgb + ", .15)";
+    //     Chart.defaults.scale.ticks.backdropColor =
+    //         "rgba(" + app.color.componentColorRgb + ", 0)";
+
+    //     var ctx5 = document.getElementById("myChart2").getContext("2d");
+
+    //     var total_token = datapie2[0].carry_forward - datapie2[0].carry_forward_balance;
+    //     var total_balance = datapie2[0].carry_forward_balance - datapie2[1].total_pending;
+    //     var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
+
+    //     window.myPie = new Chart(ctx5, {
+    //         type: "pie",
+    //         data: {
+    //             labels: ["Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token],
+    //             datasets: [
+    //                 {
+    //                     data: [total_balance, pending,total_token],
+    //                     backgroundColor: [
+    //                         "rgba(52, 143, 226)",
+    //                         "rgb(255, 128, 128)",
+    //                         "rgba(73, 182, 214)",
+    //                     ],
+    //                     borderColor: [
+    //                         app.color.red,
+    //                         app.color.orange,
+    //                         app.color.gray500,
+    //                         app.color.gray300,
+    //                         app.color.gray900,
+    //                     ],
+    //                     borderWidth: 1,
+    //                 },
+    //             ],
+    //         },
+    //         options: {
+    //             responsive: true,
+    //             plugins: {
+    //                 tooltip: {
+    //                     callbacks: {
+    //                         label: function (context) {
+    //                             var label = context.label || "";
+    //                             return label;
+    //                         },
+    //                     },
+    //                 },
+    //             },
+    //         },
+    //     });
+    // });
+
+    // $("#datepicker-applied").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     // // format: "yyyy-mm-dd",
+    // });
+
     mypie2.then(function (datapie2) {
         Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
         Chart.defaults.font.family = app.font.family;
@@ -229,18 +289,32 @@ $(document).ready(function () {
         var total_balance = datapie2[0].carry_forward_balance - datapie2[1].total_pending;
         var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
 
+        // Determine whether to display the pie chart with 0 values
+        var displayChart = total_token !== 0 || total_balance !== 0;
+
+        var dataValues = [];
+        var backgroundColors = [];
+        var labels = [];
+
+        if (displayChart) {
+            dataValues.push(total_balance, pending, total_token);
+            backgroundColors.push("rgba(52, 143, 226)", "rgb(255, 128, 128)", "rgba(73, 182, 214)");
+            labels.push("Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token);
+        } else {
+            // Display the pie chart with blue color when no carry forward
+            dataValues.push(0, 0, 1);  // Set total_balance and pending to 0
+            backgroundColors.push("rgba(200, 200, 200)", "rgba(200, 200, 200)", "rgba(200, 200, 200)"); // Blue color and light gray
+            labels.push("Total Balance: 0", "Pending / Pending Approved: 0", "Total Token: 0");
+        }
+
         window.myPie = new Chart(ctx5, {
             type: "pie",
             data: {
-                labels: ["Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token],
+                labels: labels,
                 datasets: [
                     {
-                        data: [total_balance, pending,total_token],
-                        backgroundColor: [
-                            "rgba(52, 143, 226)",
-                            "rgb(255, 128, 128)",
-                            "rgba(73, 182, 214)",
-                        ],
+                        data: dataValues,
+                        backgroundColor: backgroundColors,
                         borderColor: [
                             app.color.red,
                             app.color.orange,
@@ -268,11 +342,9 @@ $(document).ready(function () {
         });
     });
 
-    // $("#datepicker-applied").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     // // format: "yyyy-mm-dd",
-    // });
+
+
+
 
     $("#datepicker-applied")
         .datepicker({

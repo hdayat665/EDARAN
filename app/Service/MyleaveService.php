@@ -189,10 +189,14 @@ class MyleaveService
 
         $typeofleave = $r->input('typeofleave'); // Get the input value
 
+        $currentDateEntitlement = Carbon::now();
+
         $checkType = leavetypesModel::select('leave_types.id')
             ->where('leave_types.tenant_id', Auth::user()->tenant_id)
             ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
             ->get();
+
+            $yearbefore = Carbon::now()->format('Y');
 
         $leave_entitlement = leaveEntitlementModel::select('*')
             ->where('id_employment', '=', Auth::user()->id)

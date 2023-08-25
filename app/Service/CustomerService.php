@@ -4,6 +4,9 @@ namespace App\Service;
 
 use App\Models\Attachments;
 use App\Models\Employee;
+use App\Models\State;
+use App\Models\Country;
+use App\Models\Location;
 use App\Models\JobHistory;
 use App\Models\Customer;
 use App\Models\Subscription;
@@ -23,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+
 class CustomerService
 {
     public function customerView()
@@ -33,6 +37,63 @@ class CustomerService
         {
             $data = [];
         }
+
+        return $data;
+    }
+
+    public function customerCountry()
+    {
+        $data = Country::all();
+
+        return $data;
+    }
+
+    public function customerState()
+    {
+        $data = State::all();
+
+        return $data;
+    }
+
+    public function customerCity()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function customerPostcode()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function getStatebyCountry($id = '')
+    {
+        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+            ->where('location_states.country_id', $id)
+            ->get();
+
+        return $data;
+    }
+
+    public function getCitybyState($id = '')
+    {
+        $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_cities.state_id', $id)
+            ->groupBy('location_cities.name')
+            ->get();
+
+        return $data;
+    }
+
+    public function getPostcodeByCity($id = '')
+    {
+
+        $data = Location::select('*')
+            ->where('name', $id)
+            ->get();
 
         return $data;
     }
@@ -57,6 +118,13 @@ class CustomerService
         $address2 = $input['address2'] ?? null;
         // $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
         
+        $getid = Location::select('id')
+            ->where('country_id', '=', $input['country'])
+            ->where('state_id', '=', $input['state'])
+            ->where('name', '=', $input['city'])
+            ->where('postcode', '=', $input['postcode'])
+            ->first();
+
         Customer::create($input);
         $data['americass'] = americas();
         $data['asias'] = asias();
@@ -83,6 +151,12 @@ class CustomerService
         // }
         $input['update_by'] = Auth::user()->id;
         $address2 = $input['address2'] ?? null;
+        $getid = Location::select('id')
+            ->where('country_id', '=', $input['country'])
+            ->where('state_id', '=', $input['state'])
+            ->where('name', '=', $input['city'])
+            ->where('postcode', '=', $input['postcode'])
+            ->first();
 
         Customer::where('id', $id)->update($input);
 
@@ -90,8 +164,8 @@ class CustomerService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Update Status';
-        $data['americass'] = americas();
-        $data['asias'] = asias();
+        // $data['americass'] = americas();
+        // $data['asias'] = asias();
         return $data;
     }
 

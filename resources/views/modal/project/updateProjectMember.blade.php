@@ -7,30 +7,15 @@
             </div>
             <div class="modal-body">
                 <form id="editProjectMemberForm">
-
                     <div class="row">
-                        <div class="col-md-6">
-                            <label class="form-label col-form-label col-md-4">Joined Date*</label>
-                        </div>
-
-
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-6">Project Member Name*</label>
                         </div>
-
-
-                    </div>
-
-                    <div class="row mb-15px">
-
                         <div class="col-md-6">
-                            <input type="hidden" value="{{$project->id}}" name="project_id">
-                            <input type="hidden" id="idPM">
-                            <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
-                            <input type="text" class="form-control" name="joined_date" id="joined_date"  placeholder="YYYY/MM/DD" />
-
+                            <label class="form-label col-form-label col-md-4">Joined Date*</label>
                         </div>
-                        
+                    </div>
+                    <div class="row mb-15px">
                         <div class="col-md-6">
                             <select class="selectpicker form-control" id="employee_idE" name="employee_id" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
@@ -39,24 +24,22 @@
                               @endforeach
                             </select>
                         </div>
-
-
+                        <div class="col-md-6">
+                            <input type="hidden" value="{{$project->id}}" name="project_id">
+                            <input type="hidden" id="idPM">
+                            <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
+                            <input type="text" class="form-control" name="joined_date" id="joined_date" placeholder="YYYY/MM/DD" />
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Designation</label>
                         </div>
-
-
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Department</label>
                         </div>
-
-
                     </div>
                     <div class="row mb-15px">
-
                         <div class="col-md-6">
                             <select class="form-select" name="designation" id="designationE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""> </option>
@@ -66,36 +49,25 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <div class="col-md-6">
                             <select class="form-select" id="departmentE" name="department" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""></option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
-                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
+                                <option value="{{$department->id}}" >{{ $department->departmentName }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-
                     </div>
-
-
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Branch</label>
                         </div>
-
-
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Unit</label>
                         </div>
-
-
                     </div>
-
                     <div class="row mb-15px">
-
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""></option>
@@ -104,9 +76,7 @@
                                 <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
                                 @endforeach
                             </select>
-
                         </div>
-
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unitE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""></option>
@@ -116,14 +86,10 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                     </div>
-
                     <div class="row">
                         <label class="form-label col-form-label col-md-12">Select Location</label>
                     </div>
-
                     <div class="row mb-15px">
                         <div class="col-md-12">
                             <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
@@ -132,12 +98,8 @@
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
                             @endforeach
                             </select> 
-
                         </div>
-
-
                     </div>
-                    
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-check form-switch">
