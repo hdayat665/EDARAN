@@ -410,6 +410,7 @@ class myClaimController extends Controller
 
         $data['GNC'] = $mcs->getGeneralClaimDataById($id);
         // pr($data['GNC']);
+        // dd($data);
         $data['details'] = getGNCDetailByGeneralId($id);
 
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();

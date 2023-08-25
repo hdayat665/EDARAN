@@ -121,7 +121,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateAnualLeave/",
+                        url: "/updateAnualLeave",
                         data: data,
                         dataType: "json",
 
@@ -159,7 +159,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateSickLeave/",
+                        url: "/updateSickLeave",
                         data: data,
                         dataType: "json",
 
@@ -197,7 +197,7 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateCarryForward/",
+                        url: "/updateCarryForward",
                         data: data,
                         dataType: "json",
 

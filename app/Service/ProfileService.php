@@ -78,7 +78,11 @@ class ProfileService
 
             if ($input['fullName']) {
                 $employee['employeeName'] = $input['fullName'];
+                Employee::where('user_id', $user_id)->update($employee);
+            }
 
+            if ($input['personalEmail']) {
+                $employee['employeeEmail'] = $input['personalEmail'];
                 Employee::where('user_id', $user_id)->update($employee);
             }
 
@@ -92,6 +96,8 @@ class ProfileService
             {
                 $input['okuStatus'] = null;
                 $input['okuCardNum'] = null;
+                $input['okuFile'] = null;
+
             }
 
             if(!isset($input['passport']))
@@ -102,9 +108,7 @@ class ProfileService
             }
 
             if ($input['username']) {
-
                 $username['username'] = $input['username'];
-
                 Users::where('id', $user_id)->update($username);
             }
 
@@ -117,10 +121,10 @@ class ProfileService
                 }
             }
 
-            if (isset($_FILES['okuFile']['name'])) {
+            if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
                 $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-            } else {
+            } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
                 $input['okuFile'] = null;
             }
 
@@ -129,9 +133,8 @@ class ProfileService
                 $input['idNo'] = null;
             }
 
+
             UserProfile::where('user_id', $user_id)->update($input);
-            // $profileEmployment->fill($input);
-            // $profileEmployment->save();
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
@@ -166,8 +169,6 @@ class ProfileService
 
         return $data;
     }
-
-
 
     public function getEducation($id = '')
     {
@@ -448,13 +449,12 @@ class ProfileService
                 }
             }
 
-            if (isset($_FILES['okuID']['name'])) {
+            if (isset($_FILES['okuID']['name']) && !empty($_FILES['okuID']['name'])) {
                 $payslip = upload(request()->file('okuID'));
                 $input['okuID'] = $payslip['filename'];
-            } else {
+            } elseif (isset($_FILES['okuID']['name']) && empty($_FILES['okuID']['name']) && isset($_POST['okuID_disabled'])) {
                 $input['okuID'] = null;
             }
-
 
             if(!$input['DOM'])
             {
@@ -500,10 +500,6 @@ class ProfileService
                 $input['issuingCountry'] = null;
             }
 
-            // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
-            // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
-            // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
-            // $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
             $id = $input['id'];
             UserCompanion::where('id', $id)->update($input);
 
@@ -528,7 +524,7 @@ class ProfileService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Max Companion can add only 4';
+            $data['msg'] = 'You have exceeded the maximum companion data.';
 
         } else {
 
@@ -651,10 +647,10 @@ class ProfileService
                 }
             }
 
-            if (isset($_FILES['okuFile']['name'])) {
-                $payslip = upload($r()->file('okuFile'));
+            if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
+                $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-            } else {
+            } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
                 $input['okuFile'] = null;
             }
 
@@ -806,6 +802,7 @@ class ProfileService
 
         $id = $input['id'] ?? 1;
 
+
         if ($_FILES['idFile']['name'])
         {
             $idAttachment = upload($r->file('idFile'));
@@ -816,32 +813,19 @@ class ProfileService
             }
         }
 
-        if(!isset($input['non_citizen']))
-        {
-            $input['non_citizen'] = null;
+        if (isset($_FILES['okuFile']['name']) && !empty($_FILES['okuFile']['name'])) {
+            $payslip = upload(request()->file('okuFile'));
+            $input['okuFile'] = $payslip['filename'];
+        } elseif (isset($_FILES['okuFile']['name']) && empty($_FILES['okuFile']['name']) && isset($_POST['okuFile_disabled'])) {
+            $input['okuFile'] = null;
         }
-
-        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
-            $input['idNo'] = null;
-        }
-
 
         if(!isset($input['oku_status']))
-        {
-            $input['oku_status'] = null;
-        }
-
-        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
-            $input['okuFile'] = null;
-            $input['okuCardNum'] = null;
-        }
-
-        if (isset($_FILES['okuFile']['name'])) {
-            $idOKU = upload(request()->file('okuFile'));
-            $input['okuFile'] = $idOKU['filename'];
-        } else {
-            $input['okuFile'] = null;
-        }
+            {
+                $input['oku_status'] = null;
+                $input['okuFile'] = null;
+                $input['okuCardNum'] = null;
+            }
 
         if(!isset($input['passport']))
         {
@@ -849,6 +833,18 @@ class ProfileService
             $input['expiryDate'] = null;
             $input['issuingCountry'] = null;
         }
+
+        if(!isset($input['idNo']))
+        {
+            $input['idNo'] = null;
+
+        }
+
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
 
         $user = UserParent::where('id', $id)->first();
 

@@ -10,20 +10,19 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var EmployeeData = getEmployeeByJobHistory(id);
 
+
         EmployeeData.then(function (data) {
             // $("input").val("");
 
             statusData = data.data;
-            // console.log(statusData);
+            console.log(statusData);
             $("#employeeId").val(statusData.employeeId);
             $("#employeeName").val(statusData.employeeName);
             $("#employeeEmail").val(statusData.employeeEmail);
-            $("#report_to").val(statusData.report_to);
-
+            $("#report_to").val(statusData.fullName);
             $("#effectiveFrom").val(statusData.effectiveFrom);
             $("#remarks").val(statusData.remarks);
             $("#employmentDetail").val(statusData.employmentDetail);
-            $("#report_to").val(statusData.report_to);
             if (statusData.file) {
                 $("#attachment").html(
 
@@ -31,6 +30,16 @@ $(document).ready(function () {
                 );
             }
 
+            // statusData.forEach(function(data) {
+            //     if (data.file) {
+            //         const attachmentLink = '<a href="/storage/' + data.file + '" target="_blank">here</a><br>';
+            //         $("#attachment").append(attachmentLink);
+            //     }
+            // });
+
+            // $.each($('#attachment'), function() {
+            //     '<a href="/storage/' + statusData.file + '" target="_blank">here</a>'
+            //   });
 
 
             $("#idc").val(statusData.id);

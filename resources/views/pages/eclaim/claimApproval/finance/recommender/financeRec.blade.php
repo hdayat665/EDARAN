@@ -5,32 +5,32 @@
         <div class="panel panel" id="financeRecJs">
             <div class="panel-body">
                 <!-- <div class="form-control">
-                    <h3>Claim Overview</h3>
-                    <div class="row p-2">
-                        <div class="col-sm-3">
-                            <h3 class="text-center">Total <br> Claims:</h3>
-                            <h3 class="text-center text-primary ">2</h3>
-                        </div>
+                                <h3>Claim Overview</h3>
+                                <div class="row p-2">
+                                    <div class="col-sm-3">
+                                        <h3 class="text-center">Total <br> Claims:</h3>
+                                        <h3 class="text-center text-primary ">2</h3>
+                                    </div>
 
-                        <div class="col-sm-3">
+                                    <div class="col-sm-3">
 
-                            <h3 class="text-center">Total <br> Pending Claims:</h3>
-                            <h3 class="text-center text-primary">3</h3>
-                        </div>
+                                        <h3 class="text-center">Total <br> Pending Claims:</h3>
+                                        <h3 class="text-center text-primary">3</h3>
+                                    </div>
 
-                        <div class="col-sm-3">
+                                    <div class="col-sm-3">
 
-                            <h3 class="text-center">Total <br> Rejected Claims</h3>
-                            <h3 class="text-center text-primary">6</h3>
-                        </div>
+                                        <h3 class="text-center">Total <br> Rejected Claims</h3>
+                                        <h3 class="text-center text-primary">6</h3>
+                                    </div>
 
-                        <div class="col-sm-3">
+                                    <div class="col-sm-3">
 
-                            <h3 class="text-center">Total <br> Closed Claims:</h3>
-                            <h3 class="text-center text-primary">0</h3>
-                        </div>
-                    </div>
-                </div> -->
+                                        <h3 class="text-center">Total <br> Closed Claims:</h3>
+                                        <h3 class="text-center text-primary">0</h3>
+                                    </div>
+                                </div>
+                            </div> -->
                 <br>
 
                 <div class="form-control">
@@ -134,6 +134,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-content panel p-3 rounded">
                         @include('pages.eclaim.claimApproval.finance.recommender.tab1')
                         @include('pages.eclaim.claimApproval.finance.recommender.tab2')

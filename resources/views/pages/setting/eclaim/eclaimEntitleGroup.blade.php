@@ -4,9 +4,6 @@
         <h1 class="page-header">Setting <small>| Entitlement Group</small></h1>
         <div class="panel panel" id="entitleJs">
             <div class="panel-body">
-                <div class="row">
-                    <h3>Entitlement Group List</h3>
-                </div>
                 <div class="row p-2">
                     <div class="form-check">
                         <a href="/setting/eclaimEntitleGroupAddView" type="button" class="btn btn-primary " name="" id=""><i class="fa fa-plus"></i> Entitlement Group</a>

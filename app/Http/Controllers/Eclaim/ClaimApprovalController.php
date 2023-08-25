@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Auth;
 class ClaimApprovalController extends Controller
 {
     public function claimApprovalView($type = '')
-    { 
+    {
         $mcs = new ClaimApprovalService;
 
         $data['claims'] = $mcs->getGeneralClaim($type);
         $data['config'] = $mcs->getApprovalConfig($type, 'monthly');
         $data['date'] = $mcs->getBucketDate();
-        
+
         $view = getViewForClaimApproval($type);
 
         return view('pages.eclaim.claimApproval.' . $view, $data);
@@ -26,7 +26,7 @@ class ClaimApprovalController extends Controller
     {
         $msc = new ClaimApprovalService;
 
-        $data = $msc->updateStatusClaim($r, $id, $status, $stage,$desc);
+        $data = $msc->updateStatusClaim($r, $id, $status, $stage, $desc);
 
         return response()->json($data);
     }
@@ -75,15 +75,15 @@ class ClaimApprovalController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $data['user_id'] = $data['general']->user_id ?? '';
-        
+
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
-       
+
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id) ?? [];
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -123,7 +123,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -143,7 +143,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -200,9 +200,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -214,14 +214,14 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
-        
+
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
         $data['details'] = getGNCDetailByGeneralId($id);
@@ -241,7 +241,7 @@ class ClaimApprovalController extends Controller
         $data['claimData'] = $mcs->getGeneralClaimDataById($id);
         $data['getadmin'] = $mcs->getDomainRoleAdmin();
         $data['getfinance'] = $mcs->getDomainRoleFinance();
- 
+
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
@@ -292,7 +292,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -312,7 +312,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -369,9 +369,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -383,10 +383,10 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
@@ -403,7 +403,7 @@ class ClaimApprovalController extends Controller
         } else {
             $view = 'hodClaimDetailGnc';
         }
-        
+
         return view('pages.eclaim.claimApproval.' . $view, $data);
     }
 
@@ -414,14 +414,14 @@ class ClaimApprovalController extends Controller
         $result = $mcs->supervisorDetailClaimView($id);
         $data['gncs'] = $result['general'];
         $data['checkers'] = getFinanceChecker();
-        
+
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['user'] = $mcs->getUserData($data['general']->user_id);
         $data['claimData'] = $mcs->getGeneralClaimDataById($id);
         $data['getadmin'] = $mcs->getDomainRoleAdmin();
         $data['getfinance'] = $mcs->getDomainRoleFinance();
- 
+
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
@@ -471,7 +471,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -491,7 +491,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -548,9 +548,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -562,10 +562,10 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
@@ -622,12 +622,12 @@ class ClaimApprovalController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $data['user_id'] = $data['general']->user_id ?? '';
-        
+
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
@@ -669,7 +669,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -689,7 +689,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -746,9 +746,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -760,14 +760,14 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
-        
+
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
         $data['details'] = getGNCDetailByGeneralId($id);
@@ -798,12 +798,12 @@ class ClaimApprovalController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $data['user_id'] = $data['general']->user_id ?? '';
-        
+
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
@@ -845,7 +845,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -865,7 +865,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -922,9 +922,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -936,14 +936,14 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
-        
+
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
         $data['details'] = getGNCDetailByGeneralId($id);
@@ -1049,12 +1049,12 @@ class ClaimApprovalController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $data['user_id'] = $data['general']->user_id ?? '';
-        
+
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
@@ -1096,7 +1096,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -1116,7 +1116,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -1173,9 +1173,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -1187,14 +1187,14 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
-        
+
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
         $data['details'] = getGNCDetailByGeneralId($id);
@@ -1214,7 +1214,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-        
+
         $data['general'] = $result['claim'];
         $data['cashAdvances'] = $mcs->getUsedCashAdvance($id);
         $data['travels'] = $result['travel'];
@@ -1226,12 +1226,12 @@ class ClaimApprovalController extends Controller
         $data['getfinance'] = $mcs->getDomainRoleFinance();
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
-        
+
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $data['user_id'] = $data['general']->user_id ?? '';
-        
+
         $data['lessCash'] = $mcs->getlessCashClaimByGeneralId($id) ?? 0;
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id) ?? [];
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id) ?? [];
@@ -1273,7 +1273,7 @@ class ClaimApprovalController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
 
-        $carValue = $data['totalCar'][0]->total_km ??0;
+        $carValue = $data['totalCar'][0]->total_km ?? 0;
 
         $ansCar = 0;
 
@@ -1293,7 +1293,7 @@ class ClaimApprovalController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
 
-        $data['ansCar']= $ansCar ;
+        $data['ansCar'] = $ansCar;
 
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -1350,9 +1350,9 @@ class ClaimApprovalController extends Controller
             $ansMotor = $MotorValue * $firstpricemotor;
         }
 
-        $data['ansMotor']= $ansMotor;
+        $data['ansMotor'] = $ansMotor;
 
-        $totalcarmotor = $ansMotor +$ansCar;
+        $totalcarmotor = $ansMotor + $ansCar;
 
         $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
         $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
@@ -1364,14 +1364,14 @@ class ClaimApprovalController extends Controller
         $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
         $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking +$totalLaundry;
-        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking + $totalLaundry;
+        $totalTravellings = $totalPetrol + $totalParking + $totalToll + $totalcarmotor;
         // Add the sum to the $data array
         $data['sum'] = $sum;
         $data['totalcarmotor'] = $totalcarmotor;
-        
+
         $data['totalTravellings'] = $totalTravellings;
         //pr($data['totalcarmotor']);
         $data['details'] = getGNCDetailByGeneralId($id);
@@ -1446,8 +1446,13 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
+        // dd($data);
         $data['mode'] = $mcs->cashAdvanceApproverModeTransport($id);
-        
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
+
+        // dd($data);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
         //pr($data['mode']);
         if ($type == 1) {
@@ -1493,6 +1498,10 @@ class ClaimApprovalController extends Controller
         $data['checkers'] = getFinanceChecker();
         $data['ca'] = $result['general'];
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
@@ -1528,6 +1537,10 @@ class ClaimApprovalController extends Controller
         $data['ca'] = $result['general'];
 
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
@@ -1562,6 +1575,10 @@ class ClaimApprovalController extends Controller
         $result = $mcs->cashAdvanceFcheckerDetail($id);
         $data['ca'] = $result['general'];
         $data['check'] = $result['check'];
+
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
@@ -1615,7 +1632,7 @@ class ClaimApprovalController extends Controller
     public function skipAllClaim(Request $r)
     {
         $ss = new ClaimApprovalService;
-        
+
         $result = $ss->skipAllClaim($r);
 
         return response()->json($result);
@@ -1623,7 +1640,7 @@ class ClaimApprovalController extends Controller
     public function skipAllClaimApp(Request $r)
     {
         $ss = new ClaimApprovalService;
-        
+
         $result = $ss->skipAllClaimApp($r);
 
         return response()->json($result);
@@ -1636,19 +1653,19 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
-    public function updateTravelMtcAdminRec(Request $r,$id = '')
+    public function updateTravelMtcAdminRec(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcAdminRec($r,$id = '');
+        $result = $ps->updateTravelMtcAdminRec($r, $id = '');
 
         return response()->json($result);
     }
-    public function updateTravelMtcAdminApp(Request $r,$id = '')
+    public function updateTravelMtcAdminApp(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcAdminApp($r,$id = '');
+        $result = $ps->updateTravelMtcAdminApp($r, $id = '');
 
         return response()->json($result);
     }
@@ -1691,11 +1708,11 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    public function updateTravelMtcSuperVApp(Request $r,$id = '')
+    public function updateTravelMtcSuperVApp(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcSuperVApp($r,$id = '');
+        $result = $ps->updateTravelMtcSuperVApp($r, $id = '');
 
         return response()->json($result);
     }
@@ -1709,12 +1726,12 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    
-    public function updateTravelMtcSuperVRec(Request $r,$id = '')
+
+    public function updateTravelMtcSuperVRec(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcSuperVRec($r,$id = '');
+        $result = $ps->updateTravelMtcSuperVRec($r, $id = '');
 
         return response()->json($result);
     }
@@ -1738,11 +1755,11 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    public function updateTravelMtcFinanRec(Request $r,$id = '')
+    public function updateTravelMtcFinanRec(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcFinanRec($r,$id = '');
+        $result = $ps->updateTravelMtcFinanRec($r, $id = '');
 
         return response()->json($result);
     }
@@ -1757,7 +1774,7 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    
+
     public function updateOtherMtcFinanRec(Request $r)
     {
         $ps = new ClaimApprovalService;
@@ -1767,11 +1784,11 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    public function updateTravelMtcFinanApp(Request $r,$id = '')
+    public function updateTravelMtcFinanApp(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcFinanApp($r,$id = '');
+        $result = $ps->updateTravelMtcFinanApp($r, $id = '');
 
         return response()->json($result);
     }
@@ -1785,7 +1802,7 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    
+
     public function updateOtherMtcFinanApp(Request $r)
     {
         $ps = new ClaimApprovalService;
@@ -1794,12 +1811,12 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
-    
-    public function updateTravelMtcFinanChk(Request $r,$id = '')
+
+    public function updateTravelMtcFinanChk(Request $r, $id = '')
     {
         $ps = new ClaimApprovalService;
 
-        $result = $ps->updateTravelMtcFinanChk($r,$id = '');
+        $result = $ps->updateTravelMtcFinanChk($r, $id = '');
 
         return response()->json($result);
     }
@@ -1824,7 +1841,7 @@ class ClaimApprovalController extends Controller
         return response()->json($result);
     }
 
-    public function updateCheckMtc(Request $r, $id , $date, $level)
+    public function updateCheckMtc(Request $r, $id, $date, $level)
     {
         $msc = new ClaimApprovalService;
 
@@ -1833,7 +1850,7 @@ class ClaimApprovalController extends Controller
         return response()->json($data);
     }
 
-    
+
     public function updateSubsMtcSuperVApp(Request $r)
     {
         $ps = new ClaimApprovalService;

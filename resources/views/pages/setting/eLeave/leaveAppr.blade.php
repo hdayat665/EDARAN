@@ -1,14 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en" >
-	
+
 <head>
 	<meta charset="utf-8" />
 	<title>OrbitHRM | Timesheet </title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+
     <link rel="shortcut icon" href="../assets/img/logo/orbit-sm.png" >
 	<!-- ================== BEGIN core-css ================== -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="../assets/css/vendor.min.css" rel="stylesheet" />	<link href="../assets/css/vendor.min.css" rel="stylesheet" />
 	<link href="../assets/css/default/app.min.css" rel="stylesheet" />
 	<!-- ================== END core-css ================== -->
-	
+
 	<!-- ================== BEGIN page-css ================== -->
 	<link href="../assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
 	<link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
@@ -48,7 +48,7 @@
 			<!-- END navbar-header -->
 			<!-- BEGIN header-nav -->
 			<div class="navbar-nav">
-				
+
 				<div class="navbar-item dropdown">
 					<a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
 						<i class="fa fa-bell"></i>
@@ -111,10 +111,10 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="navbar-item navbar-user dropdown">
 					<a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-						<img src="../assets/img/user/user-13.jpg" alt="" /> 
+						<img src="../assets/img/user/user-13.jpg" alt="" />
 						<span>
 							<span class="d-none d-md-inline">Adam Schwartz</span>
 							<b class="caret"></b>
@@ -124,7 +124,7 @@
 						<a href="javascript:;" class="dropdown-item">Edit Profile</a>
 						<a href="javascript:;" class="dropdown-item d-flex align-items-center">
 							Inbox
-							<span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span> 
+							<span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
 						</a>
 						<a href="javascript:;" class="dropdown-item">Calendar</a>
 						<a href="javascript:;" class="dropdown-item">Setting</a>
@@ -136,7 +136,7 @@
 			<!-- END header-nav -->
 		</div>
 		<!-- END #header -->
-	
+
 		<!-- BEGIN #sidebar -->
 		<div id="sidebar" class="app-sidebar bg-gradient-gray">
 			<!-- BEGIN scrollbar -->
@@ -166,7 +166,7 @@
                             <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
 						</a>
-                        
+
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="/hris/myprofile" class="menu-link">
@@ -268,7 +268,7 @@
                             <div class="menu-icon">
                                 <i class="fa fa-user-cog text-gray"></i>
                             </div>
-                            <div class="menu-text text-gray">E-Leave</div>
+                            <div class="menu-text text-gray">eLeave</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
@@ -347,7 +347,7 @@
 							<div class="menu-icon">
 								<i class="fa fa-file-lines text-gray"></i>
 							</div>
-							<div class="menu-text text-gray">E-Claim</div> 
+							<div class="menu-text text-gray">eClaim</div>
 							<div class="menu-caret text-gray"></div>
 						</a>
 						<div class="menu-submenu">
@@ -367,7 +367,7 @@
 									<div class="menu-text text-gray">Claim Approval</div>
 								</a>
 							</div>
-							
+
 						</div>
 					</div>
 
@@ -458,7 +458,7 @@
                                 </a>
                             </div>
                                 </div>
-                                
+
                             </div>
                             <div class="menu-item has-sub">
                                 <a href="#" class="menu-link">
@@ -484,17 +484,17 @@
                                     <div class="menu-text text-gray">Status Report</div>
                                 </a>
                             </div>
-                            
+
                         </div>
-                                
-                                
+
+
                             </div>
                             <div class="menu-item">
 								<a href="#" class="menu-link">
 								<div class="menu-icon">
 								<i class="fa fa-user-minus text-gray"></i>
 							</div>
-									<div class="menu-text text-gray">E-Leave</div>
+									<div class="menu-text text-gray">eLeave</div>
 								</a>
 							</div>
 
@@ -522,9 +522,9 @@
                                     <div class="menu-text text-gray">Project Status</div>
                                 </a>
                             </div>
-                            
+
                                 </div>
-                                
+
 							</div>
                             <div class="menu-item has-sub">
 								<a href="#" class="menu-link">
@@ -551,7 +551,7 @@
                                     <div class="menu-text text-gray">Cash Advance</div>
                                 </a>
                             </div>
-                            
+
                                 </div>
 							</div>
                         </div>
@@ -573,7 +573,7 @@
 
 					<!-- End Sidenav Content Orbit -->
 
-					
+
 					<!-- BEGIN minify-button -->
 					<!-- <div class="menu-item d-flex text-gray">
 						<a href="javascript:;" class="app-sidebar-minify-btn ms-auto text-gray" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
@@ -587,21 +587,21 @@
 		<div class="app-sidebar-bg"></div>
 		<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
 		<!-- END #sidebar -->
-		
+
 		<!-- BEGIN #content -->
 		<div id="content" class="app-content">
 			<!-- BEGIN breadcrumb -->
 			<!-- BEGIN breadcrumb -->
-	
+
 	<!-- END breadcrumb -->
 	<!-- BEGIN page-header -->
-	
+
 	<!-- END page-header -->
 	<!-- BEGIN row -->
-	
+
 	<!-- END breadcrumb -->
 	<!-- BEGIN page-header -->
-	<h1 class="page-header">E-Leave <small>| Leave Approval </small></h1>
+	<h1 class="page-header">eLeave <small>| Leave Approval </small></h1>
 	<!-- END page-header -->
 
 	<!-- BEGIN panel -->
@@ -609,14 +609,14 @@
 
 		<!-- BEGIN panel-heading -->
 		<div class="panel-body">
-		    <div class="form-control">	
+		    <div class="form-control">
 		        <h3>Leave Approval</h3>
 		        <br>
-                
+
                 <div class="align-items-center" type="checkbox" data-toggle="toggle">
                     <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                     <i class="fa fa-filter"></i>
-                    </button>  
+                    </button>
                     <div id="collapseOne" class="form-control collapse hidden">
                         <h5>Filter</h5><br>
                         <table>
@@ -624,7 +624,7 @@
                                 <div class="row-5">
                                     <label for="date">Date</label>
                                     <label for="empname">Employee Name</label>
-                                    <label for="tol">Type Of Leave</label><br> 
+                                    <label for="tol">Type Of Leave</label><br>
                                 </div>
                                 <div class="row-5">
                                     <input type="date">
@@ -672,7 +672,7 @@
                 </div>
 
                 <br><br>
-                
+
                 <table class="table table-striped table-bordered align-middle">
                 <tr>
                     <th>Action</th>
@@ -684,7 +684,7 @@
                     <th>Total Days Applied</th>
                     <th>Status</th>
                 </tr>
-                <tr> 
+                <tr>
                     <td >
                         <div class="btn-group">
                             <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Action</a>
@@ -696,7 +696,7 @@
                                 <a class="dropdown-item" href="#">View Calendar</a>
                             </ul>
                         </div>
-                        
+
                     </td>
                     <td>14/08/2022</td>
                     <td>Noraliya Azman</td>
@@ -705,7 +705,7 @@
                     <td>02/09/2022</td>
                     <td>2</td>
                     <td>Pending</td>
-                </tr>     
+                </tr>
                 </table>
             </div>
 
@@ -713,14 +713,14 @@
 	</div>
 
 	<!-- END row -->
-	
+
 	<!-- END #app -->
-	
+
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="../assets/js/vendor.min.js"></script>
 	<script src="../assets/js/app.min.js"></script>
 	<!-- ================== END core-js ================== -->
-	
+
 	<!-- ================== BEGIN page-js ================== -->
 	<script src="../assets/plugins/d3/d3.min.js"></script>
 	<script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script>
