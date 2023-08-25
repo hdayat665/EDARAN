@@ -2488,7 +2488,32 @@ class SettingService
             }
 
             $data4 = $getCarryForward->lapsed_date;
-            $data5 = $getCarryForward->max_duration;
+
+            $yearbefore = Carbon::now()->subYear()->format('Y');
+
+            $checkcurrententitlementbefore = leaveEntitlementModel::select('current_entitlement')
+            ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_entitlement.id_employment', '=', $user_id)
+            ->whereYear('leave_entitlement.le_year', '=', $yearbefore)
+            ->first();
+
+            if ($checkcurrententitlementbefore) {
+                $currentEntitlement = $checkcurrententitlementbefore->current_entitlement;
+
+                // Gantikan angka 5 dengan nilai max_duration dari $getCarryForward
+                $maxDuration = $getCarryForward->max_duration;
+
+                if ($currentEntitlement >= $maxDuration) {
+                    $data5 = $maxDuration;
+                } elseif ($currentEntitlement > 0) {
+                    $data5 = $currentEntitlement;
+                } else {
+                    $data5 = 0;
+                }
+            } else {
+                $data5 = 0;
+            }
+
             $data6 = $currentDateCarbon->format('Y-m-d');
             $data7 = Auth::user()->tenant_id;
 
