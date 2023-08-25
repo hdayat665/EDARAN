@@ -31,43 +31,56 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
+        if (isset($r['username'])) {
+            // $user = Users::join('userprofile', 'users.id', '=', 'userprofile.user_id')
+            //     ->where('users.tenant_id', Auth::user()->tenant_id)
+            //     ->where('userprofile.personalEmail', $r['personalEmail'])
+            //     ->where('users.status', 'active')
+            //     ->select('users.*', 'userprofile.personalEmail')
+            //     ->first();
+            $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
-        if ($user) {
+
+            if ($user) {
+                $data['status'] = false;
+                $data['title'] = 'Error';
+                $data['type'] = 'error';
+                $data['msg'] = 'email already exists';
+            } else {
+                $user['type'] = 'employee';
+                $user['status'] = 'not complete';
+                $user['username'] = $r['username'];
+                $user['tenant_id'] = Auth::user()->tenant_id;
+                $user['tenant'] = Auth::user()->tenant;
+                $user['password'] = Hash::make('password');
+
+                Users::create($user);
+
+                $user = Users::where('username', $r['username'])->first();
+
+                $input['user_id'] = $user->id;
+                $input['DOB'] = date_format(date_create($input['DOB']), "Y/m/d H:i:s");
+                $input['expiryDate'] = date_format(date_create($input['expiryDate']), "Y/m/d H:i:s");
+                $input['tenant_id'] = Auth::user()->tenant_id;
+
+                UserProfile::create($input);
+
+                $data['status'] = true;
+                $data['title'] = 'Success';
+                $data['type'] = 'success';
+                $data['msg'] = 'Employee Profile is created';
+                $data['data'] = UserProfile::where('user_id', $user->id)->first();
+            }
+        } else {
+            // Handle the case when personalEmail is not provided
             $data['status'] = false;
             $data['title'] = 'Error';
             $data['type'] = 'error';
-            $data['msg'] = 'email already exist';
-        } else {
-            $user['type'] = 'employee';
-            $user['status'] = 'not complete';
-            $user['username'] = $r['username'];
-            $user['tenant_id'] = Auth::user()->tenant_id;
-            $user['tenant'] = Auth::user()->tenant;
-            $user['type'] = 'employee';
-            $user['password'] = Hash::make('password');
-
-            Users::create($user);
-
-            $user = Users::where('username', $r['username'])->first();
-
-            $input['user_id'] = $user->id;
-            $input['DOB'] = date_format(date_create($input['DOB']), "Y/m/d H:i:s");
-            $input['expiryDate'] = date_format(date_create($input['expiryDate']), "Y/m/d H:i:s");
-            $input['tenant_id'] = Auth::user()->tenant_id;
-
-            UserProfile::create($input);
-
-            $data['status'] = true;
-            $data['title'] = 'Success';
-            $data['type'] = 'success';
-            $data['msg'] = 'Success Create User Profile';
-            $data['data'] = UserProfile::where('user_id', $user->id)->first();
+            $data['msg'] = 'Personal Email is required';
         }
 
         return $data;
     }
-
 
     public function addAddress($r)
     {
@@ -115,7 +128,7 @@ class EmployeeService
         $data['status'] = true;
         $data['title'] = 'Success';
         $data['type'] = 'success';
-        $data['msg'] = 'Success Create Address';
+        $data['msg'] = 'Address is created';
         $data['data'] = UserAddress::where('user_id', $input['user_id'])->first();
 
         return $data;
@@ -127,7 +140,10 @@ class EmployeeService
         $data = [];
         $data['status'] = true;
         $data['msg'] = 'Success Get User Employment';
-        $data['data'] = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['data'] = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
+        ->where('employment.tenant_id', Auth::user()->tenant_id)
+        ->select('employment.*', 'userprofile.fullName')
+        ->get();
 
         return $data;
     }
@@ -137,7 +153,6 @@ class EmployeeService
         $input = $r->input();
         // dd($input);
         $status['status'] = 'terminate';
-
 
         // update status users and employment $table
         Users::where('id', $input['user_id'])->update($status);
@@ -162,21 +177,24 @@ class EmployeeService
         $jobHistory->save();
         $lastInsertedId = $jobHistory->id;
 
-        if ($r->hasFile('file')) {
-            $uploadedFile = $r->file('file');
-            $statusfile = upload($uploadedFile);
+        if ($r->hasFile('files')) {
+            $uploadedFiles = $r->file('files');
 
-            if ($statusfile['filename']) {
-                $attch['file'] = $statusfile['filename'];
+            foreach ($uploadedFiles as $uploadedFile) {
+                $statusFile = upload($uploadedFile);
+
+                if ($statusFile['filename']) {
+                    $attch = [
+                        'file' => $statusFile['filename'],
+                        'user_id' => $input['user_id'],
+                        'type' => 'termination',
+                        'jobHistoryId' => $lastInsertedId,
+                    ];
+
+                    Attachments::create($attch);
+                }
             }
-            $attch['user_id'] = $input['user_id'];
-            $attch['type'] = 'termination';
-            $attch['jobHistoryId'] = $lastInsertedId;
-
-            Attachments::create($attch);
         }
-
-
 
         $data = [];
         $data['status'] = true;
@@ -493,12 +511,15 @@ class EmployeeService
                 }
             }
 
-
-            if (isset($_FILES['okuID']['name'])) {
-                $idOKU = upload($r()->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
-            } else {
+            if (isset($_FILES['okuID']['name']) && !empty($_FILES['okuID']['name'])) {
+                $payslip = upload(request()->file('okuID'));
+                $input['okuID'] = $payslip['filename'];
+            } elseif (isset($_FILES['okuID']['name']) && empty($_FILES['okuID']['name']) && isset($_POST['okuID_disabled'])) {
                 $input['okuID'] = null;
+            }
+
+            if (!$input['DOM']) {
+                unset($input['DOM']);
             }
 
             if (!$input['DOM']) {
@@ -523,6 +544,13 @@ class EmployeeService
 
             if (!$input['address2E']) {
                 unset($input['address2E']);
+            }
+
+            if(!isset($input['okuStatus']))
+            {
+                $input['okuStatus'] = null;
+                $input['okuNumber'] = null;
+                $input['okuID'] = null;
             }
 
             $id = $input['id'];
@@ -1170,7 +1198,7 @@ class EmployeeService
             $data['status'] = true;
             $data['title'] = 'Success';
             $data['type'] = 'success';
-            $data['msg'] = 'Success Create User Employment';
+            $data['msg'] = 'Employment Details is created';
             $data['data'] = Employee::where('user_id', $input['user_id'])->first();
         }
 
@@ -1297,8 +1325,11 @@ class EmployeeService
     {
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
-        $data = Employee::where([['tenant_id', $tenant_id], ['id', $id]])->first();
-        // dd($data);
+        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
+        ->where('employment.tenant_id', $tenant_id)
+        ->where('employment.id', $id)
+        ->select('employment.*' ,'userprofile.fullName')
+        ->first();
         return $data;
     }
 
@@ -1704,11 +1735,6 @@ class EmployeeService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Others Qualification';
 
-            // $data['status'] = config('app.response.error.status');
-            // $data['type'] = config('app.response.error.type');
-            // $data['title'] = config('app.response.error.title');
-            // $data['msg'] = 'user not found';
-
         }
 
         return $data;
@@ -1766,9 +1792,9 @@ class EmployeeService
         $jobstatus = DB::table('jobhistory as jh')
         ->select('jh.id', 'e.employeeId', 'e.user_id', 'e.employeeName', 'e.employeeEmail', 'e.effectiveFrom', 'e.report_to',
             'jh.employmentDetail', 'jh.remarks', 'jh.statusHistory', 'a1.file' ,'up.fullName')
-        ->join('employment as e', 'jh.user_id', '=', 'e.user_id')
-        ->join('userprofile as up', 'e.report_to', '=', 'up.id')
-        ->join('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
+        ->leftjoin('employment as e', 'jh.user_id', '=', 'e.user_id')
+        ->leftjoin('userprofile as up', 'e.report_to', '=', 'up.id')
+        ->leftjoin('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
         ->where('jh.id', $id)
         ->get();
 
@@ -1795,11 +1821,11 @@ class EmployeeService
         $data['data'] =  DB::table('jobhistory as jh')
         ->select('jh.id', 'e.employeeId', 'e.user_id', 'e.employeeName', 'e.employeeEmail', 'e.effectiveFrom', 'e.report_to',
             'jh.employmentDetail', 'jh.remarks', 'jh.statusHistory', 'a1.file' ,'up.fullName')
-        ->join('employment as e', 'jh.user_id', '=', 'e.user_id')
-        ->join('userprofile as up', 'e.report_to', '=', 'up.id')
-        ->join('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
+        ->leftjoin('employment as e', 'jh.user_id', '=', 'e.user_id')
+        ->leftjoin('userprofile as up', 'e.report_to', '=', 'up.id')
+        ->leftjoin('attachments as a1', 'a1.jobHistoryId', '=', 'jh.id')
         ->where('jh.id', $id)
-            ->first();
+        ->first();
         $data['msg'] = 'Success Get Job History Data';
 
         return $data;

@@ -46,6 +46,13 @@ class cashAdvanceController extends Controller
         $mcs = new myClaimService;
 
         $data['cashClaim'] = $mcs->getCashAdvanceById($id);
+        // dd($data);
+        
+        $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
+        $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
+        $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
+
+
 
         return view('pages.eclaim.viewCashAdvance', $data);
     }

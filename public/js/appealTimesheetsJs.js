@@ -135,8 +135,9 @@ $(document).ready(function () {
 
             if (data.file) {
                 var fileName = data.file.split('/').pop(); // Extract the file name from the file path
-                $("#filedownloadappeal").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
+                $("#filedownloadappeal").html('<a href="/storage/' + data.file + '" target="_blank">Download ' + fileName + '</a>');
               }
+              
         });
         $("#viewapprover").modal("show");
     });

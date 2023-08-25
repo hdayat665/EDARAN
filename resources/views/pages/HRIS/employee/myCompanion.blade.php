@@ -16,7 +16,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
+                                    <input class="form-check-input" value="on" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-check form-switch">
                                             <label for="citizen" class="form-label">Non-Citizen?</label>
-                                            <input class="form-check-input partCheck2" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonNetizen1" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen">
+                                            <input class="form-check-input partCheck2" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonNetizen1" value="on" type="checkbox" role="switch" id="citizen">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -384,6 +384,9 @@
                             <div class="col-sm-6">
                                 <label for="" class="form-label" >ID Attachment</label>
                                 <input type="file" name="idFile" value="" id="" class="form-control" aria-describedby="">
+                                @if ($companion->idFile)
+                                Click <a href="{{ route('view', ['filename' => $companion->idFile]) }}" target="_blank">here</a> to see the ID Attachment.
+                                @endif
                             </div>
                         </div>
                         <div class="row p-2">
@@ -473,7 +476,8 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck1s"  id="" value="" type="checkbox" name="okuStatus1s"  >
+                                            <input class="form-check-input okuCheck1s" id="okuStatus2" value="on" {{($companion->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus">
+
                                             <label class="form-check-label" for="citizen" >
                                                 OKU?
                                             </label>
@@ -481,21 +485,17 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" >OKU Card Number*</label>
-                                        <input type="number" id="okucard1s" disabled name="okuNumber" value="{{ $companion->okuNumber ?? '' }}" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="number" id="okucard1s" name="okuNumber" value="{{ $companion->okuNumber ?? '' }}" class="form-control" readonly placeholder="OKU CARD NUMBER">
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="dob" class="form-label" >OKU Attachment*</label>
-                                        <input type="file" id="okuattach1s" disabled name="okuID" class="form-control" aria-describedby="" style= "pointer-events: none;">
-                                        @if ($companion->okuID)
-                                            Click <a href="{{ route('download', ['filename' => $companion->okuID]) }}">here</a> to see OKU ID.
-                                        @endif
-                                    </div>
-                                </div>
+                                <label for="dob" class="form-label" >OKU Attachment*</label>
+                                <input type="file" id="okuattach1s" disabled name="okuID" class="form-control" aria-describedby="">
+                                    @if ($companion->okuID )
+                                    Click <a href="{{ route('view', ['filename' => $companion->okuID]) }}" target="_blank">here</a> to see the OKU Attachment.
+                                    @endif
                             </div>
                         </div>
                         <br>

@@ -37,7 +37,8 @@
                             <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>
 
                             <label for="recipient-name" class="col-form-label">Attachments*</label><br>
-                            <input type="file" class="form-control" name="file">
+                            <input type="file" class="form-control" name="files[]" multiple>
+
                         </div>
 
                     <div class="modal-footer">
