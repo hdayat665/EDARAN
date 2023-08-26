@@ -121,7 +121,7 @@
                         <div class="mb-6">
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-                                    <input class="form-check-input excludeFromAllAccess" type="checkbox" value="" id="">
+                                    <input class="form-check-input excludeFromAllAccess" type="checkbox" name="default_YN" {{ $role->default_YN == 'Y' ? 'checked' : '' }} value="Y" id="">
                                 </div>
                                 <div class="col-auto">
                                     <p class="col-form-label">Default - Assign to new users by default</p>

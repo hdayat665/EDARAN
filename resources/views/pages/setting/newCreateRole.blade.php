@@ -19,7 +19,7 @@
                                 <label class="form-label col-form-label col-md-5">Role Name*</label>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control mb-5px" name="roleName" placeholder="ROLE NAME" value="{{ $role->roleName ?? '-' }}" />
+                                <input type="text" class="form-control mb-5px" name="role[roleName]" placeholder="ROLE NAME" value="{{ $role->roleName ?? '-' }}" />
                             </div>
                         </div>
                         <div class="row p-2">
@@ -27,14 +27,14 @@
                                 <label class="form-label col-form-label col-md-5">Description*</label>
                             </div>
                             <div class="col-sm-6">
-                                <textarea type="text" class="form-control mb-5px" rows="4" name="desc" maxlength="255" placeholder="DESCRIPTION">{{ $role->desc ?? '-' }}</textarea>
+                                <textarea type="text" class="form-control mb-5px" rows="4" name="role[desc]" maxlength="255" placeholder="DESCRIPTION">{{ $role->desc ?? '-' }}</textarea>
                             </div>
                         </div>
 
                         <div class="mb-6">
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-                                    <input class="form-check-input excludeFromAllAccess" type="checkbox" value="" id="">
+                                    <input class="form-check-input excludeFromAllAccess" name="role[default_YN]" type="checkbox" value="Y" id="">
                                 </div>
                                 <div class="col-auto">
                                     <p class="col-form-label">Default - Assign to new users by default</p>
