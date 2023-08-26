@@ -67,10 +67,11 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
 
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['addedBy'] = $user->username;
-        $input['addedTime'] = date('Y-m-d h:m:s');
-        Role::create($input);
+        $input['role']['tenant_id'] = Auth::user()->tenant_id;
+        $input['role']['addedBy'] = $user->username;
+        $input['role']['addedTime'] = date('Y-m-d h:m:s');
+
+        Role::create($input['role']);
 
         $roleData = Role::orderBy('id', 'DESC')->first();
 
@@ -2302,44 +2303,44 @@ class SettingService
     // }
 
     public function createDomainList($r)
-{
-    $input = $r->input();
-    $id = $input['id'];
-    // dd($id);
+    {
+        $input = $r->input();
+        $id = $input['id'];
+        // dd($id);
 
-    if (isset($input['id']) && $input['id'] !== null) {
-        $user = DomainList::where('id', $id)->first();
+        if (isset($input['id']) && $input['id'] !== null) {
+            $user = DomainList::where('id', $id)->first();
 
-        if (!$user) {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'domain not found';
+            if (!$user) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'domain not found';
+            } else {
+
+                DomainList::where('id', $id)->update($input);
+
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Role is updated';
+            }
+
+            return $data;
         } else {
+            $input['user_id'] = Auth::user()->id;
+            $input['tenant_id'] = Auth::user()->tenant_id;
 
-            DomainList::where('id', $id)->update($input);
+            DomainList::create($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Role is updated';
+            $data['msg'] = 'Success';
+
+            return $data;
         }
-
-        return $data;
-    } else {
-        $input['user_id'] = Auth::user()->id;
-        $input['tenant_id'] = Auth::user()->tenant_id;
-
-        DomainList::create($input);
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success';
-
-        return $data;
     }
-}
 
     public function leaveEntitlementActive()
     {
@@ -2492,10 +2493,10 @@ class SettingService
             $yearbefore = Carbon::now()->subYear()->format('Y');
 
             $checkcurrententitlementbefore = leaveEntitlementModel::select('current_entitlement')
-            ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-            ->where('leave_entitlement.id_employment', '=', $user_id)
-            ->whereYear('leave_entitlement.le_year', '=', $yearbefore)
-            ->first();
+                ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+                ->where('leave_entitlement.id_employment', '=', $user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearbefore)
+                ->first();
 
             if ($checkcurrententitlementbefore) {
                 $currentEntitlement = $checkcurrententitlementbefore->current_entitlement;
@@ -3850,22 +3851,22 @@ class SettingService
         return $data;
     }
 
-        public function getRoles()
+    public function getRoles()
     {
         // $data = DomainList::where('type', 'monthlyclaim')
         //     ->where('category_role', 'admin')
         //     ->latest('created_at')
         //     ->first();
 
-            // dd($data);
+        // dd($data);
 
-            $data = DB::table('domain_list as a')
+        $data = DB::table('domain_list as a')
             ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
             ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
             ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
             ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
             ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
-            ->leftjoin('role as g','a.role', '=', 'g.id')
+            ->leftjoin('role as g', 'a.role', '=', 'g.id')
             ->leftJoin('employment as h', 'a.checker4', '=', 'h.user_id')
             ->leftJoin('employment as i', 'a.checker5', '=', 'i.user_id')
             ->select(
@@ -3884,7 +3885,7 @@ class SettingService
             ->latest('a.created_at')
             ->first();
 
-            // dd($data);
+        // dd($data);
 
         return $data;
     }
@@ -3892,7 +3893,7 @@ class SettingService
     public function getRolesFinances()
     {
 
-            $data = DB::table('domain_list as a')
+        $data = DB::table('domain_list as a')
             ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
             ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
             ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
@@ -3915,7 +3916,7 @@ class SettingService
             ->latest('a.created_at')
             ->first();
 
-            // dd($data);
+        // dd($data);
 
         return $data;
     }
@@ -3923,7 +3924,7 @@ class SettingService
     public function getRolesCashA()
     {
 
-            $data = DB::table('domain_list as a')
+        $data = DB::table('domain_list as a')
             ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
             ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
             ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
@@ -3946,7 +3947,7 @@ class SettingService
             ->latest('a.created_at')
             ->first();
 
-            // dd($data);
+        // dd($data);
 
         return $data;
     }
@@ -3960,7 +3961,7 @@ class SettingService
             ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
             ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
             ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
-            ->leftjoin('role as g','a.role', '=', 'g.id')
+            ->leftjoin('role as g', 'a.role', '=', 'g.id')
             ->leftJoin('employment as h', 'a.checker4', '=', 'h.user_id')
             ->leftJoin('employment as i', 'a.checker5', '=', 'i.user_id')
             ->select(
@@ -3979,7 +3980,7 @@ class SettingService
             ->where('a.id', $id)
             ->latest('a.created_at')
             ->first();
-// dd($data);
+        // dd($data);
         return $data;
     }
 
@@ -3987,23 +3988,23 @@ class SettingService
     {
 
         $data = DB::table('domain_list as a')
-        ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
-        ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
-        ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
-        ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
-        ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
-        ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
-        ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
-        ->select(
-            'a.*',
-            DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
-            DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
-            DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
-            DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
-            DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
-            DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
-            DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name')
-        )
+            ->leftJoin('employment as b', 'a.checker1', '=', 'b.user_id')
+            ->leftJoin('employment as c', 'a.checker2', '=', 'c.user_id')
+            ->leftJoin('employment as d', 'a.checker3', '=', 'd.user_id')
+            ->leftJoin('employment as e', 'a.recommender', '=', 'e.user_id')
+            ->leftJoin('employment as f', 'a.approver', '=', 'f.user_id')
+            ->leftJoin('employment as g', 'a.checker4', '=', 'g.user_id')
+            ->leftJoin('employment as h', 'a.checker5', '=', 'h.user_id')
+            ->select(
+                'a.*',
+                DB::raw('COALESCE(b.employeeName, "Na") AS checker1Name'),
+                DB::raw('COALESCE(c.employeeName, "Na") AS checker2Name'),
+                DB::raw('COALESCE(d.employeeName, "Na") AS checker3Name'),
+                DB::raw('COALESCE(e.employeeName, "Na") AS recommenderName'),
+                DB::raw('COALESCE(f.employeeName, "Na") AS approverName'),
+                DB::raw('COALESCE(g.employeeName, "Na") AS checker4Name'),
+                DB::raw('COALESCE(h.employeeName, "Na") AS checker5Name')
+            )
             ->where('a.type', 'monthlyClaim')
             ->where('a.category_role', 'finance')
             ->where('a.id', $id)
@@ -4040,7 +4041,7 @@ class SettingService
             ->latest('a.created_at')
             ->first();
 
-            // dd($data);
+        // dd($data);
         return $data;
     }
 }
