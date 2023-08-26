@@ -24,7 +24,7 @@
                                     <input type="text" name="roleName" class="form-control" id="recipient-name">
                                 </blockquote>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="defaultRole" type="checkbox" id="checkbox1" />
+                                    <input class="form-check-input" name="default_YN" type="checkbox" id="checkbox1" />
                                     <label class="form-check-label" for="checkbox1">Default</label>
                                     <small> - Assign to new users by default. </small>
                                 </div>
