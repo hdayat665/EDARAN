@@ -77,7 +77,8 @@
                                                         <td>{{ $app->applied_date }}</td>
                                                         <td>{{ $app->reason }}</td>
                                                         {{-- <td>{{ $app->file ?? '-' }}</td> --}}
-                                                        <td><a href="{{ route('download', ['filename' => $app->file ?? '-']) }}">{{$app->file ?? '' }}</a></td>
+                                                        {{-- <td><a href="{{ route('download', ['filename' => $app->file ?? '-']) }}" target="_blank">{{$app->file ?? '' }}</a></td> --}}
+                                                        <td><a href="/storage/{{ $app->file }}" target="_blank">{{ $app->file }}</a></td>
                                                         {{-- <td>
                                                             @php
                                                               $file = $app->file ?? '-';
@@ -151,7 +152,8 @@
                                                     <td>{{ $app->applied_date }}</td>
                                                     <td>{{ $app->reason }}</td>
                                                     {{-- <td>{{ $app->file ?? '-' }}</td> --}}
-                                                    <td><a href="{{ route('download', ['filename' => $app->file ?? '-']) }}">{{$app->file ?? '' }}</a></td>
+                                                    {{-- <td><a href="{{ route('download', ['filename' => $app->file ?? '-']) }}">{{$app->file ?? '' }}</a></td> --}}
+                                                    <td><a href="/storage/{{ $app->file }}" target="_blank">{{ $app->file }}</a></td>
                                                     {{-- <td>
                                                         @php
                                                           $file = $app->file ?? '-';

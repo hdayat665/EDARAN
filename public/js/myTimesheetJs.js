@@ -1513,6 +1513,7 @@ getwork.then(function(data) {
                                         var day = days[index];
                                         var approver = approvers[index];
                                         var file = files[index];
+                                        resonreject = resonrejects[index];
                                         $('#log_idv').val(logId);
                                         $('#reasonappealv').val(reason);
                                         if (status === "Locked") {
@@ -1525,11 +1526,22 @@ getwork.then(function(data) {
                                         $('#monthappealv').val(month);
                                         $('#dayappealv').val(day);
                                         $('#approverview').val(approverUserId);
-
-                                        if (file) {
-                                            var fileName = file.split('/').pop(); // Extract the file name from the file path
-                                            $("#filedownloadappeal").html('<a href="/storage/' + file + '">Download ' + fileName + '</a>');
+                                        $('#reason_reject').val(resonreject);
+                                        if(!$('#reason_reject').val().trim()) { 
+                                            $('#hidereason').hide(); 
+                                            
+                                          } else {
+                                            $('#hidereason').show(); 
+                                           
                                           }
+                                        if (file) {
+                                            $('#hidesupp').show(); 
+                                            var fileName = file.split('/').pop(); // Extract the file name from the file path
+                                            $("#filedownloadappeal").html('<a href="/storage/' + file + '" target="_blank">Download ' + fileName + '</a>');
+                                        } else {
+                                            $('#hidesupp').hide(); 
+                                        }
+                                        
 
                                     
                                         $('#appealmodalview').modal('show');
@@ -1640,6 +1652,7 @@ getwork.then(function(data) {
                     var days = [];
                     var files = [];
                     var approvers = [];
+                    var resonrejects = [];
                     for (let i = 0; i < data['appeals'].length; i++) {
                         var appeals = data['appeals'][i];
 
@@ -1652,6 +1665,7 @@ getwork.then(function(data) {
                         var day = appeals['day'];
                         var approver = appeals['approver'];
                         var file = appeals['file'];
+                        var resonreject = appeals['reasonreject'];
 
 
 
@@ -1664,6 +1678,7 @@ getwork.then(function(data) {
                         days.push(day);
                         approvers.push(approver);
                         files.push(file);
+                        resonrejects.push(resonreject);
                     }
                     
                     // var dailycounter = $('<button/>', {
@@ -2384,27 +2399,62 @@ getwork.then(function(data) {
                                 for (var i = 0; i < participants.length; i++) {
                                     var participant = participants[i];
                                     var status = attendanceStatus[i].status;
-                            
+                                
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
                                     row.append($("<td></td>").text(participant.name));
-                            
+                                
                                     var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
                                     var badgeSpan = $("<span></span>");
-                            
+                                
                                     if (status === "no response") {
                                         badgeSpan.addClass("badge bg-warning rounded-pill").text("no response");
                                     } else if (status === "not attend") {
                                         badgeSpan.addClass("badge bg-danger rounded-pill").text("not attend");
-                                    } else if (status === "attend"){
+                                    } else if (status === "attend") {
                                         badgeSpan.addClass("badge bg-lime rounded-pill").text("Attend");
                                     }
-                            
+                                
                                     statusBadge.append(badgeSpan);
                                     row.append($("<td></td>").append(statusBadge));
-                            
+                                
+                                    // Adding the Delete Button
+                                    var deletedUserIds = []; // Array to store deleted user IDs
+
+                                    var deleteButton = $("<button></button>")
+                                        .addClass("btn btn-danger")
+                                        .attr("data-user-id", participant.user_id)  // Using participant.user_id here
+                                        .text("Delete")
+                                        .click(function(event) {
+                                            event.preventDefault();
+                                            var userId = $(this).attr("data-user-id");
+                                            
+                                            // Add userId to deletedUserIds array
+                                            deletedUserIds.push(userId);
+
+                                            // Log the userId and the array
+                                            console.log("Delete clicked for user ID: " + userId);
+                                            // console.log("Deleted user IDs so far: " + deletedUserIds.join(','));
+
+                                            // Add your delete logic here
+                                            var userdelete = deletedUserIds.join(',');
+                                            console.log(userdelete);
+                                            $("#deletepart").val(userdelete);
+                                            
+
+                                            // Remove the corresponding row from the table
+                                            $(this).closest("tr").remove();
+                                        });
+
+
+                                
+
+                                
+                                    row.append($("<td></td>").append(deleteButton));
+                                
                                     tableBody.append(row);
                                 }
+                                
                             
                                 // Re-initialize the DataTable
                                 $('#tableviewparticipant').DataTable({
@@ -2415,16 +2465,6 @@ getwork.then(function(data) {
                             // usage:
                             loadEventData(eventId);
                             
-                            
-                            
-                                                            
-                            
-                            
-                           
-
-                           
-
-
                             var eventData = getEvents(eventId);
                             eventData.then(function(data) {
                                 var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
@@ -2448,17 +2488,6 @@ getwork.then(function(data) {
                                 //     placeholder: "Please Choose"
                                 // });
                             });
-
-
-                            
-
-
-                            
-
-
-                            
-
-                            
 
                             $("#participantlist").val(data.participantNames);
                             $("#event_name").val(data.event_name);

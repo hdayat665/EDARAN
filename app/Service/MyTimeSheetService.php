@@ -505,6 +505,10 @@ class MyTimeSheetService
     {
         $input = $r->input();
         $user = Auth::user();
+        // dd($input);
+
+        $userdelete = $r->input('deletepart');
+        // dd($userdelete);
 
         $input['tenant_id'] = $user->tenant_id;
         if (isset($input['type_recurring'])) {
@@ -516,10 +520,18 @@ class MyTimeSheetService
 
         $currentEvent = TimesheetEvent::find($id);
         $currentParticipants = explode(',', $currentEvent->participant);
+        
+        // Assuming $userdelete is a string of user IDs separated by commas.
+        $usersToDelete = explode(',', $userdelete);
+        
 
+
+        $newParticipantsList = $currentParticipants;
+
+        // Add new participants if provided
         if (isset($input['participant'])) {
             $newParticipants = $input['participant'];
-            $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
+            $newParticipantsList = array_unique(array_merge($currentParticipants, $newParticipants));
 
             // Add new participants to attendance_event table
             $addedParticipants = array_diff($newParticipants, $currentParticipants);
@@ -531,9 +543,22 @@ class MyTimeSheetService
                 ];
                 AttendanceEvent::create($attendanceInput);
             }
-        } else {
-            $input['participant'] = implode(',', $currentParticipants);
         }
+
+        // Remove deleted participants
+        $newParticipantsList = array_diff($newParticipantsList, $usersToDelete);
+
+        // If you need to remove rows from the AttendanceEvent table related to the removed participants.
+        foreach ($usersToDelete as $userId) {
+            AttendanceEvent::where('event_id', $id)
+                        ->where('user_id', $userId)
+                        ->delete();
+        }
+
+        // Now, $newParticipantsList is the new list of participants after adding new ones and removing deleted ones.
+        $input['participant'] = implode(',', $newParticipantsList);
+
+            
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');

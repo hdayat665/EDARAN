@@ -32,8 +32,11 @@ class MyTimesheetController extends Controller
     
         $data = $mts->myTimesheetView(); // Assign the result to $data1
         $stateData = $mts->myTimesheetState(); // Assign the result to $stateData
-    
+
+        $data['timesheetsday'] = $mts->timesheetSummaryViewday();
         $data['user_id'] = Auth::user()->id;
+
+        // dd($data);
     
         // Process $data using $data1
         if ($data['employee'] !== null) {

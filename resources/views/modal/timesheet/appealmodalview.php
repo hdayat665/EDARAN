@@ -79,7 +79,16 @@
                         <textarea class="form-control" id="reasonappealv"  name="reasonv" rows="3" readonly></textarea>
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2" id="hidereason"> 
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5" id="">
+                            <label class="form-label" >Reason Of Rejection</label>
+                        </div>
+                        <div class="col-md-6">
+                        <textarea class="form-control" id="reason_reject"  name="reasonreject" rows="3" maxlength = "225" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="row p-2 id" id="hidesupp">
                         <div class="col-md-5">
                             <label class="form-label">Supporting Document</label>
                         </div>

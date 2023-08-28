@@ -8,20 +8,57 @@
 	<link href="../assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
 
     <style>
-/* .fc-disabled-day {
+.fc-disabled-day {
     background-color: #eee !important;
     color: #888 !important;
-} */
+}
 
 
     </style>
 
 
-<div id="content" class="app-content">
+<div id="" class="app-content">
     {{-- <h1 class="page-header">Calendar</h1> --}}
     <h1 class="page-header"> Timesheet <small>| My Timesheet  </small></h1>
-    <div class="row" id="myTimesheetJs">
+    <div class="panel-body">
+        <div class="form-control">
+            <table id="data-table-default" class="table table-striped table-bordered">
+                <tr>
+                    <th>Total Days of This Month</th>
+                    <td><label id="">{{ optional($data['timesheetsday'])['totalDays'] ?? 'N/A' }} days</label></td>
+            
+                    <th>Weekdays</th>
+                    <td><label id="">{{ optional($data['timesheetsday'])['weekdays'] ?? 'N/A' }} days</label></td>
+                </tr>
+                <tr>
+                    <th>Weekend</th>
+                    <td><label id="">{{ optional($data['timesheetsday'])['weekends'] ?? 'N/A' }} days</label></td>
+            
+                    <th>Working Days</th>
+                    <td>{{ optional($data['timesheetsday'])['workingDays'] ?? 'N/A' }} days</td>
+                </tr>
+                <tr>
+                    <th>Public Holidays</th>
+                    <td>{{ optional($data['timesheetsday'])['holidays'] ?? 'N/A' }} days</td>
+            
+                    <th>Worked Days</th>
+                    <td>{{ optional($data['timesheetsday'])['workedDays'] ?? 'N/A' }} days</td>
+                </tr>
+                <tr>
+                    <th>Eligible Public Holidays</th>
+                    <td>{{ optional($data['timesheetsday'])['holidays'] ?? 'N/A' }} days</td>
+            
+                    <th>Remaining TSR</th>
+                    <td>{{ optional($data['timesheetsday'])['remaininingtsr'] ?? 'N/A' }} days</td>
+                </tr>
+            </table>
+        </div>
+        
+        </div>
+        <br>
 
+    <div class="row" id="myTimesheetJs">
+    
         <div class="col-lg">
             <div id="calendar" class="calendar"></div>
         </div>
