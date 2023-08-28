@@ -136,7 +136,7 @@
                         <div class="col-sm-6" id="menu10">
                             <label class="form-label" for="Menu8">Reason*</label>
                             <div class="">
-                                <textarea class="form-control upperReason" rows="3" name="reason"></textarea>
+                                <textarea class="form-control upperReason" rows="3" name="reason" maxlength="225"></textarea>
                             </div>
                         </div>
                     </div>

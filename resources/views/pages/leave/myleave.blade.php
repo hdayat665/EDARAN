@@ -182,10 +182,13 @@
                                                                 <div class="viewleave">
                                                                     <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
                                                                 </div>
-                                                                <div class="dropdown-divider "></div>
-                                                                <div class="cancelleave">
-                                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
-                                                                </div>
+                                                                @if ($m->status_final == '4')
+                                                                @else
+                                                                    <div class="dropdown-divider "></div>
+                                                                    <div class="cancelleave">
+                                                                        <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </td>
