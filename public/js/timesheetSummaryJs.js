@@ -5,10 +5,11 @@ $(document).ready(function () {
         bFilter: true,
         initComplete: function (settings, json) {
             $("#timesheetapproval").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                "<div style='overflow:visible; width:100%;position:relative;'></div>"
             );
         },
     });
+    
 
     $(document).on("click", "#cancelTimesheet", function () {
         id = $(this).data("id");

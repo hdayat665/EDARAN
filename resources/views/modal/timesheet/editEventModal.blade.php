@@ -434,16 +434,20 @@
                                     <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Participants</th>
                                     <th class="text-nowrap">Status</th>
+                                    <th class="text-nowrap">Delete</th> <!-- New header -->
                                 </tr>
                             </thead>
+                            
                             <tbody id="tableRowParticipant">
                                 <!-- This is where the table rows will be dynamically added by the JavaScript code -->
                             </tbody>
                         </table>
                     </div>
+
                     <div class="row p-2">
                         <div class="col-sm-2">
                             <button type="button" id="addreminderedit" class="btn btn-primary btn-xs">Add Reminder</button>
+                            <input type="hidden" id="deletepart" name="deletepart">
                         </div>
                         <div class="col-sm-4">
                             <input type="hidden" id="idEvent" name="id">
