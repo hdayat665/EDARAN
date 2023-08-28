@@ -53,8 +53,8 @@
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >ID Attachment</label>
                                     <input type="file" id="idAttachment" name="idFile" class="form-control" aria-describedby="">
-                                        @if ($parent->idFile)
-                                        Click <a id="idAttachmentViewParent"></a> to see ID Attachment.
+                                        @if ($parent->idFile ?? '')
+                                            Click <a id="idAttachmentViewParent"></a> to see ID Attachment.
                                         @endif
                                 </div>
                             </div>
@@ -151,8 +151,8 @@
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="okuattach6" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
-                                        @if ($parent->okuFile)
-                                        Click <a id="okuAttachmentViewParent"></a> to see attachment.
+                                        @if ($parent->okuFile ?? '')
+                                            Click <a id="okuAttachmentViewParent"></a> to see attachment.
                                         @endif
                                 </div>
                             </div>

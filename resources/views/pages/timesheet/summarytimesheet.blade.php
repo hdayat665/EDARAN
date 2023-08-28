@@ -21,7 +21,7 @@
                 </div>
                 <!-- END panel-heading -->
 
-                <div class="panel-body">
+                {{-- <div class="panel-body">
                     <table id="data-table-default" class="table table-striped table-bordered">
                         <tr>
                             <th>Total Days of This Month</th>
@@ -50,7 +50,7 @@
                             
                         </tr>
                     </table>
-                </div>
+                </div> --}}
 
                 <!-- BEGIN panel-body -->
                 <div class="panel-body">
