@@ -430,7 +430,7 @@ class LoginService
             $response['typeEmail'] = 'forgotDomain';
             $response['title'] = 'Orbit Forgot Domain';
             // $response['content1'] = 'This email is sent to reset your Domain.';
-            $response['domain'] = $user->tenant;
+            $response['domain'] = implode(', ', $tenant_names);
             $response['username'] = $input['username'];
             // $response['content2'] = 'Please click the button below to reset your Domain:';
             $response['resetPassLink'] = env('APP_URL') . '/resetDomainView/' . $user->id;
