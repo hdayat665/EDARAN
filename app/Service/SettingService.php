@@ -2499,9 +2499,9 @@ class SettingService
                 ->first();
 
             if ($checkcurrententitlementbefore) {
+                
                 $currentEntitlement = $checkcurrententitlementbefore->current_entitlement;
 
-                // Gantikan angka 5 dengan nilai max_duration dari $getCarryForward
                 $maxDuration = $getCarryForward->max_duration;
 
                 if ($currentEntitlement >= $maxDuration) {
