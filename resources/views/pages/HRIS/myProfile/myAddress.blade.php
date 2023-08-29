@@ -1,4 +1,4 @@
-<style>  
+<style>
         .custom-dropdown-menu {
         position: static ;
         height: auto ;
@@ -12,7 +12,7 @@
 
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
-        <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
+        <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" id="addressProfile" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
         <table id="profileAddress" class="table table-striped align-middle">

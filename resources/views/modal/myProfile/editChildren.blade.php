@@ -1,14 +1,12 @@
-<!-- UPDATE CHILDREN DETAILS -->
-@if ($childrens)
-@foreach ($childrens as $children)
+
 <div class="modal fade" id="edit-children" tabindex="-1" aria-labelledby="add-children" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content" >
             <div class="modal-header">
                 <h5 class="modal-title" id="add-children">Update Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="editformchildren">
                 <form id="editChildrenForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -209,44 +207,45 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" >Postcode</label>
-                            <input type="number" id="postcode1" name="postcode" value="" class="form-control" placeholder="00000" style="text-transform:uppercase">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="firstname" class="form-label" >City</label>
-                            <input type="text" id="city1" name="city" value="" class="form-control" placeholder="CITY" style="text-transform:uppercase">
-                        </div>
-
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <label for="state" class="form-label" >State</label>
-                            <select class="form-select" name="state" id="state1" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
-                                <?php $state = state() ?>
-                                <option value="" label="PLEASE CHOOSE"  ></option>
-                                @foreach ($state as $key => $status)
-                                <option value="{{$key}}" >{{$status}}</option>
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select" name="country" id="country1" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country->sortBy('country_name') as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country</label>
-                            <select class="form-select" name="country" id="country1" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
-                                <option value="" label="PLEASE CHOOSE" selected></option>
-                                <optgroup id="country-optgroup-Americas" label="Americas">
-                                    @foreach ($americass as $key => $america)
-                                    <option value="{{$key}}"  >{{$america}}</option>
-                                    @endforeach
-                                </optgroup>
-                                <optgroup id="country-optgroup-Asia" label="Asia">
-                                    @foreach ($asias as $key => $asia)
-                                    <option value="{{$key}}"  >{{$asia}}</option>
-                                    @endforeach
-                                </optgroup>
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select" name="state" id="state1" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($state->sortBy('state_name') as $st)
+                                    <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="firstname" class="form-label">City</label>
+                            <select class="form-select" name="city" id="city1" style="text-transform: uppercase;">
+                                <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                @foreach($city->sortBy('name') as $cty)
+                                    <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="lastname" class="form-label">Postcode</label>
+                            <select class="form-select" name="postcode" id="postcode1" style="text-transform: uppercase;">
+                                <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                @foreach($postcode->sortBy('postcode') as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -257,5 +256,3 @@
         </div>
     </div>
 </div>
-@endforeach ($childrens as $children)
-@endif ($childrens)
