@@ -32,7 +32,16 @@ class CustomerService
     public function customerView()
     {
         $tenant_id = Auth::user()->tenant_id;
-        $data = Customer::where('tenant_id', $tenant_id)->orderBy('id', 'desc')->get();
+        $data = Customer::select('customer.*', 'location_states.state_name',
+        'location_country.country_name'
+        )
+        ->leftjoin('location_states', 'customer.state', '=', 'location_states.id')
+        ->leftjoin('location_country', 'customer.country', '=', 'location_country.country_id')
+        ->where('customer.tenant_id', '=', $tenant_id)
+
+        ->orderByDesc('customer.id')
+        ->get();
+
         if(!$data)
         {
             $data = [];
@@ -101,7 +110,6 @@ class CustomerService
     public function createCustomer($r)
     {
         $input = $r->input();
-
         $etData = customer::where([['customer_name', $input['customer_name']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Customer already exists.';
@@ -117,7 +125,7 @@ class CustomerService
         $input['status'] = 1;
         $address2 = $input['address2'] ?? null;
         // $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
-        
+
         $getid = Location::select('id')
             ->where('country_id', '=', $input['country'])
             ->where('state_id', '=', $input['state'])

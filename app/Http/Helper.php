@@ -1336,7 +1336,6 @@ if (!function_exists('activityName')) {
     }
 }
 
-
 if (!function_exists('getBranchFullAddress')) {
     function getBranchFullAddress($user_id = '')
     {
@@ -1349,6 +1348,7 @@ if (!function_exists('getBranchFullAddress')) {
         return $data->fulladdress;
     }
 }
+
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
@@ -2170,21 +2170,6 @@ if (!function_exists('getClaimCategoryById')) {
         return $data;
     }
 }
-
-// if (!function_exists('getClaimCategoryNameById')) {
-//     function getClaimCategoryNameById($id = '')
-//     {
-//         $data = ClaimCategory::where([['id', $id]])->first();
-
-//         if (!$data) {
-//             $data = [];
-//         }
-
-//         // pr($data);
-
-//         return $data->claim_catagory;
-//     }
-// }
 
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')

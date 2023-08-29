@@ -1335,203 +1335,204 @@ $(document).ready(function () {
         });
     });
 
-    $("#addAddressDetails").click(function (e) {
-        $("#formAddressDetails").validate({
-            // Specify validation rules
-            rules: {
-                address1: "required",
-                city: "required",
-                state: "required",
-                country: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
-                addressType: "required",
-            },
+    // $("#addAddressDetails").click(function (e) {
+    //     $("#formAddressDetails").validate({
+    //         // Specify validation rules
+    //         rules: {
+    //             address1: "required",
+    //             city: "required",
+    //             state: "required",
+    //             country: "required",
+    //             postcode: {
+    //                 required: true,
+    //                 digits: true,
+    //                 rangelength: [5, 5],
+    //             },
+    //             addressType: "required",
+    //         },
 
-            messages: {
-                address1: "Please Insert Address 1",
-                city: "Please Insert City",
-                state: "Please Choose State",
-                country: "required",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                addressType: "Please Choose Address Type",
-            },
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("formAddressDetails")
-                    );
+    //         messages: {
+    //             address1: "Please Insert Address 1",
+    //             city: "Please Insert City",
+    //             state: "Please Choose State",
+    //             country: "required",
+    //             postcode: {
+    //                 required: "Please Insert Postcode",
+    //                 digits: "Please Insert Valid Postcode",
+    //                 rangelength: "Please Insert Valid Postcode",
+    //             },
+    //             addressType: "Please Choose Address Type",
+    //         },
+    //         submitHandler: function (form) {
+    //             requirejs(["sweetAlert2"], function (swal) {
+    //                 var data = new FormData(
+    //                     document.getElementById("formAddressDetails")
+    //                 );
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/addAddressDetails",
-                        data: data,
-                        dataType: "json",
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     url: "/addAddressDetails",
+    //                     data: data,
+    //                     dataType: "json",
 
-                        processData: false,
-                        contentType: false,
-                    }).then(function (data) {
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                            }
-                        });
-                    });
-                });
-            },
-        });
-    });
+    //                     processData: false,
+    //                     contentType: false,
+    //                 }).then(function (data) {
+    //                     swal({
+    //                         title: data.title,
+    //                         text: data.msg,
+    //                         type: data.type,
+    //                         confirmButtonColor: "#3085d6",
+    //                         confirmButtonText: "OK",
+    //                         allowOutsideClick: false,
+    //                         allowEscapeKey: false,
+    //                     }).then(function () {
+    //                         if (data.type == "error") {
+    //                         } else {
+    //                             location.reload();
+    //                         }
+    //                     });
+    //                 });
+    //             });
+    //         },
+    //     });
+    // });
 
-    $("#saveAddressDetailsBtn").click(function (e) {
-        Swal.fire({
-            allowOutsideClick: false,
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            confirmButtonColor: "#3085d6",
-            title: "Declaration.",
-            icon: "info",
-            html:
-                '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-                '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-                '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-            confirmButtonText: "Yes",
+    // $("#saveAddressDetailsBtn").click(function (e) {
+    //     Swal.fire({
+    //         allowOutsideClick: false,
+    //         showCancelButton: true,
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonColor: "#3085d6",
+    //         title: "Declaration.",
+    //         icon: "info",
+    //         html:
+    //             '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+    //             '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+    //             '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+    //         confirmButtonText: "Yes",
 
-            preConfirm: () => {
-                if (
-                    !$("#t1").prop("checked") ||
-                    !$("#t2").prop("checked") ||
-                    !$("#t3").prop("checked")
-                ) {
-                    Swal.showValidationMessage(
-                        '<i class="fa fa-info-circle"></i> Please check all term to proceed'
-                    );
-                } else if (
-                    $("#t1").prop("checked") ||
-                    $("#t2").prop("checked") ||
-                    $("#t3").prop("checked")
-                ) {
-                    var data = new FormData(
-                        document.getElementById("formEditAddressDetails")
-                    );
+    //         preConfirm: () => {
+    //             if (
+    //                 !$("#t1").prop("checked") ||
+    //                 !$("#t2").prop("checked") ||
+    //                 !$("#t3").prop("checked")
+    //             ) {
+    //                 Swal.showValidationMessage(
+    //                     '<i class="fa fa-info-circle"></i> Please check all term to proceed'
+    //                 );
+    //             } else if (
+    //                 $("#t1").prop("checked") ||
+    //                 $("#t2").prop("checked") ||
+    //                 $("#t3").prop("checked")
+    //             ) {
+    //                 var data = new FormData(
+    //                     document.getElementById("formEditAddressDetails")
+    //                 );
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/updateAddressDetails",
-                        data: data,
-                        dataType: "json",
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     url: "/updateAddressDetails",
+    //                     data: data,
+    //                     dataType: "json",
 
-                        processData: false,
-                        contentType: false,
-                    }).then(function (data) {
-                        console.log(data);
-                        Swal.fire({
-                            title: data.title,
-                            icon: "success",
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                            }
-                        });
-                    });
-                } else {
-                    Swal.showValidationMessage(
-                        '<i class="fa fa-info-circle"></i> error'
-                    );
-                }
-            },
-        }).then((result) => {});
-    });
+    //                     processData: false,
+    //                     contentType: false,
+    //                 }).then(function (data) {
+    //                     console.log(data);
+    //                     Swal.fire({
+    //                         title: data.title,
+    //                         icon: "success",
+    //                         text: data.msg,
+    //                         type: data.type,
+    //                         confirmButtonColor: "#3085d6",
+    //                         confirmButtonText: "OK",
+    //                         allowOutsideClick: false,
+    //                         allowEscapeKey: false,
+    //                     }).then(function () {
+    //                         if (data.type == "error") {
+    //                         } else {
+    //                             location.reload();
+    //                         }
+    //                     });
+    //                 });
+    //             } else {
+    //                 Swal.showValidationMessage(
+    //                     '<i class="fa fa-info-circle"></i> error'
+    //                 );
+    //             }
+    //         },
+    //     }).then((result) => {});
+    // });
 
-    addressId = $("#addressId").val();
+    // addressId = $("#addressId").val();
 
-    addressIds = addressId.split(",");
+    // addressIds = addressId.split(",");
 
-    for (let i = 0; i < addressIds.length; i++) {
-        const type = addressIds[i];
+    // for (let i = 0; i < addressIds.length; i++) {
+    //     const type = addressIds[i];
 
-        $("#updateAddressDetails" + type).click(function (e) {
-            id = $(this).data("id");
-            var addressData = getAddressDetails(id);
+    //     $("#updateAddressDetails" + type).click(function (e) {
+    //         id = $(this).data("id");
+    //         var addressData = getAddressDetails(id);
 
-            addressData.then(function (data) {
-                address = data.data;
-                $("#id1").val(address.id);
-                $("#address1Edit").val(address.address1);
-                $("#address2Edit").val(address.address2);
-                $("#postcodeEdit").val(address.postcode);
-                $("#cityEdit").val(address.city);
-                $("#stateEdit").val(address.state);
-                $("#countryEdit").val(address.country);
-                $("#addressTypeEdit").val(address.addressType);
-            });
-            $("#modaleditaddress").modal("show");
-        });
+    //         addressData.then(function (data) {
+    //             address = data.data;
+    //             $("#id1").val(address.id);
+    //             $("#address1Edit").val(address.address1);
+    //             $("#address2Edit").val(address.address2);
+    //             $("#postcodeEdit").val(address.postcode);
+    //             $("#cityEdit").val(address.city);
+    //             $("#stateEdit").val(address.state);
+    //             $("#countryEdit").val(address.country);
+    //             $("#addressTypeEdit").val(address.addressType);
+    //         });
+    //         $("#modaleditaddress").modal("show");
+    //     });
 
-        $("#deleteAddressDetails" + type).click(function (e) {
-            id = $(this).data("id");
+    //     $("#deleteAddressDetails" + type).click(function (e) {
+    //         id = $(this).data("id");
 
-            requirejs(["sweetAlert2"], function (swal) {
-                swal({
-                    title: "Are you sure to delete Address?",
-                    type: "error",
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes!",
-                    showCancelButton: true,
-                }).then(function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "/deleteAddressDetails/" + id,
-                        data: { _method: "DELETE" },
-                    }).then(function (data) {
-                        console.log(data);
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                            }
-                        });
-                    });
-                });
-            });
-        });
+    //         requirejs(["sweetAlert2"], function (swal) {
+    //             swal({
+    //                 title: "Are you sure to delete Address?",
+    //                 type: "error",
+    //                 confirmButtonClass: "btn-danger",
+    //                 confirmButtonText: "Yes!",
+    //                 showCancelButton: true,
+    //             }).then(function () {
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     url: "/deleteAddressDetails/" + id,
+    //                     data: { _method: "DELETE" },
+    //                 }).then(function (data) {
+    //                     console.log(data);
+    //                     swal({
+    //                         title: data.title,
+    //                         text: data.msg,
+    //                         type: data.type,
+    //                         confirmButtonColor: "#3085d6",
+    //                         confirmButtonText: "OK",
+    //                         allowOutsideClick: false,
+    //                         allowEscapeKey: false,
+    //                     }).then(function () {
+    //                         if (data.type == "error") {
+    //                         } else {
+    //                             location.reload();
+    //                         }
+    //                     });
+    //                 });
+    //             });
+    //         });
+    //     });
 
-        function getAddressDetails(id) {
-            return $.ajax({
-                url: "/getAddressDetails/" + id,
-            });
-        }
-    }
+    //     function getAddressDetails(id) {
+    //         return $.ajax({
+    //             url: "/getAddressDetails/" + id,
+    //         });
+    //     }
+    // }
+
     $("#saveEmergency, #saveEmergency2").click(function (e) {
         $("#formEmergency").validate({
             // Specify validation rules
@@ -1552,8 +1553,6 @@ $(document).ready(function () {
                 address1: "required",
                 postcode: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
@@ -1575,8 +1574,6 @@ $(document).ready(function () {
                 address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -1682,8 +1679,7 @@ $(document).ready(function () {
                 address1_2: "required",
                 postcode_2: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
+
                 },
                 city_2: "required",
                 state_2: "required",
@@ -1705,8 +1701,7 @@ $(document).ready(function () {
                 address1_2: "Please Insert Address 1",
                 postcode_2: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
+
                 },
                 city_2: "Please Insert City",
                 state_2: "Please Choose State",
@@ -1827,8 +1822,6 @@ $(document).ready(function () {
                 issuingCountry: "required",
                 postcode: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
                 },
                 salary: {
                     digits: true,
@@ -1880,8 +1873,7 @@ $(document).ready(function () {
                 issuingCountry: "Please Choose Issuing Country",
                 postcode: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
+
                 },
                 salary: {
                     digits: "Please Insert Valid Monthly Salary",
@@ -2008,8 +2000,6 @@ $(document).ready(function () {
                     issuingCountry: "required",
                     postcode: {
                         required: true,
-                        digits: true,
-                        rangelength: [5, 5],
                     },
                     salary: {
                         digits: true,
@@ -2068,8 +2058,7 @@ $(document).ready(function () {
                     issuingCountry: "Please Choose Issuing Country",
                     postcode: {
                         required: "Please Insert Postcode",
-                        digits: "Please Insert Valid Postcode",
-                        rangelength: "Please Insert Valid Postcode",
+
                     },
                     salary: {
                         digits: "Please Insert Valid Monthly Salary",
@@ -2562,7 +2551,6 @@ $(document).ready(function () {
                 },
                 postcode: {
                     required: false,
-                    rangelength: [5, 5],
                 },
             },
 
@@ -2717,7 +2705,6 @@ $(document).ready(function () {
                 },
                 postcode: {
                     required: false,
-                    rangelength: [5, 5],
                 },
             },
 
@@ -2984,6 +2971,27 @@ $(document).ready(function () {
 
                     $("#okuattach4").css("pointer-events", "none");
                 }
+
+                $("#postcode1").val(child.postcode).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
+                $("#city1").val(child.city).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
+                $("#state1").val(child.state).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
+                $("#country1").val(child.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
             });
             $("#edit-children").modal("show");
         });
@@ -3448,8 +3456,6 @@ $(document).ready(function () {
                 address1: "required",
                 postcode: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
@@ -3501,9 +3507,7 @@ $(document).ready(function () {
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
                 postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
+                    required: "Please Choose Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -3824,6 +3828,27 @@ $(document).ready(function () {
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
                 $("#fullNameP1").val(parent.fullName);
+
+                $("#postcodeP1").val(parent.postcode).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
+                $("#cityP1").val(parent.city).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
+                $("#stateP1").val(parent.state).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
+                $("#countryP1").val(parent.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
                 if (parent.okuFile) {
                     $("#okuAttachmentViewParent").html(
                         '<a href="/storage/' + parent.okuFile + '" target="_blank">here</a>'
@@ -4163,8 +4188,8 @@ $("#same-address").change(function () {
                     var permanentAddress2 = data.data.address2;
                     var permanentPostcode = data.data.postcode;
                     var permanentCity = data.data.city;
-                    var permanentState = data.data.state;
-                    var permanentCountry = data.data.country;
+                    var permanentState = data.data.state_name;
+                    var permanentCountry = data.data.country_name;
 
                     if (
                         permanentAddress1 ||
@@ -4180,6 +4205,11 @@ $("#same-address").change(function () {
                         $("#cityc").val(permanentCity);
                         $("#statec").val(permanentState);
                         $("#countryc").val(permanentCountry);
+
+                        $("#postcodec").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                        $("#cityc").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                        $("#statec").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                        $("#countryc").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                     }
                 }
             })
@@ -4193,62 +4223,72 @@ $("#same-address").change(function () {
         $("#cityc").prop("readonly", false).val("");
         $("#statec").css({ "pointer-events": "auto", background: "none" }).val("");
         $("#countryc").css({ "pointer-events": "auto", background: "none" }).val("");
+
+        $("#postcodec").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+        $("#cityc").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+        $("#statec").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+        $("#countryc").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
     }
 });
 
-$("#same-address2").change(function () {
-    if (this.checked) {
-        $("#address1parent").val($("#address-1").val()).prop("readonly", true);
-        $("#address2parent").val($("#address-2").val()).prop("readonly", true);
-        $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
-        $("#cityparent").val($("#city").val()).prop("readonly", true);
-        $("#stateparent").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
-        $("#countryparent").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+// $("#same-address2").change(function () {
+//     if (this.checked) {
+//         $("#address1parent").val($("#address-1").val()).prop("readonly", true);
+//         $("#address2parent").val($("#address-2").val()).prop("readonly", true);
+//         $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
+//         $("#cityparent").val($("#city").val()).prop("readonly", true);
+//         $("#stateparent").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+//         $("#countryparent").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-        // Fetch permanent address from userAddress table if available
-        var id = "{{ $user->id }}";
-        getAddressforCompanion(id)
-            .then(function (data) {
-                if (data) {
-                    var permanentAddress1 = data.data.address1;
-                    var permanentAddress2 = data.data.address2;
-                    var permanentPostcode = data.data.postcode;
-                    var permanentCity = data.data.city;
-                    var permanentState = data.data.state;
-                    var permanentCountry = data.data.country;
-                    console.log(data);
+//         // Fetch permanent address from userAddress table if available
+//         var id = "{{ $user->id }}";
+//         getAddressforCompanion(id)
+//             .then(function (data) {
+//                 if (data) {
+//                            console.log(data);
 
-                    if (
-                        permanentAddress1 ||
-                        permanentAddress2 ||
-                        permanentPostcode ||
-                        permanentCity ||
-                        permanentState ||
-                        permanentCountry
-                    ) {
-                        $("#address1parent").val(permanentAddress1);
-                        $("#address2parent").val(permanentAddress2);
-                        $("#postcodeparent").val(permanentPostcode);
-                        $("#cityparent").val(permanentCity);
-                        $("#stateparent").val(permanentState);
-                        $("#stateparenthidden").val(permanentState);
-                        $("#countryparent").val(permanentCountry);
-                        $("#countryparenthidden").val(permanentCountry);
-                    }
-                }
-            })
-            .fail(function (xhr, status, error) {
-                console.log("Error fetching permanent address: " + error);
-            });
-    } else {
-        $("#address1parent").val($("").val()).prop("readonly", false);
-        $("#address2parent").val($("").val()).prop("readonly", false);
-        $("#postcodeparent").val($("").val()).prop("readonly", false);
-        $("#cityparent").val($("").val()).prop("readonly", false);
-        $("#stateparent").css({ "pointer-events": "auto", background: "none" }).val("");
-        $("#countryparent").css({ "pointer-events": "auto", background: "none" }).val("");
-    }
-});
+//                     var permanentAddress1 = data.data.address1;
+//                     var permanentAddress2 = data.data.address2;
+//                     var permanentPostcode = data.data.postcode;
+//                     var permanentCity = data.data.city;
+//                     var permanentState = data.data.state;
+//                     var permanentCountry = data.data.country;
+//                     console.log(data);
+
+//                     if (
+//                         permanentAddress1 ||
+//                         permanentAddress2 ||
+//                         permanentPostcode ||
+//                         permanentCity ||
+//                         permanentState ||
+//                         permanentCountry
+//                     ) {
+//                         $("#address1parent").val(permanentAddress1);
+//                         $("#address2parent").val(permanentAddress2);
+//                         $("#postcodeparent").val(permanentPostcode);
+//                         $("#cityparent").val(permanentCity);
+//                         $("#stateparent").val(permanentState);
+//                         $("#stateparenthidden").val(permanentState);
+//                         $("#countryparent").val(permanentCountry);
+//                         $("#countryparenthidden").val(permanentCountry);
+//                     }
+//                 }
+//             })
+//             .fail(function (xhr, status, error) {
+//                 console.log("Error fetching permanent address: " + error);
+//             });
+//     } else {
+//         $("#address1parent").val($("").val()).prop("readonly", false);
+//         $("#address2parent").val($("").val()).prop("readonly", false);
+//         $("#postcodeparent").val($("").val()).prop("readonly", false);
+//         $("#cityparent").val($("").val()).prop("readonly", false);
+//         // $("#stateparent").css({ "pointer-events": "auto", background: "none" }).val("");
+//         $("#stateparent").css({ "pointer-events": "auto", background: "" });
+
+//         // $("#countryparent").css({ "pointer-events": "auto", background: "none" }).val("");
+//         $("#countryparent").css({ "pointer-events": "auto", background: "" });
+//     }
+// });
 
 $("#same-address3").change(function () {
     if (this.checked) {
@@ -4294,7 +4334,9 @@ $("#same-addressUC").change(function () {
         $("#address2UC").val($("#address-2").val()).prop("readonly", true);
         $("#postcodeUC").val($("#postcode").val()).prop("readonly", true);
         $("#cityUC").val($("#city").val()).prop("readonly", true);
-        $("#stateUC").val($("#state").val()).prop("disabled", true);
+        // $("#stateUC").val($("#state").val()).prop("disabled", true);
+        $("#stateUC").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
         $("#countryUC").val($("#country").val()).prop("disabled", true);
 
         // Fetch permanent address from userAddress table if available
@@ -4307,8 +4349,8 @@ $("#same-addressUC").change(function () {
                     var permanentAddress2 = data.data.address2;
                     var permanentPostcode = data.data.postcode;
                     var permanentCity = data.data.city;
-                    var permanentState = data.data.state;
-                    var permanentCountry = data.data.country;
+                    var permanentState = data.data.state_name;
+                    var permanentCountry = data.data.country_name;
                     console.log(data);
 
                     if (
@@ -4325,6 +4367,11 @@ $("#same-addressUC").change(function () {
                         $("#cityUC").val(permanentCity);
                         $("#stateUC").val(permanentState);
                         $("#countryUC").val(permanentCountry);
+
+                        $("#postcodeUC").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                        $("#cityUC").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                        $("#stateUC").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                        $("#countryUC").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                     }
                 }
             })
@@ -4336,8 +4383,10 @@ $("#same-addressUC").change(function () {
             $("#address2UC").prop("readonly", false).val("");
             $("#postcodeUC").prop("readonly", false).val("");
             $("#cityUC").prop("readonly", false).val("");
-            $("#stateUC").prop("disabled", false).val("");
+            // $("#stateUC").prop("disabled", false).val("");
             $("#countryUC").prop("disabled", false).val("");
+            $("#stateUC").css({ "pointer-events": "auto", background: "none" }).val("");
+
         }
 });
 
@@ -4477,16 +4526,16 @@ $("#same-addressEditParent").change(function () {
                     var permanentAddress2 = data.data.address2;
                     var permanentPostcode = data.data.postcode;
                     var permanentCity = data.data.city;
-                    var permanentState = data.data.state;
-                    var permanentCountry = data.data.country;
+                    var permanentState = data.data.state_name;
+                    var permanentCountry = data.data.country_name;
                     console.log(data);
 
                     if (
-                        permanentAddress1 &&
-                        permanentAddress2 &&
-                        permanentPostcode &&
-                        permanentCity &&
-                        permanentState &&
+                        permanentAddress1 ||
+                        permanentAddress2 ||
+                        permanentPostcode ||
+                        permanentCity ||
+                        permanentState ||
                         permanentCountry
                     ) {
                         $("#address1P1").val(permanentAddress1);
@@ -4497,6 +4546,11 @@ $("#same-addressEditParent").change(function () {
                         $("stateeditparenthidden").val(permanentState);
                         $("#countryP1").val(permanentCountry);
                         $("countryeditparenthidden").val(permanentCountry);
+
+                        $("#postcodeP1").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                        $("#cityP1").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                        $("#stateP1").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                        $("#countryP1").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                     }
                 }
             })

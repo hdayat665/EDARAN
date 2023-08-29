@@ -41,7 +41,7 @@
                                     <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                     <td>
                                         <a href="javascript:;" data-id="{{ $customer->id }}" id="editButton" class="btn btn-primary">Edit</a>
-                                        
+
                                         <!-- <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
                                             <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}" class="dropdown-item">Edit</a>
@@ -58,12 +58,12 @@
                                             <input class="form-check-input statusCheck" data-id="{{ $customer->id }}"
                                                 {{ $customer->status == 1 ? 'checked' : '' }} type="checkbox" role="switch"
                                                 id="flexSwitchCheckDefault" />
-                                                
+
                                             <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                         </div>
                                     </td>
                                     <td>{{ $customer->customer_name }}</td>
-                                    <td>{{ $customer->address }}, {{ $customer->address2 }} {{ $customer->city}}, {{ $customer->postcode}}, {{ $customer->state}} ,{{ $customer->country}}</td>
+                                    <td>{{ $customer->address }}, {{ $customer->address2 }} {{ $customer->city}}, {{ $customer->postcode}}, {{ $customer->state_name}} ,{{ $customer->country_name}}</td>
                                     <td>{{ $customer->phoneNo }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->addedBy }}</td>
