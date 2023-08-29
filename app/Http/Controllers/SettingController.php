@@ -492,17 +492,14 @@ class SettingController extends Controller
         $data['city'] = $ss->branchCity();
         $data['postcode'] = $ss->branchPostcode();
 
-
         return view('pages.setting.branch', $data);
     }
-
 
     public function getStatebyCountry($id = '')
     {
         $ss = new SettingService;
 
         $result = $ss->getStatebyCountry($id);
-
 
         return $result;
     }
@@ -512,7 +509,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->getCitybyState($id);
-
 
         return $result;
     }
@@ -1674,5 +1670,5 @@ class SettingController extends Controller
 
         return $result;
     }
-    
+
 }

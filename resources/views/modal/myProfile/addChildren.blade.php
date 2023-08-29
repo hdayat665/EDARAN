@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="add-children">New Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="modaladd-children">
                 <form id="addChildrenForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -47,7 +47,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
                                     <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" placeholder="000000000000">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -71,14 +71,14 @@
                                 {{-- <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                
+
                                 </div> --}}
                             </div>
                         </div>
                             <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                  
+
                             </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
@@ -186,9 +186,9 @@
                             <input type="file" class="form-control" name="supportDoc">
                         </div>
                     </div>
-                    
 
 
+                <div id="addressProfile">
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address1" class="form-label" >Address 1</label>
@@ -201,49 +201,41 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" >Postcode</label>
-                            <input type="number" id="" name="postcode" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="firstname" class="form-label" >City</label>
-                            <input type="text" id="" name="city" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
-                        </div>
-                        
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <label for="state" class="form-label" >State</label>
-                            <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
-                                <?php $state = state() ?>
-                                <option value="" label="PLEASE CHOOSE"  ></option>
-                                @foreach ($state as $key => $status)
-                                <option value="{{$key}}" >{{$status}}</option>
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country->sortBy('country_name') as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country</label>
-                            <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
-                                <option value="" label="PLEASE CHOOSE" selected></option>
-                                <optgroup id="country-optgroup-Americas" label="Americas">
-                                    @foreach ($americass as $key => $america)
-                                    <option value="{{$key}}"  >{{$america}}</option>
-                                    @endforeach
-                                </optgroup>
-                                <optgroup id="country-optgroup-Asia" label="Asia">
-                                    @foreach ($asias as $key => $asia)
-                                    <option value="{{$key}}"  >{{$asia}}</option>
-                                    @endforeach
-                                </optgroup>
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                             </select>
                         </div>
                     </div>
-               
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="city" class="form-label">City</label>
+                            <select class="form-select" name="city" id="citycom" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="postcode" class="form-label">Postcode</label>
+                            <select class="form-select" name="postcode" id="postcodecom" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addChildren" class="btn btn-primary">Save</button>
-               
+
             </div>
             </form>
         </div>
