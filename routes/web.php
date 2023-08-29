@@ -147,8 +147,11 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
-            //Route::post('/updateProfilePicture', 'updateProfilePicture');
             Route::post('/updateMyProfile', 'updateMyProfile');
+            Route::get('/getStatebyCountryProfile/{id}', 'getStatebyCountryProfile');
+            Route::get('/getCitybyStateProfile/{id}', 'getCitybyStateProfile');
+            Route::get('/getPostcodeByCityProfile/{id}', 'getPostcodeByCityProfile');
+            Route::post('/createAddress', 'createAddress');
             Route::post('/updateAddress', 'updateAddress');
             Route::post('/updateEmergency', 'updateEmergency');
             Route::post('/updateCompanion', 'updateCompanion');
@@ -175,9 +178,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getAddressDetails/{id}', 'getAddressDetails');
             Route::post('/updateAddressDetails', 'updateAddressDetails');
             Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
-
             Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
-
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
@@ -205,6 +206,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(EmployeeController::class)->group(function () {
             Route::post('/addProfile', 'addProfile');
             Route::post('/addAddress', 'addAddress');
+            Route::get('/getStatebyCountryEmployee/{id}', 'getStatebyCountryEmployee');
+            Route::get('/getCitybyStateEmployee/{id}', 'getCitybyStateEmployee');
+            Route::get('/getPostcodeByCityEmployee/{id}', 'getPostcodeByCityEmployee');
             Route::post('/addEmployment', 'addEmployment');
             Route::get('/getEmployee', 'getEmployee');
             Route::post('/terminateEmployment', 'terminateEmployment');

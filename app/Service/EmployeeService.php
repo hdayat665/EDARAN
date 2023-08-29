@@ -2,28 +2,31 @@
 
 namespace App\Service;
 
-use App\Models\Attachments;
+use App\Models\Users;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\Vehicle;
 use App\Models\Employee;
+use App\Models\Location;
 use App\Models\JobHistory;
-use App\Models\Subscription;
+use App\Models\UserParent;
+use App\Models\Attachments;
 use App\Models\UserAddress;
+use App\Models\UserProfile;
+use App\Models\UserSibling;
+use App\Models\Subscription;
 use App\Models\UserChildren;
+use App\Models\UsersDetails;
 use App\Models\UserCompanion;
 use App\Models\UserEmergency;
-use App\Models\UserParent;
-use App\Models\UserProfile;
-use App\Models\Users;
-use App\Models\UsersDetails;
-use App\Models\UserSibling;
-use App\Models\UserQualificationEducation;
-use App\Models\UserQualificationOthers;
-use App\Models\Vehicle;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Mail\Attachment;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserQualificationOthers;
 use Illuminate\Support\Facades\Session;
+use App\Models\UserQualificationEducation;
 
 class EmployeeService
 {
@@ -68,6 +71,38 @@ class EmployeeService
         return $data;
     }
 
+    public function getStatebyCountryEmployee($id = '')
+    {
+        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+            ->where('location_states.country_id', $id)
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getCitybyStateEmployee($id = '')
+    {
+
+        $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_cities.state_id', $id)
+            ->groupBy('location_cities.name')
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getPostcodeByCityEmployee($id = '')
+    {
+
+        $data = Location::select('*')
+            ->where('name', $id)
+            ->get();
+
+
+        return $data;
+    }
 
     public function addAddress($r)
     {
@@ -220,6 +255,11 @@ class EmployeeService
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
 
+        $data['country'] = Country::all();
+        $data['state'] = State::all();
+        $data['city'] = Location::all();
+        $data['postcode'] = Location::all();
+
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {
@@ -293,6 +333,18 @@ class EmployeeService
         $data['addressType'] = addressType();
 
         return $data;
+    }
+
+    public function registerEmployeeView()
+    {
+
+        $data['country'] = Country::all();
+        $data['state'] = State::all();
+        $data['city'] = Location::all();
+        $data['postcode'] = Location::all();
+
+        return $data;
+
     }
 
     public function updateEmployeeProfile($input)
@@ -1398,7 +1450,7 @@ class EmployeeService
             $input['addressType'] = '3';
         } else {
             $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
-            if ($existingAddress->addressType === '3') {
+            if (in_array($existingAddress->addressType, ['3', '2', '1'])) {
                 $input['addressType'] = '0';
             } else {
                 $input['addressType'] = $existingAddress->addressType;
@@ -1671,9 +1723,14 @@ class EmployeeService
 
     public function getEmployeeAddressforCompanion($id)
     {
-        $addressDetails = UserAddress::where('user_id', $id)
-        ->whereIn('addressType', [1, 3])
-        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+     
+
+        $addressDetails = UserAddress::select('useraddress.*', 'location_states.state_name', 'location_country.country_name')
+        ->join('location_states', 'useraddress.state', '=', 'location_states.id')
+        ->join('location_country', 'useraddress.country', '=', 'location_country.country_id')
+        ->where('useraddress.user_id', $id)
+        ->whereIn('useraddress.addressType', [1, 3])
+        ->limit(1)
         ->first();
 
         if(!$addressDetails)

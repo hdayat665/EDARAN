@@ -149,6 +149,8 @@
                                 <label class="form-label">State*</label>
                                 <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase;">
                                     <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                </select>
+                        </div>
 
 
 
@@ -169,6 +171,10 @@
                         </div>
                         <div class="mb-2">
                                 <label class="form-label">Postcode*</label>
+                                <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                </select>
+                        </div>
 
                                 <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
                                     <option type="text" value="" selected="selected">PLEASE CHOOSE</option>

@@ -241,8 +241,43 @@ class ProfileController extends Controller
         $ps = new ProfileService;
 
         $data = $ps->profileView();
-        // pr($data['employment']);
         return view('pages.HRIS.myProfile.index', $data);
+    }
+
+    public function getStatebyCountryProfile($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getStatebyCountryProfile($id);
+
+        return $result;
+    }
+
+    public function getCitybyStateProfile($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getCitybyStateProfile($id);
+
+        return $result;
+    }
+
+    public function getPostcodeByCityProfile($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getPostcodeByCityProfile($id);
+
+
+        return $result;
+    }
+
+    public function createAddress(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->createAddress($r);
+        return response()->json($result);
     }
 
     public function getChildren($id = '')

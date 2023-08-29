@@ -24,6 +24,8 @@ requirejs.config({
         newsJs: assets + "/js/newsJs",
         employmentTypeJs: assets + "/js/employmentTypeJs",
         editEmployeeJs: assets + "/js/editEmployeeJs",
+        addressProfile: assets + "/js/addressProfile",
+        addressEmployee: assets + "/js/addressEmployee",
         resetPassJs: assets + "/js/resetPassJs",
         customerJs: assets + "/js/customerJs",
         projectJs: assets + "/js/projectJs",
@@ -223,6 +225,14 @@ if ($("#employmentTypeJs").length > 0) {
 
 if ($("#editEmployeeJs").length > 0) {
     requirejs(["editEmployeeJs"]);
+}
+
+if ($("#addressProfile").length > 0) {
+    requirejs(["addressProfile"]);
+}
+
+if ($("#addressEmployee").length > 0) {
+    requirejs(["addressEmployee"]);
 }
 
 if ($("#resetPassJs").length > 0) {

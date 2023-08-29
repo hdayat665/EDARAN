@@ -492,17 +492,14 @@ class SettingController extends Controller
         $data['city'] = $ss->branchCity();
         $data['postcode'] = $ss->branchPostcode();
 
-
         return view('pages.setting.branch', $data);
     }
-
 
     public function getStatebyCountry($id = '')
     {
         $ss = new SettingService;
 
         $result = $ss->getStatebyCountry($id);
-
 
         return $result;
     }
@@ -512,7 +509,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->getCitybyState($id);
-
 
         return $result;
     }
@@ -1640,4 +1636,32 @@ class SettingController extends Controller
 
         return $result;
     }
+
+    public function getroleAdmin($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getroleAdmin($id);
+
+        return $result;
+    }
+
+    public function getroleFinance($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getroleFinance($id);
+
+        return $result;
+    }
+
+    public function getroleCA($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getroleCA($id);
+
+        return $result;
+    }
+
 }

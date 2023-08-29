@@ -147,6 +147,7 @@
                         </div>
 
                         <br>
+                    <div id="addressPddrofile">
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="form-check">
@@ -169,43 +170,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="number" id="postcodec" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" style="text-transform:uppercase">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="cityc" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" style="text-transform:uppercase">
-                            </div>
-
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
-                                <select class="form-select" id="statec" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
-                                    <?php $state = state() ?>
-                                    <option value="" label="PLEASE CHOOSE" selected></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}" >{{$status}}</option>
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="countryc" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country*</label>
-                                <select class="form-select" id="countryc" name="country" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase">
-                                    <option value="" label="PLEASE CHOOSE" selected ></option>
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}"  >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}"  >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="state" id="statec" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="city" class="form-label">City*</label>
+                                <select class="form-select" name="city" value="{{ $companion->city ?? '' }}" id="cityc" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="postcode" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcode" value="{{ $companion->postcode ?? '' }}" id="postcodec" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
                         <hr class="mt-5">
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -286,13 +290,20 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State</label>
-                                <select class="form-select" id="stateEmc" name="stateE" readonly value="{{ $companion->stateE ?? '' }}" style="text-transform:uppercase">
+                                {{-- <select class="form-select" id="stateEmc" name="stateE" readonly value="{{ $companion->stateE ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="" label="Please Choose"  ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
+                                </select> --}}
+                                <select class="form-select" id="stateEmc" name="stateE" readonly style="text-transform:uppercase">
+                                    <option value="" label="Please Choose"></option>
+                                    @foreach (state() as $key => $status)
+                                        <option value="{{ $key }}" {{ isset($companion) && $companion->stateE == $key ? 'selected' : '' }}>{{ $status }}</option>
+                                    @endforeach
                                 </select>
+
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country</label>
@@ -311,7 +322,6 @@
                                 </select>
                             </div>
                         </div>
-
                     <p class="text-end mb-0 mt-3">
 
                         <button href="javascript:;" id="addCompanion" class="btn btn-primary">Save</button>
@@ -488,8 +498,7 @@
                                 </div>
                             </div>
                         </div>
-
-
+                    <div id="addressPddrofile">
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="form-check">
@@ -513,43 +522,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="postcodeUC" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="cityUC" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
-                            </div>
-
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
-                                <select class="form-select" id="stateUC" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
-                                    <?php $state = state() ?>
-                                    <option value="" label="PLEASE CHOOSE" ></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $companion->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="countryUC" value="{{$companion->country ?? '' }}" style="text-transform:uppercase">
+                                    <option value="" label="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ ($companion->country ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country*</label>
-                                <select class="form-select" id="countryUC" name="country" value="{{ $companion->country ?? '' }}">
-                                    <option value="" label="PLEASE CHOOSE" selected ></option>
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="state" id="stateUC" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ ($companion->state ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="firstname" class="form-label">City*</label>
+                                <select class="form-select" name="city" id="cityUC" value="{{ $companion->city ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ ($companion->city ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lastname" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcode" id="postcodeUC" value="{{ $companion->postcode ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ ($companion->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
                         <hr class="mt-5">
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -616,11 +628,17 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State</label>
-                                <select class="form-select" id="stateCEdit" disabled name="stateE" value="{{ $companion->stateE ?? '' }}" style="text-transform:uppercase">
+                                {{-- <select class="form-select" id="stateCEdit" disabled name="stateE" value="{{ $companion->stateE ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $companion->stateE) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    @endforeach
+                                </select> --}}
+                                <select class="form-select" id="stateEmc" name="stateE" readonly style="text-transform:uppercase">
+                                    <option value="" label="Please Choose"></option>
+                                    @foreach (state() as $key => $status)
+                                        <option value="{{ $key }}" {{ isset($companion) && $companion->stateE == $key ? 'selected' : '' }}>{{ $status }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -641,7 +659,6 @@
                                 </select>
                             </div>
                         </div>
-
                     <p class="text-end mb-0 mt-3">
                         <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
 

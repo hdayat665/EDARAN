@@ -2,27 +2,30 @@
 
 namespace App\Service;
 
+use App\Models\Users;
+use App\Models\Country;
+use App\Models\Vehicle;
 use App\Models\Employee;
+use App\Models\State;
+use App\Models\Location;
 use App\Models\JobHistory;
-use App\Models\Subscription;
+use App\Models\UserParent;
 use App\Models\UserAddress;
+use App\Models\UserProfile;
+use App\Models\UserSibling;
+use App\Models\Subscription;
 use App\Models\UserChildren;
+use App\Models\UsersDetails;
+use Illuminate\Http\Request;
 use App\Models\UserCompanion;
 use App\Models\UserEmergency;
-use App\Models\UserParent;
-use App\Models\UserProfile;
-use App\Models\UserQualificationEducation;
-use App\Models\UserQualificationOthers;
-use App\Models\Users;
-use App\Models\UsersDetails;
-use App\Models\UserSibling;
-use App\Models\Vehicle;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\UserQualificationOthers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
+use App\Models\UserQualificationEducation;
 
 class ProfileService
 {
@@ -141,6 +144,113 @@ class ProfileService
 
         return $data;
 
+    }
+
+    public function getStatebyCountryProfile($id = '')
+    {
+        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+            ->where('location_states.country_id', $id)
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getCitybyStateProfile($id = '')
+    {
+
+        $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_cities.state_id', $id)
+            ->groupBy('location_cities.name')
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getPostcodeByCityProfile($id = '')
+    {
+
+        $data = Location::select('*')
+            ->where('name', $id)
+            ->get();
+
+
+        return $data;
+    }
+
+
+    public function createAddress($r)
+    {
+        $input = $r->input();
+
+        if (!UserAddress::where('user_id', $input['user_id'])->exists()) {
+            $input['addressType'] = '3';
+        } else {
+            $existingAddress = UserAddress::where('user_id', $input['user_id'])->first();
+            if (in_array($existingAddress->addressType, ['3', '2', '1'])) {
+                $input['addressType'] = '0';
+            } else {
+                $input['addressType'] = $existingAddress->addressType;
+            }
+        }
+
+
+        $address1 = $input['address1'] ?? null;
+        $address2 = $input['address2'] ?? null;
+
+        $user_id = $input['user_id'];
+
+        $getid = Location::select('id')
+            ->where('country_id', '=', $input['country'])
+            ->where('state_id', '=', $input['state'])
+            ->where('name', '=', $input['city'])
+            ->where('postcode', '=', $input['postcode'])
+            ->first();
+
+
+        UserAddress::create($input);
+
+        // $input = [
+        //     // 'branchName' => $input['branchName'],
+        //     // 'branchType' => $input['branchType'],
+        //     // 'address' => $input['address'],
+        //     // 'address2' => $input['address2'],
+
+        //     'ref_cityid' => $getid->id,
+        //     // 'tenant_id' => Auth::user()->tenant_id,
+
+        // ];
+
+        // $input = [
+        //     // 'branchName' => $input['branchName'],
+        //     // 'branchType' => $input['branchType'],
+        //     'address1' => $input['address1'],
+        //     'address2' => $input['address2'],
+
+        //     // 'address2' => $input['address2'],
+        //     // 'user_id' => Auth::user()->id,
+
+        //     'ref_cityid' => $getid->id,
+        //     // 'tenant_id' => Auth::user()->tenant_id,
+
+        // ];
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Address is Created';
+
+        return $data;
+    }
+
+    public function getAddressDetails($id = '')
+    {
+        $data['data'] = UserAddress::where('id', $id)->first();
+        $data['msg'] = 'Success Get Address Data';
+
+        return $data;
     }
 
     public function addEducation($r)
@@ -1019,6 +1129,11 @@ class ProfileService
         ->first();
         // dd($data['employment']);
 
+        $data['country'] = Country::all();
+        $data['state'] = State::all();
+        $data['city'] = Location::all();
+        $data['postcode'] = Location::all();
+
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {
@@ -1277,13 +1392,7 @@ class ProfileService
         return $data;
     }
 
-    public function getAddressDetails($id = '')
-    {
-        $data['data'] = UserAddress::where('id', $id)->first();
-        $data['msg'] = 'Success Get Address Data';
 
-        return $data;
-    }
 
     public function addAddressDetails($r)
     {
@@ -1370,10 +1479,18 @@ class ProfileService
 
     public function getAddressforCompanion($userId, $addressType)
     {
-        $addressDetails = UserAddress::where('user_id', $userId)
-            ->whereIn('addressType', $addressType)
-            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
-            ->first();
+        $addressDetails = UserAddress::select('useraddress.*', 'location_states.state_name', 'location_country.country_name')
+        ->join('location_states', 'useraddress.state', '=', 'location_states.id')
+        ->join('location_country', 'useraddress.country', '=', 'location_country.country_id')
+        ->where('useraddress.user_id', $userId)
+        ->whereIn('useraddress.addressType', $addressType)
+        ->limit(1)
+        ->first();
+
+        // ::where('user_id', $userId)
+        //     ->whereIn('addressType', $addressType)
+        //     ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        //     ->first();
 
         if(!$addressDetails)
         {

@@ -1318,7 +1318,6 @@ if (!function_exists('activityName')) {
     }
 }
 
-
 if (!function_exists('getBranchFullAddress')) {
     function getBranchFullAddress($user_id = '')
     {
@@ -1331,6 +1330,7 @@ if (!function_exists('getBranchFullAddress')) {
         return $data->fulladdress;
     }
 }
+
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
@@ -2140,21 +2140,6 @@ if (!function_exists('getClaimCategoryById')) {
         return $data;
     }
 }
-
-// if (!function_exists('getClaimCategoryNameById')) {
-//     function getClaimCategoryNameById($id = '')
-//     {
-//         $data = ClaimCategory::where([['id', $id]])->first();
-
-//         if (!$data) {
-//             $data = [];
-//         }
-
-//         // pr($data);
-
-//         return $data->claim_catagory;
-//     }
-// }
 
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
@@ -3041,6 +3026,61 @@ if (!function_exists('getCaClaimData')) {
             // $ca[1] = ['status', '!=', 'draft'];
 
             // $data = CashAdvanceDetail::where($ca)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getMenuPermissionById')) {
+    function getMenuPermission()
+    {
+        $data = MenuPermissionCode::get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimDataForNotification')) {
+    function getClaimDataForNotification($type = '', $menu = 'DepartRecommender')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data = $mcs->getGeneralClaim($type);
+
+        if ($menu == 'DepartmentRecommender') {
+            foreach ($data as $claim) {
+                if ($claim->status == 'active' && $claim->claim_type == 'MTC') {
+                    $claims[] = $data;
+                }
+            }
+        }
+
+        if (!$data) {
+            $claims = [];
+        }
+
+        return $claims;
+    }
+}
+
+if (!function_exists('getAppealData')) {
+    function getAppealData($role = '')
+    {
+        $data = [];
+        if ($role == 'approval') {
+            $mcs = new myClaimService;
+
+            $data = $mcs->getAppealData();
         }
 
         if (!$data) {
