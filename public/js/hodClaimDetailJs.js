@@ -4,6 +4,13 @@ $(document).on("click", "#viewCaBtn", function () {
     $("#viewCa").modal("show");
 });
 
+function printAndShowAllRows() {
+    setTimeout(function() {
+        window.print();
+    }, 1000);
+}
+document.getElementById('hodMtcPrint').addEventListener('click', printAndShowAllRows);
+
 //TRAVEL MODAL
 function getTravelDataByGeneralId(id, date) {
     return $.ajax({

@@ -1,5 +1,48 @@
 @extends('layouts.dashboardTenant')
 @section('content')
+<style>
+    @media print{
+        .hide-on-print {
+            display: none;
+        }
+        .hide-print {
+            display: none;
+        }
+        .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        }
+        #btnTAttachment,
+        #btnSAttachment {
+            display: none !important;
+        }
+        #header {
+            display: none; /* Adjust the value as needed */
+        }
+        .page-header{
+            display: none;
+        }
+        .navbar-nav {
+            display: none;
+        }
+        #content {
+            position: absolute;
+            top: 0;
+            padding-top: 1cm;
+        }
+        @page {
+            margin-bottom: 2cm; /* Adjust this value as needed */
+        }
+        .dataTables_wrapper .dataTables_paginate,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_buttons {
+            display: none !important;
+        }
+    }
+</style>
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claim </small></h1>
         <div class="panel panel" id="adminApprovalMtcJs">
@@ -168,12 +211,12 @@
                                 </div>
                             @endif
                             <!-- button CANCEL changed to PRINT -->
-                            <div class="row p-2">
+                            <div class="row p-2 hide-on-print">
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
+                                    <a class="btn btn-primary " data-id="{{ $general->id }}" style="color: black;width:100%" type="button" id="admAprvPrint"> Print</a>
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            <div class="row p-2 hide-on-print">
                                 <div class="col d-flex justify-content-end">
                                     <a href="/adminApprovalView" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                                 </div>
@@ -404,20 +447,20 @@
             <div class="row p-2">
                 <div class="col-md-12">
                     <div class="form-control">
-                        <div class="row p-2">
-                                <div class="col d-flex justify-content-start">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item">
-                                            <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Travelling</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Subsistence Allowance & Accomodation</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Others</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div class="row p-2 hide-on-print">
+                            <div class="col d-flex justify-content-start">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item">
+                                        <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Travelling</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Subsistence Allowance & Accomodation</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Others</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         @include('pages.eclaim.tableAdminAppr')
                     </div>

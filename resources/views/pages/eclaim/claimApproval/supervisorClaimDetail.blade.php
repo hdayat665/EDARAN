@@ -1,3 +1,46 @@
+<style>
+    @media print{
+        .hide-on-print {
+            display: none;
+        }
+        .hide-print {
+        display: none !important;
+        }
+        .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        }
+        #btnTAttachment,
+        #btnSAttachment {
+            display: none !important;
+        }
+        #header {
+            display: none; /* Adjust the value as needed */
+        }
+        .page-header{
+            display: none;
+        }
+        .navbar-nav {
+            display: none;
+        }
+        #content {
+            position: absolute;
+            top: 0;
+            padding-top: 1cm;
+        }
+        @page {
+            margin-bottom: 2cm; /* Adjust this value as needed */
+        }
+        .dataTables_wrapper .dataTables_paginate,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_buttons {
+            display: none !important;
+        }
+    }
+</style>
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
@@ -126,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 hide-on-print">
                         @php
                                 $allChecked = $travelClaims->every(function ($item) {
                                     return $item->hod === 'checked';
@@ -157,7 +200,7 @@
                                 @endif
                                 <div class="row p-2">
                                     <div class="col d-flex justify-content-end">
-                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
+                                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="button" id="svClaimPrint"> Print</a>
                                         <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                                     </div>
                                 </div>
@@ -393,7 +436,7 @@
                 <div class="row p-2">
                     <div class="col-md-12">
                         <div class="form-control">
-                            <div class="row p-2">
+                            <div class="row p-2 hide-print">
                                 <div class="col d-flex justify-content-start">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">
