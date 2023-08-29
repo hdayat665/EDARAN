@@ -258,7 +258,7 @@ class LoginService
         if ($input['password'] != $input['confirm_password']) {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
-            $data['msg'] = 'new password and confirm password not match';
+            $data['msg'] = 'Confirm Password Does Not Match';
 
             return $data;
         }
@@ -391,7 +391,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email have been send to your email address';
         }
 
         return $data;

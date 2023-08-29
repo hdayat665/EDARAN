@@ -257,48 +257,52 @@ $(document).ready(function () {
         });
     });
 
-    $("#forgotPassEmailForm").validate({
-        rules: {
-            username: {
-                required: true,
-                email: true
+    $("#forgotPassEmail").click(function (e) {
+        $("#forgotPassEmailForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    email: true
+                },
             },
-        },
-        messages: {
-            username: {
-                required: "Please Insert Working Email",
-                email: "Working Email Does Not Exist"
+            messages: {
+                username: {
+                    required: "Please Insert Working Email",
+                    email: "Working Email Does Not Exist"
+                },
             },
-        },
-        submitHandler: function (form) {
-            var data = new FormData(form);
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                var data = new FormData(document.getElementById("forgotPassEmailForm"));
 
-            $.ajax({
-                type: "POST",
-                url: "/forgotPassEmail",
-                data: data,
-                dataType: "json",
+                    $.ajax({
+                        type: "POST",
+                        url: "/forgotPassEmail",
+                        data: data,
+                        dataType: "json",
 
-                processData: false,
-                contentType: false,
-            }).then(function (data) {
-                console.log(data);
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        // console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
                 });
-            });
-        }
+            }
+        });
     });
 
     $("#forgotDomainEmail").click(function (e) {
@@ -407,7 +411,7 @@ $(document).ready(function () {
                         }).then(function () {
                             if (data.type == "error") {
                             } else {
-                                window.location.href = "/";
+                                location.reload();
                             }
                         });
                     });
