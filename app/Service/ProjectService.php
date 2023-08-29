@@ -276,11 +276,30 @@ class ProjectService
     public function createProjectLocation($r)
     {
         $input = $r->input();
-        
+        $tenant_id = Auth::user()->tenant_id;
+
         $projectLocation = ProjectLocation::where('project_id', $input['project_id'])
                                   ->where('location_name', $input['location_name'])
                                   ->first();
-        
+
+        $project = DB::table('project as a')
+                ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+                ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+                ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
+                ->select('a.*', 'b.customer_name', 'c.employeeName')
+                ->where([['a.tenant_id', $tenant_id], ['a.id', $input['project_id']]])
+                ->orderBy('id', 'desc')
+                ->first();
+
+        if (!$project->project_manager) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Error create Project Location. Project Manager didnt exist';
+
+            return $data;
+        }
+
         if ($projectLocation) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -291,6 +310,65 @@ class ProjectService
         }
 
         ProjectLocation::create($input);
+
+        
+            
+        //pr($project->acc_manager);
+
+        $ProjectLocation = ProjectLocation::latest()->first();
+
+        $input2['joined_date'] = $project->contract_start_date;
+        $input2['location'] = strval($ProjectLocation->id);
+
+
+        $projectMembers = ProjectMember::where('project_id', $input['project_id'])
+        ->where('tenant_id', $tenant_id)
+        ->where('employee_id', $project->acc_manager)
+        ->get();
+        
+        
+
+        $projectMember = ProjectMember::find($projectMembers[0]->id);
+        
+        
+        $currentLocations = explode(',', $projectMember->location);
+        //pr($currentLocations);
+        
+        // Merge the existing locations with the new locations
+        $locationArray = explode(',', $input2['location']);
+
+        // Merge the existing locations with the new locations
+        $updatedLocations = array_merge($currentLocations, $locationArray);
+
+        // Convert the merged array back to a comma-separated string
+        $input2['location'] = implode(',', $updatedLocations);
+        
+        ProjectMember::where('id', $projectMembers[0]->id)->update($input2);
+
+        $projectMembers = ProjectMember::where('project_id', $input['project_id'])
+        ->where('tenant_id', $tenant_id)
+        ->where('employee_id', $project->project_manager)
+        ->get();
+        
+        
+
+        $projectMember = ProjectMember::find($projectMembers[0]->id);
+        
+        
+        $currentLocations = explode(',', $projectMember->location);
+        //pr($currentLocations);
+        
+        // Merge the existing locations with the new locations
+        $locationArray = explode(',', $input2['location']);
+
+        // Merge the existing locations with the new locations
+        $updatedLocations = array_merge($currentLocations, $locationArray);
+
+        // Convert the merged array back to a comma-separated string
+        $input2['location'] = implode(',', $updatedLocations);
+        
+        ProjectMember::where('id', $projectMembers[0]->id)->update($input2);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
