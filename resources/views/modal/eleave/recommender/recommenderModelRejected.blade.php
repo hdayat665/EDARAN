@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="col-md-8">
-                            <textarea class="form-control" id="reasonreject" name="reasonreject"></textarea>
+                            <textarea class="form-control" id="reasonreject" name="reasonreject" maxlength="225"></textarea>
                         </div>
                     </div>
 

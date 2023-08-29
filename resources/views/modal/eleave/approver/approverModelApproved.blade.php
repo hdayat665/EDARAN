@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-12" style="width:50%">
                                 <label>Reason*</label><br>
-                                <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="reason1"></textarea>
+                                <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="reason1" maxlength="225"></textarea>
                             </div>
                             <div class="col-12" style="width:50%" id="menu01">
                                 <label>Leave Session</label><br>

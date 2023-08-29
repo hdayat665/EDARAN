@@ -195,8 +195,8 @@
                                 <tr>    
                                     <td>{{$id}}</td>
                                     <td>{{ getClaimCategoryById($personal->claim_category)->claim_catagory ?? '-' }}</td>
-                                    <td>-</td>
-                                    <td>-</td>
+                                    <td>{{ getProjectById($personal->project_id)->project_code ?? '-' }}</td>
+                                    <td>{{ getProjectById($personal->project_id)->project_name ?? '-' }}</td>
                                     <td>{{ $personal->claim_desc ?? '-' }}</td>
                                     <td>RM {{ $personal->amount ?? '-' }}</td>
                                     <td>
