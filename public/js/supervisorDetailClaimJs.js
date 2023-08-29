@@ -1,3 +1,10 @@
+function printAndShowAllRows() {
+    setTimeout(function() {
+        window.print();
+    }, 1000);
+}
+document.getElementById('svClaimPrint').addEventListener('click', printAndShowAllRows);
+
 function getTravelDataByGeneralId(id, date) {
     return $.ajax({
       url: "/getTravelDataByGeneralId/" + id + "/" + date
