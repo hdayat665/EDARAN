@@ -404,8 +404,7 @@ $(document).ready(function () {
                 country: "required",
                 postcode: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
+
                 },
                 address1c: "required",
                 cityc: "required",
@@ -413,8 +412,7 @@ $(document).ready(function () {
                 countryc: "required",
                 postcodec: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
+
                 },
             },
 
@@ -425,8 +423,7 @@ $(document).ready(function () {
                 country: "required",
                 postcode: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
+
                 },
                 address1c: "Please Insert Address 1",
                 cityc: "Please Insert City",
@@ -434,8 +431,7 @@ $(document).ready(function () {
                 countryc: "Please Choose Country",
                 postcodec: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
+
                 },
             },
             submitHandler: function (form) {

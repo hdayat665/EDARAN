@@ -1303,8 +1303,8 @@ $("#edit-profile-picture").on("click", function () {
                         var permanentAddress2 = data.data.address2;
                         var permanentPostcode = data.data.postcode;
                         var permanentCity = data.data.city;
-                        var permanentState = data.data.state;
-                        var permanentCountry = data.data.country;
+                        var permanentState = data.data.state_name;
+                        var permanentCountry = data.data.country_name;
                         console.log(data);
 
                         if (
@@ -1318,12 +1318,22 @@ $("#edit-profile-picture").on("click", function () {
                             $("#address-1c").val(permanentAddress1);
                             $("#address-2c").val(permanentAddress2);
                             $("#postcodec").val(permanentPostcode);
-                            $("#cityc").val(permanentPostcode);
+                            $("#cityc").val(permanentCity);
                             $("#statec").val(permanentState);
                             $("#countryc").val(permanentCountry);
 
+                            var select2Elements = "#postcodec, #cityc, #statec, #countryc";
+                            $(select2Elements).select2({
+                                placeholder: "PLEASE CHOOSE",
+                                allowClear: true,
+                            });
+                            
+                            $(select2Elements).val([permanentPostcode, permanentCity, permanentState, permanentCountry]).trigger("change");
 
-
+                            $("#postcodec").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                            $("#cityc").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                            $("#statec").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                            $("#countryc").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                         }
                     }
                 })
@@ -3892,11 +3902,7 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship: "required",
                 address1: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 city: "required",
                 state: "required",
                 age: "required",

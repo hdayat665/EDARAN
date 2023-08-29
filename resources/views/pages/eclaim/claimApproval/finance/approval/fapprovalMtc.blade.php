@@ -1,7 +1,48 @@
 @extends('layouts.dashboardTenant')
 @section('content')
+<style>
+    @media print{
+        .hide-on-print {
+            display: none;
+        }
+        .tab-pane {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        }
+        #btnTAttachment,
+        #btnSAttachment {
+            display: none !important;
+        }
+        #header {
+            display: none; /* Adjust the value as needed */
+        }
+        .page-header{
+            display: none;
+        }
+        .navbar-nav {
+            display: none;
+        }
+        #content {
+            position: absolute;
+            top: 0;
+            padding-top: 1cm;
+        }
+        @page {
+            margin-bottom: 2cm; /* Adjust this value as needed */
+        }
+        .dataTables_wrapper .dataTables_paginate,
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_buttons {
+            display: none !important;
+        }
+    }
+</style>
+
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claim </small></h1>
+        <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claiiiim </small></h1>
         <div class="panel panel" id="fapprovalDetailJs">
 
             <!-- NEW DESIGN -->
@@ -163,23 +204,23 @@
                         </div>
                     </div>
                     @else
-                    <div class="row p-2">
+                    <div class="row p-2 hide-on-print">
                         <div class="col d-flex justify-content-end">
                             <a href="javascript:;" class="btn btn-warning" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2 hide-on-print">
                         <div class="col d-flex justify-content-end">
                             <a href="javascript:;" class="btn btn-danger" style="color: black;width:100%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2 hide-on-print">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
+                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" id="faAppMtcPrint" type="button"> Print</a>
                             <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2 hide-on-print">
                         <div class="col d-flex justify-content-end">
                             <a href="/financeApprovalView" class="btn btn-light" style="color: black;width:100%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
@@ -402,7 +443,7 @@
             <div class="row p-2">
                 <div class="col-md-12">
                     <div class="form-control">
-                        <div class="row p-2">
+                        <div class="row p-2 hide-on-print">
                                 <div class="col d-flex justify-content-start">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">

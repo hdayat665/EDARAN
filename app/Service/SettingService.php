@@ -545,6 +545,7 @@ class SettingService
 
         return $data;
     }
+
     public function updateBranch($r, $id)
     {
         $input = $r->input();

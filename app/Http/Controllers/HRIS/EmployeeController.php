@@ -82,12 +82,42 @@ class EmployeeController extends Controller
 
     public function registerEmployeeView()
     {
-        // $ps = new EmployeeService;
+        $ps = new EmployeeService;
 
-        // $data['employeeInfos'] = $ps->getEmployeeInfo()['data'];
+        $result = $ps->registerEmployeeView();
 
-        return view('pages.HRIS.employee.registerEmployee');
+
+        return view('pages.HRIS.employee.registerEmployee' , $result);
     }
+
+    public function getStatebyCountryEmployee($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getStatebyCountryEmployee($id);
+
+        return $result;
+    }
+
+    public function getCitybyStateEmployee($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getCitybyStateEmployee($id);
+
+        return $result;
+    }
+
+    public function getPostcodeByCityEmployee($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getPostcodeByCityEmployee($id);
+
+
+        return $result;
+    }
+
 
     public function editEmployeeView($user_id = '')
     {

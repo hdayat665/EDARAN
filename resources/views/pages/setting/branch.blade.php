@@ -100,7 +100,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
                             <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="BRANCH NAME" >
@@ -137,10 +137,10 @@
                         </div>
 
                         <div class="mb-2">
-                            <label class="form-label">State*</label>
-                            <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase;">
-                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                            </select>
+                                <label class="form-label">State*</label>
+                                <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                </select>
                         </div>
 
                         <div class="mb-2">
@@ -153,10 +153,10 @@
                         </div>
 
                         <div class="mb-2">
-                            <label class="form-label">Postcode*</label>
-                            <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
-                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                            </select>
+                                <label class="form-label">Postcode*</label>
+                                <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                </select>
                         </div>
 
                         <div class="modal-footer">

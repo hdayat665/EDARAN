@@ -1,3 +1,9 @@
+function printAndShowAllRows() {
+    setTimeout(function() {
+        window.print();
+    }, 1000);
+}
+document.getElementById('finCheckPrint').addEventListener('click', printAndShowAllRows);
 
 function getTravelDataByGeneralId(id, date) {
     return $.ajax({
