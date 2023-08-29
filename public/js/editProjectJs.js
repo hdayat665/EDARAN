@@ -586,13 +586,13 @@ $(document).ready(function () {
 
     $(document).on("click", "#editProjectMemberButton", function () {
         var id = $(this).data("id");
-        var vehicleData = getProjectMember(id);
+        var vehicleData = getProjectMemberE(id);
         // console.log(vehicleData)
         vehicleData.then(function (data) {
             // console.log(id);
+            $("#employee_idE").val(data.employee_id);
             $("#joined_date").val(data.joined_date);
             $("#joined_date").datepicker("setStartDate", data.joined_date);
-            $("#employee_idE").val(data.employee_id);
             $("#unitE").val(data.unit);
             $("#designationE").val(data.designation);
             $("#departmentE").val(data.department);
@@ -606,7 +606,7 @@ $(document).ready(function () {
         $("#editProjectMemberModal").modal("show");
     });
 
-    function getProjectMember(id) {
+    function getProjectMemberE(id) {
         return $.ajax({
             url: "/getProjectandMemberById/" + id,
         });
@@ -676,12 +676,7 @@ $(document).ready(function () {
         });
     });
 
-    function getProjectMember(id) {
-        return $.ajax({
-            url: "/getProjectMemberById/" + id
-        });
-    }
-
+   
     $(document).on("click", "#assignProjectMemberButton", function () {
         $("#assignProjectMemberModal").modal("show");
     });
@@ -751,6 +746,12 @@ $(document).ready(function () {
         });
         $("#viewAssignMemberPrevLocModal").modal("show");
     });
+
+    function getProjectMember(id) {
+        return $.ajax({
+            url: "/getProjectMemberById/" + id
+        });
+    }
 
     $(document).on("click", "#editPreviousProjectMemberButton", function () {
         var id = $(this).data("id");
