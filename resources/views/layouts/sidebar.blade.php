@@ -206,6 +206,18 @@
                                     </div>
                                     <div class="menu-text text-gray">Leave Approval</div>
                                     <div class="menu-caret text-gray"></div>
+                                    @php
+                                        $leaveApprovals = ['recommender', 'approver'];
+                                        $totalCount1 = 0;
+                                        
+                                        foreach ($leaveApprovals as $leaveApproval) {
+                                            $count = getEleaveData($leaveApproval)->count();
+                                            $totalCount1 += $count;
+                                        }
+                                        
+                                        $totalCounts = $totalCount1;
+                                    @endphp
+                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>
                                 </a>
                                 <div class="menu-submenu">
                                     <?php $target = ['leave_recommender']; ?>
@@ -273,13 +285,13 @@
                             </div>
                         @endif
                         <div class="menu-item">
-                                <a href="/projectLocTable" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-location-pin text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Project Location</i></div>
-                                </a>
-                            </div>
+                            <a href="/projectLocTable" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-location-pin text-gray"></i>
+                                </div>
+                                <div class="menu-text text-gray">Project Location</i></div>
+                            </a>
+                        </div>
                         <?php $target = ['project_info']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
