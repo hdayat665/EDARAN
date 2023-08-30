@@ -30,9 +30,9 @@
                         </div>
                         <div class="col-md-3">
                             <label for="" class="form-label" >Birth of Certificate</label>
-                            <input type="file" id="birthCert"  name="birthID" class="form-control">
-                            @if ($children->birthID)
-                                Click <a href="{{ route('download', ['filename' => $children->birthID]) }}">here</a> to see birth of certificate attachment.
+                            <input type="file" id="birthCert" name="birthID" class="form-control" aria-describedby="">
+                            @if ($children->birthID ?? '')
+                                Click <a id="BirthCerttView"></a> to see birth of certificate attachment.
                             @endif
                         </div>
                     </div>
@@ -59,8 +59,8 @@
                                 <div class="col-sm-12">
                                     <label for="" class="form-label" >ID Attachment</label>
                                     <input type="file" id="id-attachment" name="idFile" class="form-control" aria-describedby="">
-                                    @if ($children->idFile)
-                                        Click <a href="{{ route('download', ['filename' => $children->idFile]) }}">here</a> to see ID Attachment.
+                                    @if ($children->idFile ?? '')
+                                        Click <a id="idAttachmentView"></a> to see ID Attachment.
                                     @endif
                                 </div>
                             </div>
@@ -155,9 +155,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach4" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" disabled>
-                                    @if ($children->okuFile)
-                                        Click <a href="{{ route('download', ['filename' => $children->okuFile]) }}">here</a> to see OKU ID Attachment.
+                                    <input type="file" id="okuattach4" value="" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    @if ($children->okuFile  ?? '')
+                                    Click <a id="okuAttachmentView"></a> to see attachment.
                                     @endif
                                 </div>
                             </div>
@@ -192,8 +192,8 @@
                         <div class="col-md-6">
                             <label for="" class="form-label">Supporting Document</label>
                             <input type="file" name="supportDoc" id="" class="form-control" aria-describedby="">
-                            @if ($children->supportDoc)
-                                Click <a href="{{ route('download', ['filename' => $children->supportDoc]) }}">here</a> to see supporting document attachment.
+                            @if ($children->supportDoc  ?? '')
+                                Click <a id="supportDocAttachmentView"></a> to see supporting document attachment.
                             @endif
                         </div>
                     </div>
