@@ -214,66 +214,6 @@ $(document).ready(function () {
         });
     }
 
-    // mypie2.then(function (datapie2) {
-    //     Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
-    //     Chart.defaults.font.family = app.font.family;
-    //     Chart.defaults.font.weight = 500;
-    //     Chart.defaults.scale.grid.color =
-    //         "rgba(" + app.color.componentColorRgb + ", .15)";
-    //     Chart.defaults.scale.ticks.backdropColor =
-    //         "rgba(" + app.color.componentColorRgb + ", 0)";
-
-    //     var ctx5 = document.getElementById("myChart2").getContext("2d");
-
-    //     var total_token = datapie2[0].carry_forward - datapie2[0].carry_forward_balance;
-    //     var total_balance = datapie2[0].carry_forward_balance - datapie2[1].total_pending;
-    //     var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
-
-    //     window.myPie = new Chart(ctx5, {
-    //         type: "pie",
-    //         data: {
-    //             labels: ["Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token],
-    //             datasets: [
-    //                 {
-    //                     data: [total_balance, pending,total_token],
-    //                     backgroundColor: [
-    //                         "rgba(52, 143, 226)",
-    //                         "rgb(255, 128, 128)",
-    //                         "rgba(73, 182, 214)",
-    //                     ],
-    //                     borderColor: [
-    //                         app.color.red,
-    //                         app.color.orange,
-    //                         app.color.gray500,
-    //                         app.color.gray300,
-    //                         app.color.gray900,
-    //                     ],
-    //                     borderWidth: 1,
-    //                 },
-    //             ],
-    //         },
-    //         options: {
-    //             responsive: true,
-    //             plugins: {
-    //                 tooltip: {
-    //                     callbacks: {
-    //                         label: function (context) {
-    //                             var label = context.label || "";
-    //                             return label;
-    //                         },
-    //                     },
-    //                 },
-    //             },
-    //         },
-    //     });
-    // });
-
-    // $("#datepicker-applied").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     // // format: "yyyy-mm-dd",
-    // });
-
     mypie2.then(function (datapie2) {
         Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
         Chart.defaults.font.family = app.font.family;
@@ -342,10 +282,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-
-
     $("#datepicker-applied")
         .datepicker({
             todayHighlight: true,
@@ -364,19 +300,10 @@ $(document).ready(function () {
             $(this).datepicker("hide");
         });
 
-    // $("#datepicker-applied").datepicker("getDate");
-
-    // var dt = new Date();
-    // document.getElementById("datepicker-applied").innerHTML = dt;
 
     var dt = new Date();
     document.getElementById("datepicker-filter").innerHTML = dt;
 
-    // $("#datepicker-leave").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     format: "dd-mm-yyyy",
-    // });
     $("#datepicker-leave").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -424,8 +351,8 @@ $(document).ready(function () {
             $("#menu7").hide();
             $("#menu8").hide();
             $("#select4").val(1);
-            $("#start-date").val("");
-            $("#end-date").val("");
+            $("#datepicker-start").val("");
+            $("#datepicker-end").val("");
             $("#flexRadioDefault1").val("");
             $("#flexRadioDefault2").val("");
         } else if ($(this).val() == "0.5") {
@@ -434,8 +361,8 @@ $(document).ready(function () {
             $("#menu7").hide();
             $("#menu8").hide();
             $("#select4").val(0.5);
-            $("#start-date").val("");
-            $("#end-date").val("");
+            $("#datepicker-start").val("");
+            $("#datepicker-end").val("");
         } else if ($(this).val() == "-") {
             $("#menu5").hide();
             $("#menu6").hide();
@@ -443,6 +370,7 @@ $(document).ready(function () {
             $("#menu8").show();
             $("#start-date").val("");
             $("#end-date").val("");
+            $("#datepicker-leave").val("");
             $("#select4").val("");
             $("#flexRadioDefault1").val("");
             $("#flexRadioDefault2").val("");
@@ -452,15 +380,61 @@ $(document).ready(function () {
         }
     });
 
+    // $(document).on("change", "#datepicker-start, #datepicker-end", function () {
+    //     var startDate = $("#datepicker-start").val();
+    //     var endDate = $("#datepicker-end").val();
+    //     var totalDays = "";
+    //     var date = startDate + "," + endDate;
+
+    //     if(startDate.trim() === ""){
+    //         $("#datepicker-end").val("");
+    //     }
+
+    //     if (startDate && endDate) {
+
+    //         var holidayPromise = holidayPromisex(date);
+
+    //         function holidayPromisex(date) {
+    //             return $.ajax({
+    //                 url: "/myholiday/" + date,
+    //             });
+    //         }
+
+    //         holidayPromise.done(function (totalDaysx) {
+
+    //             var total_holiday = totalDaysx;
+    //             var date1 = new Date(startDate);
+    //             var date2 = new Date(endDate);
+    //             var timeDiff = date2.getTime() - date1.getTime();
+    //             var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    //             var weekends = 0;
+    //             for (var i = 0; i <= dayDiff; i++) {
+    //                 var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
+    //                 if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+    //                     weekends++;
+    //                 }
+    //             }
+
+    //             totalDays = dayDiff + 1 - weekends - total_holiday;
+
+    //             if (totalDays <= 0) {
+    //                 $("#datepicker-end").val("");
+    //                 $("#select4").val("");
+    //             } else {
+    //                 $("#select4").val(totalDays);
+    //             }
+    //         });
+    //     }
+    // });
+
     $(document).on("change", "#datepicker-start, #datepicker-end", function () {
         var startDate = $("#datepicker-start").val();
         var endDate = $("#datepicker-end").val();
         var totalDays = "";
         var date = startDate + "," + endDate;
-        // console.log(date);
-        // return false;
 
-        if(startDate.trim() === ""){
+        if (startDate.trim() === "") {
             $("#datepicker-end").val("");
         }
 
@@ -474,33 +448,84 @@ $(document).ready(function () {
                 });
             }
 
-            holidayPromise.done(function (totalDaysx) {
 
-                var total_holiday = totalDaysx;
-                var date1 = new Date(startDate);
-                var date2 = new Date(endDate);
-                var timeDiff = date2.getTime() - date1.getTime();
-                var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-                var weekends = 0;
-                for (var i = 0; i <= dayDiff; i++) {
-                    var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
-                    if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
-                        weekends++;
+            holidayPromise.done(function (dataA) {
+
+                requirejs(["sweetAlert2"], function (swal) {
+                    if (dataA.type === "error") {
+                        swal({
+                            title: dataA.title,
+                            text: dataA.msg,
+                            type: dataA.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (dataA.type === "error") {
+                                // Lakukan sesuatu jika jenis data adalah 'error'
+                                $("#datepicker-end").val("");
+                                $("#select4").val("");
+                            } else {
+
+                            }
+                        });
+                    } else {
+
+                        var total_holiday = dataA[0];
+                        var getweekend = dataA[1];
+
+                        console.log(getweekend);
+
+
+                        var date1 = new Date(startDate);
+                        var date2 = new Date(endDate);
+                        var timeDiff = date2.getTime() - date1.getTime();
+                        var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                        var weekends = 0;
+
+                        for (var i = 0; i <= dayDiff; i++) {
+                            var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
+
+
+                            var isWeekend = false;
+                            for (var j = 0; j < getweekend.length; j++) {
+                                if (parseInt(getweekend[j].day_of_week) === currentDate.getDay() && getweekend[j].total_time === null) {
+                                    isWeekend = true;
+                                    break;
+                                }
+                            }
+
+                            if (isWeekend) {
+                                weekends++;
+                            }
+                        }
+
+                        console.log(total_holiday);
+
+
+
+                        totalDays = dayDiff + 1 - weekends - total_holiday;
+
+                        if (totalDays <= 0) {
+                            $("#datepicker-end").val("");
+                            $("#select4").val("");
+                        } else {
+                            $("#select4").val(totalDays);
+                        }
+
                     }
-                }
+                });
 
-                totalDays = dayDiff + 1 - weekends - total_holiday;
 
-                if (totalDays <= 0) {
-                    $("#datepicker-end").val("");
-                    $("#select4").val("");
-                } else {
-                    $("#select4").val(totalDays);
-                }
             });
         }
-    });
+        });
+
+
+
 
     $(document).ready(function () {
         if (
@@ -583,11 +608,6 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
-                    // data.forEach(function(value, key) {
-                    //     console.log(key + ": " + value);
-                    //   });
-
-                    // var data = $('#tree').jstree("get_selected");
 
                     $.ajax({
                         type: "POST",
@@ -621,20 +641,17 @@ $(document).ready(function () {
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");
         var myleaveData = myleave(id);
-        // console.log(myleaveData);
 
         myleaveData.then(function (data) {
             console.log(data);
             $("#datepicker-applied1").val(data[0].applied_date);
             $("#typeofleave1").val(data[0].lt_type_id);
-            // $("#dayApplied1").val(data[0].day_applied);
             $("#totalapply1").val(data[0].total_day_applied);
             $("#datepicker-leave1").val(data[0].leave_date);
             $("#datepicker-start1").val(data[0].start_date);
             $("#datepicker-end1").val(data[0].end_date);
             $("#reason1").val(data[0].reason);
             $("#reasonreject1").val(data[0].reason);
-            // console.log(data[0]);
             if (data[0].day_applied == 1) {
                 $("#dayApplied1").val("One Day");
             } else if (data[0].day_applied == 0.5) {

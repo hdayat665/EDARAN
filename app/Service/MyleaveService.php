@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\ActivityLogs;
 use App\Models\holidayModel;
 use App\Models\MyLeaveModel;
+use App\Models\leaveWeekendModel;
 use App\Mail\Mail as MailMail;
 use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\DB;
@@ -1735,46 +1736,90 @@ class MyleaveService
         $startDate = $explode[0];
         $endDate = $explode[1];
 
-        $data = holidayModel::select('*')
-            ->where('leave_holiday.tenant_id', Auth::user()->tenant_id)
-            ->whereBetween('leave_holiday.start_date', [$startDate, $endDate])
-            ->orWhereBetween('leave_holiday.end_date', [$startDate, $endDate])
-            ->orderBy('leave_holiday.start_date', 'asc')
 
+        $totalDaysx = 0;
+
+        $getbranch = Employee::select('*')
+        ->leftJoin('branch as b', 'employment.branch', '=', 'b.id')
+        ->leftJoin('location_cities as lc', 'b.ref_cityid', '=', 'lc.id')
+        ->where('employment.user_id', '=', Auth::user()->id)
+        ->first();
+
+        if (empty($getbranch->branch)) {
+            $dataA = [
+                'msg' => 'The calculation for total days applied cannot proceed. The branch has not been set.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+
+            return $dataA;
+        }
+
+
+
+        $getweekend = leaveWeekendModel::select('day_of_week','total_time')
+            ->where('leave_weekend.state_id', '=', $getbranch->state_id)
+            ->where('leave_weekend.tenant_id', '=', Auth::user()->tenant_id)
             ->get();
 
+        if ($getweekend->isEmpty()) {
+            $dataA = [
+                'msg' => 'The calculation for total days applied cannot proceed. The working hour has not been set.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+
+            return $dataA;
+        }
+
+
+        $data = holidayModel::select('*')
+            ->where('leave_holiday.tenant_id', Auth::user()->tenant_id)
+            ->whereRaw('FIND_IN_SET(?, leave_holiday.state_id)', [$getbranch->state_id])
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('leave_holiday.start_date', [$startDate, $endDate])
+                      ->orWhereBetween('leave_holiday.end_date', [$startDate, $endDate]);
+            })
+            ->orderBy('leave_holiday.start_date', 'asc')
+            ->get();
 
         $totalDaysx = 0;
 
         foreach ($data as $row) {
-
             $holidayStartDate = Carbon::createFromFormat('Y-m-d', $row->start_date);
-
             $holidayEndDate = Carbon::createFromFormat('Y-m-d', $row->end_date);
+            if ($startDate > $holidayStartDate) {
+                $holidayStartDate = Carbon::createFromFormat('Y-m-d', $startDate);
+            }
 
+            if ($endDate < $holidayEndDate) {
+                $holidayEndDate = Carbon::createFromFormat('Y-m-d', $endDate);
+            }
 
-
-            $daysDiff = $holidayEndDate->diffInDays($holidayStartDate) + 1;
-
-
+            $daysDiff = $holidayEndDate->diffInDays($holidayStartDate);
 
             for ($i = 0; $i <= $daysDiff; $i++) {
                 $currentDate = $holidayStartDate->copy()->addDays($i);
                 $dayOfWeek = $currentDate->dayOfWeek;
 
-
-                // Jika hari adalah Sabtu atau Minggu, lewati iterasi
-                if ($dayOfWeek === Carbon::SATURDAY || $dayOfWeek === Carbon::SUNDAY) {
-                    continue;
+                $isWeekend = false;
+                foreach ($getweekend as $weekend) {
+                    if ($weekend->day_of_week == $dayOfWeek && $weekend->total_time === null) {
+                        $isWeekend = true;
+                        break;
+                    }
                 }
 
-                if ($currentDate >= $holidayStartDate && $currentDate <= $holidayEndDate) {
+                if (!$isWeekend) {
                     $totalDaysx++;
                 }
             }
         }
 
+        $dataA = [$totalDaysx, $getweekend];
 
-        return $totalDaysx;
+        return $dataA;
     }
 }
