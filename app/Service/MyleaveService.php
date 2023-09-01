@@ -412,12 +412,31 @@ class MyleaveService
             }
         }
 
+        $getbranch = Employee::select('*')
+            ->leftJoin('branch as b', 'employment.branch', '=', 'b.id')
+            ->leftJoin('location_cities as lc', 'b.ref_cityid', '=', 'lc.id')
+            ->where('employment.user_id', '=', Auth::user()->id)
+            ->first();
 
+        if (empty($getbranch->branch)) {
+            $data = [
+                'msg' => 'The calculation for total days applied cannot proceed. The branch has not been set.',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }
 
-        $getDateHoliday = holidayModel::where([
-            ['start_date', '=', $input['leave_date']],
-            ['tenant_id', '=', Auth::user()->tenant_id]
-        ])->first();
+        $getDateHoliday = holidayModel::select('*')
+            ->where('leave_holiday.tenant_id', Auth::user()->tenant_id)
+            ->whereRaw('FIND_IN_SET(?, leave_holiday.state_id)', [$getbranch->state_id])
+            ->where(function ($query) use ($input) {
+                $query->whereBetween('leave_holiday.start_date', [$input['leave_date'], $input['leave_date']])
+                    ->orWhereBetween('leave_holiday.end_date', [$input['leave_date'], $input['leave_date']]);
+            })
+            ->orderBy('leave_holiday.start_date', 'asc')
+            ->first();
 
         if ($getDateHoliday) {
             $data['msg'] = 'The selected date cannot be chosen as it is a public holiday for ' . $getDateHoliday->holiday_title . '.';
@@ -427,7 +446,6 @@ class MyleaveService
 
             return $data;
         }
-
 
         if ($r->input('leave_date')) {
 
@@ -482,7 +500,7 @@ class MyleaveService
                         return $data;
                     }
                 }
-                $currentDate->addDay();
+
             }
         }
 

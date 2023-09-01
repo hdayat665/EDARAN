@@ -230,21 +230,22 @@ $(document).ready(function () {
         var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
 
         // Determine whether to display the pie chart with 0 values
-        var displayChart = total_token !== 0 || total_balance !== 0;
+        var displayChart = datapie2[0].carry_forward == 0 && datapie2[0].carry_forward_balance == 0;
 
         var dataValues = [];
         var backgroundColors = [];
         var labels = [];
 
         if (displayChart) {
+             // Display the pie chart with blue color when no carry forward
+             dataValues.push(0, 0, 1);  // Set total_balance and pending to 0
+             backgroundColors.push("rgba(200, 200, 200)", "rgba(200, 200, 200)", "rgba(200, 200, 200)"); // Blue color and light gray
+             labels.push("Total Balance: 0", "Pending / Pending Approved: 0", "Total Token: 0");
+
+        } else {
             dataValues.push(total_balance, pending, total_token);
             backgroundColors.push("rgba(52, 143, 226)", "rgb(255, 128, 128)", "rgba(73, 182, 214)");
             labels.push("Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token);
-        } else {
-            // Display the pie chart with blue color when no carry forward
-            dataValues.push(0, 0, 1);  // Set total_balance and pending to 0
-            backgroundColors.push("rgba(200, 200, 200)", "rgba(200, 200, 200)", "rgba(200, 200, 200)"); // Blue color and light gray
-            labels.push("Total Balance: 0", "Pending / Pending Approved: 0", "Total Token: 0");
         }
 
         window.myPie = new Chart(ctx5, {
