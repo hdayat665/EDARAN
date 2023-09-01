@@ -428,27 +428,64 @@ class MyleaveService
             return $data;
         }
 
+
         if ($r->input('leave_date')) {
 
-            $leaveDate = Carbon::createFromFormat('Y-m-d', $input['leave_date']);
-            $dayOfWeek = $leaveDate->dayOfWeek;
+            $getbranch = Employee::select('*')
+                ->leftJoin('branch as b', 'employment.branch', '=', 'b.id')
+                ->leftJoin('location_cities as lc', 'b.ref_cityid', '=', 'lc.id')
+                ->where('employment.user_id', '=', Auth::user()->id)
+                ->first();
 
-            if ($dayOfWeek === Carbon::SATURDAY) {
-                $dayOfWeekName = 'SATURDAY';
-            } elseif ($dayOfWeek === Carbon::SUNDAY) {
-                $dayOfWeekName = 'SUNDAY';
-            }
-
-            if (isset($dayOfWeekName)) {
-                $formattedDate = $leaveDate->format('d M Y');
-                $data['msg'] = 'The selected date (' . $formattedDate . ' - ' . $dayOfWeekName . ') cannot be chosen as it is a weekend.';
-                $data['status'] = config('app.response.error.status');
-                $data['type'] = config('app.response.error.type');
-                $data['title'] = config('app.response.error.title');
-
+            if (empty($getbranch->branch)) {
+                $data = [
+                    'msg' => 'The calculation for total days applied cannot proceed. The branch has not been set.',
+                    'status' => config('app.response.error.status'),
+                    'type' => config('app.response.error.type'),
+                    'title' => config('app.response.error.title')
+                ];
                 return $data;
             }
+
+            $getweekend = leaveWeekendModel::select('state_id','day_of_week','total_time')
+                ->where('leave_weekend.state_id', '=', $getbranch->state_id)
+                ->where('leave_weekend.tenant_id', '=', Auth::user()->tenant_id)
+                ->get();
+
+            if ($getweekend->isEmpty()) {
+                $data = [
+                    'msg' => 'The calculation for total days applied cannot proceed. The working hour has not been set.',
+                    'status' => config('app.response.error.status'),
+                    'type' => config('app.response.error.type'),
+                    'title' => config('app.response.error.title')
+                ];
+                return $data;
+            }
+
+            $leaveDate = Carbon::parse($r->input('leave_date'));
+            $currentDate = $leaveDate->copy();
+            $dayDiff = $currentDate->diffInDays(Carbon::now());
+
+            for ($i = 0; $i <= $dayDiff; $i++) {
+                $isWeekend = false;
+
+                foreach ($getweekend as $weekend) {
+                    if (intval($weekend->day_of_week) === $currentDate->dayOfWeek && $weekend->total_time === null) {
+                        $formattedDate = $currentDate->format('d M Y');
+                        $dayOfWeekName = $currentDate->format('l');
+                        $data = [
+                            'msg' => "The selected date ($formattedDate - $dayOfWeekName) cannot be chosen as it is a weekend.",
+                            'status' => config('app.response.error.status'),
+                            'type' => config('app.response.error.type'),
+                            'title' => config('app.response.error.title')
+                        ];
+                        return $data;
+                    }
+                }
+                $currentDate->addDay();
+            }
         }
+
 
         if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK && $_FILES['file']['size'] > 0) {
             $myleave = upload($r->file('file'));
