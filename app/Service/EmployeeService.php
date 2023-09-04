@@ -1413,7 +1413,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Claim Hierarchy';
+        $data['msg'] = 'eClaim Hierarchy is Updated';
 
         return $data;
     }
@@ -1436,7 +1436,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Cash Hierarchy';
+        $data['msg'] = 'Cash Advance Hierarchy is Updated';
 
         return $data;
     }
@@ -1459,7 +1459,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Eleave Hierarchy';
+        $data['msg'] = 'eLeave Hierarchy is Updated';
 
         return $data;
     }
@@ -1482,7 +1482,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Timesheet Hierarchy';
+        $data['msg'] = 'Timesheet Hierarchy is Updated';
 
         return $data;
     }
@@ -1505,7 +1505,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Timesheet Hierarchy';
+        $data['msg'] = 'Timesheet Hierarchy is Updated';
 
         return $data;
     }
