@@ -362,7 +362,8 @@ class LoginService
     }
 
     public function forgotPassEmail($input)
-    {
+    { 
+        dd($input);
         $employee = Employee::where('workingEmail', $input['username'])->first();
         $user = Users::where('id', $employee['user_id'])->first();
 
