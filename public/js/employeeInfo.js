@@ -103,13 +103,13 @@ $(document).ready(function () {
             rules: {
                 effectiveFrom: "required",
                 employmentDetail: "required",
-                file: "required",
+                'files[]': "required",
             },
 
             messages: {
                 effectiveFrom: "Please Choose Exit Date",
                 employmentDetail: "Please Choose Exit Type",
-                file: "Please Upload Attachment",
+                'files[]': "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
