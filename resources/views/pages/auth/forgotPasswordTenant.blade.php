@@ -12,15 +12,14 @@
 
                     </div>
                     <div class="mb-3">
-                        <label for="recipient-domain" class="col-form-label">Domain</label>
-                        <input type="text" class="form-control">
+                        <label for="recipient-tenant" class="col-form-label">Domain</label>
+                        <input type="text" class="form-control" name="tenant_name">
                     </div>
 
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Working Email</label>
                         <input type="text" class="form-control" name="username">
                     </div>
-                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

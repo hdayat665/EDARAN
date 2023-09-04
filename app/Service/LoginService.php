@@ -362,38 +362,45 @@ class LoginService
     }
 
     public function forgotPassEmail($input)
-    { 
-        $employee = Employee::where('workingEmail', $input['username'])->first();
-        $user = Users::where('id', $employee['user_id'])->first();
-
-        if (!$user) {
+    {
+        $tenant = Tenant::where('tenant_name', $input['tenant_name'])->first();
+        if (!$tenant) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'User not found';
+            $data['msg'] = 'Domain not found';
         } else {
-            $receiver = $input['username'];
-            $response['typeEmail'] = 'forgotPass';
-            $response['title'] = 'Orbit Reset Password';
-            $response['content1'] = 'This email is sent you to reset your password.';
-            $response['domain'] = $user->tenant;
-            $response['username'] = $input['username'];
-            $response['content2'] = 'Please click the button below to reset your password:';
-            $response['resetPassLink'] = env('APP_URL') . '/resetPassView/' . $user->id;
-            $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = 'Orbit';
-            $response['subject'] = 'Orbit Reset Password';
-            // $response['typeAttachment'] = "application/pdf";
-            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+            $employee = Employee::where('workingEmail', $input['username'])->where('tenant_id', $tenant->tenant_id)->first();
+            $user = Users::where('id', $employee['user_id'])->first();
+            
+            if (!$user) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'User not found';
+            } else {
+                $receiver = $input['username'];
+                $response['typeEmail'] = 'forgotPass';
+                $response['title'] = 'Orbit Reset Password';
+                $response['content1'] = 'This email is sent you to reset your password.';
+                $response['domain'] = $user->tenant;
+                $response['username'] = $input['username'];
+                $response['content2'] = 'Please click the button below to reset your password:';
+                $response['resetPassLink'] = env('APP_URL') . '/resetPassView/' . $user->id;
+                $response['from'] = env('MAIL_FROM_ADDRESS');
+                $response['nameFrom'] = 'Orbit';
+                $response['subject'] = 'Orbit Reset Password';
+                // $response['typeAttachment'] = "application/pdf";
+                //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
-            Mail::to($receiver)->send(new MailMail($response));
+                Mail::to($receiver)->send(new MailMail($response));
 
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email address';
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Email have been send to your email address';
+            }
         }
-
         return $data;
     }
 
