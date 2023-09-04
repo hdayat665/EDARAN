@@ -398,7 +398,8 @@ class LoginService
     }
 
     public function forgotDomainEmail($input)
-    {
+    {   
+        
         $employee = Employee::where('workingEmail', $input['username'])->first();
         $user = Users::where('id', $employee['user_id'])->first();
 
@@ -412,14 +413,15 @@ class LoginService
         }
 
         $allTenants = Tenant::all();
+        
         $tenant_names = [];
 
         foreach ($allTenants as $singleTenant) {
-            if (in_array($singleTenant->id, $tenant)) {
+            if (in_array($singleTenant->tenant_id, $tenant)) {
                 $tenant_names[] = $singleTenant->tenant_name;
             }
         }
-
+        
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
