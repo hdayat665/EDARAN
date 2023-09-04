@@ -32,6 +32,7 @@
                                     }
                                 ?>
                             </select>
+                            <input type="hidden" id="employeeIdDiv" name="" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <input type="hidden" value="{{$project->id}}" name="project_id" style="text-transform: upppercase;">
