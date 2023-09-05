@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-12" style="width:50%">
                         <label>Reason*</label><br>
-                        <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="viewreason1"></textarea>
+                        <textarea rows="4" cols="50" readonly class="form-control-plaintext" id="viewreason1"></textarea>
                     </div>
                     <div class="col-12" style="width:50%" id="viewmenu01">
                         <label>Leave Session</label><br>
