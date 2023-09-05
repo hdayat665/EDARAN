@@ -142,7 +142,7 @@
                         @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <!-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> -->
+                                <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button>
                             </div>
                         </div>
                         <div class="row p-2">
