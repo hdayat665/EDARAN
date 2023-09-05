@@ -395,15 +395,15 @@ $(document).ready(function () {
             $("#startdate2").val(data[0].start_date);
             $("#enddate2").val(data[0].end_date);
             $("#totaldayapplied2").val(data[0].total_day_applied);
-            $("#reason2").val(data[0].reason);
+            $("#reason1r").val(data[0].reason);
             $("#iddata2").val(data[0].id);
 
             if (data[0].day_applied == 1) {
-                $("#dayapplied2").val("One Day");
+                $("#dayapplied2").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayapplied2").val("Half Day");
+                $("#dayapplied2").val("HALF DAY");
             } else {
-                $("#dayapplied2").val(data[0].day_applied + " Day");
+                $("#dayapplied2").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].up_rec_status === "1") {
@@ -417,11 +417,12 @@ $(document).ready(function () {
             }
 
             if (data[0].leave_session === "1") {
-                $("#leavesession2").text("Morning");
+                $("#leavesession2r").text("Morning");
             } else if (data[0].leave_session === "2") {
-                $("#leavesession2").text("Evening");
+                $("#leavesession2r").text("Evening");
             } else {
-                $("#menu10").hide();
+                $("#viewmenu01r").hide();
+                $("#expend").css("width", "100%");
             }
 
             if (data[0].username1) {
@@ -438,7 +439,7 @@ $(document).ready(function () {
 
             if (data[0].file_document) {
                 var filename = data[0].file_document.split("/").pop();
-                $("#fileDownloadPolicya2").html(
+                $("#fileDownloadPolicya2r").html(
                     '<a href="/storage/' +
                     data[0].file_document +
                     '" target="_blank">View: ' +
@@ -446,7 +447,7 @@ $(document).ready(function () {
                     '</a>'
                 );
             } else {
-                $("#fileDownloadPolicya2").html("No File Upload");
+                $("#fileDownloadPolicya2r").html("No File Upload");
             }
         });
     });

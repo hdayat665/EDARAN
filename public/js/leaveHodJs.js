@@ -364,11 +364,11 @@ $(document).ready(function () {
             console.log(data[0]);
 
             if (data[0].day_applied == 1) {
-                $("#dayapplied2").val("One Day");
+                $("#dayapplied2").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayapplied2").val("Half Day");
+                $("#dayapplied2").val("HALF DAY");
             } else {
-                $("#dayapplied2").val(data[0].day_applied + " Day");
+                $("#dayapplied2").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].up_rec_status === "1") {

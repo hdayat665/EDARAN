@@ -11,6 +11,10 @@
             overflow: visible !important;
         }
 
+        .upperReason {
+            text-transform: uppercase;
+        }
+
     </style>
 
     <div id="content" class="app-content">
