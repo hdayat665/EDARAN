@@ -268,7 +268,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project';
+        $data['msg'] = 'Project Information Is Updated';
 
         return $data;
     }
@@ -434,7 +434,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Location';
+        $data['msg'] = 'Project Location is Updated';
 
         return $data;
     }
@@ -487,7 +487,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Project Member';
+        $data['msg'] = 'Project Member Is Created';
 
         return $data;
     }
@@ -597,7 +597,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Member';
+        $data['msg'] = 'Project Member Is Updated';
 
         return $data;
     }
@@ -624,7 +624,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Save Project Member Location';
+        $data['msg'] = 'Location is Assigned to the Project Member';
 
         return $data;
     }
