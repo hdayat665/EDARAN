@@ -200,68 +200,36 @@ $(document).ready(function () {
     });
 
     $(document).ready(function () {
-        table.on("draw.dt", function () {
-            $(".statusCheck")
-                .off("change")
-                .on("change", function () {
-                    var id = $(this).data("id");
-                    var status;
-
-                    if ($(this).is(":checked")) {
-                        status = 1;
-                    } else {
-                        status = 2;
-                    }
-
-                    requirejs(["sweetAlert2"], function (swal) {
-                        $.ajax({
-                            type: "POST",
-                            url: "/updateStatusCustomer/" + id + "/" + status,
-
-                            processData: false,
-                            contentType: false,
-                        }).then(function (data) {
-                            swal({
-                                title: data.title,
-                                text: data.msg,
-                                type: data.type,
-                                confirmButtonColor: "#3085d6",
-                                confirmButtonText: "OK",
-                                allowOutsideClick: false,
-                                allowEscapeKey: false,
-                            }).then(function () {
-                                if (data.type == "error") {
-                                } else {
-                                    location.reload();
-                                }
-                            });
-                        });
+        // Delegate the "change" event to a parent element (in this case, the table itself)
+        $('#customerTable').on('change', '.statusCheck', function () {
+            var id = $(this).data('id');
+            var status = $(this).is(':checked') ? 1 : 2;
+    
+            requirejs(['sweetAlert2'], function (swal) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/updateStatusCustomer/' + id + '/' + status,
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                    }).then(function () {
+                        if (data.type === 'error') {
+                            // Handle error case if needed
+                        } else {
+                            location.reload(); // Reload the page on success
+                        }
                     });
                 });
+            });
         });
-
-        $("#customerTable").on(
-            "responsive-display",
-            function (e, datatable, row, showHide, update) {
-                if (showHide) {
-                    $(row.child()[0])
-                        .find("input.statusCheck")
-                        .prop(
-                            "checked",
-                            $(row.node())
-                                .find("input.statusCheck")
-                                .prop("checked")
-                        );
-                    $(row.child()[0])
-                        .find("input.statusCheck")
-                        .off("change")
-                        .on("change", function () {
-                            $(".statusCheck").trigger("change");
-                        });
-                }
-            }
-        );
     });
+    
 
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
@@ -561,42 +529,4 @@ $(document).ready(function () {
             url: "/getCustomerById/" + id,
         });
     }
-
-    $(".statusCheck").on("change", function () {
-        var id = $(this).data("id");
-        var status;
-
-        if ($(this).is(":checked")) {
-            status = 1;
-        } else {
-            status = 2;
-        }
-        requirejs(["sweetAlert2"], function (swal) {
-            $.ajax({
-                type: "POST",
-                url: "/updateStatusCustomer/" + id + "/" + status,
-
-                processData: false,
-                contentType: false,
-            }).then(function (data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-        });
-        // updating checked attribute of change event occurred element, this.checked returns current state
-        // $(".wrapper").val($(".container").html());
-        // updating the value of textarea
-    });
 });

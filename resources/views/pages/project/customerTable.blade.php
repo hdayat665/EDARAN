@@ -55,11 +55,10 @@
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input statusCheck" data-id="{{ $customer->id }}"
-                                                {{ $customer->status == 1 ? 'checked' : '' }} type="checkbox" role="switch"
-                                                id="flexSwitchCheckDefault" />
+                                            <input class="form-check-input statusCheck" data-id="{{ $customer->id }}" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                                                {{ $customer->status == 1 ? 'checked' : '' }}  />
 
-                                            <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault"></label> -->
                                         </div>
                                     </td>
                                     <td>{{ $customer->customer_name }}</td>
