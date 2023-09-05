@@ -91,15 +91,10 @@ $(document).ready(function () {
             $("#gender").prop("required", true);
             $("#gender").removeAttr("style");
             $("#gender").css({
-                background: "none",
+                backgroundColor: "none",
             });
+            $("#gender").val("");
 
-            $("#datepicker-expiryDate").prop("readonly", false);
-            $("#datepicker-expiryDate").prop("required", true);
-            $("#datepicker-expiryDate").removeAttr("style");
-
-            $("#datepicker-birth").prop("readonly", false);
-            $("#datepicker-birth").removeAttr("style");
         } else {
             $("#passport").prop("readonly", true);
             $("#passport").prop("required", false);
@@ -108,15 +103,8 @@ $(document).ready(function () {
             $("#gender").prop("required", false);
             $("#gender").attr("style", "pointer-events: none");
             $("#gender").css({
-                background: "#e9ecef",
+                backgroundColor: "#e9ecef",
             });
-
-            $("#datepicker-expiryDate").prop("readonly", true);
-            $("#datepicker-expiryDate").prop("required", false);
-            $("#datepicker-expiryDate").attr("style", "pointer-events: none");
-
-            $("#datepicker-birth").prop("readonly", true);
-            $("#datepicker-birth").attr("style", "pointer-events: none");
         }
     });
     $("#same-address").change(function () {
@@ -157,44 +145,38 @@ $(document).ready(function () {
         if ($(this).prop("checked")) {
             $("#idnumber").prop("disabled", true);
             $("#idnumber").prop("required", false);
+            $("#idnumber").val("");
+
         } else {
             $("#idnumber").prop("disabled", false);
             $("#idnumber").prop("required", true);
         }
     });
 
-    // $("#passport").change(function () {
-    //     if ($("#datepicker-expiryDate").prop("readonly")) {
-    //         $("#datepicker-expiryDate").prop("readonly", false);
-    //         $("#datepicker-expiryDate").css("pointer-events", "auto");
-    //     } else {
-    //         $("#datepicker-expiryDate").prop("readonly", true);
-    //         $("#datepicker-expiryDate").css("pointer-events", "none");
-    //     }
-    // });
-
-    // if ($("#passport").val() !== "") {
-    //     $("#datepicker-expiryDate").prop("readonly", false);
-    //     $("#datepicker-expiryDate").css("pointer-events", "auto");
-    //     $("#datepicker-expiryDate").css("pointer-events", "auto");
-    // } else {
-    //     $("#datepicker-expiryDate").prop("readonly", true);
-    //     $("#datepicker-expiryDate").css("pointer-events", "none");
-    // }
-
     $("#passport").change(function () {
         if (($("#passport").val() !== "") ) {
             $("#datepicker-expiryDate").prop("readonly", false);
+            $("#datepicker-expiryDate").prop("required", true);
             $("#datepicker-expiryDate").css("pointer-events", "auto");
 
             $("#issuingCountry2").prop("readonly", false);
-            $("#issuingCountry2").css("pointer-events", "auto");
+            $("#issuingCountry2").prop("required", true);
+            $("#issuingCountry2").css({
+                "pointer-events": "auto",
+                "background-color": "transparent",
+            });
+
         } else {
             $("#datepicker-expiryDate").prop("readonly", true);
+            $("#datepicker-expiryDate").prop("required", false);
             $("#datepicker-expiryDate").css("pointer-events", "none");
 
             $("#issuingCountry2").prop("readonly", true);
-            $("#issuingCountry2").css("pointer-events", "none");
+            $("#issuingCountry2").prop("required", false);
+            $("#issuingCountry2").css({
+                "pointer-events": "none",
+                "background-color": "#e9ecef",
+            });
         }
     });
 
@@ -287,7 +269,6 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [12, 12],
                 },
-                issuingCountry: "required",
                 DOB: "required",
                 gender: "required",
                 maritialStatus: "required",
@@ -319,8 +300,9 @@ $(document).ready(function () {
                     digits: "Please Insert correct Identification Number without '-' or space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
+                passport: "Please Insert Passport Number",
                 expiryDate: "Please Insert Expiry Date",
-                issuingCountry: "Please Insert Issuing Country",
+                issuingCountry: "Please Choose Issuing Country",
                 DOB: "Please Insert Date Of Birth",
                 gender: "Please Insert Gender",
                 maritialStatus: "Please Choose Marital Status",
