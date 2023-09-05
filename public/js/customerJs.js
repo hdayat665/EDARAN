@@ -421,6 +421,19 @@ $(document).ready(function () {
                     email: "Please Insert Valid Email Address",
                 },
             },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countrydiv");
+            } else if (element.attr("name") === "state") {
+                error.insertAfter("#statediv");
+            } else if (element.attr("name") === "city") {
+                error.insertAfter("#citydiv");
+            } else if (element.attr("name") === "postcode") {
+                error.insertAfter("#postdiv");
+            }  else {
+                    error.insertAfter(element);
+                }
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
@@ -492,6 +505,19 @@ $(document).ready(function () {
                     required: "Please Insert Email Customer",
                     email: "Please Insert Valid Email Address",
                 },
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryEdiv");
+            } else if (element.attr("name") === "state") {
+                error.insertAfter("#stateEdiv");
+            } else if (element.attr("name") === "city") {
+                error.insertAfter("#cityEdiv");
+            } else if (element.attr("name") === "postcode") {
+                error.insertAfter("#postEdiv");
+            }  else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {

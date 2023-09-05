@@ -56,11 +56,13 @@
                                     <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="countrydiv" name="" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <select class="form-select sel2" name="state" id="StateId" style="text-transform: uppercase;">
                                 <option value="" label="PLEASE CHOOSE" selected ></option>
                             </select>
+                            <input type="hidden" id="statediv" name="" class="form-control">
                         </div>
                     </div>
                     <br>
@@ -77,11 +79,13 @@
                             <select name="city" id="CityId" class="form-select sel3">
                                 <option value="" label="PLEASE CHOOSE" selected ></option>
                             </select>
+                            <input type="hidden" id="citydiv" name="" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <select name="postcode" id="PostcodeId" class="form-select sel4">
                                 <option value="" label="PLEASE CHOOSE" selected ></option>
                             </select>
+                            <input type="hidden" id="postdiv" name="" class="form-control">
                         </div>
                     </div>
                     <br>
