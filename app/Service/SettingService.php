@@ -2500,7 +2500,7 @@ class SettingService
                 ->first();
 
             if ($checkcurrententitlementbefore) {
-                
+
                 $currentEntitlement = $checkcurrententitlementbefore->current_entitlement;
 
                 $maxDuration = $getCarryForward->max_duration;
