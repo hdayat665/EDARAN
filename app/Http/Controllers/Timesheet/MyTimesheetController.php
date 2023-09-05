@@ -175,7 +175,9 @@ class MyTimesheetController extends Controller
         $result['events'] = $ss->getEvents();
         $result['eventsattends'] = $ss->getEventattend();
         $result['logs'] = $ss->getLogs();
-        $result['leaves'] = $ss->getLeaves();
+        $result['leaves'] = $ss->getLeavesFullDay();
+        $result['leavesHalf'] = $ss->getLeavesHalfDay();
+        // dd( $result['leavesHalf']);
         $result['holidays'] = $ss->getHolidays();
         $result['appeals'] = $ss->getAppeals();
         // dd($result['appeals']);

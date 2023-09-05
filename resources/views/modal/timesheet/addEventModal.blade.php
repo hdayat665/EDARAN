@@ -51,16 +51,16 @@
                             <input  type="text" id="duration" name="duration" class="form-control" style="pointer-events: none; touch-action: none; background: #e9ecef;" />
                             
                         </div>
-                        <div class="col-sm-2" style="pointer-events: none;">
+                        <div class="col-sm-2">
                             <div style="padding-top:20px;">
-                                {{-- <div class="form-check form-check-inline" >
+                                <div class="form-check form-check-inline" >
                                     <input class="form-check-input" name="type_recurring[]" value="allday" type="checkbox" id="alldayc"  name="inlineRadioOptions" >
                                     <label class="form-label" id="addeventallday">All Day</label>
-                                </div> --}}
-                                {{-- <div class="form-check form-check-inline">
+                                </div> 
+                                <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="type_recurring[]" value="recurring" id="addeventrecurring" type="checkbox"  name="inlineRadioOptions" >
                                     <label class="form-label" >Recurring</label>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6 ">

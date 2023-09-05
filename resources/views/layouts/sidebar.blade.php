@@ -83,26 +83,26 @@
                                 </a>
                             </div>
                         @endif
-                        <?php $target = ['timesheet_approval']; ?>
+                        {{-- <?php $target = ['timesheet_approval']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
                                 <a href="/timesheetApproval" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-receipt text-gray"></i>
-                                    </div>
+                                    </div> --}}
                                     {{-- check if this is approver ts  --}}
-                                    @php
+                                    {{-- @php
                                         $employmentData = getEmplomentByUserId();
                                         $timesheets = getTimesheetDataToApprove();
-                                    @endphp
-                                    <div class="menu-text text-gray">Timesheets Approval</div>
+                                    @endphp --}}
+                                    {{-- <div class="menu-text text-gray">Timesheets Approval</div> --}}
                                     {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
-                                    @if (isset($timesheets))
+                                    {{-- @if (isset($timesheets))
                                         <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
                                     @endif
                                 </a>
                             </div>
-                        @endif
+                        @endif --}}
                         <?php $target = ['real_time_activities']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
