@@ -208,7 +208,16 @@ $(document).ready(function () {
                 project_manager: "Please Choose Project Manager",
                 status: "Please Choose Status",
             },
-            
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "acc_manager") {
+                    error.insertAfter("#acc_managerdiv");
+                } else if (element.attr("name") === "project_manager") {
+                        error.insertAfter("#project_managerdiv");
+                } else {
+                    error.insertAfter(element);
+                }
+             },
+
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(

@@ -109,6 +109,7 @@
                                     <option value="{{ $getEmployee->id }}">{{ $getEmployee->employeeName }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="acc_managerdiv" name="" class="form-control">
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="warranty_start_date" id="datepicker-warstart" placeholder="YYYY/MM/DD" />

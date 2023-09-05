@@ -168,6 +168,13 @@ $(document).ready(function () {
                 acc_manager: "Please Insert Account Manager",
                 status: "Please Insert Status",
             },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "acc_manager") {
+                    error.insertAfter("#acc_managerdiv");
+                } else {
+                    error.insertAfter(element);
+                }
+             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
