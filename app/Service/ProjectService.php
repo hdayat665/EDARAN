@@ -847,20 +847,20 @@ class ProjectService
     public function projectRequestView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-
+    
         $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')
-            ->where([['employee_id', '=', $employee->id]])
+            ->where('employee_id', $employee->id)
             ->whereIn('status', ['pending', 'approve', 'reject'])
+            ->where('status', '!=', 'CLOSED') // Exclude the "CLOSED" status
             ->orderBy('id', 'desc')
             ->get();
-
-        // dd($projectMember);
+    
         $projectId['approve'] = [];
         foreach ($projectMember as $project) {
             $dateRequest = strtotime($project->created_at);
             $now = strtotime(now());
             $hour = abs($dateRequest - $now) / (60 * 60);
-
+    
             if ($project->status == 'pending') {
                 if ($hour > 24) {
                     $projectId['approve'][] = $project->project_id;
@@ -868,31 +868,30 @@ class ProjectService
             } elseif ($project->status == 'reject') {
                 if ($hour > 24) {
                     $this->updateStatusProjectMemberReject($project->id, 'rejected');
-                    // $projectId['approve'][] = $project->project_id;
                 }
             } else {
                 $projectId['approve'][] = $project->project_id;
             }
         }
-        // dd($projectId);
-
+    
         $data = DB::table('project as a')
-        ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-        ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
-        ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
-        ->select('a.*', 'b.customer_name', 'c.employeeName', 'd.id as project_member_id')
-        ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
-        ->whereNotIn('a.id', $projectId['approve'])
-        ->groupBy('a.id')
-        ->get();
-
-
+            ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+            ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
+            ->select('a.*', 'b.customer_name', 'c.employeeName', 'd.id as project_member_id')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
+            ->whereNotIn('a.id', $projectId['approve'])
+            ->where('a.status', '!=', 'CLOSED') // Exclude "CLOSED" status projects
+            ->groupBy('a.id')
+            ->get();
+    
         if (!$data) {
             $data = [];
         }
-
+    
         return $data;
     }
+    
 
     public function updateStatusProjectMemberReject($id, $status)
     {
