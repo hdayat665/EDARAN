@@ -50,12 +50,13 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-country" class="form-label">Country*</label>
-                            <select class="form-select" name="country" id="countryEC" value="{{ $emergency->country ?? '' }}" style="text-transform:uppercase">
+                            <select class="form-select" name="country" id="countryEC" value="{{ $emergency->country ?? '' }}" style="text-transform:uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 @foreach($country as $ct)
                                     <option value="{{ $ct->country_id }}" {{ ($emergency->country ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
+                            <div id="countryEC-err" class="error"></div>
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-state" class="form-label">State*</label>
@@ -65,6 +66,7 @@
                                     <option value="{{ $st->id }}" {{ ($emergency->state ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
+                            <div id="stateEC-err" class="error"></div>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -76,6 +78,7 @@
                                     <option value="{{ $pc->postcode }}" {{ ($emergency->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                 @endforeach
                             </select>
+                            <div id="postcodeEC-err" class="error"></div>
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-city" class="form-label">City*</label>
@@ -85,6 +88,7 @@
                                     <option value="{{ $cty->name }}" {{ ($emergency->city ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
                             </select>
+                            <div id="cityEC-err" class="error"></div>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -152,6 +156,7 @@
                                         <option value="{{ $ct->country_id }}" {{ ($emergency->country_2 ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="countryEC2-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-state" class="form-label">State*</label>
@@ -161,6 +166,7 @@
                                         <option value="{{ $st->id }}" {{ ($emergency->state_2 ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="stateEC2-err" class="error"></div>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -172,6 +178,7 @@
                                         <option value="{{ $cty->name }}" {{ ($emergency->city_2 ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityEC2-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-postcode" class="form-label">Postcode*</label>
@@ -181,6 +188,7 @@
                                         <option value="{{ $pc->postcode }}" {{ ($emergency->postcode_2 ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                     @endforeach
                                 </select>
+                                <div id="postcodeEC2-err" class="error"></div>
                             </div>
                         </div>
                         <div class="row p-2">
