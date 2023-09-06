@@ -58,7 +58,7 @@
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                            <td><a href="{{ route('view', ['filename' => $education->file]) }}" target="blank_">{{$education->file}}</a></td>
+                            <td></td>
                         </tr>
                         @endforeach
                     @endif
