@@ -543,60 +543,68 @@ $(document).ready(function () {
         }
         });
 
-
-
-
     $(document).ready(function () {
-        if (
-            $("#datepicker-filter").val() ||
-            $("#typelist").val() ||
-            $("#status_searching").val()
-        ) {
-            $("#filterleave").show();
-        } else {
-            $("#filterleave").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-filter").val() ||
+                $("#typelist").val() ||
+                $("#status_searching").val()
+            ) {
+                $("#filterleave").show();
+            } else {
+                $("#filterleave").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filter").click(function () {
             $("#filterleave").toggle();
         });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-filter").val($("#atepicker-filter").data("default-value"));
+            $("#typelist").val($("#typelist").data("default-value"));
+            $("#status_searching").val($("#status_searching").data("default-value"));
+
+            $("#filterleave").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
     });
 
     $(document).ready(function () {
-        if (
-            $("#datepicker-filtermy").val() ||
-            $("#typelistmy").val() ||
-            $("#status_searchingmy").val()
-        ) {
-            $("#filterleavemy").show();
-        } else {
-            $("#filterleavemy").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-filtermy").val() ||
+                $("#typelistmy").val() ||
+                $("#status_searchingmy").val()
+            ) {
+                $("#filterleavemy").show();
+            } else {
+                $("#filterleavemy").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filtermy").click(function () {
             $("#filterleavemy").toggle();
         });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-filtermy").val($("#datepicker-filtermy").data("default-value"));
+            $("#typelistmy").val($("#typelistmy").data("default-value"));
+            $("#status_searchingmy").val($("#status_searchingmy").data("default-value"));
+
+            $("#filterleavemy").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
     });
 
-    $("#reset").on("click", function () {
-        $("#datepicker-filter").val(
-            $("#datepicker-filter").data("default-value")
-        );
-        $("#typelist").val($("#typelist").data("default-value"));
-        $("#status_searching").val(
-            $("#status_searching").data("default-value")
-        );
-    });
 
-    $("#resetmy").on("click", function () {
-        $("#datepicker-filtermy").val(
-            $("#datepicker-filtermy").data("default-value")
-        );
-        $("#typelistmy").val($("#typelistmy").data("default-value"));
-        $("#status_searchingmy").val(
-            $("#status_searchingmy").data("default-value")
-        );
-    });
+
 
     $("#saveButton").click(function (e) {
         $("#addForm").validate({

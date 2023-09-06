@@ -47,18 +47,62 @@ $(document).ready(function () {
 
 
     $(document).ready(function () {
-        if (
-            $("#datepicker-date").val() ||
-            $("#idemployer").val() ||
-            $("#type").val()
-        ) {
-            $("#filterleave").show();
-        } else {
-            $("#filterleave").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-date").val() ||
+                $("#idemployer").val() ||
+                $("#type").val()
+            ) {
+                $("#filterleave").show();
+            } else {
+                $("#filterleave").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filter").click(function () {
             $("#filterleave").toggle();
+        });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-date").val($("#datepicker-date").data("default-value"));
+            $("#idemployer").val($("#idemployer").data("default-value"));
+            $("#type").val($("#type").data("default-value"));
+
+            $("#filterleave").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
+    });
+
+    $(document).ready(function () {
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-dateH").val() ||
+                $("#idemployerH").val() ||
+                $("#typeH").val()
+            ) {
+                $("#filterleaveH").show();
+            } else {
+                $("#filterleaveH").hide();
+            }
+        }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
+
+        $("#filterH").click(function () {
+            $("#filterleaveH").toggle();
+        });
+
+        $("#resetH").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
+            $("#idemployerH").val($("#idemployerH").data("default-value"));
+            $("#typeH").val($("#typeH").data("default-value"));
+
+            $("#filterleaveH").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
         });
     });
 
@@ -72,34 +116,6 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
-    });
-
-    $(document).ready(function () {
-        if (
-            $("#datepicker-dateH").val() ||
-            $("#idemployerH").val() ||
-            $("#typeH").val()
-        ) {
-            $("#filterleaveH").show();
-        } else {
-            $("#filterleaveH").hide();
-        }
-
-        $("#filterH").click(function () {
-            $("#filterleaveH").toggle();
-        });
-    });
-
-    $("#reset").on("click", function () {
-        $("#datepicker-date").val($("#datepicker-date").data("default-value"));
-        $("#idemployer").val($("#idemployer").data("default-value"));
-        $("#type").val($("#type").data("default-value"));
-    });
-
-    $("#resetH").on("click", function () {
-        $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
-        $("#idemployerH").val($("#idemployerH").data("default-value"));
-        $("#typeH").val($("#typeH").data("default-value"));
     });
 
     $("#leaveApprovalSv").DataTable({
