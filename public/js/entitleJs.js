@@ -9,7 +9,7 @@ $(document).ready(function () {
             });
         }
         var vehicleData = getClaimEntitleById(id);
-
+ 
         vehicleData.then(function (data) {
             var html = '<tbody class="btgccolor">';
             for (let index = 0; index < data.length; index++) {
@@ -565,9 +565,15 @@ $(document).ready(function () {
     $("#UpdateSubs").click(function (e) {
         $("#addUpdateForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                value: "required",
+               
+            },
 
-            messages: {},
+            messages: {
+                value: "Please Insert Value",
+                
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -607,9 +613,15 @@ $(document).ready(function () {
     $("#UpdateClaimCatButton").click(function (e) {
         $("#addUpdateClaimCatForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                claim_value: "required",
+               
+            },
 
-            messages: {},
+            messages: {
+                claim_value: "Please Insert Value",
+                
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
