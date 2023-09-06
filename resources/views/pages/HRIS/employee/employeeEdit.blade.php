@@ -173,7 +173,7 @@
                                                         <label for="idattach" class="form-label" >ID Attachment</label>
                                                         <input type="file" value="" name="fileID" id="fileupload" class="form-control" aria-describedby="">
                                                         @if ($profile->fileID)
-                                                            Click <a href="{{ route('view', ['filename' => $profile->fileID]) }}" target="_blank">here</a> to see ID Attachment.
+                                                            Click <a href="{{ route('view', ['filename' => $profile->fileID ?? '']) }}" target="_blank">here</a> to see ID Attachment.
                                                         @endif
                                                     </div>
                                                 </div>
@@ -290,7 +290,7 @@
                                                         <label for="idattach" class="form-label" >OKU Attachment*</label>
                                                         <input type="file" class="form-control"  name="okuFile"   id="okuattach" style= "pointer-events: none;" >
                                                         @if ($profile->okuFile)
-                                                        Click <a href="{{ route('view', ['filename' => $profile->okuFile]) }}" target="_blank">here</a> to see the OKU Attachment.
+                                                        Click <a href="{{ route('view', ['filename' => $profile->okuFile ?? '']) }}" target="_blank">here</a> to see the OKU Attachment.
                                                         @endif
                                                     </div>
                                                 </div>
