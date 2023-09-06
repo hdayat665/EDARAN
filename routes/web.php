@@ -362,7 +362,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/newUpdateRole/{id}', 'newUpdateRole');
             Route::get('/systemUser', 'systemUser');
             // Route::get('/systemUserCreate', 'systemUserCreate');
-            Route::get('/systemUserUpdate', 'systemUserUpdate');
+            Route::get('/systemUserUpdate/{id}', 'systemUserUpdate');
+            Route::post('/updateSystemRole/{id}', 'updateSystemRole');
             // Route::get('/setting', 'settingView');
 
             Route::get('/download/{filename}', function ($filename) {
@@ -569,8 +570,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
             Route::get('/getCitybyState/{id}', 'getCitybyState');
             Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
-
-
         });
 
         Route::controller(ProjectController::class)->group(function () {
@@ -603,7 +602,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getRejectProject/{id}', 'getRejectProject');
             Route::get('/projectViewAssignLocation/{id}', 'projectViewAssignLocationView');
             Route::get('/projectLocTable', 'projectLocTable');
-
         });
 
         Route::controller(ProjectReportController::class)->group(function () {

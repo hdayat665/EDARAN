@@ -39,6 +39,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\leaveSicKleaveModel;
 use App\Models\ClaimCategoryContent;
+use App\Models\CustomPermission;
 use App\Models\EclaimGeneralSetting;
 use App\Models\leaveAnualLeaveModel;
 use Illuminate\Support\Facades\Auth;
@@ -4055,6 +4056,94 @@ class SettingService
             ->first();
 
         // dd($data);
+        return $data;
+    }
+
+    public function systemUserData()
+    {
+        $data = Users::with('employement')->where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function getUserById($id = '')
+    {
+        $data = Users::with('role', 'employement', 'customRole')->where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function updateSystemRole($r, $id)
+    {
+        $modifiedBy = Auth::user()->username;
+        $modifiedTime = date('Y-m-d h:m:s');
+
+        $input = $r->input();
+
+        // check if role_custom checkbox check or not if not then permission will base on role id not user id
+        if (!isset($input['user']['role_custom_id'])) {
+            $input['user']['role_custom_id'] = NULL;
+        }
+
+        Users::where('id', $id)->update($input['user']);
+        Employee::where('user_id', $id)->update($input['employee']);
+
+        if (!empty($input['permissions']) && isset($input['user']['role_custom_id'])) {
+            CustomPermission::where('user_id', $id)->delete();
+
+            $permissions = $input['permissions'];
+
+            foreach ($permissions as $permission) {
+                $permissionRole = [
+                    'tenant_id' => Auth::user()->tenant_id,
+                    'role_id' => $input['user']['role_id'],
+                    'user_id' => $id,
+                    'permission_code' => $permission,
+                    'modified_by' => $modifiedBy,
+                    'modified_time' => $modifiedTime
+                ];
+
+                CustomPermission::create($permissionRole);
+            }
+        }
+
+        // if ($r->input('userName')) {
+        //     $data1 = $r->input('userName');
+        //     $data2 = date('Y-m-d h:m:s');
+        //     $data3 = $r->input('id');
+
+        //     $insertData = [
+        //         'tenant_id' => Auth::user()->tenant_id,
+        //         'up_user_id' => $data1,
+        //         'added_time' => $data2,
+        //         'role_id' => $data3,
+        //         'added_by' => Auth::user()->id,
+        //         'modified_by' => '',
+        //         'modified_time' => ''
+        //     ];
+
+        //     UserRole::create($insertData);
+
+        //     $usersData = [
+        //         'role_id' => $data3,
+        //     ];
+
+        //     Users::where('id', $data1)->update($usersData);
+        // }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Role is Updated';
+
         return $data;
     }
 }
