@@ -72,7 +72,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#buckettable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -112,7 +112,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#rejectedtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -152,7 +152,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#approvedtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -192,7 +192,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#amendtablesv").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
