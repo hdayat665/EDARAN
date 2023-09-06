@@ -221,7 +221,7 @@ var handleCalendarDemo = function () {
             headerToolbar: {
                 left: "prev,next",
                 center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                right: "", // Display only the "month" view in the header
             },
             navLinks: false,
             customButtons: {
@@ -517,13 +517,13 @@ var handleCalendarDemo = function () {
                     $("#editeventmodal").modal("show");
                 }
             },
-            buttonText: {
-                today: "Today",
-                month: "Month",
-                week: "Week",
-                day: "Day",
-                list: "List",
-            },
+            // buttonText: {
+            //     today: "Today",
+            //     month: "Month",
+            //     week: "Week",
+            //     day: "Day",
+            //     list: "List",
+            // },
             initialView: "dayGridMonth",
             editable: false,
             droppable: false,

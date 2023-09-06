@@ -487,7 +487,7 @@ $(document).on("click", "#subsBtn", function () {
             } else {
                 // Start and end dates are different days
                 // Check if the startDateTime has breakfast
-                if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
+                if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
                     breakfastDaysUpdate++;
                 }
                 

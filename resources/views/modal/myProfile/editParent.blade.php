@@ -191,6 +191,7 @@
                                     <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
+                            <div id="countryP1-err" class="error"></div>
                         </div>
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
@@ -200,6 +201,7 @@
                                     <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
+                            <div id="stateP1-err" class="error"></div>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -211,6 +213,7 @@
                                     <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
                             </select>
+                            <div id="cityP1-err" class="error"></div>
                         </div>
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode*</label>
@@ -220,6 +223,7 @@
                                     <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                 @endforeach
                             </select>
+                            <div id="postcodeP1-err" class="error"></div>
                         </div>
                     </div>
 

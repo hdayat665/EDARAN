@@ -271,6 +271,21 @@ $("#addAddressDetails").click(function (e) {
             city: "Please Choose City",
             postcode: "Please Choose Postcode",
         },
+
+        errorPlacement: function(error, element) {
+            if (element.attr("name") === "country") {
+                error.insertAfter("#country-err");
+            } else if (element.attr("name") === "state") {
+                error.insertAfter("#state-err");
+            } else if (element.attr("name") === "city") {
+                error.insertAfter("#city-err");
+            } else if (element.attr("name") === "postcode") {
+                error.insertAfter("#postcode-err");
+            } else {
+                error.insertAfter(element);
+            }
+        },
+
         submitHandler: function (form) {
             requirejs(["sweetAlert2"], function (swal) {
                 var data = new FormData(document.getElementById("formAddressDetails"));
@@ -322,6 +337,20 @@ $("#addAddressDetails").click(function (e) {
                 state: "Please Choose State",
                 city: "Please Choose City",
                 postcode: "Please Choose Postcode",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err-2");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err-2");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err-2");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err-2");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
