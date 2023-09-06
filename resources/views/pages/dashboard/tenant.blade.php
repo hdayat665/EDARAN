@@ -103,7 +103,7 @@
 								<td>{{ $new['title'] }}</td>
 								<td>{{ $new['content'] }}</td>
 								<td><a href="{{ $new['sourceURL'] }}" target="_blank">{{ $new['sourceURL'] }}</a></td>
-                                <td><a href="{{ route('view', ['filename' => $new->file]) }}" target="blank_">{{$new->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $new->file]) }}" target="_blank">{{$new->file}}</a></td>
 							</tr>
 						@endforeach
 						@endif
