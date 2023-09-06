@@ -47,11 +47,10 @@ $(document).ready(function () {
             $("#desc").val(data.desc);
             $("#code").val(data.code);
             $("#idP").val(data.id);
-            console.log(data.file);
+            // console.log(data.file);
             if (data.file) {
-                $("#fileDownloadPolicy").html(
-                    '<a href="/storage/' + data.file + '">Download File</a>'
-                );
+                var fileName = data.file.split('/').pop(); // Extract the file name from the file path
+                $("#fileDownloadPolicy").html('<a href="/storage/' + data.file + '" target="_blank">Download ' + fileName + '</a>');
             }
         });
         $("#editModal1").modal("show");
@@ -221,11 +220,11 @@ $(document).on("click", "#editButton2", function () {
         $("#descr").val(data.desc);
         $("#SOPName").val(data.SOPName);
         $("#idS").val(data.id);
+        
         if (data.file) {
-            $("#fileDownloadSOP").html(
-                '<a href="/storage/' + data.file + '">Download File</a>'
-            );
-        }
+            var fileName = data.file.split('/').pop(); // Extract the file name from the file path
+            $("#fileDownloadSOP").html('<a href="/storage/' + data.file + '" target="_blank">Download ' + fileName + '</a>');
+          }
     });
     $("#editModal2").modal("show");
 });
