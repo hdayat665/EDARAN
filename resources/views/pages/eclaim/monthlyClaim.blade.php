@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <div class="">
                             <div class="row p-2">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-control">
                                         <div class="row p-2">
                                             <div class="col-md-3">
@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <!-- <div class="row p-2">
                                         <div class="col d-flex justify-content-end">
                                             <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
@@ -67,6 +67,7 @@
                             </div>
                             
                             <div class="p-2">
+                            <div class="form-control">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="row p-2">
@@ -164,7 +165,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            </div>
                             </div>
                             <div class="row p-2">
                                 <br>
@@ -175,7 +176,7 @@
                     <div class="row p-2">
                                 <br>
                             </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         @include('pages.eclaim.tableListMonthlyClaim')
                     </div>
                 </div>

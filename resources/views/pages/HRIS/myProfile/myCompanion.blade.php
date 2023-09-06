@@ -16,6 +16,7 @@
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="mainCompanion" id="set-main" value="on" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }}>
+
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
                                 </div>
                             </div>
@@ -177,6 +178,7 @@
                                         <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="countryc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
@@ -186,6 +188,7 @@
                                         <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="statec-err" class="error"></div>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -197,6 +200,7 @@
                                         <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="postcode" class="form-label">Postcode*</label>
@@ -206,6 +210,7 @@
                                         <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                     @endforeach
                                 </select>
+                                <div id="postcodec-err" class="error"></div>
                             </div>
                         </div>
 
@@ -397,7 +402,7 @@
                                 <label for="marriage-cert" class="form-label" >ID Attachment</label>
                                 <input type="file" name="idFile" id="id-attachment" class="form-control" aria-describedby="">
                                 @if ($companion->idFile)
-                                Click <a href="{{ route('view', ['filename' => $companion->idFile]) }}" target="_blank">here</a> to see the ID Attachment.
+                                Click <a href="{{ route('view', ['filename' => $companion->idFile ?? '']) }}" target="_blank">here</a> to see the ID Attachment.
                                 @endif
                             </div>
                         </div>
@@ -490,7 +495,7 @@
                                 <label for="dob" class="form-label"  >OKU Attachment*</label>
                                 <input type="file" id="okuattach2" name="okuID" class="form-control" aria-describedby="" style="pointer-events: none" readonly>
                                 @if ($companion->okuID )
-                                Click <a href="{{ route('view', ['filename' => $companion->okuID]) }}" target="_blank">here</a> to see the OKU Attachment.
+                                Click <a href="{{ route('view', ['filename' => $companion->okuID ?? '']) }}" target="_blank">here</a> to see the OKU Attachment.
                                 @endif
                             </div>
                         </div>

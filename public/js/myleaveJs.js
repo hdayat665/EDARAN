@@ -41,10 +41,28 @@ $(document).ready(function () {
 
 
     $(document).ready(function() {
+
+        var originalGetComputedStyle = window.getComputedStyle;
+
+        window.getComputedStyle = function(el, pseudo) {
+            try {
+                return originalGetComputedStyle(el, pseudo);
+            } catch (err) {
+                console.warn('getComputedStyle override: prevented error.', err);
+                return {
+                    getPropertyValue: function() { return ""; } // metode palsu
+                };
+            }
+        };
+
+
         $(".test").hide();
 
-        $(".dropdown-toggle").on("click", function() {
+        $(document).on("click", ".dropdown-toggle", function(e) {
+            e.stopPropagation(); // mencegah event dari bubbling ke atas
+
             var dropdownMenu = $(this).closest(".btn-group").find(".test");
+
             $(".test").not(dropdownMenu).hide();
             dropdownMenu.toggle();
         });
@@ -525,60 +543,68 @@ $(document).ready(function () {
         }
         });
 
-
-
-
     $(document).ready(function () {
-        if (
-            $("#datepicker-filter").val() ||
-            $("#typelist").val() ||
-            $("#status_searching").val()
-        ) {
-            $("#filterleave").show();
-        } else {
-            $("#filterleave").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-filter").val() ||
+                $("#typelist").val() ||
+                $("#status_searching").val()
+            ) {
+                $("#filterleave").show();
+            } else {
+                $("#filterleave").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filter").click(function () {
             $("#filterleave").toggle();
         });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-filter").val($("#atepicker-filter").data("default-value"));
+            $("#typelist").val($("#typelist").data("default-value"));
+            $("#status_searching").val($("#status_searching").data("default-value"));
+
+            $("#filterleave").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
     });
 
     $(document).ready(function () {
-        if (
-            $("#datepicker-filtermy").val() ||
-            $("#typelistmy").val() ||
-            $("#status_searchingmy").val()
-        ) {
-            $("#filterleavemy").show();
-        } else {
-            $("#filterleavemy").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-filtermy").val() ||
+                $("#typelistmy").val() ||
+                $("#status_searchingmy").val()
+            ) {
+                $("#filterleavemy").show();
+            } else {
+                $("#filterleavemy").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filtermy").click(function () {
             $("#filterleavemy").toggle();
         });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-filtermy").val($("#datepicker-filtermy").data("default-value"));
+            $("#typelistmy").val($("#typelistmy").data("default-value"));
+            $("#status_searchingmy").val($("#status_searchingmy").data("default-value"));
+
+            $("#filterleavemy").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
     });
 
-    $("#reset").on("click", function () {
-        $("#datepicker-filter").val(
-            $("#datepicker-filter").data("default-value")
-        );
-        $("#typelist").val($("#typelist").data("default-value"));
-        $("#status_searching").val(
-            $("#status_searching").data("default-value")
-        );
-    });
 
-    $("#resetmy").on("click", function () {
-        $("#datepicker-filtermy").val(
-            $("#datepicker-filtermy").data("default-value")
-        );
-        $("#typelistmy").val($("#typelistmy").data("default-value"));
-        $("#status_searchingmy").val(
-            $("#status_searchingmy").data("default-value")
-        );
-    });
+
 
     $("#saveButton").click(function (e) {
         $("#addForm").validate({

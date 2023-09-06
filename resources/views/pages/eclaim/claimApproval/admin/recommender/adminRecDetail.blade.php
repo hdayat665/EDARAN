@@ -220,7 +220,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <a class="btn btn-primary" style="color: black;width:100%" type="submit"> Print</a> &nbsp;
+                                <a class="btn btn-primary" style="color: black;width:100%" id="admRecPrint" type="button"> Print</a> &nbsp;
                             </div>
                         </div>
                         <div class="row p-2">

@@ -96,7 +96,7 @@
                         <div class="col-sm-6">
                             <label class="form-label">Reason</label>
                             <div class="input-group">
-                                <textarea class="form-control" id="reason2" readonly></textarea>
+                                <textarea rows="4" cols="50" class="form-control" id="reason2" readonly></textarea>
                             </div>
                         </div>
                     </div>

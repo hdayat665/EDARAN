@@ -58,6 +58,7 @@
                                     </option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="countryEdiv" name="" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <select class="form-select sel6" name="state" id="StateEd" style="text-transform: uppercase;">
@@ -66,6 +67,7 @@
                                     <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="stateEdiv" name="" class="form-control">
                         </div>
                     </div>
                     <br>
@@ -85,6 +87,7 @@
                                     <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="cityEdiv" name="" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <select name="postcode" id="PostcodeEd" class="form-select sel8">
@@ -93,6 +96,7 @@
                                     <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="postEdiv" name="" class="form-control">
                         </div>
                     </div>
                     <br>

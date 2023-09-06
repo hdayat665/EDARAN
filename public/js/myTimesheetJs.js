@@ -1200,45 +1200,111 @@ getwork.then(function(data) {
 
             var leave = [];
             var leavesdate = [];
+
+            function resetTime(date) {
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+
             for (let i = 0; i < data["leaves"].length; i++) {
                 var leaves = data["leaves"][i];
-
+                
                 var startDate = new Date(leaves["start_date"]);
-                var startMonth = startDate.getMonth() + 1;
-                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-                var startYear = startDate.getFullYear();
-                var startDay = startDate.getDate();
-                startDay = startDay < 10 ? "0" + startDay : startDay;
-
                 var endDate = new Date(leaves["end_date"]);
-                var endMonth = endDate.getMonth() + 1;
-                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-                var endYear = endDate.getFullYear();
-                var endDay = endDate.getDate();
-                endDay = endDay < 10 ? "0" + endDay : endDay;
+                
+                // Calculate the number of days in the range
+                var timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+                var dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+                
+                for (let j = 0; j <= dayDifference; j++) { // <= to include the last day
+                    var currentDay = new Date(startDate);
+                    currentDay.setDate(currentDay.getDate() + j);
+                    
+                    var currentEndDay = new Date(currentDay);
+                    currentEndDay.setDate(currentEndDay.getDate() + 1);  // Exclusive end date for each day
 
+                    // Convert to YYYY-MM-DD format
+                    var currentDayStr = currentDay.toISOString().split('T')[0];
+                    var currentEndDayStr = currentEndDay.toISOString().split('T')[0];
 
-                leave.push({
-                    title:
-                        leaves["leave_types"] + " : " + "\n" + leaves["reason"],
-                    // title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-                    start: startYear + "-" + startMonth + "-" + startDay,
-                    end: endYear + "-" + endMonth + "-" + endDay,
-                    // color: app.color.green,
-                    color: "#D9EDF7",
-                    textColor: "black",
-                    fontWeight: "bold",
-                    extendedProps: {
-                        type: "leave",
-                        leaveId: leaves["id"],
-                    },
-                });
+                    leave.push({
+                        title: leaves["leave_types"] + " : " + "\n" + leaves["reason"],
+                        start: currentDayStr,
+                        end: currentEndDayStr,
+                        color: "#D9EDF7",
+                        textColor: "black",
+                        fontWeight: "bold",
+                        extendedProps: {
+                            type: "leave",
+                            leaveId: leaves["id"],
+                        },
+                    });
+                }
 
                 leavesdate.push({
-                    start: new Date(startYear, startMonth - 1, startDay),
-                    end: new Date(endYear, endMonth - 1, endDay),
+                    start: resetTime(startDate),
+                    end: resetTime(endDate),
                 });
             }
+
+            var leaveHalf = [];
+            var leavesdateHalf = [];
+            var leavehalflist = [];
+
+            function resetTime(date) {
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+
+            for (let i = 0; i < data["leavesHalf"].length; i++) {
+                var leavesHalf = data["leavesHalf"][i];
+                // console.log(leavesHalf);
+                
+                var startDate = new Date(leavesHalf["start_date"]);
+                var endDate = new Date(leavesHalf["end_date"]);
+                
+                // Calculate the number of days in the range
+                var timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+                var dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+                
+                for (let j = 0; j <= dayDifference; j++) { // <= to include the last day
+                    var currentDay = new Date(startDate);
+                    currentDay.setDate(currentDay.getDate() + j);
+                    
+                    var currentEndDay = new Date(currentDay);
+                    currentEndDay.setDate(currentEndDay.getDate() + 1);  // Exclusive end date for each day
+
+                    // Convert to YYYY-MM-DD format
+                    var currentDayStr = currentDay.toISOString().split('T')[0];
+                    var currentEndDayStr = currentEndDay.toISOString().split('T')[0];
+
+                    leaveHalf.push({
+                        title: leavesHalf["leave_types"] + " : " + "\n" + leavesHalf["reason"] +"\n" + "Half Day",
+                        start: currentDayStr,
+                        end: currentEndDayStr,
+                        color: "#D9EDF7",
+                        textColor: "black",
+                        fontWeight: "bold",
+                        extendedProps: {
+                            type: "leave",
+                            leaveId: leavesHalf["id"],
+                        },
+                    });
+                }
+
+                leavesdateHalf.push({
+                    start: resetTime(startDate),
+                    end: resetTime(endDate),
+                });
+
+                leavehalflist.push({
+                    title: leavesHalf["start_date"],
+                    start: currentDayStr,
+                    end: currentEndDayStr,
+                })
+     
+            }
+
 
             var holiday = [];
             var holidayDates = [];
@@ -1307,8 +1373,10 @@ getwork.then(function(data) {
             datalog = dataEvent.concat(log);
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+            dataAll = dataHoliday.concat(leaveHalf);
 
-            dataHoliday.sort(function(a, b) {
+
+            dataAll.sort(function(a, b) {
                 var dateA = a.start;
                 var dateB = b.start;
                 var timeA = a.start_time;
@@ -1338,13 +1406,15 @@ getwork.then(function(data) {
                 headerToolbar: {
                     left: "logButton EventButton SumButton",
                     center: "title",
-                    right: "prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                    // right: "prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                    right: "prev,today,next",
                 },
                 customButtons: {
                     logButton: {
                         text: "New Log",
                         click: function (event, jsEvent, view) {
                             $("#addLogModal").modal("show");
+
                         },
                     },
                     EventButton: {
@@ -1364,12 +1434,10 @@ getwork.then(function(data) {
 
                
 
-                dayCellDidMount: function(info) {                       
+                dayCellDidMount: function(info) {             
+                    
+                    
 
-                    
-                    // console.log(joineddate+"daycell");
-                    
-                    
                     var current = new Date(info.date);
                     var currentDate = new Date();
                     
@@ -1639,9 +1707,11 @@ getwork.then(function(data) {
                     // Convert the total seconds back to the 'hh:mm' format
                     var hours = Math.floor(totalSeconds / 3600);
                     var minutes = Math.floor((totalSeconds % 3600) / 60);
+
+
                     var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-                   
-                    var totalHoursCombineds = parseInt(hours, 10).toString();
+
+                    var forcounter = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');;
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1689,7 +1759,7 @@ getwork.then(function(data) {
                     // });
 
                     var dailycounter1 = $('<button/>', {
-                        text: totalHoursCombined,
+                        text: forcounter,
                         class: 'btn btn-danger btn-xs',
                         click: function () {
                         }
@@ -1725,13 +1795,50 @@ getwork.then(function(data) {
                     //    {
                     //     $(info.el).css('background-color', 'red');
                     //   }
-                    if (
+                    //   console.log(totalHoursCombined);
+
+                    const leaveHalfListDates = leavehalflist.map(item => new Date(item.title));
+
+                    // Logging each title in the console
+                    for (let i = 0; i < leavehalflist.length; i++) {
+                        console.log(leavehalflist[i].title);
+                    }
+
+                    // Initial value of workingDayHour
+                    console.log('Initial workingDayHour:', workingDayHour);
+
+                    // const current = new Date(); // Assuming you've defined current somewhere
+
+                    if (leaveHalfListDates.some(date => date.getDate() === current.getDate() &&
+                                                        date.getMonth() === current.getMonth() &&
+                                                        date.getFullYear() === current.getFullYear())) {
+                        
+                        
+                        // Splitting hours and minutes
+                        const [hours, minutes] = workingDayHour.split(":").map(Number);
+
+                        // Divide hours by 2
+                        const newHours = Math.floor(hours / 2);
+
+                        // Format newHours and minutes to ensure they are 2 digits
+                        const formattedNewHours = newHours < 10 ? `0${newHours}` : `${newHours}`;
+                        const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+                        // Update workingDayHour
+                        workingDayHour = `${formattedNewHours}:${formattedMinutes}`;
+
+                        console.log('Updated workingDayHour:', workingDayHour);
+
+                    }
+
+                    
+                   if (
                         (current.getDate() === currentDate.getDate()) &&
                         (hasEvent || hasLog) &&
                         (totalHoursCombined < workingDayHour)
-                      ) {
-                        $(info.el).css('background-color', '#FF8080');
-                      }
+                        ) {
+                        $(info.el).css('background-color', 'purple');
+                        }
                      else if (
                         (current.getDate() === currentDate.getDate()) &&
                         (hasEvent || hasLog) &&
@@ -1952,7 +2059,8 @@ getwork.then(function(data) {
                             ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) &&
                             !(clickedDate.day() == weekn1 && clickedDate.isBefore(today, 'day')) &&
-                            !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day'))
+                            !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day')) &&
+                            !isLeaveDay
                         )  {
                             Swal.fire({
                               icon: 'error',
@@ -2078,7 +2186,8 @@ getwork.then(function(data) {
 
                     if (
                         info.event.extendedProps.type == "leave" ||
-                        info.event.extendedProps.type == "holiday"
+                        info.event.extendedProps.type == "holiday" ||
+                        info.event.extendedProps.type == "leaveHalf"
                     ) {
                     } else if (info.event.extendedProps.type == "log") {
                         logId = info.event.extendedProps.logId;
@@ -3134,7 +3243,7 @@ getwork.then(function(data) {
                     },
                 },
 
-                events: dataHoliday,
+                events: dataAll,
                 eventOrder: 'start',
                
             });
@@ -3335,8 +3444,10 @@ $("#endeventdate").datepicker({
                 text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
             });
             
-            $("#starttime").val("");
-            $("#endtime").val("");
+            // $("#starttime").val("");
+            // $("#endtime").val("");
+            $("#lunchBreak").val("");
+
             
 
         } else {

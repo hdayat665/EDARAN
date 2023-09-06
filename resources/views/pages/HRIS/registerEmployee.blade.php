@@ -7,7 +7,7 @@ $@section('content')
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">HRIS | Register Employee</h1>
+    <h1 class="page-header">HRMIS <small>| Register Employee</small></h1>
 
     <div class="row" id="registerEmployee">
         <!-- BEGIN col-6 -->

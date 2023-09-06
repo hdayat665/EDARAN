@@ -9,10 +9,10 @@
         }
 
         .custom-dropdown-menu {
-            position: static ;
-            height: auto ;
-            max-height: none ;
-            overflow: visible ;
+            position: static !important;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
         }
 
         .upperReason {

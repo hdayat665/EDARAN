@@ -2,7 +2,7 @@
     <div class="modal-dialog" style="max-width: 1200px">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Project Register | Register Project</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Register Project</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -109,6 +109,7 @@
                                     <option value="{{ $getEmployee->id }}">{{ $getEmployee->employeeName }}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" id="acc_managerdiv" name="" class="form-control">
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="warranty_start_date" id="datepicker-warstart" placeholder="YYYY/MM/DD" />

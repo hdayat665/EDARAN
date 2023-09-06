@@ -80,10 +80,10 @@
                                             <div class="viewtimesheet">
                                                 <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            <div class="canceltimesheet">
+                                            {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
                                                 <a class="dropdown-item" data-id="{{$timesheet->id}}" id="cancelTimesheet">Cancel Timesheet</a>
-                                            </div>
+                                            </div> --}}
                                         @endif
 
                                     </div>

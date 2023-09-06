@@ -194,6 +194,49 @@ class MyTimeSheetService
             $input['total_hour'] = "$h:$m:$s";
         }
 
+        // check for halfday
+        $halfdayM = DB::table("myleave as a")
+        ->select("a.start_date", "a.leave_session")
+        ->where("a.up_user_id", $user->id)
+        ->where("a.day_applied", 0.5)
+        ->get();
+
+        // Standardize input date
+        $inputDateStandardized = str_replace('/', '-', $input['date']);
+
+        // User-inputted start and end times
+        $userStartTime = $input['start_time']; // Format should be like "08:00:00"
+        $userEndTime = $input['end_time']; // Format should be like "13:00:00"
+
+        foreach ($halfdayM as $entry) {
+            $existingDate = $entry->start_date;
+            $existingSession = $entry->leave_session;
+
+            // If the existing half-day date matches with the input date
+            if ($existingDate === $inputDateStandardized) {
+
+                // Set time boundaries dynamically based on session
+                if ($existingSession == 1) {
+                    $halfDayStartTime = "08:00:00";
+                    $halfDayEndTime = "13:00:00";
+                } else {
+                    $halfDayStartTime = "14:00:00";
+                    $halfDayEndTime = "17:00:00";
+                }
+
+                if (($userStartTime < $halfDayEndTime) && ($userEndTime > $halfDayStartTime)) {
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+                    $data['msg'] = 'Unable to Add Log Due to Overlapped Time with Half-Day Leave';
+                    return $data;
+                }
+            }
+        }
+
+        // end check for halfday
+
+        //check overlapping
         $existingLogs = TimesheetLog::where('user_id', $user->id)
             ->where('date', $input['date'])
             ->where(function ($query) use ($startTime, $endTime) {
@@ -827,7 +870,7 @@ class MyTimeSheetService
     }
 
 
-    public function getLeaves()
+    public function getLeavesFullDay()
     {
         // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
         $data = DB::table('myleave as a')
@@ -835,6 +878,25 @@ class MyTimeSheetService
             ->select('a.*', 'b.leave_types')
             ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
             ->where('a.status_final', 4)
+            ->where('a.day_applied', '!=', 0.5)
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function getLeavesHalfDay()
+    {
+        // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+        $data = DB::table('myleave as a')
+            ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+            ->select('a.*', 'b.leave_types')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
+            ->where('a.status_final', 4)
+            ->where('a.day_applied', "=",0.5)
             ->get();
 
         if (!$data) {

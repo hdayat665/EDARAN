@@ -35,7 +35,8 @@
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                         <td>{{$new->title}}</td>
                         <td>{{$new->content}}</td>
-                        <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>
+                        <!-- <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td> -->
+                        <td><a href="/storage/{{ $new->file }}" target="_blank">{{ $new->file }}</a></td>
                         <td>{{$new->addedBy}}</td>
                         <td>{{$new->created_at}}</td>
                         <td>{{$new->modifiedBy}}</td>
