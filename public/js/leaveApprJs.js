@@ -8,12 +8,31 @@ $(document).ready(function () {
         window.location.hash = e.target.hash;
     });
 
-
     $(document).ready(function() {
+
+        var originalGetComputedStyle = window.getComputedStyle;
+
+        window.getComputedStyle = function(el, pseudo) {
+            try {
+                return originalGetComputedStyle(el, pseudo);
+            } catch (err) {
+                console.warn('getComputedStyle override: prevented error.', err);
+                return {
+                    getPropertyValue: function() { return ""; } // metode palsu
+                };
+            }
+        };
+
+
+
+
         $(".test").hide();
 
-        $(".dropdown-toggle").on("click", function() {
+        $(document).on("click", ".dropdown-toggle", function(e) {
+            e.stopPropagation(); // mencegah event dari bubbling ke atas
+
             var dropdownMenu = $(this).closest(".btn-group").find(".test");
+
             $(".test").not(dropdownMenu).hide();
             dropdownMenu.toggle();
         });
@@ -28,18 +47,62 @@ $(document).ready(function () {
 
 
     $(document).ready(function () {
-        if (
-            $("#datepicker-date").val() ||
-            $("#idemployer").val() ||
-            $("#type").val()
-        ) {
-            $("#filterleave").show();
-        } else {
-            $("#filterleave").hide();
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-date").val() ||
+                $("#idemployer").val() ||
+                $("#type").val()
+            ) {
+                $("#filterleave").show();
+            } else {
+                $("#filterleave").hide();
+            }
         }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
 
         $("#filter").click(function () {
             $("#filterleave").toggle();
+        });
+
+        $("#reset").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-date").val($("#datepicker-date").data("default-value"));
+            $("#idemployer").val($("#idemployer").data("default-value"));
+            $("#type").val($("#type").data("default-value"));
+
+            $("#filterleave").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+        });
+    });
+
+    $(document).ready(function () {
+        function updateFilterVisibility() {
+            if (
+                $("#datepicker-dateH").val() ||
+                $("#idemployerH").val() ||
+                $("#typeH").val()
+            ) {
+                $("#filterleaveH").show();
+            } else {
+                $("#filterleaveH").hide();
+            }
+        }
+
+        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
+
+        $("#filterH").click(function () {
+            $("#filterleaveH").toggle();
+        });
+
+        $("#resetH").on("click", function (e) {
+            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
+
+            $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
+            $("#idemployerH").val($("#idemployerH").data("default-value"));
+            $("#typeH").val($("#typeH").data("default-value"));
+
+            $("#filterleaveH").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
         });
     });
 
@@ -53,34 +116,6 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
-    });
-
-    $(document).ready(function () {
-        if (
-            $("#datepicker-dateH").val() ||
-            $("#idemployerH").val() ||
-            $("#typeH").val()
-        ) {
-            $("#filterleaveH").show();
-        } else {
-            $("#filterleaveH").hide();
-        }
-
-        $("#filterH").click(function () {
-            $("#filterleaveH").toggle();
-        });
-    });
-
-    $("#reset").on("click", function () {
-        $("#datepicker-date").val($("#datepicker-date").data("default-value"));
-        $("#idemployer").val($("#idemployer").data("default-value"));
-        $("#type").val($("#type").data("default-value"));
-    });
-
-    $("#resetH").on("click", function () {
-        $("#datepicker-dateH").val($("#datepicker-dateH").data("default-value"));
-        $("#idemployerH").val($("#idemployerH").data("default-value"));
-        $("#typeH").val($("#typeH").data("default-value"));
     });
 
     $("#leaveApprovalSv").DataTable({
@@ -181,19 +216,19 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#status_1").text("Reject");
+                $("#status_1").text("REJECTED");
             } else if (data[0].up_rec_status === "4") {
-                $("#status_1").text("Approved");
+                $("#status_1").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#leavesession").text("Morning");
+                $("#leavesession").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#leavesession").text("Evening");
+                $("#leavesession").text("EVENING");
             } else {
                 $("#menu01").hide();
             }
@@ -254,19 +289,19 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#viewstatus_1").text("Pending");
+                $("#viewstatus_1").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#viewstatus_1").text("Pending");
+                $("#viewstatus_1").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#viewstatus_1").text("Reject");
+                $("#viewstatus_1").text("REJECTED");
             } else if (data[0].up_rec_status === "4") {
-                $("#viewstatus_1").text("Approved");
+                $("#viewstatus_1").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#viewleavesession").text("Morning");
+                $("#viewleavesession").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#viewleavesession").text("Evening");
+                $("#viewleavesession").text("EVENING");
             } else {
                 $("#viewmenu01").hide();
             }
@@ -376,33 +411,34 @@ $(document).ready(function () {
             $("#startdate2").val(data[0].start_date);
             $("#enddate2").val(data[0].end_date);
             $("#totaldayapplied2").val(data[0].total_day_applied);
-            $("#reason2").val(data[0].reason);
+            $("#reason1r").val(data[0].reason);
             $("#iddata2").val(data[0].id);
 
             if (data[0].day_applied == 1) {
-                $("#dayapplied2").val("One Day");
+                $("#dayapplied2").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayapplied2").val("Half Day");
+                $("#dayapplied2").val("HALF DAY");
             } else {
-                $("#dayapplied2").val(data[0].day_applied + " Day");
+                $("#dayapplied2").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_2").text("Pending");
+                $("#status_2").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#status_2").text("Pending");
+                $("#status_2").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#status_2").text("Reject");
+                $("#status_2").text("REJECT");
             } else if (data[0].up_rec_status === "4") {
-                $("#status_2").text("Approved");
+                $("#status_2").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#leavesession2").text("Morning");
+                $("#leavesession2r").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#leavesession2").text("Evening");
+                $("#leavesession2r").text("EVENING");
             } else {
-                $("#menu10").hide();
+                $("#viewmenu01r").hide();
+                $("#expend").css("width", "100%");
             }
 
             if (data[0].username1) {
@@ -419,7 +455,7 @@ $(document).ready(function () {
 
             if (data[0].file_document) {
                 var filename = data[0].file_document.split("/").pop();
-                $("#fileDownloadPolicya2").html(
+                $("#fileDownloadPolicya2r").html(
                     '<a href="/storage/' +
                     data[0].file_document +
                     '" target="_blank">View: ' +
@@ -427,7 +463,7 @@ $(document).ready(function () {
                     '</a>'
                 );
             } else {
-                $("#fileDownloadPolicya2").html("No File Upload");
+                $("#fileDownloadPolicya2r").html("No File Upload");
             }
         });
     });
