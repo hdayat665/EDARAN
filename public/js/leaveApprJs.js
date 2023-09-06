@@ -200,19 +200,19 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#status_1").text("Reject");
+                $("#status_1").text("REJECTED");
             } else if (data[0].up_rec_status === "4") {
-                $("#status_1").text("Approved");
+                $("#status_1").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#leavesession").text("Morning");
+                $("#leavesession").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#leavesession").text("Evening");
+                $("#leavesession").text("EVENING");
             } else {
                 $("#menu01").hide();
             }
@@ -273,19 +273,19 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#viewstatus_1").text("Pending");
+                $("#viewstatus_1").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#viewstatus_1").text("Pending");
+                $("#viewstatus_1").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#viewstatus_1").text("Reject");
+                $("#viewstatus_1").text("REJECTED");
             } else if (data[0].up_rec_status === "4") {
-                $("#viewstatus_1").text("Approved");
+                $("#viewstatus_1").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#viewleavesession").text("Morning");
+                $("#viewleavesession").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#viewleavesession").text("Evening");
+                $("#viewleavesession").text("EVENING");
             } else {
                 $("#viewmenu01").hide();
             }
@@ -407,19 +407,19 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_2").text("Pending");
+                $("#status_2").text("PENDING");
             } else if (data[0].up_rec_status === "2") {
-                $("#status_2").text("Pending");
+                $("#status_2").text("PENDING");
             } else if (data[0].up_rec_status === "3") {
-                $("#status_2").text("Reject");
+                $("#status_2").text("REJECT");
             } else if (data[0].up_rec_status === "4") {
-                $("#status_2").text("Approved");
+                $("#status_2").text("APPROVED");
             }
 
             if (data[0].leave_session === "1") {
-                $("#leavesession2r").text("Morning");
+                $("#leavesession2r").text("MORNING");
             } else if (data[0].leave_session === "2") {
-                $("#leavesession2r").text("Evening");
+                $("#leavesession2r").text("EVENING");
             } else {
                 $("#viewmenu01r").hide();
                 $("#expend").css("width", "100%");

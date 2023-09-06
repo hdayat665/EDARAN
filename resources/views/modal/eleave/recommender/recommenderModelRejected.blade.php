@@ -7,7 +7,6 @@
             </div>
             <div class="modal-body">
                 <form id="updatereject">
-
                     <div class="row row-cols-lg-auto g-3 mb-3">
                         <div class="col-12" style="width:50%">
                             <label class="form-label row-md-6">Employee Name:</label>
@@ -61,7 +60,6 @@
                             <textarea class="form-control upperReason" rows="3" id="reasonreject" name="reasonreject" maxlength="225"></textarea>
                         </div>
                     </div>
-
                     <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
