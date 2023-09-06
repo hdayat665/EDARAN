@@ -58,7 +58,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Project';
+        $data['msg'] = 'Project Is Created';
 
         return $data;
     }
@@ -268,7 +268,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project';
+        $data['msg'] = 'Project Information Is Updated';
 
         return $data;
     }
@@ -434,7 +434,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Location';
+        $data['msg'] = 'Project Location is Updated';
 
         return $data;
     }
@@ -487,7 +487,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Project Member';
+        $data['msg'] = 'Project Member Is Created';
 
         return $data;
     }
@@ -545,7 +545,7 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.employee_id', '=', 'c.user_id')
-            ->select('a.id','a.employee_id','a.joined_date', 'b.contract_start_date','b.id','c.designation', 'c.department', 'c.branch', 'c.unit')
+            ->select('a.id','a.employee_id','a.joined_date', 'b.contract_start_date','c.designation', 'c.department', 'c.branch', 'c.unit')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]]) // Specify 'a.tenant_id' to remove ambiguity
             ->orderBy('a.id', 'desc') // Use 'a.id' for ordering
             ->first();
@@ -597,7 +597,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Member';
+        $data['msg'] = 'Project Member Is Updated';
 
         return $data;
     }
@@ -624,7 +624,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Save Project Member Location';
+        $data['msg'] = 'Location is Assigned to the Project Member';
 
         return $data;
     }
@@ -687,7 +687,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Submit Project Request';
+            $data['msg'] = 'Project Request is Submitted';
         }
 
         return $data;
@@ -744,7 +744,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success ' . $status . ' Project Member';
+        $data['msg'] =  'Project Request is ' . $status . 'led' ;
 
         return $data;
     }

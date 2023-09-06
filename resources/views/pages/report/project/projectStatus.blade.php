@@ -66,19 +66,22 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4 mt-3" id="menu5">
-                        <label class="form-label" for="Menu2">Project Manager : </label>
-                        <select class="form-control" name="projectManager" id="select5"
-                            oninvalid="this.setCustomValidity('Please Choose Project Manager')"
-                            oninput="setCustomValidity('')">
-                            <option value="">PLEASE CHOOSE</option>
-                            <?php $prjManagers = prjManager(); ?>
-                            @if ($prjManagers)
-                                @foreach ($prjManagers as $manager)
+                    <label class="form-label" for="Menu2">Project Manager : </label>
+                    <select class="form-control" name="projectManager" id="select5"
+                        oninvalid="this.setCustomValidity('Please Choose Project Manager')"
+                        oninput="setCustomValidity('')">
+                        <option value="">PLEASE CHOOSE</option>
+                        <?php $prjManagers = prjManager(); ?>
+                        @if ($prjManagers)
+                            @foreach ($prjManagers as $manager)
+                                @if ($manager->name)
                                     <option value="{{ $manager->id }}">{{ $manager->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                    </div>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+
                     <div class="form-group col-md-4 mt-3" id="menu6">
                         <label class="form-label" for="Menu2">Status : </label>
                         <select class="form-control" name="statusProject" id="select6"

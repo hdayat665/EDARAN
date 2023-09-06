@@ -168,6 +168,13 @@ $(document).ready(function () {
                 acc_manager: "Please Insert Account Manager",
                 status: "Please Insert Status",
             },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "acc_manager") {
+                    error.insertAfter("#acc_managerdiv");
+                } else {
+                    error.insertAfter(element);
+                }
+             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
@@ -450,27 +457,38 @@ $("#contract_end_date").datepicker({
 }).prop("readonly", true); // Set the end date input field as readonly initially
 
 
-$("#datepicker-warstart").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-}).on("changeDate", function (e) {
-    // Remove the readonly attribute from warranty_end_date input
-    $("#datepicker-warend").removeAttr("readonly");
+$(document).ready(function () {
+    // Initialize the start datepicker
+    $("#datepicker-warstart").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    }).on("changeDate", function (e) {
+        var startDate = e.date;
 
-    // Set the end datepicker's date to the selected start date
-    $("#datepicker-warend").datepicker("update", e.date);
+        // Set the end datepicker's date to the selected start date
+        $("#datepicker-warend").datepicker("update", startDate);
 
-    // Set the minimum date for the end datepicker to the selected start date
-    $("#datepicker-warend").datepicker("setStartDate", e.date);
-});
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#datepicker-warend").datepicker("setStartDate", startDate);
 
-$("#datepicker-warend").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-    clearBtn: true,
-    endDate: '0d' // Add this line to restrict dates to today or earlier
+        // Enable or disable the end datepicker based on whether a start date is selected
+        if (startDate !== null) {
+            $("#datepicker-warend").prop("readonly", false);
+        } else {
+            $("#datepicker-warend").prop("readonly", true);
+        }
+    });
+
+    // Initialize the end datepicker
+    $("#datepicker-warend").datepicker({
+        format: "yyyy/mm/dd",
+        autoclose: true,
+        todayHighlight: true,
+    });
+
+    // Disable the end datepicker initially
+    $("#datepicker-warend").prop("readonly", true);
 });
 
 
