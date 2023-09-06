@@ -364,21 +364,24 @@ class LoginService
     public function forgotPassEmail($input)
     {
         $tenant = Tenant::where('tenant_name', $input['tenant_name'])->first();
+        
         if (!$tenant) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Domain not found';
-        } else {
+        }
+        else {
             $employee = Employee::where('workingEmail', $input['username'])->where('tenant_id', $tenant->tenant_id)->first();
-            $user = Users::where('id', $employee['user_id'])->first();
             
-            if (!$user) {
+            if (!$employee) {
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
                 $data['title'] = config('app.response.error.title');
-                $data['msg'] = 'User not found';
+                $data['msg'] = 'Working Email not match with domain name!';
             } else {
+                $user = Users::where('id', $employee['user_id'])->first();
+
                 $receiver = $input['username'];
                 $response['typeEmail'] = 'forgotPass';
                 $response['title'] = 'Orbit Reset Password';
@@ -401,6 +404,7 @@ class LoginService
                 $data['msg'] = 'Email have been send to your email address';
             }
         }
+
         return $data;
     }
 
@@ -489,6 +493,52 @@ class LoginService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Email have been send to your email';
+        }
+
+        return $data;
+    }
+
+    public function activationEmail2($input)
+    {
+        $tenant = Tenant::where('tenant_name', $input['tenant_name'])->first();
+        if (!$tenant) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Domain not found!';
+        } else {
+            $employee = Employee::where('workingEmail', $input['username'])->where('tenant_id', $tenant->tenant_id)->first();
+            
+            if (!$employee) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'Email not match with domain name!';
+            } else {
+                $user = Users::where('id', $employee['user_id'])->first();
+                
+                $receiver = $input['username'];
+                $response['typeEmail'] = 'activateAcc2';
+                $response['title'] = 'Orbit Activation Link';
+                $response['content1'] = 'This email is sent you to activate your account.';
+                $response['domain'] = $user->tenant;
+                $response['username'] = $input['username'];
+                // $response['password'] = $input['password'];
+                $response['content2'] = 'Please click the button below to activate your account:';
+                $response['resetPassLink'] = env('APP_URL') . "/activateView/" . $user->id;
+                $response['from'] = env('MAIL_FROM_ADDRESS');
+                $response['nameFrom'] = 'Orbit HRMS';
+                $response['subject'] = 'Orbit Activation Link';
+                // $response['typeAttachment'] = "application/pdf";
+                //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+                Mail::to($receiver)->send(new MailMail($response));
+
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Email have been send to your email';
+            }
         }
 
         return $data;

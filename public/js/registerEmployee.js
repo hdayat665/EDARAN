@@ -434,6 +434,29 @@ $(document).ready(function () {
 
                 },
             },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err");
+                } else if (element.attr("name") === "countryc") {
+                    error.insertAfter("#countryc-err");
+                } else if (element.attr("name") === "statec") {
+                    error.insertAfter("#statec-err");
+                } else if (element.attr("name") === "cityc") {
+                    error.insertAfter("#cityc-err");
+                } else if (element.attr("name") === "postcodec") {
+                    error.insertAfter("#postcodec-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(

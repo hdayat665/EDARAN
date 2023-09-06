@@ -3,16 +3,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">FORGOT YOUR PASSWORD?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal1" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="forgotPassEmailForm">
                     <div class="mb-3">
                         <label>A password reset link will be sent to your email to reset your password. If you don't get an email within a few minutes, please re-try.</label>
-
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="recipient-tenant" class="col-form-label">Domain</label>
+                        <label for="recipient-tenant" class="col-form-label">Domain Name</label>
                         <input type="text" class="form-control" name="tenant_name">
                     </div>
 

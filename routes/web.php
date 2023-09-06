@@ -71,6 +71,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/forgotPassEmail', 'forgotPassEmail');
         Route::post('/forgotDomainEmail', 'forgotDomainEmail');
         Route::post('/activationEmail', 'activationEmail');
+        Route::post('/activationEmail2', 'activationEmail2');
         Route::get('/activateView/{id}', 'activationView');
     });
 

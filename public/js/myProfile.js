@@ -1551,6 +1551,7 @@ $(document).ready(function () {
                 },
                 relationship: "required",
                 address1: "required",
+                country: "required",
                 postcode: {
                     required: true,
                 },
@@ -1572,11 +1573,26 @@ $(document).ready(function () {
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
+                country: "Please Insert Country",
                 postcode: {
                     required: "Please Insert Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryEC-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateEC-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityEC-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeEC-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
@@ -1677,6 +1693,7 @@ $(document).ready(function () {
                 },
                 relationship_2: "required",
                 address1_2: "required",
+                country_2: "required",
                 postcode_2: {
                     required: true,
 
@@ -1699,12 +1716,27 @@ $(document).ready(function () {
                 },
                 relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
+                country_2: "Please Insert Country",
                 postcode_2: {
                     required: "Please Insert Postcode",
 
                 },
                 city_2: "Please Insert City",
                 state_2: "Please Choose State",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country_2") {
+                    error.insertAfter("#countryEC2-err");
+                } else if (element.attr("name") === "state_2") {
+                    error.insertAfter("#stateEC2-err");
+                } else if (element.attr("name") === "city_2") {
+                    error.insertAfter("#cityEC2-err");
+                } else if (element.attr("name") === "postcode_2") {
+                    error.insertAfter("#postcodeEC2-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
@@ -1892,6 +1924,21 @@ $(document).ready(function () {
                     required: "Please Upload OKU Attachment",
                 },
             },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryc-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#statec-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityc-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodec-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 Swal.fire({
                     allowOutsideClick: false,
@@ -3544,6 +3591,20 @@ $(document).ready(function () {
                 },
             },
 
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryparent-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateparent-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityparent-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeparent-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 // requirejs(['sweetAlert2'], function(swal,swal1) {
 
@@ -3722,6 +3783,20 @@ $(document).ready(function () {
                 okuFile: {
                     required: "Please Upload OKU Attachment",
                 },
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryP1-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateP1-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityP1-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeP1-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
