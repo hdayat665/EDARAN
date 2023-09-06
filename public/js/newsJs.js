@@ -45,10 +45,9 @@ $(document).ready(function () {
             $("#title").val(data.title);
             $("#sourceURL").val(data.sourceURL);
             if (data.file) {
-                $("#fileDownload").html(
-                    '<a href="/storage/' + data.file + '">Download File</a>'
-                );
-            }
+                var fileName = data.file.split('/').pop(); // Extract the file name from the file path
+                $("#fileDownload").html('<a href="/storage/' + data.file + '" target="_blank">Download ' + fileName + '</a>');
+              }
             $("#contents").val(data.content);
             $("#idN").val(data.id);
         });
