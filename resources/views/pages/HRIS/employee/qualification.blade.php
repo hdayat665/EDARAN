@@ -58,7 +58,13 @@
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                            <td><a href="{{ route('view', ['filename' => $education->file]) }}" target="blank_">{{$education->file}}</a></td>
+                            <td>
+                            @if($education->file ?? '')
+                            <a href="{{ route('view', ['filename' => $education->file ?? '']) }}" target="_blank">
+                            {{ $education->file ?? ''}}
+                            </a>
+                            @endif
+                            </td>
                         </tr>
                         @endforeach
                     @endif
@@ -102,7 +108,7 @@
 
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
-                                <td><a href="{{ route('view', ['filename' => $other->file]) }}" target="blank_">{{$other->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $other->file ?? '']) }}" target="blank_">{{$other->file ?? ''}}</a></td>
                             </tr>
                             @endforeach
                         @endif

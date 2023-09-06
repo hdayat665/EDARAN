@@ -136,7 +136,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#activeTable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -177,7 +177,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#recommendedtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -217,7 +217,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#buckettable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -258,7 +258,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#amendtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
@@ -298,7 +298,7 @@ $(document).ready(function () {
             },
         ],
         initComplete: function (settings, json) {
-            $("#activetable").wrap(
+            $("#rejecttable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },

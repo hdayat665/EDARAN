@@ -214,7 +214,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" type="submit"> Print</a>
+                        <a class="btn btn-primary" data-id="{{ $general->id }}" style="color: black;width:100%" id="finRecMtcPrint" type="button"> Print</a>
                         </div>
                     </div>
                     <div class="row p-2">

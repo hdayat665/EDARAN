@@ -112,6 +112,7 @@
                             </option>
                         @endforeach
                     </select>
+                    <input type="hidden" id="acc_managerdiv" name="" class="form-control">
                 </div>
                 <div class="col-md-4">
                     <select class="form-select" name="project_manager" id="project_manager2" style="display:none" ></select>
@@ -124,6 +125,7 @@
                             </option>
                         @endforeach
                     </select>
+                    <input type="hidden" id="project_managerdiv" name="" class="form-control">
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date" value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />

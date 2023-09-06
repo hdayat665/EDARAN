@@ -9,37 +9,37 @@
                 <form id="updateForm">
                         <div class="row row-cols-lg-auto g-3 mb-3">
                             <div class="col-12" style="width:50%">
-                                <label>Applied Date</label><br>
+                                <label class="form-label row-md-6">Applied Date</label><br>
                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate" value="">
                                 <input type="hidden" readonly class="form-control-plaintext" id="iddata" >
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Type of Leave*</label><br>
+                                <label class="form-label row-md-6">Type of Leave*</label><br>
                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type1">
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Number of Day(s) Applied</label><br>
+                                <label class="form-label row-md-6">Number of Day(s) Applied</label><br>
                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied">
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Total Days Applied*</label><br>
+                                <label class="form-label row-md-6">Total Days Applied*</label><br>
                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="totaldayapplied">
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Leave Date</label><br>
+                                <label class="form-label row-md-6">Leave Date</label><br>
                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="leavedate">
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Reason*</label><br>
+                                <label class="form-label row-md-6">Reason*</label><br>
                                 <textarea style="overflow: hidden; border: none; background-color: transparent;" readonly class="form-control-plaintext" id="reason1" maxlength="225"></textarea>
                             </div>
                             <div class="col-12" style="width:50%" id="menu01">
-                                <label>Leave Session</label><br>
+                                <label class="form-label row-md-6">Leave Session</label><br>
                                 <div></div>
                                 <div id="leavesession" style="font-weight: lighter;"></div>
                             </div>
                             <div class="col-12" style="width:50%">
-                                <label>Supporting Document*</label><br>
+                                <label class="form-label row-md-6">Supporting Document*</label><br>
                                  <span id="fileDownloadPolicya" style="font-weight: lighter;"></span>
                             </div>
                         </div>
@@ -47,25 +47,25 @@
                             <div class="form-control" id ="hidesecond1">
                                 <div class="row p-2">
                                     <div class = col-md-4>
-                                        <label for="text" >Recommended By:</label><br>
+                                        <label  class="form-label row-md-6" for="text" >Recommended By:</label><br>
                                         <div id="recommended_by" style="font-weight: lighter;"></div>
                                     </div>
                                     <div class = col-md-2>
                                     </div>
                                     <div class = col-md-4>
-                                        <label for="text" >Approved By:</label><br>
+                                        <label  class="form-label row-md-6" for="text" >Approved By:</label><br>
                                         <div id="approved_by" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class = col-md-4>
-                                        <label for="text">Status:</label><br>
+                                        <label  class="form-label row-md-6"for="text">Status:</label><br>
                                     <div id="status_1" style="font-weight: lighter;"></div>
                                     </div>
                                     <div class = col-md-2>
                                     </div>
                                     <div class = col-md-4>
-                                        <label for="text">Status:</label><br>
+                                        <label class="form-label row-md-6" for="text">Status:</label><br>
                                     <div id="status_2" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>
@@ -73,13 +73,13 @@
                             <div class="form-control"  id ="hidesecond2">
                                 <div class="row p-2">
                                     <div class = "col-md-12">
-                                        <label for="text" >Approved By:</label><br>
+                                        <label class="form-label row-md-6" for="text" >Approved By:</label><br>
                                         <div id="approved_bya" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class = "col-md-4">
-                                        <label for="text">Status:</label><br>
+                                        <label class="form-label row-md-6" for="text">Status:</label><br>
                                     <div id="status_2a" style="font-weight: lighter;"></div>
                                     </div>
                                 </div>

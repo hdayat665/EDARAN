@@ -58,7 +58,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Project';
+        $data['msg'] = 'Project Is Created';
 
         return $data;
     }
@@ -268,7 +268,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project';
+        $data['msg'] = 'Project Information Is Updated';
 
         return $data;
     }
@@ -434,7 +434,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Location';
+        $data['msg'] = 'Project Location is Updated';
 
         return $data;
     }
@@ -487,7 +487,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Project Member';
+        $data['msg'] = 'Project Member Is Created';
 
         return $data;
     }
@@ -545,7 +545,7 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.employee_id', '=', 'c.user_id')
-            ->select('a.id','a.employee_id','a.joined_date', 'b.contract_start_date','b.id','c.designation', 'c.department', 'c.branch', 'c.unit')
+            ->select('a.id','a.employee_id','a.joined_date', 'b.contract_start_date','c.designation', 'c.department', 'c.branch', 'c.unit')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]]) // Specify 'a.tenant_id' to remove ambiguity
             ->orderBy('a.id', 'desc') // Use 'a.id' for ordering
             ->first();
@@ -597,7 +597,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Project Member';
+        $data['msg'] = 'Project Member Is Updated';
 
         return $data;
     }
@@ -624,7 +624,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Save Project Member Location';
+        $data['msg'] = 'Location is Assigned to the Project Member';
 
         return $data;
     }
@@ -687,7 +687,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Submit Project Request';
+            $data['msg'] = 'Project Request is Submitted';
         }
 
         return $data;
@@ -744,7 +744,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success ' . $status . ' Project Member';
+        $data['msg'] =  'Project Request is ' . $status . 'led' ;
 
         return $data;
     }
@@ -847,20 +847,20 @@ class ProjectService
     public function projectRequestView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-
+    
         $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')
-            ->where([['employee_id', '=', $employee->id]])
+            ->where('employee_id', $employee->id)
             ->whereIn('status', ['pending', 'approve', 'reject'])
+            ->where('status', '!=', 'CLOSED') // Exclude the "CLOSED" status
             ->orderBy('id', 'desc')
             ->get();
-
-        // dd($projectMember);
+    
         $projectId['approve'] = [];
         foreach ($projectMember as $project) {
             $dateRequest = strtotime($project->created_at);
             $now = strtotime(now());
             $hour = abs($dateRequest - $now) / (60 * 60);
-
+    
             if ($project->status == 'pending') {
                 if ($hour > 24) {
                     $projectId['approve'][] = $project->project_id;
@@ -868,31 +868,30 @@ class ProjectService
             } elseif ($project->status == 'reject') {
                 if ($hour > 24) {
                     $this->updateStatusProjectMemberReject($project->id, 'rejected');
-                    // $projectId['approve'][] = $project->project_id;
                 }
             } else {
                 $projectId['approve'][] = $project->project_id;
             }
         }
-        // dd($projectId);
-
+    
         $data = DB::table('project as a')
-        ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-        ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
-        ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
-        ->select('a.*', 'b.customer_name', 'c.employeeName', 'd.id as project_member_id')
-        ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
-        ->whereNotIn('a.id', $projectId['approve'])
-        ->groupBy('a.id')
-        ->get();
-
-
+            ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+            ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
+            ->select('a.*', 'b.customer_name', 'c.employeeName', 'd.id as project_member_id')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
+            ->whereNotIn('a.id', $projectId['approve'])
+            ->where('a.status', '!=', 'CLOSED') // Exclude "CLOSED" status projects
+            ->groupBy('a.id')
+            ->get();
+    
         if (!$data) {
             $data = [];
         }
-
+    
         return $data;
     }
+    
 
     public function updateStatusProjectMemberReject($id, $status)
     {

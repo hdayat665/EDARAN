@@ -127,7 +127,7 @@
                                 <label for="idattach" class="form-label" >ID Attachment</label>
                                 <input id="fileupload" type="file" name="fileID" class="form-control">
                                 @if ($profile->fileID)
-                                Click <a href="{{ route('view', ['filename' => $profile->fileID]) }}" target="_blank">here</a> to see the ID Attachment.
+                                Click <a href="{{ route('view', ['filename' => $profile->fileID ?? '']) }}" target="_blank">here</a> to see the ID Attachment.
                                 @endif
                             </div>
                         </div>

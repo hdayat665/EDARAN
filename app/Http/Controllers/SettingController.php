@@ -1601,11 +1601,11 @@ class SettingController extends Controller
 
     public function systemUser()
     {
-        // $ss = new SettingService;
+        $ss = new SettingService;
 
-        // $result = $ss->systemUser();
+        $result['users'] = $ss->systemUserData();
 
-        return view('pages.setting.systemUser');
+        return view('pages.setting.systemUser', $result);
     }
     // public function systemUserCreate()
     // {
@@ -1615,13 +1615,13 @@ class SettingController extends Controller
 
     //     return view('pages.setting.systemUserCreate');
     // }
-    public function systemUserUpdate()
+    public function systemUserUpdate($id = '')
     {
-        // $ss = new SettingService;
+        $ss = new SettingService;
 
-        // $result = $ss->systemUser();
+        $result['user'] = $ss->getUserById($id);
 
-        return view('pages.setting.systemUserUpdate');
+        return view('pages.setting.systemUserUpdate', $result);
     }
 
 
@@ -1671,4 +1671,12 @@ class SettingController extends Controller
         return $result;
     }
 
+    public function updateSystemRole(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateSystemRole($r, $id);
+
+        return response()->json($result);
+    }
 }

@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ApprovelRoleGeneral;
 use App\Service\MyTimeSheetService;
 use App\Models\ClaimCategoryContent;
+use App\Models\CustomPermission;
 use App\Models\MenuPermissionCode;
 use Illuminate\Support\Facades\Auth;
 use App\Service\ClaimApprovalService;
@@ -3143,6 +3144,46 @@ if (!function_exists('getAppealData')) {
 
             $data = $mcs->getAppealData();
         }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getPermissionByUserId')) {
+    function getPermissionByUserId()
+    {
+        $data = CustomPermission::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getMenuCodeByLevel1MenuId')) {
+    function getMenuCodeByLevel1MenuId($id = '')
+    {
+        $result = MenuPermissionCode::where('level_2', $id)->get();
+        $data = $result->pluck('menu_id')->toArray();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getLevel1PermissionCode')) {
+    function getLevel1PermissionCode()
+    {
+        $data = MenuPermissionCode::where('level_1', 1)->get();
 
         if (!$data) {
             $data = [];
