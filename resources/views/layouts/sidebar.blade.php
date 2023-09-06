@@ -14,6 +14,9 @@
             </div>
             <?php
             $permissions = getPermissionByRoleId(Auth::user()->role_id);
+            if (Auth::user()->role_custom_id) {
+                $permissions = getPermissionByUserId();
+            }
             $role_permission = [];
             foreach ($permissions as $permission) {
                 $role_permission[] = $permission->permission_code;
