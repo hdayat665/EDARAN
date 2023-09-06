@@ -129,9 +129,10 @@ requirejs.config({
 
         // systemUser Js
         systemUserJs: assets + "/js/systemUserJs",
+        systemRoleUpdateJs: assets + "/js/systemRoleUpdateJs",
 
         //new project location Js
-        projectLocationJs: assets + "/js/projectlocationJs"
+        projectLocationJs: assets + "/js/projectlocationJs",
     },
 });
 
@@ -387,7 +388,6 @@ if ($("#monthlyClaimViewJs").length > 0) {
     requirejs(["monthlyClaimViewJs"]);
 }
 
-
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
 }
@@ -560,6 +560,10 @@ if ($("#systemUserJs").length > 0) {
 
 if ($("#projectLocationJs").length > 0) {
     requirejs(["projectLocationJs"]);
+}
+
+if ($("#systemRoleUpdateJs").length > 0) {
+    requirejs(["systemRoleUpdateJs"]);
 }
 
 $(document).ajaxStart(function () {
