@@ -13,8 +13,11 @@
                             <th class="text-nowrap">Email</th>
                             <th class="text-nowrap">Role</th>
                             <th class="text-nowrap">Status</th>
+                            <th class="text-nowrap">Added By</th>
+                            <th class="text-nowrap">Added Time</th>
+                            <th class="text-nowrap">Modified By</th>
+                            <th class="text-nowrap">Modified Time</th>
                             <th width="9%" data-orderable="false" class="align-middle">Action</th>
-                            <th class="text-nowrap">Modified Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +39,10 @@
                                             <span class="badge <?= 'bg-red' ?>">Deactivate</span>
                                         @endif
                                     </td>
+                                    <td> {{$user->addedBy ?? '-'}}</td>
+                                    <td>{{$user->created_at ?? '-'}}</td>
+                                    <td>{{$user->modifiedBy ?? '-'}}</td>
+                                    <td>{{$user->modified_at ?? '-'}}</td>
                                     <td>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
@@ -43,7 +50,6 @@
                                             <div class="dropdown-divider"></div>
                                             <a id="deleteUserBtn" data-id="{{ $user->id }}" class="dropdown-item"> Delete</a>
                                     </td>
-                                    <td>{{ $user->updated_at ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         @endif
