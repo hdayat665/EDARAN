@@ -221,6 +221,17 @@ class LoginController extends Controller
         return response()->json($data);
     }
 
+    // public function activationEmail(Request $r)
+    // {
+    //     $input = $r->input();
+
+    //     $ls = new LoginService;
+
+    //     $data = $ls->activationEmail($input);
+
+    //     return response()->json($data);
+    // }
+
     public function activationEmail(Request $r)
     {
         $input = $r->input();
@@ -228,6 +239,17 @@ class LoginController extends Controller
         $ls = new LoginService;
 
         $data = $ls->activationEmail($input);
+
+        return response()->json($data);
+    }
+
+    public function activationEmail2(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService;
+
+        $data = $ls->activationEmail2($input);
 
         return response()->json($data);
     }

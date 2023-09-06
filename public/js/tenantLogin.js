@@ -260,15 +260,21 @@ $(document).ready(function () {
     $("#forgotPassEmail").click(function (e) {
         $("#forgotPassEmailForm").validate({
             rules: {
+                tenant_name: {
+                    required: true,
+                },
                 username: {
                     required: true,
                     email: true
                 },
             },
             messages: {
+                tenant_name: {
+                    required: "Please Insert Domain Name",
+                },
                 username: {
                     required: "Please Insert Working Email",
-                    email: "Working Email Does Not Exist"
+                    email: "Please Insert Valid Working Email"
                 },
             },
             submitHandler: function (form) {
@@ -393,6 +399,76 @@ $(document).ready(function () {
                     $.ajax({
                         type: "POST",
                         url: "/activationEmail",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        // console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#activationButton2").click(function (e) {
+        $("#activationForm2").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                tenant_name: {
+                    required: true,
+                },
+                username: {
+                    required: true,
+                    // Specify that email should be validated
+                    // by the built-in "email" rule
+                    // email: true
+                },
+                // password: {
+                //     required: true,
+                //     minlength: 5
+                // }
+            },
+
+            // Specify validation error messages
+            messages: {
+                tenant_name: {
+                    required: "Please Insert Domain Name",
+                },
+                username: {
+                    required: "Please Insert Working Email",
+                    email: "Please Insert Valid Working Email"
+                },
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("activationForm2")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/activationEmail2",
                         data: data,
                         dataType: "json",
 

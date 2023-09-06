@@ -7,12 +7,11 @@
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
                     <input type="text" name="address1" id="address1" class="form-control mb-10px" placeholder="ADDRESS 1" />
-                    <input type="hidden" name="user_id" id="user_id" class="form-control mb-10px" />
-
-                </div><label class="form-label col-form-label col-md-1">Address 2</label>
+                    <input type="hidden" name="user_id" id="user_id" class="form-control" />
+                </div>
+                <label class="form-label col-form-label col-md-1">Address 2</label>
                 <div class="col-md-5">
                     <input type="text" name="address2" id="address2" class="form-control mb-5px" placeholder="ADDRESS 2"/>
-
                 </div>
             </div>
 
@@ -25,12 +24,14 @@
                             <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                         @endforeach
                     </select>
+                    <div id="country-err" class="error"></div>
                 </div>
                 <label class="form-label col-form-label col-md-1">State*</label>
                 <div class="col-md-5">
                     <select class="form-select" name="state" id="state" value="" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="state-err" class="error"></div>
                 </div>
             </div>
             <div class="row mb-15px">
@@ -39,12 +40,14 @@
                     <select class="form-select" name="city" id="city" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="city-err" class="error"></div>
                 </div>
                 <label class="form-label col-form-label col-md-1">Postcode*</label>
                 <div class="col-md-5">
                     <select class="form-select" name="postcode" id="postcode" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="postcode-err" class="error"></div>
                 </div>
             </div>
             <br>
@@ -64,11 +67,10 @@
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
                     <input type="text" name="address1c" id="address1c" class="form-control mb-10px" placeholder="ADDRESS 1" />
-
-                </div><label class="form-label col-form-label col-md-1">Address 2</label>
+                </div>
+                <label class="form-label col-form-label col-md-1">Address 2</label>
                 <div class="col-md-5">
                     <input type="text" name="address2c" id="address2c" class="form-control mb-5px" placeholder="ADDRESS 2" />
-
                 </div>
             </div>
 
@@ -81,12 +83,14 @@
                             <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                         @endforeach
                     </select>
+                    <div id="countryc-err" class="error"></div>
                 </div>
                 <label class="form-label col-form-label col-md-1">State*</label>
                 <div class="col-md-5">
                     <select class="form-select" name="statec" id="statec" value="" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="statec-err" class="error"></div>
                 </div>
             </div>
             <div class="row mb-15px">
@@ -95,12 +99,14 @@
                     <select class="form-select" name="cityc" id="cityc" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="cityc-err" class="error"></div>
                 </div>
                 <label class="form-label col-form-label col-md-1">Postcode*</label>
                 <div class="col-md-5">
                     <select class="form-select" name="postcodec" id="postcodec" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                     </select>
+                    <div id="postcodec-err" class="error"></div>
                 </div>
             </div>
 

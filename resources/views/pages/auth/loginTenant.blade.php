@@ -71,7 +71,7 @@
 
 {{-- @include('pages.auth.tenantName'); --}}
 @include('pages.auth.forgotPasswordTenant');
-@include('pages.auth.emailActivationTenant');
+@include('pages.auth.emailActivationTenant2');
 
 @endsection
 
