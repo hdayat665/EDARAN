@@ -45,7 +45,7 @@
                                     <td>{{ $project->employeeName }}</td>
                                     <td>{{ $project->contract_start_date }}</td>
                                     <td>{{ $project->contract_end_date }}</td>
-                                    @if (in_array($project->id, $projectIdPending))
+                                    <!-- @if (in_array($project->id, $projectIdPending))
                                         <td><a data-bs-toggle="modal" data-id="{{ $project->id }}"
                                                 id="viewProjectRequestButton">Pending</a></td>
                                     @elseif (in_array($project->id, $projectIdApprove))
@@ -57,7 +57,8 @@
                                     @else
                                         <td><a data-bs-toggle="modal" data-id="{{ $project->id }}"
                                                 id="viewProjectRequestButton">-</a></td>
-                                    @endif
+                                    @endif -->
+                                    <td>{{$project->status}}</td>
                                 </tr>
                             @endforeach
                         @endif
