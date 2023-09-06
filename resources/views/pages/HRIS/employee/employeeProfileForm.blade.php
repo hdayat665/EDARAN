@@ -49,7 +49,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Passport Number</label>
             <div class="col-md-2">
-                <input type="text" name="passport" id="passport" class="form-control mb-4px" placeholder="PASSPORT NUMBER"/>
+                <input type="text" name="passport" id="passport" class="form-control mb-4px" placeholder="PASSPORT NUMBER" readonly/>
             </div>
             <label class="form-label col-form-label col-md-1">Expiry Date*</label>
             <div class="col-md-2">
@@ -57,7 +57,8 @@
             </div>
             <label class="form-label col-form-label col-md-1">Issuing Country*</label>
             <div class="col-md-5">
-                <select class="form-select" name="issuingCountry" id="issuingCountry2" style="pointer-events: none" readonly>
+                <select class="form-select" name="issuingCountry" id="issuingCountry2" style="pointer-events: none; background-color: #e9ecef" readonly>
+                    <option value="" label="PLEASE CHOOSE" selected></option>
                     <?php
                     $americass = americas();
                     $asias = asias();
@@ -85,7 +86,7 @@
             </div>
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">
-                <select class="form-select" name="gender" id="gender" style="pointer-events: none" readonly>
+                <select class="form-select" name="gender" id="gender" style="pointer-events: none; background-color: #e9ecef" readonly>
                     <?php $gender = gender() ?>
                     <option value="" label="PLEASE CHOOSE" selected></option>
                     @foreach ($gender as $key => $status)

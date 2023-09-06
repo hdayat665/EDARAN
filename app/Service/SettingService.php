@@ -636,7 +636,6 @@ class SettingService
     {
         $input = $r->input();
 
-
         $input = [
             'country_id' => $input['country_id'],
             'state_id' => $input['state_name'],
@@ -646,13 +645,26 @@ class SettingService
 
         ];
 
-        Location::create($input);
+        $existingLocation = Location::where('country_id', $input['country_id'])
+        ->where('postcode', $input['postcode'])
+        ->first();
 
+        if ($existingLocation) {
+            $data['msg'] = 'Location already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Location is Created';
+            return $data;
+
+        } else {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Location is Created';
+            Location::create($input);
+        }
+
 
         return $data;
     }
