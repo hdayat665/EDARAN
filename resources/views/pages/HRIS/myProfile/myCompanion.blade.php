@@ -16,6 +16,7 @@
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="mainCompanion" id="set-main" value="on" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }}>
+
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
                                 </div>
                             </div>
@@ -401,7 +402,7 @@
                                 <label for="marriage-cert" class="form-label" >ID Attachment</label>
                                 <input type="file" name="idFile" id="id-attachment" class="form-control" aria-describedby="">
                                 @if ($companion->idFile)
-                                Click <a href="{{ route('view', ['filename' => $companion->idFile]) }}" target="_blank">here</a> to see the ID Attachment.
+                                Click <a href="{{ route('view', ['filename' => $companion->idFile ?? '']) }}" target="_blank">here</a> to see the ID Attachment.
                                 @endif
                             </div>
                         </div>
@@ -494,7 +495,7 @@
                                 <label for="dob" class="form-label"  >OKU Attachment*</label>
                                 <input type="file" id="okuattach2" name="okuID" class="form-control" aria-describedby="" style="pointer-events: none" readonly>
                                 @if ($companion->okuID )
-                                Click <a href="{{ route('view', ['filename' => $companion->okuID]) }}" target="_blank">here</a> to see the OKU Attachment.
+                                Click <a href="{{ route('view', ['filename' => $companion->okuID ?? '']) }}" target="_blank">here</a> to see the OKU Attachment.
                                 @endif
                             </div>
                         </div>
