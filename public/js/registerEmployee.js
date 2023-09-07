@@ -1,4 +1,21 @@
 $(document).ready(function () {
+
+    $("#reportsearch").select2({
+        placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+        escapeMarkup: function(markup) {
+        return markup
+        },
+        allowClear: true,
+    });
+
+    $("#designationsearch").select2({
+        placeholder: "<span style='color: black;'>PLEASE CHOOSE</span>",
+        escapeMarkup: function(markup) {
+        return markup
+        },
+        allowClear: true,
+    });
+
     $("input[type=text]").keyup(function () {
         $(this).val($(this).val().toUpperCase());
     });
@@ -402,7 +419,7 @@ $(document).ready(function () {
                 address1: "Please Insert Address 1",
                 city: "Please Insert City",
                 state: "Please Choose State",
-                country: "required",
+                country: "Please Choose Country",
                 postcode: {
                     required: "Please Insert Postcode",
 
