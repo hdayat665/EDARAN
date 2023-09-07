@@ -35,12 +35,6 @@ class EmployeeService
         $input = $r->input();
 
         if (isset($r['username'])) {
-            // $user = Users::join('userprofile', 'users.id', '=', 'userprofile.user_id')
-            //     ->where('users.tenant_id', Auth::user()->tenant_id)
-            //     ->where('userprofile.personalEmail', $r['personalEmail'])
-            //     ->where('users.status', 'active')
-            //     ->select('users.*', 'userprofile.personalEmail')
-            //     ->first();
             $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
 
@@ -48,7 +42,7 @@ class EmployeeService
                 $data['status'] = false;
                 $data['title'] = 'Error';
                 $data['type'] = 'error';
-                $data['msg'] = 'email already exists';
+                $data['msg'] = 'Username already exists';
             } else {
                 $user['type'] = 'employee';
                 $user['status'] = 'not complete';
