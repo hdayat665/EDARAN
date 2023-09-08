@@ -14,17 +14,20 @@
                         <?php $customers = getCustomer(); ?>
                         <?php $sortedCustomers = $customers->sortBy('customer_name'); ?>
                         @foreach ($sortedCustomers as $customer)
-                            <option value="{{ $customer->id }}" {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}>
+                            <option value="{{ $customer->id }}"
+                                {{ $project->customer_id == $customer->id ? 'selected="selected"' : '' }}>
                                 {{ $customer->customer_name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">
                     <input type="hidden" id="idP" value="{{ $project->id }}">
-                    <input type="text" class="form-control mb-5px" name="project_code" placeholder="PROJECT CODE" value="{{ $project->project_code ?? '' }}" />
+                    <input type="text" class="form-control mb-5px" name="project_code" placeholder="PROJECT CODE"
+                        value="{{ $project->project_code ?? '' }}" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control mb-5px " style="text-transform: uppercase;" placeholder="PROJECT NAME" name="project_name" value="{{ $project->project_name ?? '' }}" />
+                    <input type="text" class="form-control mb-5px " style="text-transform: uppercase;"
+                        placeholder="PROJECT NAME" name="project_name" value="{{ $project->project_name ?? '' }}" />
                 </div>
             </div>
             <div class="row">
@@ -32,7 +35,8 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-12">
-                    <textarea type="text" class="form-control " rows="5" placeholder="DESCRIPTION" style="text-transform: uppercase;" name="desc" maxlength="225">{{ $project->desc ?? '' }}</textarea>
+                    <textarea type="text" class="form-control " rows="5" placeholder="DESCRIPTION"
+                        style="text-transform: uppercase;" name="desc" maxlength="225">{{ $project->desc ?? '' }}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -48,7 +52,8 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="number" step="0.01" class="form-control mb-5px" name="contract_value" placeholder="CONTRACT VALUE" value="{{ $project->contract_value ?? '' }}"
+                    <input type="number" step="0.01" class="form-control mb-5px" name="contract_value"
+                        placeholder="CONTRACT VALUE" value="{{ $project->contract_value ?? '' }}"
                         onchange="this.value=parseFloat(this.value).toFixed(2);" />
                 </div>
                 <div class="col-md-4">
@@ -56,7 +61,8 @@
                         <option label="PLEASE CHOOSE"></option>
                         <?php $ContractType = getContractType(); ?>
                         @foreach ($ContractType as $key => $value)
-                            <option value="{{ $key }}" {{ $key == $project->contract_type ? 'selected="selected"' : '' }}>
+                            <option value="{{ $key }}"
+                                {{ $key == $project->contract_type ? 'selected="selected"' : '' }}>
                                 {{ $value }}</option>
                         @endforeach
                     </select>
@@ -71,7 +77,8 @@
                             $startingYear = $financialYear;
                             $endingYear = $financialYear + 1;
                             ?>
-                            <option value="{{ $financialYear }}" {{ $financialYear == $project->financial_year ? 'selected="selected"' : '' }}>
+                            <option value="{{ $financialYear }}"
+                                {{ $financialYear == $project->financial_year ? 'selected="selected"' : '' }}>
                                 {{ $startingYear }}
                             </option>
                         @endforeach
@@ -87,13 +94,17 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="LOA_date" value="{{ $project->LOA_date ?? '' }}" id="datepicker-loa" placeholder="YYYY/MM/DD" />
+                    <input type="text" class="form-control" name="LOA_date" value="{{ $project->LOA_date ?? '' }}"
+                        id="datepicker-loa" placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="contract_start_date" value="{{ $project->contract_start_date ?? '' }}" id="datepicker-start" placeholder="YYYY/MM/DD" />
+                    <input type="text" class="form-control" name="contract_start_date"
+                        value="{{ $project->contract_start_date ?? '' }}" id="datepicker-start"
+                        placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="contract_end_date" value="{{ $project->contract_end_date ?? '' }}" id="datepicker-end" placeholder="YYYY/MM/DD" />
+                    <input type="text" class="form-control" name="contract_end_date"
+                        value="{{ $project->contract_end_date ?? '' }}" id="datepicker-end" placeholder="YYYY/MM/DD" />
                 </div>
             </div>
             <div class="row">
@@ -103,11 +114,13 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <select class="form-select selectacc" name="acc_manager" id="acc_manager2">
+                    {{-- <select class="form-select selectacc" name="acc_manager" id="acc_manager2"> --}}
+                    <select class="form-select" name="acc_manager" id="acc_manager2">
                         <?php $Employees = getEmployee(); ?>
                         <?php $sortedEmployees = $Employees->sortBy('employeeName'); ?>
                         @foreach ($sortedEmployees as $Employee)
-                            <option value="{{ $Employee->id }}" {{ $project->acc_manager == $Employee->id ? 'selected="selected"' : '' }}>
+                            <option value="{{ $Employee->id }}"
+                                {{ $project->acc_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
@@ -115,12 +128,15 @@
                     <input type="hidden" id="acc_managerdiv" name="" class="form-control">
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select" name="project_manager" id="project_manager2" style="display:none" ></select>
-                    <select class="form-select selectmng" name="project_manager" id="project_manager2_show">
+                    <select class="form-select" name="project_manager" id="project_manager2"
+                        style="display:none"></select>
+                    {{-- <select class="form-select selectmng" name="project_manager" id="project_manager2_show"> --}}
+                    <select class="form-select" name="project_manager" id="project_manager2_show">
                         <option value="" selected>PLEASE CHOOSE</option>
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
-                            <option value="{{ $Employee->id }}" {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>
+                            <option value="{{ $Employee->id }}"
+                                {{ $project->project_manager == $Employee->id ? 'selected="selected"' : '' }}>
                                 {{ $Employee->employeeName }}
                             </option>
                         @endforeach
@@ -128,7 +144,8 @@
                     <input type="hidden" id="project_managerdiv" name="" class="form-control">
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date" value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />
+                    <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date"
+                        value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />
                 </div>
             </div>
             <div class="row">
@@ -138,13 +155,17 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date" value="{{ $project->warranty_end_date ?? '' }}" placeholder="YYYY/MM/DD" />
+                    <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date"
+                        value="{{ $project->warranty_end_date ?? '' }}" placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
-                    <input type="number" class="form-control" name="bank_guarantee_amount" value="{{ $project->bank_guarantee_amount ?? '' }}" onchange="this.value=parseFloat(this.value).toFixed(2);" />
+                    <input type="number" class="form-control" name="bank_guarantee_amount"
+                        value="{{ $project->bank_guarantee_amount ?? '' }}"
+                        onchange="this.value=parseFloat(this.value).toFixed(2);" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="bank_guarantee_expiry_date" value="{{ $project->bank_guarantee_expiry_date ?? '' }}" id="datepicker-bankexpiry"
+                    <input type="text" class="form-control" name="bank_guarantee_expiry_date"
+                        value="{{ $project->bank_guarantee_expiry_date ?? '' }}" id="datepicker-bankexpiry"
                         placeholder="YYYY/MM/DD" />
                 </div>
             </div>
@@ -157,7 +178,8 @@
                         <option label="PLEASE CHOOSE"></option>
                         <?php $status = getStatusProject(); ?>
                         @foreach ($status as $key => $value)
-                            <option value="{{ $key }}" {{ $key == $project->status ? 'selected="selected"' : '' }}>{{ $value }}
+                            <option value="{{ $key }}"
+                                {{ $key == $project->status ? 'selected="selected"' : '' }}>{{ $value }}
                             </option>
                         @endforeach
                     </select>
@@ -175,10 +197,9 @@
     </div>
 </div>
 <style>
-  /* Target the parent element of .select2-selection */
-  .form-select.selectmng + .select2-container .select2-selection {
-    pointer-events: none;
-    background-color: #e9ecef;
-  }
-
+    /* Target the parent element of .select2-selection */
+    .form-select.selectmng+.select2-container .select2-selection {
+        pointer-events: none;
+        background-color: #e9ecef;
+    }
 </style>

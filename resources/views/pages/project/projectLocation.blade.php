@@ -2,7 +2,10 @@
     <h3 class="mt-10px"></i>Project Location</h3>
     <div class="panel-heading-btn">
         <br>
-        <a href="javascript:;" data-bs-toggle="modal" id="addProjectLocationButton" class="btn btn-primary">+ Add Project Location</a>
+        @if (!in_array('pmc', $role_permission))
+            <a href="javascript:;" data-bs-toggle="modal" id="addProjectLocationButton" class="btn btn-primary">+ Add
+                Project Location</a>
+        @endif
     </div>
     <br>
     <div class="panel-body">
@@ -18,28 +21,36 @@
             </thead>
             <tbody>
                 @if ($projectLocations)
-                @foreach ($projectLocations as $key => $projectLocation )
-                <tr>
-                    <td width="1%">{{ $key + 1 }}</td>
-                    <td width="6%">
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton" data-id="{{$projectLocation->id}}" class="dropdown-item">Edit</a>                        
-                        <div class="dropdown-divider"></div>
-                        <a href="javascript:;" id="deleteProjectLocationButton" data-id="{{$projectLocation->id}}" class="dropdown-item"> Delete </a>
-                    </td>
-                    <td>{{$projectLocation->location_name}}</td>
-                    <td>{{$projectLocation->address}}</td>
-                    <td><a href="https://www.google.com/maps/{{$projectLocation->location_google}}">https://www.google.com/maps/{{$projectLocation->location_google}}</a></td>
-                </tr>
-                @endforeach
+                    @foreach ($projectLocations as $key => $projectLocation)
+                        <tr>
+                            <td width="1%">{{ $key + 1 }}</td>
+                            <td width="6%">
+                                @if (!in_array('pmc', $role_permission))
+                                    <a href="#" data-bs-toggle="dropdown"
+                                        class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i
+                                            class="fa fa-caret-down"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton"
+                                            data-id="{{ $projectLocation->id }}" class="dropdown-item">Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="javascript:;" id="deleteProjectLocationButton"
+                                            data-id="{{ $projectLocation->id }}" class="dropdown-item"> Delete </a>
+                                @endif
+                            </td>
+                            <td>{{ $projectLocation->location_name }}</td>
+                            <td>{{ $projectLocation->address }}</td>
+                            <td><a
+                                    href="https://www.google.com/maps/{{ $projectLocation->location_google }}">https://www.google.com/maps/{{ $projectLocation->location_google }}</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
             </tbody>
         </table>
     </div>
     <div class="modal-footer">
-            <a class="btn btn-white me-5px btnPrevious">Previous</a>
-            <a class="btn btn-white me-5px btnNext">Next</a>
+        <a class="btn btn-white me-5px btnPrevious">Previous</a>
+        <a class="btn btn-white me-5px btnNext">Next</a>
     </div>
 </div>
 
