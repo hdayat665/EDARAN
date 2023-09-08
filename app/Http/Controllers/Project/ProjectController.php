@@ -7,7 +7,7 @@ use App\Service\CustomerService;
 use App\Service\EmployeeService;
 use App\Service\ProjectService;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -20,6 +20,7 @@ class ProjectController extends Controller
         $data['projectInfos'] = $ps->projectInfoView();
         $data['projectApproval'] = $ps->projectApprovalData();
         $data['projectManager'] = $ps->checkIfUserProjectManager();
+        $data['role_permission'] = getPermissionCodeArray();
 
         return view('pages.project.projectInfo', $data);
     }
@@ -61,6 +62,8 @@ class ProjectController extends Controller
         $data['previousProjectMembers'] = $ps->getProjectMember('on', $id);
         $data['previousProjectManagers'] = $ps->getPreviousManager($id);
         $data['projectMembers'] = $ps->getProjectMember('', $id);
+
+        $data['role_permission'] = getPermissionCodeArray();
 
         // pr($data['projectMembers']);
 
@@ -263,20 +266,20 @@ class ProjectController extends Controller
     }
 
     public function projectViewAssignLocationView($id)
-{
-    $ps = new ProjectService;
-    
-    $data = $ps->projectViewAssignLocationView($id);
-    
-    // Get the project data using the ProjectService
-    $projectService = new ProjectService;
-    $project = $projectService->getProjectById($data['projectMember']->project_id);
-    
-    // Pass the project data to the $data array
-    $data['project'] = $project;
-    
-    return view('pages.project.projectViewAssignLocation', $data);
-}
+    {
+        $ps = new ProjectService;
+
+        $data = $ps->projectViewAssignLocationView($id);
+
+        // Get the project data using the ProjectService
+        $projectService = new ProjectService;
+        $project = $projectService->getProjectById($data['projectMember']->project_id);
+
+        // Pass the project data to the $data array
+        $data['project'] = $project;
+
+        return view('pages.project.projectViewAssignLocation', $data);
+    }
 
 
 
@@ -289,7 +292,7 @@ class ProjectController extends Controller
         $data = $ps->projectAssignView($id);
         $projectService = new ProjectService;
         $project = $projectService->getProjectById($data['projectMember']->project_id);
-    
+
         // Pass the project data to the $data array
         $data['project'] = $project;
         // pr($data);
@@ -333,7 +336,7 @@ class ProjectController extends Controller
     }
     public function projectLocTable()
     {
-    
-    return view('pages.project.projectLocTable');
-}
+
+        return view('pages.project.projectLocTable');
+    }
 }
