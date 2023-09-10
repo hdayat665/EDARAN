@@ -1681,7 +1681,7 @@ class MyleaveService
             $lapse = $LeaveEntitlement->lapse + $LeaveEntitlement->carry_forward_balance;
         }
 
-        $data = [$lapse, $previousYear];
+        $data = [$lapse, $previousYear, $LeaveEntitlement->lapsed_date];
 
         return $data;
     }
