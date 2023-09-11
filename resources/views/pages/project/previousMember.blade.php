@@ -1,19 +1,18 @@
 <style>
-
-@media screen and (min-width: 1000px) {
-    .modal-dialog {
-        max-width: 800px;
-        /* New width for default modal */
+    @media screen and (min-width: 1000px) {
+        .modal-dialog {
+            max-width: 800px;
+            /* New width for default modal */
+        }
     }
-}
 
-table{
-    width: 100% !important
-}
+    table {
+        width: 100% !important
+    }
 
-.part {
-    display: none;
-}
+    .part {
+        display: none;
+    }
 </style>
 <div class="tab-pane fade" id="tab4">
     <div class="row">
@@ -33,11 +32,15 @@ table{
                 </li>
             </ul>
             <div class="tab-content panel m-0 rounded-0 p-3">
-                <div class="tab-pane fade active show" id="current-member"> 
+                <div class="tab-pane fade active show" id="current-member">
                     <div class="panel-heading-btn">
                         <br>
-                        <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton" data-id="{{$project->id}}" class="btn btn-primary">+ Add Project Member</a>
-                        <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton" class="btn btn-primary">+ Assign Location</a>
+                        @if (!in_array('pmc', $role_permission))
+                            <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton"
+                                data-id="{{ $project->id }}" class="btn btn-primary">+ Add Project Member</a>
+                            <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton"
+                                class="btn btn-primary">+ Assign Location</a>
+                        @endif
                     </div>
                     <br>
                     <div class="panel-body">
@@ -57,46 +60,57 @@ table{
                             </thead>
                             <tbody>
                                 @if ($projectMembers)
-                                @foreach ($projectMembers as $key => $projectMember)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a></td>
-                                    <td>{{$projectMember->employeeName}}</td>
-                                    <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
-                                    <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
-                                    <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
-                                    <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
-                                    <td>{{$projectMember->joined_date}}</td>
-                                    <!-- <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td> -->
-                                    <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
+                                    @foreach ($projectMembers as $key => $projectMember)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td width="1%">
+                                                @if (!in_array('pmc', $role_permission))
+                                                    <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}"
+                                                        id="editProjectMemberButton" class="btn btn-primary"><i
+                                                            class="fa fa-cogs"></i> Edit</a>
+                                                @endif
+                                            </td>
+                                            <td>{{ $projectMember->employeeName }}</td>
+                                            <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->department ? getDepartment($projectMember->department)->departmentName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->branch ? getBranch($projectMember->branch)->branchName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->unit ? getUnit($projectMember->unit)->unitName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->joined_date }}</td>
+                                            <!-- <td><a href="/projectAssignView/{{ $projectMember->id }}">view</a></td> -->
+                                            <td><a href="/projectAssignView/{{ $projectMember->id }}"
+                                                    class="btn btn-primary"> View </a></td>
 
-                                </tr>
+                                        </tr>
                                     @endforeach
                                 @endif
-                                
-                            <!-- if dont want duplicate    
+
+                                <!-- if dont want duplicate
                             @if ($projectMembers)
-                                @foreach ($projectMembers->unique('employee_id') as $projectMember)
-                                    <tr>
+@foreach ($projectMembers->unique('employee_id') as $projectMember)
+<tr>
                                         <td width="1%">
-                                            <a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-outline-green">
+                                            <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}" id="editProjectMemberButton" class="btn btn-outline-green">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </a>
                                         </td>
-                                        <td>{{$projectMember->employeeName}}</td>
-                                        <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
-                                        <td>{{$projectMember->joined_date}}</td>
-                                        <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
+                                        <td>{{ $projectMember->employeeName }}</td>
+                                        <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }}</td>
+                                        <td>{{ $projectMember->department ? getDepartment($projectMember->department)->departmentName ?? '-' : '-' }}</td>
+                                        <td>{{ $projectMember->branch ? getBranch($projectMember->branch)->branchName ?? '-' : '-' }}</td>
+                                        <td>{{ $projectMember->unit ? getUnit($projectMember->unit)->unitName ?? '-' : '-' }}</td>
+                                        <td>{{ $projectMember->joined_date }}</td>
+                                        <td><a href="/projectAssignView/{{ $projectMember->id }}" class="btn btn-primary"> View </a></td>
                                     </tr>
-                                @endforeach
-                            @endif -->
+@endforeach
+@endif -->
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
                 <div class="tab-pane fade" id="previous-member">
                     <br>
@@ -117,39 +131,43 @@ table{
                             </thead>
                             <tbody>
                                 @if ($previousProjectMembers)
-                                @foreach ($previousProjectMembers as $key => $projectMember)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$projectMember->employeeName}}</td>
-                                        <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
-                                        <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
-                                        <td>{{$projectMember->joined_date}}</td>
-                                        <td>{{$projectMember->exit_project_date}}</td>
-                                        <td><a href="/projectAssignView/{{$projectMember->id}}">View</a></td>
-                                    </tr>
-                                @endforeach
+                                    @foreach ($previousProjectMembers as $key => $projectMember)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $projectMember->employeeName }}</td>
+                                            <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->department ? getDepartment($projectMember->department)->departmentName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->branch ? getBranch($projectMember->branch)->branchName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->unit ? getUnit($projectMember->unit)->unitName ?? '-' : '-' }}
+                                            </td>
+                                            <td>{{ $projectMember->joined_date }}</td>
+                                            <td>{{ $projectMember->exit_project_date }}</td>
+                                            <td><a href="/projectAssignView/{{ $projectMember->id }}">View</a></td>
+                                        </tr>
+                                    @endforeach
                                 @endif
                             </tbody>
                         </table>
                     </div>
-                    
-                    </div>
-                    <div class="modal-footer">
-                    <a class="btn btn-white me-5px btnPrevious">Previous</a>
-                        <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
-                        <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 
-                    </div>
                 </div>
+                <div class="modal-footer">
+                    <a class="btn btn-white me-5px btnPrevious">Previous</a>
+                    <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
+                    <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 
+                </div>
             </div>
-            <br><br>
-        </div>
 
+        </div>
+        <br><br>
     </div>
-    
+
+</div>
+
 </div>
 
 @include('modal.project.addMemberProject')

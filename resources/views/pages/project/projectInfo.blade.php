@@ -13,7 +13,12 @@
                         <span class="d-sm-block d-none">Project Information</span>
                     </a>
                 </li>
-                @if ($projectManager)
+
+               @php
+                    $target = ['pmap'];
+               @endphp 
+
+                @if (count(array_intersect($role_permission, $target)) > 0)
                 <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
