@@ -14,25 +14,23 @@
                         <table id="claimCategoryTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th data-orderable="false">Action</th>
                                     <th class="text-nowrap">Status</th>
                                     <th class="text-nowrap">Claim Category<BR> Code</th>
                                     <th class="text-nowrap">Claim<BR> Category</th>
                                     <th class="text-nowrap">Claim Type</th>
                                     <th class="text-nowrap">Description</th>
+                                    <th class="text-nowrap">Added By</th>
+                                    <th class="text-nowrap">Added Time</th>
+                                    <th class="text-nowrap">Modified By</th>
+                                    <th class="text-nowrap">Modified Time</th>
+                                    <th data-orderable="false">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($claimCategorys)
                                     @foreach ($claimCategorys as $data)
                                         <tr>
-                                            <td>
-                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                                <div class="dropdown-menu">
-                                                    <a href="/setting/editClaimView/{{ $data->id }}" class="dropdown-item"> Edit</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <button id="deleteButton" data-id="{{ $data->id }}" class="dropdown-item"> Delete </button>
-                                            </td>
                                             <td>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" {{ $data->status == 1 ? 'checked' : '' }} name="" type="checkbox" role="switch" data-id="{{ $data->id }}"
@@ -47,6 +45,17 @@
                                                 </div>
                                             </td>
                                             <td>{{ $data->desc }}</td>
+                                            <td> {{$data->addedBy ?? '-'}}</td>
+                                            <td>{{$data->created_at ?? '-'}}</td>
+                                            <td>{{$data->modifiedBy ?? '-'}}</td>
+                                            <td>{{$data->modifiedTime ?? '-'}}</td>
+                                            <td>
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                                <div class="dropdown-menu">
+                                                    <a href="/setting/editClaimView/{{ $data->id }}" class="dropdown-item"> Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button id="deleteButton" data-id="{{ $data->id }}" class="dropdown-item"> Delete </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif

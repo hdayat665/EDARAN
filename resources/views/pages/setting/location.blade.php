@@ -21,6 +21,10 @@
                         <th class="text-nowrap">Country Name</th>
                         <th class="text-nowrap">State</th>
                         <th class="text-nowrap">Postcode</th>
+                        <th class="text-nowrap">Added By</th>
+                        <th class="text-nowrap">Added Time</th>
+                        <th class="text-nowrap">Modified By</th>
+                        <th class="text-nowrap">Modified Time</th>
                         <th width="9%" data-orderable="false" class="align-middle">Action</th>
                     </tr>
                 </thead>
@@ -35,6 +39,10 @@
                                 <td>{{$l->country_name}}</td>
                                 <td>{{$l->state_name}}</td>
                                 <td>{{$l->postcode}}</td>
+                                <td>{{$l->addedBy ?? '-'}}</td>
+                                <td>{{$l->created_at ?? '-'}}</td>
+                                <td>{{$l->modifiedBy ?? '-'}}</td>
+                                <td>{{$l->modified_at ?? '-'}}</td>
                                 <td>
                                     <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$l->id}}" class="btn btn-danger">Delete</a>
                                 </td>

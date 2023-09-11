@@ -73,12 +73,12 @@
             </div>
             <label class="form-label col-form-label col-md-1">Designation*</label>
             <div class="col-md-5">
-                <select class="form-select" name="designation" >
+                <select class="form-select" name="designation" id="designationsearch">
                     <?php $designations = getDesignation(); ?>
                     <option label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($designations)
 
-                    @foreach ($designations as $designation)
+                    @foreach ($designations->sortBy('designationName') as $designation)
                         <option value="{{$designation->id }}">{{$designation->designationName}}</option>
                     @endforeach
                     @endif
@@ -106,14 +106,14 @@
             </div>
             <label class="form-label col-form-label col-md-1">Report To</label>
             <div class="col-md-5">
-                <select class="form-select" name="report_to" >
+                <select class="form-select" name="report_to" id="reportsearch">
 
                     <?php $employees = getEmployee(); ?>
                     <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($employees)
 
-                    @foreach ($employees as $employee)
-                        <option value="{{$employee->id }}">{{$employee->employeeName}}</option>
+                    @foreach ($employees->sortBy('employeeName') as $employee)
+                        <option value="{{ $employee->id }}">{{ $employee->employeeName }}</option>
                     @endforeach
                     @endif
 

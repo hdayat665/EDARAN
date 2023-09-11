@@ -15,9 +15,12 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th class="text-nowrap">Created Date</th>
                             <th class="text-nowrap">Role</th>
                             <th class="text-nowrap">Description</th>
+                            <th class="text-nowrap">Added By</th>
+                            <th class="text-nowrap">Added Time</th>
+                            <th class="text-nowrap">Modified By</th>
+                            <th class="text-nowrap">Modified Time</th>
                             <th width="9%" data-orderable="false" class="align-middle">Action</th>
                         </tr>
                     </thead>
@@ -28,9 +31,13 @@
                         @foreach ($data as $role)
                             <tr class="odd gradeX">
                                 <td width="1%" class="fw-bold text-dark">{{ $no++ }}</td>
-                                <td>{{ $role->created_at ?? '-' }}</td>
                                 <td>{{ $role->roleName ?? '-' }}</td>
                                 <td>{{ $role->desc ?? '-' }}</td>
+                                <td>{{ $role->addedBy ?? '-' }}</td>
+                                <td>{{ $role->created_at ?? '-' }}</td>
+                                <td>{{ $role->modifiedBy ?? '-' }}</td>
+                                <td>{{ $role->modifiedTime ? date('Y-m-d H:i:s', strtotime($role->modifiedTime)) : '-' }}</td>
+
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">

@@ -1353,10 +1353,11 @@ if (!function_exists('getBranchFullAddress')) {
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
-        $data = Employee::where(
-            [['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]],
-            ['status', 'active'],
-        )->get();
+        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
+        ->where('employment.tenant_id', Auth::user()->tenant_id)
+        ->where('employment.status', 'active')
+        ->select('employment.*', 'userprofile.fullName')
+        ->get();
 
         if (!$data) {
             $data = [];
@@ -3192,6 +3193,7 @@ if (!function_exists('getLevel1PermissionCode')) {
         return $data;
     }
 }
+
 
 
 if (!function_exists('getPermissionCodeArray')) {

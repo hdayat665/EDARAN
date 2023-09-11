@@ -29,6 +29,7 @@ class TypeOfLogs extends Authenticatable
         'user_id',
         'type_of_log',
         'activity_id',
+        'addedBy',
     ];
 
 }
