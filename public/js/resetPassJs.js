@@ -1,4 +1,24 @@
 $(document).ready(function () {
+
+    $.validator.addMethod(
+        "respassword",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                (value.match(/[A-Z]/) && value.match(/[0-9]/))
+            );
+        },
+        "Password must contain at least one numeric and one uppercase character."
+    );
+
+    $.validator.addMethod(
+        "pwcheckspechars",
+        function (value) {
+            return /[!@#$%^&*()_=\[\]{};':"\\|,.<>\/?+-]/.test(value);
+        },
+        "The password must contain at least one special character"
+    );
+
     $("#resetPass").click(function (e) {
         $("#resetPassForm").validate({
             // Specify validation rules
@@ -10,17 +30,25 @@ $(document).ready(function () {
                 confirm_password: "required",
                 password: {
                     required: true,
-                    minlength: 5,
+                    minlength: 8,
+                    respassword: true,
+                    pwcheckspechars: true,
                 },
             },
 
             // Specify validation error messages
             messages: {
                 password: {
-                    required: "This field required.",
-                    minlength: "Your password must be at least 5 characters long."
+                    required:
+                        "Please Insert New Password <br/>*The Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    minlength:
+                        "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    respassword:
+                        "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    pwcheckspechars:
+                        "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
                 },
-                confirm_password: "This field required.",
+                confirm_password: "Please Confirm Password",
             },
 
             errorPlacement: function(error, element) {
