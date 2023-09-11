@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    
     // google map
 
     $(".partCheck").click(function () {
@@ -28,29 +27,26 @@ $(document).ready(function () {
         search: true,
     });
 
-
-    $(document).ready(function() {
-
-        $('.select1').select2({
+    $(document).ready(function () {
+        $(".select1").select2({
             placeholder: "PLEASE CHOOSE",
             allowClear: true,
-            dropdownParent: $('#addProjectMemberModal'),
+            dropdownParent: $("#addProjectMemberModal"),
             // multiple: true,
         });
     });
-    
-    $('.selectacc').select2({
+
+    $(".selectacc").select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
-        dropdownParent: $('#tab1'),
+        dropdownParent: $("#tab1"),
         // multiple: true,
     });
-    
 
-    $('.selectmng').select2({
+    $(".selectmng").select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
-        dropdownParent: $('#tab1'),
+        dropdownParent: $("#tab1"),
         // multiple: true,
     });
 
@@ -79,7 +75,7 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
-    
+
     $("#projectStart").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -208,15 +204,15 @@ $(document).ready(function () {
                 project_manager: "Please Choose Project Manager",
                 status: "Please Choose Status",
             },
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 if (element.attr("name") === "acc_manager") {
                     error.insertAfter("#acc_managerdiv");
                 } else if (element.attr("name") === "project_manager") {
-                        error.insertAfter("#project_managerdiv");
+                    error.insertAfter("#project_managerdiv");
                 } else {
                     error.insertAfter(element);
                 }
-             },
+            },
 
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -500,13 +496,13 @@ $(document).ready(function () {
                 // unit:"Please Choose Unit",
                 // location_name:"Please Select Location",
             },
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 if (element.attr("name") === "employee_id") {
                     error.insertAfter("#employeeIdDiv");
                 } else {
                     error.insertAfter(element);
                 }
-             },
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -544,13 +540,11 @@ $(document).ready(function () {
         });
     });
 
-   
     $(document).on("change", "#employee_id", function () {
         var employee_id = $(this).val();
         var employee = getEmployeeById(employee_id);
 
         employee.then(function (data) {
-           
             // $("#unit").prop("selectedIndex", data.unit);
             // $("#designation").prop("selectedIndex", data.designation);
             // $("#department").prop("selectedIndex", data.department);
@@ -560,12 +554,13 @@ $(document).ready(function () {
             $("#designation").val(data.designation);
             $("#department").val(data.department);
             $("#branchs").val(data.branch);
-            
+
             var a = data.joinedDate;
             var b = globalContractStartDate;
             var latestDate; // Change the variable name to "latestDate"
 
-            if (b > a) { // Change the comparison from "<" to ">"
+            if (b > a) {
+                // Change the comparison from "<" to ">"
                 latestDate = b; // Change the variable assignment to "latestDate"
                 $("#datepicker-joineddate").val(latestDate);
             } else {
@@ -597,7 +592,7 @@ $(document).ready(function () {
             // $("#exit_project_date").val(data.exit_project_date);
             $("#projectStart").val(data.contract_start_date);
             // $("#idPM").val(data.id);
-             globalContractStartDate = data.contract_start_date;
+            globalContractStartDate = data.contract_start_date;
         });
         $("#addProjectMemberModal").data("id", id).modal("show");
     });
@@ -619,7 +614,6 @@ $(document).ready(function () {
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
             // console.log(data);
-            
         });
         $("#editProjectMemberModal").modal("show");
     });
@@ -694,7 +688,6 @@ $(document).ready(function () {
         });
     });
 
-   
     $(document).on("click", "#assignProjectMemberButton", function () {
         $("#assignProjectMemberModal").modal("show");
     });
@@ -767,7 +760,7 @@ $(document).ready(function () {
 
     function getProjectMember(id) {
         return $.ajax({
-            url: "/getProjectMemberById/" + id
+            url: "/getProjectMemberById/" + id,
         });
     }
 
@@ -1042,13 +1035,14 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
     });
 
-        // Initialize the datepicker for contract_start_date
-        $("#datepicker-start").datepicker({
+    // Initialize the datepicker for contract_start_date
+    $("#datepicker-start")
+        .datepicker({
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
         })
-        .on("changeDate", function(e) {
+        .on("changeDate", function (e) {
             var startDate = e.date;
 
             // Update the end datepicker's date to the selected start date
@@ -1065,24 +1059,26 @@ $(document).ready(function () {
             }
         });
 
-        // Initialize the datepicker for contract_end_date
-        $("#datepicker-end").datepicker({
-            format: "yyyy/mm/dd",
-            autoclose: true,
-            todayHighlight: true,
-        });
+    // Initialize the datepicker for contract_end_date
+    $("#datepicker-end").datepicker({
+        format: "yyyy/mm/dd",
+        autoclose: true,
+        todayHighlight: true,
+    });
 
-        // Disable the end datepicker initially
-        $("#datepicker-end").prop("readonly", true);
+    // Disable the end datepicker initially
+    $("#datepicker-end").prop("readonly", true);
 
-        // Initialize the datepicker for warranty_start_date
-        $(document).ready(function () {
-            // Initialize the start datepicker
-            $("#datepicker-warstart").datepicker({
+    // Initialize the datepicker for warranty_start_date
+    $(document).ready(function () {
+        // Initialize the start datepicker
+        $("#datepicker-warstart")
+            .datepicker({
                 todayHighlight: true,
                 autoclose: true,
                 format: "yyyy/mm/dd",
-            }).on("changeDate", function (e) {
+            })
+            .on("changeDate", function (e) {
                 var startDate = e.date;
 
                 // Set the end datepicker's date to the selected start date
@@ -1099,30 +1095,27 @@ $(document).ready(function () {
                 }
             });
 
-            // Initialize the end datepicker
-            $("#datepicker-warend").datepicker({
-                format: "yyyy/mm/dd",
-                autoclose: true,
-                todayHighlight: true,
-            });
-
-            // Disable the end datepicker initially
-            $("#datepicker-warend").prop("readonly", true);
+        // Initialize the end datepicker
+        $("#datepicker-warend").datepicker({
+            format: "yyyy/mm/dd",
+            autoclose: true,
+            todayHighlight: true,
         });
 
-
+        // Disable the end datepicker initially
+        $("#datepicker-warend").prop("readonly", true);
+    });
 
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        onClose: function(dateText, inst) {
+        onClose: function (dateText, inst) {
             if (dateText === "") {
                 $(this).val(null); // Set the input value to null
             }
-        }
+        },
     });
-
 
     $(document).on("change", "#acc_manager2", function () {
         var selectedValue = $(this).val();
@@ -1131,14 +1124,16 @@ $(document).ready(function () {
                 .find("option")
                 .remove()
                 .end()
-                .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
+                .append(
+                    '<option label="PLEASE CHOOSE" selected="selected"></option>'
+                )
                 .val("");
 
             $("#project_manager2_show").next().find(".select2-selection").css({
                 "pointer-events": "auto",
-                "background-color": "white" 
+                "background-color": "white",
             });
-            
+
             $.ajax({
                 url: "/getUserWithSelectedUser/" + selectedValue,
                 success: function (data) {
@@ -1150,29 +1145,51 @@ $(document).ready(function () {
                         opt.text = user["employeeName"];
                         $("#project_manager2_show").append(opt);
                     }
-    
+
                     // Enable the select2 plugin after adding options
-                    
-    
+
                     // Set the background color here
-                    
                 },
             });
-    
+
             $("#project_manager2_show").show();
             $("#project_manager2").hide();
         } else {
             $("#project_manager2_show").hide();
             $("#project_manager2").show();
-    
+
             // Revert the styles when the change event occurs
-            $("#project_manager2_show")
-                .next()
-                .find(".select2-selection")
-                .css({
-                    "pointer-events": "none",
-                    "background-color": "#e9ecef" 
-                });
+            $("#project_manager2_show").next().find(".select2-selection").css({
+                "pointer-events": "none",
+                "background-color": "#e9ecef",
+            });
         }
-      });
+    });
+
+    // config for disabled input, textarea, and select that visible
+    var pmap = $("#pmap").val();
+    var pmc = $("#pmc").val();
+    var ac = $("#ac").val();
+    var pm = $("#pm").val();
+
+    if (pmap == "pmap") {
+        $("input:visible, textarea:visible, select:visible").each(function () {
+            $(this).prop("disabled", false);
+        });
+        $("#project_manager2_show").prop("disabled", true);
+    }
+
+    if (pmc == "pmc") {
+        $("input:visible, textarea:visible, select:visible").each(function () {
+            $(this).prop("disabled", true);
+        });
+        $("#project_manager2_show").prop("disabled", false);
+    }
+
+    if (ac == "ac" || pm == "pm") {
+        $("input:visible, textarea:visible, select:visible").each(function () {
+            $(this).prop("disabled", true);
+        });
+        $("#updateProjectInfoButton").prop("disabled", true);
+    }
 });

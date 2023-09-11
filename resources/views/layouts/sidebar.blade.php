@@ -93,14 +93,14 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-receipt text-gray"></i>
                                     </div> --}}
-                                    {{-- check if this is approver ts  --}}
-                                    {{-- @php
+                        {{-- check if this is approver ts  --}}
+                        {{-- @php
                                         $employmentData = getEmplomentByUserId();
                                         $timesheets = getTimesheetDataToApprove();
                                     @endphp --}}
-                                    {{-- <div class="menu-text text-gray">Timesheets Approval</div> --}}
-                                    {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
-                                    {{-- @if (isset($timesheets))
+                        {{-- <div class="menu-text text-gray">Timesheets Approval</div> --}}
+                        {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
+                        {{-- @if (isset($timesheets))
                                         <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
                                     @endif
                                 </a>
@@ -129,7 +129,8 @@
                                 <div class="menu-text text-gray">Appeal Approval </div>
                                 {{-- @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id) --}}
                                 @if (isset($appealTs))
-                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $appealTs->count() }}</span>
+                                    <span class="badge bg-danger badge-number"
+                                        id="numberNotify">{{ $appealTs->count() }}</span>
                                 @endif
                             </a>
                         </div>
@@ -220,7 +221,8 @@
                                         
                                         $totalCounts = $totalCount1;
                                     @endphp
-                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>
+                                    <span class="badge bg-danger badge-number" id="numberNotify">
+                                        {{ $totalCounts ?? 0 }}</span>
                                 </a>
                                 <div class="menu-submenu">
                                     <?php $target = ['leave_recommender']; ?>
@@ -235,7 +237,8 @@
                                                 @endphp
                                                 <div class="menu-text text-gray">Recommender</div>
                                                 @if (isset($eleaveRecommender))
-                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
+                                                    <span class="badge bg-danger badge-number"
+                                                        id="numberNotify">{{ $eleaveRecommender->count() }}</span>
                                                 @endif
                                             </a>
                                         </div>
@@ -252,7 +255,8 @@
                                                 @endphp
                                                 <div class="menu-text text-gray">Approver</div>
                                                 @if (isset($eleaveRecommender))
-                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
+                                                    <span class="badge bg-danger badge-number"
+                                                        id="numberNotify">{{ $eleaveRecommender->count() }}</span>
                                                 @endif
                                             </a>
                                         </div>
@@ -307,7 +311,8 @@
                                     @endphp
                                     <div class="menu-text text-gray">Project Information</div>
                                     @if (isset($projectApproverData))
-                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ $projectApproverData->count() }}</span>
+                                        <span class="badge bg-danger badge-number"
+                                            id="numberNotify">{{ $projectApproverData->count() }}</span>
                                     @endif
                                 </a>
                             </div>
@@ -394,7 +399,8 @@
                                         
                                         $totalCounts = $totalCount1 + $totalCount2;
                                     @endphp
-                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCounts ?? 0 }}</span>
+                                    <span class="badge bg-danger badge-number" id="numberNotify">
+                                        {{ $totalCounts ?? 0 }}</span>
                                 </a>
 
                                 <div class="menu-submenu">
@@ -418,7 +424,8 @@
                                                         $totalCount += $count;
                                                     }
                                                 @endphp
-                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                                <span class="badge bg-danger badge-number" id="numberNotify">
+                                                    {{ $totalCount ?? 0 }}</span>
                                             </a>
                                             <div class="menu-submenu">
                                                 <?php $target = ['eclaim_department_recommender']; ?>
@@ -483,7 +490,8 @@
                                                         $totalCount += $count;
                                                     }
                                                 @endphp
-                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                                <span class="badge bg-danger badge-number" id="numberNotify">
+                                                    {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -500,7 +508,8 @@
                                                                 $config = getApprovalConfig(7, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('FinanceRec')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getClaimData('FinanceRec')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -518,7 +527,8 @@
                                                                 $config = getApprovalConfig(8, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('FinanceApprover')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getClaimData('FinanceApprover')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -565,7 +575,8 @@
                                                         $totalCount += $count;
                                                     }
                                                 @endphp
-                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                                <span class="badge bg-danger badge-number" id="numberNotify">
+                                                    {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -582,7 +593,8 @@
                                                                 $config = getApprovalConfig(4, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('AdminRec')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getClaimData('AdminRec')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -600,7 +612,8 @@
                                                                 $config = getApprovalConfig(5, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('AdminApprover')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getClaimData('AdminApprover')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -618,7 +631,8 @@
                                                                 $config = getApprovalConfig(3, 'monthly');
                                                             @endphp
                                                             {{-- @if (isset($config->status)) --}}
-                                                            <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('AdminChecker')->count() }}</span>
+                                                            <span class="badge bg-danger badge-number"
+                                                                id="numberNotify">{{ getClaimData('AdminChecker')->count() }}</span>
                                                             {{-- @endif --}}
                                                         </a>
                                                     </div>
@@ -651,7 +665,8 @@
                                             $totalCount += $count;
                                         }
                                     @endphp
-                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                    <span class="badge bg-danger badge-number" id="numberNotify">
+                                        {{ $totalCount ?? 0 }}</span>
                                 </a>
 
                                 <div class="menu-submenu">
@@ -676,7 +691,8 @@
                                                             $totalCount += $count;
                                                         }
                                                     @endphp
-                                                    <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                                    <span class="badge bg-danger badge-number" id="numberNotify">
+                                                        {{ $totalCount ?? 0 }}</span>
                                                 </a>
                                                 <?php $target = ['cash_deparment_approver']; ?>
                                                 @if (array_intersect($role_permission, $target))
@@ -691,9 +707,11 @@
                                                                 @endphp
                                                                 <div class="menu-text text-gray">Approver</div>
                                                                 @if (isset($caClaim) && $employmentData->caapprover == Auth::user()->id)
-                                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                    <span class="badge bg-danger badge-number"
+                                                                        id="numberNotify">{{ $caClaim->count() }}</span>
                                                                 @else
-                                                                    <span class="badge bg-danger badge-number" id="numberNotify">0</span>
+                                                                    <span class="badge bg-danger badge-number"
+                                                                        id="numberNotify">0</span>
                                                                 @endif
                                                             </a>
                                                         </div>
@@ -722,7 +740,8 @@
                                                         $totalCount += $count;
                                                     }
                                                 @endphp
-                                                <span class="badge bg-danger badge-number" id="numberNotify"> {{ $totalCount ?? 0 }}</span>
+                                                <span class="badge bg-danger badge-number" id="numberNotify">
+                                                    {{ $totalCount ?? 0 }}</span>
                                             </a>
 
                                             <div class="menu-submenu">
@@ -738,7 +757,8 @@
                                                             @endphp
                                                             <div class="menu-text text-gray">Recommender</div>
                                                             @if (isset($caClaim))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ $caClaim->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -755,7 +775,8 @@
                                                             @endphp
                                                             <div class="menu-text text-gray">Approver </div>
                                                             @if (isset($caClaim))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ $caClaim->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -777,7 +798,8 @@
                                                             @endphp
                                                             <div class="menu-text text-gray">Checker</div>
                                                             @if (isset($caData))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ count($caData) }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ count($caData) }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -800,7 +822,8 @@
                                         $appealData = getAppealData('approval');
                                     @endphp
                                     @if (isset($appealData))
-                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ count($appealData) }}</span>
+                                        <span class="badge bg-danger badge-number"
+                                            id="numberNotify">{{ count($appealData) }}</span>
                                     @endif
                                 </a>
                             </div>
@@ -1078,4 +1101,5 @@
     <!-- END scrollbar -->
 </div>
 <div class="app-sidebar-bg"></div>
-<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
+<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile"
+        class="stretched-link"></a></div>

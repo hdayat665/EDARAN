@@ -3192,3 +3192,25 @@ if (!function_exists('getLevel1PermissionCode')) {
         return $data;
     }
 }
+
+
+if (!function_exists('getPermissionCodeArray')) {
+    function getPermissionCodeArray()
+    {
+        $customizeRole = Auth::user()->role_custom_id;
+
+        $permissions = getPermissionByRoleId(Auth::user()->role_id);
+
+        if ($customizeRole) {
+            $permissions = getPermissionByUserId();
+        }
+
+        $data = collect($permissions)->pluck('permission_code')->toArray();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
