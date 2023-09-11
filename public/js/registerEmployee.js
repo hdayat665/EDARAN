@@ -321,7 +321,7 @@ $(document).ready(function () {
                 expiryDate: "Please Insert Expiry Date",
                 issuingCountry: "Please Choose Issuing Country",
                 DOB: "Please Insert Date Of Birth",
-                gender: "Please Insert Gender",
+                gender: "Please Choose Gender",
                 maritialStatus: "Please Choose Marital Status",
                 religion: "Please Choose Religion",
                 personalEmail: {
