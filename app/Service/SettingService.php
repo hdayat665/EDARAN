@@ -644,18 +644,29 @@ class SettingService
 
         ];
 
-        $existingLocation = Location::where('country_id', $input['country_id'])
+        $existingPostcode = Location::where('country_id', $input['country_id'])
         ->where('postcode', $input['postcode'])
         ->first();
 
-        if ($existingLocation) {
-            $data['msg'] = 'Location already exists.';
+        $existingCity = Location::where('country_id', $input['country_id'])
+        ->where('name', $input['name'])
+        ->first();
+
+        if ($existingPostcode) {
+            $data['msg'] = 'Postcode already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
 
             return $data;
 
+        } else if ($existingCity){
+            $data['msg'] = 'City already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
         } else {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
