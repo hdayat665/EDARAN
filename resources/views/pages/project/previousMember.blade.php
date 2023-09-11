@@ -35,12 +35,12 @@
                 <div class="tab-pane fade active show" id="current-member">
                     <div class="panel-heading-btn">
                         <br>
-                        @if (!in_array('pmc', $role_permission))
+                            @if (!in_array('pmc', $role_permission))
                             <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton"
                                 data-id="{{ $project->id }}" class="btn btn-primary">+ Add Project Member</a>
                             <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton"
                                 class="btn btn-primary">+ Assign Location</a>
-                        @endif
+                            @endif
                     </div>
                     <br>
                     <div class="panel-body">
@@ -65,25 +65,19 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td width="1%">
                                                 @if (!in_array('pmc', $role_permission))
-                                                    <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}"
-                                                        id="editProjectMemberButton" class="btn btn-primary"><i
-                                                            class="fa fa-cogs"></i> Edit</a>
+                                                <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                                                 @endif
                                             </td>
                                             <td>{{ $projectMember->employeeName }}</td>
-                                            <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }}
-                                            </td>
-                                            <td>{{ $projectMember->department ? getDepartment($projectMember->department)->departmentName ?? '-' : '-' }}
-                                            </td>
-                                            <td>{{ $projectMember->branch ? getBranch($projectMember->branch)->branchName ?? '-' : '-' }}
-                                            </td>
-                                            <td>{{ $projectMember->unit ? getUnit($projectMember->unit)->unitName ?? '-' : '-' }}
-                                            </td>
+                                            <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }} </td>
+                                            <td>{{ $projectMember->department ? getDepartment($projectMember->department)->departmentName ?? '-' : '-' }} </td>
+                                            <td>{{ $projectMember->branch ? getBranch($projectMember->branch)->branchName ?? '-' : '-' }} </td>
+                                            <td>{{ $projectMember->unit ? getUnit($projectMember->unit)->unitName ?? '-' : '-' }} </td>
                                             <td>{{ $projectMember->joined_date }}</td>
                                             <!-- <td><a href="/projectAssignView/{{ $projectMember->id }}">view</a></td> -->
-                                            <td><a href="/projectAssignView/{{ $projectMember->id }}"
-                                                    class="btn btn-primary"> View </a></td>
-
+                                            <td>
+                                                <a href="/projectAssignView/{{ $projectMember->id }}" class="btn btn-primary"> View </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -110,7 +104,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
                 <div class="tab-pane fade" id="previous-member">
                     <br>
