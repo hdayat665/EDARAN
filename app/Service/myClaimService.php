@@ -3656,7 +3656,12 @@ class myClaimService
 
         return $entitle;
     }
+    public function getMaxPaidOut()
+    {
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
 
+        return $setting;
+    }
     public function getEntitlementArea($id = '')
     {
         $jobGrade = Employee::where('user_id', $id)->value('jobGrade');

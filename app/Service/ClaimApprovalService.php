@@ -199,7 +199,7 @@ class ClaimApprovalService
         )
 
             ->where('general_id', $id)
-            ->where('type_claim', 'travel', 'sv')
+            ->where('type_claim', 'travel')
             ->groupBy('travel_date')
             ->orderBy('travel_date', 'asc')
             ->get();
