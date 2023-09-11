@@ -17,11 +17,22 @@ $(document).ready(function () {
             // Specify validation error messages
             messages: {
                 password: {
-                    required: "",
-                    // minlength: "Your password must be at least 5 characters long"
+                    required: "This field required.",
+                    minlength: "Your password must be at least 5 characters long."
                 },
-                username: "",
+                confirm_password: "This field required.",
             },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "password") {
+                    error.insertAfter("#password-err");
+                } else if (element.attr("name") === "confirm_password") {
+                    error.insertAfter("#confirm_password-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
@@ -57,5 +68,33 @@ $(document).ready(function () {
                 });
             },
         });
+    });
+});
+
+//show password
+$(document).ready(function () {
+    // Function to toggle password visibility
+    function togglePasswordVisibility(inputId, iconId) {
+        const passwordInput = document.getElementById(inputId);
+        const passwordIcon = document.getElementById(iconId);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("bi-eye");
+            passwordIcon.classList.add("fa-eye-slash");
+        }
+    }
+
+    // Toggle password visibility when the eye icon is clicked
+    $("#show-password").click(function () {
+        togglePasswordVisibility("password", "password-toggle");
+    });
+
+    $("#show-confirm-password").click(function () {
+        togglePasswordVisibility("confirm_password", "confirm-password-toggle");
     });
 });

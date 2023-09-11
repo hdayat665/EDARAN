@@ -19,7 +19,8 @@
                                 <label class="form-label col-form-label col-md-5">Role Name*</label>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control mb-5px" name="role[roleName]" placeholder="ROLE NAME" value="{{ $role->roleName ?? '-' }}" />
+                                <input type="text" class="form-control mb-5px" name="role[roleName]"
+                                    placeholder="ROLE NAME" value="{{ $role->roleName ?? '-' }}" />
                             </div>
                         </div>
                         <div class="row p-2">
@@ -27,14 +28,16 @@
                                 <label class="form-label col-form-label col-md-5">Description*</label>
                             </div>
                             <div class="col-sm-6">
-                                <textarea type="text" class="form-control mb-5px" rows="4" name="role[desc]" maxlength="255" placeholder="DESCRIPTION">{{ $role->desc ?? '-' }}</textarea>
+                                <textarea type="text" class="form-control mb-5px" rows="4" name="role[desc]" maxlength="255"
+                                    placeholder="DESCRIPTION">{{ $role->desc ?? '-' }}</textarea>
                             </div>
                         </div>
 
                         <div class="mb-6">
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">
-                                    <input class="form-check-input excludeFromAllAccess" name="role[default_YN]" type="checkbox" value="Y" id="">
+                                    <input class="form-check-input excludeFromAllAccess" name="role[default_YN]"
+                                        type="checkbox" value="Y" id="">
                                 </div>
                                 <div class="col-auto">
                                     <p class="col-form-label">Default - Assign to new users by default</p>
@@ -69,50 +72,9 @@
                             
                             $all_level = getMenuPermission();
                             
-                            $levels_1 = [
-                                [
-                                    'menu_id' => 158,
-                                    'title' => 'Dashboard',
-                                ],
-                                [
-                                    'menu_id' => 1,
-                                    'title' => 'hrims',
-                                ],
-                                [
-                                    'menu_id' => 8,
-                                    'title' => 'eAttendance',
-                                ],
-                                [
-                                    'menu_id' => 121,
-                                    'title' => 'general info',
-                                ],
-                                [
-                                    'menu_id' => 11,
-                                    'title' => 'leave',
-                                ],
-                                [
-                                    'menu_id' => 4,
-                                    'title' => 'tsr',
-                                ],
-                                [
-                                    'menu_id' => 16,
-                                    'title' => 'project',
-                                ],
-                                [
-                                    'menu_id' => 60,
-                                    'title' => 'setting',
-                                ],
-                                [
-                                    'menu_id' => 44,
-                                    'title' => 'report',
-                                ],
-                                [
-                                    'menu_id' => 21,
-                                    'title' => 'claim',
-                                ],
-                            ];
+                            $levels_1 = getLevel1PermissionCode();
                             
-                            $customOrder = [158, 8, 121, 1, 11, 4, 16, 21, 44, 60];
+                            $customOrder = [1, 10, 30, 33, 16, 88, 38, 55, 92, 108];
                             
                             // Get an array of level 1 ids
                             $level1Ids = collect($levels_1)->pluck('menu_id');
@@ -148,16 +110,19 @@
                         @endphp
                         @foreach ($level1Items as $level_1)
                             @php
-                                $classHeader = 'col-xl-4 col-md-6';
-                                if (in_array($level_1->menu_id, [4, 16, 1, 11])) {
+                                // tsr
+                                $classHeader = 'col-xl-3 col-md-6';
+                                if (in_array($level_1->menu_id, [16])) {
                                     $classHeader = 'col-xl-6 col-md-6 ' . $level_1->menu_id;
                                 }
                                 
-                                if (in_array($level_1->menu_id, [1])) {
-                                    $classHeader = 'col-xl-6 col-md-6 ' . $level_1->menu_id;
+                                // project
+                                if (in_array($level_1->menu_id, [38])) {
+                                    $classHeader = 'col-xl-9 col-md-6 ' . $level_1->menu_id;
                                 }
                                 
-                                if (in_array($level_1->menu_id, [44, 60, 21])) {
+                                // report, setting, claim, tsr
+                                if (in_array($level_1->menu_id, [92, 108, 55, 16])) {
                                     $classHeader = 'col-xl-12 col-md-6 ' . $level_1->menu_id;
                                 }
                             @endphp
@@ -167,11 +132,14 @@
                                         <div class="mb-6">
                                             <div class="row g-3 align-items-center">
                                                 <div class="col-auto">
-                                                    <input class="form-check-input" {{ in_array($level_1->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox" value="{{ $level_1->code ?? '-' }}"
-                                                        id="" name="permissions[]">
+                                                    <input class="form-check-input"
+                                                        {{ in_array($level_1->code, $markMenuCodes) ? 'checked' : '' }}
+                                                        type="checkbox" value="{{ $level_1->code ?? '-' }}" id=""
+                                                        name="permissions[]">
                                                 </div>
                                                 <div class="col-auto">
-                                                    <p class="col-form-label" style="font-size: 15px;">{{ $level_1->name ?? '-' }}</p>
+                                                    <p class="col-form-label" style="font-size: 15px;">
+                                                        {{ $level_1->name ?? '-' }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,50 +147,82 @@
                                             @foreach ($level2Grouped->get($level_1['menu_id'], []) as $att_level2)
                                                 @php
                                                     $settingClass = '';
-                                                    if (in_array($att_level2->menu_id, [125, 138, 141, 150, 22, 23, 36])) {
-                                                        $settingClass = 'col-sm-3';
+                                                    // eclaim permission
+                                                    $menuIds = getMenuCodeByLevel1MenuId(55);
+                                                    if (in_array($att_level2->menu_id, $menuIds)) {
+                                                        $settingClass = 'col-sm-4';
                                                     }
                                                     
-                                                    if (in_array($att_level2->menu_id, [45, 49, 53, 52, 56, 59])) {
+                                                    // report permission
+                                                    $menuIds = getMenuCodeByLevel1MenuId(92);
+                                                    if (in_array($att_level2->menu_id, $menuIds)) {
                                                         $settingClass = 'col-sm-2';
                                                     }
                                                     
-                                                    if (in_array($att_level2->menu_id, [2, 3])) {
-                                                        $settingClass = 'col-sm-6';
+                                                    // timesheet permission
+                                                    $menuIds = getMenuCodeByLevel1MenuId(16);
+                                                    if (in_array($att_level2->menu_id, $menuIds)) {
+                                                        $settingClass = 'col-sm-3';
                                                     }
+                                                    
+                                                    // project management permission
+                                                    $menuIds = getMenuCodeByLevel1MenuId(38);
+                                                    if (in_array($att_level2->menu_id, $menuIds)) {
+                                                        $settingClass = 'col-sm-4';
+                                                    }
+                                                    
+                                                    // setting permission
+                                                    $menuIds = getMenuCodeByLevel1MenuId(108);
+                                                    if (in_array($att_level2->menu_id, $menuIds)) {
+                                                        $settingClass = 'col-sm-3';
+                                                    }
+                                                    
                                                 @endphp
                                                 <div class="{{ $settingClass }}">
 
                                                     <div class="mb-6 child-element">
                                                         <div class="row g-3 align-items-center">
                                                             <div class="col-auto">
-                                                                <input class="form-check-input" {{ in_array($att_level2->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
-                                                                    value="{{ $att_level2->code ?? '-' }}" id="" name="permissions[]">
+                                                                <input class="form-check-input"
+                                                                    {{ in_array($att_level2->code, $markMenuCodes) ? 'checked' : '' }}
+                                                                    type="checkbox" value="{{ $att_level2->code ?? '-' }}"
+                                                                    id="" name="permissions[]">
                                                             </div>
                                                             <div class="col-auto">
-                                                                <p class="col-form-label">{{ ucwords(strtolower($att_level2->name)) ?? '-' }}
+                                                                <p class="col-form-label">{{ $att_level2->name ?? '-' }}
                                                                     &nbsp;
                                                                     @if ($att_level2->add)
-                                                                        <input class="form-check-input rounded-circle fa fa-plus"
-                                                                            {{ in_array($att_level2->code . '_create', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level2->code . '_create' }}"
+                                                                        <input
+                                                                            class="form-check-input rounded-circle fa fa-plus"
+                                                                            {{ in_array($att_level2->code . '_create', $markMenuCodes) ? 'checked' : '' }}
+                                                                            value="{{ $att_level2->code . '_create' }}"
                                                                             name="permissions[]" type="checkbox">
                                                                     @endif
 
                                                                     @if ($att_level2->edit)
-                                                                        <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox"
-                                                                            {{ in_array($att_level2->code . '_edit', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level2->code . '_edit' }}"
+                                                                        <input
+                                                                            class="form-check-input rounded-circle fa fa-pencil"
+                                                                            type="checkbox"
+                                                                            {{ in_array($att_level2->code . '_edit', $markMenuCodes) ? 'checked' : '' }}
+                                                                            value="{{ $att_level2->code . '_edit' }}"
                                                                             name="permissions[]">
                                                                     @endif
 
                                                                     @if ($att_level2->delete)
-                                                                        <input class="form-check-input rounded-circle fa fa-trash" type="checkbox"
-                                                                            {{ in_array($att_level2->code . '_delete', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level2->code . '_delete' }}"
+                                                                        <input
+                                                                            class="form-check-input rounded-circle fa fa-trash"
+                                                                            type="checkbox"
+                                                                            {{ in_array($att_level2->code . '_delete', $markMenuCodes) ? 'checked' : '' }}
+                                                                            value="{{ $att_level2->code . '_delete' }}"
                                                                             name="permissions[]">
                                                                     @endif
 
                                                                     @if ($att_level2->view)
-                                                                        <input class="form-check-input rounded-circle fa fa-eye" type="checkbox"
-                                                                            {{ in_array($att_level2->code . '_view', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level2->code . '_view' }}"
+                                                                        <input
+                                                                            class="form-check-input rounded-circle fa fa-eye"
+                                                                            type="checkbox"
+                                                                            {{ in_array($att_level2->code . '_view', $markMenuCodes) ? 'checked' : '' }}
+                                                                            value="{{ $att_level2->code . '_view' }}"
                                                                             name="permissions[]">
                                                                     @endif
                                                                 </p>
@@ -234,33 +234,48 @@
                                                         <div class="mb-6 child-element2">
                                                             <div class="row g-3 align-items-center">
                                                                 <div class="col-auto">
-                                                                    <input class="form-check-input" {{ in_array($att_level3->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
-                                                                        value="{{ $att_level3->code ?? '-' }}" id="" name="permissions[]">
+                                                                    <input class="form-check-input"
+                                                                        {{ in_array($att_level3->code, $markMenuCodes) ? 'checked' : '' }}
+                                                                        type="checkbox"
+                                                                        value="{{ $att_level3->code ?? '-' }}"
+                                                                        id="" name="permissions[]">
                                                                 </div>
                                                                 <div class="col-auto">
-                                                                    <p class="col-form-label">{{ ucwords(strtolower($att_level3->name)) ?? '-' }}
+                                                                    <p class="col-form-label">
+                                                                        {{ $att_level3->name ?? '-' }}
                                                                         &nbsp;
                                                                         @if ($att_level3->add)
-                                                                            <input class="form-check-input rounded-circle fa fa-plus"
+                                                                            <input
+                                                                                class="form-check-input rounded-circle fa fa-plus"
                                                                                 {{ in_array($att_level3->code . '_create', $markMenuCodes) ? 'checked' : '' }}
-                                                                                value="{{ $att_level3->code . '_create' }}" name="permissions[]" type="checkbox">
+                                                                                value="{{ $att_level3->code . '_create' }}"
+                                                                                name="permissions[]" type="checkbox">
                                                                         @endif
 
                                                                         @if ($att_level3->edit)
-                                                                            <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox"
-                                                                                {{ in_array($att_level3->code . '_edit', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level3->code . '_edit' }}"
+                                                                            <input
+                                                                                class="form-check-input rounded-circle fa fa-pencil"
+                                                                                type="checkbox"
+                                                                                {{ in_array($att_level3->code . '_edit', $markMenuCodes) ? 'checked' : '' }}
+                                                                                value="{{ $att_level3->code . '_edit' }}"
                                                                                 name="permissions[]">
                                                                         @endif
 
                                                                         @if ($att_level3->delete)
-                                                                            <input class="form-check-input rounded-circle fa fa-trash" type="checkbox"
+                                                                            <input
+                                                                                class="form-check-input rounded-circle fa fa-trash"
+                                                                                type="checkbox"
                                                                                 {{ in_array($att_level3->code . '_delete', $markMenuCodes) ? 'checked' : '' }}
-                                                                                value="{{ $att_level3->code . '_delete' }}" name="permissions[]">
+                                                                                value="{{ $att_level3->code . '_delete' }}"
+                                                                                name="permissions[]">
                                                                         @endif
 
                                                                         @if ($att_level3->view)
-                                                                            <input class="form-check-input rounded-circle fa fa-eye" type="checkbox"
-                                                                                {{ in_array($att_level3->code . '_view', $markMenuCodes) ? 'checked' : '' }} value="{{ $att_level3->code . '_view' }}"
+                                                                            <input
+                                                                                class="form-check-input rounded-circle fa fa-eye"
+                                                                                type="checkbox"
+                                                                                {{ in_array($att_level3->code . '_view', $markMenuCodes) ? 'checked' : '' }}
+                                                                                value="{{ $att_level3->code . '_view' }}"
                                                                                 name="permissions[]">
                                                                         @endif
                                                                     </p>
@@ -273,34 +288,49 @@
                                                             <div class="mb-6 child-element3">
                                                                 <div class="row g-3 align-items-center">
                                                                     <div class="col-auto">
-                                                                        <input class="form-check-input" {{ in_array($att_level4->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
-                                                                            value="{{ $att_level4->code ?? '-' }}" id="" name="permissions[]">
+                                                                        <input class="form-check-input"
+                                                                            {{ in_array($att_level4->code, $markMenuCodes) ? 'checked' : '' }}
+                                                                            type="checkbox"
+                                                                            value="{{ $att_level4->code ?? '-' }}"
+                                                                            id="" name="permissions[]">
                                                                     </div>
                                                                     <div class="col-auto">
-                                                                        <p class="col-form-label">{{ ucwords(strtolower($att_level4->name)) ?? '-' }}
+                                                                        <p class="col-form-label">
+                                                                            {{ ucwords(strtolower($att_level4->name)) ?? '-' }}
                                                                             &nbsp;
                                                                             @if ($att_level4->add)
-                                                                                <input class="form-check-input rounded-circle fa fa-plus"
+                                                                                <input
+                                                                                    class="form-check-input rounded-circle fa fa-plus"
                                                                                     {{ in_array($att_level4->code . '_create', $markMenuCodes) ? 'checked' : '' }}
-                                                                                    value="{{ $att_level4->code . '_create' }}" name="permissions[]" type="checkbox">
+                                                                                    value="{{ $att_level4->code . '_create' }}"
+                                                                                    name="permissions[]" type="checkbox">
                                                                             @endif
 
                                                                             @if ($att_level4->edit)
-                                                                                <input class="form-check-input rounded-circle fa fa-pencil" type="checkbox"
+                                                                                <input
+                                                                                    class="form-check-input rounded-circle fa fa-pencil"
+                                                                                    type="checkbox"
                                                                                     {{ in_array($att_level4->code . '_edit', $markMenuCodes) ? 'checked' : '' }}
-                                                                                    value="{{ $att_level4->code . '_edit' }}" name="permissions[]">
+                                                                                    value="{{ $att_level4->code . '_edit' }}"
+                                                                                    name="permissions[]">
                                                                             @endif
 
                                                                             @if ($att_level4->delete)
-                                                                                <input class="form-check-input rounded-circle fa fa-trash" type="checkbox"
+                                                                                <input
+                                                                                    class="form-check-input rounded-circle fa fa-trash"
+                                                                                    type="checkbox"
                                                                                     {{ in_array($att_level4->code . '_delete', $markMenuCodes) ? 'checked' : '' }}
-                                                                                    value="{{ $att_level4->code . '_delete' }}" name="permissions[]">
+                                                                                    value="{{ $att_level4->code . '_delete' }}"
+                                                                                    name="permissions[]">
                                                                             @endif
 
                                                                             @if ($att_level4->view)
-                                                                                <input class="form-check-input rounded-circle fa fa-eye" type="checkbox"
+                                                                                <input
+                                                                                    class="form-check-input rounded-circle fa fa-eye"
+                                                                                    type="checkbox"
                                                                                     {{ in_array($att_level4->code . '_view', $markMenuCodes) ? 'checked' : '' }}
-                                                                                    value="{{ $att_level4->code . '_view' }}" name="permissions[]">
+                                                                                    value="{{ $att_level4->code . '_view' }}"
+                                                                                    name="permissions[]">
                                                                             @endif
                                                                         </p>
                                                                     </div>
@@ -319,7 +349,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 ">
-                        <button class="btn btn-primary" id="saveButton" data-id="{{ request()->segment(2) }}" style="float: right">Save</button>
+                        <button class="btn btn-primary" id="saveButton" data-id="{{ request()->segment(2) }}"
+                            style="float: right">Save</button>
                     </div>
                 </div>
             </form>

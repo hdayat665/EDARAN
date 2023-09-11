@@ -385,7 +385,7 @@
                                 <label for="" class="form-label" >ID Attachment</label>
                                 <input type="file" name="idFile" value="" id="" class="form-control" aria-describedby="">
                                 @if ($companion->idFile)
-                                Click <a href="{{ route('view', ['filename' => $companion->idFile]) }}" target="_blank">here</a> to see the ID Attachment.
+                                Click <a href="{{ route('view', ['filename' => $companion->idFile ?? '']) }}" target="_blank">here</a> to see the ID Attachment.
                                 @endif
                             </div>
                         </div>
@@ -494,7 +494,7 @@
                                 <label for="dob" class="form-label" >OKU Attachment*</label>
                                 <input type="file" id="okuattach1s" disabled name="okuID" class="form-control" aria-describedby="">
                                     @if ($companion->okuID )
-                                    Click <a href="{{ route('view', ['filename' => $companion->okuID]) }}" target="_blank">here</a> to see the OKU Attachment.
+                                    Click <a href="{{ route('view', ['filename' => $companion->okuID ?? '']) }}" target="_blank">here</a> to see the OKU Attachment.
                                     @endif
                             </div>
                         </div>

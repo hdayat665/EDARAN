@@ -68,8 +68,8 @@
                                 <td style="text-transform: uppercase;"> {{ $education->result }} </td>
                                 <td>
                                 @if($education->file ?? '')
-                                    <a href="{{ route('view', ['filename' => $education->file]) }}" target="_blank">
-                                        {{ $education->file }}
+                                    <a href="{{ route('view', ['filename' => $education->file ?? '']) }}" target="_blank">
+                                        {{ $education->file ?? ''}}
                                     </a>
                                 @endif
                                 </td>
@@ -116,7 +116,7 @@
                                 </td>
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
-                                <td><a href="{{ route('view', ['filename' => $other->file]) }}" target="_blank">{{$other->file}}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $other->file ?? '']) }}" target="_blank">{{$other->file ?? ''}}</a></td>
                             </tr>
                             @endforeach
                         @endif

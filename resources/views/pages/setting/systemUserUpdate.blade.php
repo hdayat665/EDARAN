@@ -93,59 +93,16 @@
                 <div class="row">
                     @php
                         $markMenu = $user->role->permissions;
-                        
                         if (Auth::user()->role_custom_id) {
                             $markMenu = $user->customRole;
                         }
-                        
                         $markMenuCodes = $markMenu->pluck('permission_code')->toArray();
                         
                         $all_level = getMenuPermission();
                         
-                        $levels_1 = [
-                            [
-                                'menu_id' => 158,
-                                'title' => 'Dashboard',
-                            ],
-                            [
-                                'menu_id' => 1,
-                                'title' => 'hrims',
-                            ],
-                            [
-                                'menu_id' => 8,
-                                'title' => 'eAttendance',
-                            ],
-                            [
-                                'menu_id' => 121,
-                                'title' => 'general info',
-                            ],
-                            [
-                                'menu_id' => 11,
-                                'title' => 'leave',
-                            ],
-                            [
-                                'menu_id' => 4,
-                                'title' => 'tsr',
-                            ],
-                            [
-                                'menu_id' => 16,
-                                'title' => 'project',
-                            ],
-                            [
-                                'menu_id' => 60,
-                                'title' => 'setting',
-                            ],
-                            [
-                                'menu_id' => 44,
-                                'title' => 'report',
-                            ],
-                            [
-                                'menu_id' => 21,
-                                'title' => 'claim',
-                            ],
-                        ];
+                        $levels_1 = getLevel1PermissionCode();
                         
-                        $customOrder = [158, 8, 121, 1, 11, 4, 16, 21, 44, 60];
+                        $customOrder = [1, 10, 30, 33, 16, 88, 38, 55, 92, 108];
                         
                         // Get an array of level 1 ids
                         $level1Ids = collect($levels_1)->pluck('menu_id');
@@ -181,16 +138,19 @@
                     @endphp
                     @foreach ($level1Items as $level_1)
                         @php
-                            $classHeader = 'col-xl-4 col-md-6';
-                            if (in_array($level_1->menu_id, [4, 16, 1, 11])) {
+                            // tsr
+                            $classHeader = 'col-xl-3 col-md-6';
+                            if (in_array($level_1->menu_id, [16])) {
                                 $classHeader = 'col-xl-6 col-md-6 ' . $level_1->menu_id;
                             }
                             
-                            if (in_array($level_1->menu_id, [1])) {
-                                $classHeader = 'col-xl-6 col-md-6 ' . $level_1->menu_id;
+                            // project
+                            if (in_array($level_1->menu_id, [38])) {
+                                $classHeader = 'col-xl-9 col-md-6 ' . $level_1->menu_id;
                             }
                             
-                            if (in_array($level_1->menu_id, [44, 60, 21])) {
+                            // report, setting, claim, tsr
+                            if (in_array($level_1->menu_id, [92, 108, 55, 16])) {
                                 $classHeader = 'col-xl-12 col-md-6 ' . $level_1->menu_id;
                             }
                         @endphp
@@ -204,7 +164,7 @@
                                                     id="" name="permissions[]">
                                             </div>
                                             <div class="col-auto">
-                                                <p class="col-form-label" style="font-size: 15px;">{{ $level_1->name ?? '-' }}</p>
+                                                <p class="col-form-label" style="font-size: 15px;"> {{ $level_1->name ?? '-' }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -212,17 +172,36 @@
                                         @foreach ($level2Grouped->get($level_1['menu_id'], []) as $att_level2)
                                             @php
                                                 $settingClass = '';
-                                                if (in_array($att_level2->menu_id, [125, 138, 141, 150, 22, 23, 36])) {
-                                                    $settingClass = 'col-sm-3';
+                                                // eclaim permission
+                                                $menuIds = getMenuCodeByLevel1MenuId(55);
+                                                if (in_array($att_level2->menu_id, $menuIds)) {
+                                                    $settingClass = 'col-sm-4';
                                                 }
                                                 
-                                                if (in_array($att_level2->menu_id, [45, 49, 53, 52, 56, 59])) {
+                                                // report permission
+                                                $menuIds = getMenuCodeByLevel1MenuId(92);
+                                                if (in_array($att_level2->menu_id, $menuIds)) {
                                                     $settingClass = 'col-sm-2';
                                                 }
                                                 
-                                                if (in_array($att_level2->menu_id, [2, 3])) {
-                                                    $settingClass = 'col-sm-6';
+                                                // timesheet permission
+                                                $menuIds = getMenuCodeByLevel1MenuId(16);
+                                                if (in_array($att_level2->menu_id, $menuIds)) {
+                                                    $settingClass = 'col-sm-3';
                                                 }
+                                                
+                                                // project management permission
+                                                $menuIds = getMenuCodeByLevel1MenuId(38);
+                                                if (in_array($att_level2->menu_id, $menuIds)) {
+                                                    $settingClass = 'col-sm-4';
+                                                }
+                                                
+                                                // setting permission
+                                                $menuIds = getMenuCodeByLevel1MenuId(108);
+                                                if (in_array($att_level2->menu_id, $menuIds)) {
+                                                    $settingClass = 'col-sm-3';
+                                                }
+                                                
                                             @endphp
                                             <div class="{{ $settingClass }}">
 
@@ -233,7 +212,7 @@
                                                                 value="{{ $att_level2->code ?? '-' }}" id="" name="permissions[]">
                                                         </div>
                                                         <div class="col-auto">
-                                                            <p class="col-form-label">{{ ucwords(strtolower($att_level2->name)) ?? '-' }}
+                                                            <p class="col-form-label">{{ $att_level2->name ?? '-' }}
                                                                 &nbsp;
                                                                 @if ($att_level2->add)
                                                                     <input class="form-check-input rounded-circle fa fa-plus"
@@ -271,7 +250,7 @@
                                                                     value="{{ $att_level3->code ?? '-' }}" id="" name="permissions[]">
                                                             </div>
                                                             <div class="col-auto">
-                                                                <p class="col-form-label">{{ ucwords(strtolower($att_level3->name)) ?? '-' }}
+                                                                <p class="col-form-label">{{ $att_level3->name ?? '-' }}
                                                                     &nbsp;
                                                                     @if ($att_level3->add)
                                                                         <input class="form-check-input rounded-circle fa fa-plus"

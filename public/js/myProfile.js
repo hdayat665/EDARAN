@@ -4075,6 +4075,38 @@ $(document).ready(function () {
         "The password must contain at least one special character"
     );
 
+    //show password
+    $(document).ready(function () {
+        // Function to toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const passwordIcon = document.getElementById(iconId);
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("bi-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            }
+        }
+
+        // Toggle password visibility when the eye icon is clicked
+        $("#show-current-password").click(function () {
+            togglePasswordVisibility("current_password", "current-password-toggle");
+        });
+
+        $("#show-password").click(function () {
+            togglePasswordVisibility("password", "password-toggle");
+        });
+
+        $("#show-confirm-password").click(function () {
+            togglePasswordVisibility("confirm_password", "confirm-password-toggle");
+        });
+    });
+
     $("#changePassButton").click(function (e) {
         $("#changePassForm").validate({
             // Specify validation rules

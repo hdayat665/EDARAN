@@ -3166,3 +3166,51 @@ if (!function_exists('getPermissionByUserId')) {
         return $data;
     }
 }
+
+if (!function_exists('getMenuCodeByLevel1MenuId')) {
+    function getMenuCodeByLevel1MenuId($id = '')
+    {
+        $result = MenuPermissionCode::where('level_2', $id)->get();
+        $data = $result->pluck('menu_id')->toArray();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getLevel1PermissionCode')) {
+    function getLevel1PermissionCode()
+    {
+        $data = MenuPermissionCode::where('level_1', 1)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getPermissionCodeArray')) {
+    function getPermissionCodeArray()
+    {
+        $customizeRole = Auth::user()->role_custom_id;
+
+        $permissions = getPermissionByRoleId(Auth::user()->role_id);
+
+        if ($customizeRole) {
+            $permissions = getPermissionByUserId();
+        }
+
+        $data = collect($permissions)->pluck('permission_code')->toArray();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
