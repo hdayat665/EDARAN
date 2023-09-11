@@ -73,6 +73,15 @@ $(document).ready(function () {
 
 //show password
 $(document).ready(function () {
+    const isEdge = /Edg/.test(navigator.userAgent);
+    if (isEdge) {
+        // Hide the custom reveal button if the browser is Microsoft Edge
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = 'input[type="password"]::-ms-reveal { display: none; }';
+        document.getElementsByTagName('head')[0].appendChild(style);
+    } 
+
     // Function to toggle password visibility
     function togglePasswordVisibility(inputId, iconId) {
         const passwordInput = document.getElementById(inputId);
@@ -97,4 +106,5 @@ $(document).ready(function () {
     $("#show-confirm-password").click(function () {
         togglePasswordVisibility("confirm_password", "confirm-password-toggle");
     });
+    
 });
