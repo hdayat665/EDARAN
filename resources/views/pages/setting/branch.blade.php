@@ -83,7 +83,7 @@
     <!-- ADD -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="max-height: 90vh; overflow-y: auto">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">New Branch</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -130,33 +130,35 @@
                             <label class="form-label">Country*</label>
                             <select class="form-select" name="ref_country" id="country_id" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                                @foreach($country as $ct)
+                                @foreach($country->sortBy('country_name') as $ct)
                                     <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
+                            <div id="country-err" class="error"></div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Postcode*</label>
+                            <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                            </select>
+                            <div id="postcode-err" class="error"></div>
                         </div>
 
                         <div class="mb-2">
                                 <label class="form-label">State*</label>
-                                <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase;">
+                                <select class="form-select" name="ref_state" id="state_id" style="text-transform: uppercase; ">
                                     <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 </select>
                         </div>
 
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <select class="form-select" name="location_cityid" id="city_id" style="text-transform: uppercase;">
+                            <select class="form-select" name="location_cityid" id="city_id" style="text-transform: uppercase;" >
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 <input type="hidden" class="form-control" name="latitude" id="latitude" />
                                 <input type="hidden" class="form-control" name="longitude" id="longitude" />
                             </select>
-                        </div>
-
-                        <div class="mb-2">
-                                <label class="form-label">Postcode*</label>
-                                <select class="form-select" name="ref_postcode" id="postcode_id" style="text-transform: uppercase;">
-                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                                </select>
                         </div>
 
                         <div class="modal-footer">
@@ -172,7 +174,7 @@
     <!-- EDIT -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="max-height: 90vh; overflow-y: auto">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -217,19 +219,32 @@
 
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
-                            <select class="form-select" name="ref_country" id="countryE" style="text-transform: uppercase;">
+                            <select class="form-select" name="ref_country" id="countryE" value="" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                                @foreach($country as $ct)
+                                @foreach($country->sortBy('country_name') as $ct)
                                     <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
+
+                            <div id="countryE-err" class="error"></div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Postcode*</label>
+                            <select class="form-select" name="ref_postcode" id="postcodeE" style="text-transform: uppercase;">
+                                <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                @foreach($postcode->sortBy('country_name') as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
+                            <div id="postcodeE-err" class="error"></div>
                         </div>
 
                         <div class="mb-2">
                             <label class="form-label">State*</label>
                             <select class="form-select" name="ref_state" id="stateE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="" selected="selected">Please Choose</option>
-                                @foreach($state as $st)
+                                @foreach($state->sortBy('country_name') as $st)
                                     <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
@@ -238,19 +253,9 @@
                         <div class="mb-2">
                             <label class="form-label">City*</label>
                             <select class="form-select" name="location_cityid" id="cityE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="" selected="selected">Please Choose</option>
-                                @foreach($city as $cty)
+                                <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                @foreach($city->sortBy('country_name') as $cty)
                                     <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="mb-2">
-                            <label class="form-label">Postcode*</label>
-                            <select class="form-select" name="ref_postcode" id="postcodeE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="" selected="selected">Please Choose</option>
-                                @foreach($postcode as $pc)
-                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                 @endforeach
                             </select>
                         </div>
