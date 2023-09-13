@@ -958,7 +958,7 @@ class ClaimApprovalService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'Success Approve Cash Advance';
 
         return $data;
     }
@@ -1042,7 +1042,7 @@ class ClaimApprovalService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'Success Approve Cash Advance';
 
         return $data;
     }
