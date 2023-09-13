@@ -513,7 +513,6 @@ class SettingService
             ->first();
 
 
-
         $user = Auth::user();
 
         $input = [
@@ -644,18 +643,29 @@ class SettingService
 
         ];
 
-        $existingLocation = Location::where('country_id', $input['country_id'])
+        $existingPostcode = Location::where('country_id', $input['country_id'])
         ->where('postcode', $input['postcode'])
         ->first();
 
-        if ($existingLocation) {
-            $data['msg'] = 'Location already exists.';
+        $existingCity = Location::where('country_id', $input['country_id'])
+        ->where('name', $input['name'])
+        ->first();
+
+        if ($existingPostcode) {
+            $data['msg'] = 'Postcode already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
 
             return $data;
 
+        } else if ($existingCity){
+            $data['msg'] = 'City already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
         } else {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1408,15 +1418,30 @@ class SettingService
         return $data;
     }
 
-    public function getStatebyCountry($id = '')
+    public function getPostcodeByCountryBranch($id = '')
     {
-        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+        $data = Country::join('location_states', 'location_country.country_id', '=', 'location_states.country_id')
+            ->join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
             ->where('location_states.country_id', $id)
             ->get();
+
         return $data;
     }
 
-    public function getCitybyState($id = '')
+    public function getStateAndCityByCountryBranch($id = '')
+    {
+
+        $data = Location::where('postcode', $id)
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+            ->select('location_cities.postcode', 'location_cities.name', 'location_states.state_name', 'location_cities.country_id',
+            'location_country.country_name', 'location_cities.state_id' ,'location_states.id')
+            ->get();
+
+        return $data;
+    }
+
+    public function getCitybyStateBranch($id = '')
     {
 
         $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
@@ -1424,17 +1449,15 @@ class SettingService
             ->groupBy('location_cities.name')
             ->get();
 
-
         return $data;
     }
 
-    public function getPostcodeByCity($id = '')
+    public function getPostcodeByCityBranch($id = '')
     {
 
         $data = Location::select('*')
             ->where('name', $id)
             ->get();
-
 
         return $data;
     }
@@ -1442,7 +1465,9 @@ class SettingService
 
     public function locationView()
     {
-        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name', 'location_cities.postcode', 'location_cities.addedBy', 'location_cities.created_at', 'location_cities.modifiedBy', 'location_cities.modified_at')
+        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name',
+            'location_cities.postcode', 'location_cities.addedBy', 'location_cities.created_at', 'location_cities.modifiedBy',
+            'location_cities.modified_at')
             ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
             ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
             ->orderBy('location_cities.id', 'desc')
@@ -1479,7 +1504,6 @@ class SettingService
     {
         $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
-        // dd($data);
 
         return $data;
     }

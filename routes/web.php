@@ -397,9 +397,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
 
-            Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
-            Route::get('/getCitybyState/{id}', 'getCitybyState');
-            Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
+            Route::get('/getStatebyCountryBranch/{id}', 'getStatebyCountryBranch');
+            Route::get('/getCitybyStateBranch/{id}', 'getCitybyStateBranch');
+            Route::get('/getPostcodeByCityBranch/{id}', 'getPostcodeByCityBranch');
+
+
+            Route::get('/getPostcodeByCountryBranch/{id}', 'getPostcodeByCountryBranch');
+            Route::get('/getStateAndCityByCountryBranch/{id}', 'getStateAndCityByCountryBranch');
 
             Route::get('/company', 'companyView');
             Route::get('/department', 'departmentView');
