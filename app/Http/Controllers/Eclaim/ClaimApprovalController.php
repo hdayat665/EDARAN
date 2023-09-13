@@ -1476,7 +1476,15 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+    public function updateMaxValue(Request $r, $id = '')
+    {   
+        
+        $msc = new ClaimApprovalService;
 
+        $data = $msc->updateMaxValue($r, $id);
+
+        return response()->json($data);
+    }
     public function cashAdvanceFcheckerView()
     {
         $mcs = new ClaimApprovalService;
