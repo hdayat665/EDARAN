@@ -9,32 +9,24 @@
    
     <br>
     <br>
-    <p>Title: FIRST REMINDER | TIMESHEET LOG REMINDER | {{ $date }} (DATE)</p>
+    <p>Title: 
+        @if ($mailtime == 0)
+            FIRST REMINDER
+        @elseif ($mailtime == 1)
+            SECOND REMINDER
+        @elseif ($mailtime == 2)
+            THIRD REMINDER
+        @endif
+        | TIMESHEET LOG REMINDER | {{ $date }} (DATE)</p>           
     <p>Please complete your timesheet log for the date {{ $date }} </p><br>
-    {{-- <p>{{ $user_id }} </p><br>
-    <p>{{ $branch }} </p><br>
-    <p>{{ $state }} </p><br> --}}
-    {{-- @foreach ($dow as $day)
-        <p>{{ $day }}</p><br>
-    @endforeach --}}
-    <p>{{ $wknd1 }} naim</p><br>
-    
-   
-
-    <br>
-   
-    <br>
-    
-    
-
     <p>Please click the link button for further action </p>
     <a href="{{ env('APP_URL') . '/myTimesheet' }}"><button>Click Here</button></a>
     <br>
-    <br>
     <p>
-         Thank You
+         Thank You.
        
     </p>
+    <p>for testing purpose : {{ $nameFrom }}</p>
 </body>
 
 </html>
