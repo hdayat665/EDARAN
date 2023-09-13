@@ -29,11 +29,16 @@
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
 							<thead>
 							<tr>
-								<th class="text-nowrap" data-orderable="false" >Action</th>
+
 								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
 								<th class="text-nowrap">Leave Types</th>
 								<th class="text-nowrap">Duration</th>
+                                <th class="text-nowrap">Added By</th>
+                                <th class="text-nowrap">Added Time</th>
+                                <th class="text-nowrap">Modified By</th>
+                                <th class="text-nowrap">Modified Time</th>
+                                <th class="text-nowrap" data-orderable="false" >Action</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -43,14 +48,6 @@
                                 <?php $id++ ?>
 								<tr>
 									<td>
-										<a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-										<div class="dropdown-menu">
-											<a href="javascript:;" id="editButton" data-id="{{ $t->id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1" data-bs-target="#updateleave"  ><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
-											<div class="dropdown-divider"></div>
-											<a href="javascript:;" id="deleteButton" data-id="{{ $t->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
-										</div>
-									</td>
-									<td>
 										<div class="form-check form-switch">
                                                 <input class="form-check-input statusCheck" name="mainCompanion" type="checkbox" data-id="{{ $t->id }}" id="updateStatus"
                                                 {{ $t->status == '1' ? 'checked' : '' }}>
@@ -59,6 +56,18 @@
 									<td>{{$t->leave_types_code}}</td>
 									<td>{{$t->leave_types}}</td>
 									<td>{{$t->duration}}</td>
+                                    <td>{{$t->addedBy ?? '-' }}</td>
+                                    <td>{{$t->created_at ?? '-' }}</td>
+                                    <td>{{$t->modifiedBy ?? '-' }}</td>
+                                    <td>{{$t->modifiedTime ?? '-' }}</td>
+                                    <td>
+										<a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+										<div class="dropdown-menu">
+											<a href="javascript:;" id="editButton" data-id="{{ $t->id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1" data-bs-target="#updateleave"  ><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+											<div class="dropdown-divider"></div>
+											<a href="javascript:;" id="deleteButton" data-id="{{ $t->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+										</div>
+									</td>
 								</tr>
 								@endforeach
                                 @endif

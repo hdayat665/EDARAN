@@ -208,6 +208,8 @@ class myClaimController extends Controller
         $area_data = array('area' => $data['area']);
         $json_area_data = json_encode($area_data);
 
+        $data['getMaxPaidOut'] = $mcs->getMaxPaidOut();
+        
         return view('pages.eclaim.cashAdvance',$data, compact('data', 'json_area_data'));
     }
 

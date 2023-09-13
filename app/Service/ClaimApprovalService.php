@@ -199,7 +199,7 @@ class ClaimApprovalService
         )
 
             ->where('general_id', $id)
-            ->where('type_claim', 'travel', 'sv')
+            ->where('type_claim', 'travel')
             ->groupBy('travel_date')
             ->orderBy('travel_date', 'asc')
             ->get();
@@ -757,6 +757,19 @@ class ClaimApprovalService
         // dd($data);
         return $data;
     }
+    public function updateMaxValue($r,$id = '')
+    {   
+        $input = $r->input();
+
+        ModeOfTransport::where('cash_advance_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Max Paid Cash Advance';
+
+        return $data;
+    }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
     {
         $input = $r->input();
@@ -945,7 +958,7 @@ class ClaimApprovalService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'Success Approve Cash Advance';
 
         return $data;
     }
@@ -1029,7 +1042,7 @@ class ClaimApprovalService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'Success Approve Cash Advance';
 
         return $data;
     }

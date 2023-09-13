@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -19,6 +20,12 @@ $(document).ready(function () {
     });
 
     $('.selectacc2').select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $('#addModal'),
+        // multiple: true,
+    });
+    $('.selectcust').select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#addModal'),

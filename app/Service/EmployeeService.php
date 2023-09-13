@@ -35,12 +35,6 @@ class EmployeeService
         $input = $r->input();
 
         if (isset($r['username'])) {
-            // $user = Users::join('userprofile', 'users.id', '=', 'userprofile.user_id')
-            //     ->where('users.tenant_id', Auth::user()->tenant_id)
-            //     ->where('userprofile.personalEmail', $r['personalEmail'])
-            //     ->where('users.status', 'active')
-            //     ->select('users.*', 'userprofile.personalEmail')
-            //     ->first();
             $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
 
@@ -48,7 +42,7 @@ class EmployeeService
                 $data['status'] = false;
                 $data['title'] = 'Error';
                 $data['type'] = 'error';
-                $data['msg'] = 'email already exists';
+                $data['msg'] = 'Username already exists';
             } else {
                 $user['type'] = 'employee';
                 $user['status'] = 'not complete';
@@ -1378,11 +1372,12 @@ class EmployeeService
     {
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
-        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
+        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.user_id')
         ->where('employment.tenant_id', $tenant_id)
-        ->where('employment.id', $id)
+        ->where('employment.user_id', $id)
         ->select('employment.*' ,'userprofile.fullName')
         ->first();
+        // dd($data);
         return $data;
     }
 

@@ -53,7 +53,7 @@
                             <div class="btn-group me-1 mb-1">
                                 <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
-
+                                
                                 @if ($cashClaim->status == 'draft')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <!-- <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
@@ -66,6 +66,11 @@
                                         <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Cash Advance</a>
                                     </div>
                                 @elseif ($cashClaim->status == 'amend')
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
+                                    </div>
+                                @elseif ($cashClaim->status == 'recommend')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Cash Advance</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->

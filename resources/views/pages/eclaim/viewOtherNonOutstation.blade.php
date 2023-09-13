@@ -441,7 +441,7 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="row p-2">
                             <div class="col-md-6">
                                 <label class="form-label col-form-label">Total Cash Advance</label>
@@ -460,9 +460,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row p-2 justify-content-end">
+                <!-- <div class="row p-2 justify-content-end">
                     <button class="btn btn-primary col-md-2">Button</button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row p-2">

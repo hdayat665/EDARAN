@@ -7,6 +7,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <h4>Cash Advance Information</h4>
+                        
                     </div>
                     <div class="row p-2">
                         <div class="col-md-7">
@@ -14,6 +15,7 @@
                                 <div class="row p-2">
                                     <div class="col-md-4"> 
                                         <label class="form-label">Type of Cash Advance</label>
+                                        
                                     </div>
                                     <div class="col-md-8">
                                         <select class="form-select" id="toca" name="type">
@@ -33,6 +35,7 @@
                                 @include('pages.eclaim.otherNonOutstation')
                             </div>
                         </div>
+                        
                         <div class="col-md-5">
                             @include('pages.eclaim.modeTransport')
                         </div>

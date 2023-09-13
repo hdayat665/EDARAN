@@ -3,6 +3,7 @@
         <div class="row p-2">
             <div class="col-md-4">
                 <label class="form-label">Mode Of Transport</label>
+                
             </div>
             <div class="col-md-8">
                 <select class="form-select" id="SMOT" name="transport_type">
@@ -37,7 +38,7 @@
                     </div>
                     <div class="col-md-3">
                         <select class="form-select" id="areacategory" name="project_id">
-                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
+                            <option class="form-label" value='' selected>PLEASE CHOOSE</option>
                             
                                 @foreach ($areas as $area)
                             <option value="{{ $area->id }}">{{ $area->area }}</option>
@@ -183,7 +184,9 @@
                 </div>
                 <div class="col-md-3">
                     <input readonly type="text" class="form-control" name="max_total" id="maxpaid">
+                    <input readonly type="hidden" class="form-control" id="max_value" value="{{ $data['getMaxPaidOut']->max_paid_out }}">
                 </div>
+                
             </div>
         </div>
         {{-- <div class="SV" style="display: none">

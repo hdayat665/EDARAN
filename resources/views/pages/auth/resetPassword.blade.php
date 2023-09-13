@@ -34,7 +34,7 @@
                     </div>
                     <div id="password-err" class="error mb-1"></div>
                     <input type="hidden" name="user_id" value="{{$user_id}}" class="form-control h-45px fs-13px" />
-                    <div class="form-floating pt-2" style="position: relative;">
+                    <div class="form-floating" style="position: relative;">
                         <input type="password" name="confirm_password" class="form-control h-45px fs-13px" id="confirm_password" placeholder=""/>
                         <label for="confirm_password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
                         <span class="input-group-text" id="show-confirm-password" style="cursor:pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background-color: transparent; border: none;">

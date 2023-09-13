@@ -126,6 +126,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createChequeNumber/{id}', 'createChequeNumber');
             Route::get('/cashAdvanceApproverDetail/{id}/{type}', 'cashAdvanceApproverDetail');
             Route::post('/updateStatusCashAdvance/{id}/{status}/{stage}', 'updateStatusCashAdvance');
+            Route::post('/updateMaxValue/{id}', 'updateMaxValue');
             Route::get('/cashAdvanceFcheckerView', 'cashAdvanceFcheckerView');
             Route::get('/cashAdvanceFcheckerDetail/{id}/{type}', 'cashAdvanceFcheckerDetail');
             Route::get('/cashAdvanceFapproverDetail/{id}/{type}', 'cashAdvanceFapproverDetail');
@@ -397,9 +398,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
 
-            Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
-            Route::get('/getCitybyState/{id}', 'getCitybyState');
-            Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
+            Route::get('/getStatebyCountryBranch/{id}', 'getStatebyCountryBranch');
+            Route::get('/getCitybyStateBranch/{id}', 'getCitybyStateBranch');
+            Route::get('/getPostcodeByCityBranch/{id}', 'getPostcodeByCityBranch');
+
+
+            Route::get('/getPostcodeByCountryBranch/{id}', 'getPostcodeByCountryBranch');
+            Route::get('/getStateAndCityByCountryBranch/{id}', 'getStateAndCityByCountryBranch');
 
             Route::get('/company', 'companyView');
             Route::get('/department', 'departmentView');
