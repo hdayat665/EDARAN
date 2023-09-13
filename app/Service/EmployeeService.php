@@ -1372,11 +1372,12 @@ class EmployeeService
     {
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
-        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
+        $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.user_id')
         ->where('employment.tenant_id', $tenant_id)
-        ->where('employment.id', $id)
+        ->where('employment.user_id', $id)
         ->select('employment.*' ,'userprofile.fullName')
         ->first();
+        // dd($data);
         return $data;
     }
 

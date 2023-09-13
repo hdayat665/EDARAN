@@ -14,9 +14,9 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <select class="form-select" name="customer_id">
+                            <select class="form-select selectcust" name="customer_id">
                                 <option label="PLEASE CHOOSE"></option>
-                                <?php $customers = customeractive(); ?>
+                                <?php $customers = customeractive()->sortBy('customer_name'); ?>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                 @endforeach
@@ -73,9 +73,6 @@
                                     <option value="{{ $financialYear }}">{{ $starting_year }}</option>
                                 @endforeach
                             </select>
-
-
-
                         </div>
                     </div>
                     <div class="row">
@@ -83,7 +80,6 @@
                         <label class="form-label col-form-label col-md-4">Contract Start Date*</label>
                         <label class="form-label col-form-label col-md-4">Contract End Date*</label>
                     </div>
-
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="LOA_date" id="datepicker-loa" placeholder="YYYY/MM/DD" />
@@ -104,7 +100,7 @@
                         <div class="col-md-4">
                             <select class="form-select selectacc2" name="acc_manager" id="acc_manager">
                                 <option value="" label="PLEASE CHOOSE"></option>
-                                <?php $getEmployees = getEmployee(); ?>
+                                <?php $getEmployees = getEmployee()->sortBy('employeeName'); ?>
                                 @foreach ($getEmployees as $getEmployee)
                                     <option value="{{ $getEmployee->id }}">{{ $getEmployee->employeeName }}</option>
                                 @endforeach
