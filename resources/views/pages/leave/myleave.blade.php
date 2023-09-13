@@ -70,6 +70,8 @@
                                         </div>
                                         <br>
                                         <div id = "LapseLeave" class="form-control "> Lapsed: 0 Days </div>
+                                        <br>
+                                        <div id = "LapseLeaveDate" class="form-control "> Lapsed: Date Days </div>
                                     </div>
                                 </div>
                             </div><br>

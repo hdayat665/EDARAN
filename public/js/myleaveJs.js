@@ -158,6 +158,7 @@ $(document).ready(function () {
         console.log(data);
         $("#LapseLeave").text("Lapsed: " + (data[0] ? data[0] + " Days" : "0 Days"));
         $("#yearLeave").text("Leave Carried Foward " + data[1] + "");
+        $("#LapseLeaveDate").text("Lapsed Date: " + (data[2] ? data[2] : "Data not available"));
     });
 
 

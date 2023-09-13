@@ -106,23 +106,16 @@ class SettingService
     public function updateRole($r, $id)
     {
         $modifiedBy = Auth::user()->username;
-        $modifiedTime = date('Y-m-d h:m:s');
+        $modifiedTime = date('Y-m-d H:i:s');
 
         $input = $r->input();
-
 
         $updateData['roleName'] = $r['roleName'];
         $updateData['modifiedBy'] = $modifiedBy;
         $updateData['modifiedTime'] = $modifiedTime;
         $updateData['desc'] = $r['desc'];
-        // pr($updateData);
-        // $updateData = [
-        //     'modifiedBy' => $modifiedBy,
-        //     'modifiedTime' => $modifiedTime
-        // ];
 
         Role::where('id', $id)->update($updateData);
-        // dd($input);
 
         if (!empty($input['permissions'])) {
 
@@ -520,7 +513,6 @@ class SettingService
             ->first();
 
 
-
         $user = Auth::user();
 
         $input = [
@@ -636,27 +628,44 @@ class SettingService
     {
         $input = $r->input();
 
+        $user = Auth::user();
+
+
+        // $input['role']['tenant_id'] = Auth::user()->tenant_id;
+        // $input['role']['addedBy'] = $user->username;
+        // $input['role']['addedTime'] = date('Y-m-d h:m:s');
         $input = [
             'country_id' => $input['country_id'],
             'state_id' => $input['state_name'],
             'name' => $input['city_name'],
             'postcode' => $input['postcode'],
-
+            'addedBy' => $user->username,
 
         ];
 
-        $existingLocation = Location::where('country_id', $input['country_id'])
+        $existingPostcode = Location::where('country_id', $input['country_id'])
         ->where('postcode', $input['postcode'])
         ->first();
 
-        if ($existingLocation) {
-            $data['msg'] = 'Location already exists.';
+        $existingCity = Location::where('country_id', $input['country_id'])
+        ->where('name', $input['name'])
+        ->first();
+
+        if ($existingPostcode) {
+            $data['msg'] = 'Postcode already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
 
             return $data;
 
+        } else if ($existingCity){
+            $data['msg'] = 'City already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
         } else {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1409,15 +1418,30 @@ class SettingService
         return $data;
     }
 
-    public function getStatebyCountry($id = '')
+    public function getPostcodeByCountryBranch($id = '')
     {
-        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+        $data = Country::join('location_states', 'location_country.country_id', '=', 'location_states.country_id')
+            ->join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
             ->where('location_states.country_id', $id)
             ->get();
+
         return $data;
     }
 
-    public function getCitybyState($id = '')
+    public function getStateAndCityByCountryBranch($id = '')
+    {
+
+        $data = Location::where('postcode', $id)
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+            ->select('location_cities.postcode', 'location_cities.name', 'location_states.state_name', 'location_cities.country_id',
+            'location_country.country_name', 'location_cities.state_id' ,'location_states.id')
+            ->get();
+
+        return $data;
+    }
+
+    public function getCitybyStateBranch($id = '')
     {
 
         $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
@@ -1425,17 +1449,15 @@ class SettingService
             ->groupBy('location_cities.name')
             ->get();
 
-
         return $data;
     }
 
-    public function getPostcodeByCity($id = '')
+    public function getPostcodeByCityBranch($id = '')
     {
 
         $data = Location::select('*')
             ->where('name', $id)
             ->get();
-
 
         return $data;
     }
@@ -1443,7 +1465,9 @@ class SettingService
 
     public function locationView()
     {
-        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name', 'location_cities.postcode')
+        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name',
+            'location_cities.postcode', 'location_cities.addedBy', 'location_cities.created_at', 'location_cities.modifiedBy',
+            'location_cities.modified_at')
             ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
             ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
             ->orderBy('location_cities.id', 'desc')
@@ -1480,7 +1504,6 @@ class SettingService
     {
         $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
-        // dd($data);
 
         return $data;
     }
@@ -1637,6 +1660,7 @@ class SettingService
         $logsData['type_of_log'] = $input['type_of_log'];
         $logsData['tenant_id'] = $user->tenant_id;
         $logsData['activity_name'] = implode(', ', $input['activity_name']); // Convert the array into a string
+        $logsData['addedBy'] = $user->username;
 
         TypeOfLogs::create($logsData);
 
@@ -1650,7 +1674,6 @@ class SettingService
                 $activityData['project_id'] = $input['project_id'];
                 $activityData['logs_id'] = $typeOfLog->id;
                 $activityData['tenant_id'] = $user->tenant_id;
-
                 ActivityLogs::create($activityData);
             }
         }
@@ -1670,6 +1693,8 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $modifiedBy = Auth::user()->username;
+        $modifiedTime = date('Y-m-d H:i:s');
 
         if (isset($input['project_id'])) {
             $logsData['project_id'] = $input['project_id'];
@@ -1683,6 +1708,8 @@ class SettingService
         $logsData['type_of_log'] = $input['type_of_log'];
         $logsData['tenant_id'] = $user->tenant_id;
         $logsData['activity_name'] = implode(', ', $input['activity_name']);
+        $logsData['modifiedBy'] = $modifiedBy;
+        $logsData['modifiedTime'] = $modifiedTime;
 
         TypeOfLogs::where('id', $id)->update($logsData);
 
@@ -1947,7 +1974,7 @@ class SettingService
         $claimCategory['user_id'] = $user->id;
         $claimCategory['claim_catagory_code'] = $input['claim_catagory_code'];
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
-
+        $claimCategory['addedBy'] = Auth::user()->username;
         $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
         $claimCategory['addproject'] = $input['addproject'];
 
@@ -2025,6 +2052,8 @@ class SettingService
         $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
         $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
         $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+        $input['modifiedBy'] = Auth::user()->username;
+        $input['modifiedTime'] = date('Y-m-d H:i:s');
 
         ClaimCategory::where('id', $id)->update($input);
 
@@ -3090,6 +3119,7 @@ class SettingService
         $data3 = $input['day'];
         $data4 = $input['duration'];
         $data5 = Auth::user()->tenant_id;
+        $data6 = Auth::user()->username;
 
         $input = [
             'leave_types_code' => $data1,
@@ -3097,6 +3127,7 @@ class SettingService
             'day' => $data3,
             'duration' => $data4,
             'tenant_id' => $data5,
+            'addedBy' => $data6,
             'status' => 1
         ];
 
@@ -3122,6 +3153,9 @@ class SettingService
     public function updateLeaveleavetypes($r, $id)
     {
         $input = $r->input();
+        $username = Auth::user()->username;
+        $modifiedTime = date('Y-m-d H:i:s');
+
         $existingLeaveType = leavetypesModel::where('id', $id)
             ->where('tenant_id', '=', Auth::user()->tenant_id)
             ->first();
@@ -3130,12 +3164,13 @@ class SettingService
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
         $data4 = $input['duration'];
+        $data5 = $username;
+        $data6 = $modifiedTime;
 
         if ($existingLeaveType->leave_types_code === $data1 && $existingLeaveType->leave_types === $data2) {
             $existingLeaveType->day = $data3;
             $existingLeaveType->duration = $data4;
             $existingLeaveType->save();
-
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -3165,6 +3200,9 @@ class SettingService
             $existingLeaveType->leave_types = $data2;
             $existingLeaveType->day = $data3;
             $existingLeaveType->duration = $data4;
+            $existingLeaveType->modifiedBy = $data5;
+            $existingLeaveType->modifiedTime = $data6;
+
             $existingLeaveType->save();
 
             $data['status'] = config('app.response.success.status');

@@ -460,38 +460,14 @@
                     <div class="col-md-4">
                         <div class="row p-2">
                             <div class="col-md-6">
-                                <label class="form-label col-form-label">Phone Bill</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input readonly type="text" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-6">
                                 <label class="form-label col-form-label">Entertainment</label>
                             </div>
                             <div class="col-md-6">
                                 <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->mode_of_transport->entertainment }}">
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col-md-6">
-                                <label class="form-label col-form-label">Laundry</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input readonly type="text" class="form-control" value="">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-6">
-                                <label class="form-label col-form-label">Others</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input readonly type="text" class="form-control" value="">
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                     <div class="row p-2">
                         <div class="col-md-6">
                             <label class="form-label col-form-label">Total Cash Advance</label>
@@ -510,9 +486,9 @@
                     </div>
                     </div>
                 </div>
-                <div class="row p-2 justify-content-end">
+                <!-- <div class="row p-2 justify-content-end">
                     <button class="btn btn-primary col-md-2">Button</button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="row p-2">

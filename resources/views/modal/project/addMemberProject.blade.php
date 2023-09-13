@@ -27,7 +27,7 @@
                                         // Sort employees by name alphabetically
                                         $sortedEmployees = $employees->sortBy('employeeName');
                                         foreach ($sortedEmployees as $employee) {
-                                            echo '<option value="' . $employee->id . '">' . $employee->employeeName . '</option>';
+                                            echo '<option value="' . $employee->user_id . '">' . $employee->employeeName . '</option>';
                                         }
                                     }
                                 ?>

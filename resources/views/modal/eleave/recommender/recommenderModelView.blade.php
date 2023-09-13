@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-12" style="width:50%">
                         <label class="form-label row-md-6" >Type of Leave*</label><br>
-                        <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewtype1">
+                        <input type="text" style="pointer-events: nonme;" readonly class="form-control-plaintext" id="viewtype1">
                     </div>
                     <div class="col-12" style="width:50%">
                         <label class="form-label row-md-6" >Number of Day(s) Applied</label><br>

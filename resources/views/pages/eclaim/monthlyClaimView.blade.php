@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        @if ($user->eclaimrecommender !=  '' && $GNC->supervisor == '')
+                        @if ($claimData->status =  'active')
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                             
@@ -137,7 +137,7 @@
                             
                             </div>
                         </div>
-                        @elseif ($user->eclaimrecommender != '' && $GNC->supervisor == 'recommend')
+                        @elseif ($claimData->status !=  'active')
                         
                         @endif
                         <div class="row p-2">
