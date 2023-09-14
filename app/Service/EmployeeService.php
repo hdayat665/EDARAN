@@ -356,6 +356,8 @@ class EmployeeService
     {
 
         $data['country'] = Country::all();
+        $data['country2'] = Country::all();
+
         $data['state'] = State::all();
         $data['city'] = Location::all();
         $data['postcode'] = Location::all();
@@ -1195,6 +1197,7 @@ class EmployeeService
     public function addEmployment($r)
     {
         $input = $r->input();
+
         $workingEmail = Employee::where('workingEmail', $input['workingEmail'])->first();
 
         if ($workingEmail) {
@@ -1241,7 +1244,6 @@ class EmployeeService
             $ls = new LoginService;
 
             $ls->temporaryPasswordEmail($input);
-
             $data['status'] = true;
             $data['title'] = 'Success';
             $data['type'] = 'success';
@@ -1812,7 +1814,7 @@ class EmployeeService
 
     public function getEmployeeAddressforCompanion($id)
     {
-     
+
 
         $addressDetails = UserAddress::select('useraddress.*', 'location_states.state_name', 'location_country.country_name')
         ->join('location_states', 'useraddress.state', '=', 'location_states.id')

@@ -206,6 +206,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateAddressDetails', 'updateAddressDetails');
             Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
             Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
+            Route::get('/getAddressFromRegisterPermanent/{id}', 'getAddressFromRegisterPermanent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
