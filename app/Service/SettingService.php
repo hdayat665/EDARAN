@@ -3070,6 +3070,11 @@ class SettingService
                 'status' => $leaveType->status,
                 'leave_types' => $leaveType->leave_types,
                 'day' => $leaveType->day,
+                'addedBy' => $leaveType->addedBy,
+                'created_at' => $leaveType->created_at,
+                'modifiedBy' => $leaveType->modifiedBy,
+                'modifiedTime' => $leaveType->modifiedTime,
+
 
                 // tambah field lain yang anda mahu sertakan di sini
             ];
@@ -3116,6 +3121,7 @@ class SettingService
         $data3 = $input['day'];
         $data4 = $input['duration'];
         $data5 = Auth::user()->tenant_id;
+        $data6 = Auth::user()->username;
 
         $input = [
             'leave_types_code' => $data1,
@@ -3123,6 +3129,7 @@ class SettingService
             'day' => $data3,
             'duration' => $data4,
             'tenant_id' => $data5,
+            'addedBy' => $data6,
             'status' => 1
         ];
 
@@ -3175,11 +3182,15 @@ class SettingService
         $existingLeaveType = leavetypesModel::where('id', $id)
             ->where('tenant_id', '=', Auth::user()->tenant_id)
             ->first();
+        $username = Auth::user()->username;
+        $modifiedTime = date('Y-m-d H:i:s');
 
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
         $data4 = $input['duration']; // Komen atau buang baris ini
+        $data5 = $username;
+        $data6 = $modifiedTime;
 
         $check = [
             ['AL', 'ANNUAL LEAVE'],
@@ -3211,7 +3222,8 @@ class SettingService
                 if($existingLeaveType->leave_types_code === 'NP') {
                     $existingLeaveType->duration = $data4; // Membolehkan kemaskini duration untuk "NO PAY LEAVE"
                 }
-
+                $existingLeaveType->modifiedBy = $data5;
+                $existingLeaveType->modifiedTime = $data6;
                 $existingLeaveType->save();
 
                 $data['status'] = config('app.response.success.status');
@@ -3227,6 +3239,9 @@ class SettingService
         $existingLeaveType->leave_types = $data2;
         $existingLeaveType->day = $data3;
         $existingLeaveType->duration = $data4; // Komen atau buang baris ini
+        $existingLeaveType->modifiedBy = $data5;
+        $existingLeaveType->modifiedTime = $data6;
+
         $existingLeaveType->save();
 
         $data['status'] = config('app.response.success.status');

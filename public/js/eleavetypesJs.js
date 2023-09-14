@@ -290,7 +290,7 @@ $(document).ready(function () {
         // updating the value of textarea
     });
 
-    $("#tabletypes").DataTable({
+    $("#tabletypess").DataTable({
         searching: true,
         lengthChange: true,
         lengthMenu: [
