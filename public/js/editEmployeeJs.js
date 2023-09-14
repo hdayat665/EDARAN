@@ -49,7 +49,18 @@ $("#data-table-default").dataTable({
         );
     },
 });
-
+$(".vehi").hide();
+$(document).on("click", ".dropdown-toggle", function(e) {
+    e.stopPropagation(); // mencegah event dari bubbling ke atas
+    var dropdownMenu = $(this).closest(".btn-group").find(".vehi");
+    $(".vehi").not(dropdownMenu).hide();
+    dropdownMenu.toggle();
+});
+$(document).on("click", function(e) {
+    if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+        $(".vehi").hide();
+    }
+});
 
 function initializeCroppie(src) {
     if (croppie) {
@@ -3084,6 +3095,18 @@ if (permanentChecked && correspondentChecked) {
             );
         },
     });
+    $(".child").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".child");
+        $(".child").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".child").hide();
+        }
+    });
 
     $("#childModalAdd").click(function (e) {
         $("#add-children").modal("show");
@@ -3519,21 +3542,18 @@ if (permanentChecked && correspondentChecked) {
         },
     });
     $(document).ready(function() {
-    $(".edu").hide();
-
-    $(".dropdown-toggle").on("click", function() {
-        var dropdownMenu = $(this).closest(".btn-group").find(".edu");
-        $(".edu").not(dropdownMenu).hide();
-        dropdownMenu.toggle();
+        $(".edu").hide();
+        $(".dropdown-toggle").on("click", function() {
+            var dropdownMenu = $(this).closest(".btn-group").find(".edu");
+            $(".edu").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".edu").hide();
+            }
+        });
     });
-
-    $(document).on("click", function(e) {
-        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-            $(".edu").hide();
-        }
-    });
-});
-
 
     $("#employeeOthers").DataTable({
         responsive: false,
@@ -3547,6 +3567,19 @@ if (permanentChecked && correspondentChecked) {
             );
         },
     });
+    $(".oth").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".oth");
+        $(".oth").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".oth").hide();
+        }
+    });
+
     $("#employeeAddress").DataTable({
             responsive: false,
             lengthMenu: [
@@ -3559,6 +3592,18 @@ if (permanentChecked && correspondentChecked) {
                 );
             },
         });
+    $(".empadd").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".empadd");
+        $(".empadd").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".empadd").hide();
+        }
+    });
 
     $("#siblingModalAdd").click(function (e) {
         $("input").prop("disabled", false);
@@ -3856,6 +3901,18 @@ if (permanentChecked && correspondentChecked) {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+    });
+    $(".fam").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".fam");
+        $(".fam").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".fam").hide();
+        }
     });
 
     $("#firstNameP,#lastNameP").change(function () {
