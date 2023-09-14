@@ -106,7 +106,7 @@ class SettingService
     public function updateRole($r, $id)
     {
         $modifiedBy = Auth::user()->username;
-        $modifiedTime = date('Y-m-d h:m:s');
+        $modifiedTime = date('Y-m-d H:i:s');
 
         $input = $r->input();
 
@@ -635,22 +635,32 @@ class SettingService
     public function createLocation($r)
     {
         $input = $r->input();
+        $user = Auth::user();
 
         $input = [
             'country_id' => $input['country_id'],
             'state_id' => $input['state_name'],
             'name' => $input['city_name'],
             'postcode' => $input['postcode'],
+            'addedBy' => $user->username,
 
 
         ];
 
-        $existingLocation = Location::where('country_id', $input['country_id'])
-        ->where('postcode', $input['postcode'])
+        $existingCity = Location::where('country_id', $input['country_id'])
+        ->where('name', $input['name'])
         ->first();
 
-        if ($existingLocation) {
-            $data['msg'] = 'Location already exists.';
+        if ($existingPostcode) {
+            $data['msg'] = 'Postcode already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+
+        } else if ($existingCity){
+            $data['msg'] = 'City already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -1409,15 +1419,31 @@ class SettingService
         return $data;
     }
 
-    public function getStatebyCountry($id = '')
+    public function getPostcodeByCountryBranch($id = '')
     {
-        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+        $data = Country::join('location_states', 'location_country.country_id', '=', 'location_states.country_id')
+            ->join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
             ->where('location_states.country_id', $id)
             ->get();
+
+
         return $data;
     }
 
-    public function getCitybyState($id = '')
+    public function getStateAndCityByCountryBranch($id = '')
+    {
+
+        $data = Location::where('postcode', $id)
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+            ->select('location_cities.postcode', 'location_cities.name', 'location_states.state_name', 'location_cities.country_id',
+            'location_country.country_name', 'location_cities.state_id' ,'location_states.id')
+            ->get();
+
+        return $data;
+    }
+
+    public function getCitybyStateBranch($id = '')
     {
 
         $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
@@ -1429,7 +1455,7 @@ class SettingService
         return $data;
     }
 
-    public function getPostcodeByCity($id = '')
+    public function getPostcodeByCityBranch($id = '')
     {
 
         $data = Location::select('*')
@@ -1443,7 +1469,9 @@ class SettingService
 
     public function locationView()
     {
-        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name', 'location_cities.postcode')
+        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name',
+            'location_cities.postcode', 'location_cities.addedBy', 'location_cities.created_at', 'location_cities.modifiedBy',
+            'location_cities.modified_at')
             ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
             ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
             ->orderBy('location_cities.id', 'desc')
@@ -1637,6 +1665,8 @@ class SettingService
         $logsData['type_of_log'] = $input['type_of_log'];
         $logsData['tenant_id'] = $user->tenant_id;
         $logsData['activity_name'] = implode(', ', $input['activity_name']); // Convert the array into a string
+        $logsData['addedBy'] = $user->username;
+
 
         TypeOfLogs::create($logsData);
 
@@ -1670,6 +1700,8 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $modifiedBy = Auth::user()->username;
+        $modifiedTime = date('Y-m-d H:i:s');
 
         if (isset($input['project_id'])) {
             $logsData['project_id'] = $input['project_id'];
@@ -1683,6 +1715,8 @@ class SettingService
         $logsData['type_of_log'] = $input['type_of_log'];
         $logsData['tenant_id'] = $user->tenant_id;
         $logsData['activity_name'] = implode(', ', $input['activity_name']);
+        $logsData['modifiedBy'] = $modifiedBy;
+        $logsData['modifiedTime'] = $modifiedTime;
 
         TypeOfLogs::where('id', $id)->update($logsData);
 
@@ -1947,6 +1981,7 @@ class SettingService
         $claimCategory['user_id'] = $user->id;
         $claimCategory['claim_catagory_code'] = $input['claim_catagory_code'];
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
+        $claimCategory['addedBy'] = Auth::user()->username;
 
         $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
         $claimCategory['addproject'] = $input['addproject'];
@@ -2025,6 +2060,8 @@ class SettingService
         $input['addproject'] = isset($_POST['addproject']) ? 1 : 0;
         $input['addattach'] = isset($_POST['addattach']) ? 1 : 0;
         $input['attachstatus'] = isset($_POST['attachstatus']) ? 1 : 0;
+        $input['modifiedBy'] = Auth::user()->username;
+        $input['modifiedTime'] = date('Y-m-d H:i:s');
 
         ClaimCategory::where('id', $id)->update($input);
 
