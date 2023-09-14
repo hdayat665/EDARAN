@@ -495,31 +495,38 @@ class SettingController extends Controller
         return view('pages.setting.branch', $data);
     }
 
-    public function getStatebyCountry($id = '')
+    public function getPostcodeByCountryBranch($id = '')
     {
         $ss = new SettingService;
 
-        $result = $ss->getStatebyCountry($id);
+        $result = $ss->getPostcodeByCountryBranch($id);
 
         return $result;
     }
 
-    public function getCitybyState($id = '')
+    public function getStateAndCityByCountryBranch($id = '')
     {
         $ss = new SettingService;
 
-        $result = $ss->getCitybyState($id);
+        $result = $ss->getStateAndCityByCountryBranch($id);
 
         return $result;
     }
 
-
-
-    public function getPostcodeByCity($id = '')
+    public function getCitybyStateBranch($id = '')
     {
         $ss = new SettingService;
 
-        $result = $ss->getPostcodeByCity($id);
+        $result = $ss->getCitybyStateBranch($id);
+
+        return $result;
+    }
+
+    public function getPostcodeByCityBranch($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getPostcodeByCityBranch($id);
 
 
         return $result;

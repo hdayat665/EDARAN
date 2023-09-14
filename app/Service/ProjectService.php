@@ -511,7 +511,7 @@ class ProjectService
         }
 
         $data = DB::table('project_member as a')
-            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.user_id')
             ->select('a.*', 'b.employeeName')
             ->where($cond)
             ->orderBy('id', 'desc')

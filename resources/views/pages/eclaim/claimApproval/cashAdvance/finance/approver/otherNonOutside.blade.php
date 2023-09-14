@@ -231,16 +231,21 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="row p-2"> 
-                            @if ($ca->f_approver == 'recommend')
-                            @else
-                            <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
-                            <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                            <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                            <a class="btn btn-lime" id="f_approver_button3" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
-                            @endif 
+                            <div class="row p-2"> 
+                                
+                                @if ($ca->f_approver == 'recommend')
+                                <a href="/cashAdvanceFapproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                @elseif ($ca->f_approver == 'reject')
+                                <a href="/cashAdvanceFapproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                @else
+                                    
+                                    <!-- <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp; -->
+                                    <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>&nbsp;
+                                    <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                                    <a href="/cashAdvanceFapproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                @endif 
+                            </div>                       
                         </div>
-                    </div>
                 </div>
                 <div class="row p-2">
                     <div class="form-control">
@@ -384,7 +389,7 @@
                                         <label class="form-label col-form-label">Purpose</label>
                                     </div>
                                     <div class="col-md-7">
-                                        <input readonly type="text" class="form-control" value="{{ $ca->purpose ?? '-' }}">
+                                        <textarea readonly class="form-control" name="" rows="5" maxlength="225">{{ $ca->purpose ?? '-' }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -473,7 +478,7 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="row p-2">
                                     <div class="col-md-6">
                                         <label class="form-label col-form-label">Total Cash Advance</label>
@@ -482,19 +487,28 @@
                                         <input readonly type="text" class="form-control" value="RM {{ $ca->amount ?? '-' }}">
                                     </div>
                                 </div>
+                                <form id="updateForm">
                                 <div class="row p-2">
                                     <div class="col-md-6">
-                                        <label class="form-label col-form-label">Maximum Paid Out</label>
+                                        <label class="form-label col-form-label">Maximum Paid Out </label> 
+                                        @if ($ca->f_approver == 'recommend')
+                                        
+                                        @else
+                                        <a href="#" id="editLink">Edit</a>
+                                        
+                                        @endif
                                     </div>
                                     <div class="col-md-6">
-                                        <input readonly type="text" class="form-control" value="">
+                                        <input readonly type="text" name="max_total" class="form-control" id="editableInput" value="{{ 'RM ' . ($ca->mode_of_transport->max_total ?? 0) }}">
                                     </div>
                                 </div>
                            </div>
                         </div>
                         <div class="row p-2 justify-content-end">
-                            <button class="btn btn-primary col-md-2">Button</button>
-                        </div>
+                                <button class="btn btn-primary col-md-2" id="cancelBtn" style="display: none" >Cancel</button>&nbsp;&nbsp;
+                                <button class="btn btn-primary col-md-2" id="updateBtn" style="display: none" data-id="{{ $ca->id }}">Update</button>
+                                </form>
+                            </div>
                     </div>
                 </div>
                 <div class="row p-2">

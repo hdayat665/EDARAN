@@ -15,12 +15,17 @@
             <table id="typeOfLogsTable" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="9%" data-orderable="false" class="align-middle">Action</th>
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Department</th>
                         <th class="text-nowrap">Type of Logs</th>
                         <th class="text-nowrap">Project Name</th>
                         <th class="text-nowrap">Activity Name</th>
+                        <th class="text-nowrap">Added By</th>
+                        <th class="text-nowrap">Added Time</th>
+                        <th class="text-nowrap">Modified By</th>
+                        <th class="text-nowrap">Modified Time</th>
+                        <th width="9%" data-orderable="false" class="align-middle">Action</th>
+
 
                     </tr>
                 </thead>
@@ -29,14 +34,6 @@
                     @if ($datas)
                     @foreach ($datas as $data)
                     <tr>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                            <a href="javascript:;" id="editButton" data-id="{{$data->id}}" data-bs-target="#exampleModaledit" class="dropdown-item"> Edit</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="dropdown-item"> Delete</a>
-                            </div>
-                        </td>
 
                         <td >{{$no++}}</td>
                         <td >{{$data->departmentName}}</td>
@@ -52,8 +49,21 @@
                        <td>{{ isset($typeOfLogNames[$data->type_of_log]) ? $typeOfLogNames[$data->type_of_log] : '-' }}</td>
                         <td >{{$data->project_name ? $data->project_name : '-'}}</td>
                         <td >
-                            <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">CLICK HERE</a></td>
+                            <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">CLICK HERE</a>
+                        </td>
                         {{-- <td>1. Corrective Maintenance, <br> 2. Reviewing & Documenting, <br>3. Reporting </td> --}}
+                        <td>{{ $data->addedBy ?? '-' }}</td>
+                        <td>{{ $data->created_at ?? '-' }}</td>
+                        <td>{{ $data->modifiedBy ?? '-' }}</td>
+                        <td>{{ $data->modifiedTime ?? '-' }}</td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                            <a href="javascript:;" id="editButton" data-id="{{$data->id}}" data-bs-target="#exampleModaledit" class="dropdown-item"> Edit</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="dropdown-item"> Delete</a>
+                            </div>
+                        </td>
 
                     </tr>
                     @endforeach

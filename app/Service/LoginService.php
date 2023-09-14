@@ -216,7 +216,7 @@ class LoginService
         if ($input['password'] != $input['confirm_password']) {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
-            $data['msg'] = 'new password and confirm password not match';
+            $data['msg'] = 'Confirm Password Does Notatch';
 
             return $data;
         }
@@ -265,19 +265,18 @@ class LoginService
 
         $usersData = Users::where('id', $input['user_id'])->first();
 
+        // if (Hash::check($input['current_password'] =! $usersData->password)) {
+        //     $data['title'] = 'Error!';
+        //     $data['type'] = 'error';
+        //     $data['msg'] = 'the current password does not match with old password';
 
-        if (Hash::check($input['current_password'] =! $usersData->password)) {
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'the current password does not match with old password';
-
-            return $data;
-        }
+        //     return $data;
+        // }
 
         if (Hash::check($input['password'], $usersData->password)) {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
-            $data['msg'] = 'the current password is match with old password';
+            $data['msg'] = 'the current password match with old password';
 
             return $data;
         }

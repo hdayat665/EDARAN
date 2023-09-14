@@ -5,7 +5,7 @@ $("document").ready(function () {
         lengthChange: false,
         lengthMenu: [5, 10],
         responsive: false,
-        info: false,
+        info: true,
         initComplete: function (settings, json) {
             $("#generalclaim").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
@@ -18,22 +18,24 @@ $("document").ready(function () {
         lengthChange: false,
         lengthMenu: [5, 10],
         responsive: false,
-        info: false,
-        dom: '<"top">rt<"bottom"p><"clear">',
+        info: true,
+        
         initComplete: function (settings, json) {
             $("#claimtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
     });
+    
+    
 
     $("#cashadvancetable").DataTable({
         searching: false,
         lengthChange: false,
         lengthMenu: [5, 10],
         responsive: false,
-        info: false,
-        dom: '<"top">rt<"bottom"p><"clear">',
+        info: true,
+       
         initComplete: function (settings, json) {
             $("#cashadvancetable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"

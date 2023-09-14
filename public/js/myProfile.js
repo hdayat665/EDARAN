@@ -634,7 +634,7 @@ $(document).ready(function () {
                 okuFile: {
                     required: {
                         depends: function(element) {
-                            return $(element).prop("pointer-events: auto;") === false;
+                            return $(element).prop("disabled") === false;
                         }
                     }
                 },
