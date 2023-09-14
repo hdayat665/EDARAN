@@ -9,18 +9,17 @@ $(document).ready(function () {
             );
         },
     });
-    $(document).ready(function() {
-        $(".vehi").hide();
-        $(document).on("click", ".dropdown-toggle", function() {
-            var dropdownMenu = $(this).closest(".btn-group").find(".vehi");
-            $(".vehi").not(dropdownMenu).hide();
-            dropdownMenu.toggle();
-        });
-        $(document).on("click", function(e) {
-            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-                $(".vehi").hide();
-            }
-        });
+    $(".vehi").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".vehi");
+        $(".vehi").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".vehi").hide();
+        }
     });
 
     function Previous() {

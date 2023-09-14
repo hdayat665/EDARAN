@@ -1,3 +1,11 @@
+<style>
+    .custom-dropdown-menu {
+        position: static !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+</style>
 <div class="tab-pane fade" id="default-tab-2">
     <div class="card-header">
          <ul class="nav nav-tabs" id="myTab">
@@ -15,7 +23,6 @@
              </li>
          </ul>
     </div>
-
 
      <div class="tab-content panel m-0 rounded-0 p-3">
          <div class="tab-pane fade active show" id="quali-tab-1">
@@ -44,15 +51,17 @@
                         <tr>
                             <td> {{$id}} </td>
                             <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                    <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
-                                    <!-- <div class="dropdown-divider"></div> -->
+                                <div class="btn-group">
+                                    <div>
+                                        <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    </div>
+                                    <ul><div class="dropdown-menu custom-dropdown-menu edu">
+                                        <li><a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd">Edit</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <li><a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal">Delete</a></li>
+                                    </ul>
                                 </div>
                             </td>
-
                             <td> {{ $education->fromDate }} </td>
                             <td> {{ $education->toDate }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
@@ -97,15 +106,17 @@
                             <tr>
                                 <td> {{$id}} </td>
                                 <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
-                                        <!-- <div class="dropdown-divider"></div> -->
+                                    <div class="btn-group">
+                                        <div>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        </div>
+                                        <ul><div class="dropdown-menu custom-dropdown-menu oth">
+                                            <li><a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a></li>
+                                        </ul>
                                     </div>
                                 </td>
-
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
                                 <td><a href="{{ route('view', ['filename' => $other->file ?? '']) }}" target="blank_">{{$other->file ?? ''}}</a></td>
