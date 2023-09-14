@@ -545,7 +545,7 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.employee_id', '=', 'c.user_id')
-            ->select('a.id','a.employee_id','a.joined_date', 'b.contract_start_date','c.designation', 'c.department', 'c.branch', 'c.unit')
+            ->select('a.id','a.employee_id','a.joined_date', 'b.id', 'b.contract_start_date','c.designation', 'c.department', 'c.branch', 'c.unit')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]]) // Specify 'a.tenant_id' to remove ambiguity
             ->orderBy('a.id', 'desc') // Use 'a.id' for ordering
             ->first();
