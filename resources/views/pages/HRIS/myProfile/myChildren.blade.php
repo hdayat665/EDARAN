@@ -41,13 +41,11 @@
                     </div>
                 </td>
                 <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
-
                 @if($children->nonCitizen == 'on')
                     <td>{{ $children->passport }}</td>
                 @else
                     <td>{{ $children->idNo }}</td>
                 @endif
-
                 <td>{{ $children->age }}</td>
                 <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
                 <td style="text-transform: uppercase;">{{ $children->instituition ?? '-' }}</td>

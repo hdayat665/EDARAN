@@ -2,21 +2,25 @@
 </head>
 <style>
     #employeeAddress th:first-child,
-#employeeAddress td:first-child {
-    width: 0% !important;
+    #employeeAddress td:first-child {
+        width: 0% !important;
 
-}
-#employeeAddress th:nth-child(2),
-#employeeAddress td:nth-child(2) {
-    width: 16%  !important;
-}
-#employeeAddress th:nth-child(3),
-#employeeAddress td:nth-child(3) {
-    width: 44% !important;
-}
-
-
-    </style>
+    }
+    #employeeAddress th:nth-child(2),
+    #employeeAddress td:nth-child(2) {
+        width: 16%  !important;
+    }
+    #employeeAddress th:nth-child(3),
+    #employeeAddress td:nth-child(3) {
+        width: 44% !important;
+    }
+    .custom-dropdown-menu {
+    position: static !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    }
+</style>
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
@@ -39,13 +43,16 @@
                         <tr>
                             <td> {{$id}} </td>
                             <td>
-
-                                    <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                        <div class="dropdown-menu">
-                                    <a href="javascript:;" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit"class="dropdown-item" name="userAddress" >Edit</a>
+                                <div class="btn-group">
+                                    <div>
+                                        <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    </div>
+                                    <ul><div class="dropdown-menu custom-dropdown-menu empadd">
+                                        <li><a href="javascript:;" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit" class="dropdown-item" name="userAddress" >Edit</a></li>
                                         <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" class="dropdown-item">Delete</a>
-
+                                        <li><a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" class="dropdown-item">Delete</a></li>
+                                    </ul>
+                                </div>
                             </td>
                             <td style="text-transform: uppercase;">
                                 {!! $address->address1 ?? '' !!}

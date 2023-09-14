@@ -1,15 +1,14 @@
-<style>
-        .custom-dropdown-menu {
-        position: static ;
-        height: auto ;
-        max-height: none ;
-        overflow: visible ;
-    }
-</style>
 <head>
   <link rel="stylesheet" type="text/css" href="assets/css/customaddresstablemyprofile.css">
 </head>
-
+<style>
+        .custom-dropdown-menu {
+            position: static !important;
+            height: auto !important;
+            max-height: none !important;
+            overflow: visible !important;
+    }
+</style>
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" id="addressProfile" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
