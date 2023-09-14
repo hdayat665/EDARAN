@@ -1076,4 +1076,6 @@ $(document).ready(function () {
         }
 
     });
+
+    Surrender_Cancellation
 });
