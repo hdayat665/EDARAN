@@ -23,3 +23,7 @@ resources/views/pages/.DS_Store
 composer.lock
 .DS_Store
 composer.lock
+docker/
+docker-compose.yml
+Dockerfile
+worker.log
