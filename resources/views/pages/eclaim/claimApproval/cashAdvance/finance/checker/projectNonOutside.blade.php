@@ -377,34 +377,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="row p-2"> 
-                            @if ( $ca->f_status != 'recommend')
-                        @if ($ca->pv_number != '')
-                            <!-- The pv_number is not null, so hide all buttons -->
-                        @else
-                            <!-- The pv_number is null, so show the buttons as before -->
-                            @if ($ca->f1 == 'check' && $ca->f2 == 'check' && $ca->f3 == 'check')
-                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                    <div class="col-md-2"> 
+                        @if ($ca->f_status != 'recommend')
+                            @if ($ca->pv_number != '')
+                                <!-- The pv_number is not null, so hide all buttons -->
                             @else
-                                <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
-                                <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
-                                <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                            @endif
-
-                            @if ($checkers == 'f1')
-                                <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
-                            @endif
-
-                            <!-- @if (($ca->f1 == 'check' && $ca->f2 == 'check') || ($ca->f1 == 'check' && $ca->f3 == 'check') || ($ca->f2 == 'check' && $ca->f3 == 'check'))
-                                @if ($checkers == 'f1')
-                                    <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                                <!-- The pv_number is null, so show the buttons as before -->
+                                @if ($ca->f1 == 'check' && $ca->f2 == 'check' && $ca->f3 == 'check')
+                                    <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                                @else
+                                    <div class="row p-2">
+                                        <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
+                                        @if ($checkers == 'f1')
+                                            <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>&nbsp;
+                                            <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                                        @endif
+                                        <a href="/cashAdvanceFcheckerView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                    </div>
                                 @endif
-                            @endif -->
+                            @endif
+                        @else
+                            <!-- f_status is 'recommend', so show the Back button in full div -->
+                            <div class="row p-2">
+                                <a href="/cashAdvanceFcheckerView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                            </div>
                         @endif
-                    @endif
-                        </div>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -579,14 +576,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label col-form-label">Phone Bill</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input readonly type="text" class="form-control" value="">
-                                    </div>
-                                </div>
+                                
                                 <div class="row p-2">
                                     <div class="col-md-6">
                                         <label class="form-label col-form-label">Entertainment</label>
@@ -595,24 +585,9 @@
                                         <input readonly type="text" class="form-control" value="RM {{ $ca->mode_of_transport->entertainment ?? 0 }}">
                                     </div>
                                 </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label col-form-label">Laundry</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input readonly type="text" class="form-control" value="">
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label col-form-label">Others</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input readonly type="text" class="form-control" value="">
-                                    </div>
-                                </div>
+                                
                             </div>
-                           <div class="col-md-3">
+                           <div class="col-md-4">
                             <div class="row p-2">
                                 <div class="col-md-6">
                                     <label class="form-label col-form-label">Total Cash Advance</label>
@@ -621,18 +596,27 @@
                                     <input readonly type="text" class="form-control" value="RM {{ $ca->mode_of_transport->total ?? 0 }}">
                                 </div>
                             </div>
+                            <form id="updateForm">
                             <div class="row p-2">
                                 <div class="col-md-6">
-                                    <label class="form-label col-form-label">Maximum Paid Out</label>
+                                    <label class="form-label col-form-label">Maximum Paid Out </label> 
+                                    @if ($ca->f_status == 'recommend')
+                                    
+                                    @else
+                                    <a href="#" id="editLink">Edit</a>
+                                    
+                                    @endif
                                 </div>
                                 <div class="col-md-6">
-                                    <input readonly type="text" class="form-control" value="RM {{ $ca->mode_of_transport->max_total ?? 0 }}">
+                                    <input readonly type="text" name="max_total" class="form-control" id="editableInput" value="{{ 'RM ' . ($ca->mode_of_transport->max_total ?? 0) }}">
                                 </div>
                             </div>
                            </div>
                         </div>
                         <div class="row p-2 justify-content-end">
-                            <button class="btn btn-primary col-md-2">Button</button>
+                            <button class="btn btn-primary col-md-2" id="cancelBtn" style="display: none" >Cancel</button>&nbsp;&nbsp;
+                            <button class="btn btn-primary col-md-2" id="updateBtn" style="display: none" data-id="{{ $ca->id }}">Update</button>
+                            </form>
                         </div>
                     </div>
                 </div>

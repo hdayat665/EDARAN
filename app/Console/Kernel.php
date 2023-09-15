@@ -49,11 +49,32 @@ class Kernel extends ConsoleKernel
         $submitAgeCompanion = $ageCompanion->age;
         $schedule->command('increment:agecompanion')->yearly($submitAgeCompanion);
 
+        //send email for event reminder
         $schedule->call(function () {
         $mailService = new MailService();
-        $mailService->emailEventReminder(); // Pass any required data as an argument
+        $mailService->emailEventReminder(); 
         // Log::info('Email sent successfully');
-        })->everyMinute();
+        })->everyFiveMinutes();
+
+        //send email for user not yet completed log for curent date
+        $schedule->call(function () {
+        $mailService = new MailService();
+        $mailService->emailLogMissedForToday(); 
+        // Log::info('Email sent successfully');
+        })->dailyAt('12:00');
+        
+        //send email for user not yet completed log for yesterday
+        $schedule->call(function () {
+        $mailService = new MailService();
+        $mailService->emailLogMissedForYesterday(); 
+        })->dailyAt('08:30');
+
+         //send email for user not yet completed log for two days ago
+        $schedule->call(function () {
+        $mailService = new MailService();
+        $mailService->emailLogMissedFor2daysAgo(); 
+        // Log::info('Email sent successfully');
+        })->dailyAt('14:00');
     }
 
     /**

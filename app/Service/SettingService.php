@@ -3054,9 +3054,40 @@ class SettingService
         }
 
 
-        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'ASC')->get();
+        // $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'ASC')->get();
+        $leaveTypes = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'ASC')
+            ->get();
+
+        $leaveTypesTransformed = $leaveTypes->map(function($leaveType) {
+            if (in_array($leaveType->leave_types_code, ['AL', 'SL', 'HL', 'EL'])) {
+                $leaveType->duration = '-';
+            }
+            return (object)[
+                'id' => $leaveType->id,
+                'leave_types_code' => $leaveType->leave_types_code,
+                'duration' => $leaveType->duration,
+                'status' => $leaveType->status,
+                'leave_types' => $leaveType->leave_types,
+                'day' => $leaveType->day,
+                'addedBy' => $leaveType->addedBy,
+                'created_at' => $leaveType->created_at,
+                'modifiedBy' => $leaveType->modifiedBy,
+                'modifiedTime' => $leaveType->modifiedTime,
+
+
+                // tambah field lain yang anda mahu sertakan di sini
+            ];
+        });
+
+
+        $data['types'] = $leaveTypesTransformed;
+
+        // dd($data['types']);
+        // die;
 
         return $data;
+
     }
 
 
@@ -3090,6 +3121,7 @@ class SettingService
         $data3 = $input['day'];
         $data4 = $input['duration'];
         $data5 = Auth::user()->tenant_id;
+        $data6 = Auth::user()->username;
 
         $input = [
             'leave_types_code' => $data1,
@@ -3097,6 +3129,7 @@ class SettingService
             'day' => $data3,
             'duration' => $data4,
             'tenant_id' => $data5,
+            'addedBy' => $data6,
             'status' => 1
         ];
 
@@ -3113,9 +3146,33 @@ class SettingService
 
     public function getcreateLeavetypes($id)
     {
-        $data = leavetypesModel::find($id);
+        // $data = leavetypesModel::find($id);
+
+        $leaveType = leavetypesModel::where('tenant_id', '=',Auth::user()->tenant_id)
+            ->where('id', '=', $id)
+            ->orderBy('id', 'ASC')
+            ->first();
+
+        if ($leaveType) {
+            if (in_array($leaveType->leave_types_code, ['AL', 'SL', 'HL', 'EL'])) {
+                $leaveType->duration = '-';
+            }
+            $data = (object)[
+                'id' => $leaveType->id,
+                'leave_types_code' => $leaveType->leave_types_code,
+                'duration' => $leaveType->duration,
+                'status' => $leaveType->status,
+                'leave_types' => $leaveType->leave_types,
+                'day' => $leaveType->day,
+                // tambah field lain yang anda mahu sertakan di sini
+            ];
+        } else {
+            // Handle the case where no matching leavetype was found
+            $data = null;
+        }
 
         return $data;
+
     }
 
 
@@ -3125,55 +3182,75 @@ class SettingService
         $existingLeaveType = leavetypesModel::where('id', $id)
             ->where('tenant_id', '=', Auth::user()->tenant_id)
             ->first();
+        $username = Auth::user()->username;
+        $modifiedTime = date('Y-m-d H:i:s');
 
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
-        $data4 = $input['duration'];
+        $data4 = $input['duration']; // Komen atau buang baris ini
+        $data5 = $username;
+        $data6 = $modifiedTime;
 
-        if ($existingLeaveType->leave_types_code === $data1 && $existingLeaveType->leave_types === $data2) {
-            $existingLeaveType->day = $data3;
-            $existingLeaveType->duration = $data4;
-            $existingLeaveType->save();
+        $check = [
+            ['AL', 'ANNUAL LEAVE'],
+            ['SL', 'SICK LEAVE'],
+            ['HL', 'HOSPITALIZATION'],
+            ['EL', 'EMERGENCY LEAVE'],
+            ['NP', 'NO PAY LEAVE'],
+        ];
 
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Leave type day updated successfully.';
-            return $data;
-        } else {
+        $isRestrictedType = false;
 
-            $check = [
-                ['AL', 'ANNUAL LEAVE'],
-                ['SL', 'SICK LEAVE'],
-                ['HL', 'HOSPITALIZATION'],
-                ['EL', 'EMERGENCY LEAVE'],
-                ['NP', 'NO PAY LEAVE'],
-            ];
-
-            foreach ($check as $row) {
-                if ($existingLeaveType->leave_types_code === $row[0] && $existingLeaveType->leave_types === $row[1]) {
-                    $data['status'] = config('app.response.error.status');
-                    $data['type'] = config('app.response.error.type');
-                    $data['title'] = config('app.response.error.title');
-                    $data['msg'] = 'Cannot update leave type code and leave type.';
-                    return $data;
-                }
+        foreach ($check as $row) {
+            if ($existingLeaveType->leave_types_code === $row[0] && $existingLeaveType->leave_types === $row[1]) {
+                $isRestrictedType = true;
+                break;
             }
-
-            $existingLeaveType->leave_types_code = $data1;
-            $existingLeaveType->leave_types = $data2;
-            $existingLeaveType->day = $data3;
-            $existingLeaveType->duration = $data4;
-            $existingLeaveType->save();
-
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Leave type updated successfully.';
-            return $data;
         }
+
+        if ($isRestrictedType) {
+            if ($existingLeaveType->leave_types_code !== $data1 || $existingLeaveType->leave_types !== $data2 || ($data4 !== "-" && $existingLeaveType->leave_types_code !== 'NP')) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'Cannot update leave type code, leave type, and duration for predefined leave types.';
+                return $data;
+            } else {
+                $existingLeaveType->day = $data3;
+
+                if($existingLeaveType->leave_types_code === 'NP') {
+                    $existingLeaveType->duration = $data4; // Membolehkan kemaskini duration untuk "NO PAY LEAVE"
+                }
+                $existingLeaveType->modifiedBy = $data5;
+                $existingLeaveType->modifiedTime = $data6;
+                $existingLeaveType->save();
+
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Leave type day updated successfully.';
+                return $data;
+            }
+        }
+
+
+        $existingLeaveType->leave_types_code = $data1;
+        $existingLeaveType->leave_types = $data2;
+        $existingLeaveType->day = $data3;
+        $existingLeaveType->duration = $data4; // Komen atau buang baris ini
+        $existingLeaveType->modifiedBy = $data5;
+        $existingLeaveType->modifiedTime = $data6;
+
+        $existingLeaveType->save();
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Leave type updated successfully.';
+        return $data;
     }
+
 
     public function deleteLeavetypes($id)
     {

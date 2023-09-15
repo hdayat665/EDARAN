@@ -182,13 +182,56 @@ class MyleaveService
     }
 
 
-    public function createtmyleave($r)
-    {
-        //wan
+    public function createtmyleave($r) {
 
         $input = $r->input();
 
-        $typeofleave = $r->input('typeofleave'); // Get the input value
+        // dd($input);
+        // die;
+
+        $typeofleave = $r->input('typeofleave');
+
+        $shecktypeduration = leavetypesModel::select('*')
+            ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('leave_types.id', '=', $typeofleave)
+            ->first();
+
+        if($shecktypeduration){
+
+            $submitduration = $r->input('total_day_appied');
+
+            $currentYearduration = Carbon::now()->format('Y');
+
+            $checkduration = MyLeaveModel::select(DB::raw('SUM(total_day_applied) as total_day_applied'))
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->where('myleave.lt_type_id', [$typeofleave]) // Pastikan $typeofleave adalah array
+                ->where('myleave.up_user_id', Auth::user()->id)
+                ->whereYear('myleave.applied_date', '=', $currentYearduration)
+                ->first();
+
+
+            $totallimitduration = $submitduration + ($checkduration->total_day_applied ?? 0);
+
+
+
+            // Tambahkan semak untuk kod jenis cuti yang ingin diabaikan
+            $ignore_codes = ['AL', 'SL', 'HL', 'EL']; 
+
+            if(!in_array($shecktypeduration->leave_types_code, $ignore_codes) && $totallimitduration > $shecktypeduration->duration){
+
+                $data = [
+                    'msg' => 'You have exceeded your leave entitlement.',
+                    'status' => config('app.response.error.status'),
+                    'type' => config('app.response.error.type'),
+                    'title' => config('app.response.error.title')
+                ];
+
+                return $data;
+            }
+
+
+        }
+
 
         $currentDateEntitlement = Carbon::now();
 
@@ -206,10 +249,9 @@ class MyleaveService
 
         $checkTypeIds = $checkType->pluck('id')->toArray();
 
-        // Check if the input typeofleave is in the allowed leave type IDs
         if (in_array($typeofleave, $checkTypeIds)) {
             $currentYearbalance = Carbon::now()->format('Y');
-            $checkleavebalance = leaveEntitlementModel::select('current_entitlement_balance')
+            $checkleavebalance = leaveEntitlementModel::select('current_entitlement_balance', 'lapsed_date', 'carry_forward_balance')
                 ->where('id_employment', Auth::user()->id)
                 ->whereYear('le_year', '=', $currentYearbalance)
                 ->first();
@@ -244,19 +286,44 @@ class MyleaveService
             }
 
             if ($checkleavebalance && $checkleavepending) {
-                $totalbalance = $checkleavebalance->current_entitlement_balance - $checkleavepending->total_day_applied;
 
-                $wan = $totalbalance - $r->input('total_day_appied'); // Assuming 'total_day_appied' is the number of days applied
+                $currentdatecheck = Carbon::now();
 
-                if ($wan < 0) {
-                    $data = [
-                        'msg' => 'You have exceeded your leave entitlement',
-                        'status' => config('app.response.error.status'),
-                        'type' => config('app.response.error.type'),
-                        'title' => config('app.response.error.title')
-                    ];
+                if($currentdatecheck < $checkleavebalance->lapsed_date){
 
-                    return $data;
+                    $totalleaveandcarry = $checkleavebalance->current_entitlement_balance + $checkleavebalance->carry_forward_balance;
+                    $baki = $totalleaveandcarry - $checkleavepending->total_day_applied;
+
+                    $wan = $baki - $r->input('total_day_appied'); // Assuming 'total_day_appied' is the number of days applied
+
+                    if ($wan < 0) {
+                        $data = [
+                            'msg' => 'You have exceeded your leave entitlement',
+                            'status' => config('app.response.error.status'),
+                            'type' => config('app.response.error.type'),
+                            'title' => config('app.response.error.title')
+                        ];
+
+                        return $data;
+                    }
+
+                }else{
+
+                    $totalbalance = $checkleavebalance->current_entitlement_balance - $checkleavepending->total_day_applied;
+
+                    $wan = $totalbalance - $r->input('total_day_appied'); // Assuming 'total_day_appied' is the number of days applied
+
+                    if ($wan < 0) {
+                        $data = [
+                            'msg' => 'You have exceeded your leave entitlement',
+                            'status' => config('app.response.error.status'),
+                            'type' => config('app.response.error.type'),
+                            'title' => config('app.response.error.title')
+                        ];
+
+                        return $data;
+                    }
+
                 }
             }
         }
@@ -1681,7 +1748,7 @@ class MyleaveService
             $lapse = $LeaveEntitlement->lapse + $LeaveEntitlement->carry_forward_balance;
         }
 
-        $data = [$lapse, $previousYear];
+        $data = [$lapse, $previousYear, $LeaveEntitlement->lapsed_date];
 
         return $data;
     }

@@ -141,14 +141,14 @@ $(document).ready(function () {
 
 
 
-    $(document).ready(function () {
-        var editparent = "#country, #postcode, #city, #state";
+    // $(document).ready(function () {
+    //     var editparent = "#country, #postcode, #city, #state";
 
-        $(editparent).select2({
-            placeholder: "PLEASE CHOOSE",
-            allowClear: true,
-        });
-    });
+    //     $(editparent).select2({
+    //         placeholder: "PLEASE CHOOSE",
+    //         allowClear: true,
+    //     });
+    // });
 
 
 

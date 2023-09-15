@@ -1,3 +1,11 @@
+<style>  
+    .custom-dropdown-menu {
+    position: static ;
+    height: auto ;
+    max-height: none ;
+    overflow: visible ;
+    }
+</style>
 <div class="tab-pane fade" id="default-tab-7"> 
         <div class="row p-2">
             <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Family</button>
@@ -20,13 +28,15 @@
                 <tr>
                     <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                     <td>
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="javascript:;" class="dropdown-item" id="parentModalEdit{{$parent->id}}" data-id="{{$parent->id}}">Edit</a>
-                            <div class="dropdown-divider"></div>
-                            {{-- <a href="javascript:;" class="dropdown-item" id="parentModalView{{$parent->id}}" data-id="{{$parent->id}}">View</a>
-                            <div class="dropdown-divider"></div> --}}
-                            <a href="javascript:;" class="dropdown-item" id="deleteParent{{$parent->id}}" data-id="{{$parent->id}}">Delete</a>
+                        <div class="btn-group">
+                            <div>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <ul><div class="dropdown-menu custom-dropdown-menu fam">
+                                <li><a href="javascript:;" class="dropdown-item" id="parentModalEdit{{$parent->id}}" data-id="{{$parent->id}}">Edit</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a href="javascript:;" class="dropdown-item" id="deleteParent{{$parent->id}}" data-id="{{$parent->id}}">Delete</a></li>
+                            </ul>
                         </div>
                     </td>
 

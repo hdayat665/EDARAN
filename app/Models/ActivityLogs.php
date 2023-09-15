@@ -28,6 +28,7 @@ class ActivityLogs extends Authenticatable
         'department',
         'user_id',
         'activity_name',
+        
     ];
 
 }

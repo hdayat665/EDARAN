@@ -1,13 +1,13 @@
 $(document).ready(function () {
     $("#projectTable").DataTable({});
     $(document).on("change", "#toca", function () {
-        $("input").val("");
+        // $("input").val("");
 
         if ($(this).val() == "1") {
             $(".PO").show();
             $(".MOT").show();
             $(".PNO").hide();
-            $(".OTHERSNO").hide();
+            $(".OTHERSNO").hide(); 
             $(".OTHERSO").hide();
             $(".subacco").show();
             $("#btnPO").show();
@@ -84,6 +84,9 @@ $(document).ready(function () {
             $("#maxpaid").val(0);
             $("#totalsubs").val(0);
             $("#totalacco").val(0);
+            $("#areacategory").val('');
+            $("#accom").val('');
+            
         } else if ($(this).val() == "4") {
             $(".SAC").show();
             $(".TE").show();
@@ -102,6 +105,8 @@ $(document).ready(function () {
             $("#maxpaid").val(0);
             $("#totalsubs").val(0);
             $("#totalacco").val(0);
+            $("#areacategory").val('');
+            $("#accom").val('');
         } else if ($(this).val() == "6") {
             $(".SAC").show();
             $(".TE").show();
@@ -120,6 +125,8 @@ $(document).ready(function () {
             $("#maxpaid").val(0);
             $("#totalsubs").val(0);
             $("#totalacco").val(0);
+            $("#areacategory").val('');
+            $("#accom").val('');
         } else {
             $(".SAC").hide();
             $(".TE").hide();
@@ -138,6 +145,8 @@ $(document).ready(function () {
             $("#maxpaid").val(0);
             $("#totalsubs").val(0);
             $("#totalacco").val(0);
+            $("#areacategory").val('');
+            $("#accom").val('');
         }
     });
 
@@ -170,7 +179,9 @@ $(document).ready(function () {
         $("#totalexp").val(f);
 
         var a1 = parseFloat($("#totalexp").val());
-        var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+        var a2 = parseFloat($("#max_value").val());
+        
+        var f1 = parseFloat((a2 / 100) * a1).toFixed(2);
         $("#maxpaid").val(f1);
     });
 
@@ -187,7 +198,9 @@ $(document).ready(function () {
         $("#totalexp").val(f);
 
         var a1 = parseFloat($("#totalexp").val());
-        var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+        var a2 = parseFloat($("#max_value").val());
+        
+        var f1 = parseFloat((a2 / 100) * a1).toFixed(2);
         $("#maxpaid").val(f1);
     });
 
@@ -316,7 +329,10 @@ $(document).ready(function () {
                 $("#totalexp").val(f);
 
                 var a1 = parseFloat($("#totalexp").val());
-                var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+                var a2 = parseFloat($("#max_value").val());
+        
+                var f1 = parseFloat((a2 / 100) * a1).toFixed(2);
+                
                 $("#maxpaid").val(f1);
 
             });
@@ -366,7 +382,9 @@ $(document).ready(function () {
                 $("#totalexp").val(f);
 
                 var a1 = parseFloat($("#totalexp").val());
-                var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+                var a2 = parseFloat($("#max_value").val());
+        
+                var f1 = parseFloat((a2 / 100) * a1).toFixed(2);
                 $("#maxpaid").val(f1);
             });
 

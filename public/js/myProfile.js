@@ -25,8 +25,6 @@ $(document).ready(function () {
         },
     });
 
-     //   add validation on expiry date and issuing country
-    //add parent
     $("#parentModalAdd").click(function () {
         if ($(this).prop("checked")) {
             // $("#expiryDateParent").prop("disabled", true);
@@ -54,7 +52,6 @@ $(document).ready(function () {
             $("#okuattach5").prop("readonly", true);
         }
     });
-
 
     //add children
     $("#childModalAdd").click(function () {
@@ -634,7 +631,7 @@ $(document).ready(function () {
                 okuFile: {
                     required: {
                         depends: function(element) {
-                            return $(element).prop("pointer-events: auto;") === false;
+                            return $(element).prop("disabled") === false;
                         }
                     }
                 },
@@ -861,7 +858,6 @@ $(document).ready(function () {
 
     $("#editEducation").click(function (e) {
         $("#educationModalEdit").validate({
-            // Specify validation rules
             rules: {
                 fromDate: "required",
                 toDate: "required",
@@ -950,9 +946,7 @@ $(document).ready(function () {
     });
 
     educationId = $("#educationId").val();
-
     educationIds = educationId.split(",");
-
     for (let i = 0; i < educationIds.length; i++) {
         const type = educationIds[i];
         $("#educationModalEdit" + type).click(function (e) {
@@ -1021,7 +1015,6 @@ $(document).ready(function () {
 
     $("#saveOthers").click(function (e) {
         $("#addOthers").validate({
-            // Specify validation rules
             rules: {
                 otherDate: "required",
                 otherPQDetails: "required",
@@ -1106,7 +1099,6 @@ $(document).ready(function () {
 
     $("#editOthers").click(function (e) {
         $("#othersModalEdit").validate({
-            // Specify validation rules
             rules: {
                 otherDate: "required",
                 otherPQDetails: "required",
@@ -1190,15 +1182,12 @@ $(document).ready(function () {
     });
 
     othersId = $("#othersId").val();
-
     othersIds = othersId.split(",");
-
     for (let i = 0; i < othersIds.length; i++) {
         const type = othersIds[i];
         $("#othersQualificationModalEdit" + type).click(function (e) {
             id = $(this).data("id");
             var othersData = getOthers(id);
-
             othersData.then(function (data) {
                 othersQualification = data.data;
                 $("#idOthers").val(othersQualification.id);
@@ -1256,7 +1245,6 @@ $(document).ready(function () {
 
     $("#saveAddress").click(function (e) {
         $("#formAddress").validate({
-            // Specify validation rules
             rules: {
                 address1: "required",
                 city: "required",
@@ -1671,8 +1659,6 @@ $(document).ready(function () {
                         }
                     },
                 }).then((result) => {});
-
-                // });
             },
         });
 
@@ -1696,7 +1682,6 @@ $(document).ready(function () {
                 country_2: "required",
                 postcode_2: {
                     required: true,
-
                 },
                 city_2: "required",
                 state_2: "required",
@@ -1719,7 +1704,6 @@ $(document).ready(function () {
                 country_2: "Please Insert Country",
                 postcode_2: {
                     required: "Please Insert Postcode",
-
                 },
                 city_2: "Please Insert City",
                 state_2: "Please Choose State",
@@ -1775,7 +1759,6 @@ $(document).ready(function () {
                             var data2 = new FormData(
                                 document.getElementById("formEmergency2")
                             );
-
                             // Append additional data to FormData object
                             for (var pair of data2.entries()) {
                                 data.append(pair[0], pair[1]);
@@ -1905,7 +1888,6 @@ $(document).ready(function () {
                 issuingCountry: "Please Choose Issuing Country",
                 postcode: {
                     required: "Please Insert Postcode",
-
                 },
                 salary: {
                     digits: "Please Insert Valid Monthly Salary",
@@ -2009,7 +1991,6 @@ $(document).ready(function () {
     });
 
     companion = ["1", "2", "3", "4"];
-
     for (let i = 0; i < companion.length; i++) {
         const no = companion[i];
 
@@ -2068,7 +2049,6 @@ $(document).ready(function () {
                             }
                         }
                     },
-
                 },
 
                 messages: {
@@ -2285,7 +2265,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("#qualificationOthers").DataTable({
         responsive: false,
         autoWidth: true,
@@ -2311,30 +2290,46 @@ $(document).ready(function () {
             $(".oth").hide();
         }
     });
+    
+    $(document).ready(function() {
+        $("#profileAddress").DataTable({
+            responsive: false,
+            lengthMenu: [
+                [5, 10, 15, 20, -1],
+                [5, 10, 15, 20, "All"],
+            ],
+            initComplete: function (settings, json) {
+                $("#profileAddress").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
+        });
 
-    $("#profileAddress").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
-        ],
-        initComplete: function (settings, json) {
-            $("#profileAddress").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
-            );
-        },
-    });
-    $(".myadd").hide();
-    $(document).on("click", ".dropdown-toggle", function(e) {
-        e.stopPropagation(); // mencegah event dari bubbling ke atas
-        var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
-        $(".myadd").not(dropdownMenu).hide();
-        dropdownMenu.toggle();
-    });
-    $(document).on("click", function(e) {
-        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
-            $(".myadd").hide();
-        }
+        var originalGetComputedStyle = window.getComputedStyle;
+        window.getComputedStyle = function(el, pseudo) {
+            try {
+                return originalGetComputedStyle(el, pseudo);
+            } catch (err) {
+                console.warn('getComputedStyle override: prevented error.', err);
+                return {
+                    getPropertyValue: function() { return ""; } // metode palsu
+                };
+            }
+        };
+
+        $(".myadd").hide();
+
+        $(document).on("click", ".dropdown-toggle", function(e) {
+            e.stopPropagation(); // mencegah event dari bubbling ke atas
+            var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
+            $(".myadd").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".myadd").hide();
+            }
+        });
     });
 
     $("#xName1,#lastName1").change(function () {
@@ -4169,47 +4164,7 @@ $(document).ready(function () {
         });
     });
 
-    var checkboxes = $('input[name="address_type[]"]');
-
-var permanentChecked = false;
-var correspondentChecked = false;
-var addressId = null;
-var addressType = "0";
-
-checkboxes.each(function () {
-    if ($(this).is(":checked")) {
-        if ($(this).val() === "permanent") {
-            permanentChecked = true;
-        } else if ($(this).val() === "correspondent") {
-            correspondentChecked = true;
-        }
-        if (addressId == null) {
-            addressId = $(this).data("address-id");
-            addressType = $(this).data("address-type");
-        }
-    }
-});
-
-if (permanentChecked && correspondentChecked) {
-    if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
-        addressType = "3";
-    }
-    checkboxes.not(":checked").prop("disabled", true);
-} else if (permanentChecked) {
-    addressType = "1";
-    checkboxes.filter('[value="permanent"]:not(:checked)').prop("disabled", true);
-    checkboxes.filter('[value="correspondent"]').prop("disabled", false);
-} else if (correspondentChecked) {
-    addressType = "2";
-    checkboxes.filter('[value="correspondent"]:not(:checked)').prop("disabled", true);
-    checkboxes.filter('[value="permanent"]').prop("disabled", false);
-} else {
-    addressType = "0";
-    checkboxes.prop("disabled", false);
-}
-
-    $('input[name="address_type[]"]').on("change", function () {
-
+    $(document).on("change", 'input[name="address_type[]"]', function () {
         var permanentChecked = false;
         var correspondentChecked = false;
         var addressId = $(this).data("address-id");
@@ -4217,20 +4172,19 @@ if (permanentChecked && correspondentChecked) {
             ? $(this).data("address-type")
             : "0";
 
-        var checkboxes = $('input[name="address_type[]"][data-address-id='+addressId+']');
+        var checkboxes = $('input[name="address_type[]"][data-address-id="' + addressId + '"]');
 
-            checkboxes.each(function () {
-                if ($(this).is(":checked")) {
-                    if ($(this).val() === "permanent") {
-                        permanentChecked = true;
-                        checkboxes.prop("disabled", true);
-                    } else if ($(this).val() === "correspondent") {
-                        correspondentChecked = true;
-                        checkboxes.prop("disabled", true);
-
-                    }
+        checkboxes.each(function () {
+            if ($(this).is(":checked")) {
+                if ($(this).val() === "permanent") {
+                    permanentChecked = true;
+                    checkboxes.prop("disabled", true);
+                } else if ($(this).val() === "correspondent") {
+                    correspondentChecked = true;
+                    checkboxes.prop("disabled", true);
                 }
-            });
+            }
+        });
 
         if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
@@ -4238,11 +4192,9 @@ if (permanentChecked && correspondentChecked) {
             addressType = "2";
         } else if (permanentChecked == true && correspondentChecked == true) {
             addressType = "3";
-        } else if (permanentChecked == false && correspondentChecked == false){
+        } else if (permanentChecked == false && correspondentChecked == false) {
             addressType = "0";
         }
-
-
 
         $.ajax({
             url: "/updateAddressDetails",
@@ -4263,8 +4215,6 @@ if (permanentChecked && correspondentChecked) {
                 }).then(function () {
                     location.reload();
                 });
-
-
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error(errorThrown);
