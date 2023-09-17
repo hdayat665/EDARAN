@@ -133,6 +133,8 @@ requirejs.config({
 
         //new project location Js
         projectLocationJs: assets + "/js/projectlocationJs",
+
+        appealRejectmailJS: assets + "/js/appealRejectmailJS",
     },
 });
 
@@ -564,6 +566,10 @@ if ($("#projectLocationJs").length > 0) {
 
 if ($("#systemRoleUpdateJs").length > 0) {
     requirejs(["systemRoleUpdateJs"]);
+}
+
+if ($("#appealRejectmailJS").length > 0) {
+    requirejs(["appealRejectmailJS"]);
 }
 
 $(document).ajaxStart(function () {
