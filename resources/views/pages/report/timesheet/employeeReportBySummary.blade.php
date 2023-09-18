@@ -21,10 +21,10 @@
                     <tr>
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Employee Name</th>
-                        <th class="text-nowrap">Date</th>
+                        {{-- <th class="text-nowrap">Date</th> --}}
                         <th class="text-nowrap">Department</th>
                         <th class="text-nowrap">Project</th>
-                        <th class="text-nowrap">Total Hours</th>
+                        {{-- <th class="text-nowrap">Total Hours</th> --}}
                         <th class="text-nowrap">Amount (MYR)</th>
                     </tr>
                 </thead>
@@ -35,10 +35,10 @@
                                 <td>{{ $key + 1 }}</td>
                                 {{-- <td>{{ $loop->iteration }}</td> --}}
                                 <td>{{ $row->employeeName }}</td>
-                                <td>{{ $row->date }}</td>
+                                {{-- <td>{{ $row->date }}</td> --}}
                                 <td>{{ $row->departmentName }}</td>
                                 <td>{{ $row->projectnameas ?? '-' }}</td>
-                                <td>{{ str_replace(':', '.', substr($row->total_hour, 0, -2)) }}</td>
+                                {{-- <td>{{ str_replace(':', '.', substr($row->total_hour, 0, -2)) }}</td> --}}
                                 <td>{{ number_format(floatval(str_replace(':', '.', substr($row->total_hour, 0, -2))) * floatval($row->COR), 2) }}</td>
                             </tr>
                         {{-- @endif --}}
@@ -46,7 +46,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="6">Total:</th>
+                        <th colspan="4">Total:</th>
                         <td>
                             @if ($summary)
                                 {{ number_format($summary->sum(function($summary) {

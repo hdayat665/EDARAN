@@ -185,7 +185,14 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="countryP1" value="" style="text-transform:uppercase">
+                            {{-- <select class="form-select" name="country" id="countryP1" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country->sortBy('country_name') as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
+                            </select> --}}
+                            <select class="form-select" name="country" id="countryP1" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
+
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 @foreach($country->sortBy('country_name') as $ct)
                                     <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>

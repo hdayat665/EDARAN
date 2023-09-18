@@ -23,11 +23,12 @@ class MyleaveService
     {
 
         $today = Carbon::now();
-
+        $yearCurrent = Carbon::now()->format('Y');
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->where('myleave.up_user_id', Auth::user()->id)
+            ->where('myleave.tenant_id','=', Auth::user()->tenant_id)
+            ->where('myleave.up_user_id','=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) use ($today) {
                 $query->whereDate('myleave.leave_date', '>=', $today)
                     ->orWhere(function ($subquery) {
@@ -47,10 +48,12 @@ class MyleaveService
     public function myleaveHistoryView()
     {
         $today = Carbon::now();
+        $yearCurrent = Carbon::now()->format('Y');
 
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->whereDate('myleave.leave_date', '<', $today)
             ->where(function ($query) {
                 $query->where('myleave.status_final', '=', 3)
@@ -69,10 +72,12 @@ class MyleaveService
         $input = $r->input();
 
         $today = Carbon::now();
+        $yearCurrent = Carbon::now()->format('Y');
 
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->whereDate('myleave.leave_date', '<', $today)
             ->where(function ($query) {
                 $query->where('myleave.status_final', '=', 3)
@@ -107,10 +112,11 @@ class MyleaveService
         $input = $r->input();
 
         $today = Carbon::now();
-
+        $yearCurrent = Carbon::now()->format('Y');
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) use ($today) {
                 $query->whereDate('myleave.leave_date', '>=', $today)
                     ->orWhere(function ($subquery) {
@@ -161,23 +167,17 @@ class MyleaveService
         return $data;
     }
 
-    public function datapie()
-    {
+    public function datapie() {
 
-        // $data =
-        // leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
-        //                 ->where('status', '=', 1)
-        //                 ->get();
-        // return $data;
-
-        $data = leaveEntitlementModel::where('leave_Entitlement.tenant_id', Auth::user()->tenant_id)
+        $yearCurrent = Carbon::now()->format('Y');
+        $data = leaveEntitlementModel::select('current_entitlement', 'current_entitlement_balance', DB::raw('SUM(total_day_applied) as total_day_applied'))
+            ->where('leave_Entitlement.tenant_id', Auth::user()->tenant_id)
             ->rightJoin('myleave', 'leave_entitlement.id_userProfile', '=', 'myleave.up_user_id')
-            ->where('up_rec_status', '4')
-            ->where('up_app_status', '4')
-            ->where('up_user_id', Auth::user()->id)
-            ->select('current_entitlement', 'current_entitlement_balance', DB::raw('SUM(total_day_applied) as total_day_applied'))
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
+            ->where('up_rec_status', '=','4')
+            ->where('up_app_status', '=','4')
+            ->where('up_user_id','=', Auth::user()->id)
             ->first();
-
         return $data;
     }
 
@@ -215,7 +215,7 @@ class MyleaveService
 
 
             // Tambahkan semak untuk kod jenis cuti yang ingin diabaikan
-            $ignore_codes = ['AL', 'SL', 'HL', 'EL']; 
+            $ignore_codes = ['AL', 'SL', 'HL', 'EL'];
 
             if(!in_array($shecktypeduration->leave_types_code, $ignore_codes) && $totallimitduration > $shecktypeduration->duration){
 
@@ -393,6 +393,8 @@ class MyleaveService
                     ->where('leave_types.leave_types_code', '=', 'AL')
                     ->first();
 
+                $yearCurrent = Carbon::now()->format('Y');
+
                 $getDateSameOther = MyLeaveModel::where([
                     ['start_date', '<=', $input['leave_date']],
                     ['end_date', '>=',  $input['leave_date']],
@@ -400,8 +402,11 @@ class MyleaveService
                     ['up_user_id', '=', Auth::user()->id],
                     ['lt_type_id', '=', $checkAL->id],
                     ['status_final', '=', 4],
+
                     ['calculate', '=', 1],
-                ])->first();
+                ])
+                ->whereYear('applied_date', '=',$yearCurrent)
+                ->first();
 
                 if (empty($getDateSameOther)) {
                     $data['msg'] = 'There is Pending Leave Application for the Selected Date';
@@ -411,6 +416,7 @@ class MyleaveService
                     return $data;
                 }
             } else {
+                $yearCurrent = Carbon::now()->format('Y');
                 $getDateSame = MyLeaveModel::where([
 
                     ['start_date', '<=', $input['leave_date']],
@@ -418,7 +424,9 @@ class MyleaveService
                     ['tenant_id', '=', Auth::user()->tenant_id],
                     ['up_user_id', '=', Auth::user()->id]
 
-                ])->first();
+                ])
+                ->whereYear('applied_date', '=',$yearCurrent)
+                ->first();
 
                 if ($getDateSame) {
 
@@ -443,6 +451,8 @@ class MyleaveService
                     ->where('leave_types.leave_types_code', '=', 'AL')
                     ->first();
 
+                $yearCurrent = Carbon::now()->format('Y');
+
                 $getDateSameOther = MyLeaveModel::where([
                     ['start_date', '<=', $input['start_date']],
                     ['end_date', '>=',  $input['start_date']],
@@ -451,7 +461,9 @@ class MyleaveService
                     ['lt_type_id', '=', $checkAL->id],
                     ['status_final', '=', 4],
                     ['calculate', '=', 1],
-                ])->first();
+                ])
+                ->whereYear('myleave.applied_date', '=', $yearCurrent)
+                ->first();
 
                 if (empty($getDateSameOther)) {
                     $data['msg'] = 'You Have Pending Leave to be Approved for the Selected Date';
@@ -461,12 +473,15 @@ class MyleaveService
                     return $data;
                 }
             } else {
+                $yearCurrent = Carbon::now()->format('Y');
                 $getDateSameOther = MyLeaveModel::where([
                     ['start_date', '<=', $input['start_date']],
                     ['end_date', '>=',  $input['start_date']],
                     ['tenant_id', '=', Auth::user()->tenant_id],
                     ['up_user_id', '=', Auth::user()->id]
-                ])->first();
+                ])
+                ->whereYear('myleave.applied_date', '=', $yearCurrent)
+                ->first();
 
                 if ($getDateSameOther) {
                     $data['msg'] = 'There is an Existing Application for the Selected Date';
@@ -660,9 +675,12 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
+            $yearCurrent = Carbon::now()->format('Y');
+
             $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
                 ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
                 ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->whereYear('myleave.applied_date', '=', $yearCurrent)
                 ->orderBy('myleave.created_at', 'DESC')
                 ->first();
 
@@ -705,10 +723,11 @@ class MyleaveService
             ];
 
             MyLeaveModel::create($input);
-
+            $yearCurrent = Carbon::now()->format('Y');
             $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
                 ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->where('myleave.tenant_id', '=',Auth::user()->tenant_id)
+                ->whereYear('myleave.applied_date', '=', $yearCurrent)
                 ->orderBy('myleave.created_at', 'DESC')
                 ->first();
 
@@ -787,14 +806,15 @@ class MyleaveService
 
     //sepervisor
 
-    public function leaveRecommenderActive()
-    {
+    public function leaveRecommenderActive() {
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
             MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_rec_status', '=', '1')
                     ->orWhere('myleave.up_rec_status', '=', '2');
@@ -806,14 +826,15 @@ class MyleaveService
         return $data;
     }
 
-    public function leaveRecommenderHistory()
-    {
+    public function leaveRecommenderHistory() {
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
             MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_rec_status', '=', '3')
                     ->orWhere('myleave.up_rec_status', '=', '4');
@@ -825,13 +846,15 @@ class MyleaveService
     }
     public function idemployerhod()
     {
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
-            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            MyLeaveModel::select('userProfile.user_id', 'userProfile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userProfile', 'myleave.up_user_id', '=', 'userProfile.user_id')
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
-            ->select('userProfile.user_id', 'userProfile.fullName')
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
+            ->where('myleave.tenant_id', '=',Auth::user()->tenant_id)
             ->groupBy('userProfile.user_id')
             ->get();
 
@@ -842,6 +865,7 @@ class MyleaveService
     {
 
         $input = $r->input();
+        $yearCurrent = Carbon::now()->format('Y');
 
         $query =
 
@@ -849,6 +873,7 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
             ->where('myleave.tenant_id', '=', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_rec_status', '=', '1')
                     ->orWhere('myleave.up_rec_status', '=', '2');
@@ -880,6 +905,7 @@ class MyleaveService
     {
 
         $input = $r->input();
+        $yearCurrent = Carbon::now()->format('Y');
 
         $query =
 
@@ -887,6 +913,7 @@ class MyleaveService
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
             ->where('myleave.tenant_id', '=', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_rec_status', '=', '3')
                     ->orWhere('myleave.up_rec_status', '=', '4');
@@ -982,15 +1009,17 @@ class MyleaveService
 
     public function getuserRecommender($id)
     {
+        $yearCurrent = Carbon::now()->format('Y');
 
         $data =
-            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->where('myleave.id', '=', $id)
+            MyLeaveModel::select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', '=', $id)
             ->get();
 
         return $data;
@@ -998,64 +1027,59 @@ class MyleaveService
 
     public function getuserRecommenderView($id)
     {
+        $yearCurrent = Carbon::now()->format('Y');
 
         $data =
-            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->where('myleave.id', '=', $id)
+            MyLeaveModel:: select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', '=', $id)
             ->get();
 
         return $data;
     }
 
-    public function idemployer()
-    {
+    public function idemployer(){
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
-            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            MyLeaveModel::select('userprofile.user_id', 'userprofile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
             ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-            ->select('userprofile.user_id', 'userprofile.fullName')
+            ->where('myleave.tenant_id', '=',Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->groupBy('userprofile.user_id')
             ->get();
 
         return $data;
     }
 
-    public function idemployerhods()
-    {
+    public function idemployerhods() {
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
-            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            MyLeaveModel::select('userprofile.user_id', 'userprofile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
-            ->select('userprofile.user_id', 'userprofile.fullName')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->groupBy('userprofile.user_id')
             ->get();
 
         return $data;
     }
 
-
-
-
-
-
-
-
-
     //hod
 
-    public function leaveApproverActive()
-    {
+    public function leaveApproverActive() {
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
             MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
@@ -1063,6 +1087,7 @@ class MyleaveService
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_app_status', '=', '1')
                     ->orWhere('myleave.up_app_status', '=', '2');
@@ -1072,11 +1097,12 @@ class MyleaveService
             ->get();
 
         return $data;
+
     }
 
-    public function leaveApproverHistory()
-    {
+    public function leaveApproverHistory() {
 
+        $yearCurrent = Carbon::now()->format('Y');
         $data =
             MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
@@ -1084,6 +1110,7 @@ class MyleaveService
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_app_status', '=', '3')
                     ->orWhere('myleave.up_app_status', '=', '4');
@@ -1093,13 +1120,13 @@ class MyleaveService
             ->get();
 
         return $data;
+
     }
 
-    public function searchleaveApproverActive($r)
-    {
+    public function searchleaveApproverActive($r) {
 
         $input = $r->input();
-
+        $yearCurrent = Carbon::now()->format('Y');
         $query =
 
             MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
@@ -1108,6 +1135,7 @@ class MyleaveService
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_app_status', '=', '1')
                     ->orWhere('myleave.up_app_status', '=', '2');
@@ -1138,6 +1166,7 @@ class MyleaveService
     {
 
         $input = $r->input();
+        $yearCurrent = Carbon::now()->format('Y');
 
         $query =
 
@@ -1147,6 +1176,7 @@ class MyleaveService
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
             ->where('myleave.up_rec_status', '=', 4)
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->whereYear('myleave.applied_date', '=', $yearCurrent)
             ->where(function ($query) {
                 $query->where('myleave.up_app_status', '=', '3')
                     ->orWhere('myleave.up_app_status', '=', '4');
@@ -1226,10 +1256,12 @@ class MyleaveService
         if ($settingEmail->up_app_status == '4' && (($checkAL && $checkAL->leave_types_code == 'AL') || ($checkAL && $checkAL->leave_types_code == 'EL'))) {
 
             $today = Carbon::now();
+            $yearCurrent = Carbon::now()->format('Y');
 
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             if ($today <= $check->lapsed_date) {
@@ -1289,9 +1321,12 @@ class MyleaveService
 
         if ($settingEmail->up_app_status == '4' && $checkSL &&  $checkSL->leave_types_code == 'SL') {
 
+            $yearCurrent = Carbon::now()->format('Y');
+
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             $leave = $check->sick_leave_entitlement_balance - $settingEmail->total_day_applied;
@@ -1320,12 +1355,12 @@ class MyleaveService
                         $current_entitlement_balance = $check->current_entitlement;
                     }
 
-                    $input = [
+                    $input2 = [
                         'carry_forward_balance' => $balance1,
                         'current_entitlement_balance' => $current_entitlement_balance,
                     ];
 
-                    leaveEntitlementModel::where('id', $check->id)->update($input);
+                    leaveEntitlementModel::where('id', $check->id)->update($input2);
 
                 } else {
 
@@ -1345,9 +1380,12 @@ class MyleaveService
 
         if ($settingEmail->up_app_status == '4' && $checkHL &&  $checkHL->leave_types_code == 'HL') {
 
+            $yearCurrent = Carbon::now()->format('Y');
+
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             $leave = $check->hospitalization_entitlement_balance - $settingEmail->total_day_applied;
@@ -1425,10 +1463,11 @@ class MyleaveService
         if ($settingEmail->up_app_status == '3' && $settingEmail->calculate == '1' && (($checkAL && $checkAL->leave_types_code == 'AL') || ($checkAL && $checkAL->leave_types_code == 'EL'))) {
 
             $today = Carbon::now();
-
+            $yearCurrent = Carbon::now()->format('Y');
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             if ($today <= $check->lapsed_date) {
@@ -1463,9 +1502,11 @@ class MyleaveService
 
         if ($settingEmail->up_app_status == '3' && $checkSL &&  $checkSL->leave_types_code == 'SL' && $settingEmail->calculate == '1') {
 
+            $yearCurrent = Carbon::now()->format('Y');
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             $leave = $check->sick_leave_entitlement_balance + $settingEmail->total_day_applied;
@@ -1501,18 +1542,18 @@ class MyleaveService
                         $leave = $check->current_entitlement_balance;
                     }
 
-                    $input = [
+                    $input2 = [
                         'carry_forward_balance' => $balance1,
                         'current_entitlement_balance' => $leave,
                     ];
 
-                    $inputCalculate = [
+                    $inputCalculate2 = [
                         'calculate' => 1,
                     ];
 
-                    leaveEntitlementModel::where('id', $check->id)->update($input);
+                    leaveEntitlementModel::where('id', $check->id)->update($input2);
 
-                    MyLeaveModel::where('id', $id)->update($inputCalculate);
+                    MyLeaveModel::where('id', $id)->update($inputCalculate2);
 
                 } else {
 
@@ -1531,9 +1572,11 @@ class MyleaveService
 
         if ($settingEmail->up_app_status == '3' &&  $checkHL && $checkHL->leave_types_code == 'HL' && $settingEmail->calculate == '1') {
 
+            $yearCurrent = Carbon::now()->format('Y');
             $check = leaveEntitlementModel::select('leave_entitlement.*')
                 ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
                 ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->whereYear('leave_entitlement.le_year', '=', $yearCurrent)
                 ->first();
 
             $leave = $check->hospitalization_entitlement_balance + $settingEmail->total_day_applied;

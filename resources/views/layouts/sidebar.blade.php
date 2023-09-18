@@ -21,10 +21,13 @@
             foreach ($permissions as $permission) {
                 $role_permission[] = $permission->permission_code;
             }
+            
             if (!$role_permission) {
                 $role_permission = [];
             }
+            
             ?>
+            
             <?php $target = ['hris_tab']; ?>
             @if (array_intersect($role_permission, $target))
                 <div class="menu-item has-sub">
@@ -86,26 +89,30 @@
                                 </a>
                             </div>
                         @endif
-                        {{-- <?php $target = ['timesheet_approval']; ?>
-                        @if (array_intersect($role_permission, $target))
-                            <div class="menu-item">
-                                <a href="/timesheetApproval" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-receipt text-gray"></i>
-                                    </div> --}}
-                        {{-- check if this is approver ts  --}}
-                        {{-- @php
+                        <?php $target = ['timesheet_approval']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/timesheetApproval" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-receipt text-gray"></i>
+                                        </div>
+                                        
+                                        {{-- check if this is approver ts  --}}
+                                        @php
                                         $employmentData = getEmplomentByUserId();
                                         $timesheets = getTimesheetDataToApprove();
-                                    @endphp --}}
-                        {{-- <div class="menu-text text-gray">Timesheets Approval</div> --}}
-                        {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
-                        {{-- @if (isset($timesheets))
-                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
-                                    @endif
-                                </a>
-                            </div>
-                        @endif --}}
+                                        @endphp
+
+                                        <div class="menu-text text-gray">Timesheets Approval</div>
+                                        
+                                        {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
+                                        @if (isset($timesheets))
+                                            <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
+                                        @endif
+                                    </a>
+                                </div>
+                            @endif
+
                         <?php $target = ['real_time_activities']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
@@ -117,6 +124,8 @@
                                 </a>
                             </div>
                         @endif
+                        <?php $target = ['appeal_approval']; ?>
+                        @if (array_intersect($role_permission, $target))
                         <div class="menu-item">
                             <a href="/appealtimesheet" class="menu-link">
                                 <div class="menu-icon">
@@ -134,6 +143,7 @@
                                 @endif
                             </a>
                         </div>
+                        @endif
                     </div>
                 </div>
             @endif
@@ -291,14 +301,14 @@
                                 </a>
                             </div>
                         @endif
-                        <div class="menu-item">
+                        <!-- <div class="menu-item">
                             <a href="/projectLocTable" class="menu-link">
                                 <div class="menu-icon">
                                     <i class="fa fa-location-pin text-gray"></i>
                                 </div>
                                 <div class="menu-text text-gray">Project Location</i></div>
                             </a>
-                        </div>
+                        </div> -->
                         <?php $target = ['project_info']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
@@ -368,7 +378,7 @@
                                 </a>
                             </div>
                         @endif
-                        <?php $target = ['claim_menu']; ?>
+                        <?php $target = ['claim_approval']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
 
@@ -402,7 +412,7 @@
                                     <span class="badge bg-danger badge-number" id="numberNotify">
                                         {{ $totalCounts ?? 0 }}</span>
                                 </a>
-
+ 
                                 <div class="menu-submenu">
                                     <?php $target = ['eclaim_department_menu']; ?>
                                     @if (array_intersect($role_permission, $target))
@@ -555,7 +565,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <?php $target = ['eclaim_admin_menu']; ?>
+                                    <?php $target = ['level_2']; ?>
 
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item has-sub">
@@ -580,7 +590,7 @@
                                             </a>
 
                                             <div class="menu-submenu">
-                                                <?php $target = ['eclaim_admin_recommender']; ?>
+                                                <?php $target = ['level2_recommender']; ?>
                                                 @if (array_intersect($role_permission, $target))
                                                     <div class="menu-item">
                                                         <a href="/adminRecView" class="menu-link">
@@ -599,7 +609,7 @@
                                                         </a>
                                                     </div>
                                                 @endif
-                                                <?php $target = ['eclaim_admin_approver']; ?>
+                                                <?php $target = ['level2_approver']; ?>
                                                 @if (array_intersect($role_permission, $target))
                                                     <div class="menu-item">
                                                         <a href="/adminApprovalView" class="menu-link">
@@ -618,7 +628,7 @@
                                                         </a>
                                                     </div>
                                                 @endif
-                                                <?php $target = ['eclaim_admin_checker']; ?>
+                                                <?php $target = ['level2_checker']; ?>
                                                 @if (array_intersect($role_permission, $target))
                                                     <div class="menu-item">
                                                         <a href="/adminCheckerView" class="menu-link">
@@ -643,7 +653,7 @@
                                 </div>
                             </div>
                         @endif
-                        <?php $target = ['cash_menu']; ?>
+                        <?php $target = ['cash_advance_approval']; ?>
                         @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
 
@@ -670,10 +680,10 @@
                                 </a>
 
                                 <div class="menu-submenu">
-                                    <?php $target = ['cash_menu']; ?>
+                                    <?php $target = ['department_approver']; ?>
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item has-sub">
-                                            <?php $target = ['cash_deparment_menu']; ?>
+                                            <?php $target = ['department_approver']; ?>
                                             @if (array_intersect($role_permission, $target))
                                                 <a href="javascript:;" class="menu-link">
                                                     <div class="menu-icon">
@@ -694,7 +704,7 @@
                                                     <span class="badge bg-danger badge-number" id="numberNotify">
                                                         {{ $totalCount ?? 0 }}</span>
                                                 </a>
-                                                <?php $target = ['cash_deparment_approver']; ?>
+                                                <?php $target = ['department_approver']; ?>
                                                 @if (array_intersect($role_permission, $target))
                                                     <div class="menu-submenu">
                                                         <div class="menu-item">
@@ -833,6 +843,8 @@
             @endif
             <!-- End Sidenav Content Orbit -->
             <!-- Sidenav Content Orbit -->
+            <?php $target = ['general_info_tab']; ?>
+            @if (array_intersect($role_permission, $target))
             <div class="menu-item has-sub">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
@@ -841,7 +853,10 @@
                     <div class="menu-text text-gray">General Information</div>
                     <div class="menu-caret text-gray"></div>
                 </a>
+
                 <div class="menu-submenu">
+                    <?php $target = ['phone_directory']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item">
                         <a href="/phoneDirectory" class="menu-link">
                             <div class="menu-icon">
@@ -850,6 +865,9 @@
                             <div class="menu-text text-gray">Phone Directory</i></div>
                         </a>
                     </div>
+                    @endif
+                    <?php $target = ['organization_chart']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item">
                         <a href="/organizationChart" class="menu-link">
                             <div class="menu-icon">
@@ -858,6 +876,9 @@
                             <div class="menu-text text-gray">Organization Chart</div>
                         </a>
                     </div>
+                    @endif
+                    <?php $target = ['policy_sop']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item">
                         <a href="/policysop" class="menu-link">
                             <div class="menu-icon">
@@ -866,6 +887,7 @@
                             <div class="menu-text text-gray">Policy & SOP</div>
                         </a>
                     </div>
+                    @endif
                     {{-- <div class="menu-item">
                             <a href="/departmentTree" class="menu-link">
                             <div class="menu-icon">
@@ -876,6 +898,7 @@
                         </div> --}}
                 </div>
             </div>
+            @endif
             <!-- End Sidenav Content Orbit -->
             <!-- Sidenav Content Orbit -->
             <?php $target = ['report_tab']; ?>

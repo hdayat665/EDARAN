@@ -1635,6 +1635,10 @@ class MyTimeSheetService
     {
         $input = $r->input();
 
+        //to be carry in email, to approve
+        $randomNumber = rand(10000000, 99999999); 
+        $input['generaterandom'] = $randomNumber;
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1914,4 +1918,52 @@ class MyTimeSheetService
 
         return $data;
     }
+
+    public function approveAppealE($randomN = '')
+    {
+        TimesheetAppeals::where('generaterandom', $randomN)->update(['status' => 'Approved']);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Your account have been activate';
+        return $data;
+    }
+
+    public function getAppealByRandomN($randomN)
+    {
+
+        $data = DB::table('timesheet_appeal as a')
+        ->where('generaterandom',$randomN )
+        ->first();
+
+        return $data;
+    }
+
+    public function rejectAppealEmail($r, $randomN)
+    {
+        // Retrieve the current status for the given randomN
+        $currentAppeal = TimesheetAppeals::where('generaterandom', $randomN)->first();
+
+        // Check if the appeal exists and its status
+        if ($currentAppeal && $currentAppeal->status === 'Rejected') {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Log has already been Rejected';
+            return $data;
+        }
+
+        $input = $r->input();
+
+        // Update status and other fields
+        TimesheetAppeals::where('generaterandom', $randomN)->update(array_merge($input, ['status' => 'Rejected']));
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Log has been Rejected Successfully';
+        return $data;
+    }
+
+    
 }

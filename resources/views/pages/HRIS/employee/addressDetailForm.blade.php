@@ -18,7 +18,7 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Country*</label>
                 <div class="col-md-5">
-                    <select class="form-select" name="country" id="country" value="" style="text-transform:uppercase">
+                    <select class="form-select" name="country" id="country" value=""  style="text-transform:uppercase">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                         @foreach($country->sortBy('country_name') as $ct)
                             <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
@@ -89,6 +89,9 @@
                 <div class="col-md-5">
                     <select class="form-select" name="statec" id="statec" value="" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                        @foreach($state->sortBy('state_name') as $st)
+                            <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                        @endforeach
                     </select>
                     <div id="statec-err" class="error"></div>
                 </div>
@@ -98,6 +101,9 @@
                 <div class="col-md-5">
                     <select class="form-select" name="cityc" id="cityc" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                        @foreach($city->sortBy('name') as $cty)
+                            <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                        @endforeach
                     </select>
                     <div id="cityc-err" class="error"></div>
                 </div>
@@ -105,6 +111,9 @@
                 <div class="col-md-5">
                     <select class="form-select" name="postcodec" id="postcodec" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                        @foreach($postcode->sortBy('postcode') as $pc)
+                            <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                        @endforeach
                     </select>
                     <div id="postcodec-err" class="error"></div>
                 </div>

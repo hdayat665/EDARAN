@@ -82,7 +82,7 @@
                                     @elseif ($claim->status == 'reject')
                                         <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                                     @elseif ($claim->status == 'active')
-                                        <td><span class="badge bg-lime" data-toggle="activec" title="{{$claim->status_desc}}">In Queue</span></td>
+                                        <td><span class="badge bg-success" data-toggle="activec" title="{{ $claim->status_desc }}">Pending</span></td>
                                     @endif
                                     <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                                 </tr>

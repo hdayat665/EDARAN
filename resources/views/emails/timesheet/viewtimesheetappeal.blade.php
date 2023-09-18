@@ -21,7 +21,12 @@
     <p><strong>Reason </strong> : {{ $data['data']->reason ?? '-' }} </p>
     <br>
     <p>Please click the link button for further action </p>
-    <a href="{{ env('APP_URL') . '/appealtimesheet' }}"><button>Click Here</button></a>
+    {{-- <a href="{{ env('APP_URL') . '/appealtimesheet' }}"><button>Click Here</button></a> --}}
+    <div class="row p-2">
+        <div class="col-sm-6">
+            <a href="{{ $approveApp }}"><button>Approve</button></a> &nbsp;<a href="{{ $rejectApp }}"><button>Reject</button></a>
+        </div>
+    </div>
     <br>
     <br>
     <p>

@@ -554,6 +554,9 @@ class MailService
             $response['employeeName'] = $user->employeeName;
             $response['departmentName'] = $user->departmentName;
             $response['designationName'] = $user->designationName;
+            // $response['randomnumber'] = $data->generaterandom; 
+            $response['approveApp'] = env('APP_URL') . "/approveAppealEmail/" . $data->generaterandom;
+            $response['rejectApp'] = env('APP_URL') . "/viewRejectAppealEmail/" . $data->generaterandom;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));

@@ -1,24 +1,33 @@
 $(document).ready(function () {
 
-    $(document).on("change", "#country, #countryc", function () {
-        var getCountry = $(this).val();
-        console.log("helooooo");
+    function handleStatebyCountryProfile(countrySelector, stateSelector, citySelector, postcodeSelector) {
+        $(countrySelector).on("change", function () {
+            var getCountry = $(this).val();
+            var getState = getStatebyCountryEmployee(getCountry);
 
-        var getState = getStatebyCountryEmployee(getCountry);
+            getState.then(function (data) {
+                $(stateSelector + ', ' + citySelector + ', ' + postcodeSelector).empty();
+                $(stateSelector + ', ' + citySelector + ', ' + postcodeSelector).append('<option value="">PLEASE CHOOSE</option>');
 
-        getState.then(function (data) {
-            $("#state, #statec").empty().append('<option value="">PLEASE CHOOSE</option>');
+                data.sort(function(a, b) {
+                    return a.state_name.localeCompare(b.state_name);
+                });
 
-            $("#city, #cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $.each(data, function (index, state) {
-                $("#state, #statec").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+                $.each(data, function(index, state) {
+                    $(stateSelector).append('<option value="' + state.id + '">' + state.state_name + '</option>');
+                });
             });
         });
-    });
+    }
 
+    var countryProfiles = [
+        { country: "#country", state: "#state", city: "#city", postcode: "#postcode" },
+        { country: "#countryc", state: "#statec", city: "#cityc", postcode: "#postcodec" },
+    ];
+
+    countryProfiles.forEach(function(profile) {
+        handleStatebyCountryProfile(profile.country, profile.state, profile.city, profile.postcode);
+    });
 
     function getStatebyCountryEmployee(id) {
         return $.ajax({
@@ -26,19 +35,33 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("change", "#state, #statec", function () {
-        var getState = $(this).val();
-        var getCity = getCitybyStateEmployee(getState);
+    function handleCitybyStateProfile(stateSelector, citySelector, postcodeSelector) {
+        $(stateSelector).on("change", function () {
+            var getState = $(this).val();
+            var getCity = getCitybyStateEmployee(getState);
 
-        getCity.then(function (data) {
-            $("#city, #cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
+            getCity.then(function (data) {
+                $(citySelector + ',' + postcodeSelector).empty();
+                $(citySelector + ',' + postcodeSelector).append('<option value="">PLEASE CHOOSE</option>');
 
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
+                data.sort(function(a, b) {
+                    return a.name.localeCompare(b.name);
+                });
 
-            $.each(data, function (index, city) {
-                $("#city, #cityc").append('<option value="' + city.name + '">' + city.name + '</option>');
+                $.each(data, function(index, city) {
+                    $(citySelector).append('<option value="' + city.name + '">' + city.name + '</option>');
+                });
             });
         });
+    }
+
+    var stateProfiles = [
+        { state: "#state", city: "#city", postcode: "#postcode" },
+        { state: "#statec", city: "#cityc", postcode: "#postcodec" },
+    ];
+
+    stateProfiles.forEach(function(profile) {
+        handleCitybyStateProfile(profile.state, profile.city, profile.postcode);
     });
 
     function getCitybyStateEmployee(id) {
@@ -47,21 +70,25 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("change", "#city, #cityc", function () {
-        var getCity = $(this).val();
-        var getPostcode = getPostcodeByCityEmployee(getCity);
+    function handlePostcodeByCityProfile(citySelector, postcodeSelector) {
+        $(citySelector).on("change", function () {
+            var getCity = $(this).val();
+            var getPostcode = getPostcodeByCityEmployee(getCity);
 
-        getPostcode.then(function (data) {
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
+            getPostcode.then(function (data) {
+                $(postcodeSelector).empty();
+                $(postcodeSelector).append('<option value="">PLEASE CHOOSE</option>');
 
-            $.each(data, function (index, postcode) {
-                $("#postcode, #postcodec").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+                data.sort(function(a, b) {
+                    return a.postcode.localeCompare(b.postcode);
+                });
+
+                $.each(data, function(index, postcode) {
+                    $(postcodeSelector).append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+                });
             });
         });
-    });
-
-
-
+    }
 
     function getPostcodeByCityEmployee(id) {
         return $.ajax({
@@ -69,160 +96,26 @@ $(document).ready(function () {
         });
     }
 
+    var cityProfiles = [
+        { city: "#city", postcode: "#postcode" },
+        { city: "#cityc", postcode: "#postcodec" },
+    ];
 
-      $(document).on("change", "#country, #countryc", function () {
-        var getCountry = $(this).val();
-        console.log("helooooo");
-
-        var getState = getStatebyCountryEmployee(getCountry);
-
-        getState.then(function (data) {
-            $("#state, #statec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $("#city, #cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $.each(data, function (index, state) {
-                $("#state, #statec").append('<option value="' + state.id + '">' + state.state_name + '</option>');
-            });
-        });
+    cityProfiles.forEach(function(profile) {
+        handlePostcodeByCityProfile(profile.city, profile.postcode);
     });
 
+        var editparent = "#country, #postcode, #city, #state";
 
-    function getStatebyCountryEmployee(id) {
-        return $.ajax({
-            url: "/getStatebyCountryEmployee/" + id,
+        $(editparent).select2({
+            placeholder: "PLEASE CHOOSE",
+            allowClear: true,
         });
-    }
 
-    $(document).on("change", "#state, #statec", function () {
-        var getState = $(this).val();
-        var getCity = getCitybyStateEmployee(getState);
+        // var editparent2 = "#countryc, #postcodec, #cityc, #statec";
 
-        getCity.then(function (data) {
-            $("#city, #cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $.each(data, function (index, city) {
-                $("#city, #cityc").append('<option value="' + city.name + '">' + city.name + '</option>');
-            });
-        });
-    });
-
-    function getCitybyStateEmployee(id) {
-        return $.ajax({
-            url: "/getCitybyStateEmployee/" + id,
-        });
-    }
-
-    $(document).on("change", "#city, #cityc", function () {
-        var getCity = $(this).val();
-        var getPostcode = getPostcodeByCityEmployee(getCity);
-
-        getPostcode.then(function (data) {
-            $("#postcode, #postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-            $.each(data, function (index, postcode) {
-                $("#postcode, #postcodec").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
-            });
-        });
-    });
-
-
-
-
-    function getPostcodeByCityEmployee(id) {
-        return $.ajax({
-            url: "/getPostcodeByCityEmployee/" + id,
-        });
-    }
-
-
-
-    // $(document).ready(function () {
-    //     var editparent = "#country, #postcode, #city, #state";
-
-    //     $(editparent).select2({
-    //         placeholder: "PLEASE CHOOSE",
-    //         allowClear: true,
-    //     });
-    // });
-
-
-
-    // $(document).ready(function () {
-    //     var editparent = "#countryc, #postcodec, #cityc, #statec";
-
-    //     $(editparent).select2({
-    //         placeholder: "PLEASE CHOOSE",
-    //         allowClear: true,
-    //     });
-    // });
-
-    // $(document).on("change", "#countryc", function () {
-    //     var getCountry = $(this).val();
-
-    //     var getState = getStatebyCountryEmployee(getCountry);
-
-    //     getState.then(function (data) {
-    //         $("#statec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $("#cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $("#postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $.each(data, function (index, state) {
-    //             $("#statec").append('<option value="' + state.id + '">' + state.state_name + '</option>');
-    //         });
-    //     });
-    // });
-
-
-    // function getStatebyCountryEmployee(id) {
-    //     return $.ajax({
-    //         url: "/getStatebyCountryEmployee/" + id,
-    //     });
-    // }
-
-    // $(document).on("change", "#statec", function () {
-    //     var getState = $(this).val();
-    //     var getCity = getCitybyStateEmployee(getState);
-
-    //     getCity.then(function (data) {
-    //         $("#cityc").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $("#postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $.each(data, function (index, city) {
-    //             $("#cityc").append('<option value="' + city.name + '">' + city.name + '</option>');
-    //         });
-    //     });
-    // });
-
-    // function getCitybyStateEmployee(id) {
-    //     return $.ajax({
-    //         url: "/getCitybyStateEmployee/" + id,
-    //     });
-    // }
-
-    // $(document).on("change", "#cityc", function () {
-    //     var getCity = $(this).val();
-    //     var getPostcode = getPostcodeByCityEmployee(getCity);
-
-    //     getPostcode.then(function (data) {
-    //         $("#postcodec").empty().append('<option value="">PLEASE CHOOSE</option>');
-
-    //         $.each(data, function (index, postcode) {
-    //             $("#postcodec").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
-    //         });
-    //     });
-    // });
-
-    // function getPostcodeByCityEmployee(id) {
-    //     return $.ajax({
-    //         url: "/getPostcodeByCityEmployee/" + id,
-    //     });
-    // }
+        // $(editparent2).select2({
+        //     placeholder: "PLEASE CHOOSE",
+        //     allowClear: true,
+        // });
 });
