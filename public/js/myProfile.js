@@ -1243,6 +1243,172 @@ $(document).ready(function () {
         }
     }
 
+    $("#addAddressDetails").click(function (e) {
+        $("#formAddressDetails").validate({
+            // Specify validation rules
+            rules: {
+                address1: "required",
+                country: "required",
+                state: "required",
+                city: "required",
+                postcode: "required",
+            },
+            messages: {
+                address1: "Please Insert Address 1",
+                country: "Please Choose Country",
+                state: "Please Choose State",
+                city: "Please Choose City",
+                postcode: "Please Choose Postcode",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(document.getElementById("formAddressDetails"));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createAddress",
+                        data: data,
+                        dataType: "json",
+                        processData: false,
+                                contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#saveAddressDetailsBtn").click(function (e) {
+        $("#formEditAddressDetails").validate({
+            rules: {
+                address1: "required",
+                country: "required",
+                state: "required",
+                city: "required",
+                postcode: "required",
+            },
+
+            messages: {
+                address1: "Please Insert Address 1",
+                country: "Please Choose Country",
+                state: "Please Choose State",
+                city: "Please Choose City",
+                postcode: "Please Choose Postcode",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err-2");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err-2");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err-2");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err-2");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
+            submitHandler: function (form) {
+                Swal.fire({
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonColor: "#d33",
+                    confirmButtonColor: "#3085d6",
+                    title: "Declaration.",
+                    icon: "info",
+                    html:
+                        '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                    confirmButtonText: "Yes",
+
+                    preConfirm: () => {
+                        if (
+                            !$("#t1").prop("checked") ||
+                            !$("#t2").prop("checked") ||
+                            !$("#t3").prop("checked")
+                        ) {
+                            Swal.showValidationMessage(
+                                '<i class="fa fa-info-circle"></i> Please check all term to proceed'
+                            );
+                        } else if (
+                            $("#t1").prop("checked") ||
+                            $("#t2").prop("checked") ||
+                            $("#t3").prop("checked")
+                        ) {
+                            var data = new FormData(
+                                document.getElementById("formEditAddressDetails")
+                            );
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/updateAddressDetails",
+                                data: data,
+                                dataType: "json",
+
+                                processData: false,
+                                contentType: false,
+                            }).then(function (data) {
+                                console.log(data);
+                                Swal.fire({
+                                    title: data.title,
+                                    icon: "success",
+                                    text: data.msg,
+                                    type: data.type,
+                                    confirmButtonColor: "#3085d6",
+                                    confirmButtonText: "OK",
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                }).then(function () {
+                                    if (data.type == "error") {
+                                    } else {
+                                        location.reload();
+                                        // window.location.href = "/myProfile";
+                                    }
+                                });
+                            });
+                        } else {
+                            Swal.showValidationMessage(
+                                '<i class="fa fa-info-circle"></i> error'
+                            );
+                        }
+                    },
+                }).then((result) => {});
+            },
+        });
+    });
+
     $("#saveAddress").click(function (e) {
         $("#formAddress").validate({
             rules: {
@@ -1322,204 +1488,6 @@ $(document).ready(function () {
             },
         });
     });
-
-    // $("#addAddressDetails").click(function (e) {
-    //     $("#formAddressDetails").validate({
-    //         // Specify validation rules
-    //         rules: {
-    //             address1: "required",
-    //             city: "required",
-    //             state: "required",
-    //             country: "required",
-    //             postcode: {
-    //                 required: true,
-    //                 digits: true,
-    //                 rangelength: [5, 5],
-    //             },
-    //             addressType: "required",
-    //         },
-
-    //         messages: {
-    //             address1: "Please Insert Address 1",
-    //             city: "Please Insert City",
-    //             state: "Please Choose State",
-    //             country: "required",
-    //             postcode: {
-    //                 required: "Please Insert Postcode",
-    //                 digits: "Please Insert Valid Postcode",
-    //                 rangelength: "Please Insert Valid Postcode",
-    //             },
-    //             addressType: "Please Choose Address Type",
-    //         },
-    //         submitHandler: function (form) {
-    //             requirejs(["sweetAlert2"], function (swal) {
-    //                 var data = new FormData(
-    //                     document.getElementById("formAddressDetails")
-    //                 );
-
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     url: "/addAddressDetails",
-    //                     data: data,
-    //                     dataType: "json",
-
-    //                     processData: false,
-    //                     contentType: false,
-    //                 }).then(function (data) {
-    //                     swal({
-    //                         title: data.title,
-    //                         text: data.msg,
-    //                         type: data.type,
-    //                         confirmButtonColor: "#3085d6",
-    //                         confirmButtonText: "OK",
-    //                         allowOutsideClick: false,
-    //                         allowEscapeKey: false,
-    //                     }).then(function () {
-    //                         if (data.type == "error") {
-    //                         } else {
-    //                             location.reload();
-    //                         }
-    //                     });
-    //                 });
-    //             });
-    //         },
-    //     });
-    // });
-
-    // $("#saveAddressDetailsBtn").click(function (e) {
-    //     Swal.fire({
-    //         allowOutsideClick: false,
-    //         showCancelButton: true,
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonColor: "#3085d6",
-    //         title: "Declaration.",
-    //         icon: "info",
-    //         html:
-    //             '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-    //             '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-    //             '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-    //         confirmButtonText: "Yes",
-
-    //         preConfirm: () => {
-    //             if (
-    //                 !$("#t1").prop("checked") ||
-    //                 !$("#t2").prop("checked") ||
-    //                 !$("#t3").prop("checked")
-    //             ) {
-    //                 Swal.showValidationMessage(
-    //                     '<i class="fa fa-info-circle"></i> Please check all term to proceed'
-    //                 );
-    //             } else if (
-    //                 $("#t1").prop("checked") ||
-    //                 $("#t2").prop("checked") ||
-    //                 $("#t3").prop("checked")
-    //             ) {
-    //                 var data = new FormData(
-    //                     document.getElementById("formEditAddressDetails")
-    //                 );
-
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     url: "/updateAddressDetails",
-    //                     data: data,
-    //                     dataType: "json",
-
-    //                     processData: false,
-    //                     contentType: false,
-    //                 }).then(function (data) {
-    //                     console.log(data);
-    //                     Swal.fire({
-    //                         title: data.title,
-    //                         icon: "success",
-    //                         text: data.msg,
-    //                         type: data.type,
-    //                         confirmButtonColor: "#3085d6",
-    //                         confirmButtonText: "OK",
-    //                         allowOutsideClick: false,
-    //                         allowEscapeKey: false,
-    //                     }).then(function () {
-    //                         if (data.type == "error") {
-    //                         } else {
-    //                             location.reload();
-    //                         }
-    //                     });
-    //                 });
-    //             } else {
-    //                 Swal.showValidationMessage(
-    //                     '<i class="fa fa-info-circle"></i> error'
-    //                 );
-    //             }
-    //         },
-    //     }).then((result) => {});
-    // });
-
-    // addressId = $("#addressId").val();
-
-    // addressIds = addressId.split(",");
-
-    // for (let i = 0; i < addressIds.length; i++) {
-    //     const type = addressIds[i];
-
-    //     $("#updateAddressDetails" + type).click(function (e) {
-    //         id = $(this).data("id");
-    //         var addressData = getAddressDetails(id);
-
-    //         addressData.then(function (data) {
-    //             address = data.data;
-    //             $("#id1").val(address.id);
-    //             $("#address1Edit").val(address.address1);
-    //             $("#address2Edit").val(address.address2);
-    //             $("#postcodeEdit").val(address.postcode);
-    //             $("#cityEdit").val(address.city);
-    //             $("#stateEdit").val(address.state);
-    //             $("#countryEdit").val(address.country);
-    //             $("#addressTypeEdit").val(address.addressType);
-    //         });
-    //         $("#modaleditaddress").modal("show");
-    //     });
-
-    //     $("#deleteAddressDetails" + type).click(function (e) {
-    //         id = $(this).data("id");
-
-    //         requirejs(["sweetAlert2"], function (swal) {
-    //             swal({
-    //                 title: "Are you sure to delete Address?",
-    //                 type: "error",
-    //                 confirmButtonClass: "btn-danger",
-    //                 confirmButtonText: "Yes!",
-    //                 showCancelButton: true,
-    //             }).then(function () {
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     url: "/deleteAddressDetails/" + id,
-    //                     data: { _method: "DELETE" },
-    //                 }).then(function (data) {
-    //                     console.log(data);
-    //                     swal({
-    //                         title: data.title,
-    //                         text: data.msg,
-    //                         type: data.type,
-    //                         confirmButtonColor: "#3085d6",
-    //                         confirmButtonText: "OK",
-    //                         allowOutsideClick: false,
-    //                         allowEscapeKey: false,
-    //                     }).then(function () {
-    //                         if (data.type == "error") {
-    //                         } else {
-    //                             location.reload();
-    //                         }
-    //                     });
-    //                 });
-    //             });
-    //         });
-    //     });
-
-    //     function getAddressDetails(id) {
-    //         return $.ajax({
-    //             url: "/getAddressDetails/" + id,
-    //         });
-    //     }
-    // }
 
     $("#saveEmergency, #saveEmergency2").click(function (e) {
         $("#formEmergency").validate({
@@ -2290,7 +2258,7 @@ $(document).ready(function () {
             $(".oth").hide();
         }
     });
-    
+
     $(document).ready(function() {
         $("#profileAddress").DataTable({
             responsive: false,
@@ -2379,6 +2347,7 @@ $(document).ready(function () {
                 background: "#e9ecef"});
             }
     });
+
 
 
 
@@ -2981,7 +2950,6 @@ $(document).ready(function () {
                 $("#postcode1").val(child.postcode);
                 $("#city1").val(child.city);
                 $("#state1").val(child.state);
-                $("#country1").val(child.country);
                 $("#okucard4").val(child.okuNo);
                 if (child.okuFile) {
                     $("#okuAttachmentView").html(
@@ -3690,8 +3658,6 @@ $(document).ready(function () {
                 address1: "required",
                 postcode: {
                     required: true,
-                    digits: true,
-                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
@@ -3702,7 +3668,6 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    //digits: true,
                     rangelength: [7, 7],
                 },
                 contactNo: {
@@ -3743,8 +3708,6 @@ $(document).ready(function () {
                 address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -3887,8 +3850,6 @@ $(document).ready(function () {
                 $("#address2P1").val(parent.address2);
                 $("#address1P1").val(parent.address1);
                 $("#cityP1").val(parent.city);
-                $("#stateP1").val(parent.state);
-                $("#countryP1").val(parent.country);
                 $("#contactNoP1").val(parent.contactNo);
                 $("#passportparentedit").val(parent.passport);
                 $("#expiryDateParentEdit").val(parent.expiryDate);
@@ -4164,6 +4125,45 @@ $(document).ready(function () {
         });
     });
 
+    var checkboxes = $('input[name="address_type[]"]');
+
+    var permanentChecked = false;
+    var correspondentChecked = false;
+    var addressId = null;
+    var addressType = "0";
+
+    checkboxes.each(function () {
+        if ($(this).is(":checked")) {
+            if ($(this).val() === "permanent") {
+                permanentChecked = true;
+            } else if ($(this).val() === "correspondent") {
+                correspondentChecked = true;
+            }
+            if (addressId == null) {
+                addressId = $(this).data("address-id");
+                addressType = $(this).data("address-type");
+            }
+        }
+    });
+
+    if (permanentChecked && correspondentChecked) {
+        if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+            addressType = "3";
+        }
+        checkboxes.not(":checked").prop("disabled", true);
+    } else if (permanentChecked) {
+        addressType = "1";
+        checkboxes.filter('[value="permanent"]:not(:checked)').prop("disabled", true);
+        checkboxes.filter('[value="correspondent"]').prop("disabled", false);
+    } else if (correspondentChecked) {
+        addressType = "2";
+        checkboxes.filter('[value="correspondent"]:not(:checked)').prop("disabled", true);
+        checkboxes.filter('[value="permanent"]').prop("disabled", false);
+    } else {
+        addressType = "0";
+        checkboxes.prop("disabled", false);
+    }
+    
     $(document).on("change", 'input[name="address_type[]"]', function () {
         var permanentChecked = false;
         var correspondentChecked = false;
@@ -4196,31 +4196,121 @@ $(document).ready(function () {
             addressType = "0";
         }
 
-        $.ajax({
-            url: "/updateAddressDetails",
-            type: "POST",
-            data: {
-                id: addressId,
-                addressType: addressType,
-            },
-            success: function (data) {
-                Swal.fire({
-                    icon: "success",
-                    text: "Address Type is updated!",
-                    title: "Success!",
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    location.reload();
-                });
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error(errorThrown);
-            },
+            $.ajax({
+                url: "/updateAddressDetails",
+                type: "POST",
+                data: {
+                    id: addressId,
+                    addressType: addressType,
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "Address Type is updated!",
+                        title: "Success!",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        location.reload();
+                    });
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(errorThrown);
+                },
+        	});
         });
-    });
+
+        addressId = $("#addressId").val();
+
+        addressIds = addressId.split(",");
+
+        for (let i = 0; i < addressIds.length; i++) {
+            const type = addressIds[i];
+
+            $("#updateAddressDetails" + type).click(function (e) {
+                id = $(this).data("id");
+                var addressData = getAddressDetails(id);
+
+                addressData.then(function (data) {
+                    address = data.data;
+                    $("#id1").val(address.id);
+                    $("#address1Edit").val(address.address1);
+                    $("#address2Edit").val(address.address2);
+                    $("#postcode_idedit").val(address.postcode);
+                    $("#city_idedit").val(address.city);
+                    $("#state_idedit").val(address.state);
+                    $("#country_idedit").val(address.country);
+
+                    $("#postcode_idedit").val(address.postcode).select2({
+                        placeholder: 'PLEASE CHOOSE',
+                        allowClear: true,
+                        dropdownParent: $('#modaleditaddress'),
+                    });
+                    $("#city_idedit").val(address.city).select2({
+                        placeholder: 'PLEASE CHOOSE',
+                        allowClear: true,
+                        dropdownParent: $('#modaleditaddress'),
+                    });
+                    $("#state_idedit").val(address.state).select2({
+                        placeholder: 'PLEASE CHOOSE',
+                        allowClear: true,
+                        dropdownParent: $('#modaleditaddress'),
+                    });
+                    $("#country_idedit").val(address.country).select2({
+                        placeholder: 'PLEASE CHOOSE',
+                        allowClear: true,
+                        dropdownParent: $('#modaleditaddress'),
+                    });
+                });
+                $("#modaleditaddress").modal("show");
+            });
+
+            $("#deleteAddressDetails" + type).click(function (e) {
+                id = $(this).data("id");
+
+                requirejs(["sweetAlert2"], function (swal) {
+                    swal({
+                        title: "Are you sure to delete Address?",
+                        type: "error",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: true,
+                    }).then(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/deleteAddressDetails/" + id,
+                            data: { _method: "DELETE" },
+                        }).then(function (data) {
+                            console.log(data);
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function () {
+                                if (data.type == "error") {
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        });
+                    });
+                });
+            });
+
+            function getAddressDetails(id) {
+                return $.ajax({
+                    url: "/getAddressDetails/" + id,
+                });
+            }
+        }
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4288,64 +4378,76 @@ $("#same-address").change(function () {
     }
 });
 
-// $("#same-address2").change(function () {
-//     if (this.checked) {
-//         $("#address1parent").val($("#address-1").val()).prop("readonly", true);
-//         $("#address2parent").val($("#address-2").val()).prop("readonly", true);
-//         $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
-//         $("#cityparent").val($("#city").val()).prop("readonly", true);
-//         $("#stateparent").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
-//         $("#countryparent").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+$("#same-address2").change(function () {
+    if (this.checked) {
 
-//         // Fetch permanent address from userAddress table if available
-//         var id = "{{ $user->id }}";
-//         getAddressforCompanion(id)
-//             .then(function (data) {
-//                 if (data) {
-//                            console.log(data);
+        $("#address1parent").val($("#address-1").val()).prop("readonly", true);
+        $("#address2parent").val($("#address-2").val()).prop("readonly", true);
+        // $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
+        // $("#cityparent").val($("#city").val()).prop("readonly", true);
+        $("#postcodeparent").val($("#postcode").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+        $("#cityparent").val($("#city").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-//                     var permanentAddress1 = data.data.address1;
-//                     var permanentAddress2 = data.data.address2;
-//                     var permanentPostcode = data.data.postcode;
-//                     var permanentCity = data.data.city;
-//                     var permanentState = data.data.state;
-//                     var permanentCountry = data.data.country;
-//                     console.log(data);
+        $("#stateparent").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+        $("#countryparent").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-//                     if (
-//                         permanentAddress1 ||
-//                         permanentAddress2 ||
-//                         permanentPostcode ||
-//                         permanentCity ||
-//                         permanentState ||
-//                         permanentCountry
-//                     ) {
-//                         $("#address1parent").val(permanentAddress1);
-//                         $("#address2parent").val(permanentAddress2);
-//                         $("#postcodeparent").val(permanentPostcode);
-//                         $("#cityparent").val(permanentCity);
-//                         $("#stateparent").val(permanentState);
-//                         $("#stateparenthidden").val(permanentState);
-//                         $("#countryparent").val(permanentCountry);
-//                         $("#countryparenthidden").val(permanentCountry);
-//                     }
-//                 }
-//             })
-//             .fail(function (xhr, status, error) {
-//                 console.log("Error fetching permanent address: " + error);
-//             });
-//     } else {
-//         $("#address1parent").val($("").val()).prop("readonly", false);
-//         $("#address2parent").val($("").val()).prop("readonly", false);
-//         $("#postcodeparent").val($("").val()).prop("readonly", false);
-//         $("#cityparent").val($("").val()).prop("readonly", false);
-//         // $("#stateparent").css({ "pointer-events": "auto", background: "none" }).val("");
-//         $("#stateparent").css({ "pointer-events": "auto", background: "" });
+        var id = "{{ $user->id }}";
+        getAddressforCompanion(id)
+            .then(function (data) {
+                if (data) {
+                        console.log(data);
 
-//         // $("#countryparent").css({ "pointer-events": "auto", background: "none" }).val("");
-//         $("#countryparent").css({ "pointer-events": "auto", background: "" });
-//     }
-// });
+                    var permanentAddress1 = data.data.address1;
+                    var permanentAddress2 = data.data.address2;
+                    var permanentPostcode = data.data.postcode;
+                    var permanentCity = data.data.city;
+                    var permanentState = data.data.state_name;
+                    var permanentCountry = data.data.country_name;
+                    console.log(data);
+
+                    if (
+                        permanentAddress1 ||
+                        permanentAddress2 ||
+                        permanentPostcode ||
+                        permanentCity ||
+                        permanentState ||
+                        permanentCountry
+                    ) {
+
+                        $("#address1parent").val(permanentAddress1);
+                        $("#address2parent").val(permanentAddress2);
+                        $("#postcodeparent").val(permanentPostcode);
+                        $("#cityparent").val(permanentCity);
+                        $("#stateparent").val(permanentState);
+                        $("#stateparenthidden").val(permanentState);
+                        $("#countryparent").val(permanentCountry);
+                        $("#countryparenthidden").val(permanentCountry);
+
+                        $("#postcodeparent").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                        $("#cityparent").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                        $("#stateparent").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                        $("#countryparent").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
+                    }
+                }
+            })
+            .fail(function (xhr, status, error) {
+                console.log("Error fetching permanent address: " + error);
+            });
+    } else {
+        $("#address1parent").val($("").val()).prop("readonly", false);
+        $("#address2parent").val($("").val()).prop("readonly", false);
+        // $("#postcodeparent").val($("").val()).prop("readonly", false);
+        // $("#cityparent").val($("").val()).prop("readonly", false);
+        $("#postcodeparent").css({ "pointer-events": "auto", background: "none" }).val("");
+        $("#cityparent").css({ "pointer-events": "auto", background: "none" }).val("");
+
+        $("#stateparent").css({ "pointer-events": "auto", background: "none" }).val("");
+        // $("#stateparent").css({ "pointer-events": "auto", background: "" });
+
+        $("#countryparent").css({ "pointer-events": "auto", background: "none" }).val("");
+        // $("#countryparent").css({ "pointer-events": "auto", background: "" });
+    }
+});
 
 $("#same-address3").change(function () {
     if (this.checked) {
@@ -4585,7 +4687,6 @@ $("#same-addressEditParent").change(function () {
                     var permanentCity = data.data.city;
                     var permanentState = data.data.state_name;
                     var permanentCountry = data.data.country_name;
-                    console.log(data);
 
                     if (
                         permanentAddress1 ||

@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header" id="systemRoleUpdateJs">System User <small>| Update System User</small></h1>
+        <h1 class="page-header" id="systemRoleUpdateJs">System User <small>| Update System dsasdaasdUser</small></h1>
 
         <div class="row">
             <div class="panel-heading mt-15px">
@@ -160,7 +160,7 @@
                                     <div class="mb-6">
                                         <div class="row g-3 align-items-center">
                                             <div class="col-auto">
-                                                <input class="form-check-input" {{ in_array($level_1->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox" value="{{ $level_1->code ?? '-' }}"
+                                                <input class="form-check-input level1-checkbox level-checkbox" {{ in_array($level_1->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox" value="{{ $level_1->code ?? '-' }}"
                                                     id="" name="permissions[]">
                                             </div>
                                             <div class="col-auto">
@@ -208,7 +208,7 @@
                                                 <div class="mb-6 child-element">
                                                     <div class="row g-3 align-items-center">
                                                         <div class="col-auto">
-                                                            <input class="form-check-input" {{ in_array($att_level2->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
+                                                            <input class="form-check-input level2-checkbox level-checkbox" data-level2="{{ $att_level2->menu_id }}"  {{ in_array($att_level2->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
                                                                 value="{{ $att_level2->code ?? '-' }}" id="" name="permissions[]">
                                                         </div>
                                                         <div class="col-auto">
@@ -246,7 +246,10 @@
                                                     <div class="mb-6 child-element2">
                                                         <div class="row g-3 align-items-center">
                                                             <div class="col-auto">
-                                                                <input class="form-check-input" {{ in_array($att_level3->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
+                                                                <input class="form-check-input level3-checkbox level-checkbox"
+                                                                    data-level2="{{ $att_level2->menu_id }}"
+                                                                    data-level3="{{ $att_level3->menu_id }}"
+                                                                     {{ in_array($att_level3->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
                                                                     value="{{ $att_level3->code ?? '-' }}" id="" name="permissions[]">
                                                             </div>
                                                             <div class="col-auto">
@@ -285,7 +288,11 @@
                                                         <div class="mb-6 child-element3">
                                                             <div class="row g-3 align-items-center">
                                                                 <div class="col-auto">
-                                                                    <input class="form-check-input" {{ in_array($att_level4->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
+                                                                    <input class="form-check-input level4-checkbox level-checkbox"
+                                                                        data-level2="{{ $att_level2->menu_id }}"
+                                                                        data-level3="{{ $att_level3->menu_id }}"
+                                                                        data-level4="{{ $att_level4->menu_id }}"
+                                                                         {{ in_array($att_level4->code, $markMenuCodes) ? 'checked' : '' }} type="checkbox"
                                                                         value="{{ $att_level4->code ?? '-' }}" id="" name="permissions[]">
                                                                 </div>
                                                                 <div class="col-auto">

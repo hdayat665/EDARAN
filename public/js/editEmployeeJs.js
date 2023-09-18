@@ -1283,6 +1283,81 @@ $("#edit-profile-picture").on("click", function () {
             }
         }
     });
+    $("#same-address6").change(function () {
+        if (this.checked) {
+            $("#address-1c").val($("#address-1").val()).prop("readonly", true);
+            $("#address-2c").val($("#address-2").val()).prop("readonly", true);
+            $("#postcodec").val($("#postcode").val()).prop("readonly", true);
+            $("#cityc").val($("#city").val()).prop("readonly", true);
+
+            $("#statec").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
+            $("#countryc").val($("#country").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            var id = document.getElementById("user_id").value;
+
+            // Fetch permanent address from userAddress table if available
+
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforCompanionx =
+                getEmployeeAddressforCompanion(id);
+            console.log(id);
+
+            getEmployeeAddressforCompanionx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
+                            permanentCountry
+                        ) {
+                            $("#address-1c").val(permanentAddress1);
+                            $("#address-2c").val(permanentAddress2);
+                            $("#postcodec").val(permanentPostcode);
+                            $("#cityc").val(permanentCity);
+                            $("#statec").val(permanentState);
+                            $("#countryc").val(permanentCountry);
+
+
+
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+        } else {
+            $("#address-1c").val($("").val()).prop("readonly", false);
+            $("#address-2c").val($("").val()).prop("readonly", false);
+            $("#postcodec").val($("").val()).prop("readonly", false);
+            $("#cityc").val($("").val()).prop("readonly", false);
+            $("#statec").val($("").val()).prop("disabled", false).css({ "pointer-events": "auto", background: "none" });
+            $("#countryc").val($("")
+            .val("MY"))
+            .prop("disabled", false)
+            .prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            })
+        }
+    });
+
     $("#same-address").change(function () {
         if (this.checked) {
             $("#address-1c").val($("#address-1").val()).prop("readonly", true);
@@ -1338,7 +1413,7 @@ $("#edit-profile-picture").on("click", function () {
                                 placeholder: "PLEASE CHOOSE",
                                 allowClear: true,
                             });
-                            
+
                             $(select2Elements).val([permanentPostcode, permanentCity, permanentState, permanentCountry]).trigger("change");
 
                             $("#postcodec").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
@@ -2065,11 +2140,10 @@ $("#edit-profile-picture").on("click", function () {
 
     for (let i = 0; i < educationIds.length; i++) {
         const type = educationIds[i];
-        console.log(type);
+
         $("#educationModalEdit" + type).click(function (e) {
             id = $(this).data("id");
             var educationData = getEducation(id);
-            console.log(educationData);
             educationData.then(function (data) {
                 education = data.data;
                 console.log(education);
@@ -2129,7 +2203,6 @@ $("#edit-profile-picture").on("click", function () {
 
         function getEducation(id) {
             return $.ajax({
-                url: "/getEmployeeEducationById/" + id,
                 url: "/getEmployeeEducationById/" + id,
             });
         }
@@ -4852,7 +4925,6 @@ if (permanentChecked && correspondentChecked) {
                 EffectiveFrom: "Please Insert Effective From",
                 event: "Please Choose Event",
             },
-
 
             errorPlacement: function(error, element) {
                 if (element.attr("name") === "roleId") {

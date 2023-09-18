@@ -496,6 +496,16 @@ class ProfileController extends Controller
     }
 
 
+    public function getAddressFromRegisterPermanent(Request $request)
+    {
+        $ps = new ProfileService;
+
+        $userId = Auth::user()->id;
+
+        $result = $ps->getAddressFromRegisterPermanent($userId);
+
+        return response()->json($result);
+    }
 
     public function deleteCompanion($id = '')
     {

@@ -124,36 +124,72 @@ $(document).ready(function () {
             });
         }
     });
+
+    var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+            $(editparent2).select2({
+                placeholder: "PLEASE CHOOSE",
+                allowClear: true,
+            });
+
     $("#same-address").change(function () {
         if (this.checked) {
+
+            var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+            $(editparent2).select2('destroy');
+
             $("#address1c").val($("#address1").val()).prop("readonly", true);
             $("#address2c").val($("#address2").val()).prop("readonly", true);
-            $("#postcodec").val($("#postcode").val()).prop("readonly", true);
-            $("#cityc").val($("#city").val()).prop("readonly", true);
+            $("#postcodec").val($("#postcode").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                "background-color": "#e9ecef",
+            });
+            $("#cityc").val($("#city").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                "background-color": "#e9ecef",
+            });
             $("#statec").val($("#state").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
-                background: "#e9ecef",
+                "background-color": "#e9ecef",
             });
             $("#countryc").val($("#country").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
-                background: "#e9ecef",
+                "background-color": "#e9ecef",
             });
+
+            var id = "{{ $user->id }}";
+
         } else {
+
+            var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+            $(editparent2).select2({
+                placeholder: "PLEASE CHOOSE",
+                allowClear: true,
+            });
             $("#address1c").prop("readonly", false);
             $("#address2c").prop("readonly", false);
-            $("#postcodec").prop("readonly", false);
-            $("#cityc").prop("readonly", false);
+            $("#postcodec").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                "background-color": "transparent",
+            });
+            $("#cityc").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                "background-color": "transparent",
+            });
             $("#statec").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
-                background: "#ffffff",
+                "background-color": "transparent",
             });
             $("#countryc").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
-                background: "#ffffff",
+                "background-color": "transparent",
             });
         }
     });
