@@ -13,6 +13,16 @@
     color: #888 !important;
 }
 
+/* Hide vertical scrollbar */
+.fc-scroller {
+            overflow-y: hidden !important;
+        }
+
+        /* Hide horizontal scrollbar */
+        .fc-scroller {
+            overflow-x: hidden !important;
+        }
+
 
     </style>
 
@@ -98,7 +108,7 @@
 
              <button class="btn btn-primary" type="button" onclick="window.history.back()">Back</button>&nbsp&nbsp
 
-             <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button>
+             {{-- <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button> --}}
         </div>
     </div>
     {{-- <div class="row p-2">
