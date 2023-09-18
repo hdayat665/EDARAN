@@ -73,6 +73,7 @@
                         <table id="tableholiday" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th width="1%">No.</th>
                                     <th width="1%" class="text-nowrap" data-orderable="false">Action</th>
                                     <th class="text-nowrap" data-orderable="false">Status</th>
                                     <th class="text-nowrap">Country</th>
@@ -89,6 +90,7 @@
                                     @foreach ($holiday as $h)
                                         <?php $id++; ?>
                                         <tr>
+                                            <td>{{ $id }}</td>
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                                 <div class="dropdown-menu">
