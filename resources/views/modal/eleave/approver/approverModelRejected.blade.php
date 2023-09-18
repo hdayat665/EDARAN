@@ -63,8 +63,8 @@
                     </div>
                     <br>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" id="updateButtonreject">Reject</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                        <button class="btn btn-primary" id="updateButtonreject">Reject</button>
                     </div>
                     </form>
             </div>

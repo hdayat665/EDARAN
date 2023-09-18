@@ -48,43 +48,22 @@ $(document).ready(function () {
         });
     });
 
-    // Membuat variabel untuk input pertama
-    const input3 = document.getElementById("duration");
+    function addInputValidation(inputId) {
+        const inputElement = document.getElementById(inputId);
 
-    // Membuat fungsi untuk memvalidasi input pertama
-    function validateInput3(event) {
-        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
-        input3.value = input3.value.replace(regex, ""); // Menghapus karakter selain angka
+        function validateInput(event) {
+            const regex = /[^0-9]/g;
+            inputElement.value = inputElement.value.replace(regex, "");
+        }
+
+        inputElement.addEventListener("input", validateInput);
     }
 
-    // Menambahkan event listener ke input pertama
-    input3.addEventListener("input", validateInput3);
+    addInputValidation("duration");
+    addInputValidation("durationU");
+    addInputValidation("allowrequest");
+    addInputValidation("uallowrequest");
 
-
-
-    // Membuat variabel untuk input pertama
-    const input1 = document.getElementById("allowrequest");
-
-    // Membuat fungsi untuk memvalidasi input pertama
-    function validateInput1(event) {
-        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
-        input1.value = input1.value.replace(regex, ""); // Menghapus karakter selain angka
-    }
-
-    // Menambahkan event listener ke input pertama
-    input1.addEventListener("input", validateInput1);
-
-    // Membuat variabel untuk input kedua
-    const input2 = document.getElementById("uallowrequest");
-
-    // Membuat fungsi untuk memvalidasi input kedua
-    function validateInput2(event) {
-        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
-        input2.value = input2.value.replace(regex, ""); // Menghapus karakter selain angka
-    }
-
-    // Menambahkan event listener ke input kedua
-    input2.addEventListener("input", validateInput2);
 
     // enable/disable allow request
     document.getElementById("checkallowrequest").onchange = function () {

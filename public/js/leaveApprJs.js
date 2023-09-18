@@ -208,11 +208,11 @@ $(document).ready(function () {
             $("#iddata").val(data[0].id);
 
             if (data[0].day_applied == 1) {
-                $("#dayapplied").val("One Day");
+                $("#dayapplied").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayapplied").val("Half Day");
+                $("#dayapplied").val("HALF DAY");
             } else {
-                $("#dayapplied").val(data[0].day_applied + " Day");
+                $("#dayapplied").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].up_rec_status === "1") {
@@ -281,11 +281,11 @@ $(document).ready(function () {
             $("#viewiddata").val(data[0].id);
 
             if (data[0].day_applied == 1) {
-                $("#viewdayapplied").val("One Day");
+                $("#viewdayapplied").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#viewdayapplied").val("Half Day");
+                $("#viewdayapplied").val("HALF DAY");
             } else {
-                $("#viewdayapplied").val(data[0].day_applied + " Day");
+                $("#viewdayapplied").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].up_rec_status === "1") {
