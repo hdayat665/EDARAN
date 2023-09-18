@@ -1555,7 +1555,20 @@ getwork.then(function(data) {
                                     const formattedDate = clickedDate.format('YYYY-MM-DD');
                                     $("#applieddate").val(formattedDate);
 
-                                    $('#appealmodal').modal('show');
+                                    console.log(approverUserId);
+                                    if (typeof approverUserId === 'object') {
+                                        // Convert the object to a JSON string for display
+                                        const jsonString = JSON.stringify(approverUserId, null, 2);
+                                        
+                                        // Show the error message using Swal (SweetAlert2)
+                                        Swal.fire({
+                                          title: 'Error',
+                                          text: `The appeal approver is empty. Please contact your system administrator for assistance`,
+                                          icon: 'error',
+                                        });
+                                      } else {
+                                        $('#appealmodal').modal('show');
+                                      }
                                 }
                             });
 
