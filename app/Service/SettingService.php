@@ -50,11 +50,12 @@ use Symfony\Component\Console\Input\Input;
 
 class SettingService
 {
-
-    public function getRole()
+        public function getRole()
     {
         $data = [];
-        $data['data'] = Role::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['data'] = Role::where('tenant_id', Auth::user()->tenant_id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
