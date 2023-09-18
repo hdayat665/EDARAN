@@ -7,36 +7,43 @@
         <div class="row">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs" id="myTab">
+                    <?php $target = ['project_information']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <li class="nav-item">
                         <a href="#tab1" id="nav_pro_info" data-bs-toggle="tab" class="nav-link active">
                             <span class="d-sm-none">Tab 1</span>
                             <span class="d-sm-block d-none">Project Information</span>
                         </a>
                     </li>
-                    @php
-                        $pmc = ['pmc', 'project_manager'];
-                    @endphp
-
-                    @if (array_intersect($role_permission, $pmc))
+                    @endif
+                    <?php $target = ['previ_project_manager']; ?>
+                    @if (array_intersect($role_permission, $target))
+                    
                         <li class="nav-item">
                             <a href="#tab2" id="nav_pre_pro" data-bs-toggle="tab" class="nav-link">
                                 <span class="d-sm-none">Tab 2</span>
                                 <span class="d-sm-block d-none">Previous Project Manager</span>
                             </a>
                         </li>
+                    @endif
+                    <?php $target = ['project_location_info']; ?>
+                    @if (array_intersect($role_permission, $target))
                         <li class="nav-item">
                             <a href="#tab3" id="nav_pro_loc" data-bs-toggle="tab" class="nav-link">
                                 <span class="d-sm-none">Tab 3</span>
                                 <span class="d-sm-block d-none">Project Location</span>
                             </a>
                         </li>
+                    @endif   
+                    <?php $target = ['project_member']; ?>
+                    @if (array_intersect($role_permission, $target))
                         <li class="nav-item">
                             <a href="#tab4" id="nav_pro_mem" data-bs-toggle="tab" class="nav-link">
                                 <span class="d-sm-none">Tab 4</span>
                                 <span class="d-sm-block d-none">Project Member</span>
                             </a>
                         </li>
-                    @endif
+                    @endif   
 
                     @if (in_array('pmap', $role_permission))
                         <input type="hidden" value="pmap" id="pmap">
