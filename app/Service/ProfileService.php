@@ -1502,7 +1502,29 @@ class ProfileService
         return $data;
     }
 
+    public function getAddressFromRegisterPermanent($userId)
+    {
+        $addressDetails = Location::select('location_cities.*', 'location_states.state_name', 'location_country.country_name')
+        ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+        ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+        ->get();
+        
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            $data['data'] = $addressDetails;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get Register Address Data';
+        }
 
+        return $data;
+    }
 
 
 
