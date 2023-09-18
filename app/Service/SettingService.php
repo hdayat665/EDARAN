@@ -643,6 +643,10 @@ class SettingService
         ->where('name', $input['name'])
         ->first();
 
+        $existingPostcode = Location::where('country_id', $input['country_id'])
+        ->where('postcode', $input['postcode'])
+        ->first();
+
         if ($existingPostcode) {
             $data['msg'] = 'Postcode already exists.';
             $data['status'] = config('app.response.error.status');
