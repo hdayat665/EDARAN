@@ -281,8 +281,8 @@
                                                                     <div class="col-auto">
                                                                         <input class="form-check-input level4-checkbox level-checkbox"
                                                                         data-level2="{{ $att_level2->menu_id }}"
-    data-level3="{{ $att_level3->menu_id }}"
-    data-level4="{{ $att_level4->menu_id }}"
+                                                                        data-level3="{{ $att_level3->menu_id }}"
+                                                                        data-level4="{{ $att_level4->menu_id }}"
                                                                         {{ in_array($att_level4->code, $markMenuCodes) ? 'checked' : '' }}
                                                                             type="checkbox"
                                                                             value="{{ $att_level4->code ?? '-' }}"
