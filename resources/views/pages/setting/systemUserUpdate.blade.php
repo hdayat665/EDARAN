@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header" id="systemRoleUpdateJs">System User <small>| Update System dsasdaasdUser</small></h1>
+        <h1 class="page-header" id="systemRoleUpdateJs">System User <small>| Update System User</small></h1>
 
         <div class="row">
             <div class="panel-heading mt-15px">
