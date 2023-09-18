@@ -206,6 +206,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateAddressDetails', 'updateAddressDetails');
             Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
             Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
+            Route::get('/getAddressFromRegisterPermanent/{id}', 'getAddressFromRegisterPermanent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
@@ -847,4 +848,12 @@ Route::get('org/childfinancialaccounting', function () {
 
 Route::get('org/childinternalaudit', function () {
     return view('pages.org.childInternalAudit');
+});
+
+Route::controller(MyTimesheetController::class)->group(function () {
+    // Route::get('/profile', 'profile')->middleware('auth');
+    Route::get('/approveAppealEmail/{randomN}', 'approveAppealEmail');
+    Route::post('/rejectAppealEmail/{randomN}', 'rejectAppealEmail');
+    Route::get('/viewRejectAppealEmail/{randomN}', 'viewRejectAppealEmail');
+    
 });

@@ -19,7 +19,8 @@
             <thead>
                 <tr>
                     <th width="1%">NO</th>
-                    <th class="text-nowrap">Employee Name</th>
+                    <th class="text-nowrap">Date</th>
+                    {{-- <th class="text-nowrap">Employee Name</th> --}}
                     <th class="text-nowrap">Project</th>
                     <th class="text-nowrap">Total Hours</th>
                     <th class="text-nowrap">Amount (MYR)</th>
@@ -31,7 +32,8 @@
                     @foreach ($employees as $employee)
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
-                        <td>{{$employee->employeeName}}</td>
+                        {{-- <td>{{$employee->employeeName}}</td> --}}
+                        <td>{{$employee->date}}</td>
                         <td>{{$employee->project_name}}</td>
                         <td>{{ str_replace(':', '.', substr($employee->total_hour, 0, -2)) }}</td>
                         <td>{{ number_format(floatval(str_replace(':', '.', substr($employee->total_hour, 0, -2))) * floatval($employee->COR), 2) }}</td>

@@ -71,16 +71,6 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="emergency-postcode" class="form-label">Postcode*</label>
-                            <select class="form-select" id="postcodeEC" name="postcode" value="{{ $emergency->postcode ?? '' }}"  style="text-transform: uppercase;">
-                                <option type="text"value="" label="" selected="selected">Please Choose</option>
-                                @foreach($postcode as $pc)
-                                    <option value="{{ $pc->postcode }}" {{ ($emergency->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
-                                @endforeach
-                            </select>
-                            <div id="postcodeEC-err" class="error"></div>
-                        </div>
-                        <div class="col-sm-6">
                             <label for="emergency-city" class="form-label">City*</label>
                             <select class="form-select" name="city" id="cityEC" value="" style="text-transform: uppercase;">
                                 <option type="text"value="" label="" selected="selected">Please Choose</option>
@@ -89,6 +79,16 @@
                                 @endforeach
                             </select>
                             <div id="cityEC-err" class="error"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="emergency-postcode" class="form-label">Postcode*</label>
+                            <select class="form-select" id="postcodeEC" name="postcode" value="{{ $emergency->postcode ?? '' }}"  style="text-transform: uppercase;">
+                                <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                @foreach($postcode as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ ($emergency->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
+                            <div id="postcodeEC-err" class="error"></div>
                         </div>
                     </div>
                     <div class="row p-2">

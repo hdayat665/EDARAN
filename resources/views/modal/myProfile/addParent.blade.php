@@ -180,7 +180,7 @@
                             <select class="form-select countrypar" name="country" id="countryparent" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 @foreach($country->sortBy('country_name') as $ct)
-                                <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
                                 @endforeach
                             </select>
                             <div id="countryparent-err" class="error"></div>
@@ -190,7 +190,7 @@
                             <select class="form-select statepar" name="state" id="stateparent" value="{{ $parent->state ?? '' }}" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                                 @foreach($state->sortBy('state_name') as $st)
-                                <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
                             <!-- <input type="hidden" name="state" id="stateparenthidden"> -->
@@ -203,7 +203,7 @@
                             <select class="form-select citypar" name="city" id="cityparent" style="text-transform: uppercase;">
                                 <option type="text"value="" label="" selected="selected">Please Choose</option>
                                 @foreach($city->sortBy('name') as $cty)
-                                <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                    <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                 @endforeach
                             </select>
                             <div id="cityparent-err" class="error"></div>
@@ -213,7 +213,7 @@
                             <select class="form-select postcodepar" name="postcode" id="postcodeparent" style="text-transform: uppercase;">
                                 <option type="text"value="" label="" selected="selected">Please Choose</option>
                                 @foreach($postcode->sortBy('postcode') as $pc)
-                                <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
                                 @endforeach
                             </select>
                             <div id="postcodeparent-err" class="error"></div>

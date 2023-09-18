@@ -12,6 +12,60 @@ $(document).ready(function () {
         }
     });
 
+    ////////////////////////////////////////////////////////////////////
+    $(".level1-checkbox").on("change", function () {
+        var isChecked = $(this).prop("checked");
+        var $parentPanel = $(this).closest(".panel-body");
+        $parentPanel.find(".level-checkbox").prop("checked", isChecked);
+    });
+    $(".level2-checkbox").on("change", function () {
+        var level2Id = $(this).data("level2");
+        var $parentPanel = $(this).closest(".panel-body");
+        
+        $parentPanel.find(".level3-checkbox[data-level2='" + level2Id + "']").prop("checked", $(this).prop("checked"));
+        
+        $parentPanel.find(".level4-checkbox[data-level2='" + level2Id + "']").prop("checked", $(this).prop("checked"));
+
+        var anyLevel2Checked = $parentPanel.find(".level2-checkbox:checked").length > 0;
+
+        $parentPanel.find(".level1-checkbox").prop("checked", anyLevel2Checked);
+    });
+    $(".level3-checkbox").on("change", function () {
+        var level2Id = $(this).data("level2");
+        var level3Id = $(this).data("level3");
+        var $parentPanel = $(this).closest(".panel-body");
+        
+        $parentPanel.find(".level4-checkbox[data-level3='" + level3Id + "']").prop("checked", $(this).prop("checked"));
+    
+        var anyLevel3Checked = $parentPanel.find(".level3-checkbox:checked").length > 0;
+    
+        $parentPanel.find(".level2-checkbox[data-level2='" + level2Id + "']").prop("checked", anyLevel3Checked);
+    
+        var anyLevel2Checked = $parentPanel.find(".level2-checkbox:checked").length > 0;
+    
+        $parentPanel.find(".level1-checkbox").prop("checked", anyLevel2Checked);
+    });
+    $(".level4-checkbox").on("change", function () {
+        var level2Id = $(this).data("level2");
+        var level3Id = $(this).data("level3");
+        var level4Id = $(this).data("level4");
+        var $parentPanel = $(this).closest(".panel-body");
+    
+        var anyLevel4Checked = $parentPanel.find(".level4-checkbox:checked").length > 0;
+    
+        $parentPanel.find(".level3-checkbox[data-level3='" + level3Id + "']").prop("checked", anyLevel4Checked);
+    
+        var anyLevel3Checked = $parentPanel.find(".level3-checkbox:checked").length > 0;
+    
+        $parentPanel.find(".level2-checkbox[data-level2='" + level2Id + "']").prop("checked", anyLevel3Checked);
+    
+        var anyLevel2Checked = $parentPanel.find(".level2-checkbox:checked").length > 0;
+    
+        $parentPanel.find(".level1-checkbox").prop("checked", anyLevel2Checked);
+    });
+    
+
+
     $("#systemRoleTable").DataTable({
         responsive: true,
         lengthMenu: [
