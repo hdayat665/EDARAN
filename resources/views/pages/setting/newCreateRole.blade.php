@@ -227,14 +227,14 @@
                                                                 <div class="col-auto">
                                                                     <p class="col-form-label">
                                                                         @php
-                                                                    $words = explode(" ", $att_level3->name ?? '-');
-                                                                    if(count($words) >= 3) {
-                                                                        echo $words[0] . ' <br> ' . $words[1] . ' ' . $words[2];
-                                                                    } else {
-                                                                        echo $att_level3->name ?? '-';
-                                                                    }
-                                                                @endphp
-                                                                &nbsp;
+                                                                            $words = explode(" ", $att_level3->name ?? '-');
+                                                                            if(count($words) >= 3) {
+                                                                                echo $words[0] . ' <br> ' . $words[1] . ' ' . $words[2];
+                                                                            } else {
+                                                                                echo $att_level3->name ?? '-';
+                                                                            }
+                                                                        @endphp
+                                                                        &nbsp;
                                                                         @if ($att_level3->add)
                                                                             <input
                                                                                 class="form-check-input rounded-circle fa fa-plus"
