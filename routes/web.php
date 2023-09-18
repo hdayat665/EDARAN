@@ -849,3 +849,11 @@ Route::get('org/childfinancialaccounting', function () {
 Route::get('org/childinternalaudit', function () {
     return view('pages.org.childInternalAudit');
 });
+
+Route::controller(MyTimesheetController::class)->group(function () {
+    // Route::get('/profile', 'profile')->middleware('auth');
+    Route::get('/approveAppealEmail/{randomN}', 'approveAppealEmail');
+    Route::post('/rejectAppealEmail/{randomN}', 'rejectAppealEmail');
+    Route::get('/viewRejectAppealEmail/{randomN}', 'viewRejectAppealEmail');
+    
+});

@@ -568,16 +568,42 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function approveAppealEmail($randomN = '')
+    {
+        $data = [];
+        $data['user_id'] = $randomN;
 
+        $ls = new MyTimeSheetService;
 
-    // public function getParticipantNameById($participant = '')
-    // {
-    //     $ss = new MyTimeSheetService;
+        $ls->approveAppealE($randomN);
 
-    //     $result = $ss->getParticipantNameById($participant);
+        return view('pages.auth.approveAppeal', $data);
+    }
 
-    //     return response()->json($result);
-    // }
+    public function viewRejectAppealEmail($randomN = '')
+    {
+        $ls = new MyTimeSheetService;
+        $appeal = $ls->getAppealByRandomN($randomN);
 
+        $data = [];
+        $data['user_id'] = $randomN;
+        $data['appeal'] = $appeal;
+
+        return view('pages.auth.rejectAppeal', $data);
+    }
+
+    public function rejectAppealEmail(Request $r,$randomN = '')
+    {
+        $data = [];
+        $data['user_id'] = $randomN;
+
+        $ls = new MyTimeSheetService;
+
+        $result  = $ls->rejectAppealEmail($r,$randomN);
+
+        // dd($result);    
+
+        return response()->json($result);
+    }
 
 }
