@@ -401,7 +401,6 @@ class MyleaveService
                     ['tenant_id', '=', Auth::user()->tenant_id],
                     ['up_user_id', '=', Auth::user()->id],
                     ['lt_type_id', '=', $checkAL->id],
-                    ['applied_date', '=', $yearCurrent],
                     ['status_final', '=', 4],
 
                     ['calculate', '=', 1],
@@ -1356,12 +1355,12 @@ class MyleaveService
                         $current_entitlement_balance = $check->current_entitlement;
                     }
 
-                    $input = [
+                    $input2 = [
                         'carry_forward_balance' => $balance1,
                         'current_entitlement_balance' => $current_entitlement_balance,
                     ];
 
-                    leaveEntitlementModel::where('id', $check->id)->update($input);
+                    leaveEntitlementModel::where('id', $check->id)->update($input2);
 
                 } else {
 
@@ -1543,18 +1542,18 @@ class MyleaveService
                         $leave = $check->current_entitlement_balance;
                     }
 
-                    $input = [
+                    $input2 = [
                         'carry_forward_balance' => $balance1,
                         'current_entitlement_balance' => $leave,
                     ];
 
-                    $inputCalculate = [
+                    $inputCalculate2 = [
                         'calculate' => 1,
                     ];
 
-                    leaveEntitlementModel::where('id', $check->id)->update($input);
+                    leaveEntitlementModel::where('id', $check->id)->update($input2);
 
-                    MyLeaveModel::where('id', $id)->update($inputCalculate);
+                    MyLeaveModel::where('id', $id)->update($inputCalculate2);
 
                 } else {
 

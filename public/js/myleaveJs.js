@@ -681,7 +681,7 @@ $(document).ready(function () {
             $("#reason1").val(data[0].reason);
             $("#reasonreject1").val(data[0].reason);
             if (data[0].day_applied == 1) {
-                $("#dayApplied1").val("One Day");
+                $("#dayApplied1").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
                 $("#dayApplied1").val("Half Day");
             } else {
@@ -729,39 +729,39 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
                 $("#hidenull1").show();
                 $("#hidenull2").show();
                 $(".hidenull3").show();
             } else if (data[0].up_rec_status === "2") {
-                $("#status_1").text("Pending");
+                $("#status_1").text("PENDING");
                 $("#hidenull1").show();
                 $("#hidenull2").show();
                 $(".hidenull3").show();
             } else if (data[0].up_rec_status === "3") {
-                $("#status_1").text("Rejected");
+                $("#status_1").text("REJECTED");
                 $("#hidenull1").hide();
                 $("#hidenull2").hide();
                 $(".hidenull3").hide();
             } else if (data[0].up_rec_status === "4") {
-                $("#status_1").text("Approved");
+                $("#status_1").text("APPROVED");
                 $("#hidenull1").show();
                 $("#hidenull2").show();
                 $(".hidenull3").show();
             }
 
             if (data[0].up_app_status === "1") {
-                $("#status_2").text("Pending");
-                $("#status_21").text("Pending");
+                $("#status_2").text("PENDING");
+                $("#status_21").text("PENDING");
             } else if (data[0].up_app_status === "2") {
-                $("#status_2").text("Pending");
-                $("#status_21").text("Pending");
+                $("#status_2").text("PENDING");
+                $("#status_21").text("PENDING");
             } else if (data[0].up_app_status === "3") {
-                $("#status_2").text("Rejected");
-                $("#status_21").text("Rejected");
+                $("#status_2").text("REJECTED");
+                $("#status_21").text("REJECTED");
             } else if (data[0].up_app_status === "4") {
-                $("#status_2").text("Approved");
-                $("#status_21").text("Approved");
+                $("#status_2").text("APPROVED");
+                $("#status_21").text("APPROVED");
             }
 
             if (data[0].up_rec_reason) {
@@ -829,11 +829,11 @@ $(document).ready(function () {
             $("#reasonreject2").val(data[0].reason);
             // console.log(data[0]);
             if (data[0].day_applied == 1) {
-                $("#dayApplied2").val("One Day");
+                $("#dayApplied2").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayApplied2").val("Half Day");
+                $("#dayApplied2").val("HALF DAY");
             } else {
-                $("#dayApplied2").val(data[0].day_applied + " Day");
+                $("#dayApplied2").val(data[0].day_applied + " DAY");
             }
 
             if (data[0].day_applied === "1") {
@@ -877,39 +877,39 @@ $(document).ready(function () {
             }
 
             if (data[0].up_rec_status === "1") {
-                $("#status_1h").text("Pending");
+                $("#status_1h").text("PENDING");
                 $("#hidenull1h").show();
                 $("#hidenull2h").show();
                 $(".hidenull3h").show();
             } else if (data[0].up_rec_status === "2") {
-                $("#status_1h").text("Pending");
+                $("#status_1h").text("PENDING");
                 $("#hidenull1h").show();
                 $("#hidenull2h").show();
                 $(".hidenull3h").show();
             } else if (data[0].up_rec_status === "3") {
-                $("#status_1h").text("Rejected");
+                $("#status_1h").text("REJECTED");
                 $("#hidenull1h").hide();
                 $("#hidenull2h").hide();
                 $(".hidenull3h").hide();
             } else if (data[0].up_rec_status === "4") {
-                $("#status_1h").text("Approved");
+                $("#status_1h").text("APPROVED");
                 $("#hidenull1h").show();
                 $("#hidenull2h").show();
                 $(".hidenull3h").show();
             }
 
             if (data[0].up_app_status === "1") {
-                $("#status_2h").text("Pending");
-                $("#status_21h").text("Pending");
+                $("#status_2h").text("PENDING");
+                $("#status_21h").text("PENDING");
             } else if (data[0].up_app_status === "2") {
-                $("#status_2h").text("Pending");
-                $("#status_2h").text("Pending");
+                $("#status_2h").text("PENDING");
+                $("#status_2h").text("PENDING");
             } else if (data[0].up_app_status === "3") {
-                $("#status_2h").text("Rejected");
-                $("#status_21h").text("Rejected");
+                $("#status_2h").text("REJECTED");
+                $("#status_21h").text("REJECTED");
             } else if (data[0].up_app_status === "4") {
-                $("#status_2h").text("Approved");
-                $("#status_21h").text("Approved");
+                $("#status_2h").text("APPROVED");
+                $("#status_21h").text("APPROVED");
             }
             if (data[0].up_rec_reason) {
                 $("#reasonRecommenderh").text(data[0].up_rec_reason);
@@ -1018,11 +1018,11 @@ $(document).ready(function () {
             $("#reason1").val(data[0].reason);
 
             if (data[0].day_applied == 1) {
-                $("#dayApplied").val("One Day");
+                $("#dayApplied").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
-                $("#dayApplied").val("Half Day");
+                $("#dayApplied").val("HALF DAY");
             } else {
-                $("#dayApplied").val(data[0].day_applied + " Day");
+                $("#dayApplied").val(data[0].day_applied + " DAY");
             }
 
             if (data.leave_session == "1") {
