@@ -20,7 +20,7 @@
                             <select class="selectpicker form-control" id="employee_idE" name="employee_id" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
                               @foreach ($employeeInfos as $employee)
-                                <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
+                                <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                               @endforeach
                             </select>
                         </div>
