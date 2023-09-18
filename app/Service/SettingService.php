@@ -115,19 +115,11 @@ class SettingService
         $updateData['modifiedBy'] = $modifiedBy;
         $updateData['modifiedTime'] = $modifiedTime;
         $updateData['desc'] = $r['desc'];
-        // pr($updateData);
-        // $updateData = [
-        //     'modifiedBy' => $modifiedBy,
-        //     'modifiedTime' => $modifiedTime
-        // ];
 
         Role::where('id', $id)->update($updateData);
-        // dd($input);
+        PermissionRole::where('role_id', $id)->delete();
 
         if (!empty($input['permissions'])) {
-
-            PermissionRole::where('role_id', $id)->delete();
-
             $permissions = $input['permissions'];
 
             foreach ($permissions as $permission) {
@@ -666,7 +658,6 @@ class SettingService
             $data['title'] = config('app.response.error.title');
 
             return $data;
-
         } else {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -3096,7 +3087,7 @@ class SettingService
             ->orderBy('id', 'ASC')
             ->get();
 
-        $leaveTypesTransformed = $leaveTypes->map(function($leaveType) {
+        $leaveTypesTransformed = $leaveTypes->map(function ($leaveType) {
             if (in_array($leaveType->leave_types_code, ['AL', 'SL', 'HL', 'EL'])) {
                 $leaveType->duration = '-';
             }
@@ -3124,7 +3115,6 @@ class SettingService
         // die;
 
         return $data;
-
     }
 
 
@@ -3185,7 +3175,7 @@ class SettingService
     {
         // $data = leavetypesModel::find($id);
 
-        $leaveType = leavetypesModel::where('tenant_id', '=',Auth::user()->tenant_id)
+        $leaveType = leavetypesModel::where('tenant_id', '=', Auth::user()->tenant_id)
             ->where('id', '=', $id)
             ->orderBy('id', 'ASC')
             ->first();
@@ -3209,7 +3199,6 @@ class SettingService
         }
 
         return $data;
-
     }
 
 
@@ -3256,7 +3245,7 @@ class SettingService
             } else {
                 $existingLeaveType->day = $data3;
 
-                if($existingLeaveType->leave_types_code === 'NP') {
+                if ($existingLeaveType->leave_types_code === 'NP') {
                     $existingLeaveType->duration = $data4; // Membolehkan kemaskini duration untuk "NO PAY LEAVE"
                 }
                 $existingLeaveType->modifiedBy = $data5;
