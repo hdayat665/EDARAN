@@ -1,7 +1,5 @@
 //js dah working
 $(document).ready(function () {
-
-
     var weekend1ifany;
     var weekend2ifany;
     var weekend3ifany;
@@ -18,7 +16,6 @@ $(document).ready(function () {
     var daysix;
     var dayseven;
 
-
     var totalhourday1;
     var totalhourday2;
     var totalhourday3;
@@ -26,9 +23,6 @@ $(document).ready(function () {
     var totalhourday5;
     var totalhourday6;
     var totalhourday7;
-
-
-
 
 function getWorkingHourWeekendbyState(stateid) {
   return $.ajax({

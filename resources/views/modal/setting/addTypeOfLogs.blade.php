@@ -42,15 +42,13 @@
                         <div class="col-sm-10" id="">
                             <label for="firstname" class="form-label">Activity Name*</label>
                             <input type="text" id="addtypelogactivityName" placeholder="Name" class="form-control" style="text-transform: uppercase;">
-
-
+                            <div id="error-message" style="color: red;"></div>
                         </div>
                         <div class="col-sm-2" id="" >
                             <label for="firstname" class="form-label">&nbsp;</label><br>
                             <input type="button" id="add-row" class="add-row btn btn-primary btn-sm" value="Add">
-
                         </div>
-                    </div>
+                    </div>                    
                     <br>
                     <div class="form-control">
                         <div class="row p-2">
