@@ -110,13 +110,6 @@
 
                             </select>
                         </div>
-
-                        {{-- <div class="col-sm-6" id="activityByHomeShow">
-                            <label for="issuing-country" class="form-label">Activity Name*</label>
-                            <select class="form-select" id="activityLogs" name="activity_home_show" >
-
-                            </select>
-                        </div> --}}
                         <div class="col-sm-6" id="locationByProjectHide" style="display: none"> 
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
