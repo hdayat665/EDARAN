@@ -635,9 +635,7 @@ $(document).ready(function () {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                //project_id: "required",
                 branch: "required",
-                unit: "required",
                 location_name: "required",
                 exit_project_date: "required",
             },
@@ -645,9 +643,7 @@ $(document).ready(function () {
             messages: {
                 joined_date: "Please Choose Date",
                 employee_id: "Please Choose Name",
-                //project_id: "Please Choos Name",
                 branch: "Please Choose Branch",
-                unit: "Please Choose Unit",
                 location_name: "Please Select Location",
                 exit_project_date: "Please Choose Date",
             },
