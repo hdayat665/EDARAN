@@ -666,6 +666,7 @@
                                     </div>
                                     @php
                                         $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
+                                        $employmentData = getEmplomentByUserId();
                                         if ($employmentData->caapprover == Auth::user()->id) {
                                             $ruleDepartments[100] = 'departApprover';
                                         }
@@ -713,6 +714,7 @@
                                                                     <i class="fa fa-list-check text-gray"></i>
                                                                 </div>
                                                                 @php
+                                                                    $employmentData = getEmplomentByUserId();
                                                                     $caClaim = getCaClaimData('departApprover');
                                                                 @endphp
                                                                 <div class="menu-text text-gray">Approver</div>
