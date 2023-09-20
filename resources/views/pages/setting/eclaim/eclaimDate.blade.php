@@ -12,7 +12,7 @@
                         <div class="row p-2">
                             <div class="col">
                                 <div class="row p-2">
-                                    <label for="submitClaim" class="col-sm-5 col-form-label">Submit Claim to Admin
+                                    <label for="submitClaim" class="col-sm-6 col-form-label">Submit Claim to Admin
                                         on Every :
                                         <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltipsubmitclaim"
                                             title="Setup the claim batch date that should be moved to Admin approver">
@@ -34,7 +34,7 @@
                                 </div>
                                 <br>
                                 <div class="row p-2">
-                                    <label for="expiredate" class="col-sm-5 col-form-label">Open Claim Duration <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
+                                    <label for="expiredate" class="col-sm-6 col-form-label">Open Claim Duration <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
                                             data-toggle="tooltipexpiredate" title="User can decide duration to open claim
                             "></i></label>
                             <div class="col-sm-3">
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col">
                                 <div class="row p-2">
-                                    <label for="claimfinance" class="col-sm-5 col-form-label">Submit Claim to
+                                    <label for="claimfinance" class="col-sm-6 col-form-label">Submit Claim to
                                         Finance on Every: <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltipsubmitclaim"
                                             title="Setup the claim batch date that should be
                             moved to Finance approver
@@ -75,7 +75,7 @@
                                 </div>
                                 <br>
                                 <div class="row p-2">
-                                    <label for="claimsubmit" class="col-sm-5 col-form-label">Table List Display:
+                                    <label for="claimsubmit" class="col-sm-6 col-form-label">Table List Display:
                                         <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltipclaimsubmit"
                                             title="Number of row will be display on user claim page"></i></label>
                                         <div class="col-sm-3">
@@ -93,6 +93,68 @@
                                         </div>
                                 </div>
                             </div>
+                            
+                        </div>
+                        <!-- /////////////////////////////////////// -->
+                        <div class="row p-2">
+                            <div class="col">
+                                <div class="row p-2">
+                                    <label for="submitClaim" class="col-sm-6 col-form-label">Number Of Appeal Limit
+                                        
+                                    </label>
+                                    <div class="col-sm-3">
+                                        <select class="form-select" id="" name="appeal_limit">
+                                            <option class="form-label" value="">Please Select</option>
+                                            <?php $rows = getAppealLimit(); ?>
+                                            @foreach ($rows as $row)
+                                            <option class="form-control"
+                                            @if ($data)
+                                                {{ $data->appeal_limit == $row ? 'selected' : '' }}
+                                            @endif
+                                            value="{{ $row }}">{{ $row }} Times</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row p-2">
+                                    <label for="expiredate" class="col-sm-6 col-form-label">Laundry Allowable ( Period of stays) </label>
+                                        <div class="col-sm-3">
+                                            <select class="form-select" id="" name="laundry">
+                                                <option class="form-label" value="">Please Select</option>
+                                                <?php $rows = getLaundry(); ?>
+                                                @foreach ($rows as $row)
+                                                <option class="form-control"
+                                                @if ($data)
+                                                    {{ $data->laundry == $row ? 'selected' : '' }}
+                                                @endif
+                                                value="{{ $row }}">{{ $row }} Days</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="row p-2">
+                                    <label for="claimfinance" class="col-sm-6 col-form-label">Duration Appeal Limit</label>
+                            <div class="col-sm-3">
+                                    <select class="form-select" id="" name="duration_appeal">
+                                        <option class="form-label" value="">Please Select</option>
+                                        <?php $rows = getDurationAppeal(); ?>
+                                        @foreach ($rows as $row)
+                                        <option class="form-control"
+                                        @if ($data)
+                                            {{ $data->duration_appeal == $row ? 'selected' : '' }}
+                                        @endif
+                                        value="{{ $row }}">{{ $row }} Months</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                </div>
+                                
+                            </div>
+                            
                         </div>
                     </div>
                     <br>
