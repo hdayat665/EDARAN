@@ -1,9 +1,8 @@
 <div class="tab-pane fade active show" id="default-tab-1">
-    {{-- claim approval --}}
+    
     <table id="activetable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Applied Date</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -16,7 +15,6 @@
             </tr>
         </thead>
         <tbody>
-            {{-- check if config approval status enable or disable for role before approver  --}}
             @php
                 $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER'];
                 $condByPass = '$claim->id != ""';
@@ -41,7 +39,7 @@
             @endphp
 
             @foreach ($claims as $claim)
-                @if (isset($config->status) && $claim->a_approval == 'recommend' && $claim->f1 == null && eval("return $condByPass;"))
+                @if (isset($config->status) && $claim->a_approval == 'recommend' && $claim->f1 == null && eval(""))
                     {{ $claim->id }}
 
                     <tr>

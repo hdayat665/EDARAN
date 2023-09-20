@@ -2369,7 +2369,48 @@ if (!function_exists('getDisplayRow')) {
         return $data;
     }
 }
+if (!function_exists('getAppealLimit')) {
+    function getAppealLimit()
+    {
+        for ($i = 1; $i < 6; $i++) {
+            $data[] = $i;
+        }
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getLaundry')) {
+    function getLaundry()
+    {
+        for ($i = 1; $i < 11; $i++) {
+            $data[] = $i;
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getDurationAppeal')) {
+    function getDurationAppeal()
+    {
+        for ($i = 1; $i < 13; $i++) {
+            $data[] = $i;
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getResponseSuccessAjax')) {
     function getResponseSuccessAjax()
     {

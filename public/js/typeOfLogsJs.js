@@ -282,33 +282,52 @@ $(document).ready(function () {
 });
 
 $("#add-row").click(function () {
-    var addtypelogactivityName = document.getElementById(
-        "addtypelogactivityName"
-    ).value;
+    var addtypelogactivityName = document.getElementById("addtypelogactivityName").value;
+    var errorMessageElement = document.getElementById("error-message");
 
     if (addtypelogactivityName == "") {
-        document.getElementById("addtypelogactivityName");
+        errorMessageElement.textContent = "Please enter an activity name.";
         return;
-    } else {
-        addtypelogactivityName = addtypelogactivityName.toUpperCase();
-        let table = document.getElementById("activityname");
-        // Insert a row at the end of the table
-        let newRow = table.insertRow(-1);
-        var l = table.rows.length - 1;
-        //Col 1 = addtypelogactivityName
-        table.rows[l].insertCell(0);
-        table.rows[l].cells[0].innerHTML = addtypelogactivityName;
-
-        //Col 3 = Delete Button
-        table.rows[l].insertCell(1);
-        table.rows[l].cells[1].innerHTML =
-            "<input hidden name='activity_name[]' value='" +
-            addtypelogactivityName +
-            "' /><button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
-
-        //Clear input
     }
+
+    addtypelogactivityName = addtypelogactivityName.toUpperCase();
+    let table = document.getElementById("activityname");
+    let isDuplicate = false;
+
+    // Check if the activity name already exists in the table
+    for (let i = 1; i < table.rows.length; i++) {
+        if (table.rows[i].cells[0].textContent.toUpperCase() === addtypelogactivityName) {
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    if (isDuplicate) {
+        errorMessageElement.textContent = "Duplicate entries are not allowed.";
+        return;
+    }
+
+    // If not a duplicate, clear the error message and proceed to add the new row
+    errorMessageElement.textContent = "";
+    let newRow = table.insertRow(-1);
+    var l = table.rows.length - 1;
+
+    // Col 1 = addtypelogactivityName
+    table.rows[l].insertCell(0);
+    table.rows[l].cells[0].innerHTML = addtypelogactivityName;
+
+    // Col 3 = Delete Button
+    table.rows[l].insertCell(1);
+    table.rows[l].cells[1].innerHTML =
+        "<input hidden name='activity_name[]' value='" +
+        addtypelogactivityName +
+        "' /><button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
+
+    // Clear input
+    document.getElementById("addtypelogactivityName").value = "";
 });
+
+
 
 $("#add-for-edit-row").click(function () {
     var addtypelogactivityName = document.getElementById(
