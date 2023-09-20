@@ -98,6 +98,8 @@ requirejs.config({
         fapprovalCaJs: assets + "/js/fapprovalCaJs",
         reportcorJs: assets + "/js/reportcorJs",
         appealTimesheetsJs: assets + "/js/appealTimesheetsJs",
+        cashAdvViewJs: assets + "/js/cashAdvViewJs",
+
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -570,6 +572,10 @@ if ($("#systemRoleUpdateJs").length > 0) {
 
 if ($("#appealRejectmailJS").length > 0) {
     requirejs(["appealRejectmailJS"]);
+}
+
+if ($("#cashAdvViewJs").length > 0) {
+    requirejs(["cashAdvViewJs"]);
 }
 
 $(document).ajaxStart(function () {
