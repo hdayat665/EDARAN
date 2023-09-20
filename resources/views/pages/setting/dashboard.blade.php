@@ -4,12 +4,12 @@
     <div class="panel panel">
         <div class="panel-body">
             <h3 class="mt-10px"></i> General Setting</h3><br>
-            <div class="row text-center">
+            <!-- <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/role"><i class="fas fa-circle-user fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Role</h5>
                 </div>
-            </div><br><br><br>
+            </div><br><br><br> -->
             <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/newRole"><i class="fas fa-user fa-4x text-blue"></i></a><br><br>

@@ -1517,10 +1517,11 @@ $("#subsTableUpdate").DataTable({
     });
     $("#ldgv").click(function () {
         if (this.checked) {
-            $("#ln").prop("readonly", false); // If checked enable item
+            $("#ln").prop("readonly", false);
+            $("#lodgingDiv").show();
         } else {
             $("#ln").prop("readonly", true); // If checked disable item
-            
+            $("#lodgingDiv").hide();
         }
     });
     $("#ldgvca").click(function () {
@@ -2162,6 +2163,24 @@ $("#subsTableUpdate").DataTable({
                 end_time: "required",
                 project_id: "required",
                 desc: "required",
+                lodgingname: {
+                    required: function() {
+                        // Check if the input with id "lnTotal" is readonly
+                        return !$("#lnTotal").prop("readonly");
+                    }
+                },
+                lodgingcontact: {
+                    required: function() {
+                        // Check if the input with id "lnTotal" is readonly
+                        return !$("#lnTotal").prop("readonly");
+                    }
+                },
+                lodgingaddress: {
+                    required: function() {
+                        // Check if the input with id "lnTotal" is readonly
+                        return !$("#lnTotal").prop("readonly");
+                    }
+                },
             },
 
             messages: {
@@ -2172,6 +2191,9 @@ $("#subsTableUpdate").DataTable({
                 end_time: "Please Select End Time",
                 project_id: "Please Select Project",
                 desc: "Please Insert Description",
+                lodgingname: "Please Insert Name",
+                lodgingcontact: "Please Insert Contact Number",
+                lodgingaddress: "Please Insert Address",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
