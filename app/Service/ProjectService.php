@@ -21,22 +21,22 @@ class ProjectService
         $cond[1] = ['a.tenant_id', '=', $tenant_id];
 
         $permissions = getPermissionByRoleId(Auth::user()->role_id);
-            if (Auth::user()->role_custom_id) {
-                $permissions = getPermissionByUserId();
-            }
+        if (Auth::user()->role_custom_id) {
+            $permissions = getPermissionByUserId();
+        }
+        $role_permission = [];
+        foreach ($permissions as $permission) {
+            $role_permission[] = $permission->permission_code;
+        }
+
+        if (!$role_permission) {
             $role_permission = [];
-            foreach ($permissions as $permission) {
-                $role_permission[] = $permission->permission_code;
-            }
-            
-            if (!$role_permission) {
-                $role_permission = [];
         }
 
         $target = ['project_manager'];
 
-        if (array_intersect($role_permission, $target)){
-             $cond[3] = ['a.project_manager', Auth::user()->id];
+        if (array_intersect($role_permission, $target)) {
+            $cond[3] = ['a.project_manager', Auth::user()->id];
         }
 
         if ($status_request) {
@@ -214,11 +214,11 @@ class ProjectService
             $tenant_id3 = Auth::user()->tenant_id;
             $project_id3 = $id;
             $customer_id3 = $input['customer_id'];
-            $employeeid3 = $data3['id'];
-            $designation3 = $data3['designation'];
-            $department3 = $data3['department'];
-            $branch3 = $data3['branch'];
-            $unit3 = $data3['unit'];
+            $employeeid3 = $data3['id'] ?? NULL;
+            $designation3 = $data3['designation'] ?? NULL;
+            $department3 = $data3['department'] ?? NULL;
+            $branch3 = $data3['branch'] ?? NULL;
+            $unit3 = $data3['unit'] ?? NULL;
             $joineddate3 = date_format(date_create(), 'Y-m-d');
             $status3 = ("approve");
             $assign3 = ("project manager");
@@ -246,11 +246,11 @@ class ProjectService
             $tenant_id3 = Auth::user()->tenant_id;
             $project_id3 = $id;
             $customer_id3 = $input['customer_id'];
-            $employeeid3 = $data3['id'];
-            $designation3 = $data3['designation'];
-            $department3 = $data3['department'];
-            $branch3 = $data3['branch'];
-            $unit3 = $data3['unit'];
+            $employeeid3 = $data3['id'] ?? NULL;
+            $designation3 = $data3['designation'] ?? NULL;
+            $department3 = $data3['department'] ?? NULL;
+            $branch3 = $data3['branch'] ?? NULL;
+            $unit3 = $data3['unit'] ?? NULL;
             $joineddate3 = date_format(date_create(), 'Y-m-d');
             $status3 = ("approve");
             $assign3 = ("project manager");
