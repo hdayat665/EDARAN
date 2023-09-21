@@ -363,7 +363,7 @@ class LoginService
     public function forgotPassEmail($input)
     {
         $tenant = Tenant::where('tenant_name', $input['tenant_name'])->first();
-        
+
         if (!$tenant) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -372,7 +372,7 @@ class LoginService
         }
         else {
             $employee = Employee::where('workingEmail', $input['username'])->where('tenant_id', $tenant->tenant_id)->first();
-            
+
             if (!$employee) {
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
@@ -400,7 +400,7 @@ class LoginService
                 $data['status'] = config('app.response.success.status');
                 $data['type'] = config('app.response.success.type');
                 $data['title'] = config('app.response.success.title');
-                $data['msg'] = 'Email have been send to your email address';
+                $data['msg'] = 'Email have been send to your email';
             }
         }
 
@@ -408,8 +408,8 @@ class LoginService
     }
 
     public function forgotDomainEmail($input)
-    {   
-        
+    {
+
         $employee = Employee::where('workingEmail', $input['username'])->first();
         $user = Users::where('id', $employee['user_id'])->first();
 
@@ -423,7 +423,7 @@ class LoginService
         }
 
         $allTenants = Tenant::all();
-        
+
         $tenant_names = [];
 
         foreach ($allTenants as $singleTenant) {
@@ -431,7 +431,7 @@ class LoginService
                 $tenant_names[] = $singleTenant->tenant_name;
             }
         }
-        
+
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -509,7 +509,7 @@ class LoginService
             $data['msg'] = 'Domain not found!';
         } else {
             $employee = Employee::where('workingEmail', $input['username'])->where('tenant_id', $tenant->tenant_id)->first();
-            
+
             if (!$employee) {
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
@@ -517,7 +517,7 @@ class LoginService
                 $data['msg'] = 'Email not match with domain name!';
             } else {
                 $user = Users::where('id', $employee['user_id'])->first();
-                
+
                 $receiver = $input['username'];
                 $response['typeEmail'] = 'activateAcc2';
                 $response['title'] = 'Orbit Activation Link';
@@ -591,7 +591,7 @@ class LoginService
         return $data;
     }
 
-    
+
 
 
 }
