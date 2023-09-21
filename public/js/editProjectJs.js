@@ -1168,24 +1168,24 @@ $(document).ready(function () {
     var ac = $("#ac").val();
     var pm = $("#pm").val();
 
-    if (pmap == "pmap") {
-        $("input:visible, textarea:visible, select:visible").each(function () {
-            $(this).prop("disabled", false);
-        });
-        $("#project_manager2_show").prop("disabled", true);
-    }
+    // if (pmap == "pmap") {
+    //     $("input:visible, textarea:visible, select:visible").each(function () {
+    //         $(this).prop("disabled", false);
+    //     });
+    //     $("#project_manager2_show").prop("disabled", true);
+    // }
 
-    if (pmc == "pmc") {
-        $("input:visible, textarea:visible, select:visible").each(function () {
-            $(this).prop("disabled", true);
-        });
-        $("#project_manager2_show").prop("disabled", false);
-    }
+    // if (pmc == "pmc") {
+    //     $("input:visible, textarea:visible, select:visible").each(function () {
+    //         $(this).prop("disabled", true);
+    //     });
+    //     $("#project_manager2_show").prop("disabled", false);
+    // }
 
-    if (ac == "ac" || pm == "pm") {
-        $("input:visible, textarea:visible, select:visible").each(function () {
-            $(this).prop("disabled", true);
-        });
-        $("#updateProjectInfoButton").prop("disabled", true);
-    }
+    // if (ac == "ac" || pm == "pm") {
+    //     $("input:visible, textarea:visible, select:visible").each(function () {
+    //         $(this).prop("disabled", true);
+    //     });
+    //     $("#updateProjectInfoButton").prop("disabled", true);
+    // }
 });
