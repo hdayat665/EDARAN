@@ -1,4 +1,4 @@
-<div class="form-control">
+<div class="form-control break">
     <div class="row p-2">
         <div class="col-md-6">
             <h4>Travelling Table List</h4>
@@ -24,7 +24,7 @@
     </div>
     <div class="row p-2">
         <div class="col md-12">
-        <table id="travelling" class="table table-striped table-bordered align-middle">
+            <table id="travelling" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th class="text-nowrap">No</th>
@@ -160,26 +160,18 @@
 
 </div>
 <div class="form-control">
-<div class="row p-2">
+    <div class="row p-2">
         <div class="col-md-6">
             <h4>Subsistence Allowance & Accommodation Table List</h4>
         </div>
-        <div class="col-md-6">
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="col d-flex justify-content-end">
-                        <label class="form-label">Total</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="col d-flex justify-content-end">
-                        <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_all ?? 0 }}'>
-                    </div>
-                </div>
-            </div>
+        <div class="col md-3 d-flex justify-content-end">
+            <label class="form-label">Total</label>
+        </div>
+        <div class="col md-3 d-flex justify-content-end">
+            <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_all ?? 0 }}'>
         </div>
     </div>
-
+    
     <div class="row p-2">
         <div class="">
         <table id="subsTableUpdate" class="table table-striped table-bordered align-middle">
@@ -259,19 +251,11 @@
             <div class="col-md-6">
                 <h4>Others Table List</h4>
             </div>
-            <div class="col-md-6">
-                <div class="row p-2">
-                    <div class="col-md-6">
-                        <div class="col d-flex justify-content-end">
-                            <label class="form-label">Total</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col d-flex justify-content-end">
-                            <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
-                        </div>
-                    </div>
-                </div>
+            <div class="col md-3 d-flex justify-content-end">
+                <label class="form-label">Total</label>
+            </div>
+            <div class="col md-3 d-flex justify-content-end">
+                <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
             </div>
         </div>
 

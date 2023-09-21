@@ -2,13 +2,13 @@
 @section('content')
     <div id="content" class="app-content">
         @if ($cashClaim->type == 1)
-            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Project ( Outstation )</small></h1>
+            <h1 class="page-header" id="cashAdvViewJs">eClaim <small>| My Claim | View Cash Advance | Project ( Outstation )</small></h1>
             @elseif($cashClaim->type == 2)
-            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Project ( Non Outstation )</small></h1>
+            <h1 class="page-header" id="cashAdvViewJs">eClaim <small>| My Claim | View Cash Advance | Project ( Non Outstation )</small></h1>
             @elseif($cashClaim->type == 3)
-            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Others (Outstation )</small></h1>
+            <h1 class="page-header" id="cashAdvViewJs">eClaim <small>| My Claim | View Cash Advance | Others (Outstation )</small></h1>
             @elseif($cashClaim->type == 4)
-            <h1 class="page-header">eClaim <small>| My Claim | View Cash Advance | Others (Non Outstation )</small></h1>
+            <h1 class="page-header" id="cashAdvViewJs">eClaim <small>| My Claim | View Cash Advance | Others (Non Outstation )</small></h1>
         @endif
         <div class="panel panel">
             <div class="panel-body">
@@ -23,7 +23,7 @@
                 @endif
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit" id="backPrint"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>

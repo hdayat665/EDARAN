@@ -335,7 +335,7 @@
                                                 <input readonly type="text" class="form-control" value="CA-{{ $ca->id ?? '-' }}">
                                             </div>
                                         </div>
-                                        <div class="row p-2">
+                                        <div class="row p-2 break">
                                             <div class="col-md-6">
                                                 <label class="form-label col-form-label">Applied Date</label>
                                             </div>
@@ -363,14 +363,42 @@
                             @elseif ($ca->approver == 'reject')
                             <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
                             @else
-                                
-                                
                                 <!-- <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp; -->
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>&nbsp;
-                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                                <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                <a class="btn btn-lime hide-on-print" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>&nbsp;
+                                <a href="javascript:;" class="btn btn-danger hide-on-print" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                                <a href="/cashAdvanceApproverView" class="btn btn-light hide-on-print" style="color: black;" type="submit"> Back</a>&nbsp;
+                                <button type="button" class="btn btn-primary hide-on-print" style="color: black;" id="printButton">Print</button>
                             @endif 
                         </div>
+                        <style>
+                            @media print{
+                                .hide-on-print {
+                                    display: none;
+                                }
+                                #header {
+                                    display: none;
+                                    height: 0;
+                                }
+                                .page-header{
+                                    display: none;
+                                }
+                                .navbar-nav {
+                                    display: none;
+                                }
+                                .break {
+                                    page-break-before: always;
+                                }
+                                /* .next {
+                                    display: inline-block;
+                                    width: 48%;
+                                    margin-right: 1%; 
+                                }
+
+                                .next:nth-child(odd) {
+                                    clear: left;
+                                }  */
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -437,7 +465,7 @@
                         </div> 
                     </div>
                 </div>
-                <div class="row p-2">
+                <div class="row p-2 break">
                     <div class="form-control">
                        <div class="row p-2 ">
                             <div class="col-md-6">
@@ -595,7 +623,7 @@
                                     @if ($ca->approver == 'recommend')
                                     
                                     @else
-                                    <a href="#" id="editLink">Edit</a>
+                                    <a href="#" id="editLink" class="hide-on-print">Edit</a>
                                     
                                     @endif
                                 </div>

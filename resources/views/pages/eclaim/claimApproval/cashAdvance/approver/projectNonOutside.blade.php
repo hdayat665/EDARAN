@@ -333,7 +333,7 @@
                                                 <input readonly type="text" class="form-control" value="CA-{{ $ca->id ?? '-' }}">
                                             </div>
                                         </div>
-                                        <div class="row p-2">
+                                        <div class="row p-2 break">
                                             <div class="col-md-6">
                                                 <label class="form-label col-form-label">Applied Date</label>
                                             </div>
@@ -368,17 +368,48 @@
                             </div>
                             @else
                             <div class="row p-2"> 
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                                <a class="btn btn-lime hide-on-print" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
                             </div>
                             <div class="row p-2"> 
-                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> 
+                                <a href="javascript:;" class="btn btn-danger hide-on-print" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> 
                             </div>
                             <div class="row p-2"> 
-                                <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
+                                <a href="/cashAdvanceApproverView" class="btn btn-light hide-on-print" style="color: black;" type="submit"> Back</a>
                             </div>
-                            
-                            @endif
-                        {{-- </div> --}}
+                            <div class="row p-2"> 
+                                <button type="button" class="btn btn-primary hide-on-print" style="color: black;" id="printButton">Print</button>
+                            </div>
+                        @endif
+                        </div>
+                        <style>
+                            @media print{
+                                .hide-on-print {
+                                    display: none;
+                                }
+                                #header {
+                                    display: none;
+                                    height: 0;
+                                }
+                                .page-header{
+                                    display: none;
+                                }
+                                .navbar-nav {
+                                    display: none;
+                                }
+                                .break {
+                                    page-break-before: always;
+                                }
+                                /* .next {
+                                    display: inline-block;
+                                    width: 48%;
+                                    margin-right: 1%; 
+                                }
+
+                                .next:nth-child(odd) {
+                                    clear: left;
+                                }  */
+                            }
+                        </style>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -445,7 +476,7 @@
                         </div> 
                     </div>
                 </div>
-                <div class="row p-2">
+                <div class="row p-2 break">
                     <div class="form-control">
                        <div class="row p-2 ">
                             <div class="col-md-6">
@@ -535,7 +566,7 @@
                                         <input readonly type="text" class="form-control" value="">
                                     </div>
                                 </div>
-                                <div class="row p-2">
+                                <div class="row p-2 break">
                                     <div class="col-md-6">
                                         <label class="form-label col-form-label">Subsistence Allowance</label>
                                     </div>
@@ -631,7 +662,7 @@
                 </div> --}}
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/cashAdvanceApproverView" class="btn btn-light hide-on-print" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>

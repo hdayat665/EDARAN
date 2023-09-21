@@ -78,7 +78,7 @@
                                 <div class="col-md-3">
                                     <label class="form-label">Status</label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 hide-on-print">
                                     <div class="d-grid"> <!-- Use d-grid to create a grid layout -->
                                         @if ($claimData->status == 'amend')
                                             <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Amend</a>
@@ -95,7 +95,7 @@
                                         @elseif ($claimData->status == 'reject')
                                             <a class="btn btn-danger btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Rejected</a>
                                         @elseif ($claimData->status == 'active')
-                                            <a class="btn btn-lime btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">In Queue</a>
+                                            <a class="btn btn-lime btn-lg btn-block " data-toggle="paidc" title="{{$claimData->status_desc}}">In Queue</a>
                                         @endif
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 hide-on-print">
                         @if ($claimData->status =  'active')
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
@@ -142,7 +142,7 @@
                         @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button>
+                                <button class="btn btn-primary" id="printButton" type="submit" style="width: 100%">Print</button>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -152,9 +152,45 @@
                         </div>
                     </div>
                 </div>
+                <style>
+                    @media print{
+                        .hide-on-print {
+                            display: none;
+                        }
+                        #header {
+                            display: none;
+                            height: 0;
+                        }
+                        .page-header{
+                            display: none;
+                        }
+                        .navbar-nav {
+                            display: none;
+                        }
+                        .break {
+                            page-break-before: always;
+                        }
+                        #travelling th:last-child,
+                        #travelling td:last-child {
+                            display: none;
+                        }
+                        .dataTables_wrapper .dataTables_buttons {
+                            display: none;
+                        }
+                        .dataTables_wrapper .dataTables_paginate,
+                        .dataTables_wrapper .dataTables_filter,
+                        .dataTables_wrapper .dataTables_length {
+                            display: none;
+                        }
+                        #subsTableUpdate th:last-child,
+                        #subsTableUpdate td:last-child {
+                            display: none;
+                        }
+                    }
+                </style>
 
                 {{-- ROW 2 --}}
-                <div class="row p-2">
+                <div class="row p-2 break">
                     <div class="col-md-12">
                         <div class="form-control">
                             <div class="row p-2">
@@ -266,7 +302,7 @@
                                             <input type="text" class="form-control" readonly value='RM {{ number_format($summaryTravelling[0]->total_petrol ?? 0, 2) }}'>
                                         </div>
                                     </div>
-                                    <div class="row p-2">
+                                    <div class="row p-2 break">
                                         <div class="col-md-6">
                                             <label class="form-label">Toll</label>
                                         </div>
@@ -328,7 +364,7 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-8">
-                                            <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn">View</a></label>
+                                            <label class="form-label">Cash Advance (Less) <a href="#" id="viewCaBtn" class="hide-on-print">View</a></label>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
