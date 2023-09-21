@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<!-- test fix anis2 -->
+<!-- test fix anis2 halu-->
 @section('content')
 <div class="container-fluid">
     <div class="row">
