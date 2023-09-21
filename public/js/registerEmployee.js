@@ -60,10 +60,8 @@ $(document).ready(function () {
     $("#datepicker-expiryDate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
-
+        format: "yyyy-mm-dd"
     });
-
     $("#firstName,#lastName").change(function () {
         var fn = $("#firstName").val();
         var ln = $("#lastName").val();
@@ -101,9 +99,6 @@ $(document).ready(function () {
 
     $("#nonNetizen").change(function () {
         if (this.checked) {
-            $("#passport").prop("readonly", false);
-            $("#passport").prop("required", true);
-
             $("#gender").prop("readonly", false);
             $("#gender").prop("required", true);
             $("#gender").removeAttr("style");
@@ -113,9 +108,6 @@ $(document).ready(function () {
             $("#gender").val("");
 
         } else {
-            $("#passport").prop("readonly", true);
-            $("#passport").prop("required", false);
-
             $("#gender").prop("readonly", true);
             $("#gender").prop("required", false);
             $("#gender").attr("style", "pointer-events: none");
@@ -232,30 +224,6 @@ $(document).ready(function () {
             });
         }
     });
-
-    // $(".partCheck").click(function () {
-    //     if ($(this).prop("checked")) {
-    //         $("#idnumber").prop("readonly", true);
-
-    //         $("#gender").prop("readonly", false);
-    //         $("#gender").prop("required", true);
-
-    //         $("#datepicker-expiryDate").prop("readonly", false);
-    //         $("#datepicker-birth").prop("readonly", false);
-    //         $("#datepicker-birth").css("pointer-events", "auto");
-
-    //         $("#idnumber").val("");
-    //     } else {
-    //         $("#idnumber").prop("readonly", false);
-
-    //         $("#gender").prop("readonly", true);
-    //         $("#gender").prop("required", false);
-
-    //         $("#datepicker-expiryDate").prop("readonly", false);
-    //         $("#datepicker-birth").prop("readonly", true);
-    //         $("#datepicker-birth").css("pointer-events", "none");
-    //     }
-    // });
 
     $.validator.addMethod(
         "noSpecialChars",

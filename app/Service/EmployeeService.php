@@ -1064,6 +1064,7 @@ class EmployeeService
             if ($input['roleId']) {
                 $input['role'] = $input['roleId'];
                 $userRole['role_id'] = $input['role'];
+                $userRole['role_custom_id'] = null;
                 unset($input['roleId']);
             }
 

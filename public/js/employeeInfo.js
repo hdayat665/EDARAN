@@ -156,7 +156,7 @@ $(document).ready(function () {
     $(document).on("click", "#terminate", function () {
         $("#exampleModal").modal("show");
         var userId = $(this).data("id");
-        var employeeId = $(this).data("employee");
+        var employeeId = $(this).data("id");
 
         $("#userId").val(userId);
 
@@ -164,10 +164,10 @@ $(document).ready(function () {
 
         ParentData.then(function (data) {
             parent = data;
-            $("#employeeId").val(parent.employeeId);
-            $("#employeeName").val(parent.employeeName);
-            $("#employeeEmail").val(parent.employeeEmail);
-            $("#reportTo").val(parent.fullName);
+            $("#employeeId").val(parent ? parent.employeeId : null);
+            $("#employeeName").val(parent ? parent.employeeName : null);
+            $("#employeeEmail").val(parent ? parent.employeeEmail : null);
+            $("#reportTo").val(parent ? parent.fullName : null);
         });
     });
 

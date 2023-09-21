@@ -79,7 +79,7 @@
                                                        <option value="">PLEASE CHOOSE</option>
                                                        <?php $Departments = getDepartment(); ?>
                                                        @foreach ($Departments as $Department)
-                                                           <option value="{{ $Department->id ?? null }}" 
+                                                           <option value="{{ $Department->id ?? null }}"
                                                            <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
                                                                label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
                                                        @endforeach
@@ -166,7 +166,6 @@
                                                            </option>
                                                        @endforeach
                                                     </select>
-                                                    <input type="hidden" id="reporttoodiv" name="" class="form-control">
                                                 </div>
                                            <hr>
                                            <div class="row p-2">
