@@ -644,10 +644,10 @@ class MailService
         $sendtoday = 0;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-
                 
-        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
+        $users = Employee::from('employment as a')
+            ->leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -655,24 +655,15 @@ class MailService
                 ->whereDate('timesheet_event.start_date', '=', $today)
                 ->groupBy('timesheet_event.user_id');
         })
-        ->leftJoin('timesheet_log', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_log.user_id')
+            ->leftJoin('timesheet_log', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_log.user_id') // Updated this line to use the 'a' alias
                 ->whereDate('timesheet_log.date', '=', $today)
                 ->groupBy('timesheet_log.user_id');
         })
-        ->groupBy('employment.user_id', 'employment.employeeName', 'employment.workingEmail', 'employment.branch')
-        ->select(
-            'employment.user_id',
-            'employment.employeeName',
-            'employment.workingEmail',
-            'employment.branch',
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_event.duration))) AS total_event_hours"),
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_log.total_hour))) AS total_log_hours")
-        )
-        // ->where('employment.user_id', 180)
-        ->whereIn('employment.user_id', [180,219,220,324,217])
-        // ->whereIn('employment.user_id', [180,219,])
-        ->get();
+                ->groupBy('a.user_id', 'a.employeeName', 'a.workingEmail', 'a.branch') // Updated this line to use the 'a' alias
+                ->select('a.user_id','a.employeeName','a.workingEmail','a.branch')
+                ->whereIn('a.user_id', [180,219,220,324,217]) // Updated this line to use the 'a' alias
+                ->get();
 
             foreach ($users as $user) {
 
@@ -692,7 +683,28 @@ class MailService
                 ->whereNull('a.start_time')
                 ->pluck('a.day_of_week')
                 ->toArray();
-                
+
+                $getWorkingHour = DB::table('leave_weekend as a')
+                ->where('a.state_id', $stateId)
+                ->whereNotNull('a.total_time')
+                ->select('a.total_time','a.day_of_week')
+                ->get();
+
+               // Create a mapping of total_time based on day_of_week
+                $workingHoursMap = [];
+                foreach ($getWorkingHour as $workingData) {
+                    $workingHoursMap[$workingData->day_of_week] = $workingData->total_time;
+                }
+
+                // Get the current day of the week (1 for Monday, 2 for Tuesday, etc.)
+                $currentDayOfWeek = date('N'); // 'N' returns the ISO-8601 numeric representation of the day of the week (1 for Monday, 7 for Sunday)
+
+                // Get the total_time for the current day of the week
+                if (isset($workingHoursMap[$currentDayOfWeek])) {
+                    $workingHour = $workingHoursMap[$currentDayOfWeek];
+                } else {
+                    $workingHour = '08:00';
+                }
 
                 $today_day_of_week = date('w', strtotime($today));
 
@@ -704,8 +716,6 @@ class MailService
                 //check for public
                 $getPublicHolidays = DB::table('leave_holiday as a')
                 ->select('start_date as start_dateP', 'end_date as end_dateP', 'state_id')
-                // ->find_in_set()
-                // ->whereRaw("FIND_IN_SET($participantId, a.participant)")
                 ->whereRaw("FIND_IN_SET($stateId, state_id)")
                 ->get();
 
@@ -758,29 +768,75 @@ class MailService
                 // Remove duplicate dates if any
                 $allDatesL = array_unique($allDatesL);
 
-                // print_r($allDates1);
-
                 //makesre if holiday, not send email
                 if (in_array($today, $allDatesL)) {
                     continue; // Skip to the next iteration of the loop
                 }
 
+                $getLogHour = DB::table('timesheet_log as a')
+                ->where('a.user_id', $user->user_id)
+                ->whereDate('a.date', $today)
+                ->get();
 
+                $totalEventSeconds = 0;
 
-                $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
-                $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
-                $combinedHours = $eventHours->diff($logHours)->format('%H:%I:%S');
+                foreach ($getLogHour as $log) {
+                    list($eh, $em, $es) = explode(':', $log->total_hour);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalEventSeconds += $eventSeconds;
+                }
 
-                $working_hour = '08:00:00';
+                $hours = floor($totalEventSeconds / 3600);
+                $minutes = floor(($totalEventSeconds % 3600) / 60);
+                $seconds = $totalEventSeconds % 60;
+
+                $totalLogTime = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+                $getEventHour = DB::table('timesheet_event as a')
+                ->whereRaw("FIND_IN_SET(?,a.participant)", [$user->user_id])
+                ->whereDate('a.start_date', $today)
+                ->get();
+
+                $totalDurationSeconds = 0;
+
+                foreach ($getEventHour as $event) {
+                    list($eh, $em, $es) = explode(':', $event->duration);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalDurationSeconds += $eventSeconds;
+                }
+                
+                // Convert the total seconds back to the time format (HH:MM:SS)
+                $totalHours = floor($totalDurationSeconds / 3600);
+                $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
+                $totalSeconds = $totalDurationSeconds % 60;
+                
+                $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+                
+                list($eh1, $em1, $es1) = explode(':', $totalDuration);
+                $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
+
+                // Convert $totalLogTime to seconds
+                list($eh2, $em2, $es2) = explode(':', $totalLogTime);
+                $totalLogTimeSeconds = ($eh2 * 3600) + ($em2 * 60) + $es2;
+
+                // Sum the total seconds
+                $totalSumSeconds = $totalDurationSeconds + $totalLogTimeSeconds;
+
+                // Convert the total seconds back to HH:MM:SS format
+                $totalSumHours = floor($totalSumSeconds / 3600);
+                $totalSumMinutes = floor(($totalSumSeconds % 3600) / 60);
+                $totalSumSeconds = $totalSumSeconds % 60;
+
+                $totalSumTime = sprintf('%02d:%02d:%02d', $totalSumHours, $totalSumMinutes, $totalSumSeconds);
 
                 $data = [
                     'nameFrom' => $user->employeeName,
                     'user_id' => $user->user_id,
                     'total_event_hours' => $user->total_event_hours,
                     'total_log_hours' => $user->total_log_hours,
-                    'test' => $combinedHours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
                 $response = [
@@ -788,14 +844,14 @@ class MailService
                     'typeEmail' => 'emailmissedtimesheet',
                     'from' => env('MAIL_FROM_ADDRESS'),
                     'nameFrom' => $user->employeeName,
-                    'test' => $combinedHours,
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
 
-                if ($combinedHours < $working_hour || $combinedHours === '00:00:00') {
+                if ($totalSumTime < $workingHour || $totalSumTime === '00:00:00') {
                     Mail::to($receiver)->send(new MailMail($response, $data));
                 }
             }
@@ -807,10 +863,10 @@ class MailService
         $sendtoday = 1;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-
                 
-        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
+        $users = Employee::from('employment as a')
+            ->leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -818,23 +874,15 @@ class MailService
                 ->whereDate('timesheet_event.start_date', '=', $today)
                 ->groupBy('timesheet_event.user_id');
         })
-        ->leftJoin('timesheet_log', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_log.user_id')
+            ->leftJoin('timesheet_log', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_log.user_id') // Updated this line to use the 'a' alias
                 ->whereDate('timesheet_log.date', '=', $today)
                 ->groupBy('timesheet_log.user_id');
         })
-        ->groupBy('employment.user_id', 'employment.employeeName', 'employment.workingEmail', 'employment.branch')
-        ->select(
-            'employment.user_id',
-            'employment.employeeName',
-            'employment.workingEmail',
-            'employment.branch',
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_event.duration))) AS total_event_hours"),
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_log.total_hour))) AS total_log_hours")
-        )
-        // ->where('employment.user_id', 180)
-        ->whereIn('employment.user_id', [180,219,220,324,217])
-        ->get();
+                ->groupBy('a.user_id', 'a.employeeName', 'a.workingEmail', 'a.branch') // Updated this line to use the 'a' alias
+                ->select('a.user_id','a.employeeName','a.workingEmail','a.branch')
+                ->whereIn('a.user_id', [180,219,220,324,217]) // Updated this line to use the 'a' alias
+                ->get();
 
             foreach ($users as $user) {
 
@@ -854,7 +902,28 @@ class MailService
                 ->whereNull('a.start_time')
                 ->pluck('a.day_of_week')
                 ->toArray();
-                
+
+                $getWorkingHour = DB::table('leave_weekend as a')
+                ->where('a.state_id', $stateId)
+                ->whereNotNull('a.total_time')
+                ->select('a.total_time','a.day_of_week')
+                ->get();
+
+               // Create a mapping of total_time based on day_of_week
+                $workingHoursMap = [];
+                foreach ($getWorkingHour as $workingData) {
+                    $workingHoursMap[$workingData->day_of_week] = $workingData->total_time;
+                }
+
+                // Get the current day of the week (1 for Monday, 2 for Tuesday, etc.)
+                $currentDayOfWeek = date('N'); // 'N' returns the ISO-8601 numeric representation of the day of the week (1 for Monday, 7 for Sunday)
+
+                // Get the total_time for the current day of the week
+                if (isset($workingHoursMap[$currentDayOfWeek])) {
+                    $workingHour = $workingHoursMap[$currentDayOfWeek];
+                } else {
+                    $workingHour = '08:00';
+                }
 
                 $today_day_of_week = date('w', strtotime($today));
 
@@ -866,8 +935,6 @@ class MailService
                 //check for public
                 $getPublicHolidays = DB::table('leave_holiday as a')
                 ->select('start_date as start_dateP', 'end_date as end_dateP', 'state_id')
-                // ->find_in_set()
-                // ->whereRaw("FIND_IN_SET($participantId, a.participant)")
                 ->whereRaw("FIND_IN_SET($stateId, state_id)")
                 ->get();
 
@@ -920,29 +987,75 @@ class MailService
                 // Remove duplicate dates if any
                 $allDatesL = array_unique($allDatesL);
 
-                // print_r($allDates1);
-
                 //makesre if holiday, not send email
                 if (in_array($today, $allDatesL)) {
                     continue; // Skip to the next iteration of the loop
                 }
 
+                $getLogHour = DB::table('timesheet_log as a')
+                ->where('a.user_id', $user->user_id)
+                ->whereDate('a.date', $today)
+                ->get();
 
+                $totalEventSeconds = 0;
 
-                $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
-                $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
-                $combinedHours = $eventHours->diff($logHours)->format('%H:%I:%S');
+                foreach ($getLogHour as $log) {
+                    list($eh, $em, $es) = explode(':', $log->total_hour);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalEventSeconds += $eventSeconds;
+                }
 
-                $working_hour = '08:00:00';
+                $hours = floor($totalEventSeconds / 3600);
+                $minutes = floor(($totalEventSeconds % 3600) / 60);
+                $seconds = $totalEventSeconds % 60;
+
+                $totalLogTime = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+                $getEventHour = DB::table('timesheet_event as a')
+                ->whereRaw("FIND_IN_SET(?,a.participant)", [$user->user_id])
+                ->whereDate('a.start_date', $today)
+                ->get();
+
+                $totalDurationSeconds = 0;
+
+                foreach ($getEventHour as $event) {
+                    list($eh, $em, $es) = explode(':', $event->duration);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalDurationSeconds += $eventSeconds;
+                }
+                
+                // Convert the total seconds back to the time format (HH:MM:SS)
+                $totalHours = floor($totalDurationSeconds / 3600);
+                $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
+                $totalSeconds = $totalDurationSeconds % 60;
+                
+                $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+                
+                list($eh1, $em1, $es1) = explode(':', $totalDuration);
+                $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
+
+                // Convert $totalLogTime to seconds
+                list($eh2, $em2, $es2) = explode(':', $totalLogTime);
+                $totalLogTimeSeconds = ($eh2 * 3600) + ($em2 * 60) + $es2;
+
+                // Sum the total seconds
+                $totalSumSeconds = $totalDurationSeconds + $totalLogTimeSeconds;
+
+                // Convert the total seconds back to HH:MM:SS format
+                $totalSumHours = floor($totalSumSeconds / 3600);
+                $totalSumMinutes = floor(($totalSumSeconds % 3600) / 60);
+                $totalSumSeconds = $totalSumSeconds % 60;
+
+                $totalSumTime = sprintf('%02d:%02d:%02d', $totalSumHours, $totalSumMinutes, $totalSumSeconds);
 
                 $data = [
                     'nameFrom' => $user->employeeName,
                     'user_id' => $user->user_id,
                     'total_event_hours' => $user->total_event_hours,
                     'total_log_hours' => $user->total_log_hours,
-                    'test' => $combinedHours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
                 $response = [
@@ -950,14 +1063,14 @@ class MailService
                     'typeEmail' => 'emailmissedtimesheet',
                     'from' => env('MAIL_FROM_ADDRESS'),
                     'nameFrom' => $user->employeeName,
-                    'test' => $combinedHours,
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
 
-                if ($combinedHours < $working_hour || $combinedHours === '00:00:00') {
+                if ($totalSumTime < $workingHour || $totalSumTime === '00:00:00') {
                     Mail::to($receiver)->send(new MailMail($response, $data));
                 }
             }
@@ -969,10 +1082,10 @@ class MailService
         $sendtoday = 2;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-
                 
-        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
+        $users = Employee::from('employment as a')
+            ->leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -980,23 +1093,15 @@ class MailService
                 ->whereDate('timesheet_event.start_date', '=', $today)
                 ->groupBy('timesheet_event.user_id');
         })
-        ->leftJoin('timesheet_log', function ($join) use ($today) {
-            $join->on('employment.user_id', '=', 'timesheet_log.user_id')
+            ->leftJoin('timesheet_log', function ($join) use ($today) {
+            $join->on('a.user_id', '=', 'timesheet_log.user_id') // Updated this line to use the 'a' alias
                 ->whereDate('timesheet_log.date', '=', $today)
                 ->groupBy('timesheet_log.user_id');
         })
-        ->groupBy('employment.user_id', 'employment.employeeName', 'employment.workingEmail', 'employment.branch')
-        ->select(
-            'employment.user_id',
-            'employment.employeeName',
-            'employment.workingEmail',
-            'employment.branch',
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_event.duration))) AS total_event_hours"),
-            DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_log.total_hour))) AS total_log_hours")
-        )
-        // ->where('employment.user_id', 180)
-        ->whereIn('employment.user_id', [180,219,220,324,217])
-        ->get();
+                ->groupBy('a.user_id', 'a.employeeName', 'a.workingEmail', 'a.branch') // Updated this line to use the 'a' alias
+                ->select('a.user_id','a.employeeName','a.workingEmail','a.branch')
+                ->whereIn('a.user_id', [180,219,220,324,217]) // Updated this line to use the 'a' alias
+                ->get();
 
             foreach ($users as $user) {
 
@@ -1016,7 +1121,28 @@ class MailService
                 ->whereNull('a.start_time')
                 ->pluck('a.day_of_week')
                 ->toArray();
-                
+
+                $getWorkingHour = DB::table('leave_weekend as a')
+                ->where('a.state_id', $stateId)
+                ->whereNotNull('a.total_time')
+                ->select('a.total_time','a.day_of_week')
+                ->get();
+
+               // Create a mapping of total_time based on day_of_week
+                $workingHoursMap = [];
+                foreach ($getWorkingHour as $workingData) {
+                    $workingHoursMap[$workingData->day_of_week] = $workingData->total_time;
+                }
+
+                // Get the current day of the week (1 for Monday, 2 for Tuesday, etc.)
+                $currentDayOfWeek = date('N'); // 'N' returns the ISO-8601 numeric representation of the day of the week (1 for Monday, 7 for Sunday)
+
+                // Get the total_time for the current day of the week
+                if (isset($workingHoursMap[$currentDayOfWeek])) {
+                    $workingHour = $workingHoursMap[$currentDayOfWeek];
+                } else {
+                    $workingHour = '08:00';
+                }
 
                 $today_day_of_week = date('w', strtotime($today));
 
@@ -1028,8 +1154,6 @@ class MailService
                 //check for public
                 $getPublicHolidays = DB::table('leave_holiday as a')
                 ->select('start_date as start_dateP', 'end_date as end_dateP', 'state_id')
-                // ->find_in_set()
-                // ->whereRaw("FIND_IN_SET($participantId, a.participant)")
                 ->whereRaw("FIND_IN_SET($stateId, state_id)")
                 ->get();
 
@@ -1082,29 +1206,75 @@ class MailService
                 // Remove duplicate dates if any
                 $allDatesL = array_unique($allDatesL);
 
-                // print_r($allDates1);
-
                 //makesre if holiday, not send email
                 if (in_array($today, $allDatesL)) {
                     continue; // Skip to the next iteration of the loop
                 }
 
+                $getLogHour = DB::table('timesheet_log as a')
+                ->where('a.user_id', $user->user_id)
+                ->whereDate('a.date', $today)
+                ->get();
 
+                $totalEventSeconds = 0;
 
-                $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
-                $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
-                $combinedHours = $eventHours->diff($logHours)->format('%H:%I:%S');
+                foreach ($getLogHour as $log) {
+                    list($eh, $em, $es) = explode(':', $log->total_hour);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalEventSeconds += $eventSeconds;
+                }
 
-                $working_hour = '08:00:00';
+                $hours = floor($totalEventSeconds / 3600);
+                $minutes = floor(($totalEventSeconds % 3600) / 60);
+                $seconds = $totalEventSeconds % 60;
+
+                $totalLogTime = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+                $getEventHour = DB::table('timesheet_event as a')
+                ->whereRaw("FIND_IN_SET(?,a.participant)", [$user->user_id])
+                ->whereDate('a.start_date', $today)
+                ->get();
+
+                $totalDurationSeconds = 0;
+
+                foreach ($getEventHour as $event) {
+                    list($eh, $em, $es) = explode(':', $event->duration);
+                    $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
+                    $totalDurationSeconds += $eventSeconds;
+                }
+                
+                // Convert the total seconds back to the time format (HH:MM:SS)
+                $totalHours = floor($totalDurationSeconds / 3600);
+                $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
+                $totalSeconds = $totalDurationSeconds % 60;
+                
+                $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
+                
+                list($eh1, $em1, $es1) = explode(':', $totalDuration);
+                $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
+
+                // Convert $totalLogTime to seconds
+                list($eh2, $em2, $es2) = explode(':', $totalLogTime);
+                $totalLogTimeSeconds = ($eh2 * 3600) + ($em2 * 60) + $es2;
+
+                // Sum the total seconds
+                $totalSumSeconds = $totalDurationSeconds + $totalLogTimeSeconds;
+
+                // Convert the total seconds back to HH:MM:SS format
+                $totalSumHours = floor($totalSumSeconds / 3600);
+                $totalSumMinutes = floor(($totalSumSeconds % 3600) / 60);
+                $totalSumSeconds = $totalSumSeconds % 60;
+
+                $totalSumTime = sprintf('%02d:%02d:%02d', $totalSumHours, $totalSumMinutes, $totalSumSeconds);
 
                 $data = [
                     'nameFrom' => $user->employeeName,
                     'user_id' => $user->user_id,
                     'total_event_hours' => $user->total_event_hours,
                     'total_log_hours' => $user->total_log_hours,
-                    'test' => $combinedHours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
                 $response = [
@@ -1112,14 +1282,14 @@ class MailService
                     'typeEmail' => 'emailmissedtimesheet',
                     'from' => env('MAIL_FROM_ADDRESS'),
                     'nameFrom' => $user->employeeName,
-                    'test' => $combinedHours,
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
+                   
                 ];
 
 
-                if ($combinedHours < $working_hour || $combinedHours === '00:00:00') {
+                if ($totalSumTime < $workingHour || $totalSumTime === '00:00:00') {
                     Mail::to($receiver)->send(new MailMail($response, $data));
                 }
             }
