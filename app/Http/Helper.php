@@ -1354,10 +1354,10 @@ if (!function_exists('getEmployee')) {
     function getEmployee()
     {
         $data = Employee::leftJoin('userprofile', 'employment.report_to', '=', 'userprofile.id')
-        ->where('employment.tenant_id', Auth::user()->tenant_id)
-        ->where('employment.status', 'active')
-        ->select('employment.*', 'userprofile.fullName')
-        ->get();
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->where('employment.status', 'active')
+            ->select('employment.*', 'userprofile.fullName')
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -3076,7 +3076,7 @@ if (!function_exists('getProjectApproverData')) {
     {
         $ss = new ProjectService;
 
-        $data = $ss->projectInfoView();
+        $data = $ss->projectApprovalData();
         // if ($role == 'recommender') {
         // } else {
         //     $data = $ss->leaveApprhodView();
