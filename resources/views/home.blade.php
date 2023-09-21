@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<!-- test anis2 -->
+<!-- test fix anis2 -->
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -384,4 +384,4 @@
     </div>
   </div>
 @endsection
-<!-- test anis1 -->
+<!-- test fix anis2 lagi -->
