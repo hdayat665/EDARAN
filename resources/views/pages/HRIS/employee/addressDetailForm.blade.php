@@ -6,7 +6,7 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
-                    <input type="text" name="address1" id="address1" class="form-control mb-10px" placeholder="ADDRESS 1" />
+                    <input type="text" name="address1" id="address1" class="form-control mb-5px" placeholder="ADDRESS 1" />
                     <input type="hidden" name="user_id" id="user_id" class="form-control" />
                 </div>
                 <label class="form-label col-form-label col-md-1">Address 2</label>
@@ -66,7 +66,7 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
-                    <input type="text" name="address1c" id="address1c" class="form-control mb-10px" placeholder="ADDRESS 1" />
+                    <input type="text" name="address1c" id="address1c" class="form-control mb-5px" placeholder="ADDRESS 1" />
                 </div>
                 <label class="form-label col-form-label col-md-1">Address 2</label>
                 <div class="col-md-5">
