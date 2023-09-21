@@ -280,11 +280,38 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-2">
-                <div class="row p-2"> 
-                    <button type="button" class="btn btn-primary">Back</button>
+            <div class="col-md-2">
+                    <div class="row p-2"> 
+                        <button type="button" class="btn btn-primary hide-on-print" id="printButton3">Print</button>
+                    </div>
                 </div>
-            </div> --}}
+                <style>
+                    @media print{
+                        .hide-on-print {
+                            display: none;
+                        }
+                        #backPrint{
+                            display: none;
+                        }
+                        #header {
+                            display: none;
+                        }
+                        .page-header{
+                            display: none;
+                        }
+                        .navbar-nav {
+                            display: none;
+                        }
+                        #content {
+                            position: absolute;
+                            top: 0;
+                            padding-top: 1cm;
+                        }
+                        @page {
+                            margin-bottom: 2cm;
+                        }
+                    }
+                </style>
         </div>
         <div class="row p-2">
             <div class="form-control">

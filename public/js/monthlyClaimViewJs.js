@@ -340,10 +340,12 @@ $(document).on("click", "#btnSAttachment", function () {
 
     $("#subsistenceAttachment").modal("show");
 });
+
 $(document).on("click", "#viewCaBtn", function () {
 
     $("#viewCa").modal("show");
 });
+
 $("#travelling").DataTable({
     paging: true,
     filter: false,
@@ -360,16 +362,20 @@ $("#travelling").DataTable({
             text: 'Supporting Documents',
             attr: {
                 id: 'btnTAttachment',
-                class: 'btn btn-primary',
+                class: 'btn btn-primary hide-on-print',
                 type: 'button'
             },
             action: function () {
-                // Custom button action
-                // Add your logic here
             }
         }
     ]
 });
+
+$("#printButton").click(function() {
+    // Call the window.print() function to trigger the browser's print dialog
+    window.print();
+});
+
 $("#subsTableUpdate").DataTable({
     paging: true,
     filter: false,
@@ -386,13 +392,12 @@ $("#subsTableUpdate").DataTable({
             text: 'Supporting Documents',
             attr: {
                 id: 'btnSAttachment',
-                class: 'btn btn-primary',
+                class: 'btn btn-primary hide-on-print',
                 type: 'button'
             },
             action: function () {
-                // Custom button action
-                // Add your logic here
             }
         }
     ]
+    
 });

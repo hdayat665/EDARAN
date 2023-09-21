@@ -26,7 +26,7 @@
                             </a>
                         </li>
                     @endif
-                    <?php $target = ['project_location_info']; ?>
+                    <?php $target = ['project_location_pm']; ?>
                     @if (array_intersect($role_permission, $target))
                         <li class="nav-item">
                             <a href="#tab3" id="nav_pro_loc" data-bs-toggle="tab" class="nav-link">

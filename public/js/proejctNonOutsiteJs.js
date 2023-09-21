@@ -330,4 +330,9 @@ $(document).ready(function () {
             url: "/getTravelById/" + id,
         });
     }
+
+    $("#printButton").click(function() {
+        // Call the window.print() function to trigger the browser's print dialog
+        window.print();
+    });
 });

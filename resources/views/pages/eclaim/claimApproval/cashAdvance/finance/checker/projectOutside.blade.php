@@ -405,7 +405,7 @@
                                                 <input readonly type="text" class="form-control" value="CA-{{ $ca->id ?? '-' }}">
                                             </div>
                                         </div>
-                                        <div class="row p-2">
+                                        <div class="row p-2 break">
                                             <div class="col-md-6">
                                                 <label class="form-label col-form-label">Applied Date</label>
                                             </div>
@@ -425,7 +425,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2"> 
+                    <div class="col-md-2 hide-on-print"> 
                         @if ($ca->f_status != 'recommend')
                             @if ($ca->pv_number != '')
                                 <!-- The pv_number is not null, so hide all buttons -->
@@ -442,6 +442,9 @@
                                         @endif
                                         <a href="/cashAdvanceFcheckerView" class="btn btn-light" style="color: black;" type="submit"> Back</a>
                                     </div>
+                                    <div class="row p-2"> 
+                                        <button type="button" class="btn btn-primary hide-on-print" style="color: black;" id="printButton2">Print</button>
+                                    </div>
                                 @endif
                             @endif
                         @else
@@ -451,6 +454,26 @@
                             </div>
                         @endif
                     </div>
+                    <style>
+                        @media print{
+                            .hide-on-print {
+                                display: none;
+                            }
+                            #header {
+                                display: none;
+                                height: 0;
+                            }
+                            .page-header{
+                                display: none;
+                            }
+                            .navbar-nav {
+                                display: none;
+                            }
+                            .break {
+                                page-break-before: always;
+                            }
+                        }
+                    </style>
 
                 </div>
                 <div class="row p-2">
@@ -517,7 +540,7 @@
                         </div> 
                     </div>
                 </div>
-                <div class="row p-2">
+                <div class="row p-2 break">
                     <div class="form-control">
                        <div class="row p-2 ">
                             <div class="col-md-6">
@@ -607,7 +630,7 @@
                                         <input readonly type="text" class="form-control" value="">
                                     </div>
                                 </div>
-                                <div class="row p-2">
+                                <div class="row p-2 break">
                                     <div class="col-md-6">
                                         <label class="form-label col-form-label">Subsistence Allowance</label>
                                     </div>
@@ -652,7 +675,7 @@
                                     @if ($ca->f_status == 'recommend')
                                     
                                     @else
-                                    <a href="#" id="editLink">Edit</a>
+                                    <a href="#" id="editLink" class="hide-on-print">Edit</a>
                                     
                                     @endif
                                 </div>

@@ -1185,6 +1185,32 @@
                                                         <input readonly type="text" name="total" class="form-control" value="" id="total2">
                                                     </div>
                                                 </div>
+                                                <div id='lodgingDiv' style="display: none">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">Name :</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input  type="text" name="lodgingname" class="form-control"  id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">Contact :</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input  type="number" name="lodgingcontact" class="form-control" id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label">Address :</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <textarea class="form-control" name="lodgingaddress" id="" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
