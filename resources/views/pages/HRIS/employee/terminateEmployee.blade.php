@@ -10,7 +10,7 @@
                         <div class="mb-5">
                             <label for="recipient-name" class="col-form-label">Employee ID</label>
                             <input type="text" name="employeeId" id="employeeId" class="form-control" readonly>
-                            <input type="hidden" name="user_id"  id="userId" >
+                            <input type="hidden" name="user_id"  id="userId" data-id="id">
                             <label for="recipient-name" class="col-form-label">Employee Name</label>
                             <input type="text" name="employeeName" id="employeeName" class="form-control" readonly>
                             <label for="recipient-name" class="col-form-label">Employee Email</label>

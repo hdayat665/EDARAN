@@ -4906,7 +4906,6 @@ if (permanentChecked && correspondentChecked) {
                 jobGrade: "required",
                 designation: "required",
                 employmentType: "required",
-                report_to: "required",
                 joinedDate: "required",
                 EffectiveFrom: "required",
                 event: "required",
@@ -4920,7 +4919,6 @@ if (permanentChecked && correspondentChecked) {
                 jobGrade: "Please Choose Employee Job Grade",
                 designation: "Please Choose Employee Designation",
                 employmentType: "Please Choose Employment Type",
-                report_to: "Please Choose Report To",
                 joinedDate: "Please Insert Employee Joined Date",
                 EffectiveFrom: "Please Insert Effective From",
                 event: "Please Choose Event",
@@ -4941,8 +4939,6 @@ if (permanentChecked && correspondentChecked) {
                     error.insertAfter("#designationdiv");
                 } else if (element.attr("name") === "employmentType") {
                     error.insertAfter("#employmentypediv");
-                } else if (element.attr("name") === "report_to") {
-                    error.insertAfter("#reporttoodiv");
                 } else if (element.attr("name") === "event") {
                     error.insertAfter("#eventdiv");
                 } else {
