@@ -24,7 +24,6 @@ $(document).ready(function () {
     }
 
     var countryProfiles = [
-        { country: "#country_id", postcode: "#postcode_id", state: "#state_id", city: "#city_id" },
         { country: "#countryparent", postcode: "#postcodeparent", state: "#stateparent", city: "#cityparent" },
         { country: "#countrycom", postcode: "#postcodecom", state: "#statecom", city: "#citycom" },
         { country: "#countryc", postcode: "#postcodec", state: "#statec", city: "#cityc" },
@@ -80,7 +79,6 @@ $(document).ready(function () {
     }
 
     var stateProfiles = [
-        { postcode: "#postcode_id", state: "#state_id", city: "#city_id" },
         { postcode: "#postcodeparent", state: "#stateparent", city: "#cityparent" },
         { postcode: "#postcodecom", state: "#statecom", city: "#citycom" },
         { postcode: "#postcodec", state: "#statec", city: "#cityc" },
@@ -125,12 +123,14 @@ $(document).ready(function () {
             });
         });
     }
-    stateUC
+
     var countryProfiles = [
-       { country: "#countryc", state: "#statec", city: "#cityc", postcode: "#postcodec" },
-       { country: "#countryEmc", state: "#stateEmc", city: "#cityEmc", postcode: "#postcodeEmc" },
-       { country: "#countryUC", state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
-       { country: "#countryCEdit", state: "#stateCEdit", city: "#cityCEdit", postcode: "#postcodeCEdit" },
+        { country: "#country", postcode: "#postcode", state: "#state", city: "#city" },
+        { country: "#country_id", postcode: "#postcode_id", state: "#state_id", city: "#city_id" },
+        { country: "#countryc", state: "#statec", city: "#cityc", postcode: "#postcodec" },
+        { country: "#countryEmc", state: "#stateEmc", city: "#cityEmc", postcode: "#postcodeEmc" },
+        { country: "#countryUC", state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
+        { country: "#countryCEdit", state: "#stateCEdit", city: "#cityCEdit", postcode: "#postcodeCEdit" },
     ];
 
     countryProfiles.forEach(function(profile) {
@@ -164,6 +164,8 @@ $(document).ready(function () {
     }
 
     var stateProfiles = [
+        { state: "#state", city: "#city" , postcode: "#postcode"},
+        { state: "#state_id", city: "#city_id", postcode: "#postcode_id"},
         { state: "#statec", city: "#cityc", postcode: "#postcodec" },
         { state: "#stateEmc", city: "#cityEmc", postcode: "#postcodeEmc" },
         { state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
@@ -207,6 +209,8 @@ $(document).ready(function () {
     }
 
     var cityProfiles = [
+        { city: "#city", postcode: "#postcode"},
+        { city: "#city_id", postcode: "#postcode_id"},
         { city: "#cityc", postcode: "#postcodec" },
         { city: "#cityEmc", postcode: "#postcodeEmc" },
         { city: "#cityUC", postcode: "#postcodeUC" },

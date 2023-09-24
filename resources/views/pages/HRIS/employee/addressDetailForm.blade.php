@@ -66,8 +66,7 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
-                    <input type="text" name="address1c" id="address1c" class="form-control mb-5px" placeholder="ADDRESS 1" />
-                    {{-- <input type="text" name="address1c" id="address1add" class="form-control mb-5px" placeholder="ADDRESS 1" /> --}}
+                    <input type="text" name="address1c" id="address1add" class="form-control mb-5px" placeholder="ADDRESS 1" />
                 </div>
                 <label class="form-label col-form-label col-md-1">Address 2</label>
                 <div class="col-md-5">

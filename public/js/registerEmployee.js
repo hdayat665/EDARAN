@@ -161,8 +161,8 @@ $(document).ready(function () {
                 placeholder: "PLEASE CHOOSE",
                 allowClear: true,
             });
-            $("#address1add").prop("readonly", false);
-            $("#address2add").prop("readonly", false);
+            $("#address1add").val("").prop("readonly", false);
+            $("#address2add").val("").prop("readonly", false);
             $("#postcodeadd").prop("readonly", false).css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
