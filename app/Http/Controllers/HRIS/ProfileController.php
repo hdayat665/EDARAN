@@ -253,6 +253,25 @@ class ProfileController extends Controller
         return $result;
     }
 
+    public function getPostcodeByCountryProfile($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getPostcodeByCountryProfile($id);
+
+        return $result;
+    }
+
+
+    public function getStateAndCityByPostcodeProfile($id = '')
+    {
+        $ss = new ProfileService;
+
+        $result = $ss->getStateAndCityByPostcodeProfile($id);
+
+        return $result;
+    }
+
     public function getCitybyStateProfile($id = '')
     {
         $ps = new ProfileService;

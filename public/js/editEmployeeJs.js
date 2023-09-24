@@ -977,15 +977,15 @@ $("#edit-profile-picture").on("click", function () {
                 .val($("#address-2").val())
                 .prop("readonly", true);
             $("#postcodeparent")
-                .val($("#postcode").val())
+                .val($("#postcode_id").val())
                 .prop("readonly", true);
-            $("#cityparent").val($("#city").val()).prop("readonly", true).css({
+            $("#cityparent").val($("#city_id").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
             $("#stateparent")
-                .val($("#state").val())
+                .val($("#state_id").val())
                 .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
@@ -993,7 +993,7 @@ $("#edit-profile-picture").on("click", function () {
                     background: "#e9ecef",
                 });
             $("#countryparent")
-                .val($("#country").val())
+                .val($("#country_id").val())
                 .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
@@ -1015,8 +1015,8 @@ $("#edit-profile-picture").on("click", function () {
                         var permanentAddress2 = data.data.address2;
                         var permanentPostcode = data.data.postcode;
                         var permanentCity = data.data.city;
-                        var permanentState = data.data.state;
-                        var permanentCountry = data.data.country;
+                        var permanentState = data.data.state_name;
+                        var permanentCountry = data.data.country_name;
                         console.log(data);
 
                         if (
@@ -1033,6 +1033,11 @@ $("#edit-profile-picture").on("click", function () {
                             $("#cityparent").val(permanentCity);
                             $("#stateparent").val(permanentState);
                             $("#countryparent").val(permanentCountry);
+
+                            $("#postcodeparent").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                            $("#cityparent").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                            $("#stateparent").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                            $("#countryparent").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                         }
                     }
                 })
@@ -1046,19 +1051,19 @@ $("#edit-profile-picture").on("click", function () {
                 .val($("#address-2").val())
                 .prop("readonly", true);
             $("#postcodeparent")
-                .val($("#postcode").val())
+                .val($("#postcode_id").val())
                 .prop("readonly", true);
-            $("#cityparent").val($("#city").val()).css({
+            $("#cityparent").val($("#city_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
-            $("#stateparent").val($("#state").val()).css({
+            $("#stateparent").val($("#state_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
-            $("#countryparent").val($("#country").val()).css({
+            $("#countryparent").val($("#country_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -1118,15 +1123,15 @@ $("#edit-profile-picture").on("click", function () {
                 .val($("#address-2").val())
                 .prop("readonly", true);
             $("#postcodeP1")
-                .val($("#postcode").val())
+                .val($("#postcode_id").val())
                 .prop("readonly", true);
-            $("#cityP1").val($("#city").val()).prop("readonly", true).css({
+            $("#cityP1").val($("#city_id").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
             $("#stateP1")
-                .val($("#state").val())
+                .val($("#state_id").val())
                 .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
@@ -1134,7 +1139,7 @@ $("#edit-profile-picture").on("click", function () {
                     background: "#e9ecef",
                 });
             $("#countryP1")
-                .val($("#country").val())
+                .val($("#country_id").val())
                 .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
@@ -1156,9 +1161,9 @@ $("#edit-profile-picture").on("click", function () {
                         var permanentAddress2 = data.data.address2;
                         var permanentPostcode = data.data.postcode;
                         var permanentCity = data.data.city;
-                        var permanentState = data.data.state;
-                        var permanentCountry = data.data.country;
-                        console.log(data);
+                        var permanentState = data.data.state_name;
+                        var permanentCountry = data.data.country_name;
+
 
                         if (
                             permanentAddress1 ||
@@ -1174,6 +1179,11 @@ $("#edit-profile-picture").on("click", function () {
                             $("#cityP1").val(permanentCity);
                             $("#stateP1").val(permanentState);
                             $("#countryP1").val(permanentCountry);
+
+                            $("#postcodeP1").append('<option value="' + permanentPostcode + '" selected>' + permanentPostcode + '</option>');
+                            $("#cityP1").append('<option value="' + permanentCity + '" selected>' + permanentCity + '</option>');
+                            $("#stateP1").append('<option value="' + permanentState + '" selected>' + permanentState + '</option>');
+                            $("#countryP1").append('<option value="' + permanentCountry + '" selected>' + permanentCountry + '</option>');
                         }
                     }
                 })
@@ -1187,19 +1197,19 @@ $("#edit-profile-picture").on("click", function () {
                 .val($("#address-2").val())
                 .prop("readonly", true);
             $("#postcodeP1")
-                .val($("#postcode").val())
+                .val($("#postcode_id").val())
                 .prop("readonly", true);
-            $("#cityP1").val($("#city").val()).css({
+            $("#cityP1").val($("#city_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
-            $("#stateP1").val($("#state").val()).css({
+            $("#stateP1").val($("#state_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
-            $("#countryP1").val($("#country").val()).css({
+            $("#countryP1").val($("#country_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -1287,12 +1297,12 @@ $("#edit-profile-picture").on("click", function () {
         if (this.checked) {
             $("#address-1c").val($("#address-1").val()).prop("readonly", true);
             $("#address-2c").val($("#address-2").val()).prop("readonly", true);
-            $("#postcodec").val($("#postcode").val()).prop("readonly", true);
-            $("#cityc").val($("#city").val()).prop("readonly", true);
+            $("#postcodec").val($("#postcode_id").val()).prop("readonly", true);
+            $("#cityc").val($("#city_id").val()).prop("readonly", true);
 
-            $("#statec").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+            $("#statec").val($("#state_id").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-            $("#countryc").val($("#country").val()).prop("readonly", true).css({
+            $("#countryc").val($("#country_id").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -1362,12 +1372,12 @@ $("#edit-profile-picture").on("click", function () {
         if (this.checked) {
             $("#address-1c").val($("#address-1").val()).prop("readonly", true);
             $("#address-2c").val($("#address-2").val()).prop("readonly", true);
-            $("#postcodec").val($("#postcode").val()).prop("readonly", true);
-            $("#cityc").val($("#city").val()).prop("readonly", true);
+            $("#postcodec").val($("#postcode_id").val()).prop("readonly", true);
+            $("#cityc").val($("#city_id").val()).prop("readonly", true);
 
-            $("#statec").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+            $("#statec").val($("#state_id").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-            $("#countryc").val($("#country").val()).prop("readonly", true).css({
+            $("#countryc").val($("#country_id").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -1448,12 +1458,12 @@ $("#edit-profile-picture").on("click", function () {
         if (this.checked) {
             $("#address1P1").val($("#address-1").val()).prop("readonly", true);
             $("#address2P1").val($("#address-2").val()).prop("readonly", true);
-            $("#postcodeP1").val($("#postcode").val()).prop("readonly", true);
-            $("#cityP1").val($("#city").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+            $("#postcodeP1").val($("#postcode_id").val()).prop("readonly", true);
+            $("#cityP1").val($("#city_id").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-            $("#stateP1").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+            $("#stateP1").val($("#state_id").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
-            $("#countryP1").val($("#country").val()).prop("readonly", true).css({
+            $("#countryP1").val($("#country_id").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -2360,26 +2370,33 @@ $("#edit-profile-picture").on("click", function () {
                 city: "required",
                 state: "required",
                 country: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 addressType: "required",
             },
 
             messages: {
                 address1: "Please Insert Address 1",
-                city: "Please Insert City",
+                city: "Please Choose City",
                 state: "Please Choose State",
-                country: "required",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                country: "Please Choose Country",
+                postcode: "Please Choose Postcode",
                 addressType: "Please Choose Address Type",
             },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -2417,36 +2434,117 @@ $("#edit-profile-picture").on("click", function () {
     });
 
     $("#saveAddressDetailsBtn").click(function (e) {
-        var data = new FormData(
-            document.getElementById("formEditAddressDetails")
-        );
+        $("#formEditAddressDetails").validate({
+            // Specify validation rules
+            rules: {
+                address1: "required",
+                country: "required",
+                state: "required",
+                city: "required",
+                postcode: "required",
+            },
 
-        $.ajax({
-            type: "POST",
-            url: "/updateEmployeeAddressDetails",
-            data: data,
-            dataType: "json",
+            messages: {
+                address1: "Please Insert Address 1",
+                country: "Please Choose Country",
+                state: "Please Choose State",
+                city: "Please Choose City",
+                postcode: "Please Choose Postcode",
+            },
 
-            processData: false,
-            contentType: false,
-        }).then(function (data) {
-            console.log(data);
-            Swal.fire({
-                title: data.title,
-                icon: "success",
-                text: data.msg,
-                type: data.type,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "OK",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                if (data.type == "error") {
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#country-err-2");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#state-err-2");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#city-err-2");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcode-err-2");
                 } else {
-                    location.reload();
+                    error.insertAfter(element);
                 }
-            });
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("formEditAddressDetails")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeAddressDetails",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
         });
+    });
+
+    // $("#saveAddressDetailsBtn").click(function (e) {
+    //     var data = new FormData(
+    //         document.getElementById("formEditAddressDetails")
+    //     );
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/updateEmployeeAddressDetails",
+    //         data: data,
+    //         dataType: "json",
+
+    //         processData: false,
+    //         contentType: false,
+    //     }).then(function (data) {
+    //         console.log(data);
+    //         Swal.fire({
+    //             title: data.title,
+    //             icon: "success",
+    //             text: data.msg,
+    //             type: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //         }).then(function () {
+    //             if (data.type == "error") {
+    //             } else {
+    //                 location.reload();
+    //             }
+    //         });
+    //     });
+    // });
+    $(".myadd").hide();
+    $(document).on("click", ".dropdown-toggle", function(e) {
+        e.stopPropagation(); // mencegah event dari bubbling ke atas
+        var dropdownMenu = $(this).closest(".btn-group").find(".myadd");
+        $(".myadd").not(dropdownMenu).hide();
+        dropdownMenu.toggle();
+    });
+    $(document).on("click", function(e) {
+        if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+            $(".myadd").hide();
+        }
     });
 
     addressId = $("#addressId").val();
@@ -2470,6 +2568,16 @@ $("#edit-profile-picture").on("click", function () {
                 $("#stateEdit").val(address.state);
                 $("#countryEdit").val(address.country);
                 $("#addressTypeEdit").val(address.addressType);
+                $("#countryEdit").val(address.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#modaleditaddress'),
+                });
+                $("#postcodeEdit").val(address.postcode).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#modaleditaddress'),
+                });
             });
             $("#modaleditaddress").modal("show");
         });
@@ -2637,43 +2745,43 @@ if (permanentChecked && correspondentChecked) {
                     required: true,
                 },
                 relationship: "required",
-                contactNo: {
-                    required: true,
-                    digits: true,
-                    rangelength: [10, 11],
-                },
+                contactNo: "required",
                 relationship: "required",
                 address1: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
-                city: "required",
+                country: "required",
                 state: "required",
+                city: "required",
+                postcode: "required",
+
             },
 
             messages: {
-                firstName: {
-                    required: "Please Insert First Name",
-                },
-                lastName: {
-                    required: "Please Insert Last Name",
-                },
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Valid Phone Number",
                 },
-                relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                city: "Please Insert City",
+                country: "Please Choose Country",
                 state: "Please Choose State",
+                city: "Please Choose City",
+                postcode: "Please Choose Postcode",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryEC-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateEC-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityEC-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeEC-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
@@ -2722,12 +2830,8 @@ if (permanentChecked && correspondentChecked) {
         $("#formEmergency2").validate({
             // Specify validation rules
             rules: {
-                firstName_2: {
-                    required: true,
-                },
-                lastName_2: {
-                    required: true,
-                },
+                firstName_2: "required",
+                lastName_2: "required",
                 relationship_2: "required",
                 contactNo_2: {
                     required: true,
@@ -2736,36 +2840,39 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship_2: "required",
                 address1_2: "required",
-                postcode_2: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
-                city_2: "required",
+                country_2: "required",
                 state_2: "required",
+                city_2: "required",
+                postcode_2: "required",
             },
 
             messages: {
-                firstName_2: {
-                    required: "Please Insert First Name",
-                },
-                lastName_2: {
-                    required: "Please Insert Last Name",
-                },
+                firstName_2: "Please Insert First Name",
+                lastName_2: "Please Insert Last Name",
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Valid Phone Number",
                 },
-                relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
-                postcode_2: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                city_2: "Please Insert City",
+                country_2: "Please Choose Country",
                 state_2: "Please Choose State",
+                city_2: "Please Choose City",
+                postcode_2: "Please Choose Postcode",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country_2") {
+                    error.insertAfter("#countryEC2-err");
+                } else if (element.attr("name") === "state_2") {
+                    error.insertAfter("#stateEC2-err");
+                } else if (element.attr("name") === "city_2") {
+                    error.insertAfter("#cityEC2-err");
+                } else if (element.attr("name") === "postcode_2") {
+                    error.insertAfter("#postcodeEC2-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
@@ -2816,15 +2923,9 @@ if (permanentChecked && correspondentChecked) {
         $("#addCompanionForm").validate({
             // Specify validation rules
             rules: {
-                firstName: {
-                    required: true,
-                },
-                lastName: {
-                    required: true,
-                },
+                firstName: "required",
+                lastName: "required",
                 oldIdNo: {
-                    //required: true,
-                    //digits: true,
                     rangelength: [7, 7],
                 },
                 idNo: {
@@ -2848,11 +2949,7 @@ if (permanentChecked && correspondentChecked) {
                 city: "required",
                 state: "required",
                 country: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 okuCardNum: {
                     required: true,
                     digits: true,
@@ -2911,14 +3008,10 @@ if (permanentChecked && correspondentChecked) {
                     digits: "Please Insert Correct Age",
                 },
                 address1: "Please Insert Address 1",
-                city: "Please Insert City",
+                city: "Please Choose City",
                 state: "Please Choose State",
-                country: "required",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                country: "Please Choose Country",
+                postcode: "Please Choose Postcode",
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
                     digits: "Please Insert Valid OKU Card Number",
@@ -3189,12 +3282,8 @@ if (permanentChecked && correspondentChecked) {
         $("#addChildrenForm").validate({
             // Specify validation rules
             rules: {
-                firstName: {
-                    required: true,
-                },
-                lastName: {
-                    required: true,
-                },
+                firstName: "required",
+                lastName: "required",
                 idNo: {
                     required: true,
                     digits: true,
@@ -3210,10 +3299,7 @@ if (permanentChecked && correspondentChecked) {
                 okuFile: {
                     required: true,
                 },
-
                 oldIDNo: {
-                    //required: false,
-                    //digits: true,
                     rangelength: [7, 7],
                 },
                 expiryDate: {
@@ -3221,10 +3307,6 @@ if (permanentChecked && correspondentChecked) {
                 },
                 issuingCountry: {
                     required: true,
-                },
-                postcode: {
-                    required: false,
-                    rangelength: [5, 5],
                 },
             },
 
@@ -3250,10 +3332,7 @@ if (permanentChecked && correspondentChecked) {
                 okuFile: {
                     required: "Please Upload OKU Attachment",
                 },
-
                 oldIDNo: {
-                    //required: "Please Insert Old Identification Number",
-                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Old Identification Number",
                 },
                 expiryDate: {
@@ -3261,9 +3340,6 @@ if (permanentChecked && correspondentChecked) {
                 },
                 issuingCountry: {
                     required: "Please Choose Issuing Country",
-                },
-                postcode: {
-                    rangelength: "Please Insert a valid postcode",
                 },
             },
             submitHandler: function (form) {
@@ -3339,14 +3415,6 @@ if (permanentChecked && correspondentChecked) {
                 issuingCountry: {
                     required: true,
                 },
-                postcode: {
-                    required: false,
-                    rangelength: [5, 5],
-                },
-                postcode: {
-                    required: false,
-                    rangelength: [5, 5],
-                },
             },
 
             messages: {
@@ -3380,9 +3448,6 @@ if (permanentChecked && correspondentChecked) {
                 },
                 issuingCountry: {
                     required: "Please Choose Issuing Country",
-                },
-                postcode: {
-                    rangelength: "Please Insert a valid postcode",
                 },
             },
 
@@ -3477,6 +3542,20 @@ if (permanentChecked && correspondentChecked) {
                         '<a href="/storage/' + child.okuFile + '" target="_blank">here</a>'
                     );
                 }
+                $("#postcode1").val(child.postcode);
+                $("#city1").val(child.city);
+                $("#state1").val(child.state);
+                $("#country1").val(child.country);
+                $("#postcode1").val(child.postcode).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
+                $("#country1").val(child.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#edit-formchildren'),
+                });
                 if (child.supportDoc) {
                     $("#supportDocAttachmentView").html(
                         '<a href="/storage/' + child.supportDoc + '" target="_blank">here</a>'
@@ -3693,15 +3772,15 @@ if (permanentChecked && correspondentChecked) {
                 .val($("#address-2").val())
                 .prop("readonly", true);
             $("#postcodesibling")
-                .val($("#postcode").val())
+                .val($("#postcode_id").val())
                 .prop("readonly", true);
-            $("#citysibling").val($("#city").val()).prop("readonly", true);
-            $("#statesibling").val($("#state").val()).css({
+            $("#citysibling").val($("#city_id").val()).prop("readonly", true);
+            $("#statesibling").val($("#state_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
             });
-            $("#countrysibling").val($("#country").val()).css({
+            $("#countrysibling").val($("#country_id").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 background: "#e9ecef",
@@ -3771,7 +3850,7 @@ if (permanentChecked && correspondentChecked) {
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Please Insert City",
+                city: "Please Choose City",
                 state: "Please Choose State",
             },
             submitHandler: function (form) {
@@ -4032,9 +4111,10 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship: "required",
                 address1: "required",
-                postcode: "required",
-                city: "required",
+                country: "required",
                 state: "required",
+                city: "required",
+                postcode: "required",
                 age: "required",
                 idNo: {
                     required: true,
@@ -4053,7 +4133,6 @@ if (permanentChecked && correspondentChecked) {
                 okuFile: {
                     required: true,
                 },
-
                 expiryDate: "required",
                 issuingCountry: {
                     required: true,
@@ -4077,14 +4156,11 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                city: "Please Insert City",
+                country: "Please Choose Country",
                 state: "Please Choose State",
-                age: "Please Insert Age",
+                city: "Please Choose City",
+                age: "Please Choose Age",
+                postcode: "Please Choose Postcode",
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
@@ -4109,6 +4185,21 @@ if (permanentChecked && correspondentChecked) {
                     required: "Please Choose Issuing Country",
                 },
             },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryparent-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateparent-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityparent-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeparent-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 var data = new FormData(
                     document.getElementById("addParentForm")
@@ -4167,11 +4258,8 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship: "required",
                 address1: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                country: "required",
+                postcode: "required",
                 city: "required",
                 state: "required",
                 idNo: {
@@ -4219,13 +4307,11 @@ if (permanentChecked && correspondentChecked) {
                 },
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                city: "Please Insert City",
+                country: "Please Choose Country",
                 state: "Please Choose State",
+                city: "Please Insert City",
+                postcode: "Please Choose Postcode",
+
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
@@ -4243,12 +4329,25 @@ if (permanentChecked && correspondentChecked) {
                 okuFile: {
                     required: "Please Upload OKU Attachment",
                 },
-
                 expiryDate: "Please Insert Expiry Date",
                 issuingCountry: {
                     required: "Please Choose Issuing Country",
                 },
             },
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "country") {
+                    error.insertAfter("#countryP1-err");
+                } else if (element.attr("name") === "state") {
+                    error.insertAfter("#stateP1-err");
+                } else if (element.attr("name") === "city") {
+                    error.insertAfter("#cityP1-err");
+                } else if (element.attr("name") === "postcode") {
+                    error.insertAfter("#postcodeP1-err");
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+
             submitHandler: function (form) {
                 var data = new FormData(
                     document.getElementById("editParentForm")
@@ -4259,7 +4358,6 @@ if (permanentChecked && correspondentChecked) {
                     url: "/updateEmployeeParent",
                     data: data,
                     dataType: "json",
-
                     processData: false,
                     contentType: false,
                 }).then(function (data) {
@@ -4319,6 +4417,17 @@ if (permanentChecked && correspondentChecked) {
                 $("#postcodeP1").val(parent.postcode);
                 $("#relationshipP1").val(parent.relationship);
                 $("#idno7").val(parent.idNo);
+                $("#postcodeP1").val(parent.postcode).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
+                $("#countryP1").val(parent.country).select2({
+                    placeholder: 'PLEASE CHOOSE',
+                    allowClear: true,
+                    dropdownParent: $('#editparentmodal'),
+                });
+
                 if (parent.okuFile) {
                     $("#okuAttachmentViewParent").html(
                         '<a href="/storage/' + parent.okuFile + '" target="_blank">here</a>'

@@ -1,5 +1,111 @@
 $(document).ready(function () {
-//////////////////DROPDOWN ADDRESS///////////////
+
+    function handlePostcodebyCountryProfile(countrySelector, postcodeSelector, stateSelector, citySelector ) {
+        $(countrySelector).on("change", function () {
+            var getCountry = $(this).val();
+            var getPostcode = getPostcodeByCountry(getCountry);
+
+            getPostcode.then(function (data) {
+                $(postcodeSelector + ', ' + stateSelector + ', ' + citySelector).empty();
+                $(postcodeSelector + ', ' + stateSelector + ', ' + citySelector).append('<option value="">PLEASE CHOOSE</option>');
+
+                data.sort(function(a, b) {
+                    return a.postcode.localeCompare(b.postcode);
+                });
+
+                $.each(data, function (index, postcode) {
+                    $(postcodeSelector).append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+                });
+            });
+
+            $(postcodeSelector + ', ' + stateSelector + ', ' + citySelector).empty();
+            $(postcodeSelector + ', ' + stateSelector + ', ' + citySelector).append('<option value="">PLEASE CHOOSE</option>');
+        });
+    }
+
+    var countryProfiles = [
+        { country: "#country_id", postcode: "#postcode_id", state: "#state_id", city: "#city_id" },
+        { country: "#countryparent", postcode: "#postcodeparent", state: "#stateparent", city: "#cityparent" },
+        { country: "#countrycom", postcode: "#postcodecom", state: "#statecom", city: "#citycom" },
+        { country: "#countryc", postcode: "#postcodec", state: "#statec", city: "#cityc" },
+        { country: "#countryCEdit", postcode: "#postcodeCEdit", state: "#stateCEdit", city: "#cityCEdit" },
+        { country: "#countryEC", postcode: "#postcodeEC", state: "#stateEC", city: "#cityEC" },
+        { country: "#countryEC2", postcode: "#postcodeEC2", state: "#stateEC2", city: "#cityEC2" },
+        { country: "#country_idedit", postcode: "#postcode_idedit", state: "#state_idedit", city: "#city_idedit" },
+        { country: "#countryP1", postcode: "#postcodeP1", state: "#stateP1", city: "#cityP1" },
+        { country: "#country1", postcode: "#postcode1", state: "#state1", city: "#city1" }
+    ];
+
+    for (var i = 0; i < countryProfiles.length; i++) {
+        var stateSelector = countryProfiles[i].state;
+        var citySelector = countryProfiles[i].city;
+
+        $(stateSelector + ", " + citySelector).css({
+            "pointer-events": "none",
+            "touch-action": "none",
+            background: "#e9ecef"
+        });
+    }
+
+
+    countryProfiles.forEach(function(profile) {
+        handlePostcodebyCountryProfile(profile.country, profile.postcode, profile.state, profile.city);
+    });
+
+    function getPostcodeByCountry(id) {
+            return $.ajax({
+                url: "/getPostcodeByCountryProfile/" + id,
+            });
+        }
+
+    function handleStateAndCityByPostcodeProfile(postcodeSelector, stateSelector, citySelector) {
+        $(postcodeSelector).on("change", function () {
+            var getPostcode = $(this).val();
+            var getStateAndCity = getStateAndCityByPostcode(getPostcode);
+
+            getStateAndCity.then(function (data) {
+                $(stateSelector + ',' + citySelector).empty();
+
+                $.each(data, function (index, state) {
+                    $(stateSelector).append('<option value="' + state.id + '">' + state.state_name + '</option>');
+                });
+
+                $.each(data, function(index, city) {
+                    $(citySelector).append('<option value="' + city.name + '">' + city.name + '</option>');
+                });
+            });
+            $(stateSelector + ',' + citySelector).empty();
+            $(stateSelector + ',' + citySelector).append('<option value="">PLEASE CHOOSE</option>');
+        });
+    }
+
+    var stateProfiles = [
+        { postcode: "#postcode_id", state: "#state_id", city: "#city_id" },
+        { postcode: "#postcodeparent", state: "#stateparent", city: "#cityparent" },
+        { postcode: "#postcodecom", state: "#statecom", city: "#citycom" },
+        { postcode: "#postcodec", state: "#statec", city: "#cityc" },
+        { postcode: "#postcodeEmc", state: "#stateEmc", city: "#cityEmc" },
+        { postcode: "#postcodeUC", state: "#stateUC", city: "#cityUC" },
+        { postcode: "#postcodeCEdit", state: "#stateCEdit", city: "#cityCEdit" },
+        { postcode: "#postcodeEC", state: "#stateEC", city: "#cityEC" },
+        { postcode: "#postcodeEC2", state: "#stateEC2", city: "#cityEC2" },
+        { postcode: "#postcode_idedit", state: "#state_idedit", city: "#city_idedit" },
+        { postcode: "#postcodeP1", state: "#stateP1", city: "#cityP1" },
+        { postcode: "#postcode1", state: "#state1", city: "#city1" }
+    ];
+
+    stateProfiles.forEach(function(profile) {
+        handleStateAndCityByPostcodeProfile(profile.postcode, profile.state, profile.city);
+    });
+
+    function getStateAndCityByPostcode(id) {
+        return $.ajax({
+            url: "/getStateAndCityByPostcodeProfile/" + id,
+        });
+    }
+
+    /////for companion/////
+
     function handleStatebyCountryProfile(countrySelector, stateSelector, citySelector, postcodeSelector) {
         $(countrySelector).on("change", function () {
             var getCountry = $(this).val();
@@ -20,20 +126,14 @@ $(document).ready(function () {
         });
     }
 
-    var countryProfiles = [
-        { country: "#country_id", state: "#state_id", city: "#city_id", postcode: "#postcode_id" },
-        { country: "#countryparent", state: "#stateparent", city: "#cityparent", postcode: "#postcodeparent" },
-        { country: "#countrycom", state: "#statecom", city: "#citycom", postcode: "#postcodecom" },
-        { country: "#countryc", state: "#statec", city: "#cityc", postcode: "#postcodec" },
-        { country: "#countryEC", state: "#stateEC", city: "#cityEC", postcode: "#postcodeEC" },
-        { country: "#countryEC2", state: "#stateEC2", city: "#cityEC2", postcode: "#postcodeEC2" },
-        { country: "#country_idedit", state: "#state_idedit", city: "#city_idedit", postcode: "#postcode_idedit" },
-        { country: "#countryP1", state: "#stateP1", city: "#cityP1", postcode: "#postcodeP1" },
-        { country: "#country1", state: "#state1", city: "#city1", postcode: "#postcode1" },
+    var countryProfilesOLD = [
+        { country: "#countryc", postcode: "#postcodec", state: "#statec", city: "#cityc" },
+        { country: "#countryEmc", state: "#stateEmc", city: "#cityEmc", postcode: "#postcodeEmc" },
         { country: "#countryUC", state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
+        { country: "#countryCEdit", postcode: "#postcodeCEdit", state: "#stateCEdit", city: "#cityCEdit" },
     ];
 
-    countryProfiles.forEach(function(profile) {
+    countryProfilesOLD.forEach(function(profile) {
         handleStatebyCountryProfile(profile.country, profile.state, profile.city, profile.postcode);
     });
 
@@ -43,7 +143,7 @@ $(document).ready(function () {
         });
     }
 
-    function handleCitybyStateProfile(stateSelector, citySelector, postcodeSelector) {
+   function handleCitybyStateProfile(stateSelector, citySelector, postcodeSelector) {
         $(stateSelector).on("change", function () {
             var getState = $(this).val();
             var getCity = getCitybyStateProfile(getState);
@@ -51,7 +151,7 @@ $(document).ready(function () {
             getCity.then(function (data) {
                 $(citySelector + ',' + postcodeSelector).empty();
                 $(citySelector + ',' + postcodeSelector).append('<option value="">PLEASE CHOOSE</option>');
-                
+
                 data.sort(function(a, b) {
                     return a.name.localeCompare(b.name);
                 });
@@ -68,12 +168,15 @@ $(document).ready(function () {
         { state: "#stateparent", city: "#cityparent", postcode: "#postcodeparent" },
         { state: "#statecom", city: "#citycom", postcode: "#postcodecom" },
         { state: "#statec", city: "#cityc", postcode: "#postcodec" },
+        { state: "#stateEmc", city: "#cityEmc", postcode: "#postcodeEmc" },
+        { state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
+        { state: "#stateCEdit", city: "#cityCEdit", postcode: "#postcodeCEdit" },
         { state: "#stateEC", city: "#cityEC", postcode: "#postcodeEC" },
         { state: "#stateEC2", city: "#cityEC2", postcode: "#postcodeEC2" },
         { state: "#state_idedit", city: "#city_idedit", postcode: "#postcode_idedit" },
         { state: "#stateP1", city: "#cityP1", postcode: "#postcodeP1" },
         { state: "#state1", city: "#city1", postcode: "#postcode1" },
-        { state: "#stateUC", city: "#cityUC", postcode: "#postcodeUC" },
+
     ];
 
     stateProfiles.forEach(function(profile) {
@@ -112,17 +215,20 @@ $(document).ready(function () {
         });
     }
 
+
     var cityProfiles = [
         { city: "#city_id", postcode: "#postcode_id" },
         { city: "#cityparent", postcode: "#postcodeparent" },
         { city: "#citycom", postcode: "#postcodecom" },
         { city: "#cityc", postcode: "#postcodec" },
+        { city: "#cityEmc", postcode: "#postcodeEmc" },
+        { city: "#cityUC", postcode: "#postcodeUC" },
+        { city: "#cityCEdit", postcode: "#postcodeCEdit" },
         { city: "#cityEC", postcode: "#postcodeEC" },
         { city: "#cityEC2", postcode: "#postcodeEC2" },
         { city: "#city_idedit", postcode: "#postcode_idedit" },
         { city: "#cityP1", postcode: "#postcodeP1" },
         { city: "#city1", postcode: "#postcode1" },
-        { city: "#cityUC", postcode: "#postcodeUC" }
     ];
 
     cityProfiles.forEach(function(profile) {
@@ -131,36 +237,21 @@ $(document).ready(function () {
 
     //////////////////END///////////////
 
-    /////select for add//////
-    var countryid = "#country_id, #countryparent, #countrycom";
-    $(countryid).select2({
+    var addAddress = "#country_id, #postcode_id";
+    $(addAddress).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#modaladdaddress'),
     });
 
-    var stateid = "#state_id, #stateparent, #statecom";
-    $(stateid).select2({
+    var addAddressParent = "#countryparent, #postcodeparent";
+    $(addAddressParent).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#modaladdaddress'),
     });
 
-    var cityid = "#city_id, #cityparent ,#citycom";
-    $(cityid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-        dropdownParent: $('#modaladdaddress'),
-    });
-
-    var cityid = "#postcode_id, #postcodeparent, #postcodecom";
-    $(cityid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-        dropdownParent: $('#modaladdaddress'),
-    });
-
-    var emergencyprofile = "#countryEC, #countryEC2, #stateEC, #stateEC2, #cityEC, #cityEC2, #postcodeEC, #postcodeEC2";
+    var emergencyprofile = "#countryEC, #countryEC2, #postcodeEC, #postcodeEC2";
     $(emergencyprofile).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
@@ -171,101 +262,69 @@ $(document).ready(function () {
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
     });
-///end///
 
-///select for edit///
-    var countryid = "#country_idedit, #countryP1";
-    $(countryid).select2({
+    var editcompanionprofile = "#countryUC, #stateUC, #cityUC, #postcodeUC";
+    $(editcompanionprofile).select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+    });
+
+    var companionEmploymentDetails = "#countryEmc, #stateEmc, #cityEmc, #postcodeEmc";
+    $(companionEmploymentDetails).select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+    })
+    .next(".select2-container--default")
+    .find(".select2-selection--single").css({
+        "pointer-events": "none",
+        "background-color": "#e9ecef"
+    });
+
+    var companionEmploymentEditDetails = "#countryCEdit, #stateCEdit, #cityCEdit, #postcodeCEdit";
+    $(companionEmploymentEditDetails).select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+    })
+    .next(".select2-container--default")
+    .find(".select2-selection--single").css({
+        "pointer-events": "none",
+        "background-color": "#e9ecef"
+    });
+
+    var editAddress = "#country_idedit, #postcode_idedit";
+    $(editAddress).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#modaleditaddress'),
     });
 
-    var stateid = "#state_idedit, #stateP1, #state1";
-    $(stateid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-        dropdownParent: $('#modaleditaddress'),
-    });
 
-    var cityid = "#city_idedit, #cityP1, #city1";
-    $(cityid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-        dropdownParent: $('#modaleditaddress'),
-    });
 
-    var cityid = "#postcode_idedit, #postcodeP1, #postcode1";
-    $(cityid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-        dropdownParent: $('#modaleditaddress'),
-    });
-
-    var cityid = "#countryUC, #stateUC, #cityUC, #postcodeUC";
-    $(cityid).select2({
-        placeholder: "PLEASE CHOOSE",
-        allowClear: true,
-    });
-
-    var cityid = "#countrycom, #statecom, #citycom, #postcodecom";
+    var cityid = "#countrycom, #postcodecom";
     $(cityid).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#modaladd-children'),
     });
 
-    var editchildren = "#country1, #state1, #city1, #postcode1";
+    var editchildren = "#country1, #postcode1";
     $(editchildren).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#edit-formchildren'),
     });
 
-    var addparent = "#countryparent, #postcodeparent, #cityparent, #stateparent";
+    var addparent = "#countryparent, #postcodeparent";
     $(addparent).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#addparentmodal'),
     });
 
-    var editparent = "#countryP1, #postcodeP1, #cityP1, #stateP1";
+    var editparent = "#countryP1, #postcodeP1";
     $(editparent).select2({
         placeholder: "PLEASE CHOOSE",
         allowClear: true,
         dropdownParent: $('#editparentmodal'),
     });
-//end///
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
