@@ -35,7 +35,7 @@
                 <div class="tab-pane fade active show" id="current-member">
                     <div class="panel-heading-btn">
                         <br>
-                            @if (!in_array('pmc', $role_permission))
+                            @if (in_array('project_manager', $role_permission))
                             <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton"
                                 data-id="{{ $project->id }}" class="btn btn-primary">+ Add Project Member</a>
                             <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton"
@@ -64,7 +64,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td width="1%">
-                                                @if (!in_array('pmc', $role_permission))
+                                                @if (in_array('project_manager', $role_permission))
                                                 <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                                                 @endif
                                             </td>
