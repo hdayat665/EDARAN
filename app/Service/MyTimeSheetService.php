@@ -1145,6 +1145,7 @@ class MyTimeSheetService
         $weekends = 0;
         $holidays = 0;
         $workedDays = 0;
+        // dd($currentMonth);
 
         $startOfMonth = Carbon::createFromDate($currentYear, $currentMonth, 1)->startOfDay();
         $endOfMonth = Carbon::createFromDate($currentYear, $currentMonth, $totalDays)->endOfDay();

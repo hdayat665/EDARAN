@@ -32,7 +32,7 @@ class TimesheetApprovalAutoSubmit extends Command
     {
         // Get the current month and year.
         $currentMonth = now()->format('M');
-        $currentYearMonth = now()->format('Y-m');
+        $currentYearMonth = now()->format('Y');
     
         $employees = DB::table('employment as a')
                     ->leftjoin('designation as b', 'a.designation', '=', 'b.id')
