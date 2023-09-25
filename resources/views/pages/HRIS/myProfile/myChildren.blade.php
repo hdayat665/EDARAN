@@ -1,4 +1,4 @@
-<style>  
+<style>
         .custom-dropdown-menu {
         position: static ;
         height: auto ;
@@ -60,7 +60,6 @@
     <div class="row p-2">
             <div class="modal-footer">
                 <a class="btn btn-white me-5px btnPrevious">Previous</a>
-
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
     </div>

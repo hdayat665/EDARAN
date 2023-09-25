@@ -16,7 +16,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" value="on" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
+                                    <input class="form-check-input" value="on" {{ ($companion->mainCompanion ?? 1) ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="same-address" name="sameAsPermenant">
+                                    <input class="form-check-input" type="checkbox" id="same-address6" name="sameAsPermenant">
                                     <input type="hidden" id="user" value="<?php echo $user_id; ?>" >
                                     <label class="form-check-label" for="same-address">
                                         Same as Employee Permanent Address
@@ -183,41 +183,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="postcodec" name="postcode" value="{{ $companion->postcode ?? '' }}" placeholder="00000" class="form-control" aria-describedby="lastname">
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="countryc" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="countryc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="cityc" name="city" value="{{ $companion->city ?? '' }}" placeholder="CITY" class="form-control" aria-describedby="firstname">
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="state" id="statec" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="statec-err" class="error"></div>
                             </div>
-
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
-                                <select class="form-select" name="state"  id="statec" value="{{ $companion->state ?? '' }}">
-                                    <?php $state = state() ?>
-                                    <option value="" label="PLEASE CHOOSE" ></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}" >{{$status}}</option>
+                                <label for="city" class="form-label">City*</label>
+                                <select class="form-select" name="city" id="cityc"value="{{ $companion->city ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country*</label>
-                                <select class="form-select" id="countryc" name="country" value="{{ $companion->country ?? '' }}">
-                                    <option value="MY" label="Malaysia" selected ></option>
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}"  >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}"  >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="postcode" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcode" id="postcodec" value="{{ $companion->postcode ?? '' }}"  style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
                                 </select>
+                                <div id="postcodec-err" class="error"></div>
                             </div>
                         </div>
                         <hr class="mt-5">
@@ -277,41 +282,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode</label>
-                                <input type="text" readonly id="postcodeEmc" name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="countryE" id="countryEmc" value="{{ $companion->countryE ?? '' }}" style="text-transform:uppercase">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="countryEmc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City</label>
-                                <input type="text" readonly id="cityEmc" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="stateE" id="stateEmc" value="{{ $companion->stateE ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="stateEmc-err" class="error"></div>
                             </div>
-
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State</label>
-                                <select class="form-select" id="stateEmc" name="stateE" value="{{ $companion->stateE ?? '' }}">
-                                    <?php $state = state() ?>
-                                    <option value="0" label="PLEASE CHOOSE"  ></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}" >{{$status}}</option>
+                                <label for="city" class="form-label">City*</label>
+                                <select class="form-select" name="cityE" id="cityEmc"value="{{ $companion->city ?? '' }}"  style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityEmc-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country</label>
-                                <select class="form-select" id="countryEmc" name="countryE" value="{{ $companion->countryE ?? '' }}">
-                                    <option value="MY" label="Malaysia" selected ></option>
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}"  >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}"  >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="postcode" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcodeE" id="postcodeEmc"value="{{ $companion->postcode ?? '' }}"  style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
                                 </select>
+                                <div id="postcodeEmc-err" class="error"></div>
                             </div>
                         </div>
                         <p class="text-end mb-0 mt-3">
@@ -502,7 +512,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="same-address" name="sameAsPermenant">
+                                    <input class="form-check-input" type="checkbox" id="same-address6" name="sameAsPermenant">
                                     <label class="form-check-label" for="same-address">
                                         Same as Employee Permanent Address
                                     </label>
@@ -521,39 +531,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="countryUC" value="{{$companion->country ?? '' }}" style="text-transform:uppercase">
+                                    <option value="" label="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ ($companion->country ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="countryUC-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="state" id="stateUC" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ ($companion->state ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="stateUC-err" class="error"></div>
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
-                                <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
-                                    <?php $state = state() ?>
-                                    <option value="0" label="PLEASE CHOOSE"  ></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $companion->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                <label for="firstname" class="form-label">City*</label>
+                                <select class="form-select" name="city" id="cityUC" value="{{ $companion->city ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ ($companion->city ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityUC-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country*</label>
-                                <select class="form-select"  name="country" value="{{ $companion->country ?? '' }}">
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="lastname" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcode" id="postcodeUC" value="{{ $companion->postcode ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ ($companion->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
                                 </select>
+                                <div id="postcodeUC-err" class="error"></div>
                             </div>
                         </div>
                         <hr class="mt-5">
@@ -614,40 +631,46 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode</label>
-                                <input type="text" id="lastname" readonly name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control mcdetail" placeholder="00000" aria-describedby="lastname">
+                                <label for="country" class="form-label">Country*</label>
+                                <select class="form-select" name="countryE" id="countryCEdit" value="{{ $companion->countryE ?? '' }}" style="text-transform:uppercase">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="countryCEdit-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City</label>
-                                <input type="text" id="firstname" readonly name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control mcdetail" placeholder="CITY" aria-describedby="firstname">
+                                <label for="state" class="form-label">State*</label>
+                                <select class="form-select" name="stateE" id="stateCEdit" value="{{ $companion->stateE ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="stateCEdit-err" class="error"></div>
                             </div>
-
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State</label>
-                                <select class="form-select mcdetaildrop" name="state" value="{{ $companion->stateE ?? '' }}">
-                                    <?php $state = state() ?>
-                                    <option value="0" label="PLEASE CHOOSE"></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $companion->stateE) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                <label for="city" class="form-label">City*</label>
+                                <select class="form-select" name="cityE" value="{{ $companion->city ?? '' }}" id="cityCEdit" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
                                     @endforeach
                                 </select>
+                                <div id="cityCEdit-err" class="error"></div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country</label>
-                                <select class="form-select mcdetaildrop" name="countryE" value="{{ $companion->countryE ?? '' }}">
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->countryE) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}" <?php echo ($key == $companion->countryE) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
+                                <label for="postcode" class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcodeE" value="{{ $companion->postcode ?? '' }}" id="postcodeCEdit" style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
                                 </select>
+                                <div id="postcodeCEdit-err" class="error"></div>
                             </div>
                         </div>
                     <p class="text-end mb-0 mt-3">

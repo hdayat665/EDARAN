@@ -2,7 +2,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="">Termination of Employment</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -34,17 +33,17 @@
                             </div>
                             <hr class="border border-black border-bottom">
 
-                            <p class="h6 p-2">Termination Form</p>
+                            <p class="h6 p-2">Exit Form</p>
                             <div class="row p-2">
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        Terminate Date* :
+                                        Exit Date* :
                                         <input type="text" readonly id="effectiveFrom" name="" class="form-control" >
                                     </div>
                                     </div>
                                 <div class="col-sm-6">
                                     <div class="mb-3">
-                                        Terminate Type* :
+                                        Exit Type* :
                                         <input type="text" readonly id="employmentDetail" name="" class="form-control" >
                                     </div>
                                 </div>

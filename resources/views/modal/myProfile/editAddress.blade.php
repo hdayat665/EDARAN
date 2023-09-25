@@ -30,17 +30,27 @@
                         <div id="country-err-2" class="error"></div>
                     </div>
                     <div class="col-sm-6">
+                        <label for="postcode" class="form-label">Postcode*</label>
+                        <select class="form-select" name="postcode" id="postcode_idedit" style="text-transform: uppercase;">
+                            <option type="text" value="" label="" selected="selected">Please Choose</option>
+                            @foreach($postcode->sortBy('postcode') as $pc)
+                            <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                            @endforeach
+                        </select>
+                        <div id="postcode-err-2" class="error"></div>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col-sm-6">
                         <label for="state" class="form-label">State*</label>
                         <select class="form-select" name="state" id="state_idedit" value="" style="text-transform:uppercase">
                             <option type="text" value="" label="" selected="selected">Please Choose</option>
-                            @foreach($state->sortBy('state_name') as $st)
-                            <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                            @foreach($editAddress->sortBy('state_name') as $st)
+                                <option value="{{ $st->id }}" {{ $st->country_id == 'MY' ? 'selected' : '' }}>{{ $st->state_name }}</option>
                             @endforeach
                         </select>
                         <div id="state-err-2" class="error"></div>
                     </div>
-                </div>
-                <div class="row p-2">
                     <div class="col-sm-6">
                         <label for="city" class="form-label">City*</label>
                         <select class="form-select" name="city" id="city_idedit" style="text-transform: uppercase;">
@@ -51,16 +61,7 @@
                         </select>
                         <div id="city-err-2" class="error"></div>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="postcode" class="form-label">Postcode*</label>
-                        <select class="form-select" name="postcode" id="postcode_idedit" style="text-transform: uppercase;">
-                            <option type="text" value="" label="" selected="selected">Please Choose</option>
-                            @foreach($postcode->sortBy('postcode') as $pc)
-                            <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
-                            @endforeach
-                        </select>
-                        <div id="postcode-err-2" class="error"></div>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

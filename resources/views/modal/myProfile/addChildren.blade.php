@@ -210,22 +210,22 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">State</label>
-                            <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
+                            <label for="postcode" class="form-label">Postcode</label>
+                            <select class="form-select" name="postcode" id="postcodecom" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                             </select>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="city" class="form-label">City</label>
-                            <select class="form-select" name="city" id="citycom" style="text-transform: uppercase;">
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="postcode" class="form-label">Postcode</label>
-                            <select class="form-select" name="postcode" id="postcodecom" style="text-transform: uppercase;">
+                            <label for="city" class="form-label">City</label>
+                            <select class="form-select" name="city" id="citycom" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                             </select>
                         </div>
@@ -235,8 +235,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addChildren" class="btn btn-primary">Save</button>
-
             </div>
+
             </form>
         </div>
     </div>

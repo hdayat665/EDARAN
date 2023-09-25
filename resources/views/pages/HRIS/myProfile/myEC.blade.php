@@ -45,9 +45,8 @@
                             <label for="emergency-address1" class="form-label">Address 2</label>
                             <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                         </div>
-
                     </div>
-                    <div class="row p-2">
+                    {{-- <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-country" class="form-label">Country*</label>
                             <select class="form-select" name="country" id="countryEC" value="{{ $emergency->country ?? '' }}" style="text-transform:uppercase;">
@@ -66,6 +65,7 @@
                                     <option value="{{ $st->id }}" {{ ($emergency->state ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
+
                             <div id="stateEC-err" class="error"></div>
                         </div>
                     </div>
@@ -90,12 +90,54 @@
                             </select>
                             <div id="postcodeEC-err" class="error"></div>
                         </div>
+                    </div> --}}
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="emergency-country" class="form-label">Country*</label>
+                            <select class="form-select" name="country" id="countryEC" value="{{ $emergency->country ?? '' }}" style="text-transform:uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ ($emergency->country ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
+                            </select>
+                            <div id="countryEC-err" class="error"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="emergency-postcode" class="form-label">Postcode*</label>
+                            <select class="form-select" id="postcodeEC" name="postcode" value="{{ $emergency->postcode ?? '' }}"  style="text-transform: uppercase;">
+                                <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                @foreach($postcode as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ ($emergency->postcode ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
+                            <div id="postcodeEC-err" class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="emergency-state" class="form-label">State*</label>
+                            <select class="form-select" name="state" id="stateEC" value="" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                @foreach($state as $st)
+                                    <option value="{{ $st->id }}" {{ ($emergency->state ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                @endforeach
+                            </select>
+                            <div id="stateEC-err" class="error"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="emergency-city" class="form-label">City*</label>
+                            <select class="form-select" name="city" id="cityEC" value="" style="text-transform: uppercase;">
+                                <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                @foreach($city as $cty)
+                                    <option value="{{ $cty->name }}" {{ ($emergency->city ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                @endforeach
+                            </select>
+                            <div id="cityEC-err" class="error"></div>
+                        </div>
                     </div>
                     <div class="row p-2">
                         <div class="modal-footer">
-                            {{-- <a  class="btn btn-white me-5px btnPrevious">Previous</a> --}}
                             <button type="submit" id="saveEmergency" class="btn btn-primary">Update</button>
-                            {{-- <a class="btn btn-white me-5px btnNext">Next</a> --}}
                         </div>
                     </div>
                 </form>
@@ -147,7 +189,7 @@
                                 <input type="text" id="emergency-address2" name="address2_2" value="{{ $emergency->address2_2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                             </div>
                         </div>
-                        <div class="row p-2">
+                        {{-- <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-country" class="form-label">Country*</label>
                                 <select class="form-select" name="country_2" id="countryEC2" value="{{ $emergency->country_2 ?? '' }}" style="text-transform:uppercase">
@@ -190,12 +232,54 @@
                                 </select>
                                 <div id="postcodeEC2-err" class="error"></div>
                             </div>
+                        </div> --}}
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="emergency-country" class="form-label">Country*</label>
+                                <select class="form-select" name="country_2" id="countryEC2" value="{{ $emergency->country_2 ?? '' }}" style="text-transform:uppercase">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($country->sortBy('country_name') as $ct)
+                                        <option value="{{ $ct->country_id }}" {{ ($emergency->country_2 ?? '') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="countryEC2-err" class="error"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="emergency-postcode" class="form-label">Postcode*</label>
+                                <select class="form-select" id="postcodeEC2" name="postcode_2" value="{{ $emergency->postcode ?? '' }}"  style="text-transform: uppercase;">
+                                    <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($postcode->sortBy('postcode') as $pc)
+                                        <option value="{{ $pc->postcode }}" {{ ($emergency->postcode_2 ?? '') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="postcodeEC2-err" class="error"></div>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="emergency-state" class="form-label">State*</label>
+                                <select class="form-select" name="state_2" id="stateEC2" value="" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                    @foreach($state->sortBy('state_name') as $st)
+                                        <option value="{{ $st->id }}" {{ ($emergency->state_2 ?? '') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="stateEC2-err" class="error"></div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="emergency-city" class="form-label">City*</label>
+                                <select class="form-select" name="city_2" id="cityEC2" value="{{ $emergency->city_2 ?? '' }}" style="text-transform: uppercase;">
+                                    <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                    @foreach($city->sortBy('name') as $cty)
+                                        <option value="{{ $cty->name }}" {{ ($emergency->city_2 ?? '') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div id="cityEC2-err" class="error"></div>
+                            </div>
                         </div>
                         <div class="row p-2">
                             <div class="modal-footer">
-                                {{-- <a  class="btn btn-white me-5px btnPrevious">Previous</a> --}}
                                 <button type="submit" id="saveEmergency2" class="btn btn-primary">Update</button>
-                                {{-- <a class="btn btn-white me-5px btnNext">Next</a> --}}
                             </div>
                         </div>
                     </form>

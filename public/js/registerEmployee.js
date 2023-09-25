@@ -117,7 +117,7 @@ $(document).ready(function () {
         }
     });
 
-    var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+    var editparent2 = "#countryadd, #postcodeadd, #cityadd, #stateadd";
             $(editparent2).select2({
                 placeholder: "PLEASE CHOOSE",
                 allowClear: true,
@@ -126,27 +126,27 @@ $(document).ready(function () {
     $("#same-address").change(function () {
         if (this.checked) {
 
-            var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+            var editparent2 = "#countryadd, #postcodeadd, #cityadd, #stateadd";
             $(editparent2).select2('destroy');
 
-            $("#address1c").val($("#address1").val()).prop("readonly", true);
-            $("#address2c").val($("#address2").val()).prop("readonly", true);
-            $("#postcodec").val($("#postcode").val()).prop("readonly", true).css({
+            $("#address1add").val($("#address1").val()).prop("readonly", true);
+            $("#address2add").val($("#address2").val()).prop("readonly", true);
+            $("#postcodeadd").val($("#postcode").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 "background-color": "#e9ecef",
             });
-            $("#cityc").val($("#city").val()).prop("readonly", true).css({
+            $("#cityadd").val($("#city").val()).prop("readonly", true).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 "background-color": "#e9ecef",
             });
-            $("#statec").val($("#state").val()).css({
+            $("#stateadd").val($("#state").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 "background-color": "#e9ecef",
             });
-            $("#countryc").val($("#country").val()).css({
+            $("#countryadd").val($("#country").val()).css({
                 "pointer-events": "none",
                 "touch-action": "none",
                 "background-color": "#e9ecef",
@@ -156,33 +156,38 @@ $(document).ready(function () {
 
         } else {
 
-            var editparent2 = "#countryc, #postcodec, #cityc, #statec";
+            var editparent2 = "#countryadd, #postcodeadd, #cityadd, #stateadd";
             $(editparent2).select2({
                 placeholder: "PLEASE CHOOSE",
                 allowClear: true,
             });
-            $("#address1c").prop("readonly", false);
-            $("#address2c").prop("readonly", false);
-            $("#postcodec").prop("readonly", false).css({
+            $("#address1add").val("").prop("readonly", false);
+            $("#address2add").val("").prop("readonly", false);
+            $("#postcodeadd").prop("readonly", false).css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 "background-color": "transparent",
             });
-            $("#cityc").prop("readonly", false).css({
+            $('#postcodeadd').val(null).trigger('change');
+            $("#cityadd").prop("readonly", false).css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 "background-color": "transparent",
             });
-            $("#statec").css({
+            $('#cityadd').val(null).trigger('change');
+            $("#stateadd").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 "background-color": "transparent",
             });
-            $("#countryc").css({
+            $('#stateadd').val(null).trigger('change');
+            $("#countryadd").css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 "background-color": "transparent",
             });
+            $('#countryadd').val(null).trigger('change');
+
         }
     });
 
@@ -191,7 +196,6 @@ $(document).ready(function () {
             $("#idnumber").prop("disabled", true);
             $("#idnumber").prop("required", false);
             $("#idnumber").val("");
-
         } else {
             $("#idnumber").prop("disabled", false);
             $("#idnumber").prop("required", true);
@@ -215,7 +219,9 @@ $(document).ready(function () {
             $("#datepicker-expiryDate").prop("readonly", true);
             $("#datepicker-expiryDate").prop("required", false);
             $("#datepicker-expiryDate").css("pointer-events", "none");
+            $("#datepicker-expiryDate").val("");
 
+            $("#issuingCountry2").val("");
             $("#issuingCountry2").prop("readonly", true);
             $("#issuingCountry2").prop("required", false);
             $("#issuingCountry2").css({

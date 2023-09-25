@@ -66,15 +66,17 @@ class ProjectReportController extends Controller
             $data['custName'] = $prs->searchReportCustName($query);
             $view = 'pages.report.project.filter.customerNameTable';
         } else if ($query['filter'] == 'EmpName') {
-            $employeeName = Employee::where('id', $query['employee'])->first();
-            $data['employeeName'] = $employeeName->employeeName;
+            $employeeWithDepartment = Employee::where('employment.user_id', $query['employee'])
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->select('employment.*', 'department.*')
+                ->first();
+            $data['employeeName'] = $employeeWithDepartment->employeeName;
+            $data['departmentName'] = $employeeWithDepartment->departmentName;
             //dd($query);
             $data['empName'] = $prs->searchReportEmpName($query);
             $view = 'pages.report.project.filter.employeeNameTable';
         } else if ($query['filter'] == 'ProjName') {
-
             $data['projName'] = $prs->searchReportProjName($query);
-
             $data['projMember'] = $prs->getProjectMember($query);
             $view = 'pages.report.project.filter.projectNameTable';
         } else if ($query['filter'] == 'FinYear') {
