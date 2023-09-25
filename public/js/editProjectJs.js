@@ -27,13 +27,11 @@ $(document).ready(function () {
         search: true,
     });
 
-    $(document).ready(function () {
-        $(".select1").select2({
-            placeholder: "PLEASE CHOOSE",
-            allowClear: true,
-            dropdownParent: $("#addProjectMemberModal"),
-            // multiple: true,
-        });
+    $(".select1").select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $("#addProjectMemberModal"),
+        // multiple: true,
     });
 
     $(".selectacc").select2({
@@ -49,10 +47,13 @@ $(document).ready(function () {
         dropdownParent: $("#tab1"),
         // multiple: true,
     });
-
-    // $("#project_manager2").picker({
-    //     search: true,
-    // });
+    // selectcust
+    $(".selectcust").select2({
+        placeholder: "PLEASE CHOOSE",
+        allowClear: true,
+        dropdownParent: $("#tab1"),
+        // multiple: true,
+    });
 
     $("#projectlocation").picker({
         search: true,
@@ -209,6 +210,8 @@ $(document).ready(function () {
                     error.insertAfter("#acc_managerdiv");
                 } else if (element.attr("name") === "project_manager") {
                     error.insertAfter("#project_managerdiv");
+                } else if (element.attr("name") === "customer_id") {
+                    error.insertAfter("#customerDiv");
                 } else {
                     error.insertAfter(element);
                 }
@@ -1173,19 +1176,19 @@ $(document).ready(function () {
     var ac = $("#ac").val();
     var pm = $("#pm").val();
 
-    if (pmap == "pmap") {
-        $("input:visible, textarea:visible, select:visible").each(function () {
-            $(this).prop("disabled", false);
-        });
-        $("#project_manager2_show").prop("disabled", true);
-    }
+    // if (pmap == "pmap") {
+    //     $("input:visible, textarea:visible, select:visible").each(function () {
+    //         $(this).prop("disabled", false);
+    //     });
+    //     $("#project_manager2_show").prop("disabled", true);
+    // }
 
-    if (pmc == "pmc") {
-        $("input:visible, textarea:visible, select:visible").each(function () {
-            $(this).prop("disabled", true);
-        });
-        $("#project_manager2_show").prop("disabled", false);
-    }
+    // if (pmc == "pmc") {
+    //     $("input:visible, textarea:visible, select:visible").each(function () {
+    //         $(this).prop("disabled", true);
+    //     });
+    //     $("#project_manager2_show").prop("disabled", false);
+    // }
 
     if (ac == "ac") {
         $("input:visible, textarea:visible, select:visible").each(function () {
