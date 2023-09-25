@@ -139,7 +139,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Customer';
+        $data['msg'] = 'Customer is Created.';
 
         return $data;
     }
@@ -171,7 +171,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Status';
+        $data['msg'] = 'Customer is Updated.';
         // $data['americass'] = americas();
         // $data['asias'] = asias();
         return $data;
@@ -212,11 +212,22 @@ class CustomerService
 
         Customer::where('id', $id)->update($customer);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Status';
-
+        if ($customer['status'] == 1) {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Customer is Activated.';
+        } elseif ($customer['status'] == 2) {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Customer is Deactivated.';
+        } else {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Unknown Status';
+        }
         return $data;
     }
 }
