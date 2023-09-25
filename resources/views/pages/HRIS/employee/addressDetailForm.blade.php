@@ -66,18 +66,18 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Address 1*</label>
                 <div class="col-md-5">
-                    <input type="text" name="address1c" id="address1c" class="form-control mb-5px" placeholder="ADDRESS 1" />
+                    <input type="text" name="address1c" id="address1add" class="form-control mb-5px" placeholder="ADDRESS 1" />
                 </div>
                 <label class="form-label col-form-label col-md-1">Address 2</label>
                 <div class="col-md-5">
-                    <input type="text" name="address2c" id="address2c" class="form-control mb-5px" placeholder="ADDRESS 2" />
+                    <input type="text" name="address2c" id="address2add" class="form-control mb-5px" placeholder="ADDRESS 2" />
                 </div>
             </div>
 
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">Country*</label>
                 <div class="col-md-5">
-                    <select class="form-select" name="countryc" id="countryc" value="" style="text-transform:uppercase">
+                    <select class="form-select" name="countryc" id="countryadd" value="" style="text-transform:uppercase">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                         @foreach($country->sortBy('country_name') as $ct)
                             <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
@@ -87,7 +87,7 @@
                 </div>
                 <label class="form-label col-form-label col-md-1">State*</label>
                 <div class="col-md-5">
-                    <select class="form-select" name="statec" id="statec" value="" style="text-transform: uppercase;">
+                    <select class="form-select" name="statec" id="stateadd" value="" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                         @foreach($state->sortBy('state_name') as $st)
                             <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
@@ -99,7 +99,7 @@
             <div class="row mb-15px">
                 <label class="form-label col-form-label col-md-1">City*</label>
                 <div class="col-md-5">
-                    <select class="form-select" name="cityc" id="cityc" style="text-transform: uppercase;">
+                    <select class="form-select" name="cityc" id="cityadd" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                         @foreach($city->sortBy('name') as $cty)
                             <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>
@@ -109,7 +109,7 @@
                 </div>
                 <label class="form-label col-form-label col-md-1">Postcode*</label>
                 <div class="col-md-5">
-                    <select class="form-select" name="postcodec" id="postcodec" style="text-transform: uppercase;">
+                    <select class="form-select" name="postcodec" id="postcodeadd" style="text-transform: uppercase;">
                         <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                         @foreach($postcode->sortBy('postcode') as $pc)
                             <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>

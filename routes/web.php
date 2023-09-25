@@ -177,9 +177,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
             Route::post('/updateMyProfile', 'updateMyProfile');
+
             Route::get('/getStatebyCountryProfile/{id}', 'getStatebyCountryProfile');
             Route::get('/getCitybyStateProfile/{id}', 'getCitybyStateProfile');
             Route::get('/getPostcodeByCityProfile/{id}', 'getPostcodeByCityProfile');
+
+            Route::get('/getPostcodeByCountryProfile/{id}', 'getPostcodeByCountryProfile');
+            Route::get('/getStateAndCityByPostcodeProfile/{id}', 'getStateAndCityByPostcodeProfile');
+
             Route::post('/createAddress', 'createAddress');
             Route::post('/updateAddress', 'updateAddress');
             Route::post('/updateEmergency', 'updateEmergency');
@@ -262,6 +267,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStatebyCountryEmployee/{id}', 'getStatebyCountryEmployee');
             Route::get('/getCitybyStateEmployee/{id}', 'getCitybyStateEmployee');
             Route::get('/getPostcodeByCityEmployee/{id}', 'getPostcodeByCityEmployee');
+
+            Route::get('/getPostcodeByCountryEmployee/{id}', 'getPostcodeByCountryEmployee');
+            Route::get('/getStateAndCityByPostcodeEmployee/{id}', 'getStateAndCityByPostcodeEmployee');
+
             Route::post('/addEmployment', 'addEmployment');
             Route::get('/getEmployee', 'getEmployee');
             Route::post('/terminateEmployment', 'terminateEmployment');
@@ -402,8 +411,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getStatebyCountryBranch/{id}', 'getStatebyCountryBranch');
             Route::get('/getCitybyStateBranch/{id}', 'getCitybyStateBranch');
             Route::get('/getPostcodeByCityBranch/{id}', 'getPostcodeByCityBranch');
-
-
             Route::get('/getPostcodeByCountryBranch/{id}', 'getPostcodeByCountryBranch');
             Route::get('/getStateAndCityByCountryBranch/{id}', 'getStateAndCityByCountryBranch');
 
@@ -855,5 +862,5 @@ Route::controller(MyTimesheetController::class)->group(function () {
     Route::get('/approveAppealEmail/{randomN}', 'approveAppealEmail');
     Route::post('/rejectAppealEmail/{randomN}', 'rejectAppealEmail');
     Route::get('/viewRejectAppealEmail/{randomN}', 'viewRejectAppealEmail');
-    
+
 });

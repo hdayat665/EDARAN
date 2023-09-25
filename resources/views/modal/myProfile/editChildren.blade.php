@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="add-children">Update Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="editformchildren">
+            <div class="modal-body" id="edit-formchildren">
                 <form id="editChildrenForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
@@ -216,6 +216,17 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
+                            <label for="postcode" class="form-label">Postcode</label>
+                            <select class="form-select" name="postcode" id="postcode1" style="text-transform: uppercase;">
+                                <option type="text" value="" label="" selected="selected">Please Choose</option>
+                                @foreach($postcode->sortBy('postcode') as $pc)
+                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
                             <label for="state" class="form-label">State</label>
                             <select class="form-select" name="state" id="state1" value="{{ $companion->state ?? '' }}" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
@@ -224,8 +235,6 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">City</label>
                             <select class="form-select" name="city" id="city1" style="text-transform: uppercase;">
@@ -235,18 +244,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Postcode</label>
-                            <select class="form-select" name="postcode" id="postcode1" style="text-transform: uppercase;">
-                                <option type="text" value="" label="" selected="selected">Please Choose</option>
-                                @foreach($postcode->sortBy('postcode') as $pc)
-                                    <option value="{{ $pc->postcode }}" {{ old('postcode') == $pc->postcode ? 'selected' : '' }}>{{ $pc->postcode }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                     </div>
-            </div>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button  class="btn btn-primary" id="editChildren">Update</button>

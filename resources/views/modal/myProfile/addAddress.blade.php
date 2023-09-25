@@ -1,11 +1,11 @@
 <div class="modal fade" id="modaladdaddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg" >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">New Address Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="addressProfile">
                 <form id="formAddressDetails">
                     <input type="hidden" name="user_id" value="{{$user_id}}">
 
@@ -31,14 +31,21 @@
                             <div id="country-err" class="error"></div>
                         </div>
                         <div class="col-sm-6">
+                            <label for="postcode" class="form-label">Postcode*</label>
+                            <select class="form-select" name="postcode" id="postcode_id" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                            </select>
+                            <div id="postcode-err" class="error"></div>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" name="state" id="state_id" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
                             </select>
                             <div id="state-err" class="error"></div>
                         </div>
-                    </div>
-                    <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
                             <select class="form-select" name="city" id="city_id" style="text-transform: uppercase;">
@@ -46,13 +53,7 @@
                             </select>
                             <div id="city-err" class="error"></div>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="postcode" class="form-label">Postcode*</label>
-                            <select class="form-select" name="postcode" id="postcode_id" style="text-transform: uppercase;">
-                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
-                            </select>
-                            <div id="postcode-err" class="error"></div>
-                        </div>
+
                     </div>
             </div>
 

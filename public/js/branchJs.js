@@ -2,6 +2,7 @@ $(document).ready(function () {
     var addbranch = "#country_id, #postcode_id";
 
     $(addbranch).select2({
+        allowClear: true,
         placeholder: "PLEASE CHOOSE",
         dropdownParent: $('#addModal'),
     });
@@ -36,6 +37,12 @@ $(document).ready(function () {
                 $("#postcode_id").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
             });
         });
+        $("#state_id").empty();
+        $("#state_id").append('<option value="">PLEASE CHOOSE</option>');
+        $("#city_id").empty();
+        $("#city_id").append('<option value="">PLEASE CHOOSE</option>');
+        $("#postcode_id").empty();
+        $("#postcode_id").append('<option value="">PLEASE CHOOSE</option>');
     });
 
 
@@ -59,6 +66,11 @@ $(document).ready(function () {
                 $("#city_id").append('<option value="' + city.name + '">' + city.name + '</option>');
             });
         });
+            $("#state_id").empty();
+            $("#state_id").append('<option value="">PLEASE CHOOSE</option>');
+            $("#city_id").empty();
+            $("#city_id").append('<option value="">PLEASE CHOOSE</option>');
+
     });
     function getStateAndCityByCountry(id) {
         return $.ajax({
@@ -84,6 +96,12 @@ $(document).ready(function () {
                 $("#postcodeE").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
             });
         });
+        $("#stateE").empty();
+        $("#stateE").append('<option value="">PLEASE CHOOSE</option>');
+        $("#cityE").empty();
+        $("#cityE").append('<option value="">PLEASE CHOOSE</option>');
+        $("#postcodeE").empty();
+        $("#postcodeE").append('<option value="">PLEASE CHOOSE</option>');
     });
 
     function getPostcodeByCountry(id) {
@@ -105,6 +123,10 @@ $(document).ready(function () {
                 $("#cityE").append('<option value="' + city.name + '">' + city.name + '</option>');
             });
         });
+        $("#stateE").empty();
+        $("#stateE").append('<option value="">PLEASE CHOOSE</option>');
+        $("#cityE").empty();
+        $("#cityE").append('<option value="">PLEASE CHOOSE</option>');
     });
 
     function getStateAndCityByCountry(id) {
