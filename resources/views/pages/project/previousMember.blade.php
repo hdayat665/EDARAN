@@ -40,7 +40,6 @@
                                 data-id="{{ $project->id }}" class="btn btn-primary">+ Add Project Member</a>
                             <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton"
                                 class="btn btn-primary">+ Assign Location</a>
-                            @endif
                     </div>
                     <br>
                     <div class="panel-body">
@@ -66,7 +65,7 @@
                                             <td width="1%">
                                                 @if (in_array('project_manager', $role_permission))
                                                 <a data-bs-toggle="modal" data-id="{{ $projectMember->id }}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
-                                                @endif
+                                                
                                             </td>
                                             <td>{{ $projectMember->employeeName }}</td>
                                             <td>{{ $projectMember->designation ? getDesignation($projectMember->designation)->designationName ?? '-' : '-' }} </td>
