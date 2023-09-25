@@ -7,8 +7,9 @@
         <div class="row">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs" id="myTab">
-                    <?php $target = ['project_information']; ?>
-                    @if (array_intersect($role_permission, $target))
+                    <?php $target = ['project_information', 'pmc'];?>
+
+                    @if (count(array_intersect($role_permission, $target)) > 0)
                     <li class="nav-item">
                         <a href="#tab1" id="nav_pro_info" data-bs-toggle="tab" class="nav-link active">
                             <span class="d-sm-none">Tab 1</span>
@@ -16,8 +17,8 @@
                         </a>
                     </li>
                     @endif
-                    <?php $target = ['previ_project_manager']; ?>
-                    @if (array_intersect($role_permission, $target))
+                    <?php $target = ['previ_project_manager', 'pmc'];?>
+                    @if (count(array_intersect($role_permission, $target)) > 0)
                     
                         <li class="nav-item">
                             <a href="#tab2" id="nav_pre_pro" data-bs-toggle="tab" class="nav-link">
@@ -26,8 +27,8 @@
                             </a>
                         </li>
                     @endif
-                    <?php $target = ['project_location_pm']; ?>
-                    @if (array_intersect($role_permission, $target))
+                    <?php $target = ['project_location_pm', 'pmc'];?>
+                    @if (count(array_intersect($role_permission, $target)) > 0)
                         <li class="nav-item">
                             <a href="#tab3" id="nav_pro_loc" data-bs-toggle="tab" class="nav-link">
                                 <span class="d-sm-none">Tab 3</span>
@@ -35,8 +36,8 @@
                             </a>
                         </li>
                     @endif   
-                    <?php $target = ['project_member']; ?>
-                    @if (array_intersect($role_permission, $target))
+                    <?php $target = ['project_member', 'pmc'];?>
+                    @if (count(array_intersect($role_permission, $target)) > 0)
                         <li class="nav-item">
                             <a href="#tab4" id="nav_pro_mem" data-bs-toggle="tab" class="nav-link">
                                 <span class="d-sm-none">Tab 4</span>
