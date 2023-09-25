@@ -9,8 +9,8 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <select class="form-select" name="customer_id">
-                        <option label="PLEASE CHOOSE"></option>
+                    <select class="form-select selectcust" name="customer_id">
+                        <option label="PLEASE CHOOSE">PLEASE CHOOSE</option>
                         <?php $customers = getCustomer(); ?>
                         <?php $sortedCustomers = $customers->sortBy('customer_name'); ?>
                         @foreach ($sortedCustomers as $customer)
@@ -19,6 +19,8 @@
                                 {{ $customer->customer_name }}</option>
                         @endforeach
                     </select>
+                    <input type="hidden" id="customerDiv" name="" class="form-control">
+
                 </div>
                 <div class="col-md-4">
                     <input type="hidden" id="idP" value="{{ $project->id }}">
@@ -115,7 +117,7 @@
             <div class="row mb-15px">
                 <div class="col-md-4">
                     {{-- <select class="form-select selectacc" name="acc_manager" id="acc_manager2"> --}}
-                    <select class="form-select" name="acc_manager" id="acc_manager2">
+                    <select class="form-select selectacc" name="acc_manager" id="acc_manager2">
                         <?php $Employees = getEmployee(); ?>
                         <?php $sortedEmployees = $Employees->sortBy('employeeName'); ?>
                         @foreach ($sortedEmployees as $Employee)
@@ -131,7 +133,7 @@
                     <select class="form-select" name="project_manager" id="project_manager2"
                         style="display:none"></select>
                     {{-- <select class="form-select selectmng" name="project_manager" id="project_manager2_show"> --}}
-                    <select class="form-select" name="project_manager" id="project_manager2_show">
+                    <select class="form-select selectmng" name="project_manager" id="project_manager2_show">
                         <option value="" selected>PLEASE CHOOSE</option>
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
