@@ -77,8 +77,7 @@ class Kernel extends ConsoleKernel
         $mailService->emailLogMissedFor2daysAgo(); 
         })->dailyAt('14:00');
 
-        $schedule->command('auto:submitApproval')->everyMinute();
-
+        $schedule->command('auto:submitApproval')->monthly();
     }
 
     /**

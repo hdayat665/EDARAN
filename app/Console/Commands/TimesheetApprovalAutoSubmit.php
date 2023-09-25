@@ -37,7 +37,7 @@ class TimesheetApprovalAutoSubmit extends Command
         $employees = DB::table('employment as a')
                     ->leftjoin('designation as b', 'a.designation', '=', 'b.id')
                     ->leftjoin('department as c', 'a.department', '=', 'c.id')
-                    ->whereIn('a.user_id', [219, 217, 180])
+                    // ->whereIn('a.user_id', [219, 217, 180])
                     ->select('a.*', 'b.designationName', 'c.departmentName')
                     ->get();
     
