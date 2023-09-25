@@ -453,14 +453,14 @@ $(document).ready(function () {
                     error.insertAfter("#city-err");
                 } else if (element.attr("name") === "postcode") {
                     error.insertAfter("#postcode-err");
-                } else if (element.attr("name") === "countryadd") {
-                    error.insertAfter("#countryadd-err");
-                } else if (element.attr("name") === "stateadd") {
-                    error.insertAfter("#stateadd-err");
-                } else if (element.attr("name") === "cityadd") {
-                    error.insertAfter("#cityadd-err");
-                } else if (element.attr("name") === "postcodeadd") {
-                    error.insertAfter("#postcodeadd-err");
+                } else if (element.attr("name") === "countryc") {
+                    error.insertAfter("#countryc-err");
+                } else if (element.attr("name") === "statec") {
+                    error.insertAfter("#statec-err");
+                } else if (element.attr("name") === "cityc") {
+                    error.insertAfter("#cityc-err");
+                } else if (element.attr("name") === "postcodec") {
+                    error.insertAfter("#postcodec-err");
                 } else {
                     error.insertAfter(element);
                 }
