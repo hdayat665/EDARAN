@@ -1076,6 +1076,7 @@ class MyTimeSheetService
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = $userId;
         $input['month'] = date('M');
+        $input['year'] = date('Y');
         if (isset($log_id)) {
             $input['log_id'] = implode(',', $log_id);
         }
@@ -1414,6 +1415,8 @@ class MyTimeSheetService
     {
         $ids = explode(',', $id);
 
+        // dd($ids);
+
         // $data = TimesheetLog::whereIn('id', $ids)->get();
 
         // return $data;
@@ -1422,7 +1425,7 @@ class MyTimeSheetService
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
             ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
-            ->whereIn('a.id', $ids)
+            // ->whereIn('a.id', $ids)
             ->get();
 
         return $data;
@@ -1961,7 +1964,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Log has been Rejected Successfully';
+        $data['msg'] = 'Log Appeal is Rejected';
         return $data;
     }
 
