@@ -542,6 +542,8 @@ $(document).ready(function () {
     sanitizeInputField("#lastname");
     sanitizeInputField("#emergency-firstname");
     sanitizeInputField("#emergency-lastname");
+    sanitizeInputField("#emergency-firstname_2");
+    sanitizeInputField("#emergency-lastname_2");
     sanitizeInputField("#firstnamemc");
     sanitizeInputField("#lastnamemc");
     sanitizeInputField("#firstNameChild");
@@ -1546,7 +1548,7 @@ $(document).ready(function () {
                 },
                 relationship: "Please Choose Relationship",
                 contactNo: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Choose Relationship",
@@ -1684,7 +1686,7 @@ $(document).ready(function () {
                 },
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Choose Relationship",

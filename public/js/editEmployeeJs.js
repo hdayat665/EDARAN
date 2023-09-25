@@ -1632,6 +1632,8 @@ $("#edit-profile-picture").on("click", function () {
     sanitizeInputField("#lastname");
     sanitizeInputField("#emergency-firstname");
     sanitizeInputField("#emergency-lastname");
+    sanitizeInputField("#emergency-firstname_2");
+    sanitizeInputField("#emergency-lastname_2");
     sanitizeInputField("#firstnamemc");
     sanitizeInputField("#lastnamemc");
     sanitizeInputField("#firstNameChild");
@@ -2767,7 +2769,7 @@ if (permanentChecked && correspondentChecked) {
                 lastName: "Please Insert Last Name",
                 relationship: "Please Choose Relationship",
                 contactNo: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 address1: "Please Insert Address 1",
@@ -2858,7 +2860,7 @@ if (permanentChecked && correspondentChecked) {
                 lastName_2: "Please Insert Last Name",
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 address1_2: "Please Insert Address 1",
