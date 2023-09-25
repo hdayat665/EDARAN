@@ -34,7 +34,7 @@
                         <div class="col-sm-3">
                             <label for="" class="form-label" >Birth of Certificate</label>
                             <input type="file" id="birthCert" name="birthID" class="form-control" aria-describedby="">
-                            @if ($children->birthID)
+                            @if ($children->birthID ?? '')
                                 Click <a id="BirthCerttView"></a> to see birth of certificate attachment.
                             @endif
                         </div>
@@ -59,7 +59,7 @@
                         <div class="col-sm-6">
                             <label for="" class="form-label" >ID Attachment</label>
                             <input type="file" id="id-attachment" name="idFile" class="form-control" aria-describedby="">
-                            @if ($children->idFile)
+                            @if ($children->idFile ?? '')
                                 Click <a id="idAttachmentView"></a> to see ID Attachment.
                             @endif
                         </div>
@@ -146,7 +146,7 @@
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="okuattach4" value="on" {{($children->okuStatus ?? '') ? 'checked' : ''}} name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
-                                    @if ($children->okuFile)
+                                    @if ($children->okuFile ?? '')
                                     Click <a id="okuAttachmentView"></a> to see attachment.
                                     @endif
                                 </div>
@@ -182,7 +182,7 @@
                         <div class="col-sm-6">
                             <label for="institution-name" class="form-label">Supporting Document</label>
                             <input type="file" name="supportDoc" id="" class="form-control" aria-describedby="">
-                            @if ($children->supportDoc)
+                            @if ($children->supportDoc ?? '')
                                 Click <a id="supportDocAttachmentView"></a> to see supporting document attachment.
                             @endif
                         </div>
