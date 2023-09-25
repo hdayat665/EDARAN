@@ -2,7 +2,7 @@
     <h3 class="mt-10px"></i>Project Location</h3>
     <div class="panel-heading-btn">
         <br>
-        @if (!in_array('pmc', $role_permission))
+        @if (in_array('project_manager', $role_permission))
             <a href="javascript:;" data-bs-toggle="modal" id="addProjectLocationButton" class="btn btn-primary">+ Add
                 Project Location</a>
         @endif
@@ -25,7 +25,7 @@
                         <tr>
                             <td width="1%">{{ $key + 1 }}</td>
                             <td width="6%">
-                                @if (!in_array('pmc', $role_permission))
+                                @if (in_array('project_manager', $role_permission))
                                     <a href="#" data-bs-toggle="dropdown"
                                         class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i
                                             class="fa fa-caret-down"></i></a>

@@ -118,6 +118,24 @@ class EmployeeController extends Controller
         return $result;
     }
 
+    public function getPostcodeByCountryEmployee($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getPostcodeByCountryEmployee($id);
+
+        return $result;
+    }
+
+
+    public function getStateAndCityByPostcodeEmployee($id = '')
+    {
+        $ss = new EmployeeService;
+
+        $result = $ss->getStateAndCityByPostcodeEmployee($id);
+
+        return $result;
+    }
 
     public function editEmployeeView($user_id = '')
     {

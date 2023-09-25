@@ -21,6 +21,7 @@
                         <th class="text-nowrap">Country Name</th>
                         <th class="text-nowrap">State</th>
                         <th class="text-nowrap">Postcode</th>
+                        <th class="text-nowrap">City</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
@@ -39,6 +40,7 @@
                                 <td>{{$l->country_name}}</td>
                                 <td>{{$l->state_name}}</td>
                                 <td>{{$l->postcode}}</td>
+                                <td>{{$l->name}}</td>
                                 <td>{{$l->addedBy ?? '-'}}</td>
                                 <td>{{$l->created_at ?? '-'}}</td>
                                 <td>{{$l->modifiedBy ?? '-'}}</td>

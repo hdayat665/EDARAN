@@ -112,6 +112,30 @@ class EmployeeService
         return $data;
     }
 
+    public function getPostcodeByCountryEmployee($id = '')
+    {
+        $data = Country::join('location_states', 'location_country.country_id', '=', 'location_states.country_id')
+            ->join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_states.country_id', $id)
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getStateAndCityByPostcodeEmployee($id = '')
+    {
+
+        $data = Location::where('postcode', $id)
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+            ->select('location_cities.postcode', 'location_cities.name', 'location_states.state_name', 'location_cities.country_id',
+            'location_country.country_name', 'location_cities.state_id' ,'location_states.id')
+            ->get();
+
+        return $data;
+    }
+
     public function addAddress($r)
     {
         $input = $r->input();
@@ -567,13 +591,13 @@ class EmployeeService
                 $input['okuID'] = null;
             }
 
-            if (!$input['DOM']) {
-                unset($input['DOM']);
-            }
+            // if (!$input['DOM']) {
+            //     unset($input['DOM']);
+            // }
 
-            if (!$input['DOM']) {
-                unset($input['DOM']);
-            }
+            // if (!$input['DOM']) {
+            //     unset($input['DOM']);
+            // }
 
             if (!$input['address2']) {
                 unset($input['address2']);
@@ -949,13 +973,13 @@ class EmployeeService
 
     public function getEmployeeAddressforParent($id)
     {
-
-        $addressDetails = UserAddress::where('user_id', $id)
+        $addressDetails = UserAddress::select('useraddress.*', 'location_states.state_name', 'location_country.country_name')
+        ->join('location_states', 'useraddress.state', '=', 'location_states.id')
+        ->join('location_country', 'useraddress.country', '=', 'location_country.country_id')
+        ->where('useraddress.user_id', $id)
         ->whereIn('addressType', [1, 3])
-        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        ->limit(1)
         ->first();
-
-
 
         if(!$addressDetails)
         {
@@ -1380,7 +1404,6 @@ class EmployeeService
         ->where('employment.user_id', $id)
         ->select('employment.*' ,'userprofile.fullName')
         ->first();
-        // dd($data);
         return $data;
     }
 

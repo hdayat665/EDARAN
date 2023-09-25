@@ -155,6 +155,29 @@ class ProfileService
             ->where('location_states.country_id', $id)
             ->get();
 
+        return $data;
+    }
+
+    public function getPostcodeByCountryProfile($id = '')
+    {
+        $data = Country::join('location_states', 'location_country.country_id', '=', 'location_states.country_id')
+            ->join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_states.country_id', $id)
+            ->get();
+
+
+        return $data;
+    }
+
+    public function getStateAndCityByPostcodeProfile($id = '')
+    {
+
+        $data = Location::where('postcode', $id)
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
+            ->select('location_cities.postcode', 'location_cities.name', 'location_states.state_name', 'location_cities.country_id',
+            'location_country.country_name', 'location_cities.state_id' ,'location_states.id')
+            ->get();
 
         return $data;
     }
@@ -204,9 +227,11 @@ class ProfileService
 
         $user_id = $input['user_id'];
 
-        $getid = Location::select('id')
-            ->where('country_id', '=', $input['country'])
-            ->where('state_id', '=', $input['state'])
+        $getid = Location::select('location_cities.id')
+            ->join('location_states', 'location_states.id', '=', 'location_cities.state_id')
+            ->where('location_cities.country_id', '=', $input['country'])
+            // ->where('state_id', '=', $input['state'])
+            ->where('location_states.state_name', '=', $input['state'])
             ->where('name', '=', $input['city'])
             ->where('postcode', '=', $input['postcode'])
             ->first();
@@ -526,7 +551,7 @@ class ProfileService
     public function updateCompanion($r)
     {
         $input = $r->input();
-
+        // dd($input);
         $id = Auth::user()->id;
 
         $user = UserCompanion::where('user_id', $id)->first();
@@ -610,7 +635,14 @@ class ProfileService
                 $input['issuingCountry'] = null;
             }
 
+            $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
+
+            // Update the mainCompanion attribute based on the checkbox value
             $id = $input['id'];
+            $companion = UserCompanion::find($id);
+
+
+
             UserCompanion::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -679,16 +711,16 @@ class ProfileService
             $companion = UserCompanion::create($input);
 
             // Set the main companion if the checkbox is checked
-            if ($r->input('mainCompanion')) {
-                // Set the mainCompanion attribute of the new companion to 1
-                $companion->mainCompanion = 1;
-                $companion->save();
+            // if ($r->input('mainCompanion')) {
+            //     // Set the mainCompanion attribute of the new companion to 1
+            //     $companion->mainCompanion = 1;
+            //     $companion->save();
 
-                // Set the mainCompanion attribute of all other companions to 0
-                UserCompanion::where('user_id', $id)
-                    ->where('id', '<>', $companion->id)
-                    ->update(['mainCompanion' => 0]);
-            }
+            //     // Set the mainCompanion attribute of all other companions to 0
+            //     UserCompanion::where('user_id', $id)
+            //         ->where('id', '<>', $companion->id)
+            //         ->update(['mainCompanion' => 0]);
+            // }
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -909,7 +941,6 @@ class ProfileService
     public function updateParent($r)
     {
         $input = $r->input();
-
         $id = $input['id'] ?? 1;
 
 
@@ -1126,6 +1157,12 @@ class ProfileService
         $data['state'] = State::all();
         $data['city'] = Location::all();
         $data['postcode'] = Location::all();
+
+        $data['editAddress'] = Location::join('location_states', 'location_states.id', '=', 'location_cities.state_id')
+        ->join('location_country', 'location_country.country_id', '=', 'location_cities.country_id')
+        ->select('location_states.*', 'location_country.*', 'location_cities.*')
+        ->get();
+
 
         $childId[] = '';
         if ($data['childrens']) {
@@ -1508,7 +1545,7 @@ class ProfileService
         ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
         ->join('location_country', 'location_states.country_id', '=', 'location_country.country_id')
         ->get();
-        
+
         if(!$addressDetails)
         {
             $data['status'] = config('app.response.error.status');

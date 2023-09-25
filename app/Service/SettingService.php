@@ -1465,7 +1465,7 @@ class SettingService
 
     public function locationView()
     {
-        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name',
+        $data = Location::select('location_cities.id', 'location_country.country_name', 'location_states.state_name', 'location_cities.name',
             'location_cities.postcode', 'location_cities.addedBy', 'location_cities.created_at', 'location_cities.modifiedBy',
             'location_cities.modified_at')
             ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
