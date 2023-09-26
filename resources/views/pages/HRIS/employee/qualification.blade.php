@@ -33,7 +33,7 @@
                 <table id="employeeEducation" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
-                         <th data-orderable="false">No</th>
+                         <th class="text-nowrap">No</th>
                          <th data-orderable="false">Action</th>
                          <th class="text-nowrap">From Date</th>
                          <th class="text-nowrap">To Date</th>
@@ -91,7 +91,7 @@
                 <table id="employeeOthers" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
-                         <th data-orderable="false">No</th>
+                         <th class="text-nowrap">No</th>
                          <th data-orderable="false">Action</th>
                          <th class="text-nowrap"> Date</th>
                          <th class="text-nowrap">Professional Qualification Details</th>

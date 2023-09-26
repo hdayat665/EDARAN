@@ -78,8 +78,19 @@ $(document).ready(function () {
                 $(this).val(value + ".00");
             }
         });
-    });
+        document.getElementById("resetBtn").addEventListener("click", function() {
+            // Clear the input fields
+            document.getElementById("year").selectedIndex = 0;
+            document.getElementById("month").selectedIndex = 0;
+            document.getElementById("claimcategory").selectedIndex = 0;
+            document.getElementById("amount").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("labelcategory").style.display = "none";
+            document.getElementById("supportdocument").value = "";
 
+          });
+    });
+    
     // $("#createGnc").click(function (e) {
     //     $("#createForm").validate({
     //         // Specify validation rules

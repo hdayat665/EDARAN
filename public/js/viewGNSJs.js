@@ -36,19 +36,30 @@ $(document).ready(function () {
     $(document).on("click", "#buttonView", function () {
         var id = $(this).data("id");
         var contentData = getClaimContent(id);
-
+    
         contentData.then(function (data) {
-            //console.log(contentData);
-
-            // $("#year").val(data.year);
-            // $("#month").val(data.month);
-
+            
+    
+            // Check if claim_category_content.label is not null
+            if (data.claim_category_content && data.claim_category_content.label !== null) {
+                $("#label").text(data.claim_category_content.label);
+                $("#label").show();
+            } else {
+                $("#label").hide();
+            }
+    
+            // Check if claim_category_content.content is not null
+            if (data.claim_category_content && data.claim_category_content.content !== null) {
+                $("#contents").val(data.claim_category_content.content);
+                $("#contents").show();
+            } else {
+                $("#contents").hide();
+            }
+    
             $("#applied_date").val(
                 moment(data.applied_date).format("YYYY-MM-DD")
             );
             $("#claim_category").val(data.claim_category_name);
-            $("#label").text(data.claim_category_content.label);
-            $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
             $("#desc").val(data.desc);
             var fileNames = data.file_upload.split(",");
@@ -64,9 +75,10 @@ $(document).ready(function () {
             $("#file_upload").html(html);
         });
         // Get the claim category ID from the input field
-
+    
         $("#viewModal").modal("show");
     });
+    
 
     $(document).on("click", "#btn-view-subsistence", function () {
         $("#modal-view-subsistence").modal("show");

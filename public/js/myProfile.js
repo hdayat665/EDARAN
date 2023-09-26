@@ -27,7 +27,7 @@ $(document).ready(function () {
 
     $('#firstname,#lastname').keypress(function (e) {
         var txt = String.fromCharCode(e.which);
-        if (!txt.match(/[A-Za-z0-9&. ]/)) {
+        if (txt.match(/[A-Za-z0-9&. ]/)) {
             return false;
         }
     });
@@ -542,6 +542,8 @@ $(document).ready(function () {
     sanitizeInputField("#lastname");
     sanitizeInputField("#emergency-firstname");
     sanitizeInputField("#emergency-lastname");
+    sanitizeInputField("#emergency-firstname_2");
+    sanitizeInputField("#emergency-lastname_2");
     sanitizeInputField("#firstnamemc");
     sanitizeInputField("#lastnamemc");
     sanitizeInputField("#firstNameChild");
@@ -686,19 +688,19 @@ $(document).ready(function () {
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",
-                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    digits: "Please Insert Valid Phone Number",
                     rangelength: "Please Insert Valid Phone Number",
                 },
                 phoneNo2: {
-                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number",
+                    digits: "Please Insert Valid Phone Number 2",
+                    rangelength: "Please Insert Valid Phone Number 2",
                 },
                 homeNo: {
-                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
+                    digits: "Please Insert Valid Home Number",
                     rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
-                    digits: "Please Insert Correct Extension Number Without ' - ' or Space",
+                    digits: "Please Insert Valid Extension Number",
                     rangelength: "Please Insert Valid Extension Number",
                 },
                 okuCardNum: {
@@ -1546,7 +1548,7 @@ $(document).ready(function () {
                 },
                 relationship: "Please Choose Relationship",
                 contactNo: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Choose Relationship",
@@ -1684,7 +1686,7 @@ $(document).ready(function () {
                 },
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Choose Relationship",
@@ -2552,12 +2554,12 @@ $(document).ready(function () {
     });
     $("#DOB1").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expiryDate1").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
@@ -2566,97 +2568,136 @@ $(document).ready(function () {
     });
     $("#dob").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dob4").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dobAddCompanion").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expirydatemyprofile").datepicker({
         //todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dobmc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expirydatemc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expiryDateUpdateCompanion").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dobuc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dom").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dateJoinedmcEdit").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dommc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#DOBChild").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dob6").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#DOBP1").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dateJoinedmc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expiryDateParent").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expiryDateParentEdit").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
+        autoclose: true,
+    });
+    $("#educationFromDate1").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#educationToDate1").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+    $("#datepicker-others").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+    $("#othersDate1").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+    // Initialize the datepicker for the from date
+    $("#datepicker-fromdate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#DOBparent").datepicker({
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
+        autoclose: true,
+    });
+
+    $("#DOBsibling").datepicker({
+        todayHighlight: true,
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
@@ -3149,12 +3190,6 @@ $(document).ready(function () {
         $("#add-sibling").modal("show");
     });
 
-    $("#DOBsibling").datepicker({
-        todayHighlight: true,
-        format: "yyyy/mm/dd",
-        autoclose: true,
-    });
-
     $("#addSibling").click(function (e) {
         $("#addSiblingForm").validate({
             // Specify validation rules
@@ -3491,11 +3526,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#DOBparent").datepicker({
-        todayHighlight: true,
-        format: "yyyy/mm/dd",
-        autoclose: true,
-    });
 
     $("#addParent").click(function (e) {
         $("#addParentForm").validate({
@@ -4850,19 +4880,12 @@ function getAddressforCompanion(id) {
     });
 }
 
-// Initialize the datepicker for the from date
-$("#datepicker-fromdate").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-});
-
 // Initialize the datepicker for the to date
 $("#datepicker-todate")
     .datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
     })
     .on("changeDate", function (e) {
         // Get the from date
@@ -4877,30 +4900,6 @@ $("#datepicker-todate")
             $(this).datepicker("setDate", fromDate);
         }
     });
-
-$("#educationFromDate1").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-});
-
-$("#educationToDate1").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-});
-
-$("#datepicker-others").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-});
-
-$("#othersDate1").datepicker({
-    todayHighlight: true,
-    autoclose: true,
-    format: "yyyy/mm/dd",
-});
 
 //   oku checkbox myprofile
 $(".okuCheck").click(function () {

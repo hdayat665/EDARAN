@@ -494,7 +494,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getroleAdmin/{id}', 'getroleAdmin');
             Route::get('/getroleFinance/{id}', 'getroleFinance');
             Route::get('/getroleCA/{id}', 'getroleCA');
-
+            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
 
 
 
@@ -790,6 +790,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
             Route::get('/checkLeaveEntitlement', 'checkLeaveEntitlement');
+
+            Route::get('/checkTSRLeave/{date}', 'checkTSRLeave');
+            Route::get('/checkTSRLeaveSecond/{date}', 'checkTSRLeaveSecond');
 
 
 
