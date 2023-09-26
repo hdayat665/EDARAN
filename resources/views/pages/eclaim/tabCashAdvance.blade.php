@@ -1,13 +1,14 @@
 <div class="tab-pane fade" id="card-pill-2">
     <div class="category-filter">
-        <!-- <select id="Statuscash" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
+        <select id="Statuscash" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
             <option value="">Show All</option>
             <option value="Draft">Draft</option>
             <option value="Active">Active</option>
             <option value="Rejected">Rejected</option>
             <option value="Amend">Amend</option>
+            <option value="Pending">Pending</option>
             <option value="Paid">Paid</option>
-        </select> -->
+        </select>
     </div>
     <table id="cashadvancetable" class="table table-striped table-bordered align-middle">
         <thead>

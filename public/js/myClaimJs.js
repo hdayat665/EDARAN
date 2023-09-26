@@ -12,36 +12,59 @@ $("document").ready(function () {
             );
         },
     });
-
-    $("#claimtable").DataTable({
-        searching: false,
-        lengthChange: false,
-        lengthMenu: [5, 10],
-        responsive: false,
-        info: true,
-        
-        initComplete: function (settings, json) {
-            $("#claimtable").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
-            );
-        },
+    
+    $(document).ready(function () {
+        const claimTable = $("#claimtable").DataTable({
+            searching: true, // Disable DataTables search
+            lengthChange: false,
+            lengthMenu: [5, 10],
+            responsive: false,
+            info: true,
+            initComplete: function (settings, json) {
+                $("#claimtable").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
+        });
+    
+        $("#Statusclaim").on("change", function () {
+            const selectedStatus = $(this).val();
+    
+            // Use DataTables' search API to perform the search
+            claimTable.search(selectedStatus).draw();
+        });
+    
+        // Hide DataTables search box
+        $(".dataTables_filter").hide();
     });
     
+    $(document).ready(function () {
+        const claimTable = $("#cashadvancetable").DataTable({
+            searching: true, // Disable DataTables search
+            lengthChange: false,
+            lengthMenu: [5, 10],
+            responsive: false,
+            info: true,
+            initComplete: function (settings, json) {
+                $("#cashadvancetable").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
+        });
+    
+        $("#Statuscash").on("change", function () {
+            const selectedStatus = $(this).val();
+    
+            // Use DataTables' search API to perform the search
+            claimTable.search(selectedStatus).draw();
+        });
+    
+        // Hide DataTables search box
+        $(".dataTables_filter").hide();
+    });
     
 
-    $("#cashadvancetable").DataTable({
-        searching: false,
-        lengthChange: false,
-        lengthMenu: [5, 10],
-        responsive: false,
-        info: true,
-       
-        initComplete: function (settings, json) {
-            $("#cashadvancetable").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
-            );
-        },
-    });
+    
 
     $(document).on(
         "click",
@@ -118,33 +141,48 @@ $("document").ready(function () {
     });
 
     $("#saveAppeal").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(document.getElementById("addAppealForm"));
+        $("#addAppealForm").validate({
+            // Specify validation rules
+            rules: {
+                reason: "required",
+                uploadFile: "required",
+            },
+            messages: {
+                reason: "Please Insert Reason",
+                uploadFile: "Please Upload Attachment",
+            },
 
-            $.ajax({
-                type: "POST",
-                url: "/appealMtc",
-                data: data,
-                dataType: "json",
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(document.getElementById("addAppealForm"));
+                    // var data = $('#tree').jstree("get_selected");
 
-                processData: false,
-                contentType: false,
-            }).then(function (data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/appealMtc",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
                 });
-            });
+            },
         });
     });
 
