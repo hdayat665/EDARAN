@@ -400,7 +400,7 @@ class LoginService
                 $data['status'] = config('app.response.success.status');
                 $data['type'] = config('app.response.success.type');
                 $data['title'] = config('app.response.success.title');
-                $data['msg'] = 'Email have been send to your email';
+                $data['msg'] = 'Email have been sent to your email';
             }
         }
 
@@ -457,7 +457,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email have been sent to your email';
         }
 
         return $data;
@@ -493,7 +493,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email have been sent to your email';
         }
 
         return $data;
@@ -538,7 +538,7 @@ class LoginService
                 $data['status'] = config('app.response.success.status');
                 $data['type'] = config('app.response.success.type');
                 $data['title'] = config('app.response.success.title');
-                $data['msg'] = 'Email have been send to your email';
+                $data['msg'] = 'Email have been sent to your email';
             }
         }
 
@@ -575,7 +575,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email have been sent to your email';
         }
 
         return $data;
