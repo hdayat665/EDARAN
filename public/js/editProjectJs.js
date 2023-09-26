@@ -619,9 +619,9 @@ $(document).ready(function () {
             $("#departmentE").val(data.department);
             $("#branchE").val(data.branch);
             $("#exit_project").prop("checked", data.exit_project);
-            $("#exit_project_date").val(data.exit_project_date);
-            $("#idPM").val(data.id);
-            // console.log(data);
+            $("#datepicker_exitdate").val(data.joined_date);
+            $("#datepicker_exitdate").datepicker("setStartDate", data.joined_date);
+            $("#idPM").val(id);
         });
         $("#editProjectMemberModal").modal("show");
     });
@@ -643,7 +643,7 @@ $(document).ready(function () {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                branch: "required",
+                // branch: "required",
                 location_name: "required",
                 exit_project_date: "required",
             },
@@ -651,7 +651,7 @@ $(document).ready(function () {
             messages: {
                 joined_date: "Please Choose Date",
                 employee_id: "Please Choose Name",
-                branch: "Please Choose Branch",
+                // branch: "Please Choose Branch",
                 location_name: "Please Select Location",
                 exit_project_date: "Please Choose Date",
             },
