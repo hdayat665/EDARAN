@@ -8,6 +8,13 @@
         transform: translateY(-50%);
         background-color: transparent !important;
         }
+
+    .custom-dropdown-menu {
+        position: static !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
     </style>
 
     {{-- content-start --}}
@@ -48,59 +55,63 @@
                                         <tr class="odd gradeX">
                                             <td>{{ $id }}</td>
                                             <td>
-                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                                                <div class="dropdown-menu">
-                                                    <a href="javascript:;" id="editButton" data-state_id="{{ $wk->state_id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1"
-                                                        data-bs-target="#addleave"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                                    {{-- <div class="dropdown-divider"></div>
-                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $wk->id }}" class="dropdown-item"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a> --}}
+                                                <div class="btn-group">
+                                                    <div>
+                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                                    </div>
+                                                    <div class="dropdown-menu custom-dropdown-menu tableAction">
+                                                        <a href="javascript:;" id="editButton" data-state_id="{{ $wk->state_id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1"
+                                                            data-bs-target="#addleave"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                                        {{-- <div class="dropdown-divider"></div>
+                                                        <a href="javascript:;" id="deleteButton" data-id="{{ $wk->id }}" class="dropdown-item"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a> --}}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td style="text-align:center">{{ strtoupper($wk->state_name) }}</td>
                                             <td style="text-align:center">
-                                                @if ($wk->monday_start && $wk->monday_end)
+                                                @if ($wk->monday_start && $wk->monday_end && $wk->monday_total)
                                                     {{$wk->monday_start}} - {{$wk->monday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->tuesday_start && $wk->tuesday_end)
+                                                @if ($wk->tuesday_start && $wk->tuesday_end &&  $wk->tuesday_total)
                                                     {{$wk->tuesday_start}} - {{$wk->tuesday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->webnesday_start && $wk->webnesday_end)
+                                                @if ($wk->webnesday_start && $wk->webnesday_end && $wk->webnesday_total)
                                                     {{$wk->webnesday_start}} - {{$wk->webnesday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->thursday_start && $wk->thursday_end)
+                                                @if ($wk->thursday_start && $wk->thursday_end && $wk->thursday_total)
                                                     {{$wk->thursday_start}} - {{$wk->thursday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->friday_start && $wk->friday_end)
+                                                @if ($wk->friday_start && $wk->friday_end && $wk->friday_total)
                                                     {{$wk->friday_start}} - {{$wk->friday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->saturday_start && $wk->saturday_end)
+                                                @if ($wk->saturday_start && $wk->saturday_end && $wk->saturday_total)
                                                     {{$wk->saturday_start}} - {{$wk->saturday_end}}
                                                 @else
                                                     Weekend
                                                 @endif
                                             </td>
                                             <td style="text-align:center">
-                                                @if ($wk->sunday_start && $wk->sunday_end)
+                                                @if ($wk->sunday_start && $wk->sunday_end && $wk->sunday_total)
                                                     {{$wk->sunday_start}} - {{$wk->sunday_end}}
                                                 @else
                                                     Weekend
