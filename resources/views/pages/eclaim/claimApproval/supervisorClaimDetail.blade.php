@@ -1,11 +1,13 @@
+@extends('layouts.dashboardTenant')
+@section('content')
 <style>
     @media print{
         .hide-on-print {
             display: none;
         }
-        .hide-print {
+        /* .hide-print {
         display: none !important;
-        }
+        } */
         .tab-pane {
         display: block !important;
         opacity: 1 !important;
@@ -39,10 +41,11 @@
         .dataTables_wrapper .dataTables_buttons {
             display: none !important;
         }
+        .break {
+            page-break-before: always;
+        }
     }
 </style>
-@extends('layouts.dashboardTenant')
-@section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claim </small></h1>
         <div class="panel panel" id="supervisorDetailClaimJs">
@@ -121,7 +124,7 @@
                                 <div class="col-md-2">
                                     <label class="form-label">Status</label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 ">
                                     <div class="d-grid"> <!-- Use d-grid to create a grid layout -->
                                         @if ($claimData->status == 'amend')
                                             <a class="btn btn-warning btn-lg btn-block" data-toggle="paidc" title="{{$claimData->status_desc}}">Amend</a>
@@ -289,7 +292,7 @@
                                             <input readonly type="text" value="{{ $getfinance->checker1 ? getEmployeeNameById($getfinance->checker1)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="row p-2">
+                                    <div class="row p-2 break">
                                         <div class="col-md-4">
                                             <label class="form-label">Checker 2</label>
                                         </div>
@@ -433,10 +436,10 @@
                 </div>
 
                 {{-- ROW 4 --}}
-                <div class="row p-2">
+                <div class="row p-2 break">
                     <div class="col-md-12">
                         <div class="form-control">
-                            <div class="row p-2 hide-print">
+                            <div class="row p-2 hide-on-print">
                                 <div class="col d-flex justify-content-start">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">
