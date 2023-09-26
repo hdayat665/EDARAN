@@ -1076,6 +1076,7 @@ class MyTimeSheetService
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = $userId;
         $input['month'] = date('M');
+        $input['year'] = date('Y');
         if (isset($log_id)) {
             $input['log_id'] = implode(',', $log_id);
         }
@@ -1144,6 +1145,7 @@ class MyTimeSheetService
         $weekends = 0;
         $holidays = 0;
         $workedDays = 0;
+        // dd($currentMonth);
 
         $startOfMonth = Carbon::createFromDate($currentYear, $currentMonth, 1)->startOfDay();
         $endOfMonth = Carbon::createFromDate($currentYear, $currentMonth, $totalDays)->endOfDay();
@@ -1334,7 +1336,7 @@ class MyTimeSheetService
     //     return $data;
     // }
 
-    public function getLeavesByLotId($id)
+    public function getLeavesByLotId($id, $userId)
     {
         $ids = explode(',', $id);
 
@@ -1343,7 +1345,9 @@ class MyTimeSheetService
         $data = DB::table('myleave as a')
             ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
             ->select('a.*', 'b.leave_types')
-            ->whereIn('a.id', $ids)
+            // ->whereIn('a.id', $ids)
+            ->where('a.up_user_id',$userId)
+            // ->where('a.status_final', 4)
             ->get();
 
         return $data;
@@ -1387,7 +1391,9 @@ class MyTimeSheetService
     {
         $ids = explode(',', $id);
 
-        $data = holidayModel::whereIn('id', $ids)->get();
+        // $data = holidayModel::whereIn('id', $ids)->get();
+        $data = holidayModel::get();
+        
 
         return $data;
     }
@@ -1401,18 +1407,21 @@ class MyTimeSheetService
     }
 
 
-    public function getEventsByLotId($id)
+    public function getEventsByLotId($id,$userId)
     {
         $ids = explode(',', $id);
 
-        $data = TimesheetEvent::whereIn('id', $ids)->get();
+        // $data = TimesheetEvent::whereIn('id', $ids)->get();
+        $data = TimesheetEvent::where('user_id', $userId)->get();
 
         return $data;
     }
 
-    public function getLogsByLotId($id)
+    public function getLogsByLotId($id,$userId)
     {
         $ids = explode(',', $id);
+
+        // dd($ids);
 
         // $data = TimesheetLog::whereIn('id', $ids)->get();
 
@@ -1422,7 +1431,8 @@ class MyTimeSheetService
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
             ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
-            ->whereIn('a.id', $ids)
+            // ->whereIn('a.id', $ids)
+            ->where('a.user_id', $userId)
             ->get();
 
         return $data;
@@ -1961,7 +1971,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Log has been Rejected Successfully';
+        $data['msg'] = 'Log Appeal is Rejected';
         return $data;
     }
 

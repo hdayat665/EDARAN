@@ -90,7 +90,6 @@
                                 <label for="firstname" class="form-label">Full Name</label>
                                 <input type="text" id="fullName" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" placeholder="FULL NAME" style="text-transform:uppercase" readonly>
                             </div>
-                            {{-- new --}}
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
@@ -122,7 +121,6 @@
                             </div>
                                 </div>
                             </div>
-                            {{-- new --}}
                             <div class="col-sm-6">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
                                 <input id="fileupload" type="file" name="fileID" class="form-control">
@@ -220,7 +218,6 @@
                                 </select>
                             </div>
                         </div>
-                        {{-- new --}}
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
@@ -260,11 +257,10 @@
                                     <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="00000000000">
                                 </div>
                             </div>
-                            {{-- new --}}
                             <div class="col-md-6">
                                 <div class="col p-2">
                                     <label for="phone-number2" class="form-label">Phone Number 2</label>
-                                    <input type="text" id="phone-number" name="phoneNo2" value="{{$profile->phoneNo2 ?? ''}}" class="form-control" aria-describedby="" placeholder="00000000000">
+                                    <input type="text" id="phone-number2" name="phoneNo2" value="{{$profile->phoneNo2 ?? ''}}" class="form-control" aria-describedby="phone-number2" placeholder="00000000000">
                                 </div>
                             </div>
                         </div>

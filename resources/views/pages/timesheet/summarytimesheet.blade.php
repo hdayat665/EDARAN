@@ -72,13 +72,16 @@
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
+                                        <?php
+                                            $monthNumber = DateTime::createFromFormat('M', $timesheet->month)->format('m');
+                                        ?>
                                         @if ($timesheet->status == 'approve' || $timesheet->status == 'amend')
                                             <div class="viewtimesheet">
-                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
+                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}?year={{ $timesheet->year }}&month={{$monthNumber}}" class="dropdown-item" id="viewtimesheet">View123</a>
                                             </div>
                                         @else 
                                             <div class="viewtimesheet">
-                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
+                                            <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}?year={{ $timesheet->year }}&month={{$monthNumber}}" class="dropdown-item" id="viewtimesheet">View123</a>
                                             </div>
                                             {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
@@ -107,6 +110,7 @@
                                     <div id="amended"> <span class="badge bg-danger rounded-pill" data-toggle="tooltipamend"  data-placement="bottom" title="{{$timesheet->amendreason}}">Amended</span> </div>
                                     @endif
                                 </td> -->
+
                                 <td>{{ $timesheetsday['workedDays'] }} / {{ $timesheetsday['workingDays'] }} days</td>
                             </tr>
                             @endforeach 

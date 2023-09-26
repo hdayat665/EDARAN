@@ -82,7 +82,7 @@
 
             <label class="form-label col-form-label col-md-1">Date of Birth*</label>
             <div class="col-md-2">
-                <input type="text" name="DOB" class="form-control" id="datepicker-birth" placeholder="YYYY/MM/DD" style="pointer-events: none" readonly />
+                <input type="text" name="DOB" class="form-control" id="datepicker-birth" placeholder="YYYY-MM-DD" style="pointer-events: none" readonly />
             </div>
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">

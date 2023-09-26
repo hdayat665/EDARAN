@@ -208,8 +208,14 @@ var handleCalendarDemo = function () {
         dataEvent = event.concat(log);
         dataleave = dataEvent.concat(leave);
         dataHoliday = dataleave.concat(holiday);
-        console.log(dataHoliday);
+        // console.log(dataHoliday);
+
+        var monthValue = $('#month').val();
+        var yearValue = $('#year').val();
+        var initialDateValue = yearValue + '-' + monthValue + '-01';
+
         var calendar = new FullCalendar.Calendar(calendarElm, {
+            initialDate: initialDateValue,
             datesSet: function (info) {
                 // Disable previous and next buttons
                 var prevButton = calendar.getPrevButton();

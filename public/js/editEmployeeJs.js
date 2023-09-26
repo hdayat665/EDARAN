@@ -168,7 +168,7 @@ $("#edit-profile-picture").on("click", function () {
 
     $('#firstname,#lastname').keypress(function (e) {
         var txt = String.fromCharCode(e.which);
-        if (!txt.match(/[A-Za-z0-9&. ]/)) {
+        if (txt.match(/[A-Za-z0-9&. ]/)) {
             return false;
         }
     });
@@ -547,27 +547,27 @@ $("#edit-profile-picture").on("click", function () {
 
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#DOBChild").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dobsibling").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#DOBS").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#expirydate6").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
@@ -682,23 +682,23 @@ $("#edit-profile-picture").on("click", function () {
 
     $("#expirydatemc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dommc").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
     $("#expirydatemcs").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
     $("#dommcs").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
@@ -872,14 +872,14 @@ $("#edit-profile-picture").on("click", function () {
     $("#datepicker-fromdate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
     });
 
     $("#datepicker-todate")
         .datepicker({
             todayHighlight: true,
             autoclose: true,
-            format: "yyyy/mm/dd",
+            format: "yyyy-mm-dd",
         })
         .on("changeDate", function (e) {
             // Get the from date
@@ -899,7 +899,7 @@ $("#edit-profile-picture").on("click", function () {
     $("#datepicker-others").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
     });
 
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
@@ -939,31 +939,31 @@ $("#edit-profile-picture").on("click", function () {
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
     $("#dob").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
     $("#expirydate").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
     $("#DOBaddparent").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
     $("#DOBP1").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
@@ -1632,6 +1632,8 @@ $("#edit-profile-picture").on("click", function () {
     sanitizeInputField("#lastname");
     sanitizeInputField("#emergency-firstname");
     sanitizeInputField("#emergency-lastname");
+    sanitizeInputField("#emergency-firstname_2");
+    sanitizeInputField("#emergency-lastname_2");
     sanitizeInputField("#firstnamemc");
     sanitizeInputField("#lastnamemc");
     sanitizeInputField("#firstNameChild");
@@ -1847,6 +1849,10 @@ $("#edit-profile-picture").on("click", function () {
                     digits: true,
                     rangelength: [10, 12],
                 },
+                phoneNo2: {
+                    digits: true,
+                    rangelength: [10, 11],
+                },
                 homeNo: {
                     digits: true,
                     rangelength: [9, 9],
@@ -1894,18 +1900,21 @@ $("#edit-profile-picture").on("click", function () {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
-
                 phoneNo: {
                     required: "Please Insert Phone Number",
-                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    digits: "Please Insert Phone Number",
                     rangelength: "Please Insert Valid Phone Number",
                 },
+                phoneNo2: {
+                    digits: "Please Insert Valid Phone Number 2",
+                    rangelength: "Please Insert Valid Phone Number 2",
+                },
                 homeNo: {
-                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
+                    digits: "Please Insert Valid Home Number",
                     rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
-                    digits: "Please Insert Correct Extension Number Without ' - ' or Space",
+                    digits: "Please Insert Valid Extension Number",
                 },
                 okuCardNum: {
                     required: "Please Insert OKU Card Number",
@@ -2760,7 +2769,7 @@ if (permanentChecked && correspondentChecked) {
                 lastName: "Please Insert Last Name",
                 relationship: "Please Choose Relationship",
                 contactNo: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 address1: "Please Insert Address 1",
@@ -2851,7 +2860,7 @@ if (permanentChecked && correspondentChecked) {
                 lastName_2: "Please Insert Last Name",
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
-                    required: "Please Insert Contact Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number",
                 },
                 address1_2: "Please Insert Address 1",
@@ -5499,7 +5508,7 @@ if (permanentChecked && correspondentChecked) {
 
     $("#expiryDate1").datepicker({
         todayHighlight: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         autoclose: true,
     });
 
