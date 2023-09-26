@@ -45,10 +45,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a type="button" class="btn btn-primary" id="saveAppeal">Submit</a>
-                </form>
+                <button class="btn btn-primary" id="saveAppeal">Submit</button>
             </div>
+            </form>
         </div>
     </div>
-</div>
+</div> 
 

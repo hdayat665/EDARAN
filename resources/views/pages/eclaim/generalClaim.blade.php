@@ -2,7 +2,7 @@
 @section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim | Apply General Claim</small></h1>
-        <div class="panel panel" id="generalClaimJs">
+        <div class="panel panel" id="generalClaimJs"> 
             <!-- <form id="addForm"> -->
                 <div class="panel-body">
                     <div class="row p-2">
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="modal-footer"> 
-                                        <button type="button" class="btn btn-secondary">Reset</button>
+                                        <button type="button" id='resetBtn' class="btn btn-secondary">Reset</button>
                                         <button type="submit" id="createGnc" class="btn btn-primary">Save</button>
                                         </form>
                                     </div>

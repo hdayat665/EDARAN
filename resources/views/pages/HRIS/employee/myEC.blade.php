@@ -22,8 +22,8 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="emergency-contactnumber" class="form-label">Contact Number*</label>
-                            <input type="text" id="emergency-contactnumber" name="contactNo" value="{{ $emergency->contactNo ?? '' }}" class="form-control" placeholder="CONTACT NUMBER" aria-describedby="emergency-contactnumber">
+                            <label for="emergency-contactnumber" class="form-label">Phone Number*</label>
+                            <input type="text" id="emergency-contactnumber" name="contactNo" value="{{ $emergency->contactNo ?? '' }}" class="form-control" placeholder="PHONE NUMBER" aria-describedby="emergency-contactnumber">
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
@@ -111,18 +111,18 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-firstname" class="form-label">First Name*</label>
-                                <input type="text" id="emergency-firstname" name="firstName_2" value="{{ $emergency->firstName_2 ?? '' }}" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
+                                <input type="text" id="emergency-firstname_2" name="firstName_2" value="{{ $emergency->firstName_2 ?? '' }}" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-lastname" class="form-label">Last Name*</label>
-                                <input type="text" id="emergency-lastname" name="lastName_2" value="{{ $emergency->lastName_2 ?? '' }}" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase" placeholder="LAST NAME">
+                                <input type="text" id="emergency-lastname_2" name="lastName_2" value="{{ $emergency->lastName_2 ?? '' }}" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase" placeholder="LAST NAME">
                                 <input type="hidden" name="id" value="{{$emergency->id ?? ''}}">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="emergency-contactnumber" class="form-label">Contact Number*</label>
-                                <input type="text" id="emergency-contactnumber" name="contactNo_2" value="{{ $emergency->contactNo_2 ?? '' }}" class="form-control" aria-describedby="emergency-contactnumber" placeholder="CONTACT NUMBER">
+                                <label for="emergency-contactnumber" class="form-label">Phone Number*</label>
+                                <input type="text" id="emergency-contactnumber" name="contactNo_2" value="{{ $emergency->contactNo_2 ?? '' }}" class="form-control" aria-describedby="emergency-contactnumber" placeholder="PHONE NUMBER">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>

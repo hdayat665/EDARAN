@@ -40,21 +40,21 @@ $(document).ready(function () {
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
 
     });
 
     $("#datepicker-birth").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
 
     });
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
 
     });
     $("#datepicker-expiryDate").datepicker({
@@ -107,6 +107,10 @@ $(document).ready(function () {
             });
             $("#gender").val("");
 
+            $("#datepicker-birth").prop("readonly", false);
+            $("#datepicker-birth").attr("style", "pointer-events: auto");
+            $("#datepicker-birth").val("");
+
         } else {
             $("#gender").prop("readonly", true);
             $("#gender").prop("required", false);
@@ -114,6 +118,10 @@ $(document).ready(function () {
             $("#gender").css({
                 backgroundColor: "#e9ecef",
             });
+
+            $("#datepicker-birth").prop("readonly", true);
+            $("#datepicker-birth").attr("style", "pointer-events: none");
+
         }
     });
 

@@ -14,14 +14,14 @@
 }
 
 /* Hide vertical scrollbar */
-.fc-scroller {
+/* .fc-scroller {
             overflow-y: hidden !important;
         }
 
         /* Hide horizontal scrollbar */
-        .fc-scroller {
+        /* .fc-scroller {
             overflow-x: hidden !important;
-        }
+        } */
 
 
     </style>
