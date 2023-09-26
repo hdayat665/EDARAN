@@ -7,11 +7,13 @@ use App\Models\DomainList;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Employee;
 use App\Models\leavetypesModel;
+use App\Models\TimesheetLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 use Illuminate\Support\Facades\Log;
 use DateTime;
+use Carbon\Carbon;
 
 class MailService
 {
@@ -77,7 +79,7 @@ class MailService
         // foreach ($user as $email) {
         // $receiver = $supervisor->workingEmail;
         // $response['typeEmail'] = 'hodApproval';
-            
+
         // $response['from'] = env('MAIL_FROM_ADDRESS');
         // $response['nameFrom'] = Auth::user()->username;
         // $response['subject'] = 'Monthly Claim | ' . $data->month;
@@ -502,6 +504,25 @@ class MailService
                 ->where('employment.tenant_id', Auth::user()->tenant_id)
                 ->first();
 
+        $formattedStartDate = Carbon::parse($data->start_date)->format('Y-m-d');
+        $formattedEndDate = Carbon::parse($data->end_date)->format('Y-m-d');
+
+        $checkTsrDate = TimesheetLog::where('tenant_id', $data->tenant_id)
+            ->where('user_id', $data->up_user_id)
+            ->whereBetween('date', [$formattedStartDate, $formattedEndDate])
+            ->get();
+
+        if (!$checkTsrDate->isEmpty()) {
+            TimesheetLog::where('tenant_id', $data->tenant_id)
+                ->where('user_id', $data->up_user_id)
+                ->whereBetween('date', [$formattedStartDate, $formattedEndDate])
+                ->delete();
+
+            $note = 'Your timesheet log has been deleted for the selected day(s).';
+        } else {
+            $note = null;
+        }
+
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
@@ -516,6 +537,7 @@ class MailService
             $response['employeeName'] = $approvedby->employeeName;
             $response['departmentName'] = $approvedby->departmentName;
             $response['designationName'] = $approvedby->designationName;
+            $response['note'] = $note;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));
@@ -554,9 +576,9 @@ class MailService
             $response['employeeName'] = $user->employeeName;
             $response['departmentName'] = $user->departmentName;
             $response['designationName'] = $user->designationName;
-            // $response['randomnumber'] = $data->generaterandom; 
-            $response['approveApp'] = env('APP_URL') . "approveAppealEmail/" . $data->generaterandom;
-            $response['rejectApp'] = env('APP_URL') . "viewRejectAppealEmail/" . $data->generaterandom;
+            // $response['randomnumber'] = $data->generaterandom;
+            $response['approveApp'] = env('APP_URL') . "/approveAppealEmail/" . $data->generaterandom;
+            $response['rejectApp'] = env('APP_URL') . "/viewRejectAppealEmail/" . $data->generaterandom;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));
@@ -644,10 +666,10 @@ class MailService
         $sendtoday = 0;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-                
-        $users = Employee::from('employment as a')
-            ->leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('a.user_id', '=', 'timesheet_event.user_id')
+
+
+        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -683,6 +705,7 @@ class MailService
                 ->whereNull('a.start_time')
                 ->pluck('a.day_of_week')
                 ->toArray();
+
 
                 $getWorkingHour = DB::table('leave_weekend as a')
                 ->where('a.state_id', $stateId)
@@ -804,14 +827,14 @@ class MailService
                     $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
                     $totalDurationSeconds += $eventSeconds;
                 }
-                
+
                 // Convert the total seconds back to the time format (HH:MM:SS)
                 $totalHours = floor($totalDurationSeconds / 3600);
                 $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
                 $totalSeconds = $totalDurationSeconds % 60;
-                
+
                 $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-                
+
                 list($eh1, $em1, $es1) = explode(':', $totalDuration);
                 $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
 
@@ -836,7 +859,7 @@ class MailService
                     'total_log_hours' => $user->total_log_hours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
                 $response = [
@@ -847,7 +870,7 @@ class MailService
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
 
@@ -863,10 +886,10 @@ class MailService
         $sendtoday = 1;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-                
-        $users = Employee::from('employment as a')
-            ->leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('a.user_id', '=', 'timesheet_event.user_id')
+
+
+        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -903,27 +926,6 @@ class MailService
                 ->pluck('a.day_of_week')
                 ->toArray();
 
-                $getWorkingHour = DB::table('leave_weekend as a')
-                ->where('a.state_id', $stateId)
-                ->whereNotNull('a.total_time')
-                ->select('a.total_time','a.day_of_week')
-                ->get();
-
-               // Create a mapping of total_time based on day_of_week
-                $workingHoursMap = [];
-                foreach ($getWorkingHour as $workingData) {
-                    $workingHoursMap[$workingData->day_of_week] = $workingData->total_time;
-                }
-
-                // Get the current day of the week (1 for Monday, 2 for Tuesday, etc.)
-                $currentDayOfWeek = date('N'); // 'N' returns the ISO-8601 numeric representation of the day of the week (1 for Monday, 7 for Sunday)
-
-                // Get the total_time for the current day of the week
-                if (isset($workingHoursMap[$currentDayOfWeek])) {
-                    $workingHour = $workingHoursMap[$currentDayOfWeek];
-                } else {
-                    $workingHour = '08:00';
-                }
 
                 $today_day_of_week = date('w', strtotime($today));
 
@@ -1023,14 +1025,14 @@ class MailService
                     $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
                     $totalDurationSeconds += $eventSeconds;
                 }
-                
+
                 // Convert the total seconds back to the time format (HH:MM:SS)
                 $totalHours = floor($totalDurationSeconds / 3600);
                 $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
                 $totalSeconds = $totalDurationSeconds % 60;
-                
+
                 $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-                
+
                 list($eh1, $em1, $es1) = explode(':', $totalDuration);
                 $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
 
@@ -1055,7 +1057,7 @@ class MailService
                     'total_log_hours' => $user->total_log_hours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
                 $response = [
@@ -1066,7 +1068,7 @@ class MailService
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
 
@@ -1082,10 +1084,10 @@ class MailService
         $sendtoday = 2;
 
         $today = $now->subDays($sendtoday)->format('Y-m-d');
-                
-        $users = Employee::from('employment as a')
-            ->leftJoin('timesheet_event', function ($join) use ($today) {
-            $join->on('a.user_id', '=', 'timesheet_event.user_id')
+
+
+        $users = Employee::leftJoin('timesheet_event', function ($join) use ($today) {
+            $join->on('employment.user_id', '=', 'timesheet_event.user_id')
                 ->leftJoin('attendance_event', function ($join) {
                     $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
                         ->where('attendance_event.status', '=', 'attend');
@@ -1122,27 +1124,6 @@ class MailService
                 ->pluck('a.day_of_week')
                 ->toArray();
 
-                $getWorkingHour = DB::table('leave_weekend as a')
-                ->where('a.state_id', $stateId)
-                ->whereNotNull('a.total_time')
-                ->select('a.total_time','a.day_of_week')
-                ->get();
-
-               // Create a mapping of total_time based on day_of_week
-                $workingHoursMap = [];
-                foreach ($getWorkingHour as $workingData) {
-                    $workingHoursMap[$workingData->day_of_week] = $workingData->total_time;
-                }
-
-                // Get the current day of the week (1 for Monday, 2 for Tuesday, etc.)
-                $currentDayOfWeek = date('N'); // 'N' returns the ISO-8601 numeric representation of the day of the week (1 for Monday, 7 for Sunday)
-
-                // Get the total_time for the current day of the week
-                if (isset($workingHoursMap[$currentDayOfWeek])) {
-                    $workingHour = $workingHoursMap[$currentDayOfWeek];
-                } else {
-                    $workingHour = '08:00';
-                }
 
                 $today_day_of_week = date('w', strtotime($today));
 
@@ -1242,14 +1223,14 @@ class MailService
                     $eventSeconds = ($eh * 3600) + ($em * 60) + $es;
                     $totalDurationSeconds += $eventSeconds;
                 }
-                
+
                 // Convert the total seconds back to the time format (HH:MM:SS)
                 $totalHours = floor($totalDurationSeconds / 3600);
                 $totalMinutes = floor(($totalDurationSeconds % 3600) / 60);
                 $totalSeconds = $totalDurationSeconds % 60;
-                
+
                 $totalDuration = sprintf('%02d:%02d:%02d', $totalHours, $totalMinutes, $totalSeconds);
-                
+
                 list($eh1, $em1, $es1) = explode(':', $totalDuration);
                 $totalDurationSeconds = ($eh1 * 3600) + ($em1 * 60) + $es1;
 
@@ -1274,7 +1255,7 @@ class MailService
                     'total_log_hours' => $user->total_log_hours,
                     "date" => $today,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
                 $response = [
@@ -1285,7 +1266,7 @@ class MailService
                     'date' => $today,
                     'user_id' => $user->user_id,
                     'mailtime' => $sendtoday,
-                   
+
                 ];
 
 
@@ -1388,7 +1369,7 @@ class MailService
                 Mail::to($receiver)->send(new MailMail($response, $data));
             }
         }
-    }   
+    }
 }
 
 

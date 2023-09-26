@@ -361,4 +361,21 @@ class MyleaveController extends Controller
 
         return response()->json($result);
     }
+
+    public function checkTSRLeave($date = '')
+    {
+        $gclh = new MyleaveService;
+
+        $result = $gclh->checkTSRLeave($date);
+
+        return response()->json($result);
+    }
+    public function checkTSRLeaveSecond($date = '')
+    {
+        $gclh = new MyleaveService;
+
+        $result = $gclh->checkTSRLeaveSecond($date);
+
+        return response()->json($result);
+    }
 }

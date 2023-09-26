@@ -9,6 +9,7 @@ use App\Models\ActivityLogs;
 use App\Models\holidayModel;
 use App\Models\MyLeaveModel;
 use App\Models\leaveWeekendModel;
+use App\Models\TimesheetLog;
 use App\Mail\Mail as MailMail;
 use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\DB;
@@ -687,6 +688,7 @@ class MyleaveService
             if ($settingEmail) {
 
                 $ms = new MailService;
+                
                 $ms->emailToApproveLeaveNoCommender($settingEmail);
             }
 
@@ -2148,4 +2150,70 @@ class MyleaveService
 
         return $dataA;
     }
+
+    public function checkTSRLeave($date)
+    {
+        $formattedDate = Carbon::parse($date)->format('Y-m-d');
+        $checkTsrDate = TimesheetLog::select('*')
+        ->where('tenant_id', '=', Auth::user()->tenant_id)
+        ->where('user_id', '=', Auth::user()->id)
+        ->where('date', '=', $formattedDate)
+        ->first();
+
+        if ($checkTsrDate) {
+            $data = [
+                'msg' => 'System will delete the timesheet log for the selected date after has been approved. Are you sure to proceed?',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        }else {
+            return [
+                'msg' => 'Date not found in the log',
+                'type' => 'info',
+            ];
+        }
+    }
+
+    public function checkTSRLeaveSecond($date) {
+
+        $explode = explode(',', $date);
+        $explode = explode(',', $date);
+        $startDate = Carbon::parse($explode[0]);
+        $endDate = Carbon::parse($explode[1]);
+
+        $datesWithLogs = [];
+
+        // Loop through each date between $startDate and $endDate
+        for ($dateToCheck = $startDate; $dateToCheck->lte($endDate); $dateToCheck->addDay()) {
+            $formattedDate = $dateToCheck->format('Y-m-d');
+
+            $checkTsrDate = TimesheetLog::select('*')
+                ->where('tenant_id', '=', Auth::user()->tenant_id)
+                ->where('user_id', '=', Auth::user()->id)
+                ->where('date', '=', $formattedDate)
+                ->first();
+
+            if ($checkTsrDate) {
+                $datesWithLogs[] = $formattedDate;
+            }
+        }
+
+        if (count($datesWithLogs) > 0) {
+            $data = [
+                'msg' => 'System will delete the timesheet log for the selected dates after they have been approved. Are you sure to proceed?',
+                'status' => config('app.response.error.status'),
+                'type' => config('app.response.error.type'),
+                'title' => config('app.response.error.title')
+            ];
+            return $data;
+        } else {
+            return [
+                'msg' => 'Dates not found in the log',
+                'type' => 'info',
+            ];
+        }
+    }
+
 }
