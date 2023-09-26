@@ -493,7 +493,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getroleAdmin/{id}', 'getroleAdmin');
             Route::get('/getroleFinance/{id}', 'getroleFinance');
             Route::get('/getroleCA/{id}', 'getroleCA');
-
+            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
 
 
 

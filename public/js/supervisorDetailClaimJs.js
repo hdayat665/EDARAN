@@ -114,7 +114,12 @@ $(document).on("click", "#SVRtravel", function() {
         var data = response.original;
 
         // Check if the DataTable is already initialized
-        var table = $("#tableTravelling").DataTable();
+        var table = $("#tableTravelling").DataTable({
+            paging: false,
+            scrollX: true,
+            info:false,
+            
+        });
         if (table) {
             // The DataTable is already initialized, so we can just update the data
             table.clear();
@@ -184,8 +189,9 @@ $(document).on("click", "#SVRtravel", function() {
         } else {
             // The DataTable is not yet initialized, so we need to initialize it
             $("#tableTravelling").DataTable({
-                paging: true,
+                paging: false,
                 scrollX: true,
+                info:false,
                 columns: [
                     { title: "Action", data: "id", "data-column": "id" },
                     { title: "Start Time" },
@@ -201,7 +207,12 @@ $(document).on("click", "#SVRtravel", function() {
                 ]
             });
 
-            table = $("#tableTravelling").DataTable();
+            table = $("#tableTravelling").DataTable({
+                paging: false,
+                scrollX: true,
+                info:false,
+                
+            });
             for (var i = 0; i < data.length; i++) {
                 var rowData = data[i];
                 var row = [
