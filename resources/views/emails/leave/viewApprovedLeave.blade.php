@@ -32,7 +32,9 @@
         <p style="display: none;"><strong>Leave Session</strong>: {{ $data['data']->leave_session }}</p>
     @endif
     <p><strong>Reason</strong> : {{ $data['data']->reason ?? '-' }} </p>
-
+    @if(!empty($note))
+        <p><strong>Note</strong>: {{ $note }}</p>
+    @endif
 
     <p>Please click the link button for further action </p>
     <a href="{{ env('APP_URL') }}"><button>Click Here</button></a>

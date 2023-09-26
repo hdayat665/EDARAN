@@ -790,6 +790,9 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/checkLeaveEntitlement', 'checkLeaveEntitlement');
 
+            Route::get('/checkTSRLeave/{date}', 'checkTSRLeave');
+            Route::get('/checkTSRLeaveSecond/{date}', 'checkTSRLeaveSecond');
+
 
 
             //checking holiday
