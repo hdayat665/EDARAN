@@ -11,7 +11,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Service\MailService;
 use App\Models\TimesheetLog;
 use App\Models\TimesheetAppeals;
+use App\Models\TimesheetApproval;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -19,6 +22,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\IncrementAgeChildrenCommand::class,
         \App\Console\Commands\IncrementAgeParentCommand::class,
         \App\Console\Commands\IncrementAgeCompanionCommand::class,
+        \App\Console\Commands\TimesheetApprovalAutoSubmit::class,
     ];
 
     /**
@@ -52,15 +56,13 @@ class Kernel extends ConsoleKernel
         //send email for event reminder
         $schedule->call(function () {
         $mailService = new MailService();
-        $mailService->emailEventReminder(); 
-        // Log::info('Email sent successfully');
+        $mailService->emailEventReminder();
         })->everyFiveMinutes();
 
         //send email for user not yet completed log for curent date
         $schedule->call(function () {
         $mailService = new MailService();
         $mailService->emailLogMissedForToday(); 
-        // Log::info('Email sent successfully');
         })->dailyAt('12:00');
         
         //send email for user not yet completed log for yesterday
@@ -73,8 +75,9 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
         $mailService = new MailService();
         $mailService->emailLogMissedFor2daysAgo(); 
-        // Log::info('Email sent successfully');
         })->dailyAt('14:00');
+
+        $schedule->command('auto:submitApproval')->monthly();
     }
 
     /**
