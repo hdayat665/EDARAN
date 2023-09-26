@@ -5,11 +5,12 @@
                 <h5 class="modal-title" id="exampleModalLabel">Assign Project Location</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="assignProjectMemberModal2">
                 <form id="assignProjectMemberForm">
                     <div class="mb-3">
                         <label class="form-label">Project Member Name:</label><br><br>
-                        <select class="selectpicker form-control" name="employee_id[]" id="projectmember" multiple>
+                        <select class="selectpicker form-select" name="employee_id[]" id="projectmember" aria-label="Default select example" multiple>
+                        {{-- <select class="form-select" id="projectmember" name="employee_id[]" multiple="multiple"> --}}
                             @php
                                 $sortedProjectMembers = $projectMembers->sortBy('employeeName');
                             @endphp
@@ -17,7 +18,9 @@
                                 <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                             @endforeach
                         </select>
+                        <div hidden id="projectmember-err" class="error" ></div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Project Location Name : </label><br><br>
                         <select class="selectpicker form-control" name="location[]" id="projectlocation" multiple>
@@ -26,6 +29,7 @@
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
                             @endforeach
                         </select>
+                        <div hidden id="projectlocation-err" class="error" ></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
