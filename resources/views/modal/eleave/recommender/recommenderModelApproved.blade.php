@@ -18,7 +18,7 @@
                             <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type1">
                         </div>
                         <div class="col-12" style="width:50%">
-                            <label>Number of Day(s) Applied</label><br>
+                            <label class="form-label row-md-6">Number of Day(s) Applied</label><br>
                             <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied">
                         </div>
                         <div class="col-12" style="width:50%">
