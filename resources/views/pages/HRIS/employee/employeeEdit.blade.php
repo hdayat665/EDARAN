@@ -19,7 +19,11 @@
                     @endif
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
                         <p>{{$username ?? ''}}</p>
-                        <span class="badge bg-success d-block p-2">Active</span>
+                        @if($employment->status == 'active')
+                        <span class="badge bg-success d-block p-2">Active </span>
+                        @else
+                        <span class="badge bg-danger d-block p-2">Deactivate</span>
+                        @endif
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-briefcase fa-fw me-2"></i></span>
                             <input type="text" class="form-control bg-white" value="{{getDesignationName($employment->user_id) ?? '-'}}" aria-label="Username" aria-describedby="basic-addon1" readonly>

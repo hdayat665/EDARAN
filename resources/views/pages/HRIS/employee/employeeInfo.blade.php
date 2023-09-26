@@ -12,7 +12,7 @@
     </style>
 
 <div id="content" class="app-content">
-    <h1 class="page-header">HRMIS | Employee Information</h1>
+    <h1 class="page-header">HRMIS <small>| Employee Information</small></h1>
     <div class="panel panel">
         <div class="panel-heading">
             <a href="/registerEmployee" class="btn btn-primary">+ Register New Employee</a>
@@ -63,7 +63,7 @@
                                     <ul class="dropdown-menu custom-dropdown-menu wan">
                                         <li><a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee</a></li>
                                         <div class="dropdown-divider"></div>
-                                        <li><a id="cancelButton" data-id="{{$employeeInfo->user_id}}" class="dropdown-item">Cancel Termination</a></li>
+                                        <li><a id="cancelButton" data-id="{{$employeeInfo->user_id}}" class="dropdown-item">Activate Employee</a></li>
                                     </ul>
                                 </div>
                             @endif
