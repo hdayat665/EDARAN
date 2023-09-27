@@ -45,7 +45,7 @@
 
             @foreach ($claims as $claim)
                 @if (isset($config->status))
-                    @if ($claim->f_recommender == 'recommend' && ($claim->f_approval == '' || $claim->f_approval == null) && eval("return $condByPass;"))
+                    @if ($claim->f_recommender == 'recommend' && ($claim->f_approval == '' || $claim->f_approval == null))
                         <tr>
 
                             <td>
