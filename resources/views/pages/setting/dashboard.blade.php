@@ -62,6 +62,12 @@
                     <a class="mb-10px" href="/news"><i class="fa fa-newspaper fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">News</h5>
                 </div>
+            </div><br><br><br>
+            <div class="row text-center">
+                <div class="col-lg-2">
+                    <a class="mb-10px" href="/knowledgeLib"><i class="fa fa-newspaper fa-4x text-blue"></i></a><br><br>
+                    <h5 class="mb-5px">Knowledge Library</h5>
+                </div>
             </div>
             <br>
             <h3 class="mt-10px"></i> e-Attendance Settings</h3> <br>
