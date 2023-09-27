@@ -1590,7 +1590,7 @@ class ClaimApprovalController extends Controller
         $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
         $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
         $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
-        dd($result);
+        
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
         if ($type == 1) {
@@ -1603,7 +1603,7 @@ class ClaimApprovalController extends Controller
             $view = 'otherNonOutside';
         }
 
-        // return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
     }
 
     public function createChequeNumber(Request $r, $id = '')
