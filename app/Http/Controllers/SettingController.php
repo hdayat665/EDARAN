@@ -594,7 +594,16 @@ class SettingController extends Controller
 
         $result = $ss->newsView();
 
-        return view('pages.setting.news', $result);
+        return view('pages.setting.news',$result);
+    }
+    
+    public function knowledgeLib()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->knowledgeLibView();
+
+        return view('pages.setting.knowledgeLibrary', $result);
     }
 
     public function roleView()
@@ -1683,6 +1692,33 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateSystemRole($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function createknowledgeLib(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createknowledgeLib($r);
+
+        return response()->json($result);
+    }
+
+    public function getKnowledgebyId($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getKnowledgebyId($id);
+
+        return $result;
+    }
+
+    public function deleteKnowledgeLib($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteKnowledgeLib($id);
 
         return response()->json($result);
     }

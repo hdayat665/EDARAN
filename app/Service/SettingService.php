@@ -47,6 +47,7 @@ use App\Models\leaveEntitlementModel;
 use App\Models\leaveCarryForwordModel;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
+use App\Models\KnowledgeLibrary;
 
 class SettingService
 {
@@ -4274,6 +4275,81 @@ class SettingService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Role is Updated';
+
+        return $data;
+    }
+
+    public function createknowledgeLib($r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $newsData = KnowledgeLibrary::where([['title', $input['title']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($newsData) {
+            $data['msg'] = 'Title already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = $user->tenant_id;
+        $input['addedBy'] = $user->username;
+
+        KnowledgeLibrary::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Knowledge Library is created';
+
+        return $data;
+    }
+
+    public function knowledgeLibView()
+    {
+        $data['knowledge'] = KnowledgeLibrary::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
+        return $data;
+    }
+
+    public function getKnowledgebyId($id)
+    {
+        $data = KnowledgeLibrary::find($id);
+
+        return $data;
+    }
+
+    public function deleteKnowledgeLib($id)
+    {
+        $libs = KnowledgeLibrary::find($id);
+
+        if (!$libs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'News not found';
+        } else {
+            $libs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Knowledge Library is Deleted';
+        }
 
         return $data;
     }
