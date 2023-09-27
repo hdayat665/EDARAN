@@ -23,9 +23,25 @@ $(document).ready(function () {
         search: true,
     });
 
-    $("#projectmember").picker({
-        search: true,
+
+
+    $('#projectmember').select2({
+        placeholder: "PLEASE CHOOSE",
+        dropdownParent: $("#assignProjectMemberModal2"),
     });
+
+    $('#projectlocation').select2({
+        placeholder: "PLEASE CHOOSE",
+        dropdownParent: $("#assignProjectMemberModal2"),
+    });
+
+    // $("#projectlocation").picker({
+    //     search: true,
+    // });
+
+    // $("#projectmember").picker
+    // ({ search: true
+    // });
 
     $(".select1").select2({
         placeholder: "PLEASE CHOOSE",
@@ -53,10 +69,6 @@ $(document).ready(function () {
         allowClear: true,
         dropdownParent: $("#tab1"),
         // multiple: true,
-    });
-
-    $("#projectlocation").picker({
-        search: true,
     });
 
     $("#joined_date").datepicker({
@@ -699,14 +711,27 @@ $(document).ready(function () {
     $("#assignProjectMember").click(function (e) {
         $("#assignProjectMemberForm").validate({
             rules: {
-                location_name: "required",
+                "employee_id[]": "required",
+                "location[]": "required",
             },
 
             messages: {
-                location_name: "Please Select Location",
+                "employee_id[]": "Please Select Project name",
+                "location[]": "Please Select Location",
+            },
+
+            errorPlacement: function(error, element) {
+                if (element.attr("name") === "employee_id[]") {
+                    error.insertAfter("#projectmember-err");
+                } else if (element.attr("name") === "location[]") {
+                    error.insertAfter("#projectlocation-err");
+                } else {
+                    error.insertAfter(element);
+                }
             },
 
             submitHandler: function (form) {
+
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("assignProjectMemberForm")
