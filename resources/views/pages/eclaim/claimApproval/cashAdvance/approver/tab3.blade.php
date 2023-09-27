@@ -2,7 +2,7 @@
     <table id="rejected" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th data-orderable="false">Action</th>
+                <th data-orderable="false">No</th>
                 <th class="text-nowrap">Claim ID</th>
                 <th class="text-nowrap">Requested By</th>
                 <th class="text-nowrap">Type of Cash Advance</th>
@@ -12,27 +12,16 @@
                 <th class="text-nowrap">Status Date</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Remarks</th>
+                <th data-orderable="false">Action</th>
             </tr>
         </thead>
         <tbody>
+        <?php $no = 1 ?>
             @foreach ($cas as $ca)
                 @if ($ca->approver == 'reject')
                     <tr>
-                        
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="/cashAdvanceApproverDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
-                                        aria-hidden="true"></i>
-                                    View PO
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <!-- <a href="javascript:;" id="approveButton3" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="rejectButton3" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-ban" aria-hidden="true"></i> Reject</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
-                            </div>
+                        <td>{{ $no++ }} </td>   
+                         
                         <td>CA-{{ $ca->id }}</td>
                         <td>{{ $ca->userProfil4e->fullName ?? '-' }}</td>
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
@@ -60,6 +49,21 @@
                             <td><span class="badge bg-lime" data-toggle="activec" title="{{$ca->status_desc}}">In Queue</span></td>
                         @endif
                         <td>{{ $ca->remark ?? '-' }}</td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                                <a href="/cashAdvanceApproverDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
+                                        aria-hidden="true"></i>
+                                    View PO
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <!-- <a href="javascript:;" id="approveButton3" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="javascript:;" id="rejectButton3" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-ban" aria-hidden="true"></i> Reject</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
+                            </div>
+                        </td>  
                     </tr>
                 @endif
             @endforeach
