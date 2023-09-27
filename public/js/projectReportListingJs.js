@@ -24,23 +24,23 @@ $(document).ready(function() {
             },
             {
                 extend: 'pdf',
-className: 'btn-blue',
-exportOptions: {
-    rows: function (idx, data, node) {
-        var length = $('#projectReportListing').DataTable().page.len();
-        if (length === -1 || idx < length) {
-            return true;
-        }
-        return false;
-    },
-    columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-},
-customize: function (doc) {
-    // Change the page orientation to landscape
-    doc.pageOrientation = 'landscape';
+                className: 'btn-blue',
+                exportOptions: {
+                    rows: function (idx, data, node) {
+                        var length = $('#projectReportListing').DataTable().page.len();
+                        if (length === -1 || idx < length) {
+                            return true;
+                        }
+                        return false;
+                    },
+                    columns: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                },
+                customize: function (doc) {
+                    // Change the page orientation to landscape
+                    doc.pageOrientation = 'landscape';
 
-    // You can further customize the PDF here if needed
-}
+                    // You can further customize the PDF here if needed
+                }
             },
             {
                 extend: 'print',

@@ -27,6 +27,7 @@ $(document).ready(function () {
 
     $('#projectmember').select2({
         placeholder: "PLEASE CHOOSE",
+        allowClear: true,
         dropdownParent: $("#assignProjectMemberModal2"),
     });
 
