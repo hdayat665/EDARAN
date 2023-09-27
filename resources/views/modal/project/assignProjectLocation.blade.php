@@ -39,5 +39,9 @@
             </div>
         </div>
     </div>
-
 </div>
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+        padding-left: 18px; /* Adjust the padding as needed */
+}
+</style>

@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\holidayModel;
+use App\Models\KnowledgeLibrary;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Service\Carbon;
@@ -415,6 +416,19 @@ class DashboardService
 
         return $datesNotInFinalArray;
 
+    }
+
+    public function knowledgeLib()
+    {
+        $data['knowledgeLib'] = KnowledgeLibrary::where('tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        if ($data['knowledgeLib']->isEmpty()) {
+            $data['knowledgeLib'] = collect(); // Set an empty collection if there are no news items
+        }
+
+        return $data;
     }
 
 }

@@ -327,6 +327,20 @@
         },
     });
 
+    $('#tableknowledge-dashboard').DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function(settings, json) {
+            $("#tableknowledge-dashboard").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+
     $(document).on("click", "#markAllAsRead", function() {
         var id = $(this).data('id');
         return $.ajax({

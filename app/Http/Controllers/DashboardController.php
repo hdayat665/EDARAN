@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $ss = new DashboardService;
         $result['news'] = $ss->newsView();
         $result['events'] = $ss->eventView();
+        $result['knowledgeLib'] = $ss->knowledgeLib();
         $result['numberOfObjects'] = $ss->myProject();
         $result['allproject'] = $ss->allproject();
         $result['allEmployee'] = $ss->allEmployee();
