@@ -172,6 +172,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateOtherMtcAdminRec', 'updateOtherMtcAdminRec');
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+            Route::post('/createCAPVNumber', 'createCAPVNumber');
         });
 
         Route::controller(ProfileController::class)->group(function () {

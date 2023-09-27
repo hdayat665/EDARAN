@@ -361,4 +361,55 @@ $(document).ready(function () {
         // Call the window.print() function to trigger the browser's print dialog
         window.print();
     });
+
+    $("#addPV").on("click", function () {
+        $("#modalAddPv").modal("show");
+    });
+
+    $("#savePVNumber").click(function (e) {
+        $("#addPVNumberF").validate({
+            rules: {
+               
+                
+            },
+
+            messages: {
+                
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addPVNumberF")
+                    );
+                    // var data = $('#tree').jstree("get_selected");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createCAPVNumber",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
 });
