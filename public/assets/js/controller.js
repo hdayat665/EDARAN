@@ -22,6 +22,7 @@ requirejs.config({
         designationJs: assets + "/js/designationJs",
         SOPJs: assets + "/js/SOPJs",
         newsJs: assets + "/js/newsJs",
+        knowledgeLiBJs: assets + "/js/knowledgeLibJS",
         employmentTypeJs: assets + "/js/employmentTypeJs",
         editEmployeeJs: assets + "/js/editEmployeeJs",
         addressProfile: assets + "/js/addressProfile",
@@ -225,6 +226,10 @@ if ($("#SOPJs").length > 0) {
 
 if ($("#newsJs").length > 0) {
     requirejs(["newsJs"]);
+}
+
+if ($("#knowledgeLiBJs").length > 0) {
+    requirejs(["knowledgeLiBJs"]);
 }
 
 if ($("#employmentTypeJs").length > 0) {

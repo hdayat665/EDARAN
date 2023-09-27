@@ -169,7 +169,42 @@
 			</div>
 		</div>
 
-
+<!-- knowledge library -->
+	<div class="row">
+		<div class="col-lg-12 panel panel-inverse" data-sortable-id="index-1">
+				<div class="panel-heading mt-15px">
+							<h4 class="panel-title"> <i class="fas fa-message fa-fw me-3"></i>Knowledge Library</h4>
+				</div>
+				<div class="panel-body">
+				<table id="tableknowledge-dashboard" style="width: 100%;" class="table table-striped table-bordered align-middle">
+					<thead>
+						<tr>
+							<th class="text-nowrap">No.</th>
+							<th class="text-nowrap">Title</th>
+							<th class="text-nowrap">Content</th>
+							<th class="text-nowrap">Link</th>
+							<th class="text-nowrap">Attachment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $id = 0 ?>
+						@if ($knowledgeLib['knowledgeLib'])
+						@foreach ($knowledgeLib['knowledgeLib'] as $know)
+							<?php $id++ ?>
+							<tr>
+								<td width="1%" class="fw-bold text-dark">{{ $id }}</td>
+								<td>{{ $know['title'] }}</td>
+								<td>{{ $know['content'] }}</td>
+								<td><a href="{{ $know['sourceURL'] }}" target="_blank">{{ $know['sourceURL'] }}</a></td>
+                                <td><a href="{{ route('view', ['filename' => $know->file ?? '']) }}" target="_blank">{{$know->file ?? ''}}</a></td>
+							</tr>
+						@endforeach
+						@endif
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 	<!--  -->
 	<!-- <div class="row">
 		<div class="col-lg-12 panel panel-inverse" data-sortable-id="index-1">

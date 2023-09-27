@@ -408,6 +408,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
+            Route::get('/knowledgeLib', 'knowledgeLib');
+            Route::post('/createknowledgeLib', 'createknowledgeLib');
+            Route::get('/getKnowledgebyId/{id}', 'getKnowledgebyId');
+            Route::delete('/deleteKnowledgeLib/{id}', 'deleteKnowledgeLib');
 
             Route::get('/getStatebyCountryBranch/{id}', 'getStatebyCountryBranch');
             Route::get('/getCitybyStateBranch/{id}', 'getCitybyStateBranch');
