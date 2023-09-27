@@ -3857,11 +3857,17 @@ class SettingService
                 MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.end_time END)
             ) AS monday_end"),
             DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.total_time END)
+            ) AS monday_total"),
+            DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.start_time END)
             ) AS tuesday_start"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.end_time END)
             ) AS tuesday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.total_time END)
+            ) AS tuesday_total"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.start_time END)
             ) AS webnesday_start"),
@@ -3869,11 +3875,17 @@ class SettingService
                 MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.end_time END)
             ) AS webnesday_end"),
             DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.total_time END)
+            ) AS webnesday_total"),
+            DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.start_time END)
             ) AS thursday_start"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.end_time END)
             ) AS thursday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.total_time END)
+            ) AS thursday_total"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.start_time END)
             ) AS friday_start"),
@@ -3881,22 +3893,33 @@ class SettingService
                 MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.end_time END)
             ) AS friday_end"),
             DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.total_time END)
+            ) AS friday_total"),
+            DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.start_time END)
             ) AS saturday_start"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.end_time END)
             ) AS saturday_end"),
             DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.total_time END)
+            ) AS saturday_total"),
+            DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.start_time END)
             ) AS sunday_start"),
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.end_time END)
             ) AS sunday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.total_time END)
+            ) AS sunday_total"),
         )
             ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
             ->Join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
             ->groupBy('leave_weekend.state_id')
             ->get();
+
+        // dd($data);
 
         return $data;
     }

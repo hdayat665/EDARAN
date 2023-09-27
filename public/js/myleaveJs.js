@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     var checkLeaveEntitlement = checkLeaveEntitlement();
 
     function checkLeaveEntitlement() {
@@ -37,9 +36,6 @@ $(document).ready(function () {
         });
     });
 
-
-
-
     $(document).ready(function() {
 
         var originalGetComputedStyle = window.getComputedStyle;
@@ -54,10 +50,7 @@ $(document).ready(function () {
                 };
             }
         };
-
-
         $(".test").hide();
-
         $(document).on("click", ".dropdown-toggle", function(e) {
             e.stopPropagation(); // mencegah event dari bubbling ke atas
 
@@ -74,11 +67,8 @@ $(document).ready(function () {
         });
     });
 
-
     const fileInput = document.getElementById("fileupload");
-
     fileInput.addEventListener("change", validateFile);
-
     function validateFile() {
         const fileSize = fileInput.files[0].size / 1024 / 1024; // ukuran file dalam MB
         if (fileSize > 5) {
@@ -86,10 +76,12 @@ $(document).ready(function () {
             fileInput.value = ""; // reset input file
         }
     }
+
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
         $('.nav-tabs a[href="#' + hash + '"]').tab("show");
     }
+
     $(".nav-tabs a").on("shown.bs.tab", function (e) {
         window.location.hash = e.target.hash;
     });
@@ -160,7 +152,6 @@ $(document).ready(function () {
         $("#yearLeave").text("Leave Carried Foward " + data[1] + "");
         $("#LapseLeaveDate").text("Lapsed Date: " + (data[2] ? data[2] : "Data not available"));
     });
-
 
     var mypie1 = mypie1();
 
@@ -234,6 +225,7 @@ $(document).ready(function () {
     }
 
     mypie2.then(function (datapie2) {
+
         Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
         Chart.defaults.font.family = app.font.family;
         Chart.defaults.font.weight = 500;
@@ -310,13 +302,11 @@ $(document).ready(function () {
         })
         .datepicker("setDate", new Date());
 
-    $("#datepicker-applied")
-        .on("show", function (e) {
+    $("#datepicker-applied").on("show", function (e) {
             e.preventDefault();
             e.stopPropagation();
             return false;
-        })
-        .on("click", function (e) {
+        }).on("click", function (e) {
             $(this).datepicker("hide");
         });
 
@@ -400,55 +390,81 @@ $(document).ready(function () {
         }
     });
 
-    // $(document).on("change", "#datepicker-start, #datepicker-end", function () {
-    //     var startDate = $("#datepicker-start").val();
-    //     var endDate = $("#datepicker-end").val();
-    //     var totalDays = "";
-    //     var date = startDate + "," + endDate;
+    $(document).on("change", "#datepicker-leave", function () {
+        var startDate = $("#datepicker-leave").val();
 
-    //     if(startDate.trim() === ""){
-    //         $("#datepicker-end").val("");
-    //     }
+        if (startDate) {
+            checktsrdate(startDate).then(function (data) {
+                if (data && data.title) {
+                    requirejs(["sweetAlert2"], function (swal) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type === "error") {
+                                // Handle error
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                }
+            });
+        }
 
-    //     if (startDate && endDate) {
+        function checktsrdate(date) {
+            return $.ajax({
+                url: "/checkTSRLeave/" + date,
+            });
+        }
+    });
 
-    //         var holidayPromise = holidayPromisex(date);
-
-    //         function holidayPromisex(date) {
-    //             return $.ajax({
-    //                 url: "/myholiday/" + date,
-    //             });
-    //         }
-
-    //         holidayPromise.done(function (totalDaysx) {
-
-    //             var total_holiday = totalDaysx;
-    //             var date1 = new Date(startDate);
-    //             var date2 = new Date(endDate);
-    //             var timeDiff = date2.getTime() - date1.getTime();
-    //             var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-    //             var weekends = 0;
-    //             for (var i = 0; i <= dayDiff; i++) {
-    //                 var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
-    //                 if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
-    //                     weekends++;
-    //                 }
-    //             }
-
-    //             totalDays = dayDiff + 1 - weekends - total_holiday;
-
-    //             if (totalDays <= 0) {
-    //                 $("#datepicker-end").val("");
-    //                 $("#select4").val("");
-    //             } else {
-    //                 $("#select4").val(totalDays);
-    //             }
-    //         });
-    //     }
-    // });
 
     $(document).on("change", "#datepicker-start, #datepicker-end", function () {
+
+        var startDate = $("#datepicker-start").val();
+        var endDate = $("#datepicker-end").val();
+        var date = startDate + "," + endDate;
+
+        if (startDate && endDate) {
+            checktsrdateSecond(date).then(function (data) {
+                if (data && data.title) {
+                    requirejs(["sweetAlert2"], function (swal) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type === "error") {
+                                // Handle error
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
+        function checktsrdateSecond(date) {
+            return $.ajax({
+                url: "/checkTSRLeaveSecond/" + date,
+            });
+        }
+
+    });
+
+    $(document).on("change", "#datepicker-start, #datepicker-end", function () {
+
         var startDate = $("#datepicker-start").val();
         var endDate = $("#datepicker-end").val();
         var totalDays = "";
@@ -467,8 +483,6 @@ $(document).ready(function () {
                     url: "/myholiday/" + date,
                 });
             }
-
-
 
             holidayPromise.done(function (dataA) {
 
@@ -495,21 +509,14 @@ $(document).ready(function () {
 
                         var total_holiday = dataA[0];
                         var getweekend = dataA[1];
-
-                        console.log(getweekend);
-
-
                         var date1 = new Date(startDate);
                         var date2 = new Date(endDate);
                         var timeDiff = date2.getTime() - date1.getTime();
                         var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
                         var weekends = 0;
-
                         for (var i = 0; i <= dayDiff; i++) {
                             var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
-
-
                             var isWeekend = false;
                             for (var j = 0; j < getweekend.length; j++) {
                                 if (parseInt(getweekend[j].day_of_week) === currentDate.getDay() && getweekend[j].total_time === null) {
@@ -517,16 +524,11 @@ $(document).ready(function () {
                                     break;
                                 }
                             }
-
                             if (isWeekend) {
                                 weekends++;
                             }
                         }
-
                         console.log(total_holiday);
-
-
-
                         totalDays = dayDiff + 1 - weekends - total_holiday;
 
                         if (totalDays <= 0) {
@@ -535,14 +537,13 @@ $(document).ready(function () {
                         } else {
                             $("#select4").val(totalDays);
                         }
-
                     }
                 });
 
 
             });
         }
-        });
+    });
 
     $(document).ready(function () {
         function updateFilterVisibility() {
@@ -557,20 +558,18 @@ $(document).ready(function () {
             }
         }
 
-        updateFilterVisibility(); // Memanggil fungsi pada masa pemuatan laman
+        updateFilterVisibility();
 
         $("#filter").click(function () {
             $("#filterleave").toggle();
         });
 
         $("#reset").on("click", function (e) {
-            e.preventDefault(); // Menghentikan aksi asal (misalnya, penghantaran borang)
-
+            e.preventDefault();
             $("#datepicker-filter").val($("#atepicker-filter").data("default-value"));
             $("#typelist").val($("#typelist").data("default-value"));
             $("#status_searching").val($("#status_searching").data("default-value"));
-
-            $("#filterleave").show(); // Memastikan #filterleave tetap terbuka selepas "reset" ditekan
+            $("#filterleave").show();
         });
     });
 
@@ -671,7 +670,6 @@ $(document).ready(function () {
         var myleaveData = myleave(id);
 
         myleaveData.then(function (data) {
-            console.log(data);
             $("#datepicker-applied1").val(data[0].applied_date);
             $("#typeofleave1").val(data[0].lt_type_id);
             $("#totalapply1").val(data[0].total_day_applied);
@@ -814,7 +812,6 @@ $(document).ready(function () {
     $(document).on("click", "#editButton2", function () {
         var id = $(this).data("id");
         var myleaveData = myleave(id);
-        // console.log(myleaveData);
 
         myleaveData.then(function (data) {
             $("#datafullname2").val(data[0].username);
@@ -827,7 +824,6 @@ $(document).ready(function () {
             $("#datepicker-end2").val(data[0].end_date);
             $("#reason2").val(data[0].reason);
             $("#reasonreject2").val(data[0].reason);
-            // console.log(data[0]);
             if (data[0].day_applied == 1) {
                 $("#dayApplied2").val("ONE DAY");
             } else if (data[0].day_applied == 0.5) {
@@ -960,8 +956,6 @@ $(document).ready(function () {
 
     $(document).on("click", "#deleteButton", function () {
         id = $(this).data("id");
-        // console.log(id);
-        // return false;
         requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure!",
@@ -975,11 +969,7 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: "/deletemyleave/" + id,
-                    // dataType: "json",
                     data: { _method: "DELETE" },
-
-                    // processData: false,
-                    // contentType: false,
                 }).then(function (data) {
                     swal({
                         title: data.title,
@@ -1002,16 +992,12 @@ $(document).ready(function () {
 
     $(document).on("click", "#editButton2", function () {
         var id = $(this).data("id");
-        console.log(id);
         var myleavethree = myleavesv(id);
-        // console.log(myleaveData2);
 
         myleavethree.then(function (data) {
             $("#datafullname").val(data[0].fullName);
-            console.log(data[0]);
             $("#applieddate").val(data[0].applied_date);
             $("#type1").val(data[0].type);
-            // $("#dayapplied").val(data[0].day_applied);
             $("#startdate").val(data[0].start_date);
             $("#enddate").val(data[0].end_date);
             $("#totaldayapplied").val(data[0].total_day_applied);
@@ -1035,13 +1021,10 @@ $(document).ready(function () {
             }
 
             if (data.status === 1) {
-                // tampilkan status "Approved"
                 $("#status_display").text($("#status_1").text());
             } else if (data.status === 2) {
-                // tampilkan status "Rejected"
                 $("#status_display").text($("#status_2").text());
             } else {
-                // tampilkan pesan kesalahan jika status tidak valid
                 $("#status_display").text("Invalid status");
             }
         });
@@ -1056,25 +1039,17 @@ $(document).ready(function () {
     $(document).on("change", "#typeofleavehidden", function () {
         var checktype = $("#typeofleavehidden").val();
         var checktype1 = $("#type_sick").val();
-
-        // console.log(checktype,checktype1);
-
         if(checktype == 2  &&  checktype1 == 2){
-
             $("#hideavaible").show();
             $("#menusick").show();
             $("#menu9").hide();
-
         }else{
-
             $("#hideavaible").hide();
             $("#menu9").show();
             $("#menusick").hide();
             $("#radio1").val("");
             $("#radio2").val("");
-
         }
-
     });
 
     Surrender_Cancellation

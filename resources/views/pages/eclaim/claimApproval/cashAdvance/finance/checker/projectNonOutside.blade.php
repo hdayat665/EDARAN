@@ -406,7 +406,7 @@
                             </div>
                         @endif
                     </div>
-                    <style>
+                    <!-- <style>
                         @media print{
                             .hide-on-print {
                                 display: none;
@@ -425,7 +425,7 @@
                                 page-break-before: always;
                             }
                         }
-                    </style>
+                    </style> -->
                 </div>
                 <div class="row p-2">
                     <div class="form-control">
@@ -643,6 +643,73 @@
                         </div>
                     </div>
                 </div>
+                <div class="row p-2">
+                    <div class="form-control">
+                        <div class="row p-2">
+                            <div class="row p-2">
+                                <h4>CLOSED CASH ADVANCE</h4>
+                            </div>
+                            <div class="row p-2">
+                                <button class="btn btn-primary col-md-2" id="addPV" style="" >Add Claim PV Number</button>
+                            </div>
+                        </div>
+                        <div class="row p-2 justify-content-end">
+                            <button class="btn btn-primary col-md-2" id="cancelBtn" style="display: none" >Cancel</button>&nbsp;&nbsp;
+                            <button class="btn btn-primary col-md-2" id="updateBtn" style="display: none" data-id="{{ $ca->id }}">Update</button>
+                            </form>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <table id="" class="table table-striped table-bordered align-middle col-md-6">
+                                    <thead>
+                                        <tr>
+                                            <th width="1%">No</th>
+                                            <th width="text-nowrap">Payment Date</th>
+                                            <th width="text-nowrap">Claim PV Number</th>
+                                            <th class="text-nowrap">Paid (RM)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1 ?>
+                                                    
+                                            @if ($PVNumber)
+                                                @foreach ($PVNumber as $pv)
+                                                    <tr class="odd gradeX">
+                                                        <td>{{ $no++ }}</td>
+                                                        <td>{{ $pv->date}}</td>
+                                                        <td>{{ $pv->pv_number}}</td>
+                                                        <td>{{ $pv->amount_paid}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <table id="" class="table table-striped table-bordered align-middle col-md-6">
+                                    <thead>
+                                        <tr>
+                                            <th width="text-nowrap">Advance PV Number</th>
+                                            <th width="text-nowrap">Cash Advance (RM)</th>
+                                            <th class="text-nowrap">Total Paid (RM)</th>
+                                            <th class="text-nowrap">Balance (RM)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $ca->pv_number ?? '-' }}</td>
+                                            <td>{{ $ca->amount ?? '0' }}</td>
+                                            <td>{{ $ca->used_amount ?? '0' }}</td>
+                                            <td>{{ $ca->final_amount ?? '0' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{-- <div class="row p-2">
                     <div class="form-control">
                         <div class="row p-2">
@@ -651,7 +718,7 @@
                             </div>
                             <div class="row p-2">
                                <div class="col-md-8">
-                                <table id="appealtablehistory" class="table table-striped table-bordered align-middle">
+                                <table id="" class="table table-striped table-bordered align-middle">
                                     <thead>
                                         <tr>
                                             <th width="1%">No</th>
@@ -677,4 +744,6 @@
             </div>
         </div>
     </div>
+    @include('modal.eclaimApproval.cashAdvance.projectOutsideFcheckerModalPV');
 @endsection
+

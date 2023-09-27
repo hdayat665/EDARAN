@@ -27,6 +27,8 @@
             <div id="calendar" class="calendar"></div>
             <input type="hidden" id="timesheetApprovalId" value="{{$id}}">
             <input type="hidden" id="timesheetApprovalUserId" value="{{$userId}}">
+            <input type="hidden" id="month" value="{{ request('month', 'default_value') }}">
+            <input type="hidden" id="year" value="{{ request('year', 'default_value') }}">
         </div>
     </div>
     <div class="row p-2">

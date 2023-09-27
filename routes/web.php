@@ -172,6 +172,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateOtherMtcAdminRec', 'updateOtherMtcAdminRec');
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+            Route::post('/createCAPVNumber', 'createCAPVNumber');
         });
 
         Route::controller(ProfileController::class)->group(function () {
@@ -493,7 +494,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getroleAdmin/{id}', 'getroleAdmin');
             Route::get('/getroleFinance/{id}', 'getroleFinance');
             Route::get('/getroleCA/{id}', 'getroleCA');
-
+            Route::get('/getClaimCategoryDetails/{id}', 'getClaimCategoryDetails');
 
 
 
@@ -789,6 +790,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
             Route::get('/checkLeaveEntitlement', 'checkLeaveEntitlement');
+
+            Route::get('/checkTSRLeave/{date}', 'checkTSRLeave');
+            Route::get('/checkTSRLeaveSecond/{date}', 'checkTSRLeaveSecond');
 
 
 

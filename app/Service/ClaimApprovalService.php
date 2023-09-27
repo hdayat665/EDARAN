@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\EntitleGroup;
 use App\Models\TransportMillage;
 use App\Models\MtcAttachment;
+use App\Models\CAPVNumber;
 
 class ClaimApprovalService
 {
@@ -6738,6 +6739,30 @@ class ClaimApprovalService
             ->select("b.user_id","b.employeeName","c.employeeName as caapprover_name")  // getting the name
             ->first();
         // dd($data);
+        return $data;
+    }
+
+    public function createCAPVNumber($r)
+    {
+        $input = $r->input();
+        $user = Auth::user();
+        // dd($input);
+        $input['date'] = now()->format('Y-m-d');
+        CAPVNumber::create($input);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create PV Number';
+        return $data;
+    }
+
+    public function cashAdvancePVNumber($id = '')
+    {
+        $data = DB::table("ca_pv_number as a")
+                ->where('a.ca_id',$id)
+                ->get();
+                // dd($data);
+
         return $data;
     }
     

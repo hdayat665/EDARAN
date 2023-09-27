@@ -334,11 +334,11 @@ class MyTimesheetController extends Controller
         $result['holidays'] = [];
 
         if ($getIds) {
-            $result['events'] = $ss->getEventsByLotId($getIds->event_id);
-            $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
-            $result['leaves'] = $ss->getLeavesByLotId($getIds->leave_id);
+            $result['events'] = $ss->getEventsByLotId($getIds->event_id, $userId);
+            $result['logs'] = $ss->getLogsByLotId($getIds->log_id, $userId);
+            $result['leaves'] = $ss->getLeavesByLotId($getIds->leave_id, $userId);
             $result['holidays'] = $ss->getHolidaysByLotId($getIds->holiday_id);
-            // dd($result['holidays']);
+            // dd($result['logs']);
         }
 
         return response()->json($result);

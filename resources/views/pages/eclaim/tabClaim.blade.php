@@ -1,13 +1,15 @@
 <div class="tab-pane fade active show" id="card-pill-1">
     <div class="category-filter">
-        <!-- <select id="Statusclaim" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
+        <select id="Statusclaim" class="form-control" style=" width: 200px; margin-left: auto; margin-right: 0;">
             <option value="">Show All</option>
-            <option value="Draft">Draft</option>
+            <option value="draft">Draft</option>
             <option value="Active">Active</option>
-            <option value="Rejected">Rejected</option>
-            <option value="Amend">Amend</option>
+            <option value="rejected">Rejected</option>
+            <option value="amend">Amend</option>
             <option value="paid">Paid</option>
-        </select> -->
+            <option value="Pending">pending</option>
+            <option value="In Queue">In Queue</option>
+        </select>
     </div>
     <table id="claimtable" class="table table-striped table-bordered align-middle">
         <thead>

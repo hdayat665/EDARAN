@@ -1,5 +1,36 @@
 $(document).ready(function () {
 
+    $(document).ready(function() {
+
+        var originalGetComputedStyle = window.getComputedStyle;
+
+        window.getComputedStyle = function(el, pseudo) {
+            try {
+                return originalGetComputedStyle(el, pseudo);
+            } catch (err) {
+                console.warn('getComputedStyle override: prevented error.', err);
+                return {
+                    getPropertyValue: function() { return ""; } // metode palsu
+                };
+            }
+        };
+        $(".tableAction").hide();
+        $(document).on("click", ".dropdown-toggle", function(e) {
+            e.stopPropagation(); // mencegah event dari bubbling ke atas
+
+            var dropdownMenu = $(this).closest(".btn-group").find(".tableAction");
+
+            $(".tableAction").not(dropdownMenu).hide();
+            dropdownMenu.toggle();
+        });
+
+        $(document).on("click", function(e) {
+            if (!$(".btn-group").is(e.target) && $(".btn-group").has(e.target).length === 0) {
+                $(".tableAction").hide();
+            }
+        });
+    });
+
 
     $("#tableweekend").DataTable({
         searching: true,
@@ -225,6 +256,264 @@ $(document).ready(function () {
             url: "/getweekend/" + id,
         });
     }
+
+    // Assuming start_time and end_time are in 'HH:mm' format
+    // $.validator.addMethod("endAfterStart", function(value, element, params) {
+    //     var startTime = $(params[0]).val();
+    //     var endTime = $(params[1]).val();
+
+    //     if(!startTime || !endTime) return true; // if one of them is missing, this validation passes (other rules will catch the error)
+
+    //     return Date.parse('01/01/1970 ' + endTime) > Date.parse('01/01/1970 ' + startTime);
+    // }, "End time must be after start time.");
+
+    // $.validator.addMethod("durationCheck", function(value, element, params) {
+    //     var startTime = $(params[0]).val();
+    //     var endTime = $(params[1]).val();
+    //     var duration = $(params[2]).val();
+
+    //     if(duration && (!startTime || !endTime)) {
+    //         return false;
+    //     }
+
+    //     return true;
+    // }, "Required when Start Time is provided.");
+
+    // $("#updateweekendmodal").validate({
+    //     rules: {
+    //         start_time_monday: {
+    //             durationCheck: ['#start_time_monday', '#end_time_monday', '#duration_monday'],
+    //             endAfterStart: ['#start_time_monday', '#end_time_monday']
+    //         },
+    //         end_time_monday: {
+    //             endAfterStart: ['#start_time_monday', '#end_time_monday']
+    //         },
+    //         start_time_tuesday: {
+    //             durationCheck: ['#start_time_tuesday', '#end_time_tuesday', '#duration_tuesday'],
+    //             endAfterStart: ['#start_time_tuesday', '#end_time_tuesday']
+    //         },
+    //         end_time_tuesday: {
+    //             endAfterStart: ['#start_time_tuesday', '#end_time_tuesday']
+    //         },
+    //         start_time_wednesday: {
+    //             durationCheck: ['#start_time_wednesday', '#end_time_wednesday', '#duration_wednesday'],
+    //             endAfterStart: ['#start_time_wednesday', '#end_time_wednesday']
+    //         },
+    //         end_time_wednesday: {
+    //             endAfterStart: ['#start_time_wednesday', '#end_time_wednesday']
+    //         },
+    //         start_time_thursday: {
+    //             durationCheck: ['#start_time_thursday', '#end_time_thursday', '#duration_thursday'],
+    //             endAfterStart: ['#start_time_thursday', '#end_time_thursday']
+    //         },
+    //         end_time_thursday: {
+    //             endAfterStart: ['#start_time_thursday', '#end_time_thursday']
+    //         },
+    //         start_time_friday: {
+    //             durationCheck: ['#start_time_friday', '#end_time_friday', '#duration_friday'],
+    //             endAfterStart: ['#start_time_friday', '#end_time_friday']
+    //         },
+    //         end_time_friday: {
+    //             endAfterStart: ['#start_time_friday', '#end_time_friday']
+    //         },
+    //         start_time_saturday: {
+    //             durationCheck: ['#start_time_saturday', '#end_time_saturday', '#duration_saturday'],
+    //             endAfterStart: ['#start_time_saturday', '#end_time_saturday']
+    //         },
+    //         end_time_saturday: {
+    //             endAfterStart: ['#start_time_saturday', '#end_time_saturday']
+    //         },
+    //         start_time_sunday: {
+    //             durationCheck: ['#start_time_sunday', '#end_time_sunday', '#duration_sunday'],
+    //             endAfterStart: ['#start_time_sunday', '#end_time_sunday']
+    //         },
+    //         end_time_sunday: {
+    //             endAfterStart: ['#start_time_sunday', '#end_time_sunday']
+    //         },
+    //         // Repeat the same for other days (Tuesday, Wednesday, ...)
+    //     },
+    //     // other options
+    // });
+
+    // Add custom validation methods
+    $.validator.addMethod("endAfterStart", function(value, element, params) {
+        var startTime = $(params[0]).val();
+        var endTime = $(params[1]).val();
+
+        if (!startTime || !endTime) return true;
+
+        return Date.parse('01/01/1970 ' + endTime) > Date.parse('01/01/1970 ' + startTime);
+    }, "Enable to enter backdated");
+
+    $.validator.addMethod("checkStartTime", function(value, element, params) {
+        var startTime = $(params[0]).val();
+        var endTime = $(params[1]).val();
+        var duration = $(params[2]).val();
+
+        if (!startTime && (endTime || duration)) {
+            return false;
+        }
+
+        return true;
+    }, "Please Insert Start Time");
+
+    $.validator.addMethod("checkEndTime", function(value, element, params) {
+        var startTime = $(params[0]).val();
+        var endTime = $(params[1]).val();
+        var duration = $(params[2]).val();
+
+        if (!endTime && (startTime || duration)) {
+            return false;
+        }
+
+        return true;
+    }, "Please Insert End Time");
+
+    $("#updateweekendmodal").click(function(e) {
+        // Use validate method
+        $("#updateweekendmodal").validate({
+            rules: {
+
+                start_time_monday: {
+                    checkStartTime: ['#start_time_monday', '#end_time_monday', '#duration_monday'],
+                },
+                end_time_monday: {
+                    checkEndTime: ['#start_time_monday', '#end_time_monday', '#duration_monday'],
+                    endAfterStart: ['#start_time_monday', '#end_time_monday']
+                },
+                duration_monday: {
+                    required: function(element) {
+                        return $('#start_time_monday').val() !== "" || $('#end_time_monday').val() !== "";
+                    }
+                },
+                start_time_tuesday: {
+                    checkStartTime: ['#start_time_tuesday', '#end_time_tuesday', '#duration_tuesday'],
+                },
+                end_time_tuesday: {
+                    checkEndTime: ['#start_time_tuesday', '#end_time_tuesday', '#duration_tuesday'],
+                    endAfterStart: ['#start_time_tuesday', '#end_time_tuesday']
+                },
+                duration_tuesday: {
+                    required: function(element) {
+                        return $('#start_time_tuesday').val() !== "" || $('#end_time_tuesday').val() !== "";
+                    }
+                },
+                start_time_wednesday: {
+                    checkStartTime: ['#start_time_wednesday', '#end_time_wednesday', '#duration_wednesday'],
+                },
+                end_time_wednesday: {
+                    checkEndTime: ['#start_time_wednesday', '#end_time_wednesday', '#duration_wednesday'],
+                    endAfterStart: ['#start_time_wednesday', '#end_time_wednesday']
+                },
+                duration_wednesday: {
+                    required: function(element) {
+                        return $('#start_time_wednesday').val() !== "" || $('#end_time_wednesday').val() !== "";
+                    }
+                },
+                start_time_thursday: {
+                    checkStartTime: ['#start_time_thursday', '#end_time_thursday', '#duration_thursday'],
+                },
+                end_time_thursday: {
+                    checkEndTime: ['#start_time_thursday', '#end_time_thursday', '#duration_thursday'],
+                    endAfterStart: ['#start_time_thursday', '#end_time_thursday']
+                },
+                duration_thursday: {
+                    required: function(element) {
+                        return $('#start_time_thursday').val() !== "" || $('#end_time_thursday').val() !== "";
+                    }
+                },
+                start_time_friday: {
+                    checkStartTime: ['#start_time_friday', '#end_time_friday', '#duration_friday'],
+                },
+                end_time_friday: {
+                    checkEndTime: ['#start_time_friday', '#end_time_friday', '#duration_friday'],
+                    endAfterStart: ['#start_time_friday', '#end_time_friday']
+                },
+                duration_friday: {
+                    required: function(element) {
+                        return $('#start_time_friday').val() !== "" || $('#end_time_friday').val() !== "";
+                    }
+                },
+                start_time_saturday: {
+                    checkStartTime: ['#start_time_saturday', '#end_time_saturday', '#duration_saturday'],
+                },
+                end_time_saturday: {
+                    checkEndTime: ['#start_time_saturday', '#end_time_saturday', '#duration_saturday'],
+                    endAfterStart: ['#start_time_saturday', '#end_time_saturday']
+                },
+                duration_saturday: {
+                    required: function(element) {
+                        return $('#start_time_saturday').val() !== "" || $('#end_time_saturday').val() !== "";
+                    }
+                },
+                start_time_sunday: {
+                    checkStartTime: ['#start_time_sunday', '#end_time_sunday', '#duration_sunday'],
+                },
+                end_time_sunday: {
+                    checkEndTime: ['#start_time_sunday', '#end_time_sunday', '#duration_sunday'],
+                    endAfterStart: ['#start_time_sunday', '#end_time_sunday']
+                },
+                duration_sunday: {
+                    required: function(element) {
+                        return $('#start_time_sunday').val() !== "" || $('#end_time_sunday').val() !== "";
+                    }
+                },
+            },
+            messages: {
+                duration_monday: {
+                    required: "Please Insert Duration"
+                },
+                duration_tuesday: {
+                    required: "Please Insert Duration"
+                },
+                duration_wednesday: {
+                    required: "Please Insert Duration"
+                },
+                duration_thursday: {
+                    required: "Please Insert Duration"
+                },
+                duration_friday: {
+                    required: "Please Insert Duration"
+                },
+                duration_saturday: {
+                    required: "Please Insert Duration"
+                },
+                duration_sunday: {
+                    required: "Please Insert Duration"
+                }
+            },
+            submitHandler: function(form) {
+                requirejs(["sweetAlert2"], function(swal) {
+                    var data = new FormData(document.getElementById("updateweekendmodal"));
+                    console.log('test');
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateweekend",
+                        data: data,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                    }).then(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == "error") {} else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+
 
     $("#updateweekendmodal").click(function (e) {
 
