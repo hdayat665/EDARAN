@@ -3094,7 +3094,7 @@ class SettingService
 
         $leaveTypesTransformed = $leaveTypes->map(function ($leaveType) {
             if (in_array($leaveType->leave_types_code, ['AL', 'SL', 'HL', 'EL'])) {
-                $leaveType->duration = '-';
+                $leaveType->duration = 'Not Applicable';
             }
             return (object)[
                 'id' => $leaveType->id,
@@ -3187,7 +3187,7 @@ class SettingService
 
         if ($leaveType) {
             if (in_array($leaveType->leave_types_code, ['AL', 'SL', 'HL', 'EL'])) {
-                $leaveType->duration = '-';
+                $leaveType->duration = 'Not Applicable';
             }
             $data = (object)[
                 'id' => $leaveType->id,
@@ -3241,7 +3241,7 @@ class SettingService
         }
 
         if ($isRestrictedType) {
-            if ($existingLeaveType->leave_types_code !== $data1 || $existingLeaveType->leave_types !== $data2 || ($data4 !== "-" && $existingLeaveType->leave_types_code !== 'NP')) {
+            if ($existingLeaveType->leave_types_code !== $data1 || $existingLeaveType->leave_types !== $data2 || ($data4 !== "Not Applicable" && $existingLeaveType->leave_types_code !== 'NP')) {
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
                 $data['title'] = config('app.response.error.title');
