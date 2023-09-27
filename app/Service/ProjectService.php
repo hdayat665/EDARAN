@@ -523,15 +523,15 @@ class ProjectService
             $cond[3] = ['project_id', '=', $id];
         }
 
-
-
         if ($exit_project) {
             $cond[2] = ['exit_project', '=', $exit_project];
         }
 
         $data = DB::table('project_member as a')
-            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.user_id')
-            ->select('a.*', 'b.employeeName')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('employment as c', 'a.employee_id', '=', 'c.user_id')
+
+            ->select('a.*', 'c.employeeName','b.contract_start_date', 'c.designation', 'c.department', 'c.branch', 'c.unit')
             ->where($cond)
             ->orderBy('id', 'desc')
             ->get();
@@ -539,7 +539,6 @@ class ProjectService
         if (!$data) {
             $data = [];
         }
-
 
         return $data;
     }
@@ -591,11 +590,11 @@ class ProjectService
         }
         return $data;
     }
-
-
+    
     public function updateProjectMember($r, $id)
     {
         $input = $r->input();
+        
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
 
         if (isset($input['exit_project'])) {
@@ -604,8 +603,9 @@ class ProjectService
 
         if (isset($input['location'])) {
             $projectMember = ProjectMember::find($id);
+           
             $currentLocations = explode(',', $projectMember->location);
-
+            
             // Merge the existing locations with the new locations
             $updatedLocations = array_merge($currentLocations, $input['location']);
             $input['location'] = implode(',', $updatedLocations);
