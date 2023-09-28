@@ -3865,17 +3865,17 @@ class myClaimService
         return $data;
     }
 
-
     public function getHistoryAppealData()
     {
         $data = AppealMtc::where([
-            ['tenant_id', Auth::user()->tenant_id],
+            ['user_id', Auth::user()->user_id],
             ['status', '!=', 'pending']
         ])->get();
 
 
         return $data;
     }
+
     public function approveAppealMtc($id = '')
     {
 
