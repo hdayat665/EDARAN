@@ -130,8 +130,9 @@ requirejs.config({
         // newRole Js
         newRoleJs: assets + "/js/newRoleJs",
 
-        // systemUser Js
+        // systemrole Js
         systemUserJs: assets + "/js/systemUserJs",
+        // systemUser Js
         systemRoleUpdateJs: assets + "/js/systemRoleUpdateJs",
 
         //new project location Js
