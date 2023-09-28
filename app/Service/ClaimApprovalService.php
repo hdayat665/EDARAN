@@ -722,7 +722,7 @@ class ClaimApprovalService
         $employees = Employee::where('caapprover', Auth::user()->id)->get();
 
         $userId = [];
-        foreach ($employees as $key => $employee) {
+        foreach ($employees as $employee) {
             $userId[] = $employee->user_id;
         }
 

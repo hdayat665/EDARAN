@@ -25,9 +25,10 @@
             if (!$role_permission) {
                 $role_permission = [];
             }
+            $uid = Auth::user()->id;
             
             ?>
-            
+
             <?php $target = ['hris_tab']; ?>
             @if (array_intersect($role_permission, $target))
                 <div class="menu-item has-sub">
@@ -90,28 +91,29 @@
                             </div>
                         @endif
                         <?php $target = ['timesheet_approval']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/timesheetApproval" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-receipt text-gray"></i>
-                                        </div>
-                                        
-                                        {{-- check if this is approver ts  --}}
-                                        @php
+                        @if (array_intersect($role_permission, $target))
+                            <div class="menu-item">
+                                <a href="/timesheetApproval" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-receipt text-gray"></i>
+                                    </div>
+
+                                    {{-- check if this is approver ts  --}}
+                                    @php
                                         $employmentData = getEmplomentByUserId();
                                         $timesheets = getTimesheetDataToApprove();
-                                        @endphp
+                                    @endphp
 
-                                        <div class="menu-text text-gray">Timesheets Approval</div>
-                                        
-                                        {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
-                                        @if (isset($timesheets))
-                                            <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
-                                        @endif
-                                    </a>
-                                </div>
-                            @endif
+                                    <div class="menu-text text-gray">Timesheets Approval</div>
+
+                                    {{-- @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id) --}}
+                                    @if (isset($timesheets))
+                                        <span class="badge bg-danger badge-number"
+                                            id="numberNotify">{{ $timesheets->count() }}</span>
+                                    @endif
+                                </a>
+                            </div>
+                        @endif
 
                         <?php $target = ['real_time_activities']; ?>
                         @if (array_intersect($role_permission, $target))
@@ -126,23 +128,23 @@
                         @endif
                         <?php $target = ['appeal_approval']; ?>
                         @if (array_intersect($role_permission, $target))
-                        <div class="menu-item">
-                            <a href="/appealtimesheet" class="menu-link">
-                                <div class="menu-icon">
-                                    <i class="fa fa-receipt text-gray"></i>
-                                </div>
-                                @php
-                                    $employmentData = getEmplomentByUserId();
-                                    $appealTs = getTimesheetAppealData();
-                                @endphp
-                                <div class="menu-text text-gray">Appeal Approval </div>
-                                {{-- @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id) --}}
-                                @if (isset($appealTs))
-                                    <span class="badge bg-danger badge-number"
-                                        id="numberNotify">{{ $appealTs->count() }}</span>
-                                @endif
-                            </a>
-                        </div>
+                            <div class="menu-item">
+                                <a href="/appealtimesheet" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-receipt text-gray"></i>
+                                    </div>
+                                    @php
+                                        $employmentData = getEmplomentByUserId();
+                                        $appealTs = getTimesheetAppealData();
+                                    @endphp
+                                    <div class="menu-text text-gray">Appeal Approval </div>
+                                    {{-- @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id) --}}
+                                    @if (isset($appealTs))
+                                        <span class="badge bg-danger badge-number"
+                                            id="numberNotify">{{ $appealTs->count() }}</span>
+                                    @endif
+                                </a>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -391,6 +393,7 @@
                                     <div class="menu-caret text-gray">
                                     </div>
                                     @php
+                                        
                                         $ruleDepartments1 = ['DepartRecommender', 'DepartApprover'];
                                         $totalCount1 = 0;
                                         
@@ -399,7 +402,36 @@
                                             $totalCount1 += $count;
                                         }
                                         
-                                        $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
+                                        $domain = getDomainListByTypeNCategory('monthlyClaim', 'admin');
+                                        $ruleDepartments2 = [];
+                                        if ($domain->approver == $uid) {
+                                            $ruleDepartments2[] = 'AdminApprover';
+                                        }
+                                        
+                                        if ($domain->recommender == $uid) {
+                                            $ruleDepartments2[] = 'AdminRec';
+                                        }
+                                        
+                                        if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                            $ruleDepartments2[] = 'AdminChecker';
+                                        }
+                                        
+                                        $domain = getDomainListByTypeNCategory('monthlyClaim', 'finance');
+                                        
+                                        if ($domain->recommender == $uid) {
+                                            $ruleDepartments2[] = 'FinanceRec';
+                                        }
+                                        
+                                        if ($domain->approver == $uid) {
+                                            $ruleDepartments2[] = 'FinanceApprover';
+                                        }
+                                        
+                                        if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                            $ruleDepartments2[] = 'FinanceCheckerMTC';
+                                            $ruleDepartments2[] = 'FinanceCheckerGNC';
+                                        }
+                                        // print_r($ruleDepartments2);
+                                        // $ruleDepartments2 = ['AdminRec', 'AdminApprover', 'AdminChecker', 'FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
                                         $totalCount2 = 0;
                                         
                                         foreach ($ruleDepartments2 as $department) {
@@ -408,11 +440,12 @@
                                         }
                                         
                                         $totalCounts = $totalCount1 + $totalCount2;
+                                        
                                     @endphp
                                     <span class="badge bg-danger badge-number" id="numberNotify">
                                         {{ $totalCounts ?? 0 }}</span>
                                 </a>
- 
+
                                 <div class="menu-submenu">
                                     <?php $target = ['eclaim_department_menu']; ?>
                                     @if (array_intersect($role_permission, $target))
@@ -493,7 +526,21 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                                 @php
-                                                    $ruleDepartments = ['FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
+                                                    $ruleDepartments = [];
+                                                    $domain = getDomainListByTypeNCategory('monthlyClaim', 'finance');
+                                                    if ($domain->recommender == $uid) {
+                                                        $ruleDepartments[] = 'FinanceRec';
+                                                    }
+                                                    
+                                                    if ($domain->approver == $uid) {
+                                                        $ruleDepartments[] = 'FinanceApprover';
+                                                    }
+                                                    
+                                                    if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                                        $ruleDepartments[] = 'FinanceCheckerGNC';
+                                                        $ruleDepartments[] = 'FinanceCheckerMTC';
+                                                    }
+                                                    // $ruleDepartments = ['FinanceRec', 'FinanceApprover', 'FinanceCheckerMTC', 'FinanceCheckerGNC'];
                                                     $totalCount = 0;
                                                     foreach ($ruleDepartments as $department) {
                                                         $count = getClaimData($department)->count();
@@ -519,7 +566,7 @@
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ getClaimData('FinanceRec')->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->recommender == $uid ? getClaimData('FinanceRec')->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -538,7 +585,7 @@
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ getClaimData('FinanceApprover')->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->approver == $uid ? getClaimData('FinanceApprover')->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -557,7 +604,17 @@
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ getClaimData('FinanceCheckerMTC')->count() + getClaimData('FinanceCheckerGNC')->count() }}</span>
+                                                                    id="numberNotify">
+                                                                    @if ($domain)
+                                                                        @if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid)
+                                                                            {{ getClaimData('FinanceCheckerMTC')->count() + getClaimData('FinanceCheckerGNC')->count() }}
+                                                                        @else
+                                                                            0
+                                                                        @endif
+                                                                    @else
+                                                                        0
+                                                                    @endif
+                                                                </span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -578,12 +635,27 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                                 @php
-                                                    $ruleDepartments = ['AdminRec', 'AdminApprover', 'AdminChecker'];
+                                                    $ruleDepartments = [];
+                                                    $domain = getDomainListByTypeNCategory('monthlyClaim', 'admin');
+                                                    if ($domain->recommender == $uid) {
+                                                        $ruleDepartments[] = 'AdminRec';
+                                                    }
+                                                    
+                                                    if ($domain->approver == $uid) {
+                                                        $ruleDepartments[] = 'AdminApprover';
+                                                    }
+                                                    
+                                                    if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                                        $ruleDepartments[] = 'AdminChecker';
+                                                    }
+                                                    
+                                                    // $ruleDepartments = ['AdminRec', 'AdminApprover', 'AdminChecker'];
                                                     $totalCount = 0;
                                                     foreach ($ruleDepartments as $department) {
                                                         $count = getClaimData($department)->count();
                                                         $totalCount += $count;
                                                     }
+                                                    
                                                 @endphp
                                                 <span class="badge bg-danger badge-number" id="numberNotify">
                                                     {{ $totalCount ?? 0 }}</span>
@@ -604,7 +676,7 @@
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ getClaimData('AdminRec')->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->recommender == $uid ? getClaimData('AdminRec')->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -623,7 +695,7 @@
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ getClaimData('AdminApprover')->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->approver == $uid ? getClaimData('AdminApprover')->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -642,7 +714,7 @@
                                                             @endphp
                                                             {{-- @if (isset($config->status)) --}}
                                                             <span class="badge bg-danger badge-number"
-                                                                id="numberNotify">{{ getClaimData('AdminChecker')->count() }}</span>
+                                                                id="numberNotify">{{ $domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid ? getClaimData('AdminChecker')->count() : 0 }}</span>
                                                             {{-- @endif --}}
                                                         </a>
                                                     </div>
@@ -665,7 +737,22 @@
                                     <div class="menu-caret text-gray">
                                     </div>
                                     @php
-                                        $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
+                                        $domain = getDomainListByTypeNCategory('cashAdvance');
+                                        $ruleDepartments = [];
+                                        
+                                        if ($domain->recommender == $uid) {
+                                            $ruleDepartments[] = 'financeRec';
+                                        }
+                                        
+                                        if ($domain->approver == $uid) {
+                                            $ruleDepartments[] = 'financeApprover';
+                                        }
+                                        
+                                        if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                            $ruleDepartments[] = 'financeChecker';
+                                        }
+                                        
+                                        // $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
                                         $employmentData = getEmplomentByUserId();
                                         if ($employmentData->caapprover == Auth::user()->id) {
                                             $ruleDepartments[100] = 'departApprover';
@@ -745,7 +832,20 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                                 @php
-                                                    $ruleDepartments = ['financeRec', 'financeApprover', 'financeChecker'];
+                                                    $ruleDepartments = [];
+                                                    
+                                                    if ($domain->recommender == $uid) {
+                                                        $ruleDepartments[] = 'financeRec';
+                                                    }
+                                                    
+                                                    if ($domain->approver == $uid) {
+                                                        $ruleDepartments[] = 'financeApprover';
+                                                    }
+                                                    
+                                                    if ($domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid) {
+                                                        $ruleDepartments[] = 'financeChecker';
+                                                    }
+                                                    
                                                     $totalCount = 0;
                                                     foreach ($ruleDepartments as $department) {
                                                         $count = getCaClaimData($department)->count();
@@ -770,7 +870,7 @@
                                                             <div class="menu-text text-gray">Recommender</div>
                                                             @if (isset($caClaim))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->recommender == $uid ? $caClaim->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -788,7 +888,7 @@
                                                             <div class="menu-text text-gray">Approver </div>
                                                             @if (isset($caClaim))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                    id="numberNotify">{{ $domain->approver == $uid ? $caClaim->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -811,7 +911,7 @@
                                                             <div class="menu-text text-gray">Checker</div>
                                                             @if (isset($caData))
                                                                 <span class="badge bg-danger badge-number"
-                                                                    id="numberNotify">{{ count($caData) }}</span>
+                                                                    id="numberNotify">{{ $domain->checker1 == $uid || $domain->checker2 == $uid || $domain->checker3 == $uid ? $caClaim->count() : 0 }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -847,50 +947,50 @@
             <!-- Sidenav Content Orbit -->
             <?php $target = ['general_info_tab']; ?>
             @if (array_intersect($role_permission, $target))
-            <div class="menu-item has-sub">
-                <a href="javascript:;" class="menu-link">
-                    <div class="menu-icon">
-                        <i class="fa fa-circle-info text-gray"></i>
-                    </div>
-                    <div class="menu-text text-gray">General Information</div>
-                    <div class="menu-caret text-gray"></div>
-                </a>
+                <div class="menu-item has-sub">
+                    <a href="javascript:;" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fa fa-circle-info text-gray"></i>
+                        </div>
+                        <div class="menu-text text-gray">General Information</div>
+                        <div class="menu-caret text-gray"></div>
+                    </a>
 
-                <div class="menu-submenu">
-                    <?php $target = ['phone_directory']; ?>
-                    @if (array_intersect($role_permission, $target))
-                    <div class="menu-item">
-                        <a href="/phoneDirectory" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-rectangle-list text-gray"></i>
+                    <div class="menu-submenu">
+                        <?php $target = ['phone_directory']; ?>
+                        @if (array_intersect($role_permission, $target))
+                            <div class="menu-item">
+                                <a href="/phoneDirectory" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Phone Directory</i></div>
+                                </a>
                             </div>
-                            <div class="menu-text text-gray">Phone Directory</i></div>
-                        </a>
-                    </div>
-                    @endif
-                    <?php $target = ['organization_chart']; ?>
-                    @if (array_intersect($role_permission, $target))
-                    <div class="menu-item">
-                        <a href="/organizationChart" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-rectangle-list text-gray"></i>
+                        @endif
+                        <?php $target = ['organization_chart']; ?>
+                        @if (array_intersect($role_permission, $target))
+                            <div class="menu-item">
+                                <a href="/organizationChart" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Organization Chart</div>
+                                </a>
                             </div>
-                            <div class="menu-text text-gray">Organization Chart</div>
-                        </a>
-                    </div>
-                    @endif
-                    <?php $target = ['policy_sop']; ?>
-                    @if (array_intersect($role_permission, $target))
-                    <div class="menu-item">
-                        <a href="/policysop" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-rectangle-list text-gray"></i>
+                        @endif
+                        <?php $target = ['policy_sop']; ?>
+                        @if (array_intersect($role_permission, $target))
+                            <div class="menu-item">
+                                <a href="/policysop" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Policy & SOP</div>
+                                </a>
                             </div>
-                            <div class="menu-text text-gray">Policy & SOP</div>
-                        </a>
-                    </div>
-                    @endif
-                    {{-- <div class="menu-item">
+                        @endif
+                        {{-- <div class="menu-item">
                             <a href="/departmentTree" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-folder-tree text-gray"></i>
@@ -898,8 +998,8 @@
                                 <div class="menu-text text-gray">Department Tree</div>
                             </a>
                         </div> --}}
+                    </div>
                 </div>
-            </div>
             @endif
             <!-- End Sidenav Content Orbit -->
             <!-- Sidenav Content Orbit -->

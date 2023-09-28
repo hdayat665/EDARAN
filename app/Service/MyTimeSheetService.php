@@ -1645,9 +1645,11 @@ class MyTimeSheetService
     {
         $input = $r->input();
 
-        //to be carry in email, to approve
-        $randomNumber = rand(10000000, 99999999); 
-        $input['generaterandom'] = $randomNumber;
+        do {
+        $randomNumber = rand(10000000, 99999999);
+        } while (TimesheetAppeals::where('generaterandom', $randomNumber)->exists());
+
+    $input['generaterandom'] = $randomNumber;
 
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));

@@ -65,7 +65,7 @@
             </div><br><br><br>
             <div class="row text-center">
                 <div class="col-lg-2">
-                    <a class="mb-10px" href="/knowledgeLib"><i class="fa fa-newspaper fa-4x text-blue"></i></a><br><br>
+                    <a class="mb-10px" href="/knowledgeLib"><i class="fa fa-bank fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Knowledge Library</h5>
                 </div>
             </div>
