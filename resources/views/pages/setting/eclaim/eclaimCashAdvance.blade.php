@@ -9,54 +9,35 @@
                         <table id="cashAdvanceTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th class="text-nowrap">Action</th>
+                                    <th width="1%">No.</th>
                                     <th class="text-nowrap">Status</th>
                                     <th class="text-nowrap">Employee Name</th>
                                     <th class="text-nowrap">Department</th>
-                                    <th class="text-nowrap">Cash Advanced <BR> Month</th>
+                                    <th class="text-nowrap">Cash Advanced Month</th>
+                                    <th class="text-nowrap">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+								<?php $id = 0 ?>
+									@if ($cashAdvance)
+									@foreach ($cashAdvance as $ca)
+                                <?php $id++ ?>
+								<tr>
+                                    <td>{{ $id }}</td>
+									<td>{{ $ca->cash_advance_status == 1 ? 'Active' : 'Deactive' }}</td>
+									<td>{{$ca->employeeName}}</td>
+									<td>{{$ca->departmentName}}</td>
+									<td>{{$ca->cashadvancemonth}}</td>
                                     <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="mainCompanion" type="checkbox"
-                                                role="switch" id="set-main" checked>
-                                            {{-- <label class="form-check-label" for="set-main">Send notification email</label>  --}}
+										<div class="form-check form-switch">
+                                                <input class="form-check-input statusCheck" name="mainCompanion" type="checkbox" data-id="{{ $ca->user_id }}" data-name ="{{ $ca->employeeName }}"  id="updateStatus"
+                                                {{ $ca->cash_advance_status == '1' ? 'checked' : '' }}>
                                         </div>
-                                    </td>
-                                    <td>Active</td>
-                                    <td>Hafiz Bin Rahman</td>
-                                    <td>Service Delivery Department</td>
-                                    <td>January</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="mainCompanion" type="checkbox"
-                                                role="switch" id="set-main" checked>
-                                            {{-- <label class="form-check-label" for="set-main">Send notification email</label>  --}}
-                                        </div>
-                                    </td>
-                                    <td>Deactivate</td>
-                                    <td>Ahmad bin Abu</td>
-                                    <td>Sale Department</td>
-                                    <td>March</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="mainCompanion" type="checkbox"
-                                                role="switch" id="set-main" checked>
-                                            {{-- <label class="form-check-label" for="set-main">Send notification email</label>  --}}
-                                        </div>
-                                    </td>
-                                    <td>Active</td>
-                                    <td>Zarina bin Hassan</td>
-                                    <td>Human Resource Department</td>
-                                    <td>September</td>
-                                </tr>
-                            </tbody>
+									</td>
+								</tr>
+								@endforeach
+                                @endif
+							</tbody>
                         </table>
                     </div>
                 </div>
