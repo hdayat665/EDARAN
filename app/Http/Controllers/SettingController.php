@@ -596,7 +596,7 @@ class SettingController extends Controller
 
         return view('pages.setting.news',$result);
     }
-    
+
     public function knowledgeLib()
     {
         $ss = new SettingService;
@@ -906,10 +906,23 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['cashAdvance'] = $ss->eclaimGeneralView();
+
+        //dd($result['cashAdvance']);
 
         return view('pages.setting.eclaim.eclaimCashAdvance', $result);
     }
+
+    public function updatecashAdvance($id, $status)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updatecashAdvance($id, $status);
+
+        return response()->json($result);
+    }
+
+    
 
     public function approvalConfigView()
     {
@@ -1633,6 +1646,7 @@ class SettingController extends Controller
     // }
     public function systemUserUpdate($id = '')
     {
+
         $ss = new SettingService;
 
         $result['user'] = $ss->getUserById($id);

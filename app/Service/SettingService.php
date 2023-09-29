@@ -48,6 +48,7 @@ use App\Models\leaveCarryForwordModel;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
 use App\Models\KnowledgeLibrary;
+use App\Models\CashAdvanceDetail;
 
 class SettingService
 {
@@ -1829,14 +1830,42 @@ class SettingService
 
     public function eclaimGeneralView()
     {
-        $data['subs'] = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
-        $data['general'] = EclaimGeneralSetting::where([['tenant_id', Auth::user()->tenant_id]])->orderBy('id', 'DESC')->first();
-
-        if (!$data) {
-            $data = [];
-        }
+        $data = CashAdvanceDetail::select(
+            'cash_advance_detail.user_id',
+            'employment.employeeName',
+            'department.departmentName',
+            'employment.cash_advance_status',
+            DB::raw('GROUP_CONCAT(DISTINCT UPPER(MONTHNAME(cash_advance_detail.created_at)) ORDER BY MONTH(cash_advance_detail.created_at)) as cashadvancemonth'))
+        ->where('cash_advance_detail.tenant_id', Auth::user()->tenant_id)
+        ->where('cash_advance_detail.status', '!=', 'paid')
+        ->leftJoin('employment', 'cash_advance_detail.user_id', '=', 'employment.user_id')
+        ->leftJoin('department', 'employment.department', '=', 'department.id')
+        ->groupBy('employment.employeeName', 'department.departmentName')
+        ->get();
 
         return $data;
+
+    }
+
+    public function updatecashAdvance($id, $status)
+    {
+        $update['cash_advance_status'] = $status;
+
+        Employee::where('id', $id)->update($update);
+
+        if ($status == 1) {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Cash Advanced status is actived';
+            return $data;
+        } else {
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Cash Advanced status is deactivated';
+            return $data;
+        }
     }
 
     public function getEclaimGeneralById($id = '')

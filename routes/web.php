@@ -463,6 +463,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting/eclaimCategoryView', 'eclaimCategoryView');
             Route::get('/setting/eclaimEntitleGroupView', 'eclaimEntitleGroupView');
             Route::get('/setting/cashAdvanceView', 'cashAdvanceView');
+            Route::get('/setting/updatecashAdvance/{id}/{status}', 'updatecashAdvance');
             Route::get('/setting/approvalConfigView', 'approvalConfigView');
             Route::get('/setting/approvalRoleView', 'approvalRoleView');
             Route::get('/setting/addClaimView', 'addClaimView');
