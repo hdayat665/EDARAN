@@ -965,6 +965,8 @@ class ClaimApprovalController extends Controller
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
         $data['config'] = $mcs->getApprovalConfig(6, 'monthly');
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','finance');
+
         $view = 'financeChecker';
 
         return view('pages.eclaim.claimApproval.finance.checker.' . $view, $data);
@@ -978,6 +980,7 @@ class ClaimApprovalController extends Controller
         $data['config'] = $mcs->getApprovalConfig(3, 'monthly');
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','admin');
 
         $view = 'adminChecker';
 
@@ -991,7 +994,8 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
         $data['config'] = $mcs->getApprovalConfig(7, 'monthly');
         $data['claims'] = $mcs->financeRecView();
-
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','recommender');
+        
         $view = 'financeRec';
 
         return view('pages.eclaim.claimApproval.finance.recommender.' . $view, $data);
@@ -1002,6 +1006,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
         $data['config'] = $mcs->getApprovalConfig(4, 'monthly');
         $data['claims'] = $mcs->adminRecView();
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','admin');
 
         $view = 'adminRec';
 
@@ -1014,7 +1019,8 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
         $data['config'] = $mcs->getApprovalConfig(8, 'monthly');
         $data['claims'] = $mcs->financeRecView();
-        //pr($data['config']);
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','finance');
+        
         $view = 'fapproval';
 
         return view('pages.eclaim.claimApproval.finance.approval.' . $view, $data);
@@ -1025,6 +1031,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
         $data['config'] = $mcs->getApprovalConfig(5, 'monthly');
         $data['claims'] = $mcs->adminRecView();
+        $data['domain'] = getDomainListByTypeNCategory('monthlyClaim','admin');
 
         $view = 'adminApproval';
 
@@ -1492,6 +1499,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->cashAdvanceFcheckerView();
         $data['check'] = $result['check'];
         $data['cas'] = $result['general'];
+        $data['domain'] = getDomainListByTypeNCategory('cashAdvance');
 
         $view = 'financeChecker';
 
@@ -1533,6 +1541,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['cas'] = $mcs->cashAdvanceFapproverView();
+        $data['domain'] = getDomainListByTypeNCategory('cashAdvance');
 
         $view = 'financeApprover';
 
@@ -1573,6 +1582,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['cas'] = $mcs->cashAdvanceFapproverView();
+        $data['domain'] = getDomainListByTypeNCategory('cashAdvance');
 
         $view = 'financeRecommender';
 
@@ -1590,7 +1600,7 @@ class ClaimApprovalController extends Controller
         $data['employeeInfo'] = $mcs->cashAdvanceEmployeeInfo($id);
         $data['approvalInfo'] = $mcs->cashAdvanceApprovalInfo();
         $data['deptApprover'] = $mcs->cashAdvanceDeptApprover($id);
-        dd($result);
+        
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
 
         if ($type == 1) {
@@ -1603,7 +1613,7 @@ class ClaimApprovalController extends Controller
             $view = 'otherNonOutside';
         }
 
-        // return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
     }
 
     public function createChequeNumber(Request $r, $id = '')

@@ -2816,7 +2816,7 @@ if (!function_exists('getClaimData')) {
             // $cond[1] = ['supervisor', NULL];
             $cond[11] = ['f_recommender', 'recommend'];
             $cond[12] = ['f_approval', NULL];
-            $cond[13]  =  $condByPass;
+            // $cond[13]  =  $condByPass;
         }
 
         if ($roleApprover == 'FinanceCheckerGNC') {
@@ -3254,6 +3254,24 @@ if (!function_exists('getPermissionCodeArray')) {
             $data = [];
         }
 
+        return $data;
+    }
+}
+
+if (!function_exists('getDomainListByTypeNCategory')) {
+    function getDomainListByTypeNCategory($type='', $category_role ='')
+    {
+        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
+        if ($type) {
+            $cond[1] = ['type', $type];
+        }
+
+        if ($category_role) {
+            $cond[2] = ['category_role', $category_role];
+        }
+
+        $data = DomainList::where($cond)->orderBy('created_at','DESC')->first();
+        
         return $data;
     }
 }

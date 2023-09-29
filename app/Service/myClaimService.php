@@ -3840,37 +3840,42 @@ class myClaimService
 
 
         $cond[0] = ['eclaimapprover', Auth::user()->id];
-
+        
         $employees = Employee::where($cond)->get();
-
+        
         $userId = [];
         foreach ($employees as $key => $employee) {
             $userId[] = $employee->user_id;
         }
-
+        
+        
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
         $claim[1] = ['status', 'Pending'];
 
-        $data = AppealMtc::where($claim)->where(function ($query) use ($userId) {
-            if ($userId) {
-                $query->whereIn('user_id', $userId);
-            }
-        })->get();
+        // $data = AppealMtc::where($claim)
+        // ->when($userId, function ($query) use ($userId) {
+        //     $query->whereIn('user_id', $userId);
+        // })
+        // ->get();
 
+        $data = AppealMtc::where($claim)
+        ->whereIn('user_id', $userId)
+        ->get();
+        
         return $data;
     }
-
 
     public function getHistoryAppealData()
     {
         $data = AppealMtc::where([
-            ['tenant_id', Auth::user()->tenant_id],
+            ['user_id', Auth::user()->user_id],
             ['status', '!=', 'pending']
         ])->get();
 
 
         return $data;
     }
+
     public function approveAppealMtc($id = '')
     {
 
