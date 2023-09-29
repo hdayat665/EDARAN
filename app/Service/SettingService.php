@@ -1837,7 +1837,7 @@ class SettingService
             'employment.cash_advance_status',
             DB::raw('GROUP_CONCAT(DISTINCT UPPER(MONTHNAME(cash_advance_detail.created_at)) ORDER BY MONTH(cash_advance_detail.created_at)) as cashadvancemonth'))
         ->where('cash_advance_detail.tenant_id', Auth::user()->tenant_id)
-        ->where('cash_advance_detail.status', '!=', 'paid')
+        ->where('cash_advance_detail.status', '=', 'paid')
         ->leftJoin('employment', 'cash_advance_detail.user_id', '=', 'employment.user_id')
         ->leftJoin('department', 'employment.department', '=', 'department.id')
         ->groupBy('employment.employeeName', 'department.departmentName')
