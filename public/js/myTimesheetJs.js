@@ -24,31 +24,31 @@ $(document).ready(function () {
     var totalhourday6;
     var totalhourday7;
 
-function getWorkingHourWeekendbyState(stateid) {
-  return $.ajax({
-    url: "/getWorkingHourWeekendbyState/" + stateid,
-  });
-}
-
-var idwork = $("#state_id").val();
-
-var joineddate = $("#joinneddate").val();
-// console.log(joineddate);
-
-getwork = getWorkingHourWeekendbyState(idwork);
-
-getwork.then(function(data) {
-  var days = {};
-  for (var i = 0; i < data.length; i++) {
-    var workdata = data[i];
-    var dayNumber = i + 1;
-    var dayKey = 'day' + dayNumber;
-    if (workdata.start_time === null) {
-      days[dayKey] = workdata.day_of_week;
+    function getWorkingHourWeekendbyState(stateid) {
+    return $.ajax({
+        url: "/getWorkingHourWeekendbyState/" + stateid,
+    });
     }
-  }
 
-  // Store defined values in separate variables
+    var idwork = $("#state_id").val();
+
+    var joineddate = $("#joinneddate").val();
+    // console.log(joineddate);
+
+    getwork = getWorkingHourWeekendbyState(idwork);
+
+    getwork.then(function(data) {
+    var days = {};
+    for (var i = 0; i < data.length; i++) {
+        var workdata = data[i];
+        var dayNumber = i + 1;
+        var dayKey = 'day' + dayNumber;
+        if (workdata.start_time === null) {
+        days[dayKey] = workdata.day_of_week;
+        }
+    }
+
+    // Store defined values in separate variables
    weekend1ifany = days.hasOwnProperty('day1') ? days.day1 : null;
    weekend2ifany = days.hasOwnProperty('day2') ? days.day2 : null;
    weekend3ifany = days.hasOwnProperty('day3') ? days.day3 : null;
@@ -333,8 +333,19 @@ getwork.then(function(data) {
 
     function getDataByProject(projectId, type) {
         if ((type = "addLog")) {
+            
             $("#locationByProjectHide").hide();
-            $("#locationByProjectShow").show();
+
+
+            if ($("#typeoflog").val() == "2") {
+                $("#locationByProjectShow").show();
+            }
+            else if ($("#typeoflog").val() == "1") {
+                $("#locationByProjectShow").hide();
+            }
+            // $("#locationByProjectShow").show();
+
+
             $("#activityByProjectShow").show();
             $("#activityByProjectHide").hide();
 
@@ -343,18 +354,6 @@ getwork.then(function(data) {
             $("#activityOffice").find("option").remove().end();
 
             $("#activityLogs").find("option").remove().end();
-
-            // var locationOffice = getLocationByProjectId(projectId);
-
-            // locationOffice.then(function(data) {
-            //     // console.log(data);
-            //     for (let i = 0; i < data.length; i++) {
-            //         const locations = data[i];
-            //         var opt = document.createElement("option");
-            //         document.getElementById("projectLocationOffice").innerHTML +=
-            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
-            //     }
-            // })
 
             var locationOffice = getLocationByProjectId(projectId);
 
@@ -380,18 +379,6 @@ getwork.then(function(data) {
                 select.appendChild(warehouseOption);
                 // $('#projectLocationOffice').picker({ search: true });
             });
-
-            // var activityOffice = getActivityByProjectId(projectId);
-
-            // activityOffice.then(function(data) {
-            //     // console.log(data);
-            //     for (let i = 0; i < data.length; i++) {
-            //         const locations = data[i];
-            //         var opt = document.createElement("option");
-            //         document.getElementById("activityOffice").innerHTML +=
-            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
-            //     }
-            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
@@ -436,18 +423,6 @@ getwork.then(function(data) {
 
             $("#activityOfficeEdit").find("option").remove().end();
 
-            // var locationOffice = getLocationByProjectId(projectId);
-
-            // locationOffice.then(function(data) {
-            //     // console.log(data);
-            //     for (let i = 0; i < data.length; i++) {
-            //         const locations = data[i];
-            //         var opt = document.createElement("option");
-            //         document.getElementById("projectLocationOfficeEdit").innerHTML +=
-            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
-            //     }
-            // })
-
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.then(function (data) {
@@ -479,18 +454,6 @@ getwork.then(function(data) {
                 }
                 // $('#projectlocsearchedit').picker({ search: true });
             });
-
-            // var activityOffice = getActivityByProjectId(projectId);
-
-            // activityOffice.then(function(data) {
-            //     // console.log(data);
-            //     for (let i = 0; i < data.length; i++) {
-            //         const locations = data[i];
-            //         var opt = document.createElement("option");
-            //         document.getElementById("activityOfficeEdit").innerHTML +=
-            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
-            //     }
-            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
@@ -1327,9 +1290,7 @@ getwork.then(function(data) {
                     start: new Date(startYear, startMonth - 1, startDay),
                     end: new Date(endYear, endMonth - 1, endDay),
                     startdateholidays: holidays['start_date'],
-                    endateholidays: holidays['end_date'],
-                    
-                    
+                    endateholidays: holidays['end_date'],    
                 });
             }
 
@@ -1409,12 +1370,7 @@ getwork.then(function(data) {
                     }
                 },
 
-
-               
-
                 dayCellDidMount: function(info) {             
-                    
-                    
 
                     var current = new Date(info.date);
                     var currentDate = new Date();
@@ -1478,9 +1434,6 @@ getwork.then(function(data) {
                     else if(secondLowestValue == 7) {
                         secondLowestValue = 3;
                     }
-
-                    
-
                     
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
                     
@@ -1513,9 +1466,7 @@ getwork.then(function(data) {
                       }
                       else if(current.getDay() == dayseven){
                         workingDayHour = totalhourday7;
-                      }
-
-                      
+                      }                     
 
                     var appealaddb = $('<button/>', {
                                 text: 'Appeal',
@@ -1601,12 +1552,8 @@ getwork.then(function(data) {
                                             $('#hidesupp').hide(); 
                                         }
                                         
-
-                                    
                                         $('#appealmodalview').modal('show');
-                                        
-
-
+                                    
                                     }
                                     return false;
                                 }
@@ -1728,8 +1675,6 @@ getwork.then(function(data) {
                         var file = appeals['file'];
                         var resonreject = appeals['reasonreject'];
 
-
-
                         appliedDates.push(appliedDate);
                         reasons.push(reason);
                         logsid.push(logid);
@@ -1741,13 +1686,6 @@ getwork.then(function(data) {
                         files.push(file);
                         resonrejects.push(resonreject);
                     }
-                    
-                    // var dailycounter = $('<button/>', {
-                    //     text: totalHoursforlog,
-                    //     class: 'btn btn-danger btn-xs',
-                    //     click: function () {
-                    //     }
-                    // });
 
                     var dailycounter1 = $('<button/>', {
                         text: forcounter,
@@ -1764,12 +1702,6 @@ getwork.then(function(data) {
                         (current.getTime() < currentDate.getTime())
                         
                     ) {
-                        // $(info.el).append('&nbsp;').append(dailycounter);
-                        // $(dailycounter).css({
-                        //     position: 'relative',
-                        //     top: '-35px',
-                        //     'z-index': '999',
-                        // });
 
                         $(info.el).append('&nbsp;').append(dailycounter1);
                         $(dailycounter1).css({
@@ -1779,14 +1711,6 @@ getwork.then(function(data) {
                         });
 
                       } 
-                    //   if(
-                         
-                    //     (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                    //     !(current.getDay() === 6 || current.getDay() === 0) && !hasLog  && !hasEvent)
-                    //    {
-                    //     $(info.el).css('background-color', 'red');
-                    //   }
-                    //   console.log(totalHoursCombined);
 
                     const leaveHalfListDates = leavehalflist.map(item => new Date(item.title));
 
@@ -1794,11 +1718,6 @@ getwork.then(function(data) {
                     for (let i = 0; i < leavehalflist.length; i++) {
                         // console.log(leavehalflist[i].title);
                     }
-
-                    // Initial value of workingDayHour
-                    // console.log('Initial workingDayHour:', workingDayHour);
-
-                    // const current = new Date(); // Assuming you've defined current somewhere
 
                     if (leaveHalfListDates.some(date => date.getDate() === current.getDate() &&
                                                         date.getMonth() === current.getMonth() &&
@@ -1817,8 +1736,6 @@ getwork.then(function(data) {
 
                         // Update workingDayHour
                         workingDayHour = `${formattedNewHours}:${formattedMinutes}`;
-
-                        // console.log('Updated workingDayHour:', workingDayHour);
 
                     }
 
@@ -1862,9 +1779,7 @@ getwork.then(function(data) {
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
-                      
-                      
-                      
+                       
                      else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
@@ -1882,10 +1797,6 @@ getwork.then(function(data) {
                         $(info.el).css('background-color', '#80ff80');
                       }
 
-                     
-                    //  if ((current < twoDaysBefore)) {
-                    //     $(info.el).css('background-color', 'red');
-                    //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
                        else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && 
                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)) {
@@ -2001,10 +1912,6 @@ getwork.then(function(data) {
                             secondLowestValue = 3;
                         }
                 
-                        // console.log(lowestValue + "," + secondLowestValue);
-                        
-                
-                
                         // Check if the current day is Saturday (6) or Sunday (0)
                         if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
                             daystominus = -4;
@@ -2013,8 +1920,6 @@ getwork.then(function(data) {
                         // check if the clicked date's status is "approve"
                         var appliedDates = [];
                         var statuses = [];
-
-
 
                         for (let i = 0; i < data['appeals'].length; i++) {
                           var appeals = data['appeals'][i];
@@ -2034,10 +1939,8 @@ getwork.then(function(data) {
                             
                         }
 
-
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
-                       
                         let isLeaveDay = false;
                             for (let i = 0; i < leavesdate.length; i++) {
                                 if (clickedDate >= leavesdate[i].start && clickedDate <= leavesdate[i].end) {
@@ -2060,16 +1963,6 @@ getwork.then(function(data) {
                             });
                             return;
                           }
-
-                        //   if (isLeaveDay
-                        //    ) {
-                        //     Swal.fire({
-                        //       icon: 'error',
-                        //       title: 'Oops...',
-                        //       text: 'Cannot Log on weekend',
-                        //     });
-                        //     return;
-                        //   }
                           
                         if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
@@ -2077,46 +1970,10 @@ getwork.then(function(data) {
                           return;
                         }
 
-                        // Check if the clicked date is Saturday or Sunday
-                        // if (clickedDate.day() === 0 || clickedDate.day() === 6) {
-                        //     return;
-                        // }
-
                         // show the add log modal
                         $('#addLogModal').modal('show');
                         $("#dateaddlog").val(formattedDate);
                       },
-
-                // original code
-                // dateClick: function(info) {
-
-                //     $('#addLogModal').modal('show');
-
-
-                // dateClick: function(info) {
-                //     const today = dayjs();
-                //     const clickedDate = dayjs(info.date);
-
-                    // check if the clicked date is within the last 2 days before the current date
-                    // if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
-                    //   Swal.fire({
-                    //     icon: 'error',
-                    //     title: 'Error',
-                    //     text: 'You can only select the current date and 2 days before.'
-                    //   });
-                    //   return;
-                    // }
-
-                    // show the modal and set the date
-                //     $('#addLogModal').modal('show');
-                //     const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //     $("#dateaddlog").val(formattedDate);
-                //   },
-                // retrieve the value of the hidden input field containing the user id
-
-
-
-
 
                 eventClick: function(info) {
 
@@ -2146,9 +2003,6 @@ getwork.then(function(data) {
                         });
                     }
 
-                    
-                    
-
                     function getAttendance1(eventId) {
                         return $.ajax({
                             url: "/getAttendanceByEventId/" + eventId,
@@ -2160,20 +2014,6 @@ getwork.then(function(data) {
                             url: "/getEventById/" + id,
                         });
                     }
-
-                    // employeeData = getEmployee();
-                    // employeeData.then(function (data) {
-                    //     // console.log(data.data);
-                    //     const employees = data.data;
-                    //     for (let i = 0; i < employees.length; i++) {
-                    //         const employee = employees[i];
-                    //         $("#addneweventparticipantedit").picker(
-                    //             "remove",
-                    //             employee["user_id"]
-                    //         );
-                    //         // console.log(employee['user_id']);
-                    //     }
-                    // });
 
                     if (
                         info.event.extendedProps.type == "leave" ||
@@ -2288,16 +2128,13 @@ getwork.then(function(data) {
                                     "none"
                                 );
                             }
-
-                            // if (data.type_of_log == 2 && data.office_log == 1) {
-
-                            // }
                             
                             $("#activityByProjectEditShow").hide();
                             $("#locationByProjectEditShow").hide();
                             // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
+
                            
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
@@ -2306,35 +2143,8 @@ getwork.then(function(data) {
                                 data.project_location
                             );
                             // projectlocsearchedit
-                            $("#activity_name_edit2").val(data.activity_name);
-                            // activity_name_edit2
-
-                            var activityNamehide = $("#activity_name_edit2").val();
-
-                            if (!activityNamehide) {
-                              // Hide the div if the activityName is empty or null
-                              $("#activityByProjectEditHide1").hide();
-                            }
-
-                            var projectLhide = $("#projectlocsearchedit").val();
-
-                            if (!projectLhide) {
-                              // Hide the div if the activityName is empty or null
-                              $("#locationByProjectEditHide").hide();
-                            }
-
-
-
-                            $("#activity_name_edit1").val(data.activity_name);
+                            $("#activity_name_edit2").val(data.activity_name);   
                            
-
-                            // $("#projectLocationOfficeEdit").picker(
-                            //     "set",
-                            //     data.project_location
-                            // );
-                            // $('#projectlocsearchedit').picker('set', data.project_location);
-                            // $('#projectlocsearchedit').picker('set', data.project_location);
-                            // $("#projectlocsearchedit").val(data.project_location);
                             $("#exit_project").prop(
                                 "checked",
                                 data.exit_project
@@ -2414,8 +2224,46 @@ getwork.then(function(data) {
                                 // Initial setup based on the initial statusappeal value
                                 $("#statusappeal").trigger("change");
 
-                                
+                                //hide/show activity name
+                                $("#activity_name_edit1").val(data.activity_name);
+                                var activityNamehide1 = $("#activity_name_edit1").val();
 
+                                if (!activityNamehide1) {
+                                // Hide the div if the activityName is empty or null
+                                $("#activityByProjectEditHide").hide();
+                                
+                                } else {
+                                    $("#activityByProjectEditHide").show();
+                                }
+
+                                var activityNamehide = $("#activity_name_edit2").val();
+
+                                if (!activityNamehide) {
+                                // Hide the div if the activityName is empty or null
+                                $("#activityByProjectEditHide1").hide();
+                                
+                                } else {
+                                    $("#activityByProjectEditHide1").show();
+                                }
+
+                                //hide project if no data
+                                var projectLhide = $("#projectlocsearchedit").val();
+
+                                if (!projectLhide) {
+                                // Hide the div if the activityName is empty or null
+                                $("#locationByProjectEditHide").hide();
+                                }
+
+                                //hide officlog if no data
+                                var officeloghideshow = $("#officelog2edit").val();
+
+                                if (!officeloghideshow) {
+                                    // Hide the div if the activityName is empty or null
+                                    $("#officelogedit").hide();
+                                    
+                                    } else {
+                                        $("#officelogedit").show();
+                                    }
                                 
                         });
 
@@ -2532,10 +2380,6 @@ getwork.then(function(data) {
                                             // Add userId to deletedUserIds array
                                             deletedUserIds.push(userId);
 
-                                            // Log the userId and the array
-                                            // console.log("Delete clicked for user ID: " + userId);
-                                            // console.log("Deleted user IDs so far: " + deletedUserIds.join(','));
-
                                             // Add your delete logic here
                                             var userdelete = deletedUserIds.join(',');
                                             // console.log(userdelete);
@@ -2545,10 +2389,6 @@ getwork.then(function(data) {
                                             // Remove the corresponding row from the table
                                             $(this).closest("tr").remove();
                                         });
-
-
-                                
-
                                 
                                     row.append($("<td></td>").append(deleteButton));
                                 
@@ -2595,9 +2435,6 @@ getwork.then(function(data) {
                             $("#starteventdateedit").val(data.start_date);
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
-
-                            
-
                             $("#starteventtimeedit").mdtimepicker({
                                 showMeridian: true,
                                 timeFormat: 'hh:mm:ss.000',
@@ -3071,12 +2908,6 @@ getwork.then(function(data) {
                                 descE.style.overflowY = "auto";
                                 descE.style.resize = "vertical";;
                                 descE.style.backgroundColor = "white";
-
-                               
-
-
-                                // Gray out the form
-                                // form.style.opacity = "0.5";
                             } else {
                                 document.getElementById(
                                     "deleteEventButton"
@@ -3126,7 +2957,7 @@ getwork.then(function(data) {
                                         $("#tueedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == "wednesda") {
+                                    if (dataSetRecurring == "wednesday") {
                                         $("#wededit").prop("checked", true);
                                     }
 
@@ -3312,18 +3143,8 @@ $("#endeventdate").datepicker({
     format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
     autoclose: true, // Closes the datepicker on selection
 });
-
-    // $('#projectLocationOffice').picker({ search: true });
-    // $('#activityOffice').picker({ search: true });
-    // $('#activity_name_edit').picker({ search: true });
-    // $('#projectlocsearch').picker({ search: true });
-    // $('#activity_names').picker({ search: true });
     $("#addneweventprojectlocsearch").picker({ search: true });
     $("#addneweventparticipant").picker({ search: true });
-    // $('#addneweventparticipant').selectpicker();
-    // $('#addneweventparticipant').chosen({
-    //     placeholder_text_multiple: 'Select participants'
-    // });
     $("#addneweventselectproject").picker({ search: true });
 
     //for addlogmodal
@@ -3575,20 +3396,21 @@ $("#endeventdate").datepicker({
     });
 
     $(document).on('change', "#typeoflog", function() {
-        var selectedValue = $(this).val();
-        
+        var selectedValueOfTypeLog = $(this).val();
+        $("#myProject,#officelog2,#officeLogProject,#activity_names,#activityOffice,#projectlocsearch,#projectLocationOffice").val("");
         $("#activityByProjectHide").hide();  
-        if (selectedValue == "1") {
+        if (selectedValueOfTypeLog == "1") {
             $("#activityByProjectHide").show(); 
-            $("#officelog,#myproject,#activityByProjectShow,#locationByProjectHide,#locationByProjectShow,#listproject").hide();
+            $("#officelog").show();
+            $("#myproject,#activityByProjectShow,#locationByProjectHide,#locationByProjectShow,#listproject").hide();
             $("#myProject,#officelog2,#officeLogProject,#activity_names,#activityOffice,#projectlocsearch,#projectLocationOffice").val("");
             
-        } else if (selectedValue == "2") {
+        } else if (selectedValueOfTypeLog == "2") {
             $("#officelog").show();
-        } else if (selectedValue == "3") { 
+        } else if (selectedValueOfTypeLog == "3") { 
             $("#listproject").show();
             $("#locationByProjectHide, #activityByProjectHide").hide();
-        } else if (selectedValue == "4"){
+        } else if (selectedValueOfTypeLog == "4"){
             $("#activityByProjectHide").show(); 
             $("#officelog,#myproject,#activityByProjectShow,#locationByProjectHide,#locationByProjectShow,#listproject").hide();
             $("#myProject,#officelog2,#officeLogProject,#activity_names,#activityOffice,#projectlocsearch,#projectLocationOffice").val("");
@@ -3597,21 +3419,28 @@ $("#endeventdate").datepicker({
     
     $(document).on("change", "#officelog2", function () {
         var selectedValue = $(this).val();
-    
+       
         // Hide all relevant elements
         $("#listproject, #activityByProjectHide, #activityByProjectShow, #locationByProjectShow").hide();
     
-        if (selectedValue == "1") {
+        if ($("#typeoflog").val() == "2" && selectedValue == "1") {
+            // Your code here
             $("#myProject,#officeLogProject,#activity_names,#projectlocsearch").val("");
             $("#listproject, #activityByProjectShow, #locationByProjectShow").show();
+        }else if ($("#typeoflog").val() == "1" && selectedValue == "1") {
+            // Your code here
+            $("#myProject,#officeLogProject,#activity_names,#projectlocsearch").val("");
+            $("#listproject, #activityByProjectShow").show();
+            $("#locationByProjectShow").hide();
+        
         } else if (selectedValue == "2") {
             $("#activityByProjectHide").show();
             $("#myProject,#officeLogProject,#activity_names,#projectlocsearch").val("");
             $("#activityByProjectHide").show();
             $("#myproject,#listproject,#activityByProjectShow,#locationByProjectShow").hide();
-            
 
         }
+    
     });
 
     $(document).on("change", "#addneweventselectrecurring", function () {
@@ -3768,59 +3597,52 @@ $("#endeventdate").datepicker({
         dropdownParent: $('#editeventmodal'),
         multiple: true
     });
-    
-    
 
     $(document).on("change", "#typeoflogedit", function () {
-        if ($(this).val() == "2") {
+        var selectedValue = $(this).val();
+    
+        // Handle case when value is "2"
+        if (selectedValue == "2") {
             $("#officelogedit").show();
-            // $("#project_id_edit").hide();
-            // $("#locationByProjectEditHide").show();
         } else {
             $("#officelogedit").hide();
             $("#listprojectedit").hide();
-            // $("#locationByProjectEditHide").hide();
         }
-    });
-    $(document).on("change", "#typeoflogedit", function () {
-        if ($(this).val() == "3") {
+    
+        // Handle case when value is "3"
+        if (selectedValue == "3") {
             $("#myprojectedit").show();
-            // $("#typeoflogedit").show();
-            // $("#activity_location_edit").show();
-            // $("#activityByProjectEditHide").hide();
-            $("#activityByProjectEditHide1").show();
-            $("#locationByProjectEditHide").show();
-            $("#locationByProjectEditShow").show();
-            $("#activityByProjectEditShow").show();
+            $("#activityByProjectEditHide1, #locationByProjectEditHide, #locationByProjectEditShow, #activityByProjectEditShow").show();
         } else {
             $("#myprojectedit").hide();
-            $("#listprojectedit").hide();
-            // $("#typeoflogedit").hide();
-            // $("#activity_location_edit").hide();
-            $("#activityByProjectEditHide1").hide();
-            $("#locationByProjectEditHide").hide();
-            
+            $("#listprojectedit, #activityByProjectEditHide1, #locationByProjectEditHide, #locationByProjectEditShow, #activityByProjectEditShow").hide();
         }
     });
+    
     $(document).on("change", "#officelog2edit", function () {
         if ($(this).val() == "1") {
-            $("#myprojectedit").show();
-            $("#activityByProjectEditHide").hide();
+            if ($("#typeoflogedit").val() == "2" && selectedValue == "1") {
+                // Your code here
+                $("#myprojectedit,#officeLogProjectEdit,#activity_names,#projectlocsearchedit").val("");
+                $("#listprojectedit, #activityByProjectShow, #locationByProjectShow").show();
+            }else if ($("#typeoflogedit").val() == "1" && selectedValue == "1") {
+                // Your code here
+                $("#myprojectedit,#officeLogProjectEdit,#activity_names,#projectlocsearchedit").val("");
+                $("#listprojectedit, #activityByProjectShow").show();
+                $("#locationByProjectShow").hide();
+            // $("#myprojectedit").show();
+            // $("#activityByProjectEditHide").hide();
 
-            // $("#activityByProjectEditShow").show();
-            // $("#locationByProjectEditHide").show();
+        
         } else if ($(this).val() == "2") {
             $("#activityByProjectEditHide").show();
             $("#myprojectedit").hide();
             // $("#myprojectedit").hide();
             // $("#locationByProjectEditHide").hide();
         }
-        // } else {
-        //     $("#myprojectedit").hide();
-        //     $("#activityByProjectEditHide").hide();
-        //     $("#locationByProjectEditHide").hide();
+        
 
-        // }
+        }
     });
 
     $(document).on("change", "#addneweventselectrecurringedit", function () {

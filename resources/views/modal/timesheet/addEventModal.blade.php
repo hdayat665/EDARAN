@@ -53,10 +53,10 @@
                         </div>
                         <div class="col-sm-2">
                             <div style="padding-top:20px;">
-                                <div class="form-check form-check-inline" >
+                                <!-- <div class="form-check form-check-inline" >
                                     <input class="form-check-input" name="type_recurring[]" value="allday" type="checkbox" id="alldayc"  name="inlineRadioOptions" >
                                     <label class="form-label" id="addeventallday">All Day</label>
-                                </div> 
+                                </div>  -->
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="type_recurring[]" value="recurring" id="addeventrecurring" type="checkbox"  name="inlineRadioOptions" >
                                     <label class="form-label" >Recurring</label>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2" style="display:none">
+                    <div class="row p-2" >
                         <div class="col-sm-6" id="addneweventrecurring" style="display:none">
                             <label for="firstname" class="form-label">Recurring*</label>
                             <select class="form-select" name="recurring" id="addneweventselectrecurring" aria-label="Default select example">
