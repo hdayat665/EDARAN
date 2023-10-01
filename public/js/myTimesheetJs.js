@@ -295,12 +295,6 @@ getwork.then(function(data) {
         });
     }
 
-    function getAppealidList() {
-        return $.ajax({
-            url: "/getAppealidList/"
-        });
-    }
-
     var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
     $elem.on("sp-change", function () {
@@ -742,7 +736,7 @@ getwork.then(function(data) {
                         }).then(function () {
                             if (data.type == "error") {
                             } else {
-                                location.reload();
+                                location.reload();    
                             }
                         });
                     });
@@ -942,8 +936,6 @@ getwork.then(function(data) {
             });
         }
         
-        var approverData;
-        
         var approverUserId;
 
         function getApproverAppeal(id) {
@@ -966,42 +958,25 @@ getwork.then(function(data) {
             var event = [];
         for (let i = 0; i < data['events'].length; i++) {
             var events = data['events'][i];
-            // var startDate = new Date(events['start_date']);
-            // var startMonth = startDate.getMonth() + 1;
-            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            // var startYear = startDate.getFullYear();
-            // var startDay = startDate.getDate();
-            // startDay = startDay < 10 ? "0" + startDay : startDay;
+            var startDate = new Date(events['start_date']);
+            var startMonth = startDate.getMonth() + 1;
+            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            var startYear = startDate.getFullYear();
+            var startDay = startDate.getDate();
+            startDay = startDay < 10 ? "0" + startDay : startDay;
+            var startTime = events["start_time"];
+            var time = startTime.split(":");
+            startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-            // var endDate = new Date(events['end_date']);
-            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
-            // var endMonth = endDate.getMonth() + 1;
-            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            // var endYear = endDate.getFullYear();
-            // var endDay = endDate.getDate();
-            // endDay = endDay < 10 ? "0" + endDay : endDay;
-
-                var startDate = new Date(events['start_date']);
-                var startMonth = startDate.getMonth() + 1;
-                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-                var startYear = startDate.getFullYear();
-                var startDay = startDate.getDate();
-                startDay = startDay < 10 ? "0" + startDay : startDay;
-                var startTime = events["start_time"];
-                var time = startTime.split(":");
-                startTime = time[0] < 10 ? "0" + startTime : startTime;
-
-                var endDate = new Date(events['end_date']);
-                var endMonth = endDate.getMonth() + 1;
-                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-                var endYear = endDate.getFullYear();
-                var endDay = endDate.getDate();
-                endDay = endDay < 10 ? "0" + endDay : endDay;
-                var endTime = events['end_time'];
-                time = endTime.split(":");
-                endTime = time[0] < 10 ? "0" + endTime : endTime;
-
-            
+            var endDate = new Date(events['end_date']);
+            var endMonth = endDate.getMonth() + 1;
+            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            var endYear = endDate.getFullYear();
+            var endDay = endDate.getDate();
+            endDay = endDay < 10 ? "0" + endDay : endDay;
+            var endTime = events['end_time'];
+            time = endTime.split(":");
+            endTime = time[0] < 10 ? "0" + endTime : endTime;
 
             event.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
@@ -1015,29 +990,12 @@ getwork.then(function(data) {
                 }
             });
 
-        }
-
-      
+        }    
 
         var eventattend = [];
         attendhour = [];
         for (let i = 0; i < data['eventsattends'].length; i++) {
             var events = data['eventsattends'][i];
-            // var startDate = new Date(events['start_date']);
-            // var startMonth = startDate.getMonth() + 1;
-            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            // var startYear = startDate.getFullYear();
-            // var startDay = startDate.getDate();
-            // startDay = startDay < 10 ? "0" + startDay : startDay;
-
-            // var endDate = new Date(events['end_date']);
-            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
-            // var endMonth = endDate.getMonth() + 1;
-            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            // var endYear = endDate.getFullYear();
-            // var endDay = endDate.getDate();
-            // endDay = endDay < 10 ? "0" + endDay : endDay;
-
             var startDate = new Date(events['start_date']);
             var startMonth = startDate.getMonth() + 1;
             startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -1246,53 +1204,63 @@ getwork.then(function(data) {
      
             }
 
-
             var holiday = [];
             var holidayDates = [];
             var rangeholiday = [];
+
             for (let i = 0; i < data['holidays'].length; i++) {
                 var holidays = data['holidays'][i];
                 var startDate = new Date(holidays['start_date']);
-                var startMonth = startDate.getMonth() + 1;
-                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-                var startYear = startDate.getFullYear();
-                var startDay = startDate.getDate();
-                startDay = startDay < 10 ? "0" + startDay : startDay;
-
                 var endDate = new Date(holidays["end_date"]);
-                var endMonth = endDate.getMonth() + 1;
-                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-                var endYear = endDate.getFullYear();
-                var endDay = endDate.getDate();
-                endDay = endDay < 10 ? "0" + endDay : endDay;
 
-                holiday.push({
-                    title: holidays["holiday_title"],
-                    start: startYear + "-" + startMonth + "-" + startDay,
-                    end: endYear + "-" + endMonth + "-" + endDay,
-                    // color: app.color.yellow,
-                    color: "#FFD480",
-                    textColor: "black",
-                    fontWeight: "bold",
-                    extendedProps: {
-                        type: "holiday",
-                        holidayId: holidays["id"],
-                    },
-                });
+                // Calculate the number of days in the holiday range
+                var timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+                var dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+                for (let j = 0; j <= dayDifference; j++) { // <= to include the last day
+                    var currentDay = new Date(startDate);
+                    currentDay.setDate(currentDay.getDate() + j);
+
+                    var currentEndDay = new Date(currentDay);
+                    currentEndDay.setDate(currentEndDay.getDate() + 1);  // Exclusive end date for each day
+
+                    // Convert to YYYY-MM-DD format
+                    var currentDayStr = currentDay.toISOString().split('T')[0];
+                    var currentEndDayStr = currentEndDay.toISOString().split('T')[0];
+
+                    holiday.push({
+                        title: holidays["holiday_title"],
+                        start: currentDayStr,
+                        end: currentEndDayStr,
+                        color: "#FFD480",
+                        textColor: "black",
+                        fontWeight: "bold",
+                        extendedProps: {
+                            type: "holiday",
+                            holidayId: holidays["id"],
+                        },
+                    });
+                }
 
                 holidayDates.push({
                     title: holidays["holiday_title"],
-                    start: new Date(startYear, startMonth - 1, startDay),
-                    end: new Date(endYear, endMonth - 1, endDay),
+                    start: resetTime(startDate),
+                    end: resetTime(endDate),
                 });
 
                 rangeholiday.push({
-                    start: new Date(startYear, startMonth - 1, startDay),
-                    end: new Date(endYear, endMonth - 1, endDay),
+                    start: resetTime(startDate),
+                    end: resetTime(endDate),
                     startdateholidays: holidays['start_date'],
-                    endateholidays: holidays['end_date'],    
+                    endateholidays: holidays['end_date'],
                 });
             }
+
+            function resetTime(date) {
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+
 
             var highestNumber = 0;
             for (let i = 0; i < data['appeals'].length; i++) {
