@@ -60,18 +60,18 @@
                         </div> --}}
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Duration*</label>
-                            <input type="text"  class="form-control" name="duration" id="durationeditevent"   style="pointer-events: none; touch-action: none; background: #e9ecef;">
+                            <input type="text"  class="form-control" name="duration" id="durationeditevent"   ">
                         </div>
-                        <div class="col-sm-3" style="pointer-events: none;">
+                        <div class="col-sm-3">
                             <div style="padding-top:20px;">
-                                {{-- <div class="form-check form-check-inline">
+                                <!-- <div class="form-check form-check-inline">
                                     <input class="form-check-input"  type="checkbox"  name="type_recurring[]" id="addeventalldayedit" value="allday" >
                                     <label class="form-label" >All Day</label>
-                                </div> --}}
-                                {{-- <div class="form-check form-check-inline">
+                                </div> -->
+                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="addeventrecurringedit" type="checkbox"  name="type_recurring[]" value="recurring" >
                                     <label class="form-label" >Recurring*</label>
-                                </div> --}}
+                                </div> 
                             </div>
                         </div>
                         <div class="col-sm-6 ">
@@ -92,8 +92,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2" style="display:none">
-                        <div class="col-sm-6" id="addneweventrecurringedit" >
+                    <div class="row p-2" >
+                        <div class="col-sm-6" id="addneweventrecurringedit" style="display:none" >
                             <label for="firstname" class="form-label">Recurring*</label>
                             <select class="form-select" name="recurring" id="addneweventselectrecurringedit" aria-label="Default select example">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE</option>
