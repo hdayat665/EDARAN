@@ -26,23 +26,8 @@ class MyTimeSheetService
 {
     public function myTimesheetView()
     {
-        // $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
-        // $cond[2] = ['b.user_id', Auth::user()->id];
-
-        // $data = DB::table('project_member as a')
-        // ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
-        // // ->leftJoin('project as c', 'a.project_id', '=', 'c.id')
-        // ->select('b.id', 'b.employeeName as name')
-        // ->where($cond)
-        // ->get();
 
         $data['employee'] = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->first();
-        // $data['employee'] = Employee::join('appeal_timesheet', 'employment.user_id', '=', 'appeal_timesheet.user_id')
-        // ->where([
-        //     ['employment.tenant_id', Auth::user()->tenant_id],
-        //     ['employment.user_id', Auth::user()->id]
-        // ])
-        // ->first();
 
         return $data;
     }
@@ -53,7 +38,6 @@ class MyTimeSheetService
 
         $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
             ->leftJoin('location_cities as c', 'b.ref_cityid', '=', 'c.id')
-            // ->leftJoin('location_states as d', 'd.id', '=', 'c.id')
             ->where('employment.user_id', $userId)
             ->select('c.state_id')
             ->first();
@@ -62,32 +46,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-
-    //     public function getTimesheetEvents()
-    // {
-    //     $employee = Employee::where([
-    //         ['tenant_id', Auth::user()->tenant_id],
-    //         ['user_id', Auth::user()->id]
-    //     ])->first();
-
-    //     $timesheet_events = TimesheetEvent::whereRaw("FIND_IN_SET($employee->user_id, participant) > 0")->get();
-
-    //     $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
-
-    //     $participant_ids = [];
-    //     foreach ($timesheet_events as $event) {
-    //         $ids = explode(",", $event->participant);
-    //         $participant_ids = array_merge($participant_ids, $ids);
-    //     }
-    //     $participant_ids = array_unique($participant_ids);
-
-    //     return collect([
-    //         'employees' => $employees,
-    //         'participant_ids' => $participant_ids
-    //     ]);
-    // }
-
 
     public function createLog($r)
     {
@@ -105,21 +63,6 @@ class MyTimeSheetService
 
         $monday = 1;
         $tuesday = 2;
-
-        // $branch = Branch::join('employment', 'branch.id', '=', 'employment.branch')
-        // ->where('employment.user_id', $user->id)
-        // ->select('branch.*')
-        // ->first();
-
-        //     $getstate = Employee::join('employment as emp1', 'employees.id', '=', 'emp1.employee_id')
-        //     ->join('branch', 'emp1.branch', '=', 'branch.id')
-        //     ->join('location_cities', 'branch.ref_cityid', '=', 'location_cities.id')
-        //     ->join('employment as emp2', 'employees.id', '=', 'emp2.employee_id')
-        //     ->where('emp2.user_id', $user->id)
-        //     ->select('location_cities.id')
-        //     ->first();
-
-        // dd($getstate);
 
         $getstate = DB::table('employment as a')
             ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
@@ -258,18 +201,6 @@ class MyTimeSheetService
             return $data;
         }
 
-
-
-        // $dayOfWeek = date('N', strtotime($input['date']));
-
-        // if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
-        //     $data['status'] = config('app.response.error.status');
-        //     $data['type'] = config('app.response.error.type');
-        //     $data['title'] = config('app.response.error.title');
-        //     $data['msg'] = 'Cannot Apply Log On Weekend';
-        //     return $data;
-        // }
-
         TimesheetLog::create($input);
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -286,15 +217,6 @@ class MyTimeSheetService
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
         $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
-
-        // $start_time = strtotime($input['start_time']);
-        // $end_time = strtotime($input['end_time']);
-        // $totaltime = $end_time - $start_time;
-
-
-
-
-
         $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
         $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
@@ -314,14 +236,10 @@ class MyTimeSheetService
             unset($input['project_location_office']);
         }
 
-
-
         // $totaltime = $totaltime - ($h * 3600);
         $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
         $h = intval($totaltime / 3600);
         $totaltime = $totaltime - ($h * 3600);
-
-
 
         // Minutes is obtained by dividing
         // remaining total time with 60
@@ -378,10 +296,6 @@ class MyTimeSheetService
             }
         }
 
-
-
-
-
         TimesheetLog::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
@@ -413,14 +327,6 @@ class MyTimeSheetService
         return $data;
     }
 
-    // public function getLogsById($id)
-    // {
-    //     $data = TimesheetLog::find($id);
-
-    //     return
-    //      $data;
-    // }
-
     public function getLogsById($id)
     {
         $logs = TimesheetLog::find($id);
@@ -431,7 +337,6 @@ class MyTimeSheetService
         // dd($logs);
         return $logs;
     }
-
 
     public function employeeNamebyId($userId)
     {
@@ -447,13 +352,24 @@ class MyTimeSheetService
         $input = $r->input();
         $user = Auth::user();
 
+        // dd($input);
+
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
 
+        if (isset($input['type_recurring'])) {
+            $input['type_recurring'] = implode(',', $input['type_recurring']);
+        }
+        if (isset($input['set_reccuring'])) {
+            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
+        }
+        
         $participants = isset($input['participant']) ? $input['participant'] : [];
         $participants[] = $user->id; // Add the logged-in user to the participants array
 
-        $participants = array_unique($participants);
+        if (is_array($participants)) {
+            $input['participant'] = implode(',', $participants);
+        }
 
         $input['participant'] = implode(',', $participants);
 
@@ -660,7 +576,7 @@ class MyTimeSheetService
                 // $response['typeAttachment'] = "application/pdf";
                 // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
-                FacadesMail::to($receiver)->send(new Mail($response));
+                // FacadesMail::to($receiver)->send(new Mail($response));
             }
         }
 
@@ -733,13 +649,6 @@ class MyTimeSheetService
         return $data;
     }
 
-    // public function getEventById($id)
-    // {
-    //     $data = TimesheetEvent::find($id);
-
-    //     return $data;
-    // }
-
     public function getEventById($id)
     {
         $event = TimesheetEvent::find($id);
@@ -790,15 +699,6 @@ class MyTimeSheetService
         return $event;
     }
 
-    //     public function getStateById($id)
-    // {
-    //     $loggedInEmployee = DB::table('employment')
-    //                         ->where('user_id', '=', Auth::user()->id)
-    //                         ->first();
-
-    //     dd($loggedInEmployee);
-    // }
-
     public function getStateById($id)
     {
         $data = Employee::leftJoin('branch as b', 'b.id', '=', 'employment.branch')
@@ -823,31 +723,9 @@ class MyTimeSheetService
         return $data;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // public function getLogs()
-    // {
-    //     $data = TimesheetLog::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
-
-    //     return $data;
-    // }
-
     public function getHolidays()
     {
-        // $data = holidayModel::where([['tenant_id', Auth::user()->tenant_id]])->get();
-        // dd($data);
 
-        // return $data;
         $user = Auth::user();
         $stateId = DB::table('employment as a')
             ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
@@ -855,9 +733,6 @@ class MyTimeSheetService
             ->where('a.user_id', $user->id)
             ->select('c.state_id')
             ->value('c.state_id'); // Use the value() method to get the single value directly
-        // dd($stateId);
-        // return $stateId; // Optionally return the state_id if needed
-
 
         $getpublicbystate = DB::table('leave_holiday as a')
             ->whereRaw("FIND_IN_SET($stateId, a.state_id)")
@@ -865,14 +740,11 @@ class MyTimeSheetService
             ->get();
 
         return  $getpublicbystate;
-        // dd($getpublicbystate);
-
     }
 
 
     public function getLeavesFullDay()
     {
-        // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
         $data = DB::table('myleave as a')
             ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
             ->select('a.*', 'b.leave_types')
@@ -890,7 +762,6 @@ class MyTimeSheetService
 
     public function getLeavesHalfDay()
     {
-        // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
         $data = DB::table('myleave as a')
             ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
             ->select('a.*', 'b.leave_types')
@@ -905,8 +776,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-
 
     public function getLogs()
     {
@@ -924,17 +793,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-    // public function getEvents()
-    // {
-    //     $cond[1] = ['tenant_id', Auth::user()->tenant_id];
-    //     $cond[2] = ['user_id', Auth::user()->id];
-    //     // $data = TimesheetEvent::where($cond)
-    //         ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
-    //         ->get();
-
-    //     return $data;
-    // }
 
     public function getEvents()
     {
@@ -965,31 +823,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-
-
-
-
-
-
-    // public function getEventattend()
-    // {
-    //     $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
-    //     $cond[2] = ['a.user_id', Auth::user()->id];
-    //     $data = DB::table('timesheet_event as a')
-    //         ->leftJoin('attendance_event as b', 'a.id', '=', 'b.event_id')
-    //         ->select('a.*')
-    //         ->where(function ($query) use ($cond) {
-    //             $query->where($cond)
-    //                 ->orWhere('a.participant', 'like', '%' . Auth::user()->id . '%')
-    //                 ->where('b.status', 'attend');
-    //         })
-    //         ->distinct()
-    //         ->get();
-
-    //     return $data;
-    // }
-
 
     public function getLocationByProjectId($project_id = '')
     {
@@ -1302,13 +1135,6 @@ class MyTimeSheetService
         return $data;
     }
 
-    // public function getemployeeNamelog($id)
-    // {
-
-    //     $data = TimesheetApproval::find($id);
-    //     return $data;
-    // }
-
     public function getemployeeNamelog($id)
     {
         $timesheetApproval = TimesheetApproval::find($id);
@@ -1326,15 +1152,6 @@ class MyTimeSheetService
         }
         return '';
     }
-
-    // public function getLeavesByLotId($id)
-    // {
-    //     $ids = explode(',', $id);
-
-    //     $data = MyLeaveModel::whereIn('id', $ids)->get();
-
-    //     return $data;
-    // }
 
     public function getLeavesByLotId($id, $userId)
     {
@@ -1421,12 +1238,6 @@ class MyTimeSheetService
     {
         $ids = explode(',', $id);
 
-        // dd($ids);
-
-        // $data = TimesheetLog::whereIn('id', $ids)->get();
-
-        // return $data;
-
         $data = DB::table('timesheet_log as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
@@ -1451,13 +1262,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-    // public function getEmployeeNameById($id,$userId)
-    // {
-    //     $employee = Employee::find($id,$userId);
-
-    //     return $employee->employeeName;
-    // }
 
     public function updateAttendStatus($id = '', $status = '')
     {
@@ -1514,9 +1318,6 @@ class MyTimeSheetService
             $cond[5] = ['end_date', '<=', date_format(date_create($date_range[1]), 'Y-m-d')];
         }
 
-        // $data = TimesheetEvent::where($cond)
-        //     ->get();
-
         $data = DB::table('timesheet_event as a')
             ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
             ->select('a.*', 'b.employeeName')
@@ -1528,8 +1329,6 @@ class MyTimeSheetService
 
     public function gettimesheetid($id)
     {
-
-
         $tenant_id = Auth::user()->tenant_id;
 
         $data = DB::table('timesheet_approval as a')
@@ -1597,15 +1396,6 @@ class MyTimeSheetService
 
         return $data;
     }
-
-
-    // public function getAppealidList($id)
-    // {
-    //     $data = TimesheetAppeals::find($id);
-
-    //     return
-    //      $data;
-    // }
 
     public function getAppealidList()
     {
@@ -1712,10 +1502,7 @@ class MyTimeSheetService
             return $data;
         }
 
-
-
         TimesheetAppeals::create($input);
-
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
             ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
@@ -1846,13 +1633,6 @@ class MyTimeSheetService
         return $data;
     }
 
-    // public function getParticipantNameById($id)
-    // {
-    //     $data = Employee::find($id);
-
-    //     return $data;
-    // }
-
     public function getemployeeNamecreator($id)
     {
         $timesheetApproval = TimesheetApproval::find($id);
@@ -1898,14 +1678,6 @@ class MyTimeSheetService
         $input = $r->input();
         $user = Auth::user();
         // dd($id,$input);
-
-        // $input['user_id'] = $user->id;
-        // $input['tenant_id'] = $user->tenant_id;
-        // $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
-
-        // $start_time = strtotime($input['start_time']);
-        // $end_time = strtotime($input['end_time']);
-        // $totaltime = $end_time - $start_time;
 
         // $input['reasonreject'] = $input['reasonreject'];
         $input['status'] = "Rejected";
@@ -1977,5 +1749,4 @@ class MyTimeSheetService
         return $data;
     }
 
-    
 }
