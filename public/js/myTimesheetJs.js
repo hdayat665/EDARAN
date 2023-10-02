@@ -3077,13 +3077,20 @@ getwork.then(function(data) {
     });
 
 
+    var startDate = new Date(); // Initialize startDate with the current date
+
     $("#starteventdate")
         .datepicker({
             format: "yyyy/mm/dd",
             todayHighlight: true,
             autoclose: true,
         })
-        .datepicker("setDate", new Date());
+        .datepicker("setDate", startDate);
+
+        function updateEndEventDate() {
+            var formattedDate = startDate.getFullYear() + '/' + (startDate.getMonth() + 1).toString().padStart(2, '0') + '/' + startDate.getDate().toString().padStart(2, '0');
+            $("#endeventdate").val(formattedDate);
+        }
 
     $("#endeventdate")
         .datepicker({
@@ -3465,7 +3472,10 @@ $("#endeventdate").datepicker({
 
     $("#addeventrecurring").click(function () {
         if ($(this).is(":checked")) {
-            $("#addneweventrecurring").show();
+            $("#endeventdate").prop("readonly", false);
+            $("#addneweventrecurring").show();    
+            updateEndEventDate();
+            
         } else {
             $("#addneweventrecurring").hide();
             $("#addneweventsetreccurring").hide();
@@ -3473,8 +3483,24 @@ $("#endeventdate").datepicker({
             $("#setrecurringontheyearly").hide();
             $("#setrecurringmontly").hide();
             $("#setrecurringonmontly").hide();
+            $("#endeventdate").prop("readonly", true);
+            $("#sat").prop("checked", false);
+            $("#sun").prop("checked", false);
+            $("#mon").prop("checked", false);
+            $("#tue").prop("checked", false);
+            $("#wed").prop("checked", false);
+            $("#thu").prop("checked", false);
+            $("#fri").prop("checked", false);
+            $("#addneweventselectrecurring").val("");
+            updateEndEventDate();
+            
         }
     });
+
+    $("#starteventdate").change(function () {
+    startDate = $(this).datepicker("getDate");
+    updateEndEventDate(); // Update #endeventdate
+});
 
     $("#ondaycheck").click(function () {
         if ($(this).is(":checked")) {
