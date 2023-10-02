@@ -906,7 +906,7 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['cashAdvance'] = $ss->eclaimGeneralView();
+        $result['cashAdvance'] = $ss->eclaimCashAdvance();
 
         //dd($result['cashAdvance']);
 
@@ -922,7 +922,7 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    
+
 
     public function approvalConfigView()
     {

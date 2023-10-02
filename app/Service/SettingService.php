@@ -1828,7 +1828,7 @@ class SettingService
         return $data;
     }
 
-    public function eclaimGeneralView()
+    public function eclaimCashAdvance()
     {
         $data = CashAdvanceDetail::select(
             'cash_advance_detail.user_id',
@@ -1846,6 +1846,20 @@ class SettingService
         return $data;
 
     }
+
+    public function eclaimGeneralView()
+    {
+        $data['subs'] = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
+        $data['general'] = EclaimGeneralSetting::where([['tenant_id', Auth::user()->tenant_id]])->orderBy('id', 'DESC')->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+
 
     public function updatecashAdvance($id, $status)
     {
